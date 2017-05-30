@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.aminecraftdev.custombosses</groupId>
+    <artifactId>CustomBosses</artifactId>
+    <packaging>pom</packaging>
+    <version>3.0.0.0</version>
+    <modules>
+        <module>api-modules/FactionsM</module>
+        <module>api-modules/FactionsOne</module>
+        <module>api-modules/FactionsUUID</module>
+        <module>api-modules/PluginAPI</module>
+        <module>plugin-modules/Core</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.11.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.milkbowl.vault</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.6</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sk89q</groupId>
+            <artifactId>worldguard</artifactId>
+            <version>6.0.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sk89q</groupId>
+            <artifactId>worldedit</artifactId>
+            <version>6.0.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+</project>

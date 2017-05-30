@@ -1,0 +1,55 @@
+AutoSpawns:
+  '1':
+    Coords:
+      world: world
+      x: 0
+      y: 150
+      z: 0
+
+    PossibleSpawns:
+      - SKELETON
+      - ZOMBIE
+      - GIANT
+
+    Settings:
+      spawnIfChunkNotLoaded: false
+      maxSpawned: 1
+      bossesPerInterval: 1
+      spawnRate: 30m
+      spawnType: INTERVAL
+      holographicPlaceholder: '{custombosses_1}'
+
+    Messages:
+      onSpawn: []
+      Intervals:
+        '10':
+          - '&e&l(!) &bThe boss (#1) is about to spawn in {0} seconds!'
+        '60':
+          - '&e&l(!) &bThe boss (#1) is about to spawn in {0} seconds!'
+        '300':
+          - '&e&l(!) &bThe boss (#1) is about to spawn in 5 minutes!'
+  '2':
+    Coords:
+      world: world
+      x: 0
+      y: 150
+      z: 0
+
+    PossibleSpawns:
+      - SKELETON
+
+    Settings:
+      spawnIfChunkNotLoaded: false
+      maxSpawned: 1
+      bossesPerInterval: 1
+      spawnRate: 1m
+      spawnType: INTERVAL
+      holographicPlaceholder: '{custombosses_2}'
+
+    Messages:
+      onSpawn: []
+      Intervals:
+        '10':
+          - '&e&l(!) &bThe boss (#2) is about to spawn in {0} seconds!'
+        '30':
+          - '&e&l(!) &bThe boss (#2) is about to spawn in {0} seconds!'

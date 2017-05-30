@@ -1,0 +1,4 @@
+name: CustomBosses
+main: net.aminecraftdev.custombosses.CustomBosses
+version: ${project.version}
+author: AMinecraftDev

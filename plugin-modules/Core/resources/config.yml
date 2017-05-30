@@ -1,0 +1,102 @@
+Settings:
+  AutoSpawns:
+    enabled: true
+    sectionToTimeInCommand: '1'
+  BroadcastRange:
+    onDeath: -1
+    onHealth: 150
+    onSkill: 150
+    onSpawn: -1
+    onSpawnCommand: 0
+    onTaunt: 150
+  CommandsEnabled:
+    Help: true
+    KillAll: true
+    List: true
+    Reload: true
+    Spawn: true
+    Time: true
+  HealthBar:
+    ActionBar:
+      enabled: true
+      message: '&6{0}&7 has &c{1}/{2} health.'
+    BossBar:
+      enabled: false
+      message: '&6{0}'
+      useHealthBar: true
+onSpawn:
+  Regions:
+    enabled: true
+    spawnRegions:
+      - 'spawn_region1'
+    blockedRegions:
+      - 'blocked_region1'
+  Worlds:
+    enabled: false
+    blockedWorlds:
+      - 'world_nether'
+      - 'world_the_end'
+onSkill:
+  minionsPerSpawn: 5
+  maxMinionsPerBoss: 10
+  disableCageBreak: true
+onDeath:
+  noReward:
+    onLava: true
+    onDrown: false
+    onSuffocate: false
+GUI:
+  EggExtraLore:
+    - '&8&m-----------------------------------'
+    - '&7'
+    - '&6&lGet this egg:'
+    - '&f/giveegg {0} {1} [amount]'
+    - '&7'
+    - '&8&m-----------------------------------'
+
+  Inventory:
+    name: '&6&lCustom Bosses'
+    slots: 54
+    Items:
+      '54':
+        type: PAPER
+        name: '&e&lNext Page ->'
+        lore:
+        - '&7Click this to go to the &enext'
+        - '&epage&7, if there is one.'
+        NextPage: true
+      '53':
+        type: 102
+        name: '&e'
+        lore: []
+      '52':
+        type: 102
+        name: '&e'
+        lore: []
+      '51':
+        type: 102
+        name: '&e'
+        lore: []
+      '50':
+        type: 102
+        name: '&e'
+        lore: []
+      '49':
+        type: 102
+        name: '&e'
+        lore: []
+      '48':
+        type: 102
+        name: '&e'
+        lore: []
+      '47':
+        type: 102
+        name: '&e'
+        lore: []
+      '46':
+        type: PAPER
+        name: '&e&l<- Previous Page'
+        lore:
+        - '&7Click this to go the &eprevious'
+        - '&epage&7, if there is one.'
+        PreviousPage: true
