@@ -34,12 +34,12 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Core" target="1.8" />
+      <module name="Core" target="1.5" />
       <module name="custombosses" target="1.5" />
-      <module name="FactionsM" target="1.8" />
-      <module name="FactionsOne" target="1.8" />
-      <module name="FactionsUUID" target="1.8" />
-      <module name="PluginAPI" target="1.8" />
+      <module name="FactionsM" target="1.5" />
+      <module name="FactionsOne" target="1.5" />
+      <module name="FactionsUUID" target="1.5" />
+      <module name="PluginAPI" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

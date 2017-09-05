@@ -1,55 +1,29 @@
 package net.aminecraftdev.custombosses.managers;
 
-import net.aminecraftdev.custombosses.handlers.builders.EntityHandler;
-import net.aminecraftdev.custombosses.handlers.builders.EquipmentHandler;
-import net.aminecraftdev.custombosses.handlers.mobs.BossEntity;
-import net.aminecraftdev.custombosses.handlers.mobs.MinionEntity;
-import net.aminecraftdev.custombosses.innerapi.PotionUtils;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.potion.PotionEffect;
+import net.aminecraftdev.custombosses.handlers.BossEntity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author AMinecraftDev
  * @version 1.0.0
- * @since 31-May-17
+ * @since 06-Sep-17
  */
 public class BossManager {
 
-    private static final Set<BossEntity> BOSSES = new HashSet<>();
-    private static final Set<MinionEntity> MINIONS = new HashSet<>();
-    private EntityHandler entityHandler;
-    private EquipmentHandler equipmentHandler;
+    private static final Map<String, BossEntity> MAP_OF_BOSSES = new HashMap<>();
 
-    public BossManager() {
-        this.entityHandler = new EntityHandler();
-        this.equipmentHandler = new EquipmentHandler();
+    public static boolean isBossEntitySet(String identifier) {
+        return MAP_OF_BOSSES.containsKey(identifier);
     }
 
-
-
-
-    public EntityHandler getEntityHandler() {
-        return entityHandler;
+    public static void addBossEntity(BossEntity bossEntity) {
+        MAP_OF_BOSSES.put(bossEntity.getIdentifier(), bossEntity);
     }
 
-    public EquipmentHandler getEquipmentHandler() {
-        return equipmentHandler;
+    public static BossEntity getBossEntity(String identifier) {
+        return MAP_OF_BOSSES.getOrDefault(identifier, null);
     }
-
-    public void applyPotionEffects(LivingEntity livingEntity, ConfigurationSection configurationSection) {
-        for(String s : configurationSection.getKeys(false)) {
-            PotionEffect potionEffect = PotionUtils.getPotionEffect(configurationSection.getConfigurationSection(s));
-
-            if(potionEffect == null) continue;
-
-            livingEntity.addPotionEffect(potionEffect);
-        }
-    }
-
-
 
 }

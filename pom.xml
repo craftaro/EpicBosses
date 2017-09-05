@@ -7,7 +7,7 @@
     <groupId>net.aminecraftdev.custombosses</groupId>
     <artifactId>CustomBosses</artifactId>
     <packaging>pom</packaging>
-    <version>3.0.0.0</version>
+    <version>3.0.0.1</version>
     <modules>
         <module>api-modules/FactionsM</module>
         <module>api-modules/FactionsOne</module>
