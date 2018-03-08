@@ -10,28 +10,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>FactionsOne</artifactId>
-    <packaging>jar</packaging>
-
-    <dependencies>
-        <dependency>
-            <groupId>net.aminecraftdev.custombosses</groupId>
-            <artifactId>FactionHelper</artifactId>
-            <version>3.0.0.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.massivecraft</groupId>
-            <artifactId>FactionsOne</artifactId>
-            <version>1.2.1</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+    <artifactId>FactionHelper</artifactId>
 
     <build>
         <defaultGoal>clean package install</defaultGoal>
         <directory>target</directory>
-        <finalName>${project.artifactId}-${plugin.version}</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
         <sourceDirectory>${basedir}/src/</sourceDirectory>
         <plugins>
             <plugin>
@@ -60,4 +44,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

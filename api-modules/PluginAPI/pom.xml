@@ -15,8 +15,8 @@
 
     <build>
         <defaultGoal>clean package install</defaultGoal>
-        <directory>/target</directory>
-        <finalName>${project.artifactId}-${project.version}</finalName>
+        <directory>target</directory>
+        <finalName>${project.artifactId}-${plugin.version}</finalName>
         <sourceDirectory>${basedir}/src/</sourceDirectory>
         <plugins>
             <plugin>

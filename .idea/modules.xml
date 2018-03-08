@@ -3,9 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/plugin-modules/Core/Core.iml" filepath="$PROJECT_DIR$/plugin-modules/Core/Core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/plugin-modules/FactionHelper/FactionHelper.iml" filepath="$PROJECT_DIR$/plugin-modules/FactionHelper/FactionHelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/api-modules/FactionsM/FactionsM.iml" filepath="$PROJECT_DIR$/api-modules/FactionsM/FactionsM.iml" />
       <module fileurl="file://$PROJECT_DIR$/api-modules/FactionsOne/FactionsOne.iml" filepath="$PROJECT_DIR$/api-modules/FactionsOne/FactionsOne.iml" />
       <module fileurl="file://$PROJECT_DIR$/api-modules/FactionsUUID/FactionsUUID.iml" filepath="$PROJECT_DIR$/api-modules/FactionsUUID/FactionsUUID.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api-modules/LegacyFactions/LegacyFactions.iml" filepath="$PROJECT_DIR$/api-modules/LegacyFactions/LegacyFactions.iml" />
       <module fileurl="file://$PROJECT_DIR$/api-modules/PluginAPI/PluginAPI.iml" filepath="$PROJECT_DIR$/api-modules/PluginAPI/PluginAPI.iml" />
       <module fileurl="file://$PROJECT_DIR$/custombosses.iml" filepath="$PROJECT_DIR$/custombosses.iml" />
     </modules>

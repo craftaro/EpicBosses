@@ -2,29 +2,16 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile name="Annotation profile for PluginAPI" enabled="true">
-        <sourceOutputDir name="../../../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../../../target/generated-test-sources/test-annotations" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="PluginAPI" />
-      </profile>
-      <profile name="Annotation profile for FactionsUUID" enabled="true">
-        <sourceOutputDir name="../../../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="FactionsUUID" />
-      </profile>
-      <profile name="Annotation profile for FactionsOne" enabled="true">
-        <sourceOutputDir name="../../../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="FactionsOne" />
-      </profile>
-      <profile name="Annotation profile for FactionsM" enabled="true">
-        <sourceOutputDir name="../../../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
+        <module name="FactionHelper" />
         <module name="FactionsM" />
+        <module name="FactionsOne" />
+        <module name="FactionsUUID" />
+        <module name="LegacyFactions" />
+        <module name="PluginAPI" />
       </profile>
       <profile name="Annotation profile for CustomBosses" enabled="true">
         <sourceOutputDir name="../../target/generated-sources/annotations" />
@@ -34,12 +21,14 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Core" target="1.5" />
+      <module name="Core" target="1.8" />
       <module name="custombosses" target="1.5" />
-      <module name="FactionsM" target="1.5" />
-      <module name="FactionsOne" target="1.5" />
-      <module name="FactionsUUID" target="1.5" />
-      <module name="PluginAPI" target="1.5" />
+      <module name="FactionHelper" target="1.8" />
+      <module name="FactionsM" target="1.8" />
+      <module name="FactionsOne" target="1.8" />
+      <module name="FactionsUUID" target="1.8" />
+      <module name="LegacyFactions" target="1.8" />
+      <module name="PluginAPI" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>net.aminecraftdev.custombosses</groupId>
-            <artifactId>PluginAPI</artifactId>
+            <artifactId>FactionHelper</artifactId>
             <version>3.0.0.0</version>
             <scope>provided</scope>
         </dependency>
@@ -36,8 +36,8 @@
 
     <build>
         <defaultGoal>clean package install</defaultGoal>
-        <directory>/target</directory>
-        <finalName>${project.artifactId}-${project.version}</finalName>
+        <directory>target</directory>
+        <finalName>${project.artifactId}-${plugin.version}</finalName>
         <sourceDirectory>${basedir}/src/</sourceDirectory>
         <plugins>
             <plugin>
@@ -66,5 +66,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

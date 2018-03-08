@@ -11,15 +11,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>Core</artifactId>
-    <version>3.0.0.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>net.aminecraftdev.custombosses</groupId>
+            <artifactId>FactionHelper</artifactId>
+            <version>3.0.0.0</version>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>net.aminecraftdev.custombosses</groupId>
             <artifactId>FactionsM</artifactId>
             <version>3.0.0.0</version>
-            <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
@@ -27,7 +32,6 @@
             <groupId>net.aminecraftdev.custombosses</groupId>
             <artifactId>FactionsUUID</artifactId>
             <version>3.0.0.0</version>
-            <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
@@ -35,7 +39,6 @@
             <groupId>net.aminecraftdev.custombosses</groupId>
             <artifactId>FactionsOne</artifactId>
             <version>3.0.0.0</version>
-            <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
@@ -43,7 +46,6 @@
             <groupId>net.aminecraftdev.custombosses</groupId>
             <artifactId>PluginAPI</artifactId>
             <version>3.0.0.0</version>
-            <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
@@ -52,14 +54,15 @@
     <build>
         <defaultGoal>clean package install</defaultGoal>
         <directory>../../target</directory>
-        <finalName>CustomBosses-${project.version}</finalName>
+        <finalName>CustomBosses-${plugin.version}</finalName>
         <sourceDirectory>${basedir}/src/</sourceDirectory>
         <resources>
             <resource>
                 <targetPath>.</targetPath>
                 <filtering>true</filtering>
-                <directory>${basedir}/resources</directory>
+                <directory>${basedir}/resources/</directory>
                 <includes>
+                    <include>*.json</include>
                     <include>*.yml</include>
                 </includes>
             </resource>
@@ -76,7 +79,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>1.4</version>
+                <version>3.1.0</version>
                 <configuration>
                     <createDependencyReducedPom>false</createDependencyReducedPom>
                 </configuration>

@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>FactionsOne</artifactId>
+    <artifactId>LegacyFactions</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -21,9 +21,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.massivecraft</groupId>
-            <artifactId>FactionsOne</artifactId>
-            <version>1.2.1</version>
+            <groupId>net.redstoneore.legacyfactions</groupId>
+            <artifactId>LegacyFactions</artifactId>
+            <version>1.4.7</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

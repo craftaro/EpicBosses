@@ -16,22 +16,22 @@
     <dependencies>
         <dependency>
             <groupId>net.aminecraftdev.custombosses</groupId>
-            <artifactId>PluginAPI</artifactId>
+            <artifactId>FactionHelper</artifactId>
             <version>3.0.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.massivecraft</groupId>
+            <groupId>com.massivecraft.factions</groupId>
             <artifactId>FactionsUUID</artifactId>
-            <version>1.6.9.5-U0.1.20</version>
+            <version>1.6.9.5-U0.1.21</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
 
     <build>
         <defaultGoal>clean package install</defaultGoal>
-        <directory>/target</directory>
-        <finalName>${project.artifactId}-${project.version}</finalName>
+        <directory>target</directory>
+        <finalName>${project.artifactId}-${plugin.version}</finalName>
         <sourceDirectory>${basedir}/src/</sourceDirectory>
         <plugins>
             <plugin>
@@ -60,5 +60,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

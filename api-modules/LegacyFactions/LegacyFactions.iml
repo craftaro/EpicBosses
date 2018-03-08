@@ -10,8 +10,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="FactionHelper" scope="PROVIDED" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.massivecraft.factions:Factions:2.9.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.massivecraft.massivecore:MassiveCore:2.9.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.redstoneore.legacyfactions:LegacyFactions:1.4.7" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.spigotmc:spigot:1.11.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.milkbowl.vault:VaultAPI:1.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.bukkit:bukkit:1.9-R0.1-SNAPSHOT" level="project" />
