@@ -1,0 +1,18 @@
+TODO: Remove the need for a skill Model, make it get JSON data -> send it through the parser -> output custom skill
+TODO: Finish the Skill system
+TODO: Setup the Custom input Skill system
+TODO: Test the Skill system (without running the plugin as a whole)
+TODO: Apply CustomSkill class to BossEntity
+TODO: Add additional configurations to BossEntity/CustomEntityModel
+TODO: Make a parser to convert CustomEntityModels to CustomEntity's
+TODO: Make a parser to convert SkillModels to Skills
+TODO: Setup a items.json which can read and write items really easily
+TODO: Setup a messages.json which can allow for any message within the plugin to be referred to this section
+TODO: Make a load/save for bosses.json and skills.json
+TODO: Setup commands
+TODO: Setup drops system
+TODO: Setup API
+TODO: Setup GUI aspect to allow for in-game boss setup
+TODO: Write a documentation up about how to use the plugin
+TODO: Make the 2.x.x - 3.x.x converter (an executable jar, NOT a plugin)
+

@@ -1,9 +1,9 @@
 package net.aminecraftdev.custombosses.entities.base;
 
 import net.aminecraftdev.custombosses.handlers.EntityHandler;
-import net.aminecraftdev.custombosses.handlers.IIdentifier;
+import net.aminecraftdev.custombosses.utils.IIdentifier;
 import net.aminecraftdev.custombosses.models.CustomEntityModel;
-import net.aminecraftdev.custombosses.skills.base.CustomSkill;
+import net.aminecraftdev.custombosses.skills.CustomSkill;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EntityEquipment;
@@ -27,8 +27,6 @@ public class CustomEntity implements IIdentifier {
     public CustomEntity(String identifier, CustomEntityModel customEntityModel) {
         this.identifier = identifier;
         this.customEntityModel = customEntityModel;
-
-        // TODO: Convert customSkillModels into customSkills
     }
 
     @Override

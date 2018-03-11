@@ -1,4 +1,4 @@
-package net.aminecraftdev.custombosses.skills.types;
+package net.aminecraftdev.custombosses.skills.enums;
 
 /**
  * @author Charles Cullen

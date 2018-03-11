@@ -1,11 +1,11 @@
 package net.aminecraftdev.custombosses.models;
 
-import net.aminecraftdev.custombosses.handlers.IIdentifier;
+import net.aminecraftdev.custombosses.utils.IIdentifier;
 import net.aminecraftdev.custombosses.handlers.ValidationHandler;
-import net.aminecraftdev.custombosses.handlers.models.IEquipmentHandler;
-import net.aminecraftdev.custombosses.handlers.models.IPotionHandler;
-import net.aminecraftdev.custombosses.handlers.models.ISkillHandler;
-import net.aminecraftdev.custombosses.handlers.models.IStatsHandler;
+import net.aminecraftdev.custombosses.utils.models.IEquipmentHandler;
+import net.aminecraftdev.custombosses.utils.models.IPotionHandler;
+import net.aminecraftdev.custombosses.utils.models.ISkillHandler;
+import net.aminecraftdev.custombosses.utils.models.IStatsHandler;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -16,9 +16,6 @@ import java.util.*;
  * @author AMinecraftDev
  * @version 1.0.0
  * @since 06-Sep-17
- *
- * TODO: Make it load messages via a messages.json file
- * TODO: Make it load all custom items via. a items.json file
  */
 public class CustomEntityModel implements IIdentifier, IStatsHandler, IEquipmentHandler, ISkillHandler, IPotionHandler {
 

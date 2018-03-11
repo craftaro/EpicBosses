@@ -20,7 +20,7 @@
     </modules>
 
     <properties>
-        <plugin.version>3.0.0a</plugin.version>
+        <plugin.version>3.0.0b</plugin.version>
     </properties>
 
     <dependencies>

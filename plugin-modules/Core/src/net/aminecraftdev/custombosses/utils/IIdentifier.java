@@ -1,4 +1,4 @@
-package net.aminecraftdev.custombosses.handlers;
+package net.aminecraftdev.custombosses.utils;
 
 /**
  * @author Charles Cullen

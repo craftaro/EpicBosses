@@ -1,4 +1,4 @@
-package net.aminecraftdev.custombosses.handlers.models;
+package net.aminecraftdev.custombosses.utils.models;
 
 import org.bukkit.entity.EntityType;
 
