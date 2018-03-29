@@ -1,7 +1,7 @@
 package net.aminecraftdev.custombosses.skills;
 
 import net.aminecraftdev.custombosses.entities.components.skills.SkillComponent;
-import net.aminecraftdev.custombosses.utils.IIdentifier;
+import net.aminecraftdev.custombosses.utils.identifier.IIdentifier;
 import net.aminecraftdev.custombosses.skills.enums.SkillTarget;
 import net.aminecraftdev.custombosses.skills.enums.SkillType;
 import org.bukkit.entity.Player;

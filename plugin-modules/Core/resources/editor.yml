@@ -1,0 +1,153 @@
+MainPanel:
+  name: '&b&l{name} Editor'
+  slots: 45
+  EmptySpaceFiller:
+    enabled: true
+    Item:
+      type: '160:0'
+      name: '&7'
+  Items:
+    '12':
+      type: DIAMOND
+      name: '&c&lDrops Manager'
+      lore:
+      - '&7Click here to manage the drop table'
+      - '&7that is attached to this boss.'
+      Button: Drops
+    '14':
+      type: DIAMOND_HELMET
+      name: '&c&lEquipment Manager'
+      lore:
+      - '&7Click here to manage the equipment'
+      - '&7that the boss has equipped.'
+      Button: Equipment
+    '16':
+      type: BONE
+      name: '&a&lTargeting Manager'
+      lore:
+      - '&7Click here to edit how the boss handles'
+      - '&7targeting of players and mobs.'
+      Button: Targeting
+    '22':
+      type: BOW
+      name: '&c&lWeapon Manager'
+      lore:
+      - '&7Click here to manage the weapon(s)'
+      - '&7that the boss has equipped.'
+      Button: Weapon
+    '23':
+      type: BARRIER
+      name: '&c&l!&4&l!&c&l! &4&lWARNING &c&l!&4&l!&c&l!'
+      lore:
+      - '&7While editing is enabled for this boss'
+      - '&7no one will be able to spawn it, nor'
+      - '&7will it spawn naturally.'
+    '24':
+      type: BLAZE_POWDER
+      name: '&c&lSkill Manager'
+      lore:
+      - '&7Click here to manage the assigned'
+      - '&7skill(s) the boss has and their occurrence'
+      - '&7chances.'
+      Button: Skill
+    '32':
+      type: '351:4'
+      name: '&a&lStatistics Manager'
+      lore:
+      - '&7Click here to edit the statistics of the'
+      - '&7boss, including things like: health,'
+      - '&7potion effects, commands on spawn, etc.'
+      Button: Stats
+    '39':
+      type: REDSTONE
+      name: '&a&lParticle Manager'
+      lore:
+      - '&7Click here to manage the particles the'
+      - '&7boss has equipped during certain events.'
+      Button: Particle
+    '41':
+      type: GRASS
+      name: '&a&lSpawning Manager'
+      lore:
+      - '&7Click here to edit how the boss handles'
+      - '&7spawning.'
+      Button: Spawning
+    '43':
+      type: BOOK
+      name: '&a&lText Manager'
+      lore:
+      - '&7Click here to edit the taunts, sayings,'
+      - '&7etc. for this boss.'
+      Button: Text
+DropsPanel:
+  name: '&b&l{name} Editor'
+  slots: 54
+  Settings:
+    fillTo: 45
+  Items:
+    '46':
+      type: DIAMOND
+      name: '&b&lSelected Drop Table'
+      lore:
+      - '&7The current selected drop'
+      - '&7table is: &b{dropTable}&7.'
+      - '&7'
+      - '&b&lHints'
+      - '&b&l* &7If this shows N/A it means'
+      - '&7   there was an issue loading the'
+      - '&7   previous table, or it doesn''t'
+      - '&7   have one selected.'
+      - '&b&l* &7Click here to go straight to the'
+      - '&7   editing screen of the drop table.'
+    '47':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '48':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '49':
+      type: PAPER
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page of drop tables.'
+      - '&7'
+      - '&7Currently viewing page &e{currentPage}/{maxPages}&7.'
+      PreviousPage: true
+    '50':
+      type: DIAMOND_BLOCK
+      name: '&a&lCreate a new Drop Table'
+      lore:
+      - '&7Click here to create a new drop'
+      - '&7table. It will automatically be'
+      - '&7assigned to this boss when created.'
+      Button: CreateDropTable
+    '51':
+      type: PAPER
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page of drop tables.'
+      - '&7'
+      - '&7Currently viewing page &e{currentPage}/{maxPages}&7.'
+      NextPage: true
+    '52':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '53':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '54':
+      type: BOOK
+      name: '&c&lDrops Guide'
+      lore:
+      - '&7When selecting the drop table for this custom boss'
+      - '&7you can either choose from one of the above listed'
+      - '&7pre-configured drop tables or you can make a'
+      - '&7new one for this boss.'
+      - '&7'
+      - '&c&lHints'
+      - '&c&l* &7The currently selected drop table will be shown'
+      - '&7   with an emerald which states so.'
+      - '&c&l* &7Every d rop table from every boss will be listed'
+      - '&7   here as an available drop table.'

@@ -1,6 +1,6 @@
 package net.aminecraftdev.custombosses.models;
 
-import net.aminecraftdev.custombosses.utils.IIdentifier;
+import net.aminecraftdev.custombosses.utils.identifier.IIdentifier;
 import net.aminecraftdev.custombosses.handlers.ValidationHandler;
 import net.aminecraftdev.custombosses.utils.models.IEquipmentHandler;
 import net.aminecraftdev.custombosses.utils.models.IPotionHandler;

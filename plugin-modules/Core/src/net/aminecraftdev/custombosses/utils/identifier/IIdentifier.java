@@ -1,4 +1,4 @@
-package net.aminecraftdev.custombosses.utils;
+package net.aminecraftdev.custombosses.utils.identifier;
 
 /**
  * @author Charles Cullen
@@ -7,6 +7,6 @@ package net.aminecraftdev.custombosses.utils;
  */
 public interface IIdentifier {
 
-    String getIdentifier();
+    Identifier<String> getIdentifier();
 
 }
