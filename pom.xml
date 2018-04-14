@@ -20,7 +20,7 @@
     </modules>
 
     <properties>
-        <plugin.version>3.0.0-SNAPSHOT-U4</plugin.version>
+        <plugin.version>3.0.0-SNAPSHOT-U5</plugin.version>
         <plugin.name>CustomBosses</plugin.name>
         <plugin.main>net.aminecraftdev.custombosses.CustomBosses</plugin.main>
         <plugin.author>AMinecraftDev</plugin.author>
