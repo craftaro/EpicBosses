@@ -1,0 +1,6 @@
+name: ${plugin.name}
+main: ${plugin.main}
+version: ${plugin.version}
+author: ${plugin.author}
+#TODO: softdepend:
+#TODO: depends:

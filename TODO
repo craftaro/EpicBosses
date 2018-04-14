@@ -17,3 +17,5 @@ TODO: Write a documentation up about how to use the plugin
 TODO: Make the 2.x.x - 3.x.x converter (an executable jar, NOT a plugin)
 TODO: Write particle system so u can make bosses change particles when they get hit, or use skills, etc.
 TODO: Make a (sorted) drop table viewer
+TODO: Method for equipment, weapons, etc. will when selecting a current one it grabs all items from the items.json if they have a valid type for the needed, otherwise it when creating it'll allow you to place an item in, and that item gets saved
+TODO: Loading drop tables, it'll grab an active list (which will be the same as the droptables.json) and project that into a GUI (with pages)

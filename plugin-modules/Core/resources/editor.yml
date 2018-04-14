@@ -1,11 +1,26 @@
+# MainPanel:                              # panel name                      #
+#   name: '&b&l{name} Editor'             # panel display name              #
+#   slots: 45                             # panel size                      #
+#   Settings:                             # settings section                #
+#     emptySpaceFiller: true              # fill in empty space             #
+#     fillTo: 0                           # fill to slot                    #
+#     backButton: false                   # use back button                 #
+#     exitButton: false                   # use exit button                 #
+#   EmptySpaceFiller:                     # empty space filler itemstack    #
+#     type: '160:0'                       # empty space filler type         #
+#     name: '&7'                          # empty space filler name         #
+#   Buttons:                              # buttons section                 #
+#     BackButton: 9                       # back button slot                #
+#     ExitButton: 9                       # exit button slot                #
+
 MainPanel:
   name: '&b&l{name} Editor'
   slots: 45
+  Settings:
+    emptySpaceFiller: true
   EmptySpaceFiller:
-    enabled: true
-    Item:
-      type: '160:0'
-      name: '&7'
+    type: '160:0'
+    name: '&7'
   Items:
     '12':
       type: DIAMOND
@@ -106,7 +121,7 @@ DropsPanel:
       type: STAINED_GLASS_PANE
       name: '&7'
     '49':
-      type: PAPER
+      type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
       - '&7Click here to go to the previous'
@@ -123,7 +138,7 @@ DropsPanel:
       - '&7assigned to this boss when created.'
       Button: CreateDropTable
     '51':
-      type: PAPER
+      type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
       - '&7Click here to go to the next'
@@ -151,3 +166,307 @@ DropsPanel:
       - '&7   with an emerald which states so.'
       - '&c&l* &7Every d rop table from every boss will be listed'
       - '&7   here as an available drop table.'
+EquipmentPanel:
+  name: '&b&l{name} Editor'
+  slots: 9
+  Settings:
+    backButton: true
+  Buttons:
+    BackButton: 9
+  Items:
+    '1':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '2':
+      type: DIAMOND_HELMET
+      name: '&c&lHelmet'
+      lore:
+      - '&7Click here to change the'
+      - '&7helmet for the &f{boss}'
+      - '&7or add one from your'
+      - '&7inventory.'
+      Button: Helmet
+    '3':
+      type: DIAMOND_CHESTPLATE
+      name: '&c&lChestplate'
+      lore:
+      - '&7Click here to change the'
+      - '&7chestplate for the &f{boss}'
+      - '&7or add one from your'
+      - '&7inventory.'
+      Button: Chestplate
+    '4':
+      type: DIAMOND_LEGGINGS
+      name: '&c&lLeggings'
+      lore:
+      - '&7Click here to change the'
+      - '&7leggings for the &f{boss}'
+      - '&7or add one from your'
+      - '&7inventory.'
+      Button: Leggings
+    '5':
+      type: DIAMOND_BOOTS
+      name: '&c&lBoots'
+      lore:
+      - '&7Click here to change the'
+      - '&7boots for the &f{boss}'
+      - '&7or add one from your'
+      - '&7inventory.'
+      Button: Boots
+    '6':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '7':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '8':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'
+    '9':
+      type: BOOK
+      name: '&c&lEquipment Guide'
+      lore:
+      - '&7here you can choose what equipment'
+      - '&7this boss has. To choose simply click'
+      - '&7the desired piece, then click one of'
+      - '&7the preset pieces or click the diamond'
+      - '&7block to add a new piece from your'
+      - '&7inventory.'
+HelmetPanel:
+  name: '&b&l{name} Editor'
+  slots: 54
+  Settings:
+    fillTo: 45
+    backButton: true
+  Buttons:
+    BackButton: 54
+  Items:
+    '46':
+      type: DIAMOND
+      name: '&c&lRemove'
+      lore:
+      - '&7click here to remove the'
+      - '&7currently equipped helmet.'
+      Button: Remove
+    '47':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '48':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page of helmets.'
+      - '&7'
+      - '&7Currently viewing page &e{currentPage}/{maxPages}&7.'
+      PreviousPage: true
+    '50':
+      type: DIAMOND_BLOCK
+      name: '&a&lAdd New Helmet'
+      lore:
+      - '&7Click here to add a new'
+      - '&7helmet which you have in your'
+      - '&7inventory.'
+      Button: AddNew
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page of helmets.'
+      - '&7'
+      - '&7Currently viewing page &e{currentPage}/{maxPages}&7.'
+      NextPage: true
+    '52':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '53':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '54':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'
+ChestplatePanel:
+  name: '&b&l{name} Editor'
+  slots: 54
+  Settings:
+    fillTo: 45
+    backButton: true
+  Buttons:
+    BackButton: 54
+  Items:
+    '46':
+      type: DIAMOND
+      name: '&c&lRemove'
+      lore:
+      - '&7click here to remove the'
+      - '&7currently equipped chestplate.'
+      Button: Remove
+    '47':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '48':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page of chestplates.'
+      - '&7'
+      - '&7Currently viewing page &e{currentPage}/{maxPages}&7.'
+      PreviousPage: true
+    '50':
+      type: DIAMOND_BLOCK
+      name: '&a&lAdd New Chestplate'
+      lore:
+      - '&7Click here to add a new'
+      - '&7chestplate which you have in your'
+      - '&7inventory.'
+      Button: AddNew
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page of chestplates.'
+      - '&7'
+      - '&7Currently viewing page &e{currentPage}/{maxPages}&7.'
+      NextPage: true
+    '52':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '53':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '54':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'
+LeggingsPanel:
+  name: '&b&l{name} Editor'
+  slots: 54
+  Settings:
+    fillTo: 45
+    backButton: true
+  Buttons:
+    BackButton: 54
+  Items:
+    '46':
+      type: DIAMOND
+      name: '&c&lRemove'
+      lore:
+      - '&7click here to remove the'
+      - '&7currently equipped {type}.'
+      Button: Remove
+    '47':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '48':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page of leggings.'
+      - '&7'
+      - '&7Currently viewing page &e{currentPage}/{maxPages}&7.'
+      PreviousPage: true
+    '50':
+      type: DIAMOND_BLOCK
+      name: '&a&lAdd New Leggings'
+      lore:
+      - '&7Click here to add a new'
+      - '&7leggings which you have in your'
+      - '&7inventory.'
+      Button: AddNew
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page of leggings.'
+      - '&7'
+      - '&7Currently viewing page &e{currentPage}/{maxPages}&7.'
+      NextPage: true
+    '52':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '53':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '54':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'
+BootsPanel:
+  name: '&b&l{name} Editor'
+  slots: 54
+  Settings:
+    fillTo: 45
+    backButton: true
+  Buttons:
+    BackButton: 54
+  Items:
+    '46':
+      type: DIAMOND
+      name: '&c&lRemove'
+      lore:
+      - '&7click here to remove the'
+      - '&7currently equipped {type}.'
+      Button: Remove
+    '47':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '48':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page of boots.'
+      - '&7'
+      - '&7Currently viewing page &e{currentPage}/{maxPages}&7.'
+      PreviousPage: true
+    '50':
+      type: DIAMOND_BLOCK
+      name: '&a&lAdd New Boots'
+      lore:
+      - '&7Click here to add a new'
+      - '&7boots which you have in your'
+      - '&7inventory.'
+      Button: AddNew
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page of boots.'
+      - '&7'
+      - '&7Currently viewing page &e{currentPage}/{maxPages}&7.'
+      NextPage: true
+    '52':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '53':
+      type: STAINED_GLASS_PANE
+      name: '&7'
+    '54':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'
