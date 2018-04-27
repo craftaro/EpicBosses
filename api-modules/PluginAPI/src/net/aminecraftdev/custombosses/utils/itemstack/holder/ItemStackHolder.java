@@ -17,17 +17,17 @@ public class ItemStackHolder {
     @Expose private List<String> lore;
     @Expose private List<String> enchants;
     @Expose private String skullOwner;
-    @Expose private String spawnerType;
+    @Expose private Short spawnerId;
     @Expose private Boolean glowing;
 
-    public ItemStackHolder(String type, Short durability, String name, List<String> lore, List<String> enchants, String skullOwner, String spawnerType, Boolean glowing) {
+    public ItemStackHolder(String type, Short durability, String name, List<String> lore, List<String> enchants, String skullOwner, Short spawnerId, Boolean glowing) {
         this.type = type;
         this.durability = durability;
         this.name = name;
         this.lore = lore;
         this.enchants = enchants;
         this.skullOwner = skullOwner;
-        this.spawnerType = spawnerType;
+        this.spawnerId = spawnerId;
         this.glowing = glowing;
     }
 
@@ -55,8 +55,8 @@ public class ItemStackHolder {
         return skullOwner;
     }
 
-    public String getSpawnerType() {
-        return spawnerType;
+    public Short getSpawnerId() {
+        return spawnerId;
     }
 
     public Boolean getIsGlowing() {

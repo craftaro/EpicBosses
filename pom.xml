@@ -20,7 +20,7 @@
     </modules>
 
     <properties>
-        <plugin.version>3.0.0-SNAPSHOT-U6</plugin.version>
+        <plugin.version>3.0.0-SNAPSHOT-U7</plugin.version>
         <plugin.name>CustomBosses</plugin.name>
         <plugin.main>net.aminecraftdev.custombosses.CustomBosses</plugin.main>
         <plugin.author>AMinecraftDev</plugin.author>
@@ -136,45 +136,6 @@
                         </artifactItem>
                     </artifactItems>
                 </configuration>
-                <inherited>false</inherited>
-            </plugin>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.6</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}/jars</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>plugin-modules/Core/resources-json</directory>
-                                    <includes>
-                                        <include>*.json</include>
-                                    </includes>
-                                    <excludes>
-                                        <exclude>plugin.yml</exclude>
-                                    </excludes>
-                                    <filtering>true</filtering>
-                                </resource>
-                                <resource>
-                                    <directory>plugin-modules/Core/resources-yml</directory>
-                                    <includes>
-                                        <include>*.yml</include>
-                                        <include>items.csv</include>
-                                    </includes>
-                                    <excludes>
-                                        <exclude>plugin.yml</exclude>
-                                    </excludes>
-                                    <filtering>true</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
                 <inherited>false</inherited>
             </plugin>
             <plugin>

@@ -9,4 +9,10 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class CustomBosses extends JavaPlugin {
 
+    @Override
+    public void onEnable() {
+
+    }
+
+
 }
