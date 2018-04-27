@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
-    <output url="file://$MODULE_DIR$/../../target/classes" />
-    <output-test url="file://$MODULE_DIR$/../../target/test-classes" />
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/resources-json" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/resources-yml" type="java-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="PluginAPI" />
     <orderEntry type="module" module-name="FactionHelper" />
     <orderEntry type="module" module-name="FactionsM" />
-    <orderEntry type="module" module-name="FactionsUUID" />
     <orderEntry type="module" module-name="FactionsOne" />
-    <orderEntry type="module" module-name="PluginAPI" />
+    <orderEntry type="module" module-name="FactionsUUID" />
+    <orderEntry type="module" module-name="LegacyFactions" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.spigotmc:spigot:1.11.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.milkbowl.vault:VaultAPI:1.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.bukkit:bukkit:1.9-R0.1-SNAPSHOT" level="project" />

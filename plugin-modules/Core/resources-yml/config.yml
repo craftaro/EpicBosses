@@ -1,0 +1,8 @@
+Hooks:
+  ASkyBlock: false
+  Factions: false
+  StackMob: false
+  WorldEdit: true
+  WorldGuard: true
+Menu:
+  enabledBlock: EMERALD_BLOCK

@@ -1,0 +1,61 @@
+{
+  "SkeletonKing": {
+    "editing": false,
+    "mainStats": {
+      "entityType": "SKELETON",
+      "health": 500,
+      "displayName": "&6&lSkeleton King Boss"
+    },
+    "spawnItem": "SKSpawnEgg",
+    "equipment": {
+      "helmet": "SKHelmet",
+      "chestplate": "SKChestplate",
+      "leggings": "SKLeggings",
+      "boots": "SKBoots"
+    },
+    "hands": {
+      "mainHand": "SKMainHand",
+      "offHand": "SKOffHand"
+    },
+    "potions": [
+      {
+        "type": "resistance",
+        "level": 3,
+        "duration": -1
+      },
+      {
+        "type": "speed",
+        "level": 1,
+        "duration": 500
+      }
+    ],
+    "skills": {
+      "overallChance": 35.5,
+      "masterMessage": "SKMainSkillMessage",
+      "skills": [
+        "KNOCKBACK1",
+        "CAGE1"
+      ]
+    },
+    "drops": {
+      "naturalDrops": false,
+      "dropExp": false,
+      "dropTable": "SKTable"
+    },
+    "messages": {
+      "onSpawn": "SKOnSpawn",
+      "onDeath": "SKOnDeath",
+      "taunts": {
+        "delay": 60,
+        "taunts": [
+          "SKTaunt1",
+          "SKTaunt2"
+        ]
+      }
+    },
+    "commands": {
+      "onSpawn": "SKOnSpawn",
+      "onDeath": "SKOnDeath"
+    }
+  }
+}

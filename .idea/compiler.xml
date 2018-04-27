@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Core" />
         <module name="FactionHelper" />
         <module name="FactionsM" />
         <module name="FactionsOne" />
@@ -13,16 +14,10 @@
         <module name="LegacyFactions" />
         <module name="PluginAPI" />
       </profile>
-      <profile name="Annotation profile for CustomBosses" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="Core" />
-      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Core" target="1.8" />
-      <module name="custombosses" target="1.5" />
+      <module name="custombosses" target="1.8" />
       <module name="FactionHelper" target="1.8" />
       <module name="FactionsM" target="1.8" />
       <module name="FactionsOne" target="1.8" />
