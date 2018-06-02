@@ -6,46 +6,23 @@
     "lore": [
       "&7Right click a block to spawn",
       "&7the boss as that location."
-    ],
-    "skullOwner": "",
-    "enchants": [],
-    "spawnerType": ""
+    ]
   },
   "SKHelmet": {
     "type": "gold_helmet",
-    "durability": "",
-    "name": "",
-    "lore": [],
-    "owner": "",
-    "enchants": [ "protection:4", "unbreaking:3" ],
-    "spawnerType": ""
+    "enchants": [ "protection:4", "unbreaking:3" ]
   },
   "SKChestplate": {
     "type": "gold_chestplate",
-    "durability": "",
-    "name": "",
-    "lore": [],
-    "owner": "",
-    "enchants": [ "protection:4", "unbreaking:3" ],
-    "spawnerType": ""
+    "enchants": [ "protection:4", "unbreaking:3" ]
   },
   "SKLeggings": {
     "type": "gold_leggings",
-    "durability": "",
-    "name": "",
-    "lore": [],
-    "owner": "",
-    "enchants": [ "protection:4", "unbreaking:3" ],
-    "spawnerType": ""
+    "enchants": [ "protection:4", "unbreaking:3" ]
   },
   "SKBoots": {
     "type": "diamond_boots",
-    "durability": "",
-    "name": "",
-    "lore": [],
-    "owner": "",
-    "enchants": [ "protection:4", "unbreaking:3" ],
-    "spawnerType": ""
+    "enchants": [ "protection:4", "unbreaking:3" ]
   },
   "SKMainHand": {
     "type": "diamond_sword",

@@ -30,7 +30,7 @@
         <dependency>
             <groupId>com.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>1.11.2</version>
+            <version>1.12.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -49,6 +49,12 @@
             <groupId>com.sk89q</groupId>
             <artifactId>worldedit</artifactId>
             <version>6.0.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.22</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
