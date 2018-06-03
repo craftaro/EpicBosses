@@ -1,11 +1,12 @@
 package net.aminecraftdev.custombosses.utils.itemstack;
 
 import net.aminecraftdev.custombosses.utils.IConverter;
+import net.aminecraftdev.custombosses.utils.IReplaceableConverter;
 import net.aminecraftdev.custombosses.utils.StringUtils;
 import net.aminecraftdev.custombosses.utils.factory.NbtFactory;
 import net.aminecraftdev.custombosses.utils.itemstack.converters.EnchantConverter;
-import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
 import net.aminecraftdev.custombosses.utils.itemstack.converters.MaterialConverter;
+import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.CreatureSpawner;
@@ -17,13 +18,14 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Charles Cullen
  * @version 1.0.0
  * @since 28-Apr-18
  */
-public class ItemStackConverter implements IConverter<ItemStackHolder, ItemStack> {
+public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder, ItemStack> {
 
     private MaterialConverter materialConverter;
     private EnchantConverter enchantConverter;
@@ -36,6 +38,7 @@ public class ItemStackConverter implements IConverter<ItemStackHolder, ItemStack
     @Override
     public ItemStackHolder to(ItemStack itemStack) {
         Material material = itemStack.getType();
+        int amount = itemStack.getAmount();
         Short durability = itemStack.getDurability(), spawnerId = null;
         String type, name = null, skullOwner = null;
         List<String> lore = null, enchants = null;
@@ -93,11 +96,16 @@ public class ItemStackConverter implements IConverter<ItemStackHolder, ItemStack
             if(compound.containsKey("ench")) isGlowing = true;
         }
 
-        return new ItemStackHolder(type, durability, name, lore, enchants, skullOwner, spawnerId, isGlowing);
+        return new ItemStackHolder(amount, type, durability, name, lore, enchants, skullOwner, spawnerId, isGlowing);
     }
 
     @Override
     public ItemStack from(ItemStackHolder itemStackHolder) {
+        return from(itemStackHolder, null);
+    }
+
+    @Override
+    public ItemStack from(ItemStackHolder itemStackHolder, Map<String, String> replaceMap) {
         ItemStack itemStack = new ItemStack(Material.AIR);
 
         if(itemStackHolder.getType() == null) return itemStack;
@@ -119,14 +127,30 @@ public class ItemStackConverter implements IConverter<ItemStackHolder, ItemStack
         if(name != null || skullOwner != null || lore != null || spawnerId != null) {
             ItemMeta itemMeta = itemStack.getItemMeta();
 
-            if(name != null) itemMeta.setDisplayName(StringUtils.get().translateColor(name));
-            if(lore != null) {
-                List<String> newLore = new ArrayList<>();
+            //-----------
+            // SET NAME
+            //-----------
+            if(name != null) {
+                name = StringUtils.get().translateColor(name);
 
-                lore.forEach(string ->newLore.add(StringUtils.get().translateColor(string)));
-                itemMeta.setLore(newLore);
+                itemMeta.setDisplayName(replaceString(name, replaceMap));
             }
 
+            //-----------
+            // SET LORE
+            //-----------
+            if(lore != null) {
+                List<String> replacedLore = new ArrayList<>(lore);
+
+                replacedLore.replaceAll(s -> s.replace('&', '§'));
+                replacedLore.replaceAll(s -> replaceString(s, replaceMap));
+
+                itemMeta.setLore(replacedLore);
+            }
+
+            //----------------------------------------------
+            // SET OWNER, SPAWNER ID, OR UPDATE ITEM META
+            //----------------------------------------------
             if(skullOwner != null) {
                 SkullMeta skullMeta = (SkullMeta) itemMeta;
 
@@ -154,5 +178,17 @@ public class ItemStackConverter implements IConverter<ItemStackHolder, ItemStack
         }
 
         return itemStack;
+    }
+
+    private String replaceString(String input, Map<String, String> replaceMap) {
+        if(replaceMap == null) return input;
+
+        for(String replaceKey : replaceMap.keySet()) {
+            if(input.contains(replaceKey)) {
+                input = input.replace(replaceKey, replaceMap.get(replaceKey));
+            }
+        }
+
+        return input;
     }
 }

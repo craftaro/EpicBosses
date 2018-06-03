@@ -213,7 +213,6 @@ public class NbtFactory {
         /**
          * Save the content of a NBT compound to a stream.
          * <p>
-         * Use {@link Files#newOutputStreamSupplier(File)} to provide a stream supplier to a file.
          * @param stream - the output stream.
          * @param option - whether or not to compress the output.
          * @throws IOException If anything went wrong.
@@ -408,7 +407,6 @@ public class NbtFactory {
     /**
      * Load the content of a file from a stream.
      * <p>
-     * Use {@link Files#newInputStreamSupplier(File)} to provide a stream from a file.
      * @param stream - the stream supplier.
      * @param option - whether or not to decompress the input stream.
      * @return The decoded NBT compound.
@@ -440,7 +438,6 @@ public class NbtFactory {
     /**
      * Save the content of a NBT compound to a stream.
      * <p>
-     * Use {@link Files#newOutputStreamSupplier(File)} to provide a stream supplier to a file.
      * @param source - the NBT compound to save.
      * @param stream - the stream.
      * @param option - whether or not to compress the output.

@@ -10,6 +10,8 @@ public enum Debug {
     NULL_CHECK("An object was found as null when it should not be null."),
     NULL_ENTITY_TYPE("The {0} boss or minion has got an invalid entity type."),
 
+    MAX_HEALTH("You cannot set the max health higher than {0}. You can adjust your max health in the spigot.yml file and restart your server to increase this."),
+
     ATTEMPTED_TO_SPAWN_WHILE_DISABLED("The {0} boss/minion attempted to spawn while editing is enabled.");
 
     private String message;

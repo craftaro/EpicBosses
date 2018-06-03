@@ -3,10 +3,10 @@ package net.aminecraftdev.custombosses.utils;
 /**
  * @author Charles Cullen
  * @version 1.0.0
- * @since 28-Apr-18
+ * @since 03-Jun-18
  */
-public interface IReloadable {
+public interface ILoadable {
 
-    void reload();
+    void load();
 
 }

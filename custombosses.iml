@@ -9,7 +9,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.spigotmc:spigot:1.8.8" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.spigotmc:spigot:1.12.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.milkbowl.vault:VaultAPI:1.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.bukkit:bukkit:1.9-R0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-lang:commons-lang:2.6" level="project" />

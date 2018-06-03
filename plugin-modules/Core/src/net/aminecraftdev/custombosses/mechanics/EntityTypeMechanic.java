@@ -1,8 +1,9 @@
 package net.aminecraftdev.custombosses.mechanics;
 
-import net.aminecraftdev.custombosses.entity.elements.MainStatsElement;
+import net.aminecraftdev.custombosses.entity.BossEntity;
+import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
 import net.aminecraftdev.custombosses.utils.EntityTypeUtil;
-import org.bukkit.Location;
+import net.aminecraftdev.custombosses.utils.IMechanic;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 
@@ -11,35 +12,30 @@ import org.bukkit.entity.LivingEntity;
  * @version 1.0.0
  * @since 01-Jun-18
  */
-public class EntityTypeMechanic {
+public class EntityTypeMechanic implements IMechanic {
 
-    private static final EntityTypeMechanic instance = new EntityTypeMechanic();
-
-    public LivingEntity getBaseEntity(MainStatsElement mainStatsElement, Location location) {
-        String bossEntityType = mainStatsElement.getEntityType();
+    @Override
+    public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
+        String bossEntityType = bossEntity.getMainStats().getEntityType();
         LivingEntity livingEntity;
 
         try {
-            livingEntity = EntityTypeUtil.get(bossEntityType, location);
+            livingEntity = EntityTypeUtil.get(bossEntityType, activeBossHolder.getLocation());
         } catch (NullPointerException ex) {
-            return null;
+            return false;
         }
 
         if(livingEntity == null) {
             EntityType entityType = EntityType.valueOf(bossEntityType.toUpperCase());
 
             try {
-                livingEntity = (LivingEntity) location.getWorld().spawnEntity(location, entityType);
+                livingEntity = (LivingEntity) activeBossHolder.getLocation().getWorld().spawnEntity(activeBossHolder.getLocation(), entityType);
             } catch (Exception ex) {
-                return null;
+                return false;
             }
         }
 
-        return livingEntity;
+        activeBossHolder.setLivingEntity(livingEntity);
+        return true;
     }
-
-    public static EntityTypeMechanic get() {
-        return instance;
-    }
-
 }
