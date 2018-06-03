@@ -1,6 +1,5 @@
 package net.aminecraftdev.custombosses.utils.itemstack;
 
-import net.aminecraftdev.custombosses.utils.IConverter;
 import net.aminecraftdev.custombosses.utils.IReplaceableConverter;
 import net.aminecraftdev.custombosses.utils.StringUtils;
 import net.aminecraftdev.custombosses.utils.factory.NbtFactory;

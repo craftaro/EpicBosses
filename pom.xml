@@ -13,14 +13,13 @@
         <module>api-modules/FactionsM</module>
         <module>api-modules/FactionsOne</module>
         <module>api-modules/FactionsUUID</module>
-        <module>api-modules/PluginAPI</module>
         <module>api-modules/LegacyFactions</module>
         <module>plugin-modules/Core</module>
         <module>plugin-modules/FactionHelper</module>
     </modules>
 
     <properties>
-        <plugin.version>3.0.0-SNAPSHOT-U9</plugin.version>
+        <plugin.version>3.0.0-SNAPSHOT-U10</plugin.version>
         <plugin.name>CustomBosses</plugin.name>
         <plugin.main>net.aminecraftdev.custombosses.CustomBosses</plugin.main>
         <plugin.author>AMinecraftDev</plugin.author>

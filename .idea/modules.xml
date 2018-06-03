@@ -8,7 +8,6 @@
       <module fileurl="file://$PROJECT_DIR$/api-modules/FactionsOne/FactionsOne.iml" filepath="$PROJECT_DIR$/api-modules/FactionsOne/FactionsOne.iml" />
       <module fileurl="file://$PROJECT_DIR$/api-modules/FactionsUUID/FactionsUUID.iml" filepath="$PROJECT_DIR$/api-modules/FactionsUUID/FactionsUUID.iml" />
       <module fileurl="file://$PROJECT_DIR$/api-modules/LegacyFactions/LegacyFactions.iml" filepath="$PROJECT_DIR$/api-modules/LegacyFactions/LegacyFactions.iml" />
-      <module fileurl="file://$PROJECT_DIR$/api-modules/PluginAPI/PluginAPI.iml" filepath="$PROJECT_DIR$/api-modules/PluginAPI/PluginAPI.iml" />
       <module fileurl="file://$PROJECT_DIR$/custombosses.iml" filepath="$PROJECT_DIR$/custombosses.iml" />
     </modules>
   </component>

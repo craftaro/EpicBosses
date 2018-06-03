@@ -1,7 +1,5 @@
 package net.aminecraftdev.custombosses.utils.file;
 
-import java.io.File;
-
 /**
  * @author Charles Cullen
  * @version 1.0.0
@@ -9,8 +7,8 @@ import java.io.File;
  */
 public interface IFileHandler<ReturnObject> {
 
-    ReturnObject loadFile(File file);
+    ReturnObject loadFile();
 
-    void saveFile(File file, ReturnObject returnObject);
+    void saveFile(ReturnObject returnObject);
 
 }

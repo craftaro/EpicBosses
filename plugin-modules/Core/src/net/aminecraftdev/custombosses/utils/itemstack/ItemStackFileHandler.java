@@ -4,8 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import net.aminecraftdev.custombosses.utils.file.FileUtils;
 import net.aminecraftdev.custombosses.utils.file.IFileHandler;
 import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.FileReader;
@@ -27,9 +29,31 @@ public class ItemStackFileHandler implements IFileHandler<Map<String, ItemStackH
             .excludeFieldsWithoutExposeAnnotation()
             .create();
 
+    private final JavaPlugin javaPlugin;
+    private final boolean saveResource;
+    private final File file;
+
+    public ItemStackFileHandler(JavaPlugin javaPlugin, File file, boolean saveResource) {
+        this.saveResource = saveResource;
+        this.javaPlugin = javaPlugin;
+        this.file = file;
+    }
+
     @Override
-    public Map<String, ItemStackHolder> loadFile(File file) {
+    public Map<String, ItemStackHolder> loadFile() {
         Map<String, ItemStackHolder> itemStackHolderMap = new HashMap<>();
+
+        if(!this.file.exists()) {
+            if(this.saveResource) {
+                String path = this.file.getName();
+
+                if(this.javaPlugin.getResource(path) != null) {
+                    this.javaPlugin.saveResource(path, false);
+                }
+            } else {
+                FileUtils.get().createFile(this.file);
+            }
+        }
 
         try {
             FileReader fileReader = new FileReader(file);
@@ -53,7 +77,7 @@ public class ItemStackFileHandler implements IFileHandler<Map<String, ItemStackH
     }
 
     @Override
-    public void saveFile(File file, Map<String, ItemStackHolder> map) {
+    public void saveFile(Map<String, ItemStackHolder> map) {
         try {
             FileWriter fileWriter = new FileWriter(file);
             Type type = new TypeToken<Map<String, ItemStackHolder>>(){}.getType();
