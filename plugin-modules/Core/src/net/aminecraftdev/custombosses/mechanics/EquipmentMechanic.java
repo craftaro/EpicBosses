@@ -3,7 +3,7 @@ package net.aminecraftdev.custombosses.mechanics;
 import net.aminecraftdev.custombosses.entity.BossEntity;
 import net.aminecraftdev.custombosses.entity.elements.EquipmentElement;
 import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
-import net.aminecraftdev.custombosses.managers.ItemStackManager;
+import net.aminecraftdev.custombosses.managers.BossItemFileManager;
 import net.aminecraftdev.custombosses.utils.IMechanic;
 import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
 import org.bukkit.entity.LivingEntity;
@@ -17,14 +17,16 @@ import org.bukkit.inventory.ItemStack;
  */
 public class EquipmentMechanic implements IMechanic {
 
-    private ItemStackManager itemStackManager;
+    private BossItemFileManager itemStackManager;
 
-    public EquipmentMechanic(ItemStackManager itemStackManager) {
+    public EquipmentMechanic(BossItemFileManager itemStackManager) {
         this.itemStackManager = itemStackManager;
     }
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
+        if(activeBossHolder.getLivingEntity() == null) return false;
+
         LivingEntity livingEntity = activeBossHolder.getLivingEntity();
         EquipmentElement equipmentElement = bossEntity.getEquipment();
         EntityEquipment entityEquipment = livingEntity.getEquipment();
@@ -40,7 +42,6 @@ public class EquipmentMechanic implements IMechanic {
                 ItemStack itemStack = this.itemStackManager.getItemStackConverter().from(itemStackHolder);
 
                 entityEquipment.setHelmet(itemStack);
-                entityEquipment.setHelmetDropChance(0);
             }
         }
 
@@ -51,7 +52,6 @@ public class EquipmentMechanic implements IMechanic {
                 ItemStack itemStack = this.itemStackManager.getItemStackConverter().from(itemStackHolder);
 
                 entityEquipment.setChestplate(itemStack);
-                entityEquipment.setChestplateDropChance(0);
             }
         }
 
@@ -62,7 +62,6 @@ public class EquipmentMechanic implements IMechanic {
                 ItemStack itemStack = this.itemStackManager.getItemStackConverter().from(itemStackHolder);
 
                 entityEquipment.setLeggings(itemStack);
-                entityEquipment.setLeggingsDropChance(0);
             }
         }
 
@@ -73,7 +72,6 @@ public class EquipmentMechanic implements IMechanic {
                 ItemStack itemStack = this.itemStackManager.getItemStackConverter().from(itemStackHolder);
 
                 entityEquipment.setBoots(itemStack);
-                entityEquipment.setBootsDropChance(0);
             }
         }
 

@@ -4,16 +4,15 @@ import net.aminecraftdev.custombosses.entity.BossEntity;
 import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.IMechanic;
-import net.aminecraftdev.custombosses.utils.StringUtils;
-import net.aminecraftdev.custombosses.utils.reader.SpigotYmlReader;
+import net.aminecraftdev.custombosses.utils.file.reader.SpigotYmlReader;
 import org.bukkit.entity.LivingEntity;
 
 /**
  * @author Charles Cullen
  * @version 1.0.0
- * @since 02-Jun-18
+ * @since 27-Jun-18
  */
-public class StatsMechanic implements IMechanic {
+public class HealthMechanic implements IMechanic {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
@@ -30,17 +29,6 @@ public class StatsMechanic implements IMechanic {
 
         livingEntity.setMaxHealth(maxHealth);
         livingEntity.setHealth(maxHealth);
-
-        String customName = bossEntity.getMainStats().getDisplayName();
-
-        if(customName != null) {
-            livingEntity.setCustomName(StringUtils.get().translateColor(customName));
-            livingEntity.setCustomNameVisible(true);
-        }
-
-        livingEntity.setRemoveWhenFarAway(false);
-        livingEntity.setCanPickupItems(false);
-
         return true;
     }
 }

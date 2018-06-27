@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import lombok.Getter;
 import lombok.Setter;
 import net.aminecraftdev.custombosses.entity.elements.*;
+import net.aminecraftdev.custombosses.utils.potion.holder.PotionEffectHolder;
 
 import java.util.List;
 
@@ -14,19 +15,19 @@ import java.util.List;
  */
 public class BossEntity {
 
-    @Expose private final List<PotionElement> potions;
-    @Expose private final MainStatsElement mainStats;
-    @Expose private final EquipmentElement equipment;
-    @Expose private final MessagesElement messages;
-    @Expose private final CommandsElement commands;
-    @Expose private final SkillsElement skills;
-    @Expose private final HandsElement hands;
-    @Expose private final DropsElement drops;
+    @Expose @Getter private final List<PotionEffectHolder> potions;
+    @Expose @Getter private final MainStatsElement mainStats;
+    @Expose @Getter private final EquipmentElement equipment;
+    @Expose @Getter private final MessagesElement messages;
+    @Expose @Getter private final CommandsElement commands;
+    @Expose @Getter private final SkillsElement skills;
+    @Expose @Getter private final HandsElement hands;
+    @Expose @Getter private final DropsElement drops;
 
     @Expose @Getter @Setter private String spawnItem;
     @Expose @Getter @Setter private boolean editing;
 
-    public BossEntity(boolean editing, MainStatsElement mainStats, String spawnItem, EquipmentElement equipment, HandsElement hands, List<PotionElement> potions,
+    public BossEntity(boolean editing, MainStatsElement mainStats, String spawnItem, EquipmentElement equipment, HandsElement hands, List<PotionEffectHolder> potions,
                       SkillsElement skills, DropsElement drops, MessagesElement messages, CommandsElement commands) {
         this.editing = editing;
         this.mainStats = mainStats;
@@ -38,37 +39,5 @@ public class BossEntity {
         this.drops = drops;
         this.messages = messages;
         this.commands = commands;
-    }
-
-    public MainStatsElement getMainStats() {
-        return mainStats;
-    }
-
-    public EquipmentElement getEquipment() {
-        return equipment;
-    }
-
-    public HandsElement getHands() {
-        return hands;
-    }
-
-    public List<PotionElement> getPotions() {
-        return potions;
-    }
-
-    public SkillsElement getSkills() {
-        return skills;
-    }
-
-    public DropsElement getDrops() {
-        return drops;
-    }
-
-    public MessagesElement getMessages() {
-        return messages;
-    }
-
-    public CommandsElement getCommands() {
-        return commands;
     }
 }

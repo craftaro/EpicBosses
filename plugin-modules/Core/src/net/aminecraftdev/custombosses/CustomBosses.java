@@ -1,7 +1,8 @@
 package net.aminecraftdev.custombosses;
 
 import lombok.Getter;
-import net.aminecraftdev.custombosses.managers.ItemStackManager;
+import net.aminecraftdev.custombosses.managers.BossItemFileManager;
+import net.aminecraftdev.custombosses.managers.BossMechanicManager;
 import net.aminecraftdev.custombosses.utils.IReloadable;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,13 +13,16 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class CustomBosses extends JavaPlugin implements IReloadable {
 
-    @Getter private ItemStackManager itemStackManager;
+    @Getter private BossMechanicManager bossMechanicManager;
+    @Getter private BossItemFileManager itemStackManager;
 
     @Override
     public void onEnable() {
-        this.itemStackManager = new ItemStackManager(this);
+        this.itemStackManager = new BossItemFileManager(this);
 
         reload();
+
+        this.bossMechanicManager.load();
     }
 
 

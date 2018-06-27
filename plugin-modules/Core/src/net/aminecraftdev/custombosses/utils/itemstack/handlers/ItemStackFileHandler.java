@@ -1,4 +1,4 @@
-package net.aminecraftdev.custombosses.utils.itemstack;
+package net.aminecraftdev.custombosses.utils.itemstack.handlers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

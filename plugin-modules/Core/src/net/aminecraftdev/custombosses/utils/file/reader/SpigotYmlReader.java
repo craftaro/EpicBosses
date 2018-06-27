@@ -1,4 +1,4 @@
-package net.aminecraftdev.custombosses.utils.reader;
+package net.aminecraftdev.custombosses.utils.file.reader;
 
 import net.aminecraftdev.custombosses.utils.IYmlReader;
 import net.aminecraftdev.custombosses.utils.file.FileUtils;

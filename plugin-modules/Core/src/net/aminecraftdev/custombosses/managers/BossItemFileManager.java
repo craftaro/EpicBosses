@@ -5,7 +5,7 @@ import net.aminecraftdev.custombosses.utils.ILoadable;
 import net.aminecraftdev.custombosses.utils.IReloadable;
 import net.aminecraftdev.custombosses.utils.ISavable;
 import net.aminecraftdev.custombosses.utils.itemstack.ItemStackConverter;
-import net.aminecraftdev.custombosses.utils.itemstack.ItemStackFileHandler;
+import net.aminecraftdev.custombosses.utils.itemstack.handlers.ItemStackFileHandler;
 import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,14 +18,14 @@ import java.util.Map;
  * @version 1.0.0
  * @since 03-Jun-18
  */
-public class ItemStackManager implements ILoadable, ISavable, IReloadable {
+public class BossItemFileManager implements ILoadable, ISavable, IReloadable {
 
     @Getter private final ItemStackConverter itemStackConverter = new ItemStackConverter();
 
     private Map<String, ItemStackHolder> itemStackHolders = new HashMap<>();
     private ItemStackFileHandler itemStackFileHandler;
 
-    public ItemStackManager(JavaPlugin javaPlugin) {
+    public BossItemFileManager(JavaPlugin javaPlugin) {
         File file = new File(javaPlugin.getDataFolder(), "items.json");
 
         this.itemStackFileHandler = new ItemStackFileHandler(javaPlugin, file, true);
