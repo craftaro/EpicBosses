@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class SkillsElement {
 
-    @Expose @Getter @Setter private double overallChance;
+    @Expose @Getter @Setter private Double overallChance;
     @Expose @Getter @Setter private String masterMessage;
     @Expose @Getter @Setter private List<String> skills;
 

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class TauntElement {
 
-    @Expose @Getter @Setter private int delay;
+    @Expose @Getter @Setter private Integer delay;
     @Expose @Getter @Setter private List<String> taunts;
 
 }

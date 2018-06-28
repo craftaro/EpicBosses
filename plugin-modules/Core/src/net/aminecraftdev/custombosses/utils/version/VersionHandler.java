@@ -1,5 +1,6 @@
 package net.aminecraftdev.custombosses.utils.version;
 
+import lombok.Getter;
 import net.aminecraftdev.custombosses.utils.Versions;
 import org.bukkit.Bukkit;
 
@@ -10,7 +11,7 @@ import org.bukkit.Bukkit;
  */
 public class VersionHandler {
 
-    private Versions version;
+    @Getter private Versions version;
 
     public VersionHandler() {
         String v = Bukkit.getServer().getClass().getPackage().getName();
@@ -21,7 +22,7 @@ public class VersionHandler {
     }
 
     public boolean canUseOffHand() {
-        return this.version.isHigherThan(Versions.v1_9_R1);
+        return this.version.isHigherThanOrEqualTo(Versions.v1_9_R1);
     }
 
 }

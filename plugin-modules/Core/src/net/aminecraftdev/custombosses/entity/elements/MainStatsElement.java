@@ -12,7 +12,7 @@ import lombok.Setter;
 public class MainStatsElement {
 
     @Expose @Getter @Setter private String entityType;
-    @Expose @Getter @Setter private double health;
+    @Expose @Getter @Setter private Double health;
     @Expose @Getter @Setter private String displayName;
 
 }

@@ -3,6 +3,7 @@ package net.aminecraftdev.custombosses.utils;
 import net.aminecraftdev.custombosses.utils.entity.ICustomEntityHandler;
 import net.aminecraftdev.custombosses.utils.entity.handlers.*;
 import org.bukkit.Location;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 
 /**
@@ -41,4 +42,11 @@ public enum EntityTypeUtil {
         return null;
     }
 
+    public static EntityTypeUtil get(String entityType) {
+        for(EntityTypeUtil entityTypeUtil : values()) {
+            if(entityType.toUpperCase().startsWith(entityTypeUtil.name())) return entityTypeUtil;
+        }
+
+        return null;
+    }
 }

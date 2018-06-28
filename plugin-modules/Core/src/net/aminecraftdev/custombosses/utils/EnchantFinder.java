@@ -51,7 +51,9 @@ public enum EnchantFinder {
     EnchantFinder(String fancyName, Enchantment enchantment, String... names) {
         this.fancyName = fancyName;
         this.enchantment = enchantment;
+
         this.names.addAll(Arrays.asList(names));
+        this.names.add(fancyName);
     }
 
     public Enchantment getEnchantment() {

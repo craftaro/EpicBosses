@@ -13,18 +13,22 @@ import org.bukkit.entity.Skeleton;
  * @version 1.0.0
  * @since 01-Jun-18
  */
-public class WitherSkeletonHandler implements ICustomEntityHandler {
+public class StraySkeletonHandler implements ICustomEntityHandler {
 
     private VersionHandler versionHandler = new VersionHandler();
 
     @Override
     public LivingEntity getBaseEntity(String entityType, Location spawnLocation) {
+        if(this.versionHandler.getVersion().isLessThanOrEqualTo(Versions.v1_9_R2)) {
+            throw new NullPointerException("This feature is only implemented in version 1.10 and above of Minecraft.");
+        }
+
         if(this.versionHandler.getVersion().isHigherThanOrEqualTo(Versions.v1_11_R1)) {
-            return (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.WITHER_SKELETON);
+            return (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.STRAY);
         }
 
         Skeleton skeleton = (Skeleton) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.SKELETON);
-        skeleton.setSkeletonType(Skeleton.SkeletonType.WITHER);
+        skeleton.setSkeletonType(Skeleton.SkeletonType.STRAY);
 
         return skeleton;
     }

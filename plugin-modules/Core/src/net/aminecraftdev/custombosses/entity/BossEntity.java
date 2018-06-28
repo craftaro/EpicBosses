@@ -27,7 +27,7 @@ public class BossEntity {
     @Expose @Getter @Setter private String spawnItem;
     @Expose @Getter @Setter private boolean editing;
 
-    public BossEntity(boolean editing, MainStatsElement mainStats, String spawnItem, EquipmentElement equipment, HandsElement hands, List<PotionEffectHolder> potions,
+    public BossEntity(boolean editing, String spawnItem, MainStatsElement mainStats, EquipmentElement equipment, HandsElement hands, List<PotionEffectHolder> potions,
                       SkillsElement skills, DropsElement drops, MessagesElement messages, CommandsElement commands) {
         this.editing = editing;
         this.mainStats = mainStats;

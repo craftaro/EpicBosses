@@ -11,12 +11,7 @@ import lombok.Setter;
  */
 public class DropsElement {
 
-    @Expose @Getter @Setter private boolean naturalDrops, dropExp;
+    @Expose @Getter @Setter private Boolean naturalDrops, dropExp;
     @Expose @Getter @Setter private String dropTable;
 
-    public DropsElement(boolean naturalDrops, boolean dropExp, String dropTable) {
-        this.naturalDrops = naturalDrops;
-        this.dropExp = dropExp;
-        this.dropTable = dropTable;
-    }
 }

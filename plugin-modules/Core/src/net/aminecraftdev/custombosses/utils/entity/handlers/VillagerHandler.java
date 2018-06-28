@@ -17,14 +17,20 @@ public class VillagerHandler implements ICustomEntityHandler {
     public LivingEntity getBaseEntity(String entityType, Location spawnLocation) {
         Villager villager = (Villager) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.VILLAGER);
         String[] split = entityType.split(":");
-        int size = Integer.valueOf(split[1]);
-        Villager.Profession profession = Villager.Profession.getProfession(size);
 
-        if(profession == null) {
-            throw new NullPointerException("Profession value is too high and does not represent an actual villager profession.");
+        if(split.length == 2) {
+            String type = split[1];
+            Villager.Profession profession;
+
+            try {
+                profession = Villager.Profession.valueOf(type.toUpperCase());
+            } catch (Exception ex) {
+                throw new NullPointerException("Profession value is too high and does not represent an actual villager profession.");
+            }
+
+            villager.setProfession(profession);
         }
 
-        villager.setProfession(profession);
         return villager;
     }
 }

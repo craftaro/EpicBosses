@@ -29,8 +29,20 @@ public enum Versions {
         this.bukkitVersion = name();
     }
 
-    public boolean isHigherThan(Versions input) {
+    public boolean isLessThan(Versions input) {
+        return this.weight < input.weight;
+    }
+
+    public boolean isLessThanOrEqualTo(Versions input) {
+        return this.weight <= input.weight;
+    }
+
+    public boolean isHigherThanOrEqualTo(Versions input) {
         return this.weight >= input.weight;
+    }
+
+    public boolean isHigherThan(Versions input) {
+        return this.weight > input.weight;
     }
 
     public static Versions getVersion(String input) {

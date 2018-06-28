@@ -19,15 +19,15 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     @Override
     public void onEnable() {
         this.itemStackManager = new BossItemFileManager(this);
+        this.bossMechanicManager = new BossMechanicManager(this);
 
         reload();
-
-        this.bossMechanicManager.load();
     }
 
 
     @Override
     public void reload() {
         this.itemStackManager.reload();
+        this.bossMechanicManager.load();
     }
 }
