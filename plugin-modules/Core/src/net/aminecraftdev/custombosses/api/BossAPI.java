@@ -26,22 +26,12 @@ public class BossAPI {
         MessagesElement messagesElement = new MessagesElement();
         CommandsElement commandsElement = new CommandsElement();
 
-        EntityTypeUtil entityTypeUtil = EntityTypeUtil.get(entityTypeInput);
-
-        if(entityTypeUtil == null) {
-            try {
-
-            } catch (Exception ex) {
-
-            }
-            EntityType entityType = EntityType.valueOf(entityTypeInput.toUpperCase());
-
-            if(entityType == null) {
-
-            }
-        }
+        //TODO: Set the entityType to said entityTypeInput
 
         BossEntity bossEntity = new BossEntity(true, null, mainStatsElement, equipmentElement, handsElement, potionEffectHolders, skillsElement, dropsElement, messagesElement, commandsElement);
+
+
+        return bossEntity;
     }
 
 }

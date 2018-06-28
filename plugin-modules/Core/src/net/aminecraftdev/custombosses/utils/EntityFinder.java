@@ -13,6 +13,8 @@ import java.util.List;
  * @author Charles Cullen
  * @version 1.0.0
  * @since 28-Jun-18
+ *
+ * TODO: Finish all the possible boss options.
  */
 public enum EntityFinder {
 
