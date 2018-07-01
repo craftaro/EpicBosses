@@ -24,7 +24,32 @@ public enum EntityFinder {
     HUSK("Husk", new HuskZombieHandler(), "husk"),
     ZOMBIE_VILLAGER("ZombieVillager", new ZombieVillagerHandler(), "zombievillager", "zombie_villager", "zombie villager", "villagerzombie", "villager_zombie", "villager zombie"),
     SKELETON_HORSE("SkeletonHorse", new SkeletonHorseHandler(), "skeletonhorse", "skeleton_horse", "skeleton horse"),
-    ZOMBIE_HORSE("ZombieHorse", new ZombieHorseHandler(), "zombiehorse", "zombie_horse", "zombie horse");
+    ZOMBIE_HORSE("ZombieHorse", new ZombieHorseHandler(), "zombiehorse", "zombie_horse", "zombie horse"),
+    DONKEY("Donkey", new DonkeyHorseHandler(), "donkey"),
+    MULE("Mule", new MuleHorseHandler(), "mule"),
+    EVOKER("Evoker", new EvokerHandler(), "evoker"),
+    VEX("Vex", new VexHandler(), "vex"),
+    VINDICATOR("Vindicator", new VindicatorHandler(), "vindicator"),
+    ILLUSIONER("Illusioner", new IllusionerHandler(), "illusioner"),
+    CREEPER("Creeper", EntityType.CREEPER, "creeper"),
+    SKELETON("Skeleton", EntityType.SKELETON, "skeleton"),
+    SPIDER("Spider", EntityType.SPIDER, "spider"),
+    GIANT("Giant", EntityType.GIANT, "giant", "giant_zombie", "giant zombie", "giantzombie"),
+    ZOMBIE("Zombie", new ZombieHandler(), "zombie"),
+    BABY_ZOMBIE("BabyZombie", new ZombieBabyHandler(), "babyzombie", "baby_zombie", "baby zombie"),
+    SLIME("Slime", new SlimeHandler(), "slime"),
+    GHAST("Ghast", EntityType.GHAST, "ghast"),
+    PIG_ZOMBIE("PigZombie", new PigZombieHandler(), "pigzombie", "pig zombie", "pig_zombie", "zombiepigman", "zombie_pigman", "zombie pigman"),
+    BABY_PIG_ZOMBIE("BabyPigZombie", new PigZombieBabyHandler(), "babypigzombie", "baby pig zombie", "baby_pig_zombie", "babyzombiepigman", "baby_zombie_pigman", "baby zombie pigman"),
+    ENDERMAN("Enderman", EntityType.ENDERMAN, "enderman"),
+    CAVE_SPIDER("CaveSpider", EntityType.CAVE_SPIDER, "cavespider", "cave_spider", "cave spider"),
+    SILVERFISH("Silverfish", EntityType.SILVERFISH, "silverfish"),
+    BLAZE("Blaze", EntityType.BLAZE, "blaze"),
+    MAGMA_CUBE("MagmaCube", new MagmaCubeHandler(), "magmacube", "magma_cube", "magma cube"),
+    ENDER_DRAGON("EnderDragon", EntityType.ENDER_DRAGON, "enderdragon", "ender_dragon", "ender dragon"),
+    WITHER("Wither", EntityType.WITHER, "wither"),
+    BAT("Bat", EntityType.BAT, "bat"),
+    WITCH("Witch", EntityType.WITCH, "witch");
 
     @Getter private ICustomEntityHandler customEntityHandler;
     @Getter private List<String> names = new ArrayList<>();
