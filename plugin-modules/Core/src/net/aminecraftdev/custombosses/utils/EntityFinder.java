@@ -13,8 +13,6 @@ import java.util.List;
  * @author Charles Cullen
  * @version 1.0.0
  * @since 28-Jun-18
- *
- * TODO: Finish all the possible boss options.
  */
 public enum EntityFinder {
 
@@ -49,7 +47,26 @@ public enum EntityFinder {
     ENDER_DRAGON("EnderDragon", EntityType.ENDER_DRAGON, "enderdragon", "ender_dragon", "ender dragon"),
     WITHER("Wither", EntityType.WITHER, "wither"),
     BAT("Bat", EntityType.BAT, "bat"),
-    WITCH("Witch", EntityType.WITCH, "witch");
+    WITCH("Witch", EntityType.WITCH, "witch"),
+    ENDERMITE("Endermite", new EndermiteHandler(), "endermite"),
+    GUARDIAN("Guardian", new GuardianHandler(), "guardian"),
+    SHULKER("Shulker", new ShulkerHandler(), "shulker"),
+    PIG("Pig", EntityType.PIG, "pig"),
+    SHEEP("Sheep", EntityType.SHEEP, "sheep"),
+    COW("Cow", EntityType.COW, "cow"),
+    CHICKEN("Chicken", EntityType.CHICKEN, "chicken"),
+    SQUID("Squid", EntityType.SQUID, "squid"),
+    WOLF("Wolf", EntityType.WOLF, "wolf"),
+    MUSHROOM_COW("MushroomCow", EntityType.MUSHROOM_COW, "mushroomcow", "mushroom_cow", "mushroom cow", "mooshroom"),
+    SNOWMAN("Snowman", EntityType.SNOWMAN, "snowman"),
+    OCELOT("Ocelot", EntityType.OCELOT, "ocelot"),
+    IRON_GOLEM("IronGolem", EntityType.IRON_GOLEM, "irongolem", "iron_golem", "iron golem", "ig"),
+    HORSE("Horse", EntityType.HORSE, "horse"),
+    RABBIT("Rabbit", new RabbitHandler(), "rabbit"),
+    POLAR_BEAR("PolarBear", new PolarBearHandler(), "polarbear", "polar_bear", "polar bear", "snowbear", "snow_bear", "snow bear"),
+    LLAMA("Llama", new LlamaHandler(), "llama"),
+    PARROT("Parrot", new ParrotHandler(), "parrot"),
+    VILLAGER("Villager", new VillagerHandler(), "villager");
 
     @Getter private ICustomEntityHandler customEntityHandler;
     @Getter private List<String> names = new ArrayList<>();
@@ -74,6 +91,16 @@ public enum EntityFinder {
         this.names.add(fancyName);
 
         this.customEntityHandler = null;
+    }
+
+    public static EntityFinder get(String name) {
+        for(EntityFinder entityFinder : values()) {
+            for (String s : entityFinder.getNames()) {
+                if(name.equalsIgnoreCase(s)) return entityFinder;
+            }
+        }
+
+        return null;
     }
 
 }

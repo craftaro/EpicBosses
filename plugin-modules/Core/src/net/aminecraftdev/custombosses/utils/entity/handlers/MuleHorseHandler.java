@@ -19,6 +19,10 @@ public class MuleHorseHandler implements ICustomEntityHandler {
 
     @Override
     public LivingEntity getBaseEntity(String entityType, Location spawnLocation) {
+        if(this.versionHandler.getVersion().isLessThan(Versions.v1_11_R1)) {
+            throw new NullPointerException("This feature is only implemented in version 1.11 and above of Minecraft.");
+        }
+
         if(this.versionHandler.getVersion().isHigherThanOrEqualTo(Versions.v1_11_R1)) {
             return (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.MULE);
         }

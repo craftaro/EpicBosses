@@ -13,7 +13,7 @@ import org.bukkit.entity.LivingEntity;
  * @version 1.0.0
  * @since 01-Jul-18
  */
-public class DonkeyHorseHandler implements ICustomEntityHandler {
+public class LlamaHandler implements ICustomEntityHandler {
 
     private VersionHandler versionHandler = new VersionHandler();
 
@@ -24,11 +24,11 @@ public class DonkeyHorseHandler implements ICustomEntityHandler {
         }
 
         if(this.versionHandler.getVersion().isHigherThanOrEqualTo(Versions.v1_11_R1)) {
-            return (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.DONKEY);
+            return (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.LLAMA);
         }
 
         Horse horse = (Horse) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.HORSE);
-        horse.setVariant(Horse.Variant.DONKEY);
+        horse.setVariant(Horse.Variant.LLAMA);
 
         return horse;
     }
