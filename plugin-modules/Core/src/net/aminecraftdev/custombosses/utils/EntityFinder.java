@@ -3,7 +3,9 @@ package net.aminecraftdev.custombosses.utils;
 import lombok.Getter;
 import net.aminecraftdev.custombosses.utils.entity.ICustomEntityHandler;
 import net.aminecraftdev.custombosses.utils.entity.handlers.*;
+import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -91,6 +93,23 @@ public enum EntityFinder {
         this.names.add(fancyName);
 
         this.customEntityHandler = null;
+    }
+
+    public LivingEntity spawnNewLivingEntity(String input, Location location) {
+        if(this.customEntityHandler != null) {
+            LivingEntity livingEntity;
+
+            try {
+                livingEntity = this.customEntityHandler.getBaseEntity(input, location);
+            } catch (NullPointerException ex) {
+                Debug.FAILED_ATTEMPT_TO_SPAWN_BOSS.debug(ex.getMessage());
+                return null;
+            }
+
+            return livingEntity;
+        } else {
+            return (LivingEntity) location.getWorld().spawnEntity(location, getEntityType());
+        }
     }
 
     public static EntityFinder get(String name) {
