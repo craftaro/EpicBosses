@@ -1,11 +1,11 @@
-package net.aminecraftdev.custombosses.managers;
+package net.aminecraftdev.custombosses.managers.files;
 
 import lombok.Getter;
 import net.aminecraftdev.custombosses.utils.ILoadable;
 import net.aminecraftdev.custombosses.utils.IReloadable;
 import net.aminecraftdev.custombosses.utils.ISavable;
 import net.aminecraftdev.custombosses.utils.itemstack.ItemStackConverter;
-import net.aminecraftdev.custombosses.utils.itemstack.handlers.ItemStackFileHandler;
+import net.aminecraftdev.custombosses.file.ItemStackFileHandler;
 import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
 import org.bukkit.plugin.java.JavaPlugin;
 

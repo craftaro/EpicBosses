@@ -47,11 +47,19 @@ public class BossMechanicManager implements ILoadable {
 
                 if(mechanic == null) continue;
 
-                if(!mechanic.applyMechanic(bossEntity, activeBossHolder)) {
-                    Debug.MECHANIC_APPLICATION_FAILED.debug(mechanic.getClass().getSimpleName());
-                    return false;
-                }
+                if(!handleMechanicApplication(mechanic, bossEntity, activeBossHolder)) return false;
             }
+        }
+
+        return true;
+    }
+
+    private boolean handleMechanicApplication(IMechanic mechanic, BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
+        if(mechanic == null) return false;
+
+        if(!mechanic.applyMechanic(bossEntity, activeBossHolder)) {
+            Debug.MECHANIC_APPLICATION_FAILED.debug(mechanic.getClass().getSimpleName());
+            return false;
         }
 
         return true;

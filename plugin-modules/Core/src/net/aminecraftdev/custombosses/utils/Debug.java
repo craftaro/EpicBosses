@@ -8,11 +8,12 @@ package net.aminecraftdev.custombosses.utils;
 public enum Debug {
 
     NULL_CHECK("An object was found as null when it should not be null."),
-    NULL_ENTITY_TYPE("The {0} boss or minion has got an invalid entity type."),
 
     MAX_HEALTH("You cannot set the max health higher than {0}. You can adjust your max health in the spigot.yml file and restart your server to increase this."),
     MECHANIC_APPLICATION_FAILED("Some mechanics have failed to be applied. It got stuck at {0} mechanic."),
+    BOSS_NAME_EXISTS("A boss was attempted to be created with the name {0} but there is already a boss with that name."),
 
+    ATTEMPTED_TO_UPDATE_PLUGIN("Something has attempted to update the PLUGIN variable in the BossAPI class while it is already initialized."),
     ATTEMPTED_TO_SPAWN_WHILE_DISABLED("The {0} boss/minion attempted to spawn while editing is enabled."),
     FAILED_ATTEMPT_TO_SPAWN_BOSS("A boss has attempted to spawn but cannot spawn for the following reason: \n{0}");
 

@@ -11,6 +11,7 @@ import lombok.Setter;
  */
 public class MainStatsElement {
 
+    @Expose @Getter @Setter private Integer position;
     @Expose @Getter @Setter private String entityType;
     @Expose @Getter @Setter private Double health;
     @Expose @Getter @Setter private String displayName;

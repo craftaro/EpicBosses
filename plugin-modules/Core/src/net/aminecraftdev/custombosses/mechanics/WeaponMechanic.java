@@ -3,7 +3,7 @@ package net.aminecraftdev.custombosses.mechanics;
 import net.aminecraftdev.custombosses.entity.BossEntity;
 import net.aminecraftdev.custombosses.entity.elements.HandsElement;
 import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
-import net.aminecraftdev.custombosses.managers.BossItemFileManager;
+import net.aminecraftdev.custombosses.managers.files.BossItemFileManager;
 import net.aminecraftdev.custombosses.utils.IMechanic;
 import net.aminecraftdev.custombosses.utils.version.VersionHandler;
 import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
@@ -28,9 +28,9 @@ public class WeaponMechanic implements IMechanic {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        if(activeBossHolder.getLivingEntity() == null) return false;
+        if(activeBossHolder.getLivingEntityMap().getOrDefault(0, null) == null) return false;
 
-        LivingEntity livingEntity = activeBossHolder.getLivingEntity();
+        LivingEntity livingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(0, null);
         EntityEquipment entityEquipment = livingEntity.getEquipment();
         HandsElement handsElement = bossEntity.getHands();
         String mainHand = handsElement.getMainHand();

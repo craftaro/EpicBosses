@@ -3,7 +3,7 @@ package net.aminecraftdev.custombosses.mechanics;
 import net.aminecraftdev.custombosses.entity.BossEntity;
 import net.aminecraftdev.custombosses.entity.elements.EquipmentElement;
 import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
-import net.aminecraftdev.custombosses.managers.BossItemFileManager;
+import net.aminecraftdev.custombosses.managers.files.BossItemFileManager;
 import net.aminecraftdev.custombosses.utils.IMechanic;
 import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
 import org.bukkit.entity.LivingEntity;
@@ -25,9 +25,9 @@ public class EquipmentMechanic implements IMechanic {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        if(activeBossHolder.getLivingEntity() == null) return false;
+        if(activeBossHolder.getLivingEntityMap().getOrDefault(0, null) == null) return false;
 
-        LivingEntity livingEntity = activeBossHolder.getLivingEntity();
+        LivingEntity livingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(0, null);
         EquipmentElement equipmentElement = bossEntity.getEquipment();
         EntityEquipment entityEquipment = livingEntity.getEquipment();
         String helmet = equipmentElement.getHelmet();

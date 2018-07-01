@@ -1,9 +1,10 @@
-package net.aminecraftdev.custombosses.utils.itemstack.handlers;
+package net.aminecraftdev.custombosses.file;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import net.aminecraftdev.custombosses.utils.file.FileHandler;
 import net.aminecraftdev.custombosses.utils.file.FileUtils;
 import net.aminecraftdev.custombosses.utils.file.IFileHandler;
 import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
@@ -22,41 +23,25 @@ import java.util.Map;
  * @version 1.0.0
  * @since 28-Apr-18
  */
-public class ItemStackFileHandler implements IFileHandler<Map<String, ItemStackHolder>> {
+public class ItemStackFileHandler extends FileHandler<Map<String, ItemStackHolder>> {
 
     private static final Gson GSON = new GsonBuilder()
             .setPrettyPrinting()
             .excludeFieldsWithoutExposeAnnotation()
             .create();
 
-    private final JavaPlugin javaPlugin;
-    private final boolean saveResource;
-    private final File file;
-
     public ItemStackFileHandler(JavaPlugin javaPlugin, File file, boolean saveResource) {
-        this.saveResource = saveResource;
-        this.javaPlugin = javaPlugin;
-        this.file = file;
+        super(javaPlugin, saveResource, file);
     }
 
     @Override
     public Map<String, ItemStackHolder> loadFile() {
         Map<String, ItemStackHolder> itemStackHolderMap = new HashMap<>();
 
-        if(!this.file.exists()) {
-            if(this.saveResource) {
-                String path = this.file.getName();
-
-                if(this.javaPlugin.getResource(path) != null) {
-                    this.javaPlugin.saveResource(path, false);
-                }
-            } else {
-                FileUtils.get().createFile(this.file);
-            }
-        }
+        createFile();
 
         try {
-            FileReader fileReader = new FileReader(file);
+            FileReader fileReader = new FileReader(getFile());
             JsonObject jsonObject = GSON.fromJson(fileReader, JsonObject.class);
 
             fileReader.close();
@@ -79,7 +64,7 @@ public class ItemStackFileHandler implements IFileHandler<Map<String, ItemStackH
     @Override
     public void saveFile(Map<String, ItemStackHolder> map) {
         try {
-            FileWriter fileWriter = new FileWriter(file);
+            FileWriter fileWriter = new FileWriter(getFile());
             Type type = new TypeToken<Map<String, ItemStackHolder>>(){}.getType();
 
             fileWriter.write(GSON.toJson(new HashMap<>(map), type));
