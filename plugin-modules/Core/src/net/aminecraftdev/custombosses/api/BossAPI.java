@@ -21,6 +21,26 @@ public class BossAPI {
     private static CustomBosses PLUGIN;
 
     /**
+     * Used to update the variable to the
+     * plugin instance so the methods can
+     * pull variables in the main class to use
+     * in their method.
+     *
+     * This should only ever be used in house and
+     * never to be used by an outside party.
+     *
+     * @param plugin - the plugin instance.
+     */
+    public BossAPI(CustomBosses plugin) {
+        if(PLUGIN != null) {
+            Debug.ATTEMPTED_TO_UPDATE_PLUGIN.debug();
+            return;
+        }
+
+        PLUGIN = plugin;
+    }
+
+    /**
      * Used to create a base BossEntity model which
      * can be used to fine tune and then once the main
      * elements are filled in editing can be disabled
@@ -52,34 +72,13 @@ public class BossAPI {
         mainStatsElement.setDisplayName(name);
         mainStatsElement.setHealth(50D);
 
-        boolean result = PLUGIN.getBossesFileManager().saveNewBossEntity(name, bossEntity);
+        boolean result = PLUGIN.getBossEntityContainer().saveData(name, bossEntity);
 
         if (!result) {
-            Debug.BOSS_NAME_EXISTS.debug(name);
             return null;
         }
 
         return bossEntity;
-    }
-
-    /**
-     * Used to update the variable to the
-     * plugin instance so the methods can
-     * pull variables in the main class to use
-     * in their method.
-     *
-     * This should only ever be used in house and
-     * never to be used by an outside party.
-     *
-     * @param customBosses - the plugin instance.
-     */
-    public static void setPlugin(CustomBosses customBosses) {
-        if(PLUGIN != null) {
-            Debug.ATTEMPTED_TO_UPDATE_PLUGIN.debug();
-            return;
-        }
-
-        PLUGIN = customBosses;
     }
 
 }

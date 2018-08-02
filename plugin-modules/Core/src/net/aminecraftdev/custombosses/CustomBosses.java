@@ -2,6 +2,7 @@ package net.aminecraftdev.custombosses;
 
 import lombok.Getter;
 import net.aminecraftdev.custombosses.api.BossAPI;
+import net.aminecraftdev.custombosses.container.BossEntityContainer;
 import net.aminecraftdev.custombosses.file.BossesFileHandler;
 import net.aminecraftdev.custombosses.managers.files.BossItemFileManager;
 import net.aminecraftdev.custombosses.managers.BossMechanicManager;
@@ -16,14 +17,16 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class CustomBosses extends JavaPlugin implements IReloadable {
 
+    @Getter private BossEntityContainer bossEntityContainer;
     @Getter private BossMechanicManager bossMechanicManager;
     @Getter private BossItemFileManager itemStackManager;
     @Getter private BossesFileManager bossesFileManager;
 
     @Override
     public void onEnable() {
-        BossAPI.setPlugin(this);
+        new BossAPI(this);
 
+        this.bossEntityContainer = new BossEntityContainer();
         this.itemStackManager = new BossItemFileManager(this);
         this.bossesFileManager = new BossesFileManager(this);
         this.bossMechanicManager = new BossMechanicManager(this);

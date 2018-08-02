@@ -1,16 +1,14 @@
 package net.aminecraftdev.custombosses.managers.files;
 
-import lombok.Getter;
+import net.aminecraftdev.custombosses.CustomBosses;
+import net.aminecraftdev.custombosses.container.BossEntityContainer;
 import net.aminecraftdev.custombosses.entity.BossEntity;
 import net.aminecraftdev.custombosses.file.BossesFileHandler;
 import net.aminecraftdev.custombosses.utils.ILoadable;
 import net.aminecraftdev.custombosses.utils.IReloadable;
 import net.aminecraftdev.custombosses.utils.ISavable;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -19,18 +17,20 @@ import java.util.Map;
  */
 public class BossesFileManager implements ILoadable, ISavable, IReloadable {
 
-    private Map<String, BossEntity> bossEntityMap = new HashMap<>();
+    private BossEntityContainer bossEntityContainer;
     private BossesFileHandler bossesFileHandler;
 
-    public BossesFileManager(JavaPlugin javaPlugin) {
-        File file = new File(javaPlugin.getDataFolder(), "bosses.json");
+    public BossesFileManager(CustomBosses customBosses) {
+        File file = new File(customBosses.getDataFolder(), "bosses.json");
 
-        this.bossesFileHandler = new BossesFileHandler(javaPlugin, true, file);
+        this.bossesFileHandler = new BossesFileHandler(customBosses, true, file);
+        this.bossEntityContainer = customBosses.getBossEntityContainer();
     }
 
     @Override
     public void load() {
-        this.bossEntityMap = this.bossesFileHandler.loadFile();
+        this.bossEntityContainer.clearContainer();
+        this.bossEntityContainer.saveData(this.bossesFileHandler.loadFile());
     }
 
     @Override
@@ -40,19 +40,10 @@ public class BossesFileManager implements ILoadable, ISavable, IReloadable {
 
     @Override
     public void save() {
-        this.bossesFileHandler.saveFile(this.bossEntityMap);
-    }
-
-    public boolean saveNewBossEntity(String name, BossEntity bossEntity) {
-        if(this.bossEntityMap.containsKey(name)) {
-            return false;
-        }
-
-        this.bossEntityMap.put(name, bossEntity);
-        return true;
+        this.bossesFileHandler.saveFile(this.bossEntityContainer.getData());
     }
 
     public BossEntity getBossEntity(String name) {
-        return this.bossEntityMap.getOrDefault(name, null);
+        return this.bossEntityContainer.getData().getOrDefault(name, null);
     }
 }
