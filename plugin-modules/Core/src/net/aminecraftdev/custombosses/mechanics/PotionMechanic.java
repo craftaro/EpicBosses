@@ -24,9 +24,9 @@ public class PotionMechanic implements IMechanic {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        if(activeBossHolder.getLivingEntity() == null) return false;
+        if(activeBossHolder.getLivingEntityMap().getOrDefault(0, null) == null) return false;
 
-        LivingEntity livingEntity = activeBossHolder.getLivingEntity();
+        LivingEntity livingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(0, null);
         List<PotionEffectHolder> potionElements = bossEntity.getPotions();
 
         if(potionElements != null && !potionElements.isEmpty()) {

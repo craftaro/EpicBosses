@@ -5,11 +5,13 @@ import net.aminecraftdev.custombosses.entity.BossEntity;
 import net.aminecraftdev.custombosses.entity.elements.*;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.EntityFinder;
+import net.aminecraftdev.custombosses.utils.panel.Panel;
 import net.aminecraftdev.custombosses.utils.potion.holder.PotionEffectHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -38,6 +40,24 @@ public class BossAPI {
         }
 
         PLUGIN = plugin;
+        Panel.setPlugin(plugin);
+    }
+
+    /**
+     * Used to get the Boss configuration section name
+     * from a BossEntity instance.
+     *
+     * @param bossEntity - the boss Entity instance
+     * @return name of the boss from the BossContainer or null if not found.
+     */
+    public static String getBossEntityName(BossEntity bossEntity) {
+        for(Map.Entry<String, BossEntity> entry : PLUGIN.getBossEntityContainer().getData().entrySet()) {
+            if(entry.getValue().equals(bossEntity)) {
+                return entry.getKey();
+            }
+        }
+
+        return null;
     }
 
     /**

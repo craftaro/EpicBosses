@@ -19,7 +19,7 @@
     </modules>
 
     <properties>
-        <plugin.version>3.0.0-SNAPSHOT-U19</plugin.version>
+        <plugin.version>3.0.0-SNAPSHOT-U20</plugin.version>
         <plugin.name>CustomBosses</plugin.name>
         <plugin.main>net.aminecraftdev.custombosses.CustomBosses</plugin.main>
         <plugin.author>AMinecraftDev</plugin.author>
@@ -29,7 +29,7 @@
         <dependency>
             <groupId>com.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>1.12.1</version>
+            <version>1.13</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -56,12 +56,22 @@
             <version>1.16.22</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>1.2</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <repositories>
         <repository>
             <id>vault-repo</id>
             <url>http://nexus.hc.to/content/repositories/pub_releases</url>
+        </repository>
+        <repository>
+            <id>bstats-repo</id>
+            <url>http://repo.bstats.org/content/repositories/releases/</url>
         </repository>
     </repositories>
 

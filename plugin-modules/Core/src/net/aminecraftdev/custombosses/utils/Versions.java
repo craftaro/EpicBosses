@@ -18,7 +18,8 @@ public enum Versions {
     v1_9_R2(7, "1.9.4"),
     v1_10_R1(8, "1.10"),
     v1_11_R1(9, "1.11.2"),
-    v1_12_R1(10, "1.12.1");
+    v1_12_R1(10, "1.12.1"),
+    v1_13_R1(11, "1.13");
 
     @Getter private String displayVersion, bukkitVersion;
     private int weight;

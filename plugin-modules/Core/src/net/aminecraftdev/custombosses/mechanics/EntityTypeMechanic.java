@@ -1,11 +1,16 @@
 package net.aminecraftdev.custombosses.mechanics;
 
+import net.aminecraftdev.custombosses.api.BossAPI;
+import net.aminecraftdev.custombosses.container.BossEntityContainer;
 import net.aminecraftdev.custombosses.entity.BossEntity;
 import net.aminecraftdev.custombosses.entity.elements.MainStatsElement;
 import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
+import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.EntityFinder;
 import net.aminecraftdev.custombosses.utils.IMechanic;
 import org.bukkit.entity.LivingEntity;
+
+import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -30,6 +35,18 @@ public class EntityTypeMechanic implements IMechanic {
             if(livingEntity == null) return false;
 
             activeBossHolder.setLivingEntity(position, livingEntity);
+
+            if(position > 1) {
+                int lowerPosition = position - 1;
+                LivingEntity lowerLivingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(lowerPosition, null);
+
+                if(lowerLivingEntity == null) {
+                    Debug.FAILED_ATTEMPT_TO_STACK_BOSSES.debug(BossAPI.getBossEntityName(bossEntity));
+                    return false;
+                }
+
+                lowerLivingEntity.setPassenger(livingEntity);
+            }
         }
 
         return true;

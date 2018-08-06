@@ -18,18 +18,10 @@ public class MaterialConverter implements IConverter<String, Material> {
 
     @Override
     public Material from(String input) {
-        if(NumberUtils.get().isInt(input)) {
-            return Material.getMaterial(Integer.parseInt(input));
-        }
-
         if(input.contains(":")) {
             String[] split = input.split(":");
 
             input = split[0];
-
-            if(NumberUtils.get().isInt(input)) {
-                return Material.getMaterial(Integer.parseInt(input));
-            }
         }
 
         return Material.matchMaterial(input);

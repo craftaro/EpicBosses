@@ -169,7 +169,7 @@ public class ItemStackUtils {
             itemStack.setDurability(dura);
         }
 
-        if(configurationSection.contains("owner") && itemStack.getType() == Material.SKULL_ITEM) {
+        if(configurationSection.contains("owner") && itemStack.getType() == Material.LEGACY_SKULL_ITEM) {
             SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
 
             skullMeta.setOwner(owner);
@@ -185,15 +185,11 @@ public class ItemStackUtils {
 
         if(material == null) {
             if(NumberUtils.get().isInt(string)) {
-                material = Material.getMaterial(Integer.valueOf(string));
-
-                if(material != null) return material;
-
                 return null;
             } else {
                 String[] split = string.split(":");
 
-                material = Material.getMaterial(Integer.valueOf(split[0]));
+                material = Material.getMaterial(split[0]);
 
                 if(material != null) return material;
 

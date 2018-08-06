@@ -22,15 +22,15 @@ public enum EnchantFinder {
     aqua_affinity("Aqua Affinity", Enchantment.WATER_WORKER, "water_worker", "water worker", "aquaaffinity", "aqua_affinity", "aqua affinity"),
     thorns("Thorns", Enchantment.THORNS, "thorns"),
     depth_strider("Depth Strider", Enchantment.DEPTH_STRIDER, "depth_strider", "depth strider"),
-    frost_walker("Frost Walker", Enchantment.getById(9), "frost_walker", "frost walker"),
-    binding_curse("Curse of Binding", Enchantment.getById(10), "binding_curse", "binding curse", "curse"),
+    frost_walker("Frost Walker", Enchantment.FROST_WALKER, "frost_walker", "frost walker"),
+    binding_curse("Curse of Binding", Enchantment.BINDING_CURSE, "binding_curse", "binding curse", "curse"),
     sharpness("Sharpness", Enchantment.DAMAGE_ALL, "sharpness", "damage", "damage all", "damage_all"),
     smite("Smite", Enchantment.DAMAGE_UNDEAD, "smite", "damage_undead", "damage undead"),
     bane_of_arthropods("Bane of Arthropods", Enchantment.DAMAGE_ARTHROPODS, "damage_arthropods", "arthropods", "bane_of_arthropods", "bane of arthropods"),
     knockback("Knockback", Enchantment.KNOCKBACK, "knockback"),
     fire_aspect("Fire Aspect", Enchantment.FIRE_ASPECT, "fire aspect", "fire_aspect", "fireaspect"),
     looting("Looting", Enchantment.LOOT_BONUS_MOBS, "looting", "loot bonus mobs", "loot_bonus_mobs"),
-    sweeping_edge("Sweeping Edge", Enchantment.getById(22), "sweeping edge", "sweeping_edge"),
+    sweeping_edge("Sweeping Edge", Enchantment.SWEEPING_EDGE, "sweeping edge", "sweeping_edge"),
     efficiency("Efficiency", Enchantment.DIG_SPEED, "efficiency", "dig speed", "dig_speed", "digspeed"),
     silk_touch("Silk Touch", Enchantment.SILK_TOUCH, "silk touch", "silk_touch", "silktouch", "silk"),
     unbreaking("Unbreaking", Enchantment.DURABILITY, "durability", "unbreaking"),
@@ -41,8 +41,8 @@ public enum EnchantFinder {
     infinite("Infinite", Enchantment.ARROW_INFINITE, "infinite", "arrow_infinite", "arrow infinite"),
     luck("Luck", Enchantment.LUCK, "luck"),
     lure("Lure", Enchantment.LURE, "lure"),
-    mending("Mending", Enchantment.getById(70), "mending"),
-    curse_of_vanishing("Curse of Vanishing", Enchantment.getById(71), "vanishing", "vanishing curse", "vanishing_curse", "curseofvanishing", "vanishingcurse", "curse of vanishing", "curse_of_vanishing");
+    mending("Mending", Enchantment.MENDING, "mending"),
+    curse_of_vanishing("Curse of Vanishing", Enchantment.VANISHING_CURSE, "vanishing", "vanishing curse", "vanishing_curse", "curseofvanishing", "vanishingcurse", "curse of vanishing", "curse_of_vanishing");
 
     private Enchantment enchantment;
     private String fancyName;

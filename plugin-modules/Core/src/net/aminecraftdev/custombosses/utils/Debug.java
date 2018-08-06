@@ -16,7 +16,8 @@ public enum Debug {
 
     ATTEMPTED_TO_UPDATE_PLUGIN("Something has attempted to update the PLUGIN variable in the BossAPI class while it is already initialized."),
     ATTEMPTED_TO_SPAWN_WHILE_DISABLED("The {0} boss/minion attempted to spawn while editing is enabled."),
-    FAILED_ATTEMPT_TO_SPAWN_BOSS("A boss has attempted to spawn but cannot spawn for the following reason: \n{0}");
+    FAILED_ATTEMPT_TO_SPAWN_BOSS("A boss has attempted to spawn but cannot spawn for the following reason: \n{0}"),
+    FAILED_ATTEMPT_TO_STACK_BOSSES("A boss has failed to stack on top of another boss under the {0} boss configuration.");
 
     private String message;
 

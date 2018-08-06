@@ -5,7 +5,6 @@ import net.aminecraftdev.custombosses.utils.StringUtils;
 import net.aminecraftdev.custombosses.utils.panel.base.ClickAction;
 import net.aminecraftdev.custombosses.utils.panel.base.PageAction;
 import net.aminecraftdev.custombosses.utils.panel.base.PanelCloseAction;
-import net.aminecraftdev.custombosses.utils.panel.builder.PanelBuilderCounter;
 import net.aminecraftdev.custombosses.utils.panel.builder.PanelBuilderSettings;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;

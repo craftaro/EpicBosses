@@ -25,9 +25,9 @@ public class SettingsMechanic implements IMechanic {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        if(activeBossHolder.getLivingEntity() == null) return false;
+        if(activeBossHolder.getLivingEntityMap().getOrDefault(0, null) == null) return false;
 
-        LivingEntity livingEntity = activeBossHolder.getLivingEntity();
+        LivingEntity livingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(0, null);
         EntityEquipment entityEquipment = livingEntity.getEquipment();
 
         livingEntity.setRemoveWhenFarAway(false);

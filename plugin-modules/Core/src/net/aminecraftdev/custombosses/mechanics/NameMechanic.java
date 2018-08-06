@@ -15,11 +15,12 @@ public class NameMechanic implements IMechanic {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        if(activeBossHolder.getLivingEntity() == null) return false;
+        if(activeBossHolder.getLivingEntityMap().getOrDefault(0, null) == null) return false;
+        if(bossEntity.getMainStats().isEmpty() || bossEntity.getMainStats().get(0) == null) return false;
 
-        LivingEntity livingEntity = activeBossHolder.getLivingEntity();
+        LivingEntity livingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(0, null);
 
-        String customName = bossEntity.getMainStats().getDisplayName();
+        String customName = bossEntity.getMainStats().get(0).getDisplayName();
 
         if(customName != null) {
             livingEntity.setCustomName(StringUtils.get().translateColor(customName));
