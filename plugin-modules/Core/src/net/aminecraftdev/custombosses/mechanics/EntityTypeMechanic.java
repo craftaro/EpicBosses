@@ -8,6 +8,7 @@ import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.EntityFinder;
 import net.aminecraftdev.custombosses.utils.IMechanic;
+import net.aminecraftdev.custombosses.utils.mechanics.IPrimaryMechanic;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.Map;
@@ -17,7 +18,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 01-Jun-18
  */
-public class EntityTypeMechanic implements IMechanic {
+public class EntityTypeMechanic implements IPrimaryMechanic {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {

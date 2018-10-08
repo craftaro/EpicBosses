@@ -7,6 +7,8 @@ package net.aminecraftdev.custombosses.utils.file;
  */
 public interface IFileHandler<ReturnObject> {
 
+    void createFile();
+
     ReturnObject loadFile();
 
     void saveFile(ReturnObject returnObject);

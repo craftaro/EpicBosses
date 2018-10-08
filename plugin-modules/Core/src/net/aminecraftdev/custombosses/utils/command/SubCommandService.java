@@ -19,7 +19,7 @@ public abstract class SubCommandService<T extends CommandSender> extends Command
     }
 
     @Override
-    public void addSubCommand(SubCommand subCommand) {
+    public void registerSubCommand(SubCommand subCommand) {
         this.subCommands.add(subCommand);
     }
 

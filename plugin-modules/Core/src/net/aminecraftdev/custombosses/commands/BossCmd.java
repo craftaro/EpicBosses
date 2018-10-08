@@ -4,6 +4,7 @@ import net.aminecraftdev.custombosses.utils.command.SubCommandService;
 import net.aminecraftdev.custombosses.utils.command.attributes.Alias;
 import net.aminecraftdev.custombosses.utils.command.attributes.Description;
 import net.aminecraftdev.custombosses.utils.command.attributes.Name;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 /**
@@ -23,6 +24,13 @@ public class BossCmd extends SubCommandService<CommandSender> {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
+        if(args.length == 0) {
+            Bukkit.dispatchCommand(sender, "boss help");
+            return;
+        }
 
+        if(handleSubCommand(sender, args)) return;
+
+        Bukkit.dispatchCommand(sender, "boss help");
     }
 }

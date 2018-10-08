@@ -3,6 +3,7 @@ package net.aminecraftdev.custombosses.mechanics;
 import net.aminecraftdev.custombosses.entity.BossEntity;
 import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
 import net.aminecraftdev.custombosses.utils.IMechanic;
+import net.aminecraftdev.custombosses.utils.mechanics.IOptionalMechanic;
 import net.aminecraftdev.custombosses.utils.potion.PotionEffectConverter;
 import net.aminecraftdev.custombosses.utils.potion.holder.PotionEffectHolder;
 import org.bukkit.entity.LivingEntity;
@@ -14,7 +15,7 @@ import java.util.List;
  * @version 1.0.0
  * @since 27-Jun-18
  */
-public class PotionMechanic implements IMechanic {
+public class PotionMechanic implements IOptionalMechanic {
 
     private PotionEffectConverter potionEffectConverter;
 

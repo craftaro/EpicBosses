@@ -95,6 +95,7 @@ public class BossAPI {
         boolean result = PLUGIN.getBossEntityContainer().saveData(name, bossEntity);
 
         if (!result) {
+            Debug.FAILED_TO_SAVE_THE_NEW_BOSS.debug(name, entityFinder.getFancyName());
             return null;
         }
 

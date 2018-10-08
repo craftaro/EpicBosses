@@ -6,6 +6,7 @@ import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.IMechanic;
 import net.aminecraftdev.custombosses.utils.StringUtils;
 import net.aminecraftdev.custombosses.utils.file.reader.SpigotYmlReader;
+import net.aminecraftdev.custombosses.utils.mechanics.IPrimaryMechanic;
 import net.aminecraftdev.custombosses.utils.version.VersionHandler;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EntityEquipment;
@@ -15,7 +16,7 @@ import org.bukkit.inventory.EntityEquipment;
  * @version 1.0.0
  * @since 02-Jun-18
  */
-public class SettingsMechanic implements IMechanic {
+public class SettingsMechanic implements IPrimaryMechanic {
 
     private VersionHandler versionHandler;
 

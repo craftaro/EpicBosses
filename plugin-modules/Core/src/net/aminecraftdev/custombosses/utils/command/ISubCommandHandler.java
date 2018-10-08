@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
  */
 public interface ISubCommandHandler {
 
-    void addSubCommand(SubCommand subCommand);
+    void registerSubCommand(SubCommand subCommand);
 
     boolean handleSubCommand(CommandSender commandSender, String[] args);
 

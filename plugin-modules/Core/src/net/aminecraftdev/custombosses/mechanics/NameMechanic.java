@@ -4,6 +4,7 @@ import net.aminecraftdev.custombosses.entity.BossEntity;
 import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
 import net.aminecraftdev.custombosses.utils.IMechanic;
 import net.aminecraftdev.custombosses.utils.StringUtils;
+import net.aminecraftdev.custombosses.utils.mechanics.IOptionalMechanic;
 import org.bukkit.entity.LivingEntity;
 
 /**
@@ -11,7 +12,7 @@ import org.bukkit.entity.LivingEntity;
  * @version 1.0.0
  * @since 27-Jun-18
  */
-public class NameMechanic implements IMechanic {
+public class NameMechanic implements IOptionalMechanic {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {

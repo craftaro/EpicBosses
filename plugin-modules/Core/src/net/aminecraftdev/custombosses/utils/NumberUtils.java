@@ -19,6 +19,12 @@ public class NumberUtils {
         return true;
     }
 
+    public Integer getInteger(String input) {
+        if(!isInt(input)) return null;
+
+        return Integer.valueOf(input);
+    }
+
     public boolean isDouble(String string) {
         try {
             Double.valueOf(string);
@@ -27,6 +33,12 @@ public class NumberUtils {
         }
 
         return true;
+    }
+
+    public Double getDouble(String input) {
+        if(!isDouble(input)) return null;
+
+        return Double.valueOf(input);
     }
 
     public static NumberUtils get() {

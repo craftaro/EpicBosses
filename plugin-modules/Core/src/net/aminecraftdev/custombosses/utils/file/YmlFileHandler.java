@@ -1,6 +1,7 @@
 package net.aminecraftdev.custombosses.utils.file;
 
 import lombok.Getter;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -8,16 +9,16 @@ import java.io.File;
 /**
  * @author Charles Cullen
  * @version 1.0.0
- * @since 01-Jul-18
+ * @since 04-Oct-18
  */
-public abstract class FileHandler<T> implements IFileHandler<T> {
+public class YmlFileHandler implements IFileHandler<FileConfiguration> {
 
     private final JavaPlugin javaPlugin;
     private final boolean saveResource;
 
     @Getter private final File file;
 
-    public FileHandler(JavaPlugin javaPlugin, boolean saveResource, File file) {
+    public YmlFileHandler(JavaPlugin javaPlugin, boolean saveResource, File file) {
         this.javaPlugin = javaPlugin;
         this.saveResource = saveResource;
         this.file = file;
@@ -37,6 +38,16 @@ public abstract class FileHandler<T> implements IFileHandler<T> {
 
             FileUtils.get().createFile(this.file);
         }
+    }
+
+    @Override
+    public FileConfiguration loadFile() {
+        return FileUtils.get().loadFile(this.file);
+    }
+
+    @Override
+    public void saveFile(FileConfiguration config) {
+        FileUtils.get().saveFile(this.file, config);
     }
 
 }

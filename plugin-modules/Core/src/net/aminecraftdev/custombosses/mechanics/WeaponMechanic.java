@@ -5,6 +5,7 @@ import net.aminecraftdev.custombosses.entity.elements.HandsElement;
 import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
 import net.aminecraftdev.custombosses.managers.files.BossItemFileManager;
 import net.aminecraftdev.custombosses.utils.IMechanic;
+import net.aminecraftdev.custombosses.utils.mechanics.IOptionalMechanic;
 import net.aminecraftdev.custombosses.utils.version.VersionHandler;
 import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
 import org.bukkit.entity.LivingEntity;
@@ -16,7 +17,7 @@ import org.bukkit.inventory.ItemStack;
  * @version 1.0.0
  * @since 27-Jun-18
  */
-public class WeaponMechanic implements IMechanic {
+public class WeaponMechanic implements IOptionalMechanic {
 
     private BossItemFileManager itemStackManager;
     private VersionHandler versionHandler;

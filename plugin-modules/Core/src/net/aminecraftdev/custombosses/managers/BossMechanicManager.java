@@ -7,6 +7,8 @@ import net.aminecraftdev.custombosses.mechanics.*;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.ILoadable;
 import net.aminecraftdev.custombosses.utils.IMechanic;
+import net.aminecraftdev.custombosses.utils.mechanics.IOptionalMechanic;
+import net.aminecraftdev.custombosses.utils.mechanics.IPrimaryMechanic;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -19,7 +21,8 @@ import java.util.Queue;
 public class BossMechanicManager implements ILoadable {
 
     private final CustomBosses customBosses;
-    private Queue<IMechanic> mechanicQueue;
+    private Queue<IOptionalMechanic> optionalMechanics;
+    private Queue<IPrimaryMechanic> primaryMechanics;
 
     public BossMechanicManager(CustomBosses customBosses) {
         this.customBosses = customBosses;
@@ -27,34 +30,55 @@ public class BossMechanicManager implements ILoadable {
 
     @Override
     public void load() {
-        this.mechanicQueue = new LinkedList<>();
+        this.primaryMechanics = new LinkedList<>();
+        this.optionalMechanics = new LinkedList<>();
 
-        this.mechanicQueue.add(new EntityTypeMechanic());
-        this.mechanicQueue.add(new NameMechanic());
-        this.mechanicQueue.add(new HealthMechanic());
-        this.mechanicQueue.add(new EquipmentMechanic(this.customBosses.getItemStackManager()));
-        this.mechanicQueue.add(new WeaponMechanic(this.customBosses.getItemStackManager()));
-        this.mechanicQueue.add(new PotionMechanic());
-        this.mechanicQueue.add(new SettingsMechanic());
+        registerMechanic(new EntityTypeMechanic());
+        registerMechanic(new NameMechanic());
+        registerMechanic(new HealthMechanic());
+        registerMechanic(new EquipmentMechanic(this.customBosses.getItemStackManager()));
+        registerMechanic(new WeaponMechanic(this.customBosses.getItemStackManager()));
+        registerMechanic(new PotionMechanic());
+        registerMechanic(new SettingsMechanic());
     }
 
     public boolean handleMechanicApplication(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        if(this.mechanicQueue != null && bossEntity != null && activeBossHolder != null) {
-            Queue<IMechanic> queue = new LinkedList<>(this.mechanicQueue);
+        if(bossEntity != null && activeBossHolder != null) {
+            Queue<IMechanic> queue = new LinkedList<>(this.primaryMechanics);
 
             while(!queue.isEmpty()) {
                 IMechanic mechanic = queue.poll();
 
                 if(mechanic == null) continue;
 
-                if(!handleMechanicApplication(mechanic, bossEntity, activeBossHolder)) return false;
+                if(!didMechanicApplicationFail(mechanic, bossEntity, activeBossHolder)) return false;
+            }
+
+            queue = new LinkedList<>(this.optionalMechanics);
+
+            while(!queue.isEmpty()) {
+                IMechanic mechanic = queue.poll();
+
+                if(mechanic == null) continue;
+
+                if(didMechanicApplicationFail(mechanic, bossEntity, activeBossHolder)) return false;
             }
         }
 
         return true;
     }
 
-    private boolean handleMechanicApplication(IMechanic mechanic, BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
+    public void registerMechanic(IMechanic mechanic) {
+        if(mechanic instanceof IPrimaryMechanic) {
+            this.primaryMechanics.add((IPrimaryMechanic) mechanic);
+        } else if(mechanic instanceof IOptionalMechanic) {
+            this.optionalMechanics.add((IOptionalMechanic) mechanic);
+        } else {
+            Debug.MECHANIC_TYPE_NOT_STORED.debug();
+        }
+    }
+
+    private boolean didMechanicApplicationFail(IMechanic mechanic, BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
         if(mechanic == null) return false;
 
         if(!mechanic.applyMechanic(bossEntity, activeBossHolder)) {
