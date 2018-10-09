@@ -7,6 +7,7 @@ import net.aminecraftdev.custombosses.container.BossEntityContainer;
 import net.aminecraftdev.custombosses.file.BossesFileHandler;
 import net.aminecraftdev.custombosses.file.LangFileHandler;
 import net.aminecraftdev.custombosses.managers.BossCommandManager;
+import net.aminecraftdev.custombosses.managers.DebugManager;
 import net.aminecraftdev.custombosses.managers.files.BossItemFileManager;
 import net.aminecraftdev.custombosses.managers.BossMechanicManager;
 import net.aminecraftdev.custombosses.managers.files.BossesFileManager;
@@ -29,6 +30,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     @Getter private BossCommandManager bossCommandManager;
     @Getter private BossItemFileManager itemStackManager;
     @Getter private BossesFileManager bossesFileManager;
+    @Getter private DebugManager debugManager;
 
     @Getter private LangFileHandler langFileHandler;
     @Getter private FileConfiguration lang;
@@ -44,7 +46,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         System.out.println("Boss API loaded (took " + (System.currentTimeMillis() - beginMs) + "ms)");
         beginMs = System.currentTimeMillis();
 
-
+        this.debugManager = new DebugManager();
         this.bossEntityContainer = new BossEntityContainer();
         this.bossMechanicManager = new BossMechanicManager(this);
 

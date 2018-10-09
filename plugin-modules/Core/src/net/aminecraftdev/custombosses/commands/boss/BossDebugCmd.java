@@ -1,8 +1,11 @@
 package net.aminecraftdev.custombosses.commands.boss;
 
-import net.aminecraftdev.custombosses.managers.files.BossesFileManager;
+import net.aminecraftdev.custombosses.managers.DebugManager;
+import net.aminecraftdev.custombosses.utils.Message;
+import net.aminecraftdev.custombosses.utils.Permission;
 import net.aminecraftdev.custombosses.utils.command.SubCommand;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 /**
  * @author Charles Cullen
@@ -11,21 +14,37 @@ import org.bukkit.command.CommandSender;
  */
 public class BossDebugCmd extends SubCommand {
 
-    private BossesFileManager bossesFileManager;
+    private DebugManager debugManager;
 
-    public BossDebugCmd(BossesFileManager bossesFileManager) {
+    public BossDebugCmd(DebugManager debugManager) {
         super("debug");
 
-        this.bossesFileManager = bossesFileManager;
+        this.debugManager = debugManager;
     }
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        StringBuilder stringBuilder = new StringBuilder();
+        if(!Permission.debug.hasPermission(sender)) {
+            Message.Boss_Debug_NoPermission.msg(sender);
+            return;
+        }
 
-        this.bossesFileManager.getBossEntities().forEach((name, entity) -> stringBuilder.append(name).append(", "));
+        if(!(sender instanceof Player)) {
+            Message.General_MustBePlayer.msg(sender);
+            return;
+        }
 
-        System.out.println("CURRENT BOSSES: " +
-                "\n" + stringBuilder.toString());
+        Player player = (Player) sender;
+        String toggled;
+
+        if(this.debugManager.isToggled(player.getUniqueId())) {
+            this.debugManager.togglePlayerOff(player.getUniqueId());
+            toggled = "Off";
+        } else {
+            this.debugManager.togglePlayerOn(player.getUniqueId());
+            toggled = "On";
+        }
+
+        Message.Boss_Debug_Toggled.msg(player, toggled);
     }
 }
