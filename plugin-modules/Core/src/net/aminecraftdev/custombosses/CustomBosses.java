@@ -11,6 +11,7 @@ import net.aminecraftdev.custombosses.managers.files.BossItemFileManager;
 import net.aminecraftdev.custombosses.managers.BossMechanicManager;
 import net.aminecraftdev.custombosses.managers.files.BossesFileManager;
 import net.aminecraftdev.custombosses.utils.IReloadable;
+import net.aminecraftdev.custombosses.utils.Message;
 import net.aminecraftdev.custombosses.utils.command.SubCommandService;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -43,23 +44,28 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         System.out.println("Boss API loaded (took " + (System.currentTimeMillis() - beginMs) + "ms)");
         beginMs = System.currentTimeMillis();
 
-        loadFileManagersAndHandlers();
 
         this.bossEntityContainer = new BossEntityContainer();
         this.bossMechanicManager = new BossMechanicManager(this);
-        this.bossCommandManager = new BossCommandManager(new BossCmd(), this);
 
         System.out.println("Managers and Containers loaded (took " + (System.currentTimeMillis() - beginMs) + "ms)");
         beginMs = System.currentTimeMillis();
 
+        loadFileManagersAndHandlers();
+
+        System.out.println("File Handlers and File Managers loaded (took " + (System.currentTimeMillis() - beginMs) + "ms)");
+        beginMs = System.currentTimeMillis();
+
+        this.bossCommandManager = new BossCommandManager(new BossCmd(), this);
         this.bossCommandManager.load();
 
         System.out.println("All commands and listeners loaded (took " + (System.currentTimeMillis() - beginMs) + "ms)");
         beginMs = System.currentTimeMillis();
 
         reload();
+        saveMessagesToFile();
 
-        System.out.println("Reloaded all fields (took " + (System.currentTimeMillis() - beginMs) + "ms) and plugin is now loaded. Took a total of " + (System.currentTimeMillis() - startMs) + "ms.");
+        System.out.println("Reloaded all fields, saved messages (took " + (System.currentTimeMillis() - beginMs) + "ms) and plugin is now loaded. Took a total of " + (System.currentTimeMillis() - startMs) + "ms.");
     }
 
     @Override
@@ -69,6 +75,19 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.bossMechanicManager.load();
 
         this.lang = this.langFileHandler.loadFile();
+        Message.setFile(getLang());
+    }
+
+    private void saveMessagesToFile() {
+        FileConfiguration lang = getLang();
+
+        for(Message message : Message.values()) {
+            if(!lang.contains(message.getPath())) {
+                lang.set(message.getPath(), message.getDefault());
+            }
+        }
+
+        this.langFileHandler.saveFile(lang);
     }
 
     private void loadFileManagersAndHandlers() {

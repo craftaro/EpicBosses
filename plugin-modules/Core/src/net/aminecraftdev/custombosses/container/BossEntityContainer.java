@@ -1,6 +1,5 @@
 package net.aminecraftdev.custombosses.container;
 
-import com.google.common.collect.Maps;
 import net.aminecraftdev.custombosses.entity.BossEntity;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.IContainer;
@@ -14,7 +13,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 18-Jul-18
  */
-public class BossEntityContainer implements IContainer<Map<String, BossEntity>> {
+public class BossEntityContainer implements IContainer<Map<String, BossEntity>, String> {
 
     private Map<String, BossEntity> container = new HashMap<>();
 
@@ -54,5 +53,10 @@ public class BossEntityContainer implements IContainer<Map<String, BossEntity>> 
     @Override
     public void clearContainer() {
         this.container.clear();
+    }
+
+    @Override
+    public boolean exists(String string) {
+        return this.container.containsKey(string);
     }
 }

@@ -15,14 +15,22 @@ import org.bukkit.inventory.ItemStack;
  */
 public enum Message {
 
+    Boss_Create_EntityTypeNotFound("&c&l(!) &cThe specified entity type {0} was not found. If you think this is an error please contact &fAMinecraftDev&c."),
+    Boss_Create_InvalidArgs("&c&l(!) &cYou must use &n/boss create [name] [entity] &c to create a boss."),
+    Boss_Create_NameAlreadyExists("&c&l(!) &cA boss already exists with the name {0}."),
+    Boss_Create_NoEntitySpecified("&c&l(!) &cNo entity type was specified. Make sure to add an entity type! Possible entity types are: \n&7{0}"),
+    Boss_Create_NoPermission("&c&l(!) &cYou do not have access to this command."),
+    Boss_Create_SomethingWentWrong("&c&l(!) &cSomething went wrong in the API class while finalising the boss creation."),
+    Boss_Create_SuccessfullyCreated("&e&lCustomBosses &8» &7A boss has successfully been created with the name &f{0}&7 and the entity type &f{1}&7."),
+
     Boss_Help_Page1(
             "&8&m----*--------&6&l[ &e&lBoss Help &7(Page 1) &6&l]&8&m--------*----\n" +
             "&e/boss help (page) &8» &7Displays boss commands.\n" +
-            "&e/boss create [name] &8» &7Start the creation of a boss.\n" +
+            "&e/boss create [name] [entity] &8» &7Start the creation of a boss.\n" +
             "&e/boss edit [name] &8» &7Edit the specified boss.\n" +
             "&e/boss info [name] &8» &7Shows information on the specified boss.\n" +
-            "&e/gang nearby (radius) &8» &7Shows the nearby bosses.\n" +
-            "&e/gang reload &8» &7Reloads the boss plugin.\n" +
+            "&e/boss nearby (radius) &8» &7Shows the nearby bosses.\n" +
+            "&e/boss reload &8» &7Reloads the boss plugin.\n" +
             "&7\n" +
             "&7Use /boss help 2 to view the next page.\n" +
             "&8&m----*-----------------------------------*----"),
@@ -34,7 +42,6 @@ public enum Message {
             "&e/boss droptable &8» &7Shows all current drop tables.\n" +
             "&e/boss items &8» &7Shows all current custom items.\n" +
             "&e/boss skills &8» &7Shows all current set skills.\n" +
-            "&7\n" +
             "&7\n" +
             "&8&m----*-----------------------------------*----"),
 

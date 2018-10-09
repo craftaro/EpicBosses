@@ -44,6 +44,24 @@ public class BossAPI {
     }
 
     /**
+     * Used to register a Boss Entity into
+     * the plugin after it has been created
+     * using the BossAPI#createBaseBossEntity
+     * method or by manually creating a BossEntity.
+     *
+     * @param name - Name for the boss section.
+     * @param bossEntity - The boss section.
+     * @return false if it failed, true if it saved successfully.
+     */
+    public static boolean registerBossEntity(String name, BossEntity bossEntity) {
+        if(name == null || bossEntity == null) return false;
+
+        PLUGIN.getBossEntityContainer().saveData(name, bossEntity);
+        PLUGIN.getBossesFileManager().save();
+        return true;
+    }
+
+    /**
      * Used to get the Boss configuration section name
      * from a BossEntity instance.
      *
@@ -74,6 +92,11 @@ public class BossAPI {
         String input = entityTypeInput.split(":")[0];
         EntityFinder entityFinder = EntityFinder.get(input);
 
+        if(PLUGIN.getBossEntityContainer().exists(name)) {
+            Debug.BOSS_NAME_EXISTS.debug(name);
+            return null;
+        }
+
         if (entityFinder == null) return null;
 
         List<MainStatsElement> mainStatsElements = new ArrayList<>(Arrays.asList(new MainStatsElement()));
@@ -98,6 +121,8 @@ public class BossAPI {
             Debug.FAILED_TO_SAVE_THE_NEW_BOSS.debug(name, entityFinder.getFancyName());
             return null;
         }
+
+        PLUGIN.getBossesFileManager().save();
 
         return bossEntity;
     }

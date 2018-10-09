@@ -1,9 +1,9 @@
 package net.aminecraftdev.custombosses.managers;
 
+import net.aminecraftdev.custombosses.CustomBosses;
 import net.aminecraftdev.custombosses.commands.boss.*;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.ILoadable;
-import net.aminecraftdev.custombosses.utils.IReloadable;
 import net.aminecraftdev.custombosses.utils.command.SubCommandService;
 
 /**
@@ -15,9 +15,9 @@ public class BossCommandManager implements ILoadable {
 
     private SubCommandService<?> commandService;
     private boolean hasBeenLoaded = false;
-    private IReloadable customBosses;
+    private CustomBosses customBosses;
 
-    public BossCommandManager(SubCommandService<?> commandService, IReloadable customBosses) {
+    public BossCommandManager(SubCommandService<?> commandService, CustomBosses customBosses) {
         this.commandService = commandService;
         this.customBosses = customBosses;
     }
@@ -29,7 +29,8 @@ public class BossCommandManager implements ILoadable {
             return;
         }
 
-        this.commandService.registerSubCommand(new BossCreateCmd());
+        this.commandService.registerSubCommand(new BossCreateCmd(this.customBosses.getBossEntityContainer()));
+        this.commandService.registerSubCommand(new BossDebugCmd(this.customBosses.getBossesFileManager()));
         this.commandService.registerSubCommand(new BossDropTableCmd());
         this.commandService.registerSubCommand(new BossEditCmd());
         this.commandService.registerSubCommand(new BossHelpCmd());

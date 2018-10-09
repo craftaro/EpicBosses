@@ -9,6 +9,8 @@ import net.aminecraftdev.custombosses.utils.IReloadable;
 import net.aminecraftdev.custombosses.utils.ISavable;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -45,5 +47,9 @@ public class BossesFileManager implements ILoadable, ISavable, IReloadable {
 
     public BossEntity getBossEntity(String name) {
         return this.bossEntityContainer.getData().getOrDefault(name, null);
+    }
+
+    public Map<String, BossEntity> getBossEntities() {
+        return this.bossEntityContainer.getData();
     }
 }

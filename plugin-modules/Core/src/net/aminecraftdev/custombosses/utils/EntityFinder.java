@@ -95,6 +95,11 @@ public enum EntityFinder {
         this.customEntityHandler = null;
     }
 
+    @Override
+    public String toString() {
+        return this.fancyName;
+    }
+
     public LivingEntity spawnNewLivingEntity(String input, Location location) {
         if(this.customEntityHandler != null) {
             LivingEntity livingEntity;
