@@ -93,13 +93,12 @@ public class PanelBuilder {
                 if(innerSection.contains("NextPage") && innerSection.getBoolean("NextPage")) this.panelBuilderCounter.addPageData(slot, 1);
                 if(innerSection.contains("PreviousPage") && innerSection.getBoolean("PreviousPage")) this.panelBuilderCounter.addPageData(slot, -1);
 
-                for(String identifier : slotsWith.keySet()) {
-                    if(innerSection.contains(identifier) && innerSection.getBoolean(identifier)) {
-                        Set<Integer> current = slotsWith.get(identifier);
+                if(innerSection.contains("Button") && slotsWith.containsKey(innerSection.getString("Button"))) {
+                    String identifier = innerSection.getString("Button");
+                    Set<Integer> current = slotsWith.get(identifier);
 
-                        current.add(slot);
-                        this.panelBuilderCounter.getSlotsWithCounter().put(identifier, current);
-                    }
+                    current.add(slot);
+                    this.panelBuilderCounter.getSlotsWithCounter().put(identifier, current);
                 }
 
                 for(String identifier : specialSlotsWith.keySet()) {

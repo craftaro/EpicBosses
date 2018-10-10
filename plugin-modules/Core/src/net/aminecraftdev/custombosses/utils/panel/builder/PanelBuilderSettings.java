@@ -18,13 +18,15 @@ public class PanelBuilderSettings {
 
     public PanelBuilderSettings(ConfigurationSection configurationSection) {
         ItemStackHolderConverter itemStackHolderConverter = new ItemStackHolderConverter();
+        ConfigurationSection settingsSection = configurationSection.getConfigurationSection("Settings");
+        ConfigurationSection buttonsSection = configurationSection.getConfigurationSection("Buttons");
 
-        this.emptySpaceFiller = configurationSection.getBoolean("Settings.emptySpaceFiller", false);
-        this.backButton = configurationSection.getBoolean("Settings.backButton", false);
-        this.exitButton = configurationSection.getBoolean("Settings.exitButton", false);
-        this.fillTo = configurationSection.getInt("Settings.fillTo", 0);
-        this.backButtonSlot = configurationSection.getInt("Buttons.backButton", -1);
-        this.exitButtonSlot = configurationSection.getInt("Buttons.exitButton", -1);
+        this.emptySpaceFiller = settingsSection != null && settingsSection.getBoolean("emptySpaceFiller", false);
+        this.backButton = settingsSection != null &&  settingsSection.getBoolean("backButton", false);
+        this.exitButton = settingsSection != null &&  settingsSection.getBoolean("exitButton", false);
+        this.fillTo = settingsSection == null? 0 : settingsSection.getInt("fillTo", 0);
+        this.backButtonSlot = buttonsSection == null? -1 : buttonsSection.getInt("backButton", -1);
+        this.exitButtonSlot = buttonsSection == null? -1 : buttonsSection.getInt("exitButton", -1);
         this.emptySpaceFillerItem = itemStackHolderConverter.to(configurationSection.getConfigurationSection("EmptySpaceFiller"));
     }
 

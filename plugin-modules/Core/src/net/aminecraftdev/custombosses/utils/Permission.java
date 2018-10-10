@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
  */
 public enum Permission {
 
+    admin("boss.admin"),
     create("boss.create"),
     debug("boss.debug"),
     reload("boss.reload");

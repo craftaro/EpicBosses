@@ -28,6 +28,10 @@ public enum Message {
     Boss_Debug_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Debug_Toggled("&e&lCustomBosses &8» &7You have toggled debug mode for &fCustomBosses &7to {0}."),
 
+    Boss_DropTable_NoPermission("&c&l(!) &cYou do not have access to this command."),
+
+    Boss_Edit_NoPermission("&c&l(!) &cYou do not have access to this command."),
+
     Boss_Help_Page1(
             "&8&m----*--------&6&l[ &e&lBoss Help &7(Page 1) &6&l]&8&m--------*----\n" +
             "&e/boss help (page) &8» &7Displays boss commands.\n" +
@@ -50,8 +54,14 @@ public enum Message {
             "&7\n" +
             "&8&m----*-----------------------------------*----"),
 
+    Boss_Items_NoPermission("&c&l(!) &cYou do not have access to this command."),
+
+    Boss_Menu_NoPermission("&c&l(!) &cYou do not have access to this command."),
+
     Boss_Reload_NoPermission("&c&l(!) &cYou do not have access to this command."),
-    Boss_Reload_Successful("&e&lCustomBosses &8» &7All boss data has been reloaded. The process took &f{0}ms&7.");
+    Boss_Reload_Successful("&e&lCustomBosses &8» &7All boss data has been reloaded. The process took &f{0}ms&7."),
+
+    Boss_Skills_NoPermission("&c&l(!) &cYou do not have access to this command.");
 
     private static FileConfiguration LANG;
 

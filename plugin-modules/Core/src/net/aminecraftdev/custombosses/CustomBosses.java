@@ -5,8 +5,10 @@ import net.aminecraftdev.custombosses.api.BossAPI;
 import net.aminecraftdev.custombosses.commands.BossCmd;
 import net.aminecraftdev.custombosses.container.BossEntityContainer;
 import net.aminecraftdev.custombosses.file.BossesFileHandler;
+import net.aminecraftdev.custombosses.file.EditorFileHandler;
 import net.aminecraftdev.custombosses.file.LangFileHandler;
 import net.aminecraftdev.custombosses.managers.BossCommandManager;
+import net.aminecraftdev.custombosses.managers.BossPanelManager;
 import net.aminecraftdev.custombosses.managers.DebugManager;
 import net.aminecraftdev.custombosses.managers.files.BossItemFileManager;
 import net.aminecraftdev.custombosses.managers.BossMechanicManager;
@@ -14,6 +16,7 @@ import net.aminecraftdev.custombosses.managers.files.BossesFileManager;
 import net.aminecraftdev.custombosses.utils.IReloadable;
 import net.aminecraftdev.custombosses.utils.Message;
 import net.aminecraftdev.custombosses.utils.command.SubCommandService;
+import net.aminecraftdev.custombosses.utils.file.YmlFileHandler;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,10 +33,11 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     @Getter private BossCommandManager bossCommandManager;
     @Getter private BossItemFileManager itemStackManager;
     @Getter private BossesFileManager bossesFileManager;
+    @Getter private BossPanelManager bossPanelManager;
     @Getter private DebugManager debugManager;
 
-    @Getter private LangFileHandler langFileHandler;
-    @Getter private FileConfiguration lang;
+    @Getter private YmlFileHandler langFileHandler, editorFileHandler;
+    @Getter private FileConfiguration lang, editor;
 
     @Override
     public void onEnable() {
@@ -47,6 +51,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         beginMs = System.currentTimeMillis();
 
         this.debugManager = new DebugManager();
+        this.bossPanelManager = new BossPanelManager(this);
         this.bossEntityContainer = new BossEntityContainer();
         this.bossMechanicManager = new BossMechanicManager(this);
 
@@ -58,7 +63,14 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         System.out.println("File Handlers and File Managers loaded (took " + (System.currentTimeMillis() - beginMs) + "ms)");
         beginMs = System.currentTimeMillis();
 
+        createFiles();
+
+        System.out.println("All default YML files have been created (took " + (System.currentTimeMillis() - beginMs) + "ms)");
+        beginMs = System.currentTimeMillis();
+
         this.bossCommandManager = new BossCommandManager(new BossCmd(), this);
+
+        this.bossPanelManager.load();
         this.bossCommandManager.load();
 
         System.out.println("All commands and listeners loaded (took " + (System.currentTimeMillis() - beginMs) + "ms)");
@@ -77,7 +89,24 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.bossMechanicManager.load();
 
         this.lang = this.langFileHandler.loadFile();
+        this.editor = this.editorFileHandler.loadFile();
+
+        this.bossPanelManager.reload();
+
         Message.setFile(getLang());
+    }
+
+    private void loadFileManagersAndHandlers() {
+        this.itemStackManager = new BossItemFileManager(this);
+        this.bossesFileManager = new BossesFileManager(this);
+
+        this.langFileHandler = new LangFileHandler(this);
+        this.editorFileHandler = new EditorFileHandler(this);
+    }
+
+    private void createFiles() {
+        this.editorFileHandler.createFile();
+        this.langFileHandler.createFile();
     }
 
     private void saveMessagesToFile() {
@@ -90,12 +119,5 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         }
 
         this.langFileHandler.saveFile(lang);
-    }
-
-    private void loadFileManagersAndHandlers() {
-        this.itemStackManager = new BossItemFileManager(this);
-        this.bossesFileManager = new BossesFileManager(this);
-
-        this.langFileHandler = new LangFileHandler(this);
     }
 }

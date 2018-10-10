@@ -1,12 +1,16 @@
 package net.aminecraftdev.custombosses.utils.panel;
 
 import lombok.Getter;
+import net.aminecraftdev.custombosses.utils.ICloneable;
 import net.aminecraftdev.custombosses.utils.StringUtils;
+import net.aminecraftdev.custombosses.utils.itemstack.ItemStackConverter;
+import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
 import net.aminecraftdev.custombosses.utils.panel.base.ClickAction;
 import net.aminecraftdev.custombosses.utils.panel.base.PageAction;
 import net.aminecraftdev.custombosses.utils.panel.base.PanelCloseAction;
 import net.aminecraftdev.custombosses.utils.panel.builder.PanelBuilderSettings;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,7 +29,7 @@ import java.util.*;
  * @version 2.0.0
  * @since 18-Jul-2018
  */
-public class Panel implements Listener {
+public class Panel implements Listener, ICloneable<Panel> {
 
     //--------------------------------------------------
     //
@@ -33,6 +37,7 @@ public class Panel implements Listener {
     //
     //--------------------------------------------------
 
+    @Getter private static final ItemStackConverter ITEM_STACK_CONVERTER = new ItemStackConverter();
     @Getter private static final List<Panel> PANELS = new ArrayList<>();
 
     private static JavaPlugin PLUGIN;
@@ -103,6 +108,8 @@ public class Panel implements Listener {
         this.inventory = inventory;
         this.pageData.putAll(pageData);
         this.panelBuilderSettings = panelBuilderSettings;
+
+        fillEmptySpace();
 
         PANELS.add(this);
     }
@@ -338,6 +345,39 @@ public class Panel implements Listener {
     }
 
     /**
+     * Used to set the parent panel for this Panel, which
+     * will be used if the Back Button is set up for this
+     * panel.
+     *
+     * @param parentPanel - the parent Panel
+     * @return the current Panel
+     */
+    public Panel setParentPanel(Panel parentPanel) {
+        if(!this.panelBuilderSettings.isBackButton()) return this;
+
+        int slot = this.panelBuilderSettings.getBackButtonSlot() - 1;
+
+        setOnClick(slot, event -> parentPanel.openFor((Player) event.getWhoClicked()));
+        return this;
+    }
+
+    public Panel setExitButton() {
+        if(!this.panelBuilderSettings.isExitButton()) return this;
+
+        int slot = this.panelBuilderSettings.getExitButtonSlot();
+
+        setOnClick(slot, event -> event.getWhoClicked().closeInventory());
+        return this;
+    }
+
+
+    //--------------------------------------------------
+    //
+    // O T H E R   P A N E L   M E T H O D S
+    //
+    //--------------------------------------------------
+
+    /**
      * Used to destroy a panel, no matter how many people
      * are in it or what's happening in it.
      *
@@ -365,6 +405,55 @@ public class Panel implements Listener {
         InventoryCloseEvent.getHandlerList().unregister(this);
     }
 
+    /**
+     * Used to fill the empty spaces in the panel with the specified
+     * EmptySpaceFiller item if it's set up in the config.
+     */
+    public void fillEmptySpace() {
+        ItemStackHolder itemStackHolder = this.panelBuilderSettings.getEmptySpaceFillerItem();
+
+        if(itemStackHolder == null) return;
+
+        ItemStack itemStack = ITEM_STACK_CONVERTER.from(itemStackHolder);
+
+        if(itemStack == null) return;
+
+        for(int i = 0; i < getInventory().getSize(); i++) {
+            ItemStack itemAtSlot = getInventory().getItem(i);
+
+            if(itemAtSlot == null || itemAtSlot.getType() == Material.AIR) {
+                getInventory().setItem(i, itemStack);
+            }
+        }
+    }
+
+    @Override
+    public Panel clone() {
+        Panel panel = new Panel(this.inventory.getTitle(), this.inventory.getSize());
+
+        panel.targettedSlotActions.putAll(this.targettedSlotActions);
+        panel.allSlotActions.addAll(this.allSlotActions);
+        panel.currentPageContainer.putAll(this.currentPageContainer);
+
+        panel.cancelClick = this.cancelClick;
+        panel.destroyWhenDone = this.destroyWhenDone;
+        panel.cancelLowerClick = this.cancelLowerClick;
+        panel.panelBuilderSettings = this.panelBuilderSettings;
+        panel.clickSound = this.clickSound;
+        panel.onPageChange = this.onPageChange;
+        panel.panelClose = this.panelClose;
+
+        for(int i = 0; i < this.inventory.getSize(); i++) {
+            ItemStack itemStack = this.inventory.getItem(i);
+
+            if(itemStack != null) {
+                panel.inventory.setItem(i, itemStack);
+            }
+        }
+
+        return panel;
+    }
+
     //--------------------------------------------------
     //
     // P A N E L   S T A T I C   M E T H O D
@@ -374,5 +463,4 @@ public class Panel implements Listener {
     public static void setPlugin(JavaPlugin javaPlugin) {
         PLUGIN = javaPlugin;
     }
-
 }

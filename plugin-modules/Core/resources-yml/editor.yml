@@ -12,14 +12,80 @@
 #   Buttons:                              # buttons section                 #
 #     BackButton: 9                       # back button slot                #
 #     ExitButton: 9                       # exit button slot                #
-EditorList:
-  name: '&6CustomBosses &eEditor'
+MainMenu:
+  name: '&6&lCustomBosses'
+  slots: 18
+  Settings:
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Items:
+    '2':
+      type: ZOMBIE_SPAWN_EGG
+      name: '&6&lCustomBosses'
+      lore:
+      - '&eLeft Click »'
+      - '&7Edit any of the already created'
+      - '&7custom bosses.'
+      - '&7'
+      - '&eRight Click »'
+      - '&7Create a new custom boss from'
+      - '&7scratch.'
+      Button: CustomBosses
+    '5':
+      type: DIAMOND
+      name: '&6&lCustom Items'
+      lore:
+      - '&eLeft Click »'
+      - '&7Edit any of the already created'
+      - '&7custom items.'
+      - '&7'
+      - '&eRight Click »'
+      - '&7Create a new custom item from'
+      - '&7an item in your inventory.'
+      Button: CustomItems
+    '8':
+      type: CLOCK
+      name: '&6&lAutoSpawns'
+      lore:
+      - '&eLeft Click »'
+      - '&7Edit any of the already created'
+      - '&7auto spawns.'
+      - '&7'
+      - '&eRight Click »'
+      - '&7Create a new auto spawn from'
+      - '&7scratch.'
+      Button: AutoSpawns
+    '12':
+      type: OAK_PRESSURE_PLATE
+      name: '&6&lDrop Tables'
+      lore:
+      - '&eLeft Click »'
+      - '&7Edit any of the already created'
+      - '&7drop tables.'
+      - '&7'
+      - '&eRight Click »'
+      - '&7Create a new drop table from'
+      - '&7scratch.'
+      Button: DropTables
+    '16':
+      type: BLAZE_POWDER
+      name: '&6&lCustom Skills'
+      lore:
+      - '&eLeft Click »'
+      - '&fEdit any of the already created'
+      - '&fcustom skills.'
+      - '&7'
+      - '&eRight Click »'
+      - '&fCreate a new custom skill from'
+      - '&fscratch.'
+      Button: CustomSkills
+ListPanel:
+  name: '{panelName}'
   slots: 54
   Settings:
-    backButton: true
     fillTo: 45
-  Buttons:
-    backButton: 50
   Items:
     '46':
       type: GLASS_PANE

@@ -30,17 +30,19 @@ public class BossCommandManager implements ILoadable {
         }
 
         this.commandService.registerSubCommand(new BossCreateCmd(this.customBosses.getBossEntityContainer()));
-        this.commandService.registerSubCommand(new BossDebugCmd(this.customBosses.getBossesFileManager()));
-        this.commandService.registerSubCommand(new BossDropTableCmd());
-        this.commandService.registerSubCommand(new BossEditCmd());
+        this.commandService.registerSubCommand(new BossDebugCmd(this.customBosses.getDebugManager()));
+        this.commandService.registerSubCommand(new BossDropTableCmd(this.customBosses.getBossPanelManager()));
+        this.commandService.registerSubCommand(new BossEditCmd(this.customBosses.getBossPanelManager()));
         this.commandService.registerSubCommand(new BossHelpCmd());
         this.commandService.registerSubCommand(new BossInfoCmd());
-        this.commandService.registerSubCommand(new BossItemsCmd());
+        this.commandService.registerSubCommand(new BossItemsCmd(this.customBosses.getBossPanelManager()));
         this.commandService.registerSubCommand(new BossKillAllCmd());
         this.commandService.registerSubCommand(new BossListCmd());
+        this.commandService.registerSubCommand(new BossMenuCmd(this.customBosses.getBossPanelManager()));
         this.commandService.registerSubCommand(new BossNearbyCmd());
         this.commandService.registerSubCommand(new BossReloadCmd(this.customBosses));
-        this.commandService.registerSubCommand(new BossSkillsCmd());
+        this.commandService.registerSubCommand(new BossShopCmd());
+        this.commandService.registerSubCommand(new BossSkillsCmd(this.customBosses.getBossPanelManager()));
         this.commandService.registerSubCommand(new BossSpawnCmd());
         this.commandService.registerSubCommand(new BossTimeCmd());
 

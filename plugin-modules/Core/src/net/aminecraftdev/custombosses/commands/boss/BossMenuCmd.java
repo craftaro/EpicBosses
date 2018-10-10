@@ -10,14 +10,14 @@ import org.bukkit.entity.Player;
 /**
  * @author Charles Cullen
  * @version 1.0.0
- * @since 04-Oct-18
+ * @since 10-Oct-18
  */
-public class BossSkillsCmd extends SubCommand {
+public class BossMenuCmd extends SubCommand {
 
     private BossPanelManager bossPanelManager;
 
-    public BossSkillsCmd(BossPanelManager bossPanelManager) {
-        super("skills", "skill");
+    public BossMenuCmd(BossPanelManager bossPanelManager) {
+        super("menu");
 
         this.bossPanelManager = bossPanelManager;
     }
@@ -25,7 +25,7 @@ public class BossSkillsCmd extends SubCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if(!Permission.admin.hasPermission(sender)) {
-            Message.Boss_Skills_NoPermission.msg(sender);
+            Message.Boss_Menu_NoPermission.msg(sender);
             return;
         }
 
@@ -36,6 +36,6 @@ public class BossSkillsCmd extends SubCommand {
 
         Player player = (Player) sender;
 
-        this.bossPanelManager.getCustomSkills().openFor(player);
+        this.bossPanelManager.getMainMenu().openFor(player);
     }
 }
