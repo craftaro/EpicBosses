@@ -31,6 +31,7 @@ public enum Message {
     Boss_DropTable_NoPermission("&c&l(!) &cYou do not have access to this command."),
 
     Boss_Edit_NoPermission("&c&l(!) &cYou do not have access to this command."),
+    Boss_Edit_ItemStackHolderNull("&c&l(!) &cThe itemstack name that is provided for the spawn item doesn't exist or wasn't found."),
 
     Boss_Help_Page1(
             "&8&m----*--------&6&l[ &e&lBoss Help &7(Page 1) &6&l]&8&m--------*----\n" +

@@ -5,6 +5,7 @@ import net.aminecraftdev.custombosses.CustomBosses;
 import net.aminecraftdev.custombosses.panel.*;
 import net.aminecraftdev.custombosses.utils.ILoadable;
 import net.aminecraftdev.custombosses.utils.IReloadable;
+import net.aminecraftdev.custombosses.utils.StringUtils;
 import net.aminecraftdev.custombosses.utils.panel.base.IPanelHandler;
 import net.aminecraftdev.custombosses.utils.panel.builder.PanelBuilder;
 
@@ -92,7 +93,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //---------------------------------------------
 
     private void loadCustomBossesMenu() {
-        this.bosses = new CustomBossesPanel(this, getListMenu(this.customBossesTitle));
+        this.bosses = new CustomBossesPanel(this, getListMenu(this.customBossesTitle), this.customBosses);
     }
 
     private void reloadCustomBosses() {
@@ -150,7 +151,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     private PanelBuilder getListMenu(String name) {
         Map<String, String> replaceMap = new HashMap<>();
 
-        replaceMap.put("{panelName}", name);
+        replaceMap.put("{panelName}", StringUtils.get().translateColor(name));
 
         return new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("ListPanel"), replaceMap);
     }

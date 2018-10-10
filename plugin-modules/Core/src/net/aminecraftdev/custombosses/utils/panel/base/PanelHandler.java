@@ -29,8 +29,6 @@ public class PanelHandler implements IPanelHandler {
                 .setDestroyWhenDone(false)
                 .setCancelClick(true)
                 .setCancelLowerClick(true);
-
-        fillPanel();
     }
 
     @Override

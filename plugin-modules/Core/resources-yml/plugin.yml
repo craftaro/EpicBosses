@@ -2,5 +2,6 @@ name: ${plugin.name}
 main: ${plugin.main}
 version: ${plugin.version}
 author: ${plugin.author}
+api-version: 1.13
 #TODO: softdepend:
 #TODO: depends:

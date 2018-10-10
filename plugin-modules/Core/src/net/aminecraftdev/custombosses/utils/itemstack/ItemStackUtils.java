@@ -169,7 +169,7 @@ public class ItemStackUtils {
             itemStack.setDurability(dura);
         }
 
-        if(configurationSection.contains("owner") && itemStack.getType() == Material.LEGACY_SKULL_ITEM) {
+        if(configurationSection.contains("owner") && itemStack.getType() == Material.PLAYER_HEAD) {
             SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
 
             skullMeta.setOwner(owner);

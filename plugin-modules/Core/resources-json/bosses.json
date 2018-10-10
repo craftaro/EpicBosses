@@ -9,7 +9,7 @@
         "displayName": "&6&lSkeleton King Boss"
       }
     ],
-    "spawnItem": "SKSpawnEgg",
+    "spawnItem": "SKSpawnItem",
     "equipment": {
       "helmet": "SKHelmet",
       "chestplate": "SKChestplate",

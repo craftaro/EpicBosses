@@ -20,6 +20,7 @@ public enum Debug {
     FAILED_ATTEMPT_TO_STACK_BOSSES("A boss has failed to stack on top of another boss under the {0} boss configuration."),
     FAILED_TO_SAVE_THE_NEW_BOSS("The {0} with EntityType boss was successfully created but failed to save."),
     FAILED_TO_LOAD_BOSSCOMMANDMANAGER("The boss command manager tried to load again, but it has already loaded previously."),
+    FAILED_TO_LOAD_CUSTOM_ITEM("The itemstack name that is provided ({0}) for the spawn item for {1} doesn't exist or wasn't found."),
 
     MECHANIC_TYPE_NOT_STORED("This mechanic type is not stored, therefore will not be applied. Valid mechanic types are IOptionalMechanic and IPrimaryMechanic.");
 

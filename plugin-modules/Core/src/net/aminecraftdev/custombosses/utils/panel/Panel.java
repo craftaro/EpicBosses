@@ -454,6 +454,14 @@ public class Panel implements Listener, ICloneable<Panel> {
         return panel;
     }
 
+    public int getMaxPage(List<?> list) {
+        return (int) Math.ceil((double) list.size() / (double) getPanelBuilderSettings().getFillTo()) - 1;
+    }
+
+    public int getMaxPage(Map<?,?> map) {
+        return (int) Math.ceil((double) map.size() / (double) getPanelBuilderSettings().getFillTo()) - 1;
+    }
+
     //--------------------------------------------------
     //
     // P A N E L   S T A T I C   M E T H O D

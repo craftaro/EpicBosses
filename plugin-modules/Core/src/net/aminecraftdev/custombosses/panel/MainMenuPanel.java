@@ -1,10 +1,13 @@
 package net.aminecraftdev.custombosses.panel;
 
 import net.aminecraftdev.custombosses.managers.BossPanelManager;
+import net.aminecraftdev.custombosses.utils.Message;
+import net.aminecraftdev.custombosses.utils.panel.base.ClickAction;
 import net.aminecraftdev.custombosses.utils.panel.base.PanelHandler;
 import net.aminecraftdev.custombosses.utils.panel.builder.PanelBuilder;
 import net.aminecraftdev.custombosses.utils.panel.builder.PanelBuilderCounter;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 
 /**
  * @author Charles Cullen
@@ -22,15 +25,80 @@ public class MainMenuPanel extends PanelHandler {
         PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
 
         panelBuilderCounter
-                .addSlotCounter("CustomBosses", event -> this.bossPanelManager.getBosses().openFor((Player) event.getWhoClicked()))
-                .addSlotCounter("CustomItems", event -> this.bossPanelManager.getCustomItems().openFor((Player) event.getWhoClicked()))
-                .addSlotCounter("AutoSpawns", event -> this.bossPanelManager.getAutoSpawns().openFor((Player) event.getWhoClicked()))
-                .addSlotCounter("DropTables", event -> this.bossPanelManager.getDropTables().openFor((Player) event.getWhoClicked()))
-                .addSlotCounter("CustomSkills", event -> this.bossPanelManager.getCustomSkills().openFor((Player) event.getWhoClicked()));
+                .addSlotCounter("CustomBosses", getBossesAction())
+                .addSlotCounter("CustomItems", getCustomItemsAction())
+                .addSlotCounter("AutoSpawns", getAutoSpawnsAction())
+                .addSlotCounter("DropTables", getDropTablesAction())
+                .addSlotCounter("CustomSkills", getCustomSkillsAction());
 
         this.panel = panelBuilder.getPanel()
                 .setCancelClick(true)
                 .setDestroyWhenDone(false)
                 .setCancelLowerClick(true);
+    }
+
+    private ClickAction getBossesAction() {
+        return event -> {
+            Player player = (Player) event.getWhoClicked();
+
+            if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
+                this.bossPanelManager.getBosses().openFor(player);
+            } else if(event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
+                Message.Boss_Create_InvalidArgs.msg(player);
+                player.closeInventory();
+            }
+        };
+    }
+
+    private ClickAction getCustomItemsAction() {
+        return event -> {
+            Player player = (Player) event.getWhoClicked();
+
+            if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
+                this.bossPanelManager.getCustomItems().openFor(player);
+            } else if(event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
+                //TODO: Set up create item inventory
+                player.closeInventory();
+            }
+        };
+    }
+
+    private ClickAction getAutoSpawnsAction() {
+        return event -> {
+            Player player = (Player) event.getWhoClicked();
+
+            if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
+                this.bossPanelManager.getAutoSpawns().openFor(player);
+            } else if(event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
+                //TODO: Set up create auto spawn command
+                player.closeInventory();
+            }
+        };
+    }
+
+    private ClickAction getDropTablesAction() {
+        return event -> {
+            Player player = (Player) event.getWhoClicked();
+
+            if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
+                this.bossPanelManager.getDropTables().openFor(player);
+            } else if(event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
+                //TODO: Set up create drop table command
+                player.closeInventory();
+            }
+        };
+    }
+
+    private ClickAction getCustomSkillsAction() {
+        return event -> {
+            Player player = (Player) event.getWhoClicked();
+
+            if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
+                this.bossPanelManager.getCustomSkills().openFor(player);
+            } else if(event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
+                //TODO: Set up create skills command
+                player.closeInventory();
+            }
+        };
     }
 }

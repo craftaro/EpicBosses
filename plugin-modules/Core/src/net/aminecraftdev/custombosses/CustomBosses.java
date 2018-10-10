@@ -41,45 +41,33 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
 
     @Override
     public void onEnable() {
-        final long startMs = System.currentTimeMillis();
         long beginMs = System.currentTimeMillis();
 
         new BossAPI(this);
         new Metrics(this);
 
-        System.out.println("Boss API loaded (took " + (System.currentTimeMillis() - beginMs) + "ms)");
-        beginMs = System.currentTimeMillis();
-
         this.debugManager = new DebugManager();
-        this.bossPanelManager = new BossPanelManager(this);
         this.bossEntityContainer = new BossEntityContainer();
         this.bossMechanicManager = new BossMechanicManager(this);
 
-        System.out.println("Managers and Containers loaded (took " + (System.currentTimeMillis() - beginMs) + "ms)");
-        beginMs = System.currentTimeMillis();
-
         loadFileManagersAndHandlers();
 
-        System.out.println("File Handlers and File Managers loaded (took " + (System.currentTimeMillis() - beginMs) + "ms)");
-        beginMs = System.currentTimeMillis();
+        this.bossPanelManager = new BossPanelManager(this);
 
         createFiles();
+        reloadFiles();
 
-        System.out.println("All default YML files have been created (took " + (System.currentTimeMillis() - beginMs) + "ms)");
-        beginMs = System.currentTimeMillis();
-
+        this.itemStackManager.reload();
+        this.bossesFileManager.reload();
         this.bossCommandManager = new BossCommandManager(new BossCmd(), this);
-
         this.bossPanelManager.load();
-        this.bossCommandManager.load();
-
-        System.out.println("All commands and listeners loaded (took " + (System.currentTimeMillis() - beginMs) + "ms)");
-        beginMs = System.currentTimeMillis();
 
         reload();
         saveMessagesToFile();
 
-        System.out.println("Reloaded all fields, saved messages (took " + (System.currentTimeMillis() - beginMs) + "ms) and plugin is now loaded. Took a total of " + (System.currentTimeMillis() - startMs) + "ms.");
+        this.bossCommandManager.load();
+
+        System.out.println("Loaded all fields and managers, saved messages and plugin is initialized and ready to go. (took " + (System.currentTimeMillis() - beginMs) + "ms).");
     }
 
     @Override
@@ -88,8 +76,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.bossesFileManager.reload();
         this.bossMechanicManager.load();
 
-        this.lang = this.langFileHandler.loadFile();
-        this.editor = this.editorFileHandler.loadFile();
+        reloadFiles();
 
         this.bossPanelManager.reload();
 
@@ -102,6 +89,11 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
 
         this.langFileHandler = new LangFileHandler(this);
         this.editorFileHandler = new EditorFileHandler(this);
+    }
+
+    private void reloadFiles() {
+        this.lang = this.langFileHandler.loadFile();
+        this.editor = this.editorFileHandler.loadFile();
     }
 
     private void createFiles() {

@@ -85,7 +85,10 @@ ListPanel:
   name: '{panelName}'
   slots: 54
   Settings:
+    backButton: true
     fillTo: 45
+  Buttons:
+    backButton: 50
   Items:
     '46':
       type: GLASS_PANE

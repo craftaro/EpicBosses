@@ -1,7 +1,6 @@
 {
   "SKSpawnItem": {
-    "type": "383",
-    "durability": "51",
+    "type": "SKELETON_SPAWN_EGG",
     "name": "&6&lSkeleton King Boss Spawn Egg",
     "lore": [
       "&7Right click a block to spawn",
@@ -9,26 +8,26 @@
     ]
   },
   "SKHelmet": {
-    "type": "gold_helmet",
+    "type": "GOLDEN_HELMET",
     "enchants": [ "protection:4", "unbreaking:3" ]
   },
   "SKChestplate": {
-    "type": "gold_chestplate",
+    "type": "GOLDEN_CHESTPLATE",
     "enchants": [ "protection:4", "unbreaking:3" ]
   },
   "SKLeggings": {
-    "type": "gold_leggings",
+    "type": "GOLDEN_LEGGINGS",
     "enchants": [ "protection:4", "unbreaking:3" ]
   },
   "SKBoots": {
-    "type": "diamond_boots",
+    "type": "DIAMOND_BOOTS",
     "enchants": [ "protection:4", "unbreaking:3" ]
   },
   "SKMainHand": {
-    "type": "diamond_sword",
+    "type": "DIAMOND_SWORD",
     "enchants": [ "sharpness:4", "unbreaking:3" ]
   },
   "SKOffHand": {
-    "type": "shield"
+    "type": "SHIELD"
   }
 }

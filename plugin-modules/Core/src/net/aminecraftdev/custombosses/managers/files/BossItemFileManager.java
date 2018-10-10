@@ -50,4 +50,8 @@ public class BossItemFileManager implements ILoadable, ISavable, IReloadable {
         return this.itemStackHolders.getOrDefault(name, null);
     }
 
+    public Map<String, ItemStackHolder> getItemStackHolders() {
+        return new HashMap<>(this.itemStackHolders);
+    }
+
 }

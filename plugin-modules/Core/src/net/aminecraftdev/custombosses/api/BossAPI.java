@@ -3,8 +3,10 @@ package net.aminecraftdev.custombosses.api;
 import net.aminecraftdev.custombosses.CustomBosses;
 import net.aminecraftdev.custombosses.entity.BossEntity;
 import net.aminecraftdev.custombosses.entity.elements.*;
+import net.aminecraftdev.custombosses.managers.files.BossItemFileManager;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.EntityFinder;
+import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
 import net.aminecraftdev.custombosses.utils.panel.Panel;
 import net.aminecraftdev.custombosses.utils.potion.holder.PotionEffectHolder;
 
@@ -125,6 +127,20 @@ public class BossAPI {
         PLUGIN.getBossesFileManager().save();
 
         return bossEntity;
+    }
+
+    /**
+     * Used to obtain an item stack holder
+     * of the specified item stack from the
+     * ItemStack bank.
+     *
+     * @param name - name of the ItemStack
+     * @return null if not found, instance if found
+     */
+    public static ItemStackHolder getStoredItemStack(String name) {
+        BossItemFileManager bossItemFileManager = PLUGIN.getItemStackManager();
+
+        return bossItemFileManager.getItemStackHolder(name);
     }
 
 }
