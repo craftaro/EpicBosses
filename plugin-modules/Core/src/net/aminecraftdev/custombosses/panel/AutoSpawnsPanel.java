@@ -15,6 +15,8 @@ public class AutoSpawnsPanel extends PanelHandler {
 
     public AutoSpawnsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
         super(bossPanelManager, panelBuilder);
+
+        fillPanel();
     }
 
     @Override

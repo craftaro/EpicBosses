@@ -1,5 +1,9 @@
 package net.aminecraftdev.custombosses.utils;
 
+import net.aminecraftdev.custombosses.CustomBosses;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 /**
  * @author Charles Cullen
  * @version 1.0.0
@@ -24,6 +28,8 @@ public enum Debug {
 
     MECHANIC_TYPE_NOT_STORED("This mechanic type is not stored, therefore will not be applied. Valid mechanic types are IOptionalMechanic and IPrimaryMechanic.");
 
+    private static CustomBosses PLUGIN;
+
     private String message;
 
     Debug(String message) {
@@ -41,9 +47,21 @@ public enum Debug {
             current += 1;
         }
 
-        // TODO: Check config if debug is enabled and print message
+        String finalMsg = message;
 
-        throw new IllegalArgumentException(message);
+        if(PLUGIN.isDebug()) ServerUtils.get().logDebug(finalMsg);
+
+        PLUGIN.getDebugManager().getToggledPlayers().forEach(uuid -> {
+            Player player = Bukkit.getPlayer(uuid);
+
+            if(player == null) return;
+
+            player.sendMessage(finalMsg);
+        });
+    }
+
+    public static void setPlugin(CustomBosses plugin) {
+        PLUGIN = plugin;
     }
 
 }

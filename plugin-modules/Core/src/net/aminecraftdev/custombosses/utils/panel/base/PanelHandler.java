@@ -38,6 +38,7 @@ public class PanelHandler implements IPanelHandler {
 
     @Override
     public void openFor(Player player) {
+        System.out.println(this.panel);
         this.panel.openFor(player);
     }
 }

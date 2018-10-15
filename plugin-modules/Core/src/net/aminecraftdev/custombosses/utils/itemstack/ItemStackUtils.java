@@ -1,6 +1,7 @@
 package net.aminecraftdev.custombosses.utils.itemstack;
 
 import net.aminecraftdev.custombosses.utils.NumberUtils;
+import net.aminecraftdev.custombosses.utils.StringUtils;
 import net.aminecraftdev.custombosses.utils.factory.NbtFactory;
 import net.aminecraftdev.custombosses.utils.itemstack.enchants.GlowEnchant;
 import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
@@ -178,6 +179,43 @@ public class ItemStackUtils {
         }
 
         return addGlow? addGlow(itemStack) : itemStack;
+    }
+
+    public static void applyDisplayName(ItemStack itemStack, String name) {
+        applyDisplayName(itemStack, name, null);
+    }
+
+    public static void applyDisplayName(ItemStack itemStack, String name, Map<String, String> replaceMap) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        if(replaceMap != null) {
+            for(String s : replaceMap.keySet()) {
+                if(name.contains(s)) name = name.replace(s, replaceMap.get(s));
+            }
+        }
+
+        itemMeta.setDisplayName(StringUtils.get().translateColor(name));
+        itemStack.setItemMeta(itemMeta);
+    }
+
+    public static void applyDisplayLore(ItemStack itemStack, List<String> lore) {
+        applyDisplayLore(itemStack, lore, null);
+    }
+
+    public static void applyDisplayLore(ItemStack itemStack, List<String> lore, Map<String, String> replaceMap) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        if(replaceMap != null) {
+            for(String s : replaceMap.keySet()) {
+                lore.replaceAll(loreLine -> loreLine
+                        .replace(s, replaceMap.get(s))
+                        .replace('&', '§')
+                );
+            }
+        }
+
+        itemMeta.setLore(lore);
+        itemStack.setItemMeta(itemMeta);
     }
 
     public static Material getType(String string) {

@@ -36,6 +36,14 @@ public class BossEditCmd extends SubCommand {
 
         Player player = (Player) sender;
 
-        this.bossPanelManager.getBosses().openFor(player);
+        switch(args.length) {
+            default:
+            case 1:
+                this.bossPanelManager.getBosses().openFor(player);
+                break;
+            case 2:
+                //TODO: Open specific boss editing menu
+                break;
+        }
     }
 }

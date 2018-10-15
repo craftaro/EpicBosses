@@ -42,32 +42,6 @@ public class BossMechanicManager implements ILoadable {
         registerMechanic(new SettingsMechanic());
     }
 
-    public boolean handleMechanicApplication(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        if(bossEntity != null && activeBossHolder != null) {
-            Queue<IMechanic> queue = new LinkedList<>(this.primaryMechanics);
-
-            while(!queue.isEmpty()) {
-                IMechanic mechanic = queue.poll();
-
-                if(mechanic == null) continue;
-
-                if(!didMechanicApplicationFail(mechanic, bossEntity, activeBossHolder)) return false;
-            }
-
-            queue = new LinkedList<>(this.optionalMechanics);
-
-            while(!queue.isEmpty()) {
-                IMechanic mechanic = queue.poll();
-
-                if(mechanic == null) continue;
-
-                if(didMechanicApplicationFail(mechanic, bossEntity, activeBossHolder)) return false;
-            }
-        }
-
-        return true;
-    }
-
     public void registerMechanic(IMechanic mechanic) {
         if(mechanic instanceof IPrimaryMechanic) {
             this.primaryMechanics.add((IPrimaryMechanic) mechanic);
@@ -78,14 +52,39 @@ public class BossMechanicManager implements ILoadable {
         }
     }
 
-    private boolean didMechanicApplicationFail(IMechanic mechanic, BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        if(mechanic == null) return false;
+    public boolean handleMechanicApplication(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
+        if(bossEntity != null && activeBossHolder != null) {
+            Queue<IMechanic> queue = new LinkedList<>(this.primaryMechanics);
 
-        if(!mechanic.applyMechanic(bossEntity, activeBossHolder)) {
-            Debug.MECHANIC_APPLICATION_FAILED.debug(mechanic.getClass().getSimpleName());
-            return false;
+            while(!queue.isEmpty()) {
+                IMechanic mechanic = queue.poll();
+
+                if(mechanic == null) continue;
+
+                if(didMechanicApplicationFail(mechanic, bossEntity, activeBossHolder)) return false;
+            }
+
+            queue = new LinkedList<>(this.optionalMechanics);
+
+            while(!queue.isEmpty()) {
+                IMechanic mechanic = queue.poll();
+
+                if(mechanic == null) continue;
+                if(didMechanicApplicationFail(mechanic, bossEntity, activeBossHolder)) continue;
+            }
         }
 
         return true;
+    }
+
+    private boolean didMechanicApplicationFail(IMechanic mechanic, BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
+        if(mechanic == null) return true;
+
+        if(!mechanic.applyMechanic(bossEntity, activeBossHolder)) {
+            Debug.MECHANIC_APPLICATION_FAILED.debug(mechanic.getClass().getSimpleName());
+            return true;
+        }
+
+        return false;
     }
 }

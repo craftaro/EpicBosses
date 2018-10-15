@@ -3,6 +3,10 @@ package net.aminecraftdev.custombosses.utils.version;
 import lombok.Getter;
 import net.aminecraftdev.custombosses.utils.Versions;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * @author Charles Cullen
@@ -23,6 +27,22 @@ public class VersionHandler {
 
     public boolean canUseOffHand() {
         return this.version.isHigherThanOrEqualTo(Versions.v1_9_R1);
+    }
+
+    public ItemStack getItemInHand(HumanEntity humanEntity) {
+        if(this.version.isLessThanOrEqualTo(Versions.v1_8_R3)) {
+            return humanEntity.getItemInHand();
+        } else {
+            return humanEntity.getInventory().getItemInMainHand();
+        }
+    }
+
+    public void setItemInHand(HumanEntity humanEntity, ItemStack itemStack) {
+        if(this.version.isLessThanOrEqualTo(Versions.v1_8_R3)) {
+            humanEntity.setItemInHand(itemStack);
+        } else {
+            humanEntity.getInventory().setItemInMainHand(itemStack);
+        }
     }
 
 }

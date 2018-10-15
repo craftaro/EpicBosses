@@ -1,6 +1,20 @@
+Settings:
+  debug: false
 Hooks:
   ASkyBlock: false
   Factions: false
   StackMob: false
   WorldEdit: true
   WorldGuard: true
+Display:
+  Bosses:
+    name: '&e&l{name}'
+    lore:
+    - '&eEnabled: &7{enabled}'
+    - '&7'
+    - '&eLeft Click »'
+    - '&7Edit the custom boss.'
+    - '&7'
+    - '&eRight Click »'
+    - '&7Get spawn item for custom'
+    - '&7boss.'

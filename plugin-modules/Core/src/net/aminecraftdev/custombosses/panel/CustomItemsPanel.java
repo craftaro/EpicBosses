@@ -15,6 +15,8 @@ public class CustomItemsPanel extends PanelHandler {
 
     public CustomItemsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
         super(bossPanelManager, panelBuilder);
+
+        fillPanel();
     }
 
     @Override

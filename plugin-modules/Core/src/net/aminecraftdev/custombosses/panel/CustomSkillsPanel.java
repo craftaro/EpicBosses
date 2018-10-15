@@ -15,6 +15,8 @@ public class CustomSkillsPanel extends PanelHandler {
 
     public CustomSkillsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
         super(bossPanelManager, panelBuilder);
+
+        fillPanel();
     }
 
     @Override

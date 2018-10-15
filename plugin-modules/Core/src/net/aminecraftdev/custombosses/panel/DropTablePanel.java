@@ -15,6 +15,8 @@ public class DropTablePanel extends PanelHandler {
 
     public DropTablePanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
         super(bossPanelManager, panelBuilder);
+
+        fillPanel();
     }
 
     @Override
