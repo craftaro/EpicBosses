@@ -323,4 +323,21 @@ public class ItemStackUtils {
 
         return new ItemStackHolder(amount, type, durability, name, lore, enchants, skullOwner, spawnerId, isGlowing);
     }
+
+    public static boolean isItemStackSame(ItemStack itemStack1, ItemStack itemStack2) {
+        if(itemStack1 == null || itemStack2 == null) return false;
+        if(itemStack1.getType() != itemStack2.getType()) return false;
+        if(itemStack1.getDurability() != itemStack2.getDurability()) return false;
+
+        ItemMeta itemMeta1 = itemStack1.getItemMeta();
+        ItemMeta itemMeta2 = itemStack2.getItemMeta();
+
+        if(itemMeta1 == null || itemMeta2 == null) return false;
+        if(itemMeta1.hasDisplayName() != itemMeta2.hasDisplayName()) return false;
+        if(itemMeta1.getDisplayName().equals(itemMeta2.getDisplayName())) return false;
+        if(itemMeta1.hasLore() != itemMeta2.hasLore()) return false;
+        if(!itemMeta1.getLore().equals(itemMeta2.getLore())) return false;
+
+        return true;
+    }
 }

@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 public enum Message {
 
     General_MustBePlayer("&c&l(!) &cYou must be a player to use this command."),
+    General_CannotSpawn("&c&l(!) &cYou cannot spawn a boss at this location! &c&l(!)"),
 
     Boss_Create_EntityTypeNotFound("&c&l(!) &cThe specified entity type {0} was not found. If you think this is an error please contact &fAMinecraftDev&c."),
     Boss_Create_InvalidArgs("&c&l(!) &cYou must use &n/boss create [name] [entity] &c to create a boss."),
@@ -32,6 +33,7 @@ public enum Message {
 
     Boss_Edit_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Edit_ItemStackHolderNull("&c&l(!) &cThe itemstack name that is provided for the spawn item doesn't exist or wasn't found."),
+    Boss_Edit_CannotSpawn("&c&l(!) &cYou cannot spawn this boss while editing is enabled. If you think this is a mistake please contact an administrator to disable the editing of the boss."),
 
     Boss_Help_Page1(
             "&8&m----*--------&6&l[ &e&lBoss Help &7(Page 1) &6&l]&8&m--------*----\n" +

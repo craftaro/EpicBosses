@@ -1,11 +1,31 @@
 Settings:
   debug: false
+
+  BlockedWorlds:
+    enabled: false
+    worlds:
+    - 'world_the_end'
+    - 'world_nether'
+Toggles:
+  endermanTeleporting: true
+  potionsAffectingBoss: true
 Hooks:
-  ASkyBlock: false
-  Factions: false
-  StackMob: false
-  WorldEdit: true
-  WorldGuard: true
+  ASkyBlock:
+    enabled: false
+    onOwnIsland: false
+  Factions:
+    enabled: false
+    useWarzoneSpawnRegion: false
+  StackMob:
+    enabled: false
+  WorldGuard:
+    enabled: true
+    spawnRegions:
+    - 'spawn_region1'
+    - 'spawn_region2'
+    blockedRegions:
+    - 'blocked_region1'
+    - 'blocked_region2'
 Display:
   Bosses:
     name: '&e&l{name}'

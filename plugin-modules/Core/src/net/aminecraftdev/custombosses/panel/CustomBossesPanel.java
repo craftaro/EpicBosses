@@ -3,10 +3,10 @@ package net.aminecraftdev.custombosses.panel;
 import net.aminecraftdev.custombosses.CustomBosses;
 import net.aminecraftdev.custombosses.api.BossAPI;
 import net.aminecraftdev.custombosses.entity.BossEntity;
+import net.aminecraftdev.custombosses.managers.BossEntityManager;
 import net.aminecraftdev.custombosses.managers.BossPanelManager;
-import net.aminecraftdev.custombosses.utils.Debug;
+import net.aminecraftdev.custombosses.managers.files.BossesFileManager;
 import net.aminecraftdev.custombosses.utils.itemstack.ItemStackUtils;
-import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
 import net.aminecraftdev.custombosses.utils.panel.base.PanelHandler;
 import net.aminecraftdev.custombosses.utils.panel.builder.PanelBuilder;
 import org.bukkit.Material;
@@ -25,12 +25,16 @@ import java.util.Map;
  */
 public class CustomBossesPanel extends PanelHandler {
 
+    private BossEntityManager bossEntityManager;
+    private BossesFileManager bossesFileManager;
     private CustomBosses customBosses;
 
     public CustomBossesPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses customBosses) {
         super(bossPanelManager, panelBuilder);
 
         this.customBosses = customBosses;
+        this.bossEntityManager = customBosses.getBossEntityManager();
+        this.bossesFileManager = customBosses.getBossesFileManager();
         this.panel.setParentPanel(this.bossPanelManager.getMainMenu().getPanel());
 
         fillPanel();
@@ -38,7 +42,7 @@ public class CustomBossesPanel extends PanelHandler {
 
     @Override
     public void fillPanel() {
-        Map<String, BossEntity> currentEntities = new HashMap<>(this.customBosses.getBossesFileManager().getBossEntities());
+        Map<String, BossEntity> currentEntities = new HashMap<>(this.bossesFileManager.getBossEntities());
         List<String> entryList = new ArrayList<>(currentEntities.keySet());
         int maxPage = this.panel.getMaxPage(entryList);
 
@@ -62,18 +66,9 @@ public class CustomBossesPanel extends PanelHandler {
             } else {
                 String name = entryList.get(i);
                 BossEntity entity = bossEntityMap.get(name);
-                ItemStackHolder itemStackHolder = BossAPI.getStoredItemStack(entity.getSpawnItem());
-
-                if(itemStackHolder == null) {
-                    Debug.FAILED_TO_LOAD_CUSTOM_ITEM.debug(entity.getSpawnItem(), name);
-                    getPanel().setItem(i-startIndex, new ItemStack(Material.AIR), e -> {});
-                    continue;
-                }
-
-                ItemStack itemStack = this.customBosses.getItemStackManager().getItemStackConverter().from(itemStackHolder);
+                ItemStack itemStack = this.bossEntityManager.getSpawnItem(entity);
 
                 if(itemStack == null) {
-                    Debug.FAILED_TO_LOAD_CUSTOM_ITEM.debug(entity.getSpawnItem(), name);
                     getPanel().setItem(i-startIndex, new ItemStack(Material.AIR), e -> {});
                     continue;
                 }

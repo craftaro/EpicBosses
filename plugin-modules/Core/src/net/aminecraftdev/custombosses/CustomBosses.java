@@ -8,11 +8,8 @@ import net.aminecraftdev.custombosses.file.BossesFileHandler;
 import net.aminecraftdev.custombosses.file.ConfigFileHandler;
 import net.aminecraftdev.custombosses.file.EditorFileHandler;
 import net.aminecraftdev.custombosses.file.LangFileHandler;
-import net.aminecraftdev.custombosses.managers.BossCommandManager;
-import net.aminecraftdev.custombosses.managers.BossPanelManager;
-import net.aminecraftdev.custombosses.managers.DebugManager;
+import net.aminecraftdev.custombosses.managers.*;
 import net.aminecraftdev.custombosses.managers.files.BossItemFileManager;
-import net.aminecraftdev.custombosses.managers.BossMechanicManager;
 import net.aminecraftdev.custombosses.managers.files.BossesFileManager;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.IReloadable;
@@ -34,10 +31,14 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
 
     @Getter private BossEntityContainer bossEntityContainer;
     @Getter private BossMechanicManager bossMechanicManager;
+    @Getter private BossLocationManager bossLocationManager;
+    @Getter private BossListenerManager bossListenerManager;
     @Getter private BossCommandManager bossCommandManager;
     @Getter private BossItemFileManager itemStackManager;
+    @Getter private BossEntityManager bossEntityManager;
     @Getter private BossesFileManager bossesFileManager;
     @Getter private BossPanelManager bossPanelManager;
+    @Getter private BossHookManager bossHookManager;
     @Getter private VersionHandler versionHandler;
     @Getter private DebugManager debugManager;
 
@@ -59,6 +60,9 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.versionHandler = new VersionHandler();
         this.bossEntityContainer = new BossEntityContainer();
         this.bossMechanicManager = new BossMechanicManager(this);
+        this.bossEntityManager = new BossEntityManager(this);
+        this.bossHookManager = new BossHookManager(this);
+        this.bossLocationManager = new BossLocationManager(this);
 
         loadFileManagersAndHandlers();
 
@@ -70,9 +74,12 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.itemStackManager.reload();
         this.bossesFileManager.reload();
         this.bossCommandManager = new BossCommandManager(new BossCmd(), this);
+        this.bossListenerManager = new BossListenerManager(this);
         this.bossPanelManager.load();
 
         //RELOAD/LOAD ALL MANAGERS
+        this.bossHookManager.reload();
+        this.bossLocationManager.reload();
         this.itemStackManager.reload();
         this.bossesFileManager.reload();
         this.bossMechanicManager.load();
@@ -80,6 +87,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         saveMessagesToFile();
 
         this.bossCommandManager.load();
+        this.bossListenerManager.load();
 
         ServerUtils.get().logDebug("Loaded all fields and managers, saved messages and plugin is initialized and ready to go. (took " + (System.currentTimeMillis() - beginMs) + "ms).");
     }
@@ -93,6 +101,8 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         reloadFiles();
 
         this.bossPanelManager.reload();
+        this.bossHookManager.reload();
+        this.bossLocationManager.reload();
         this.debug = getConfig().getBoolean("Settings.debug", false);
 
         Message.setFile(getLang());

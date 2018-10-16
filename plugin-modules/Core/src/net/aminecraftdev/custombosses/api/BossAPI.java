@@ -3,12 +3,14 @@ package net.aminecraftdev.custombosses.api;
 import net.aminecraftdev.custombosses.CustomBosses;
 import net.aminecraftdev.custombosses.entity.BossEntity;
 import net.aminecraftdev.custombosses.entity.elements.*;
+import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
 import net.aminecraftdev.custombosses.managers.files.BossItemFileManager;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.EntityFinder;
 import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
 import net.aminecraftdev.custombosses.utils.panel.Panel;
 import net.aminecraftdev.custombosses.utils.potion.holder.PotionEffectHolder;
+import org.bukkit.Location;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -127,6 +129,23 @@ public class BossAPI {
         PLUGIN.getBossesFileManager().save();
 
         return bossEntity;
+    }
+
+    /**
+     * Used to spawn a new active boss for the
+     * specified bossEntity.
+     *
+     * @param bossEntity - targetted BossEntity
+     * @param location - Location to spawn the boss.
+     * @return ActiveBossHolder class with stored information
+     */
+    public static ActiveBossHolder spawnNewBoss(BossEntity bossEntity, Location location) {
+        if(bossEntity.isEditing()) {
+            Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
+            return null;
+        }
+
+        return PLUGIN.getBossEntityManager().createActiveBossHolder(bossEntity, location);
     }
 
     /**

@@ -19,7 +19,7 @@
     </modules>
 
     <properties>
-        <plugin.version>3.0.0-SNAPSHOT-U26</plugin.version>
+        <plugin.version>3.0.0-SNAPSHOT-U27</plugin.version>
         <plugin.name>CustomBosses</plugin.name>
         <plugin.main>net.aminecraftdev.custombosses.CustomBosses</plugin.main>
         <plugin.author>AMinecraftDev</plugin.author>
@@ -48,6 +48,12 @@
             <groupId>com.sk89q</groupId>
             <artifactId>worldedit</artifactId>
             <version>6.0.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.wasteofplastic</groupId>
+            <artifactId>askyblock</artifactId>
+            <version>3.0.8.3</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
