@@ -44,7 +44,7 @@ public class BossLocationManager implements IReloadable {
                     Location l = new Location(location.getWorld(), x, y, z);
                     Block block = l.getBlock();
 
-                    if(block.getType() != Material.AIR) return false;
+                    if(block.getType().isSolid()) return false;
                 }
             }
         }
@@ -57,14 +57,16 @@ public class BossLocationManager implements IReloadable {
             List<String> currentRegions = this.bossHookManager.getWorldGuardHelper().getRegionNames(location);
             boolean blocked = false;
 
-            for(String s : this.bossHookManager.getWorldguardBlockedRegions()) {
-                if(currentRegions.contains(s)) {
-                    blocked = true;
-                    break;
+            if(currentRegions != null) {
+                for(String s : this.bossHookManager.getWorldguardBlockedRegions()) {
+                    if(currentRegions.contains(s)) {
+                        blocked = true;
+                        break;
+                    }
                 }
-            }
 
-            if(blocked) return false;
+                if(blocked) return false;
+            }
         }
 
         if(this.bossHookManager.isFactionsEnabled() && this.bossHookManager.getFactionHelper() != null) {
@@ -75,14 +77,16 @@ public class BossLocationManager implements IReloadable {
             List<String> currentRegions = this.bossHookManager.getWorldGuardHelper().getRegionNames(location);
             boolean allowed = false;
 
-            for(String s : this.bossHookManager.getWorldGuardSpawnRegions()) {
-                if(currentRegions.contains(s)) {
-                    allowed = true;
-                    break;
+            if(currentRegions != null) {
+                for(String s : this.bossHookManager.getWorldGuardSpawnRegions()) {
+                    if(currentRegions.contains(s)) {
+                        allowed = true;
+                        break;
+                    }
                 }
-            }
 
-            if(!allowed) return false;
+                if(!allowed) return false;
+            }
         }
 
         if(this.bossHookManager.isAskyblockEnabled() && this.bossHookManager.getASkyblockHelper() != null) {

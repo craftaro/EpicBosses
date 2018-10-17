@@ -1,0 +1,8 @@
+{
+  "SKOnSpawn": [
+    "broadcast this is a default command that is broadcasted when the Skeleton King is spawned."
+  ],
+  "SKOnDeath": [
+    "broadcast this is the default command when the Skeleton King is defeated!"
+  ]
+}

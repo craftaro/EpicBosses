@@ -140,10 +140,10 @@ public class BossAPI {
      * @return ActiveBossHolder class with stored information
      */
     public static ActiveBossHolder spawnNewBoss(BossEntity bossEntity, Location location) {
-        if(bossEntity.isEditing()) {
-            Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
-            return null;
-        }
+//        if(bossEntity.isEditing()) {
+//            Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
+//            return null;
+//        }
 
         return PLUGIN.getBossEntityManager().createActiveBossHolder(bossEntity, location);
     }

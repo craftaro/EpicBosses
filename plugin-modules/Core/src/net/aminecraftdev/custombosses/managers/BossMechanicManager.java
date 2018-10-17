@@ -54,10 +54,10 @@ public class BossMechanicManager implements ILoadable {
 
     public boolean handleMechanicApplication(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
         if(bossEntity != null && activeBossHolder != null) {
-            if(bossEntity.isEditing()) {
-                Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
-                return false;
-            }
+//            if(bossEntity.isEditing()) {
+//                Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
+//                return false;
+//            }
 
             Queue<IMechanic> queue = new LinkedList<>(this.primaryMechanics);
 

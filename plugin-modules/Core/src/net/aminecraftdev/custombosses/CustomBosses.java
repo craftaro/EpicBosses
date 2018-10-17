@@ -9,7 +9,9 @@ import net.aminecraftdev.custombosses.file.ConfigFileHandler;
 import net.aminecraftdev.custombosses.file.EditorFileHandler;
 import net.aminecraftdev.custombosses.file.LangFileHandler;
 import net.aminecraftdev.custombosses.managers.*;
+import net.aminecraftdev.custombosses.managers.files.BossCommandFileManager;
 import net.aminecraftdev.custombosses.managers.files.BossItemFileManager;
+import net.aminecraftdev.custombosses.managers.files.BossMessagesFileManager;
 import net.aminecraftdev.custombosses.managers.files.BossesFileManager;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.IReloadable;
@@ -26,17 +28,22 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author AMinecraftDev
  * @version 1.0.0
  * @since 06-Sep-17
+ *
+ * TODO: In menu when toggling Edit mode, make sure that it has all needed mechanics
  */
 public class CustomBosses extends JavaPlugin implements IReloadable {
+
+    @Getter private BossMessagesFileManager bossMessagesFileManager;
+    @Getter private BossCommandFileManager bossCommandFileManager;
+    @Getter private BossItemFileManager itemStackManager;
+    @Getter private BossesFileManager bossesFileManager;
 
     @Getter private BossEntityContainer bossEntityContainer;
     @Getter private BossMechanicManager bossMechanicManager;
     @Getter private BossLocationManager bossLocationManager;
     @Getter private BossListenerManager bossListenerManager;
     @Getter private BossCommandManager bossCommandManager;
-    @Getter private BossItemFileManager itemStackManager;
     @Getter private BossEntityManager bossEntityManager;
-    @Getter private BossesFileManager bossesFileManager;
     @Getter private BossPanelManager bossPanelManager;
     @Getter private BossHookManager bossHookManager;
     @Getter private VersionHandler versionHandler;
@@ -60,28 +67,31 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.versionHandler = new VersionHandler();
         this.bossEntityContainer = new BossEntityContainer();
         this.bossMechanicManager = new BossMechanicManager(this);
-        this.bossEntityManager = new BossEntityManager(this);
         this.bossHookManager = new BossHookManager(this);
         this.bossLocationManager = new BossLocationManager(this);
 
         loadFileManagersAndHandlers();
 
+        //Managers that rely on Files
         this.bossPanelManager = new BossPanelManager(this);
+        this.bossEntityManager = new BossEntityManager(this);
 
         createFiles();
         reloadFiles();
 
         this.itemStackManager.reload();
         this.bossesFileManager.reload();
+        this.bossCommandFileManager.reload();
+        this.bossMessagesFileManager.reload();
+
         this.bossCommandManager = new BossCommandManager(new BossCmd(), this);
         this.bossListenerManager = new BossListenerManager(this);
+
         this.bossPanelManager.load();
 
         //RELOAD/LOAD ALL MANAGERS
         this.bossHookManager.reload();
         this.bossLocationManager.reload();
-        this.itemStackManager.reload();
-        this.bossesFileManager.reload();
         this.bossMechanicManager.load();
 
         saveMessagesToFile();
@@ -94,8 +104,11 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
 
     @Override
     public void reload() {
-        this.itemStackManager.reload();
+        this.bossMessagesFileManager.reload();
+        this.bossCommandFileManager.reload();
         this.bossesFileManager.reload();
+        this.itemStackManager.reload();
+
         this.bossMechanicManager.load();
 
         reloadFiles();
@@ -111,6 +124,8 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     private void loadFileManagersAndHandlers() {
         this.itemStackManager = new BossItemFileManager(this);
         this.bossesFileManager = new BossesFileManager(this);
+        this.bossCommandFileManager = new BossCommandFileManager(this);
+        this.bossMessagesFileManager = new BossMessagesFileManager(this);
 
         this.langFileHandler = new LangFileHandler(this);
         this.editorFileHandler = new EditorFileHandler(this);

@@ -46,7 +46,6 @@ public class BossSpawnListener implements Listener {
     public void onInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Block block = event.getClickedBlock();
-        Location location = block.getLocation().clone();
         BlockFace blockFace = event.getBlockFace();
         Action action = event.getAction();
 
@@ -67,10 +66,13 @@ public class BossSpawnListener implements Listener {
 
         if(bossEntity == null) return;
 
-        if(bossEntity.isEditing()) {
-            Message.Boss_Edit_CannotSpawn.msg(player);
-            return;
-        }
+//        if(bossEntity.isEditing()) {
+//            Message.Boss_Edit_CannotSpawn.msg(player);
+//            event.setCancelled(true);
+//            return;
+//        }
+
+        Location location = block.getLocation().clone();
 
         if(blockFace == BlockFace.UP) {
             location.add(0,1,0);
@@ -85,6 +87,12 @@ public class BossSpawnListener implements Listener {
         event.setCancelled(true);
 
         ActiveBossHolder activeBossHolder = BossAPI.spawnNewBoss(bossEntity, location);
+
+        if(activeBossHolder == null) {
+            //TODO: Make log file to store when a boss was spawned, where, what boss, and who spawned it, and the debug reason to why it couldn't spawn.
+            event.setCancelled(true);
+            return;
+        }
 
         //TODO: Set TargetHandler to the boss
 
@@ -107,6 +115,9 @@ public class BossSpawnListener implements Listener {
         //TODO: Handle onSpawn commands, and messages
 
         BossSpawnEvent bossSpawnEvent = new BossSpawnEvent(activeBossHolder);
+
+        ServerUtils.get().callEvent(bossSpawnEvent);
+        System.out.println("SPAWN EVENT CALLED");
     }
 
 }

@@ -11,6 +11,8 @@ import org.bukkit.entity.LivingEntity;
  * @author Charles Cullen
  * @version 1.0.0
  * @since 27-Jun-18
+ *
+ * TODO: Make a hologram above name instead of using default CustomName
  */
 public class NameMechanic implements IOptionalMechanic {
 

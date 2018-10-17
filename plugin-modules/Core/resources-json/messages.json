@@ -1,0 +1,30 @@
+{
+  "SKMainSkillMessage": [
+    "&6&l{boss} &7has used the &e{skill} &7skill."
+  ],
+  "SKOnSpawn": [
+    "&8&m-----*--------------------*-----",
+    "&7",
+    "&fA &e{boss} &fhas been spawned at &e{location}&f!",
+    "&7",
+    "&8&m-----*--------------------*-----"
+  ],
+  "SKOnDeath": [
+    "&8&m-----*--------------------*-----",
+    "&7",
+    "&e{boss}&f has been killed,",
+    "&fbelow are the top damagers:",
+    "&7",
+    "&6&l#1 &e{pos1}&f - &e{pos1%}% &f(&e{pos1dmg} dmg&f)",
+    "&6&l#2 &e{pos2}&f - &e{pos2%}% &f(&e{pos2dmg} dmg&f)",
+    "&6&l#3 &e{pos3}&f - &e{pos3%}% &f(&e{pos3dmg} dmg&f)",
+    "&7",
+    "&8&m-----*--------------------*-----"
+  ],
+  "SKTaunt1": [
+    "&6&lSkeleton King &f» &7My pocket knife is sharper then that sword! &o*cackle*"
+  ],
+  "SKTaunt2": [
+    "&6&lSkeleton King &f» &7You think you humans can defeat me?! I am the notorious Skeleton King!"
+  ]
+}

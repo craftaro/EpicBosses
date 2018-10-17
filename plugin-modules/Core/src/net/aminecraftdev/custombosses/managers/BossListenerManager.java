@@ -30,5 +30,8 @@ public class BossListenerManager implements ILoadable {
         ServerUtils serverUtils = ServerUtils.get();
 
         serverUtils.registerListener(new BossSpawnListener(this.plugin));
+
+
+        this.hasBeenLoaded = true;
     }
 }
