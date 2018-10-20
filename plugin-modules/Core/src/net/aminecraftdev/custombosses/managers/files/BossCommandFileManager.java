@@ -1,6 +1,5 @@
 package net.aminecraftdev.custombosses.managers.files;
 
-import lombok.Getter;
 import net.aminecraftdev.custombosses.CustomBosses;
 import net.aminecraftdev.custombosses.file.CommandsFileHandler;
 import net.aminecraftdev.custombosses.utils.ILoadable;

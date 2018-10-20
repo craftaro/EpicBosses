@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
  */
 public enum Message {
 
+    General_LocationFormat("{world}, {x}, {y}, {z}"),
     General_MustBePlayer("&c&l(!) &cYou must be a player to use this command."),
     General_CannotSpawn("&c&l(!) &cYou cannot spawn a boss at this location! &c&l(!)"),
 

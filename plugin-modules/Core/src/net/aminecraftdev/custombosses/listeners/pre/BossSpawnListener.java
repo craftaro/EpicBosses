@@ -2,16 +2,20 @@ package net.aminecraftdev.custombosses.listeners.pre;
 
 import net.aminecraftdev.custombosses.CustomBosses;
 import net.aminecraftdev.custombosses.api.BossAPI;
+import net.aminecraftdev.custombosses.container.BossEntityContainer;
 import net.aminecraftdev.custombosses.entity.BossEntity;
 import net.aminecraftdev.custombosses.events.BossSpawnEvent;
 import net.aminecraftdev.custombosses.events.PreBossSpawnEvent;
 import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
 import net.aminecraftdev.custombosses.managers.BossEntityManager;
 import net.aminecraftdev.custombosses.managers.BossLocationManager;
+import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.Message;
 import net.aminecraftdev.custombosses.utils.ServerUtils;
+import net.aminecraftdev.custombosses.utils.StringUtils;
 import net.aminecraftdev.custombosses.utils.itemstack.ItemStackUtils;
 import net.aminecraftdev.custombosses.utils.version.VersionHandler;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -23,6 +27,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -89,7 +94,7 @@ public class BossSpawnListener implements Listener {
         ActiveBossHolder activeBossHolder = BossAPI.spawnNewBoss(bossEntity, location);
 
         if(activeBossHolder == null) {
-            //TODO: Make log file to store when a boss was spawned, where, what boss, and who spawned it, and the debug reason to why it couldn't spawn.
+            Debug.FAILED_TO_CREATE_ACTIVE_BOSS_HOLDER.debug();
             event.setCancelled(true);
             return;
         }
@@ -104,6 +109,8 @@ public class BossSpawnListener implements Listener {
     @EventHandler
     public void onPreBossSpawnEvent(PreBossSpawnEvent event) {
         ActiveBossHolder activeBossHolder = event.getActiveBossHolder();
+        BossEntity bossEntity = activeBossHolder.getBossEntity();
+        Location location = activeBossHolder.getLocation();
         ItemStack itemStack = event.getItemStackUsed().clone();
         Player player = event.getPlayer();
 
@@ -111,13 +118,36 @@ public class BossSpawnListener implements Listener {
         player.getInventory().removeItem(itemStack);
         player.updateInventory();
 
+        List<String> commands = this.bossEntityManager.getOnSpawnCommands(bossEntity);
+        List<String> messages = this.bossEntityManager.getOnSpawnMessage(bossEntity);
+        int messagesRadius = this.bossEntityManager.getOnSpawnMessageRadius(bossEntity);
+
+        if(commands != null) {
+            commands.forEach(command -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command));
+        }
+        if(messages != null) {
+            if(activeBossHolder.getName() != null) messages.replaceAll(s -> s.replace("{boss}", activeBossHolder.getName()));
+            messages.replaceAll(s -> s.replace("{location}", StringUtils.get().translateLocation(location)));
+            messages.replaceAll(s -> s.replace('&', '§'));
+
+            if(messagesRadius == -1) {
+                messages.forEach(Bukkit::broadcastMessage);
+            } else {
+                Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
+                    if(onlinePlayer.getWorld().getName().equals(location.getWorld().getName())) {
+                        if(onlinePlayer.getLocation().distanceSquared(location) <= messagesRadius) {
+                            messages.forEach(player::sendMessage);
+                        }
+                    }
+                });
+            }
+        }
+
         //TODO: Create AutoTarget for TargetHandler
-        //TODO: Handle onSpawn commands, and messages
 
         BossSpawnEvent bossSpawnEvent = new BossSpawnEvent(activeBossHolder);
 
         ServerUtils.get().callEvent(bossSpawnEvent);
-        System.out.println("SPAWN EVENT CALLED");
     }
 
 }

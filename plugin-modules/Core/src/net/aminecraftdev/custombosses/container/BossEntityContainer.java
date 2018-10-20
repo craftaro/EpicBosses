@@ -22,6 +22,14 @@ public class BossEntityContainer implements IContainer<Map<String, BossEntity>, 
         return new HashMap<>(this.container);
     }
 
+    public String getName(BossEntity bossEntity) {
+        for(Map.Entry<String, BossEntity> entry : getData().entrySet()) {
+            if(entry.getValue().equals(bossEntity)) return entry.getKey();
+        }
+
+        return null;
+    }
+
     @Override
     public boolean saveData(Map<String, BossEntity> stringBossEntityMap) {
         StringBuilder stringBuilder = new StringBuilder();

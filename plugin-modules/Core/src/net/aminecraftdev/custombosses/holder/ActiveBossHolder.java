@@ -8,6 +8,7 @@ import org.bukkit.entity.LivingEntity;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author Charles Cullen
@@ -18,12 +19,15 @@ public class ActiveBossHolder {
 
     @Getter private final BossEntity bossEntity;
     @Getter private final Location location;
+    @Getter private final String name;
 
     @Getter private Map<Integer, LivingEntity> livingEntityMap = new HashMap<>();
+    @Getter private Map<UUID, Double> mapOfDamagingUsers = new HashMap<>();
 
-    public ActiveBossHolder(BossEntity bossEntity, Location spawnLocation) {
+    public ActiveBossHolder(BossEntity bossEntity, Location spawnLocation, String name) {
         this.location = spawnLocation;
         this.bossEntity = bossEntity;
+        this.name = name;
     }
 
     public void setLivingEntity(int position, LivingEntity livingEntity) {

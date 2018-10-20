@@ -4,16 +4,13 @@ import com.google.gson.annotations.Expose;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 /**
  * @author Charles Cullen
  * @version 1.0.0
- * @since 14-May-18
+ * @since 20-Oct-18
  */
-public class TauntElement {
+public class SubMessageElement {
 
-    @Expose @Getter @Setter private Integer delay, radius;
-    @Expose @Getter @Setter private List<String> taunts;
-
+    @Expose @Getter @Setter private String message;
+    @Expose @Getter @Setter private Integer radius;
 }

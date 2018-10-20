@@ -26,6 +26,8 @@ public enum Debug {
     FAILED_TO_LOAD_BOSSCOMMANDMANAGER("The boss command manager tried to load again, but it has already loaded previously."),
     FAILED_TO_LOAD_BOSSLISTENERMANAGER("The boss listener manager tried to load again, but it has already loaded previously."),
     FAILED_TO_LOAD_CUSTOM_ITEM("The itemstack name that is provided ({0}) for the spawn item doesn't exist or wasn't found."),
+    FAILED_TO_LOAD_MESSAGES("The messages name that is provided ({0}) doesn't exist or wasn't found."),
+    FAILED_TO_LOAD_COMMANDS("The commands name that is provided ({0}) doesn't exist or wasn't found."),
     FAILED_TO_CREATE_ACTIVE_BOSS_HOLDER("Something went wrong while trying to create an active boss holder for someone who is trying to spawn a boss."),
 
     MECHANIC_TYPE_NOT_STORED("This mechanic type is not stored, therefore will not be applied. Valid mechanic types are IOptionalMechanic and IPrimaryMechanic.");

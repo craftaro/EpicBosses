@@ -4,7 +4,9 @@ import net.aminecraftdev.custombosses.CustomBosses;
 import net.aminecraftdev.custombosses.entity.BossEntity;
 import net.aminecraftdev.custombosses.entity.elements.*;
 import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
+import net.aminecraftdev.custombosses.managers.files.BossCommandFileManager;
 import net.aminecraftdev.custombosses.managers.files.BossItemFileManager;
+import net.aminecraftdev.custombosses.managers.files.BossMessagesFileManager;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.EntityFinder;
 import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
@@ -145,7 +147,9 @@ public class BossAPI {
 //            return null;
 //        }
 
-        return PLUGIN.getBossEntityManager().createActiveBossHolder(bossEntity, location);
+        String name = PLUGIN.getBossEntityContainer().getName(bossEntity);
+
+        return PLUGIN.getBossEntityManager().createActiveBossHolder(bossEntity, location, name);
     }
 
     /**
@@ -160,6 +164,32 @@ public class BossAPI {
         BossItemFileManager bossItemFileManager = PLUGIN.getItemStackManager();
 
         return bossItemFileManager.getItemStackHolder(name);
+    }
+
+    /**
+     * Used to obtain the list of strings that
+     * a message is built in to.
+     *
+     * @param id - the id from the messages.json
+     * @return null if not found, instance if found
+     */
+    public static List<String> getStoredMessages(String id) {
+        BossMessagesFileManager bossMessagesFileManager = PLUGIN.getBossMessagesFileManager();
+
+        return bossMessagesFileManager.getMessages(id);
+    }
+
+    /**
+     * Used to obtain the list of strings that
+     * a command is built of.
+     *
+     * @param id - the id from the commands.json
+     * @return null if not found, instance if found
+     */
+    public static List<String> getStoredCommands(String id) {
+        BossCommandFileManager bossCommandFileManager = PLUGIN.getBossCommandFileManager();
+
+        return bossCommandFileManager.getCommands(id);
     }
 
 }

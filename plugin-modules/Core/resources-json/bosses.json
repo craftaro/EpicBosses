@@ -46,10 +46,17 @@
       "dropTable": "SKTable"
     },
     "messages": {
-      "onSpawn": "SKOnSpawn",
-      "onDeath": "SKOnDeath",
+      "onSpawn": {
+        "message": "SKOnSpawn",
+        "radius": -1
+      },
+      "onDeath": {
+        "message": "SKOnDeath",
+        "radius": -1
+      },
       "taunts": {
         "delay": 60,
+        "radius": 100,
         "taunts": [
           "SKTaunt1",
           "SKTaunt2"

@@ -1,6 +1,7 @@
 package net.aminecraftdev.custombosses.utils;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +22,19 @@ public class StringUtils {
 
     public String translateColor(String string) {
         return ChatColor.translateAlternateColorCodes('&', string);
+    }
+
+    public String translateLocation(Location location) {
+        String world = location.getWorld().getName();
+        int x = location.getBlockX();
+        int y = location.getBlockY();
+        int z = location.getBlockZ();
+
+        return Message.General_LocationFormat.toString()
+                .replace("{world}", world)
+                .replace("{x}", ""+x)
+                .replace("{y}", ""+y)
+                .replace("{z}", ""+z);
     }
 
     public <T> String appendList(List<T> list) {
