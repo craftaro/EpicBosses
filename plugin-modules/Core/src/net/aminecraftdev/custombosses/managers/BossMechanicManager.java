@@ -7,6 +7,7 @@ import net.aminecraftdev.custombosses.mechanics.*;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.ILoadable;
 import net.aminecraftdev.custombosses.utils.IMechanic;
+import net.aminecraftdev.custombosses.utils.ServerUtils;
 import net.aminecraftdev.custombosses.utils.mechanics.IOptionalMechanic;
 import net.aminecraftdev.custombosses.utils.mechanics.IPrimaryMechanic;
 
@@ -65,6 +66,8 @@ public class BossMechanicManager implements ILoadable {
                 IMechanic mechanic = queue.poll();
 
                 if(mechanic == null) continue;
+
+                ServerUtils.get().logDebug("Applying " + mechanic.getClass().getSimpleName());
 
                 if(didMechanicApplicationFail(mechanic, bossEntity, activeBossHolder)) return false;
             }

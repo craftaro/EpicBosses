@@ -136,7 +136,7 @@ public class BossSpawnListener implements Listener {
                 Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
                     if(onlinePlayer.getWorld().getName().equals(location.getWorld().getName())) {
                         if(onlinePlayer.getLocation().distanceSquared(location) <= messagesRadius) {
-                            messages.forEach(player::sendMessage);
+                            messages.forEach(s -> onlinePlayer.sendMessage(s));
                         }
                     }
                 });
@@ -144,6 +144,7 @@ public class BossSpawnListener implements Listener {
         }
 
         //TODO: Create AutoTarget for TargetHandler
+        //TODO: Handle Taunts
 
         BossSpawnEvent bossSpawnEvent = new BossSpawnEvent(activeBossHolder);
 

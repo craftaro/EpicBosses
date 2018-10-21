@@ -1,6 +1,7 @@
 package net.aminecraftdev.custombosses.managers;
 
 import net.aminecraftdev.custombosses.CustomBosses;
+import net.aminecraftdev.custombosses.listeners.after.BossDeathListener;
 import net.aminecraftdev.custombosses.listeners.during.BossDamageListener;
 import net.aminecraftdev.custombosses.listeners.pre.BossSpawnListener;
 import net.aminecraftdev.custombosses.utils.Debug;
@@ -32,7 +33,7 @@ public class BossListenerManager implements ILoadable {
 
         serverUtils.registerListener(new BossSpawnListener(this.plugin));
         serverUtils.registerListener(new BossDamageListener(this.plugin));
-
+        serverUtils.registerListener(new BossDeathListener(this.plugin));
 
         this.hasBeenLoaded = true;
     }

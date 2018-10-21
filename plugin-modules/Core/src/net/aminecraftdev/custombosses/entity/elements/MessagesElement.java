@@ -11,7 +11,8 @@ import lombok.Setter;
  */
 public class MessagesElement {
 
-    @Expose @Getter @Setter private SubMessageElement onSpawn, onDeath;
+    @Expose @Getter @Setter private OnSpawnMessageElement onSpawn;
+    @Expose @Getter @Setter private OnDeathMessageElement onDeath;
     @Expose @Getter @Setter private TauntElement taunts;
 
 }

@@ -1,17 +1,14 @@
 package net.aminecraftdev.custombosses.mechanics;
 
 import net.aminecraftdev.custombosses.api.BossAPI;
-import net.aminecraftdev.custombosses.container.BossEntityContainer;
 import net.aminecraftdev.custombosses.entity.BossEntity;
+import net.aminecraftdev.custombosses.entity.elements.EntityStatsElement;
 import net.aminecraftdev.custombosses.entity.elements.MainStatsElement;
 import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.EntityFinder;
-import net.aminecraftdev.custombosses.utils.IMechanic;
 import net.aminecraftdev.custombosses.utils.mechanics.IPrimaryMechanic;
 import org.bukkit.entity.LivingEntity;
-
-import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -22,7 +19,13 @@ public class EntityTypeMechanic implements IPrimaryMechanic {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        for(MainStatsElement mainStatsElement : bossEntity.getMainStats()) {
+        for(EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
+            System.out.println(entityStatsElement);
+
+            MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
+
+            System.out.println(mainStatsElement);
+
             String bossEntityType = mainStatsElement.getEntityType();
             String input = bossEntityType.split(":")[0];
             EntityFinder entityFinder = EntityFinder.get(input);

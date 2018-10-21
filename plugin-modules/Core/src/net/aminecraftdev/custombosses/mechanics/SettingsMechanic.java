@@ -1,6 +1,8 @@
 package net.aminecraftdev.custombosses.mechanics;
 
 import net.aminecraftdev.custombosses.entity.BossEntity;
+import net.aminecraftdev.custombosses.entity.elements.EntityStatsElement;
+import net.aminecraftdev.custombosses.entity.elements.MainStatsElement;
 import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.IMechanic;
@@ -26,23 +28,29 @@ public class SettingsMechanic implements IPrimaryMechanic {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        if(activeBossHolder.getLivingEntityMap().getOrDefault(0, null) == null) return false;
+        if(activeBossHolder.getLivingEntityMap().getOrDefault(1, null) == null) return false;
 
-        LivingEntity livingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(0, null);
-        EntityEquipment entityEquipment = livingEntity.getEquipment();
+        for(EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
+            MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
+            LivingEntity livingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(mainStatsElement.getPosition(), null);
 
-        livingEntity.setRemoveWhenFarAway(false);
-        livingEntity.setCanPickupItems(false);
-        entityEquipment.setHelmetDropChance(0.0F);
-        entityEquipment.setChestplateDropChance(0.0F);
-        entityEquipment.setLeggingsDropChance(0.0F);
-        entityEquipment.setBootsDropChance(0.0F);
+            if(livingEntity == null) return false;
 
-        if(this.versionHandler.canUseOffHand()) {
-            entityEquipment.setItemInMainHandDropChance(0.0F);
-            entityEquipment.setItemInOffHandDropChance(0.0F);
-        } else {
-            entityEquipment.setItemInHandDropChance(0.0F);
+            EntityEquipment entityEquipment = livingEntity.getEquipment();
+
+            livingEntity.setRemoveWhenFarAway(false);
+            livingEntity.setCanPickupItems(false);
+            entityEquipment.setHelmetDropChance(0.0F);
+            entityEquipment.setChestplateDropChance(0.0F);
+            entityEquipment.setLeggingsDropChance(0.0F);
+            entityEquipment.setBootsDropChance(0.0F);
+
+            if(this.versionHandler.canUseOffHand()) {
+                entityEquipment.setItemInMainHandDropChance(0.0F);
+                entityEquipment.setItemInOffHandDropChance(0.0F);
+            } else {
+                entityEquipment.setItemInHandDropChance(0.0F);
+            }
         }
 
         return true;

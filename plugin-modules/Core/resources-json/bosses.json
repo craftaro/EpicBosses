@@ -1,35 +1,37 @@
 {
   "SkeletonKing": {
     "editing": true,
-    "mainStats": [
-      {
-        "position": 1,
-        "entityType": "SKELETON",
-        "health": 500,
-        "displayName": "&6&lSkeleton King Boss"
-      }
-    ],
     "spawnItem": "SKSpawnItem",
-    "equipment": {
-      "helmet": "SKHelmet",
-      "chestplate": "SKChestplate",
-      "leggings": "SKLeggings",
-      "boots": "SKBoots"
-    },
-    "hands": {
-      "mainHand": "SKMainHand",
-      "offHand": "SKOffHand"
-    },
-    "potions": [
+    "entityStats": [
       {
-        "type": "resistance",
-        "level": 3,
-        "duration": -1
-      },
-      {
-        "type": "speed",
-        "level": 1,
-        "duration": 500
+        "mainStats": {
+          "position": 1,
+          "entityType": "SKELETON",
+          "health": 500,
+          "displayName": "&6&lSkeleton King Boss"
+        },
+        "equipment": {
+          "helmet": "SKHelmet",
+          "chestplate": "SKChestplate",
+          "leggings": "SKLeggings",
+          "boots": "SKBoots"
+        },
+        "hands": {
+          "mainHand": "SKMainHand",
+          "offHand": "SKOffHand"
+        },
+        "potions": [
+          {
+            "type": "resistance",
+            "level": 3,
+            "duration": -1
+          },
+          {
+            "type": "speed",
+            "level": 1,
+            "duration": 500
+          }
+        ]
       }
     ],
     "skills": {
@@ -52,7 +54,9 @@
       },
       "onDeath": {
         "message": "SKOnDeath",
-        "radius": -1
+        "positionMessage": "SKPosition",
+        "radius": -1,
+        "onlyShow": 3
       },
       "taunts": {
         "delay": 60,

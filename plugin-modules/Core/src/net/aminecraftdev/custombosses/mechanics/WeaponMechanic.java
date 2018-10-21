@@ -1,7 +1,10 @@
 package net.aminecraftdev.custombosses.mechanics;
 
 import net.aminecraftdev.custombosses.entity.BossEntity;
+import net.aminecraftdev.custombosses.entity.elements.EntityStatsElement;
+import net.aminecraftdev.custombosses.entity.elements.EquipmentElement;
 import net.aminecraftdev.custombosses.entity.elements.HandsElement;
+import net.aminecraftdev.custombosses.entity.elements.MainStatsElement;
 import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
 import net.aminecraftdev.custombosses.managers.files.BossItemFileManager;
 import net.aminecraftdev.custombosses.utils.IMechanic;
@@ -29,38 +32,44 @@ public class WeaponMechanic implements IOptionalMechanic {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        if(activeBossHolder.getLivingEntityMap().getOrDefault(0, null) == null) return false;
+        if(activeBossHolder.getLivingEntityMap().getOrDefault(1, null) == null) return false;
 
-        LivingEntity livingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(0, null);
-        EntityEquipment entityEquipment = livingEntity.getEquipment();
-        HandsElement handsElement = bossEntity.getHands();
-        String mainHand = handsElement.getMainHand();
-        String offHand = handsElement.getOffHand();
+        for(EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
+            MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
+            LivingEntity livingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(mainStatsElement.getPosition(), null);
 
-        if(mainHand != null) {
-            ItemStackHolder itemStackHolder = this.itemStackManager.getItemStackHolder(mainHand);
+            if(livingEntity == null) return false;
 
-            if(itemStackHolder != null) {
-                ItemStack itemStack = this.itemStackManager.getItemStackConverter().from(itemStackHolder);
+            EntityEquipment entityEquipment = livingEntity.getEquipment();
+            HandsElement handsElement = entityStatsElement.getHands();
+            String mainHand = handsElement.getMainHand();
+            String offHand = handsElement.getOffHand();
 
-                if(this.versionHandler.canUseOffHand()) {
-                    entityEquipment.setItemInMainHand(itemStack);
-                } else {
-                    entityEquipment.setItemInHand(itemStack);
+            if(mainHand != null) {
+                ItemStackHolder itemStackHolder = this.itemStackManager.getItemStackHolder(mainHand);
+
+                if(itemStackHolder != null) {
+                    ItemStack itemStack = this.itemStackManager.getItemStackConverter().from(itemStackHolder);
+
+                    if(this.versionHandler.canUseOffHand()) {
+                        entityEquipment.setItemInMainHand(itemStack);
+                    } else {
+                        entityEquipment.setItemInHand(itemStack);
+                    }
+                }
+            }
+
+            if(offHand != null && this.versionHandler.canUseOffHand()) {
+                ItemStackHolder itemStackHolder = this.itemStackManager.getItemStackHolder(offHand);
+
+                if(itemStackHolder != null) {
+                    ItemStack itemStack = this.itemStackManager.getItemStackConverter().from(itemStackHolder);
+
+                    entityEquipment.setItemInOffHand(itemStack);
                 }
             }
         }
 
-        if(offHand != null && this.versionHandler.canUseOffHand()) {
-            ItemStackHolder itemStackHolder = this.itemStackManager.getItemStackHolder(offHand);
-
-            if(itemStackHolder != null) {
-                ItemStack itemStack = this.itemStackManager.getItemStackConverter().from(itemStackHolder);
-
-                entityEquipment.setItemInOffHand(itemStack);
-            }
-        }
-
-        return false;
+        return true;
     }
 }

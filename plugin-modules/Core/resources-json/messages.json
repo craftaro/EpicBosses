@@ -15,11 +15,12 @@
     "&e{boss}&f has been killed,",
     "&fbelow are the top damagers:",
     "&7",
-    "&6&l#1 &e{pos1}&f - &e{pos1%}% &f(&e{pos1dmg} dmg&f)",
-    "&6&l#2 &e{pos2}&f - &e{pos2%}% &f(&e{pos2dmg} dmg&f)",
-    "&6&l#3 &e{pos3}&f - &e{pos3%}% &f(&e{pos3dmg} dmg&f)",
+    "{positions}",
     "&7",
     "&8&m-----*--------------------*-----"
+  ],
+  "SKPosition": [
+    "&6&l#{pos} &e{name}&f - &e{percent}% &f(&e{dmg} dmg&f)"
   ],
   "SKTaunt1": [
     "&6&lSkeleton King &f» &7My pocket knife is sharper then that sword! &o*cackle*"

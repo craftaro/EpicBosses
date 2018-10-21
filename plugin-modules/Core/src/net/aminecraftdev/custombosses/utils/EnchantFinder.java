@@ -1,5 +1,6 @@
 package net.aminecraftdev.custombosses.utils;
 
+import lombok.Getter;
 import org.bukkit.enchantments.Enchantment;
 
 import java.util.ArrayList;
@@ -44,9 +45,9 @@ public enum EnchantFinder {
     mending("Mending", Enchantment.MENDING, "mending"),
     curse_of_vanishing("Curse of Vanishing", Enchantment.VANISHING_CURSE, "vanishing", "vanishing curse", "vanishing_curse", "curseofvanishing", "vanishingcurse", "curse of vanishing", "curse_of_vanishing");
 
-    private Enchantment enchantment;
-    private String fancyName;
-    private List<String> names = new ArrayList<>();
+    @Getter private List<String> names = new ArrayList<>();
+    @Getter private Enchantment enchantment;
+    @Getter private String fancyName;
 
     EnchantFinder(String fancyName, Enchantment enchantment, String... names) {
         this.fancyName = fancyName;
@@ -54,18 +55,6 @@ public enum EnchantFinder {
 
         this.names.addAll(Arrays.asList(names));
         this.names.add(fancyName);
-    }
-
-    public Enchantment getEnchantment() {
-        return enchantment;
-    }
-
-    public List<String> getNames() {
-        return names;
-    }
-
-    public String getFancyName() {
-        return fancyName;
     }
 
     public static EnchantFinder getByName(String name) {

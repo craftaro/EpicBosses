@@ -1,5 +1,7 @@
 package net.aminecraftdev.custombosses.utils;
 
+import java.text.DecimalFormat;
+
 /**
  * @author Charles Cullen
  * @version 1.0.0
@@ -39,6 +41,12 @@ public class NumberUtils {
         if(!isDouble(input)) return null;
 
         return Double.valueOf(input);
+    }
+
+    public String formatDouble(double d) {
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###,###.##");
+
+        return decimalFormat.format(d);
     }
 
     public static NumberUtils get() {

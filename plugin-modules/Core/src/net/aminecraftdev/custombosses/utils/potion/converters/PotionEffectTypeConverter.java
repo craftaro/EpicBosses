@@ -1,6 +1,7 @@
 package net.aminecraftdev.custombosses.utils.potion.converters;
 
 import net.aminecraftdev.custombosses.utils.IConverter;
+import net.aminecraftdev.custombosses.utils.PotionEffectFinder;
 import org.bukkit.potion.PotionEffectType;
 
 /**
@@ -12,11 +13,19 @@ public class PotionEffectTypeConverter implements IConverter<String, PotionEffec
 
     @Override
     public String to(PotionEffectType potionEffectType) {
-        return potionEffectType.getName().toUpperCase();
+        PotionEffectFinder potionEffectFinder = PotionEffectFinder.getByEffect(potionEffectType);
+
+        if(potionEffectFinder == null) return null;
+
+        return potionEffectFinder.getFancyName();
     }
 
     @Override
     public PotionEffectType from(String s) {
-        return PotionEffectType.getByName(s);
+        PotionEffectFinder potionEffectFinder = PotionEffectFinder.getByName(s);
+
+        if(potionEffectFinder == null) return null;
+
+        return potionEffectFinder.getPotionEffectType();
     }
 }

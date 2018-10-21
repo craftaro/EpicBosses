@@ -15,26 +15,19 @@ import java.util.List;
  */
 public class BossEntity {
 
-    @Expose @Getter private final List<PotionEffectHolder> potions;
-    @Expose @Getter private final List<MainStatsElement> mainStats;
-    @Expose @Getter private final EquipmentElement equipment;
+    @Expose @Getter private final List<EntityStatsElement> entityStats;
     @Expose @Getter private final MessagesElement messages;
     @Expose @Getter private final CommandsElement commands;
     @Expose @Getter private final SkillsElement skills;
-    @Expose @Getter private final HandsElement hands;
     @Expose @Getter private final DropsElement drops;
 
     @Expose @Getter @Setter private String spawnItem;
     @Expose @Getter @Setter private boolean editing;
 
-    public BossEntity(boolean editing, String spawnItem, List<MainStatsElement> mainStats, EquipmentElement equipment, HandsElement hands, List<PotionEffectHolder> potions,
-                      SkillsElement skills, DropsElement drops, MessagesElement messages, CommandsElement commands) {
+    public BossEntity(boolean editing, String spawnItem, List<EntityStatsElement> entityStats, SkillsElement skills, DropsElement drops, MessagesElement messages, CommandsElement commands) {
         this.editing = editing;
-        this.mainStats = mainStats;
         this.spawnItem = spawnItem;
-        this.equipment = equipment;
-        this.hands = hands;
-        this.potions = potions;
+        this.entityStats = entityStats;
         this.skills = skills;
         this.drops = drops;
         this.messages = messages;

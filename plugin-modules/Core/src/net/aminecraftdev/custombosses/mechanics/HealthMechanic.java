@@ -1,9 +1,12 @@
 package net.aminecraftdev.custombosses.mechanics;
 
 import net.aminecraftdev.custombosses.entity.BossEntity;
+import net.aminecraftdev.custombosses.entity.elements.EntityStatsElement;
+import net.aminecraftdev.custombosses.entity.elements.MainStatsElement;
 import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.IMechanic;
+import net.aminecraftdev.custombosses.utils.ServerUtils;
 import net.aminecraftdev.custombosses.utils.file.reader.SpigotYmlReader;
 import net.aminecraftdev.custombosses.utils.mechanics.IPrimaryMechanic;
 import org.bukkit.entity.LivingEntity;
@@ -17,20 +20,27 @@ public class HealthMechanic implements IPrimaryMechanic {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        if(activeBossHolder.getLivingEntityMap().getOrDefault(0, null) == null) return false;
-        if(bossEntity.getMainStats().isEmpty() || bossEntity.getMainStats().get(0) == null) return false;
+        if(activeBossHolder.getLivingEntityMap().getOrDefault(1, null) == null) return false;
 
-        LivingEntity livingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(0, null);
         double maxHealthSetting = (double) SpigotYmlReader.get().getObject("settings.attribute.maxHealth.max");
-        double maxHealth = bossEntity.getMainStats().get(0).getHealth();
 
-        if(maxHealth > maxHealthSetting) {
-            Debug.MAX_HEALTH.debug(maxHealthSetting);
-            return false;
+        for(EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
+            MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
+            LivingEntity livingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(mainStatsElement.getPosition(), null);
+            double maxHealth = mainStatsElement.getHealth();
+
+            if(livingEntity == null) return false;
+
+            if(maxHealth > maxHealthSetting) {
+                Debug.MAX_HEALTH.debug(maxHealthSetting);
+                return false;
+            }
+
+
+            livingEntity.setMaxHealth(maxHealth);
+            livingEntity.setHealth(maxHealth);
         }
 
-        livingEntity.setMaxHealth(maxHealth);
-        livingEntity.setHealth(maxHealth);
         return true;
     }
 }

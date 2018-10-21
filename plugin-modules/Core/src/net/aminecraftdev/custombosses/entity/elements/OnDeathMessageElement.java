@@ -7,10 +7,10 @@ import lombok.Setter;
 /**
  * @author Charles Cullen
  * @version 1.0.0
- * @since 20-Oct-18
+ * @since 21-Oct-18
  */
-public class SubMessageElement {
+public class OnDeathMessageElement {
 
-    @Expose @Getter @Setter private String message;
-    @Expose @Getter @Setter private Integer radius;
+    @Expose @Getter @Setter private String message, positionMessage;
+    @Expose @Getter @Setter private Integer radius, onlyShow;
 }

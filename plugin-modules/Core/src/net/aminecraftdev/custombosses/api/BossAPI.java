@@ -105,22 +105,27 @@ public class BossAPI {
 
         if (entityFinder == null) return null;
 
-        List<MainStatsElement> mainStatsElements = new ArrayList<>(Arrays.asList(new MainStatsElement()));
-        EquipmentElement equipmentElement = new EquipmentElement();
-        HandsElement handsElement = new HandsElement();
-        List<PotionEffectHolder> potionEffectHolders = new ArrayList<>();
+        List<EntityStatsElement> entityStatsElements = new ArrayList<>();
+        EntityStatsElement entityStatsElement = new EntityStatsElement();
+        MainStatsElement mainStatsElement = new MainStatsElement();
+
+        mainStatsElement.setHealth(50D);
+        mainStatsElement.setDisplayName(name);
+        mainStatsElement.setEntityType(entityFinder.getFancyName());
+
+        entityStatsElement.setMainStats(mainStatsElement);
+        entityStatsElement.setEquipment(new EquipmentElement());
+        entityStatsElement.setHands(new HandsElement());
+        entityStatsElement.setPotions(new ArrayList<>());
+
+        entityStatsElements.add(entityStatsElement);
+
         SkillsElement skillsElement = new SkillsElement();
         DropsElement dropsElement = new DropsElement();
         MessagesElement messagesElement = new MessagesElement();
         CommandsElement commandsElement = new CommandsElement();
 
-        BossEntity bossEntity = new BossEntity(true, null, mainStatsElements, equipmentElement, handsElement, potionEffectHolders, skillsElement, dropsElement, messagesElement, commandsElement);
-        MainStatsElement mainStatsElement = mainStatsElements.get(0);
-
-        mainStatsElement.setEntityType(entityFinder.getFancyName());
-        mainStatsElement.setDisplayName(name);
-        mainStatsElement.setHealth(50D);
-
+        BossEntity bossEntity = new BossEntity(true, null, entityStatsElements, skillsElement, dropsElement, messagesElement, commandsElement);
         boolean result = PLUGIN.getBossEntityContainer().saveData(name, bossEntity);
 
         if (!result) {
