@@ -1,3 +1,100 @@
 {
-
+  "SkeletonTableSpray": {
+    "dropType": "SPRAY",
+    "rewards": {
+      "sprayRewards": {
+        "SKSpawnItem": 10.0,
+        "SKHelmet": 45.0,
+        "SKChestplate": 45.0,
+        "SKLeggings": 45.0,
+        "SKBoots": 45.0,
+        "SKMainHand": 30.0,
+        "SKOffHand": 30.0
+      },
+      "sprayMaxDistance": 10,
+      "sprayMaxDrops": 5
+    }
+  },
+  "SkeletonTableDrop": {
+    "dropType": "DROP",
+    "rewards": {
+      "dropRewards": {
+        "SKSpawnItem": 10.0,
+        "SKHelmet": 45.0,
+        "SKChestplate": 45.0,
+        "SKLeggings": 45.0,
+        "SKBoots": 45.0,
+        "SKMainHand": 30.0,
+        "SKOffHand": 30.0
+      },
+      "dropMaxDrops": 4
+    }
+  },
+  "SkeletonTableGive": {
+    "dropType": "GIVE",
+    "rewards": {
+      "giveRewards": {
+        "1": {
+          "items": {
+            "SKHelmet": 10.0,
+            "SKChestplate": 25.0,
+            "SKLeggings": 25.0,
+            "SKBoots": 25.0,
+            "SKMainHand": 10.0,
+            "SKOffHand": 10.0
+          },
+          "maxDrops": -1,
+          "randomDrops": false
+        },
+        "2": {
+          "items": {
+            "SKHelmet": 8.0,
+            "SKChestplate": 20.0,
+            "SKLeggings": 20.0,
+            "SKBoots": 20.0,
+            "SKMainHand": 8.0,
+            "SKOffHand": 8.0
+          },
+          "maxDrops": -1,
+          "randomDrops": false
+        },
+        "3": {
+          "items": {
+            "SKHelmet": 5.0,
+            "SKChestplate": 15.0,
+            "SKLeggings": 15.0,
+            "SKBoots": 15.0,
+            "SKMainHand": 5.0,
+            "SKOffHand": 5.0
+          },
+          "maxDrops": -1,
+          "randomDrops": false
+        },
+        "4": {
+          "items": {
+            "SKHelmet": 3.0,
+            "SKChestplate": 10.0,
+            "SKLeggings": 10.0,
+            "SKBoots": 10.0,
+            "SKMainHand": 3.0,
+            "SKOffHand": 3.0
+          },
+          "maxDrops": -1,
+          "randomDrops": false
+        },
+        "5": {
+          "items": {
+            "SKHelmet": 1.0,
+            "SKChestplate": 5.0,
+            "SKLeggings": 5.0,
+            "SKBoots": 5.0,
+            "SKMainHand": 1.0,
+            "SKOffHand": 1.0
+          },
+          "maxDrops": 3,
+          "randomDrops": true
+        }
+      }
+    }
+  }
 }
