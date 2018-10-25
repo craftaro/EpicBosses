@@ -2,12 +2,13 @@ package net.aminecraftdev.custombosses.managers;
 
 import net.aminecraftdev.custombosses.CustomBosses;
 import net.aminecraftdev.custombosses.api.BossAPI;
+import net.aminecraftdev.custombosses.droptable.DropTable;
 import net.aminecraftdev.custombosses.entity.BossEntity;
 import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
-import net.aminecraftdev.custombosses.managers.files.BossCommandFileManager;
-import net.aminecraftdev.custombosses.managers.files.BossItemFileManager;
-import net.aminecraftdev.custombosses.managers.files.BossMessagesFileManager;
+import net.aminecraftdev.custombosses.holder.DeadBossHolder;
 import net.aminecraftdev.custombosses.managers.files.BossesFileManager;
+import net.aminecraftdev.custombosses.managers.files.DropTableFileManager;
+import net.aminecraftdev.custombosses.managers.files.ItemsFileManager;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.itemstack.holder.ItemStackHolder;
 import org.bukkit.Location;
@@ -26,11 +27,13 @@ public class BossEntityManager {
 
     private static final List<ActiveBossHolder> ACTIVE_BOSS_HOLDERS = new ArrayList<>();
 
-    private BossItemFileManager bossItemFileManager;
+    private DropTableFileManager dropTableFileManager;
     private BossMechanicManager bossMechanicManager;
+    private ItemsFileManager bossItemFileManager;
     private BossesFileManager bossesFileManager;
 
     public BossEntityManager(CustomBosses customBosses) {
+        this.dropTableFileManager = customBosses.getDropTableFileManager();
         this.bossMechanicManager = customBosses.getBossMechanicManager();
         this.bossItemFileManager = customBosses.getItemStackManager();
         this.bossesFileManager = customBosses.getBossesFileManager();
@@ -209,6 +212,32 @@ public class BossEntityManager {
         double onePercent = totalDamage / 100;
 
         return playerDamage / onePercent;
+    }
+
+    public DropTable getDropTable(BossEntity bossEntity) {
+        return this.dropTableFileManager.getDropTable(bossEntity.getDrops().getDropTable());
+    }
+
+    public void handleDropTable(DropTable dropTable, DeadBossHolder deadBossHolder) {
+        String dropType = dropTable.getDropType();
+        BossEntity bossEntity = deadBossHolder.getBossEntity();
+        String tableName = bossEntity.getDrops().getDropTable();
+
+        if(dropType == null) {
+            Debug.FAILED_TO_FIND_DROP_TABLE_TYPE.debug(tableName);
+            return;
+        }
+
+        if(dropType.equalsIgnoreCase("SPRAY")) {
+
+        } else if(dropType.equalsIgnoreCase("GIVE")) {
+
+        } else if(dropType.equalsIgnoreCase("DROP")) {
+
+        } else {
+            Debug.FAILED_TO_FIND_DROP_TABLE_TYPE.debug(tableName);
+            return;
+        }
     }
 
 }

@@ -18,14 +18,14 @@ import java.util.Map;
  * @version 1.0.0
  * @since 03-Jun-18
  */
-public class BossItemFileManager implements ILoadable, ISavable, IReloadable {
+public class ItemsFileManager implements ILoadable, ISavable, IReloadable {
 
     @Getter private final ItemStackConverter itemStackConverter = new ItemStackConverter();
 
     private Map<String, ItemStackHolder> itemStackHolders = new HashMap<>();
     private ItemStackFileHandler itemStackFileHandler;
 
-    public BossItemFileManager(JavaPlugin javaPlugin) {
+    public ItemsFileManager(JavaPlugin javaPlugin) {
         File file = new File(javaPlugin.getDataFolder(), "items.json");
 
         this.itemStackFileHandler = new ItemStackFileHandler(javaPlugin, file, true);

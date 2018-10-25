@@ -16,12 +16,12 @@ import java.util.Map;
  * @version 1.0.0
  * @since 17-Oct-18
  */
-public class BossMessagesFileManager implements ILoadable, ISavable, IReloadable {
+public class MessagesFileManager implements ILoadable, ISavable, IReloadable {
 
     private Map<String, List<String>> messagesMap = new HashMap<>();
     private MessagesFileHandler messagesFileHandler;
 
-    public BossMessagesFileManager(CustomBosses customBosses) {
+    public MessagesFileManager(CustomBosses customBosses) {
         File file = new File(customBosses.getDataFolder(), "messages.json");
 
         this.messagesFileHandler = new MessagesFileHandler(customBosses, true, file);

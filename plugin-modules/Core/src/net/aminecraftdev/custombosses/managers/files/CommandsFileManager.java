@@ -16,12 +16,12 @@ import java.util.Map;
  * @version 1.0.0
  * @since 17-Oct-18
  */
-public class BossCommandFileManager implements ILoadable, ISavable, IReloadable {
+public class CommandsFileManager implements ILoadable, ISavable, IReloadable {
 
     private Map<String, List<String>> commandsMap = new HashMap<>();
     private CommandsFileHandler commandsFileHandler;
 
-    public BossCommandFileManager(CustomBosses customBosses) {
+    public CommandsFileManager(CustomBosses customBosses) {
         File file = new File(customBosses.getDataFolder(), "commands.json");
 
         this.commandsFileHandler = new CommandsFileHandler(customBosses, true, file);

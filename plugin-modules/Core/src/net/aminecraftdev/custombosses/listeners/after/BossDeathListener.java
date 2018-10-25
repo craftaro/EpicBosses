@@ -1,11 +1,14 @@
 package net.aminecraftdev.custombosses.listeners.after;
 
 import net.aminecraftdev.custombosses.CustomBosses;
+import net.aminecraftdev.custombosses.droptable.DropTable;
 import net.aminecraftdev.custombosses.entity.BossEntity;
 import net.aminecraftdev.custombosses.events.BossDeathEvent;
 import net.aminecraftdev.custombosses.events.PreBossDeathEvent;
 import net.aminecraftdev.custombosses.holder.ActiveBossHolder;
+import net.aminecraftdev.custombosses.holder.DeadBossHolder;
 import net.aminecraftdev.custombosses.managers.BossEntityManager;
+import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.NumberUtils;
 import net.aminecraftdev.custombosses.utils.ServerUtils;
 import org.bukkit.Bukkit;
@@ -65,6 +68,7 @@ public class BossDeathListener implements Listener {
         BossEntity bossEntity = activeBossHolder.getBossEntity();
         Location location = event.getLocation();
 
+        Map<UUID, Double> mapOfDamage = this.bossEntityManager.getSortedMapOfDamage(activeBossHolder);
         List<String> commands = this.bossEntityManager.getOnDeathCommands(bossEntity);
         List<String> messages = this.bossEntityManager.getOnDeathMessage(bossEntity);
         int messageRadius = this.bossEntityManager.getOnDeathMessageRadius(bossEntity);
@@ -79,7 +83,6 @@ public class BossDeathListener implements Listener {
 
             if(messages != null) {
                 if(positionsMessage != null) {
-                    Map<UUID, Double> mapOfDamage = this.bossEntityManager.getSortedMapOfDamage(activeBossHolder);
                     List<String> finalPositionsMessage = new ArrayList<>();
                     int current = 1;
 
@@ -132,10 +135,16 @@ public class BossDeathListener implements Listener {
             }
         });
 
-        //TODO: Handle DropTable
-
+        DeadBossHolder deadBossHolder = new DeadBossHolder(bossEntity, location, mapOfDamage);
         BossDeathEvent bossDeathEvent = new BossDeathEvent(activeBossHolder);
+        DropTable dropTable = this.bossEntityManager.getDropTable(bossEntity);
 
+        if(dropTable == null) {
+            Debug.FAILED_TO_FIND_DROP_TABLE.debug(activeBossHolder.getName(), bossEntity.getDrops().getDropTable());
+            return;
+        }
+
+        this.bossEntityManager.handleDropTable(dropTable, deadBossHolder);
         ServerUtils.get().callEvent(bossDeathEvent);
     }
 

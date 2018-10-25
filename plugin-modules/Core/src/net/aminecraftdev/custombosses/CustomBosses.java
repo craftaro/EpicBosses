@@ -4,20 +4,15 @@ import lombok.Getter;
 import net.aminecraftdev.custombosses.api.BossAPI;
 import net.aminecraftdev.custombosses.commands.BossCmd;
 import net.aminecraftdev.custombosses.container.BossEntityContainer;
-import net.aminecraftdev.custombosses.file.BossesFileHandler;
 import net.aminecraftdev.custombosses.file.ConfigFileHandler;
 import net.aminecraftdev.custombosses.file.EditorFileHandler;
 import net.aminecraftdev.custombosses.file.LangFileHandler;
 import net.aminecraftdev.custombosses.managers.*;
-import net.aminecraftdev.custombosses.managers.files.BossCommandFileManager;
-import net.aminecraftdev.custombosses.managers.files.BossItemFileManager;
-import net.aminecraftdev.custombosses.managers.files.BossMessagesFileManager;
-import net.aminecraftdev.custombosses.managers.files.BossesFileManager;
+import net.aminecraftdev.custombosses.managers.files.*;
 import net.aminecraftdev.custombosses.utils.Debug;
 import net.aminecraftdev.custombosses.utils.IReloadable;
 import net.aminecraftdev.custombosses.utils.Message;
 import net.aminecraftdev.custombosses.utils.ServerUtils;
-import net.aminecraftdev.custombosses.utils.command.SubCommandService;
 import net.aminecraftdev.custombosses.utils.file.YmlFileHandler;
 import net.aminecraftdev.custombosses.utils.version.VersionHandler;
 import org.bstats.bukkit.Metrics;
@@ -33,10 +28,11 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class CustomBosses extends JavaPlugin implements IReloadable {
 
-    @Getter private BossMessagesFileManager bossMessagesFileManager;
-    @Getter private BossCommandFileManager bossCommandFileManager;
-    @Getter private BossItemFileManager itemStackManager;
+    @Getter private MessagesFileManager bossMessagesFileManager;
+    @Getter private CommandsFileManager bossCommandFileManager;
+    @Getter private DropTableFileManager dropTableFileManager;
     @Getter private BossesFileManager bossesFileManager;
+    @Getter private ItemsFileManager itemStackManager;
 
     @Getter private BossEntityContainer bossEntityContainer;
     @Getter private BossMechanicManager bossMechanicManager;
@@ -83,6 +79,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.bossesFileManager.reload();
         this.bossCommandFileManager.reload();
         this.bossMessagesFileManager.reload();
+        this.dropTableFileManager.reload();
 
         this.bossCommandManager = new BossCommandManager(new BossCmd(), this);
         this.bossListenerManager = new BossListenerManager(this);
@@ -108,6 +105,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.bossCommandFileManager.reload();
         this.bossesFileManager.reload();
         this.itemStackManager.reload();
+        this.dropTableFileManager.reload();
 
         this.bossMechanicManager.load();
 
@@ -122,10 +120,11 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     }
 
     private void loadFileManagersAndHandlers() {
-        this.itemStackManager = new BossItemFileManager(this);
+        this.itemStackManager = new ItemsFileManager(this);
         this.bossesFileManager = new BossesFileManager(this);
-        this.bossCommandFileManager = new BossCommandFileManager(this);
-        this.bossMessagesFileManager = new BossMessagesFileManager(this);
+        this.bossCommandFileManager = new CommandsFileManager(this);
+        this.bossMessagesFileManager = new MessagesFileManager(this);
+        this.dropTableFileManager = new DropTableFileManager(this);
 
         this.langFileHandler = new LangFileHandler(this);
         this.editorFileHandler = new EditorFileHandler(this);
