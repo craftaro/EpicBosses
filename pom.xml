@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>net.aminecraftdev.custombosses</groupId>
-    <artifactId>CustomBosses</artifactId>
+    <groupId>com.songoda.epicbosses</groupId>
+    <artifactId>EpicBosses</artifactId>
     <packaging>pom</packaging>
-    <version>3.0.0.0</version>
+    <version>1.0.0</version>
 
     <modules>
         <module>api-modules/FactionsM</module>
@@ -19,8 +19,8 @@
     </modules>
 
     <properties>
-        <plugin.version>3.0.0-SNAPSHOT-U33</plugin.version>
-        <plugin.name>CustomBosses</plugin.name>
+        <plugin.version>1.0.0-SNAPSHOT-U34</plugin.version>
+        <plugin.name>EpicBosses</plugin.name>
         <plugin.main>com.songoda.epicbosses.CustomBosses</plugin.main>
         <plugin.author>AMinecraftDev</plugin.author>
     </properties>

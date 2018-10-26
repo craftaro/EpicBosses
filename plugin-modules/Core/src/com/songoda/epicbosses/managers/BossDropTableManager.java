@@ -2,16 +2,22 @@ package com.songoda.epicbosses.managers;
 
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
+import com.songoda.epicbosses.droptable.elements.GiveTableElement;
+import com.songoda.epicbosses.droptable.elements.GiveTableSubElement;
 import com.songoda.epicbosses.droptable.elements.SprayTableElement;
+import com.songoda.epicbosses.holder.DeadBossHolder;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.utils.Debug;
+import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.RandomUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author Charles Cullen
@@ -21,9 +27,11 @@ import java.util.Map;
 public class BossDropTableManager {
 
     private ItemsFileManager itemsFileManager;
+    private BossEntityManager bossEntityManager;
 
     public BossDropTableManager(CustomBosses plugin) {
         this.itemsFileManager = plugin.getItemStackManager();
+        this.bossEntityManager = plugin.getBossEntityManager();
     }
 
     public List<ItemStack> getSprayItems(SprayTableElement sprayTableElement) {
@@ -64,6 +72,36 @@ public class BossDropTableManager {
         }
 
         return customDrops;
+    }
+
+    public void handleGiveTable(GiveTableElement giveTableElement, DeadBossHolder deadBossHolder) {
+        Map<String, Map<String, GiveTableSubElement>> rewards = giveTableElement.getGiveRewards();
+        Map<UUID, Double> mapOfDamage = deadBossHolder.getSortedDamageMap();
+        List<UUID> positions = new ArrayList<>(mapOfDamage.keySet());
+
+        rewards.forEach((positionString, lootMap) -> {
+            if(!NumberUtils.get().isInt(positionString)) {
+                Debug.DROP_TABLE_FAILED_INVALID_NUMBER.debug(positionString);
+                return;
+            }
+
+            int position = NumberUtils.get().getInteger(positionString);
+
+            if(positions.size() < position) return;
+
+            UUID uuid = positions.get(position);
+            double percentage = this.bossEntityManager.getPercentage(activeBossHolder, entry.getKey());
+
+            lootMap.forEach((key, subElement) -> {
+                Double requiredPercentage = subElement.getRequiredPercentage();
+                Boolean randomDrops = subElement.getRandomDrops();
+
+                if(requiredPercentage == null) requiredPercentage = 0.0D;
+                if(randomDrops == null) randomDrops = false;
+
+
+            });
+        });
     }
 
 }

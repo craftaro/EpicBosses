@@ -14,14 +14,15 @@ import java.util.UUID;
  */
 public class DeadBossHolder {
 
-    @Getter private final Map<UUID, Double> sortedDamageMap;
+    @Getter private final Map<UUID, Double> sortedDamageMap, percentageMap;
     @Getter private final BossEntity bossEntity;
     @Getter private final Location location;
 
-    public DeadBossHolder(BossEntity bossEntity, Location deathLocation, Map<UUID, Double> sortedDamageMap) {
+    public DeadBossHolder(BossEntity bossEntity, Location deathLocation, Map<UUID, Double> sortedDamageMap, Map<UUID, Double> percentageMap) {
         this.location = deathLocation;
         this.bossEntity = bossEntity;
         this.sortedDamageMap = sortedDamageMap;
+        this.percentageMap = percentageMap;
     }
 
 }

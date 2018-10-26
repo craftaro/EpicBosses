@@ -16,5 +16,6 @@ public class GiveTableSubElement {
     @Expose @Getter @Setter private Map<String, Double> items;
     @Expose @Getter @Setter private Integer maxDrops;
     @Expose @Getter @Setter private Boolean randomDrops;
+    @Expose @Getter @Setter private Double requiredPercentage;
 
 }

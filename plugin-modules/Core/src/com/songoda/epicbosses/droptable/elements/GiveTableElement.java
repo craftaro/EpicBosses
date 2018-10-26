@@ -15,6 +15,6 @@ import java.util.Map;
  */
 public class GiveTableElement extends RewardsTableElement {
 
-    @Expose @Getter @Setter private Map<String, GiveTableSubElement> giveRewards;
+    @Expose @Getter @Setter private Map<String, Map<String, GiveTableSubElement>> giveRewards;
 
 }

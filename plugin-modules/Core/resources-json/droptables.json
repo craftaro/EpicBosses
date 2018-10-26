@@ -35,16 +35,33 @@
     "rewards": {
       "giveRewards": {
         "1": {
-          "items": {
-            "SKHelmet": 10.0,
-            "SKChestplate": 25.0,
-            "SKLeggings": 25.0,
-            "SKBoots": 25.0,
-            "SKMainHand": 10.0,
-            "SKOffHand": 10.0
+          "1": {
+            "items": {
+              "SKHelmet": 10.0,
+              "SKChestplate": 25.0,
+              "SKLeggings": 25.0,
+              "SKBoots": 25.0,
+              "SKMainHand": 10.0,
+              "SKOffHand": 10.0
+            },
+            "maxDrops": -1,
+            "randomDrops": false,
+            "requiredPercentage": 80.0
           },
-          "maxDrops": -1,
-          "randomDrops": false
+          "2": {
+            "items": {
+              "SKCustomDrop1": 50.0,
+              "SKCustomDrop2": 50.0
+            },
+            "requiredPercentage": 50.0
+          },
+          "3": {
+            "items": {
+              "SKCustomDrop1": 100.0,
+              "SKCustomDrop2": 100.0
+            },
+            "requiredPercentage": 0.0
+          }
         },
         "2": {
           "items": {

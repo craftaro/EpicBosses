@@ -4,5 +4,14 @@
   ],
   "SKOnDeath": [
     "broadcast this is the default command when the Skeleton King is defeated!"
+  ],
+  "SKEco500": [
+    "eco give %player% 500"
+  ],
+  "SKEco2500": [
+    "eco give %player% 2500"
+  ],
+  "SKEco5000": [
+    "eco give %player% 5000"
   ]
 }

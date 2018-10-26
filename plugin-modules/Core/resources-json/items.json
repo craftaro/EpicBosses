@@ -29,5 +29,19 @@
   },
   "SKOffHand": {
     "type": "SHIELD"
+  },
+  "SKCustomDrop1": {
+    "type": "STONE",
+    "name": "&5Skeleton King Stone",
+    "lore": [
+      "&7This stone will bring you",
+      "&7great luck in battle."
+    ]
+  },
+  "SKCustomDrop2": {
+    "type": "COMMAND",
+    "command": [
+      "SKEco500"
+    ]
   }
 }

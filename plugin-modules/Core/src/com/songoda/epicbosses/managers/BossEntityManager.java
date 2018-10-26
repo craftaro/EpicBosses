@@ -214,6 +214,20 @@ public class BossEntityManager {
         return playerDamage / onePercent;
     }
 
+    public double getPercentage(DeadBossHolder deadBossHolder, UUID uuid) {
+        Map<UUID, Double> damagingUsers = deadBossHolder.getSortedDamageMap();
+        double totalDamage = 0.0;
+
+        for(Double damage : damagingUsers.values()) {
+            if(damage != null) totalDamage += damage;
+        }
+
+        double playerDamage = damagingUsers.get(uuid);
+        double onePercent = totalDamage / 100;
+
+        return playerDamage / onePercent;
+    }
+
     public DropTable getDropTable(BossEntity bossEntity) {
         return this.dropTableFileManager.getDropTable(bossEntity.getDrops().getDropTable());
     }

@@ -28,15 +28,15 @@ public class ServerUtils {
     }
 
     public void logError(String log) {
-        log("&c[CustomBosses] Error - &7" + log);
+        log("&c[EpicBosses] Error - &7" + log);
     }
 
     public void logWarn(String log) {
-        log("&e[CustomBosses] Warn - &7" + log);
+        log("&e[EpicBosses] Warn - &7" + log);
     }
 
     public void logDebug(String log) {
-        log("&d[CustomBosses] Debug - &7" + log);
+        log("&d[EpicBosses] Debug - &7" + log);
     }
 
     public BukkitTask runTask(Runnable runnable) {

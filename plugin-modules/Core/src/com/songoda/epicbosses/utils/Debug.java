@@ -32,6 +32,8 @@ public enum Debug {
     FAILED_TO_LOAD_COMMANDS("The commands name that is provided ({0}) doesn't exist or wasn't found."),
     FAILED_TO_CREATE_ACTIVE_BOSS_HOLDER("Something went wrong while trying to create an active boss holder for someone who is trying to spawn a boss."),
 
+    DROP_TABLE_FAILED_INVALID_NUMBER("The specified position ({0}) on the drop table is not a valid number."),
+
     MECHANIC_TYPE_NOT_STORED("This mechanic type is not stored, therefore will not be applied. Valid mechanic types are IOptionalMechanic and IPrimaryMechanic.");
 
     private static CustomBosses PLUGIN;
