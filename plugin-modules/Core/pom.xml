@@ -65,7 +65,11 @@
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
-                            <shadedPattern>net.aminecraftdev.custombosses.utils.bstats</shadedPattern>
+                            <shadedPattern>com.songoda.epicbosses.utils.bstats</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>utils.factions</pattern>
+                            <shadedPattern>com.songoda.epicbosses.utils.factions</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>

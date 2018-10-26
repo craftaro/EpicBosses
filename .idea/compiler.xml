@@ -2,7 +2,6 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -15,15 +14,5 @@
         <module name="LegacyFactions" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Core" target="1.8" />
-      <module name="custombosses" target="1.8" />
-      <module name="FactionHelper" target="1.8" />
-      <module name="FactionsM" target="1.8" />
-      <module name="FactionsOne" target="1.8" />
-      <module name="FactionsUUID" target="1.8" />
-      <module name="LegacyFactions" target="1.8" />
-      <module name="PluginAPI" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

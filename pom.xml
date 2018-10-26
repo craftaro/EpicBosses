@@ -19,9 +19,9 @@
     </modules>
 
     <properties>
-        <plugin.version>3.0.0-SNAPSHOT-U32</plugin.version>
+        <plugin.version>3.0.0-SNAPSHOT-U33</plugin.version>
         <plugin.name>CustomBosses</plugin.name>
-        <plugin.main>net.aminecraftdev.custombosses.CustomBosses</plugin.main>
+        <plugin.main>com.songoda.epicbosses.CustomBosses</plugin.main>
         <plugin.author>AMinecraftDev</plugin.author>
     </properties>
 
