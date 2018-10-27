@@ -11,6 +11,7 @@
         "SKMainHand": 30.0,
         "SKOffHand": 30.0
       },
+      "randomSprayDrops": true,
       "sprayMaxDistance": 10,
       "sprayMaxDrops": 5
     }
@@ -27,6 +28,7 @@
         "SKMainHand": 30.0,
         "SKOffHand": 30.0
       },
+      "randomDrops": true,
       "dropMaxDrops": 4
     }
   },
@@ -44,8 +46,15 @@
               "SKMainHand": 10.0,
               "SKOffHand": 10.0
             },
-            "maxDrops": -1,
-            "randomDrops": false,
+            "commands": {
+              "SKEco500": 30.0,
+              "SKEco2500": 50.0,
+              "SKEco5000": 10.0
+            },
+            "maxDrops": 3,
+            "maxCommands": 1,
+            "randomDrops": true,
+            "randomCommands": true,
             "requiredPercentage": 80.0
           },
           "2": {

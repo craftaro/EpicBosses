@@ -37,11 +37,5 @@
       "&7This stone will bring you",
       "&7great luck in battle."
     ]
-  },
-  "SKCustomDrop2": {
-    "type": "COMMAND",
-    "command": [
-      "SKEco500"
-    ]
   }
 }

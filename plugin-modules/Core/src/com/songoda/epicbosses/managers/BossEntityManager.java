@@ -3,6 +3,9 @@ package com.songoda.epicbosses.managers;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
+import com.songoda.epicbosses.droptable.elements.DropTableElement;
+import com.songoda.epicbosses.droptable.elements.GiveTableElement;
+import com.songoda.epicbosses.droptable.elements.SprayTableElement;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.holder.DeadBossHolder;
@@ -28,12 +31,14 @@ public class BossEntityManager {
     private static final List<ActiveBossHolder> ACTIVE_BOSS_HOLDERS = new ArrayList<>();
 
     private DropTableFileManager dropTableFileManager;
+    private BossDropTableManager bossDropTableManager;
     private BossMechanicManager bossMechanicManager;
     private ItemsFileManager bossItemFileManager;
     private BossesFileManager bossesFileManager;
 
     public BossEntityManager(CustomBosses customBosses) {
         this.dropTableFileManager = customBosses.getDropTableFileManager();
+        this.bossDropTableManager = customBosses.getBossDropTableManager();
         this.bossMechanicManager = customBosses.getBossMechanicManager();
         this.bossItemFileManager = customBosses.getItemStackManager();
         this.bossesFileManager = customBosses.getBossesFileManager();
@@ -200,32 +205,25 @@ public class BossEntityManager {
         return sortedMap;
     }
 
-    public double getPercentage(ActiveBossHolder activeBossHolder, UUID uuid) {
-        Map<UUID, Double> damagingUsers = activeBossHolder.getMapOfDamagingUsers();
+    public Map<UUID, Double> getPercentageMap(Map<UUID, Double> damagingUsers) {
+        Map<UUID, Double> percentageMap = new HashMap<>();
         double totalDamage = 0.0;
 
         for(Double damage : damagingUsers.values()) {
             if(damage != null) totalDamage += damage;
         }
 
-        double playerDamage = damagingUsers.get(uuid);
         double onePercent = totalDamage / 100;
 
-        return playerDamage / onePercent;
-    }
+        damagingUsers.forEach((uuid, damage) -> {
+            if(uuid == null || damage == null) return;
 
-    public double getPercentage(DeadBossHolder deadBossHolder, UUID uuid) {
-        Map<UUID, Double> damagingUsers = deadBossHolder.getSortedDamageMap();
-        double totalDamage = 0.0;
+            double playerPercent = damage / onePercent;
 
-        for(Double damage : damagingUsers.values()) {
-            if(damage != null) totalDamage += damage;
-        }
+            percentageMap.put(uuid, playerPercent);
+        });
 
-        double playerDamage = damagingUsers.get(uuid);
-        double onePercent = totalDamage / 100;
-
-        return playerDamage / onePercent;
+        return percentageMap;
     }
 
     public DropTable getDropTable(BossEntity bossEntity) {
@@ -243,14 +241,21 @@ public class BossEntityManager {
         }
 
         if(dropType.equalsIgnoreCase("SPRAY")) {
+            SprayTableElement sprayTableElement = (SprayTableElement) dropTable.getRewards();
+            List<ItemStack> itemStacks = this.bossDropTableManager.getSprayItems(sprayTableElement);
 
+            //TODO: Spray itemstacks
         } else if(dropType.equalsIgnoreCase("GIVE")) {
+            GiveTableElement giveTableElement = (GiveTableElement) dropTable.getRewards();
 
+            this.bossDropTableManager.handleGiveTable(giveTableElement, deadBossHolder);
         } else if(dropType.equalsIgnoreCase("DROP")) {
+            DropTableElement dropTableElement = (DropTableElement) dropTable.getRewards();
+            List<ItemStack> itemStacks = this.bossDropTableManager.getDropItems(dropTableElement);
 
+            itemStacks.forEach(itemStack -> deadBossHolder.getLocation().getWorld().dropItemNaturally(deadBossHolder.getLocation(), itemStack));
         } else {
             Debug.FAILED_TO_FIND_DROP_TABLE_TYPE.debug(tableName);
-            return;
         }
     }
 

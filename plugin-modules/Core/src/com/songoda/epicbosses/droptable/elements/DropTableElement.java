@@ -15,6 +15,7 @@ import java.util.Map;
 public class DropTableElement extends RewardsTableElement {
 
     @Expose @Getter @Setter private Map<String, Double> dropRewards;
+    @Expose @Getter @Setter private Boolean randomDrops;
     @Expose @Getter @Setter private Integer dropMaxDrops;
 
 }

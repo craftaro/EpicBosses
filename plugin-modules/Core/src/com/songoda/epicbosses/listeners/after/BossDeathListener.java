@@ -66,6 +66,7 @@ public class BossDeathListener implements Listener {
         Location location = event.getLocation();
 
         Map<UUID, Double> mapOfDamage = this.bossEntityManager.getSortedMapOfDamage(activeBossHolder);
+        Map<UUID, Double> mapOfPercent = this.bossEntityManager.getPercentageMap(mapOfDamage);
         List<String> commands = this.bossEntityManager.getOnDeathCommands(bossEntity);
         List<String> messages = this.bossEntityManager.getOnDeathMessage(bossEntity);
         int messageRadius = this.bossEntityManager.getOnDeathMessageRadius(bossEntity);
@@ -87,14 +88,18 @@ public class BossDeathListener implements Listener {
                         if(current > onlyShow) break;
 
                         List<String> clonedPositionsMessage = new ArrayList<>(positionsMessage);
-                        double percentage = this.bossEntityManager.getPercentage(activeBossHolder, entry.getKey());
+                        Double percentage = mapOfPercent.getOrDefault(entry.getKey(), null);
                         int position = current;
 
+                        if(percentage == null) percentage = -1.0D;
+
+                        double finalPercentage = percentage;
+
                         clonedPositionsMessage.replaceAll(s -> s
-                                .replace("{pos}", ""+position)
+                                .replace("{pos}", "" + position)
                                 .replace("{name}", Bukkit.getOfflinePlayer(entry.getKey()).getName())
                                 .replace("{dmg}", NumberUtils.get().formatDouble(entry.getValue()))
-                                .replace("{percent}", NumberUtils.get().formatDouble(percentage))
+                                .replace("{percent}", NumberUtils.get().formatDouble(finalPercentage))
                                 .replace('&', '§'));
 
                         finalPositionsMessage.addAll(clonedPositionsMessage);
@@ -132,7 +137,7 @@ public class BossDeathListener implements Listener {
             }
         });
 
-        DeadBossHolder deadBossHolder = new DeadBossHolder(bossEntity, location, mapOfDamage);
+        DeadBossHolder deadBossHolder = new DeadBossHolder(bossEntity, location, mapOfDamage, mapOfPercent);
         BossDeathEvent bossDeathEvent = new BossDeathEvent(activeBossHolder);
         DropTable dropTable = this.bossEntityManager.getDropTable(bossEntity);
 

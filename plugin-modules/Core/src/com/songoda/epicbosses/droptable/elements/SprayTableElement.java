@@ -14,6 +14,7 @@ import java.util.Map;
 public class SprayTableElement extends RewardsTableElement {
 
     @Expose @Getter @Setter private Map<String, Double> sprayRewards;
+    @Expose @Getter @Setter private Boolean randomSprayDrops;
     @Expose @Getter @Setter private Integer sprayMaxDistance, sprayMaxDrops;
 
 }

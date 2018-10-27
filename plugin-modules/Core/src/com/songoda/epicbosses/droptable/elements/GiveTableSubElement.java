@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public class GiveTableSubElement {
 
-    @Expose @Getter @Setter private Map<String, Double> items;
-    @Expose @Getter @Setter private Integer maxDrops;
-    @Expose @Getter @Setter private Boolean randomDrops;
+    @Expose @Getter @Setter private Map<String, Double> items, commands;
+    @Expose @Getter @Setter private Integer maxDrops, maxCommands;
+    @Expose @Getter @Setter private Boolean randomDrops, randomCommands;
     @Expose @Getter @Setter private Double requiredPercentage;
 
 }
