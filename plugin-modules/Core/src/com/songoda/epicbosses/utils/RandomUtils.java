@@ -13,8 +13,18 @@ public class RandomUtils {
 
     private Random random = new Random();
 
+    public boolean preformRandomAction() {
+        int rand = getRandomNumber(2);
+
+        return rand <= 0;
+    }
+
     public int getRandomNumber() {
         return this.random.nextInt(100);
+    }
+
+    public int getRandomNumber(int maximum) {
+        return this.random.nextInt(maximum);
     }
 
     public double getRandomDecimalNumber() {

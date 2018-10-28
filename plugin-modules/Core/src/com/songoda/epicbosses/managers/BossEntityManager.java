@@ -13,10 +13,13 @@ import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.DropTableFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.utils.Debug;
+import com.songoda.epicbosses.utils.RandomUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import org.bukkit.Location;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -244,7 +247,7 @@ public class BossEntityManager {
             SprayTableElement sprayTableElement = (SprayTableElement) dropTable.getRewards();
             List<ItemStack> itemStacks = this.bossDropTableManager.getSprayItems(sprayTableElement);
 
-            //TODO: Spray itemstacks
+            sprayDrops(sprayTableElement, itemStacks, deadBossHolder);
         } else if(dropType.equalsIgnoreCase("GIVE")) {
             GiveTableElement giveTableElement = (GiveTableElement) dropTable.getRewards();
 
@@ -257,6 +260,35 @@ public class BossEntityManager {
         } else {
             Debug.FAILED_TO_FIND_DROP_TABLE_TYPE.debug(tableName);
         }
+    }
+
+    private void sprayDrops(SprayTableElement sprayTableElement, List<ItemStack> rewards, DeadBossHolder deadBossHolder) {
+        Integer maximumDistance = sprayTableElement.getSprayMaxDistance();
+
+        if(maximumDistance == null) maximumDistance = 10;
+
+        Location deathLocation = deadBossHolder.getLocation();
+        Integer finalMaximumDistance = maximumDistance;
+
+        rewards.forEach(itemStack -> {
+            Location destinationLocation = deathLocation.clone();
+            int x = RandomUtils.get().getRandomNumber(finalMaximumDistance + 1);
+            int currentX = destinationLocation.getBlockX();
+            int z = RandomUtils.get().getRandomNumber(finalMaximumDistance + 1);
+            int currentZ = destinationLocation.getBlockZ();
+
+            if(RandomUtils.get().preformRandomAction()) x = -x;
+            if(RandomUtils.get().preformRandomAction()) z = -z;
+
+            destinationLocation.setX(currentX + x);
+            destinationLocation.setZ(currentZ + z);
+
+            Item item = deathLocation.getWorld().dropItemNaturally(deathLocation, itemStack);
+            Vector vector = deathLocation.toVector().subtract(destinationLocation.toVector()).normalize();
+
+            item.setPickupDelay(20);
+            item.setVelocity(vector);
+        });
     }
 
 }
