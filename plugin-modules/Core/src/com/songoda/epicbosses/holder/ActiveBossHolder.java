@@ -1,6 +1,8 @@
 package com.songoda.epicbosses.holder;
 
 import lombok.Getter;
+import lombok.Setter;
+import com.songoda.epicbosses.targetting.TargetHandler;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.exception.AlreadySetException;
 import org.bukkit.Location;
@@ -24,6 +26,9 @@ public class ActiveBossHolder {
     @Getter private Map<Integer, LivingEntity> livingEntityMap = new HashMap<>();
     @Getter private Map<UUID, Double> mapOfDamagingUsers = new HashMap<>();
 
+    @Getter @Setter private TargetHandler targetHandler = null;
+    @Getter @Setter private boolean isDead = false;
+
     public ActiveBossHolder(BossEntity bossEntity, Location spawnLocation, String name) {
         this.location = spawnLocation;
         this.bossEntity = bossEntity;
@@ -36,5 +41,9 @@ public class ActiveBossHolder {
         } else {
             this.livingEntityMap.put(position, livingEntity);
         }
+    }
+
+    public boolean hasAttacked(UUID uuid) {
+        return this.mapOfDamagingUsers.containsKey(uuid);
     }
 }

@@ -21,8 +21,8 @@ public class BossEntity {
     @Expose @Getter private final SkillsElement skills;
     @Expose @Getter private final DropsElement drops;
 
-    @Expose @Getter @Setter private String spawnItem;
     @Expose @Getter @Setter private boolean editing;
+    @Expose @Getter @Setter private String spawnItem, targeting;
 
     public BossEntity(boolean editing, String spawnItem, List<EntityStatsElement> entityStats, SkillsElement skills, DropsElement drops, MessagesElement messages, CommandsElement commands) {
         this.editing = editing;

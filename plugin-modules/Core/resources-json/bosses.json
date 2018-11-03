@@ -2,6 +2,7 @@
   "SkeletonKing": {
     "editing": true,
     "spawnItem": "SKSpawnItem",
+    "targeting": "RandomNearby",
     "entityStats": [
       {
         "mainStats": {

@@ -9,6 +9,7 @@ import com.songoda.epicbosses.events.PreBossSpawnEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.BossLocationManager;
+import com.songoda.epicbosses.managers.BossTargetManager;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.ServerUtils;
@@ -38,12 +39,14 @@ import java.util.Map;
 public class BossSpawnListener implements Listener {
 
     private BossLocationManager bossLocationManager;
+    private BossTargetManager bossTargetManager;
     private BossEntityManager bossEntityManager;
     private VersionHandler versionHandler;
 
     public BossSpawnListener(CustomBosses customBosses) {
         this.versionHandler = customBosses.getVersionHandler();
         this.bossEntityManager = customBosses.getBossEntityManager();
+        this.bossTargetManager = customBosses.getBossTargetManager();
         this.bossLocationManager = customBosses.getBossLocationManager();
     }
 
@@ -99,10 +102,9 @@ public class BossSpawnListener implements Listener {
             return;
         }
 
-        //TODO: Set TargetHandler to the boss
-
         PreBossSpawnEvent preBossSpawnEvent = new PreBossSpawnEvent(activeBossHolder, player, itemStack);
 
+        this.bossTargetManager.initializeTargetHandler(activeBossHolder);
         ServerUtils.get().callEvent(preBossSpawnEvent);
     }
 
@@ -136,14 +138,14 @@ public class BossSpawnListener implements Listener {
                 Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
                     if(onlinePlayer.getWorld().getName().equals(location.getWorld().getName())) {
                         if(onlinePlayer.getLocation().distanceSquared(location) <= messagesRadius) {
-                            messages.forEach(s -> onlinePlayer.sendMessage(s));
+                            messages.forEach(onlinePlayer::sendMessage);
                         }
                     }
                 });
             }
         }
 
-        //TODO: Create AutoTarget for TargetHandler
+        activeBossHolder.getTargetHandler().runTargetCycle();
         //TODO: Handle Taunts
 
         BossSpawnEvent bossSpawnEvent = new BossSpawnEvent(activeBossHolder);

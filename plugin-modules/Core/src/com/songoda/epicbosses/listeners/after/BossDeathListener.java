@@ -55,6 +55,7 @@ public class BossDeathListener implements Listener {
         if(this.bossEntityManager.isAllEntitiesDead(activeBossHolder)) {
             PreBossDeathEvent preBossDeathEvent = new PreBossDeathEvent(activeBossHolder, location);
 
+            activeBossHolder.setDead(true);
             ServerUtils.get().callEvent(preBossDeathEvent);
         }
     }
@@ -129,7 +130,7 @@ public class BossDeathListener implements Listener {
                     Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
                         if(onlinePlayer.getWorld().getName().equals(location.getWorld().getName())) {
                             if(onlinePlayer.getLocation().distanceSquared(location) <= messageRadius) {
-                                finalMessage.forEach(s -> onlinePlayer.sendMessage(s));
+                                finalMessage.forEach(onlinePlayer::sendMessage);
                             }
                         }
                     });
