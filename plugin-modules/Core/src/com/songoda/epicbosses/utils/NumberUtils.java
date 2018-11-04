@@ -27,6 +27,10 @@ public class NumberUtils {
         return Integer.valueOf(input);
     }
 
+    public int getSquared(int original) {
+        return original * original;
+    }
+
     public boolean isDouble(String string) {
         try {
             Double.valueOf(string);

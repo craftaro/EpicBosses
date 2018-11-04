@@ -1,6 +1,5 @@
 package com.songoda.epicbosses;
 
-import com.songoda.epicbosses.targetting.TargetHandler;
 import lombok.Getter;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.commands.BossCmd;
@@ -44,6 +43,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     @Getter private BossEntityManager bossEntityManager;
     @Getter private BossTargetManager bossTargetManager;
     @Getter private BossPanelManager bossPanelManager;
+    @Getter private BossTauntManager bossTauntManager;
     @Getter private BossHookManager bossHookManager;
     @Getter private VersionHandler versionHandler;
     @Getter private DebugManager debugManager;
@@ -64,6 +64,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
 
         this.debugManager = new DebugManager();
         this.versionHandler = new VersionHandler();
+        this.bossTauntManager = new BossTauntManager(this);
         this.bossTargetManager = new BossTargetManager(this);
         this.bossEntityContainer = new BossEntityContainer();
         this.bossMechanicManager = new BossMechanicManager(this);

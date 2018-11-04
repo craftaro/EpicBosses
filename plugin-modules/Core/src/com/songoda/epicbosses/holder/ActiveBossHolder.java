@@ -2,7 +2,7 @@ package com.songoda.epicbosses.holder;
 
 import lombok.Getter;
 import lombok.Setter;
-import com.songoda.epicbosses.targetting.TargetHandler;
+import com.songoda.epicbosses.targeting.TargetHandler;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.exception.AlreadySetException;
 import org.bukkit.Location;

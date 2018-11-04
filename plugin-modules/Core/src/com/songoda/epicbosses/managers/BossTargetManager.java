@@ -3,11 +3,11 @@ package com.songoda.epicbosses.managers;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
-import com.songoda.epicbosses.targetting.TargetHandler;
-import com.songoda.epicbosses.targetting.types.ClosestTargetHandler;
-import com.songoda.epicbosses.targetting.types.NotDamagedNearbyTargetHandler;
-import com.songoda.epicbosses.targetting.types.RandomNearbyTargetHandler;
-import com.songoda.epicbosses.targetting.types.TopDamagerTargetHandler;
+import com.songoda.epicbosses.targeting.TargetHandler;
+import com.songoda.epicbosses.targeting.types.ClosestTargetHandler;
+import com.songoda.epicbosses.targeting.types.NotDamagedNearbyTargetHandler;
+import com.songoda.epicbosses.targeting.types.RandomNearbyTargetHandler;
+import com.songoda.epicbosses.targeting.types.TopDamagerTargetHandler;
 import lombok.Getter;
 
 /**

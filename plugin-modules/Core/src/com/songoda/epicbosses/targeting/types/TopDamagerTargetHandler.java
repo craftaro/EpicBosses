@@ -1,8 +1,8 @@
-package com.songoda.epicbosses.targetting.types;
+package com.songoda.epicbosses.targeting.types;
 
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossTargetManager;
-import com.songoda.epicbosses.targetting.TargetHandler;
+import com.songoda.epicbosses.targeting.TargetHandler;
 import com.songoda.epicbosses.utils.MapUtils;
 import org.bukkit.entity.LivingEntity;
 

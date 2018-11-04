@@ -1,6 +1,5 @@
-package com.songoda.epicbosses.targetting;
+package com.songoda.epicbosses.targeting;
 
-import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossTargetManager;
 import com.songoda.epicbosses.utils.ServerUtils;

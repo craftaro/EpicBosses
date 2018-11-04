@@ -9,6 +9,7 @@ import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.holder.DeadBossHolder;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.utils.Debug;
+import com.songoda.epicbosses.utils.MessageUtils;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import org.bukkit.Bukkit;
@@ -124,17 +125,7 @@ public class BossDeathListener implements Listener {
                     }
                 }
 
-                if(messageRadius == -1) {
-                    finalMessage.forEach(Bukkit::broadcastMessage);
-                } else {
-                    Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
-                        if(onlinePlayer.getWorld().getName().equals(location.getWorld().getName())) {
-                            if(onlinePlayer.getLocation().distanceSquared(location) <= messageRadius) {
-                                finalMessage.forEach(onlinePlayer::sendMessage);
-                            }
-                        }
-                    });
-                }
+                MessageUtils.get().sendMessage(location, NumberUtils.get().getSquared(messageRadius), finalMessage);
             }
         });
 

@@ -10,10 +10,8 @@ import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.BossLocationManager;
 import com.songoda.epicbosses.managers.BossTargetManager;
-import com.songoda.epicbosses.utils.Debug;
-import com.songoda.epicbosses.utils.Message;
-import com.songoda.epicbosses.utils.ServerUtils;
-import com.songoda.epicbosses.utils.StringUtils;
+import com.songoda.epicbosses.managers.BossTauntManager;
+import com.songoda.epicbosses.utils.*;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.Bukkit;
@@ -41,10 +39,12 @@ public class BossSpawnListener implements Listener {
     private BossLocationManager bossLocationManager;
     private BossTargetManager bossTargetManager;
     private BossEntityManager bossEntityManager;
+    private BossTauntManager bossTauntManager;
     private VersionHandler versionHandler;
 
     public BossSpawnListener(CustomBosses customBosses) {
         this.versionHandler = customBosses.getVersionHandler();
+        this.bossTauntManager = customBosses.getBossTauntManager();
         this.bossEntityManager = customBosses.getBossEntityManager();
         this.bossTargetManager = customBosses.getBossTargetManager();
         this.bossLocationManager = customBosses.getBossLocationManager();
@@ -122,7 +122,7 @@ public class BossSpawnListener implements Listener {
 
         List<String> commands = this.bossEntityManager.getOnSpawnCommands(bossEntity);
         List<String> messages = this.bossEntityManager.getOnSpawnMessage(bossEntity);
-        int messagesRadius = this.bossEntityManager.getOnSpawnMessageRadius(bossEntity);
+        int messageRadius = this.bossEntityManager.getOnSpawnMessageRadius(bossEntity);
 
         if(commands != null) {
             commands.forEach(command -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command));
@@ -130,23 +130,12 @@ public class BossSpawnListener implements Listener {
         if(messages != null) {
             if(activeBossHolder.getName() != null) messages.replaceAll(s -> s.replace("{boss}", activeBossHolder.getName()));
             messages.replaceAll(s -> s.replace("{location}", StringUtils.get().translateLocation(location)));
-            messages.replaceAll(s -> s.replace('&', '§'));
 
-            if(messagesRadius == -1) {
-                messages.forEach(Bukkit::broadcastMessage);
-            } else {
-                Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
-                    if(onlinePlayer.getWorld().getName().equals(location.getWorld().getName())) {
-                        if(onlinePlayer.getLocation().distanceSquared(location) <= messagesRadius) {
-                            messages.forEach(onlinePlayer::sendMessage);
-                        }
-                    }
-                });
-            }
+            MessageUtils.get().sendMessage(location, NumberUtils.get().getSquared(messageRadius), messages);
         }
 
         activeBossHolder.getTargetHandler().runTargetCycle();
-        //TODO: Handle Taunts
+        this.bossTauntManager.handleTauntSystem(activeBossHolder);
 
         BossSpawnEvent bossSpawnEvent = new BossSpawnEvent(activeBossHolder);
 

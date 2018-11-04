@@ -1,4 +1,4 @@
-package com.songoda.epicbosses.targetting;
+package com.songoda.epicbosses.targeting;
 
 import org.bukkit.entity.LivingEntity;
 
