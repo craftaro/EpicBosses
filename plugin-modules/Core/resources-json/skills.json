@@ -1,3 +1,60 @@
 {
-
+  "Blind1": {
+    "mode": "ALL",
+    "type": "POTION",
+    "radius": 10,
+    "displayName": "Blind",
+    "customMessage": "BlindMessage",
+    "potions": [
+      {
+        "type": "blind",
+        "level": 2,
+        "duration": 10
+      }
+    ]
+  },
+  "Guts1": {
+    "mode": "ALL",
+    "type": "COMMAND",
+    "radius": 10,
+    "displayName": "Guts",
+    "customMessage": "GutsMessage",
+    "commands": [
+      {
+        "chance": 25,
+        "commands": [
+          "Guts1",
+          "Guts2"
+        ]
+      },
+      {
+        "chance": 10,
+        "commands": [
+          "Guts3"
+        ]
+      }
+    ]
+  },
+  "Knockback1": {
+    "mode": "ALL",
+    "type": "CUSTOM",
+    "radius": 10,
+    "displayName": "Knockback",
+    "customMessage": null,
+    "custom": {
+      "type": "KNOCKBACK",
+      "multiplier": 2.5
+    }
+  },
+  "Shazaam1": {
+    "mode": "ALL",
+    "type": "GROUP",
+    "radius": 10,
+    "displayName": "Shazaam",
+    "customMessage": "ShazaamMessage",
+    "groupedSkills": [
+      "Blind1",
+      "Knockback1"
+    ]
+  }
 }

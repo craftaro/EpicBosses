@@ -23,8 +23,6 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author AMinecraftDev
  * @version 1.0.0
  * @since 06-Sep-17
- *
- * TODO: In menu when toggling Edit mode, make sure that it has all needed mechanics
  */
 public class CustomBosses extends JavaPlugin implements IReloadable {
 
