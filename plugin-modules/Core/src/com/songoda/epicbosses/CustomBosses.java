@@ -41,6 +41,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     @Getter private BossEntityManager bossEntityManager;
     @Getter private BossTargetManager bossTargetManager;
     @Getter private BossPanelManager bossPanelManager;
+    @Getter private BossSkillManager bossSkillManager;
     @Getter private BossTauntManager bossTauntManager;
     @Getter private BossHookManager bossHookManager;
     @Getter private VersionHandler versionHandler;
@@ -62,11 +63,12 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
 
         this.debugManager = new DebugManager();
         this.versionHandler = new VersionHandler();
+        this.bossSkillManager = new BossSkillManager();
+        this.bossHookManager = new BossHookManager(this);
         this.bossTauntManager = new BossTauntManager(this);
         this.bossTargetManager = new BossTargetManager(this);
         this.bossEntityContainer = new BossEntityContainer();
         this.bossMechanicManager = new BossMechanicManager(this);
-        this.bossHookManager = new BossHookManager(this);
         this.bossLocationManager = new BossLocationManager(this);
         this.bossDropTableManager = new BossDropTableManager(this);
 

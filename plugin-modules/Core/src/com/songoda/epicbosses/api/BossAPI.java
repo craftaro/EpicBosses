@@ -7,6 +7,7 @@ import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.files.CommandsFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.managers.files.MessagesFileManager;
+import com.songoda.epicbosses.skills.types.CustomSkill;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.EntityFinder;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
@@ -63,6 +64,35 @@ public class BossAPI {
         PLUGIN.getBossEntityContainer().saveData(name, bossEntity);
         PLUGIN.getBossesFileManager().save();
         return true;
+    }
+
+    /**
+     * Used to register skills into the
+     * system so that when a boss uses a
+     * skill it will be recognised with
+     * custom coding. All skills will be
+     * instantly detected once registered
+     * with this method.
+     *
+     * @param customSkill - The custom skill you are registering
+     * @return boolean if the registration succeeded or failed
+     */
+    public static boolean registerCustomSkill(CustomSkill customSkill) {
+        return PLUGIN.getBossSkillManager().registerSkill(customSkill);
+    }
+
+    /**
+     * Used to unregister one of the
+     * custom skills that are in the
+     * system. You do not need to unregister
+     * any external skills onDisable of the
+     * server as it will have no impact on
+     * the way it closes.
+     *
+     * @param customSkill - The custom skill you are trying to remove
+     */
+    public static void removeCustomSkill(CustomSkill customSkill) {
+        PLUGIN.getBossSkillManager().removeSkill(customSkill);
     }
 
     /**

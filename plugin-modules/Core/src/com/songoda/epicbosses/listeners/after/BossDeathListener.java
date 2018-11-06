@@ -73,9 +73,10 @@ public class BossDeathListener implements Listener {
         List<String> messages = this.bossEntityManager.getOnDeathMessage(bossEntity);
         int messageRadius = this.bossEntityManager.getOnDeathMessageRadius(bossEntity);
         int onlyShow = this.bossEntityManager.getOnDeathShowAmount(bossEntity);
+        ServerUtils serverUtils = ServerUtils.get();
 
         if(commands != null) {
-            commands.forEach(command -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command));
+            commands.forEach(serverUtils::sendConsoleCommand);
         }
 
         ServerUtils.get().runTaskAsync(() -> {

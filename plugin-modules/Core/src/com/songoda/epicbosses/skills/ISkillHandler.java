@@ -1,6 +1,9 @@
 package com.songoda.epicbosses.skills;
 
 import com.songoda.epicbosses.holder.ActiveBossHolder;
+import org.bukkit.entity.LivingEntity;
+
+import java.util.List;
 
 /**
  * @author Charles Cullen
@@ -9,6 +12,6 @@ import com.songoda.epicbosses.holder.ActiveBossHolder;
  */
 public interface ISkillHandler {
 
-    void castSkill(ActiveBossHolder activeBossHolder);
+    void castSkill(ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities);
 
 }

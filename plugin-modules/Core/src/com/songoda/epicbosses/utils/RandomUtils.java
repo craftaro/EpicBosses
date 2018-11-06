@@ -35,6 +35,12 @@ public class RandomUtils {
         return amount;
     }
 
+    public boolean canPreformAction(double chanceOfSuccess) {
+        double randomChance = getRandomDecimalNumber();
+
+        return (randomChance <= chanceOfSuccess);
+    }
+
     public static RandomUtils get() {
         return INSTANCE;
     }

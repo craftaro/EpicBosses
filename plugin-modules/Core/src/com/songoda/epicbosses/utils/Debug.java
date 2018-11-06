@@ -35,7 +35,10 @@ public enum Debug {
     DROP_TABLE_FAILED_INVALID_NUMBER("The specified position ({0}) on the drop table is not a valid number."),
     DROP_TABLE_FAILED_TO_GET_ITEM("The drop table failed to get the specific item for the list."),
 
-    MECHANIC_TYPE_NOT_STORED("This mechanic type is not stored, therefore will not be applied. Valid mechanic types are IOptionalMechanic and IPrimaryMechanic.");
+    MECHANIC_TYPE_NOT_STORED("This mechanic type is not stored, therefore will not be applied. Valid mechanic types are IOptionalMechanic and IPrimaryMechanic."),
+
+    SKILL_COMMANDS_ARE_EMPTY("The commands list for the skill {0} is empty."),
+    SKILL_POTIONS_ARE_EMPTY("The potions list for the skill {0} is empty.");
 
     private static CustomBosses PLUGIN;
 

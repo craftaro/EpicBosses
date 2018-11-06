@@ -77,6 +77,10 @@ public class ServerUtils {
         Bukkit.getPluginManager().registerEvents(listener, this.javaPlugin);
     }
 
+    public void sendConsoleCommand(String command) {
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+    }
+
     public static ServerUtils get() {
         return serverUtils;
     }

@@ -123,9 +123,10 @@ public class BossSpawnListener implements Listener {
         List<String> commands = this.bossEntityManager.getOnSpawnCommands(bossEntity);
         List<String> messages = this.bossEntityManager.getOnSpawnMessage(bossEntity);
         int messageRadius = this.bossEntityManager.getOnSpawnMessageRadius(bossEntity);
+        ServerUtils serverUtils = ServerUtils.get();
 
         if(commands != null) {
-            commands.forEach(command -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command));
+            commands.forEach(serverUtils::sendConsoleCommand);
         }
         if(messages != null) {
             if(activeBossHolder.getName() != null) messages.replaceAll(s -> s.replace("{boss}", activeBossHolder.getName()));

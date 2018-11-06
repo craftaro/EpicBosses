@@ -9,7 +9,7 @@ import lombok.Setter;
  * @version 1.0.0
  * @since 05-Nov-18
  */
-public class Skill {
+public abstract class Skill implements ISkillHandler {
 
     @Expose @Getter @Setter private String mode, type, displayName, customMessage;
     @Expose @Getter @Setter private Double radius;

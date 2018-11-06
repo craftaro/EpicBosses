@@ -14,6 +14,7 @@ import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.RandomUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -64,6 +65,7 @@ public class BossDropTableManager {
         Map<UUID, Double> mapOfDamage = deadBossHolder.getSortedDamageMap();
         Map<UUID, Double> percentMap = deadBossHolder.getPercentageMap();
         List<UUID> positions = new ArrayList<>(mapOfDamage.keySet());
+        ServerUtils serverUtils = ServerUtils.get();
 
         rewards.forEach((positionString, lootMap) -> {
             if(!NumberUtils.get().isInt(positionString)) {
@@ -101,8 +103,8 @@ public class BossDropTableManager {
             });
 
             totalCommands.replaceAll(s -> s.replace("%player%", player.getName()));
+            totalCommands.forEach(serverUtils::sendConsoleCommand);
 
-            totalCommands.forEach(s -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), s));
             totalRewards.forEach(itemStack -> {
                 if(player.getInventory().firstEmpty() == -1) {
                     player.getWorld().dropItemNaturally(player.getLocation(), itemStack);
@@ -125,9 +127,8 @@ public class BossDropTableManager {
 
         for(String itemName : keyList) {
             Double chance = chanceMap.get(itemName);
-            double randomNumber = RandomUtils.get().getRandomDecimalNumber();
 
-            if(randomNumber > chance) continue;
+            if(!RandomUtils.get().canPreformAction(chance)) continue;
             if((max > 0) && (newListToMerge.size() >= max)) break;
 
             ItemStack itemStack = this.getDropTableItemStack.getListItem(itemName);
@@ -154,9 +155,8 @@ public class BossDropTableManager {
 
         for(String itemName : keyList) {
             Double chance = chanceMap.get(itemName);
-            double randomNumber = RandomUtils.get().getRandomDecimalNumber();
 
-            if(randomNumber > chance) continue;
+            if(!RandomUtils.get().canPreformAction(chance)) continue;
             if((max > 0) && (newListToMerge.size() >= max)) break;
 
             List<String> commands = this.getDropTableCommand.getListItem(itemName);

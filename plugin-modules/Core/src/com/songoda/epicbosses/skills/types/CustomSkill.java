@@ -11,7 +11,7 @@ import lombok.Setter;
  * @version 1.0.0
  * @since 05-Nov-18
  */
-public class CustomSkill extends Skill {
+public abstract class CustomSkill extends Skill {
 
     @Expose @Getter @Setter private CustomSkillElement custom;
 
