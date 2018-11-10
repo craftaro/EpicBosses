@@ -38,7 +38,8 @@ public enum Debug {
     MECHANIC_TYPE_NOT_STORED("This mechanic type is not stored, therefore will not be applied. Valid mechanic types are IOptionalMechanic and IPrimaryMechanic."),
 
     SKILL_COMMANDS_ARE_EMPTY("The commands list for the skill {0} is empty."),
-    SKILL_POTIONS_ARE_EMPTY("The potions list for the skill {0} is empty.");
+    SKILL_POTIONS_ARE_EMPTY("The potions list for the skill {0} is empty."),
+    SKILL_CAGE_INVALID_MATERIAL("Invalid block type {0} for the skill {1}.");
 
     private static CustomBosses PLUGIN;
 

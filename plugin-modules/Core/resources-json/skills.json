@@ -46,6 +46,21 @@
       "multiplier": 2.5
     }
   },
+  "Cage1": {
+    "mode": "ALL",
+    "type": "CUSTOM",
+    "radius": 10,
+    "displayName": "Cage",
+    "custom": {
+      "type": "CAGE",
+      "multiplier": 0.0
+    },
+    "cage": {
+      "flatType": "IRON_BLOCK",
+      "wallType": "IRON_BARS",
+      "insideType": "WATER"
+    }
+  },
   "Shazaam1": {
     "mode": "ALL",
     "type": "GROUP",
