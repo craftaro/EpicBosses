@@ -35,17 +35,6 @@
       }
     ]
   },
-  "Knockback1": {
-    "mode": "ALL",
-    "type": "CUSTOM",
-    "radius": 10,
-    "displayName": "Knockback",
-    "customMessage": null,
-    "custom": {
-      "type": "KNOCKBACK",
-      "multiplier": 2.5
-    }
-  },
   "Cage1": {
     "mode": "ALL",
     "type": "CUSTOM",
@@ -59,6 +48,111 @@
       "flatType": "IRON_BLOCK",
       "wallType": "IRON_BARS",
       "insideType": "WATER"
+    }
+  },
+  "Disarm1": {
+    "mode": "ONE",
+    "type": "CUSTOM",
+    "radius": 10,
+    "displayName": "Disarm",
+    "customMessage": null,
+    "custom": {
+      "type": "DISARM",
+      "multiplier": null
+    }
+  },
+  "Fireball1": {
+    "mode": "RANDOM",
+    "type": "CUSTOM",
+    "radius": 10,
+    "displayName": "Fireball",
+    "customMessage": null,
+    "custom": {
+      "type": "FIREBALL",
+      "multiplier": 3.0
+    }
+  },
+  "Grapple1": {
+    "mode": "RANDOM",
+    "type": "CUSTOM",
+    "radius": 10,
+    "displayName": "Grapple",
+    "customMessage": null,
+    "custom": {
+      "type": "GRAPPLE",
+      "multiplier": 3.0
+    }
+  },
+  "Insidious1": {
+    "mode": "RANDOM",
+    "type": "CUSTOM",
+    "radius": 10,
+    "displayName": "Insidious",
+    "customMessage": null,
+    "custom": {
+      "type": "INSIDIOUS",
+      "multiplier": 2.5
+    }
+  },
+  "Knockback1": {
+    "mode": "ALL",
+    "type": "CUSTOM",
+    "radius": 10,
+    "displayName": "Knockback",
+    "customMessage": null,
+    "custom": {
+      "type": "KNOCKBACK",
+      "multiplier": 2.5
+    }
+  },
+  "Launch1": {
+    "mode": "ALL",
+    "type": "CUSTOM",
+    "radius": 10,
+    "displayName": "Launch",
+    "customMessage": null,
+    "custom": {
+      "type": "LAUNCH",
+      "multiplier": 3.0
+    }
+  },
+  "Lightning1": {
+    "mode": "ALL",
+    "type": "CUSTOM",
+    "radius": 10,
+    "displayName": "Lightning",
+    "customMessage": null,
+    "custom": {
+      "type": "LIGHTNING",
+      "multiplier": null
+    }
+  },
+  "Minions1": {
+    "mode": "ALL",
+    "type": "CUSTOM",
+    "radius": 10,
+    "displayName": "Minions",
+    "customMessage": null,
+    "custom": {
+      "type": "MINIONS",
+      "multiplier": null
+    },
+    "minions": {
+      "amount": 5,
+      "bosses": [
+        "Minion1"
+      ]
+    }
+  },
+  "Warp1": {
+    "mode": "ONE",
+    "type": "CUSTOM",
+    "radius": 10,
+    "displayName": "Warp",
+    "customMessage": null,
+    "custom": {
+      "type": "WARP",
+      "multiplier": null
     }
   },
   "Shazaam1": {

@@ -1,6 +1,7 @@
 package com.songoda.epicbosses.skills.custom;
 
 import com.google.gson.annotations.Expose;
+import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.skills.custom.cage.CageLocationData;
 import com.songoda.epicbosses.skills.custom.cage.CagePlayerData;
@@ -31,6 +32,10 @@ public class Cage extends CustomSkill {
     @Getter private static final List<UUID> playersInCage = new ArrayList<>();
 
     @Expose @Getter @Setter private CustomCageSkillElement cage;
+
+    public Cage(CustomBosses plugin) {
+        super(plugin);
+    }
 
     @Override
     public void castSkill(ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {

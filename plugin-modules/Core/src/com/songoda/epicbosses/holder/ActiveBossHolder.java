@@ -43,6 +43,14 @@ public class ActiveBossHolder {
         }
     }
 
+    public LivingEntity getLivingEntity() {
+        for(LivingEntity livingEntity : getLivingEntityMap().values()) {
+            if(livingEntity != null) return livingEntity;
+        }
+
+        return null;
+    }
+
     public boolean hasAttacked(UUID uuid) {
         return this.mapOfDamagingUsers.containsKey(uuid);
     }

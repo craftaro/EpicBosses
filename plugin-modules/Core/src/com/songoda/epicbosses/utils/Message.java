@@ -18,6 +18,7 @@ public enum Message {
     General_LocationFormat("{world}, {x}, {y}, {z}"),
     General_MustBePlayer("&c&l(!) &cYou must be a player to use this command."),
     General_CannotSpawn("&c&l(!) &cYou cannot spawn a boss at this location! &c&l(!)"),
+    General_Disarmed("&4&l(!) &f&lYOU HAVE BEEN DISARMED! CHECK THE GROUND AROUND YOU FOR YOUR ITEM!"),
 
     Boss_Create_EntityTypeNotFound("&c&l(!) &cThe specified entity type {0} was not found. If you think this is an error please contact &fAMinecraftDev&c."),
     Boss_Create_InvalidArgs("&c&l(!) &cYou must use &n/boss create [name] [entity] &c to create a boss."),
