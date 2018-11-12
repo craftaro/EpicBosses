@@ -1,5 +1,6 @@
 package com.songoda.epicbosses;
 
+import com.songoda.epicbosses.container.MinionEntityContainer;
 import lombok.Getter;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.commands.BossCmd;
@@ -29,6 +30,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     @Getter private MessagesFileManager bossMessagesFileManager;
     @Getter private CommandsFileManager bossCommandFileManager;
     @Getter private DropTableFileManager dropTableFileManager;
+    @Getter private MinionsFileManager minionsFileManager;
     @Getter private BossesFileManager bossesFileManager;
     @Getter private ItemsFileManager itemStackManager;
 
@@ -44,8 +46,13 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     @Getter private BossSkillManager bossSkillManager;
     @Getter private BossTauntManager bossTauntManager;
     @Getter private BossHookManager bossHookManager;
+
+    @Getter private MinionMechanicManager minionMechanicManager;
+    @Getter private MinionEntityContainer minionEntityContainer;
+
     @Getter private VersionHandler versionHandler;
     @Getter private DebugManager debugManager;
+
 
     @Getter private YmlFileHandler langFileHandler, editorFileHandler, configFileHandler;
     @Getter private FileConfiguration lang, editor, config;
@@ -68,7 +75,9 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.bossTauntManager = new BossTauntManager(this);
         this.bossTargetManager = new BossTargetManager(this);
         this.bossEntityContainer = new BossEntityContainer();
+        this.minionEntityContainer = new MinionEntityContainer();
         this.bossMechanicManager = new BossMechanicManager(this);
+        this.minionMechanicManager = new MinionMechanicManager(this);
         this.bossLocationManager = new BossLocationManager(this);
         this.bossDropTableManager = new BossDropTableManager(this);
 
@@ -83,6 +92,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
 
         this.itemStackManager.reload();
         this.bossesFileManager.reload();
+        this.minionsFileManager.reload();
         this.bossCommandFileManager.reload();
         this.bossMessagesFileManager.reload();
         this.dropTableFileManager.reload();
@@ -96,6 +106,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.bossHookManager.reload();
         this.bossLocationManager.reload();
         this.bossMechanicManager.load();
+        this.minionMechanicManager.load();
 
         saveMessagesToFile();
 
@@ -109,6 +120,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     public void reload() {
         this.bossMessagesFileManager.reload();
         this.bossCommandFileManager.reload();
+        this.minionsFileManager.reload();
         this.bossesFileManager.reload();
         this.itemStackManager.reload();
         this.dropTableFileManager.reload();
@@ -128,6 +140,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     private void loadFileManagersAndHandlers() {
         this.itemStackManager = new ItemsFileManager(this);
         this.bossesFileManager = new BossesFileManager(this);
+        this.minionsFileManager = new MinionsFileManager(this);
         this.bossCommandFileManager = new CommandsFileManager(this);
         this.bossMessagesFileManager = new MessagesFileManager(this);
         this.dropTableFileManager = new DropTableFileManager(this);

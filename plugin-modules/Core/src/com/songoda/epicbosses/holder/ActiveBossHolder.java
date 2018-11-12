@@ -8,9 +8,7 @@ import com.songoda.epicbosses.exception.AlreadySetException;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author Charles Cullen
@@ -25,6 +23,7 @@ public class ActiveBossHolder {
 
     @Getter private Map<Integer, LivingEntity> livingEntityMap = new HashMap<>();
     @Getter private Map<UUID, Double> mapOfDamagingUsers = new HashMap<>();
+    @Getter private List<LivingEntity> minionList = new ArrayList<>();
 
     @Getter @Setter private TargetHandler targetHandler = null;
     @Getter @Setter private boolean isDead = false;

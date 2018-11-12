@@ -1,12 +1,11 @@
 package com.songoda.epicbosses.managers;
 
 import com.songoda.epicbosses.CustomBosses;
-import com.songoda.epicbosses.entity.BossEntity;
+import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.interfaces.IMechanicManager;
 import com.songoda.epicbosses.mechanics.*;
 import com.songoda.epicbosses.utils.Debug;
-import com.songoda.epicbosses.utils.ILoadable;
 import com.songoda.epicbosses.utils.IMechanic;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.mechanics.IOptionalMechanic;
@@ -18,22 +17,21 @@ import java.util.Queue;
 /**
  * @author Charles Cullen
  * @version 1.0.0
- * @since 27-Jun-18
+ * @since 12-Nov-18
  */
-public class BossMechanicManager implements IMechanicManager<BossEntity, ActiveBossHolder> {
+public class MinionMechanicManager implements IMechanicManager<MinionEntity, ActiveBossHolder> {
 
     private final CustomBosses customBosses;
     private Queue<IOptionalMechanic> optionalMechanics;
     private Queue<IPrimaryMechanic> primaryMechanics;
 
-    public BossMechanicManager(CustomBosses customBosses) {
+    public MinionMechanicManager(CustomBosses customBosses) {
         this.customBosses = customBosses;
     }
 
     @Override
     public void load() {
         this.primaryMechanics = new LinkedList<>();
-        this.optionalMechanics = new LinkedList<>();
 
         registerMechanic(new EntityTypeMechanic());
         registerMechanic(new NameMechanic());
@@ -56,8 +54,8 @@ public class BossMechanicManager implements IMechanicManager<BossEntity, ActiveB
     }
 
     @Override
-    public boolean handleMechanicApplication(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        if(bossEntity != null && activeBossHolder != null) {
+    public boolean handleMechanicApplication(MinionEntity minionEntity, ActiveBossHolder activeBossHolder) {
+        if(minionEntity != null && activeBossHolder != null) {
 //            if(bossEntity.isEditing()) {
 //                Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
 //                return false;
@@ -72,7 +70,7 @@ public class BossMechanicManager implements IMechanicManager<BossEntity, ActiveB
 
                 ServerUtils.get().logDebug("Applying " + mechanic.getClass().getSimpleName());
 
-                if(didMechanicApplicationFail(mechanic, bossEntity, activeBossHolder)) return false;
+                if(didMechanicApplicationFail(mechanic, minionEntity, activeBossHolder)) return false;
             }
 
             queue = new LinkedList<>(this.optionalMechanics);
@@ -81,17 +79,17 @@ public class BossMechanicManager implements IMechanicManager<BossEntity, ActiveB
                 IMechanic mechanic = queue.poll();
 
                 if(mechanic == null) continue;
-                if(didMechanicApplicationFail(mechanic, bossEntity, activeBossHolder)) continue;
+                if(didMechanicApplicationFail(mechanic, minionEntity, activeBossHolder)) continue;
             }
         }
 
         return true;
     }
 
-    private boolean didMechanicApplicationFail(IMechanic mechanic, BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
+    private boolean didMechanicApplicationFail(IMechanic mechanic, MinionEntity minionEntity, ActiveBossHolder activeBossHolder) {
         if(mechanic == null) return true;
 
-        if(!mechanic.applyMechanic(bossEntity, activeBossHolder)) {
+        if(!mechanic.applyMechanic(minionEntity, activeBossHolder)) {
             Debug.MECHANIC_APPLICATION_FAILED.debug(mechanic.getClass().getSimpleName());
             return true;
         }

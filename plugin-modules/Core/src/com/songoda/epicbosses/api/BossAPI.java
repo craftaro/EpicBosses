@@ -2,11 +2,13 @@ package com.songoda.epicbosses.api;
 
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.entity.BossEntity;
+import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.entity.elements.*;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.files.CommandsFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.managers.files.MessagesFileManager;
+import com.songoda.epicbosses.skills.custom.Minions;
 import com.songoda.epicbosses.skills.types.CustomSkill;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.EntityFinder;
@@ -65,6 +67,23 @@ public class BossAPI {
         PLUGIN.getBossesFileManager().save();
         return true;
     }
+    /**
+     * Used to register a Minion Entity into
+     * the plugin after it has been created
+     * using the BossAPI#createBaseMinionEntity
+     * method or by manually creating a MinionEntity.
+     *
+     * @param name - Name for the minion section.
+     * @param minionEntity - The minion section.
+     * @return false if it failed, true if it saved successfully.
+     */
+    public static boolean registerMinionEntity(String name, MinionEntity minionEntity) {
+        if(name == null || minionEntity == null) return false;
+
+        PLUGIN.getMinionEntityContainer().saveData(name, minionEntity);
+        PLUGIN.getMinionsFileManager().save();
+        return true;
+    }
 
     /**
      * Used to register skills into the
@@ -105,6 +124,23 @@ public class BossAPI {
     public static String getBossEntityName(BossEntity bossEntity) {
         for(Map.Entry<String, BossEntity> entry : PLUGIN.getBossEntityContainer().getData().entrySet()) {
             if(entry.getValue().equals(bossEntity)) {
+                return entry.getKey();
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Used to get the Minion configuration section name
+     * from a MinionEntity instance.
+     *
+     * @param minionEntity - the Minion Entity instance
+     * @return name of the minion from the MinionContainer or null if not found.
+     */
+    public static String getMinionEntityName(MinionEntity minionEntity) {
+        for(Map.Entry<String, MinionEntity> entry : PLUGIN.getMinionEntityContainer().getData().entrySet()) {
+            if(entry.getValue().equals(minionEntity)) {
                 return entry.getKey();
             }
         }
@@ -167,6 +203,55 @@ public class BossAPI {
     }
 
     /**
+     * Used to create a base MinionEntity model which
+     * can be used to fine tune and then once the main
+     * elements are filled in editing can be disabled
+     * and the minion can be spawned in skills.
+     *
+     * @param name - minion name
+     * @param entityTypeInput - entity type
+     * @return null if something went wrong, or the MinionEntity that was created.
+     */
+    public static MinionEntity createBaseMinionEntity(String name, String entityTypeInput) {
+        String input = entityTypeInput.split(":")[0];
+        EntityFinder entityFinder = EntityFinder.get(input);
+
+        if(PLUGIN.getMinionEntityContainer().exists(name)) {
+            Debug.MINION_NAME_EXISTS.debug(name);
+            return null;
+        }
+
+        if (entityFinder == null) return null;
+
+        List<EntityStatsElement> entityStatsElements = new ArrayList<>();
+        EntityStatsElement entityStatsElement = new EntityStatsElement();
+        MainStatsElement mainStatsElement = new MainStatsElement();
+
+        mainStatsElement.setHealth(50D);
+        mainStatsElement.setDisplayName(name);
+        mainStatsElement.setEntityType(entityFinder.getFancyName());
+
+        entityStatsElement.setMainStats(mainStatsElement);
+        entityStatsElement.setEquipment(new EquipmentElement());
+        entityStatsElement.setHands(new HandsElement());
+        entityStatsElement.setPotions(new ArrayList<>());
+
+        entityStatsElements.add(entityStatsElement);
+
+        MinionEntity minionEntity = new MinionEntity(true,entityStatsElements);
+        boolean result = PLUGIN.getMinionEntityContainer().saveData(name, minionEntity);
+
+        if (!result) {
+            Debug.FAILED_TO_SAVE_THE_NEW_MINION.debug(name, entityFinder.getFancyName());
+            return null;
+        }
+
+        PLUGIN.getMinionsFileManager().save();
+
+        return minionEntity;
+    }
+
+    /**
      * Used to spawn a new active boss for the
      * specified bossEntity.
      *
@@ -183,6 +268,24 @@ public class BossAPI {
         String name = PLUGIN.getBossEntityContainer().getName(bossEntity);
 
         return PLUGIN.getBossEntityManager().createActiveBossHolder(bossEntity, location, name);
+    }
+
+    /**
+     * Used to spawn a new minion for the specified
+     * bossEntity, under the activebossholder.
+     *
+     * @param activeBossHolder - targeted active boss
+     * @param minionEntity - MinionEntity to spawn
+     * @param minions - Minion skill class
+     * @return ActiveBossHolder class with stored information
+     */
+    public static ActiveBossHolder spawnNewMinion(ActiveBossHolder activeBossHolder, MinionEntity minionEntity, Minions minions) {
+//        if(minionEntity.isEditing()) {
+//            Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
+//            return null;
+//        }
+
+        return PLUGIN.getBossEntityManager().spawnMinionsOnBossHolder(activeBossHolder, minionEntity, minions);
     }
 
     /**

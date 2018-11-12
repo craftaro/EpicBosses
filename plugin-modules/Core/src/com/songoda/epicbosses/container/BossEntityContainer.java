@@ -40,6 +40,7 @@ public class BossEntityContainer implements IContainer<Map<String, BossEntity>, 
             if(getData().containsKey(entry.getKey())) {
                 failed += 1;
                 stringBuilder.append(entry.getKey()).append("; ");
+                continue;
             }
 
             this.container.put(entry.getKey(), entry.getValue());

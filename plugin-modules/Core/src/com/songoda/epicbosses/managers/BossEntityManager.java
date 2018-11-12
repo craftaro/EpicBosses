@@ -7,11 +7,13 @@ import com.songoda.epicbosses.droptable.elements.DropTableElement;
 import com.songoda.epicbosses.droptable.elements.GiveTableElement;
 import com.songoda.epicbosses.droptable.elements.SprayTableElement;
 import com.songoda.epicbosses.entity.BossEntity;
+import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.holder.DeadBossHolder;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.DropTableFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
+import com.songoda.epicbosses.skills.custom.Minions;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.RandomUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
@@ -33,6 +35,7 @@ public class BossEntityManager {
 
     private static final List<ActiveBossHolder> ACTIVE_BOSS_HOLDERS = new ArrayList<>();
 
+    private MinionMechanicManager minionMechanicManager;
     private DropTableFileManager dropTableFileManager;
     private BossDropTableManager bossDropTableManager;
     private BossMechanicManager bossMechanicManager;
@@ -40,6 +43,7 @@ public class BossEntityManager {
     private BossesFileManager bossesFileManager;
 
     public BossEntityManager(CustomBosses customBosses) {
+        this.minionMechanicManager = customBosses.getMinionMechanicManager();
         this.dropTableFileManager = customBosses.getDropTableFileManager();
         this.bossDropTableManager = customBosses.getBossDropTableManager();
         this.bossMechanicManager = customBosses.getBossMechanicManager();
@@ -167,6 +171,18 @@ public class BossEntityManager {
         }
 
         ACTIVE_BOSS_HOLDERS.add(activeBossHolder);
+        return activeBossHolder;
+    }
+
+    public ActiveBossHolder spawnMinionsOnBossHolder(ActiveBossHolder activeBossHolder, MinionEntity minionEntity, Minions minions) {
+        //TODO: Add Minions json class
+        //TODO: Finish minions spawn method
+
+        if(!this.minionMechanicManager.handleMechanicApplication(minionEntity, activeBossHolder)) {
+            Debug.FAILED_TO_CREATE_ACTIVE_BOSS_HOLDER.debug();
+            return null;
+        }
+
         return activeBossHolder;
     }
 
