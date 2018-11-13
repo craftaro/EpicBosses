@@ -13,18 +13,20 @@ import java.util.List;
  * @version 1.0.0
  * @since 14-May-18
  */
-public class BossEntity extends MinionEntity {
+public class BossEntity {
 
+    @Expose @Getter private final List<EntityStatsElement> entityStats;
     @Expose @Getter private final MessagesElement messages;
     @Expose @Getter private final CommandsElement commands;
     @Expose @Getter private final SkillsElement skills;
     @Expose @Getter private final DropsElement drops;
 
     @Expose @Getter @Setter private String spawnItem, targeting;
+    @Expose @Getter @Setter private boolean editing;
 
     public BossEntity(boolean editing, String spawnItem, List<EntityStatsElement> entityStats, SkillsElement skills, DropsElement drops, MessagesElement messages, CommandsElement commands) {
-        super(editing, entityStats);
-
+        this.editing = editing;
+        this.entityStats = entityStats;
         this.spawnItem = spawnItem;
         this.skills = skills;
         this.drops = drops;

@@ -8,7 +8,7 @@
         "mainStats": {
           "position": 1,
           "entityType": "SKELETON",
-          "health": 500,
+          "health": 5,
           "displayName": "&6&lSkeleton King Boss"
         },
         "equipment": {
@@ -46,7 +46,7 @@
     "drops": {
       "naturalDrops": false,
       "dropExp": false,
-      "dropTable": "SKTable"
+      "dropTable": "SkeletonTableSpray"
     },
     "messages": {
       "onSpawn": {

@@ -46,12 +46,21 @@ public class BossDeathListener implements Listener {
         if(activeBossHolder == null) return;
 
         EntityDamageEvent.DamageCause damageCause = entityDamageEvent.getCause();
+        Boolean naturalDrops = activeBossHolder.getBossEntity().getDrops().getNaturalDrops();
+        Boolean dropExp = activeBossHolder.getBossEntity().getDrops().getDropExp();
+
+        if(naturalDrops == null) naturalDrops = false;
+        if(dropExp == null) dropExp = true;
+
+        if(!naturalDrops) event.getDrops().clear();
+        if(!dropExp) event.setDroppedExp(0);
 
         if(damageCause == EntityDamageEvent.DamageCause.VOID || damageCause == EntityDamageEvent.DamageCause.LAVA
                 || activeBossHolder.getMapOfDamagingUsers().isEmpty()) {
             this.bossEntityManager.removeActiveBossHolder(activeBossHolder);
             return;
         }
+
 
         if(this.bossEntityManager.isAllEntitiesDead(activeBossHolder)) {
             PreBossDeathEvent preBossDeathEvent = new PreBossDeathEvent(activeBossHolder, location);

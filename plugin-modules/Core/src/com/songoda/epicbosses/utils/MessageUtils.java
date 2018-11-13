@@ -34,11 +34,11 @@ public class MessageUtils {
         messages.replaceAll(s -> s.replace('&', '§'));
 
         if(radius == -1) {
-            Bukkit.getOnlinePlayers().forEach(player -> messages.forEach(player::sendMessage));
+            Bukkit.getOnlinePlayers().forEach(player -> messages.forEach(string -> player.sendMessage(string)));
         } else {
             Bukkit.getOnlinePlayers().forEach(player -> {
                 if((player.getWorld().equals(center.getWorld())) && (player.getLocation().distanceSquared(center) <= radius)) {
-                    messages.forEach(player::sendMessage);
+                    messages.forEach(string -> player.sendMessage(string));
                 }
             });
         }

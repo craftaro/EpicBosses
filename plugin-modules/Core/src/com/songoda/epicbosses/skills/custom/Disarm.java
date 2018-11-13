@@ -1,7 +1,7 @@
 package com.songoda.epicbosses.skills.custom;
 
-import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
+import com.songoda.epicbosses.skills.ISkillHandler;
 import com.songoda.epicbosses.skills.types.CustomSkill;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.RandomUtils;
@@ -18,10 +18,10 @@ import java.util.List;
  * @version 1.0.0
  * @since 11-Nov-18
  */
-public class Disarm extends CustomSkill {
+public class Disarm extends CustomSkill implements ISkillHandler {
 
-    public Disarm(CustomBosses plugin) {
-        super(plugin);
+    public Disarm(String mode, String type, Double radius, String displayName, String customMessage) {
+        super(mode, type, radius, displayName, customMessage);
     }
 
     @Override
@@ -37,8 +37,8 @@ public class Disarm extends CustomSkill {
                     if(livingEntity instanceof HumanEntity) {
                         HumanEntity humanEntity = (HumanEntity) livingEntity;
 
-                        itemStack = getPlugin().getVersionHandler().getItemInHand(humanEntity);
-                        getPlugin().getVersionHandler().setItemInHand(humanEntity, replacementItemStack);
+                        itemStack = PLUGIN.getVersionHandler().getItemInHand(humanEntity);
+                        PLUGIN.getVersionHandler().setItemInHand(humanEntity, replacementItemStack);
                         break;
                     }
                 case 1:

@@ -2,6 +2,7 @@ package com.songoda.epicbosses.skills.types;
 
 import com.google.gson.annotations.Expose;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
+import com.songoda.epicbosses.skills.ISkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.elements.CommandSkillElement;
 import com.songoda.epicbosses.utils.Debug;
@@ -18,9 +19,13 @@ import java.util.List;
  * @version 1.0.0
  * @since 05-Nov-18
  */
-public class CommandSkill extends Skill {
+public class CommandSkill extends Skill implements ISkillHandler {
 
     @Expose @Getter @Setter private List<CommandSkillElement> commands;
+
+    public CommandSkill(String mode, String type, Double radius, String displayName, String customMessage) {
+        super(mode, type, radius, displayName, customMessage);
+    }
 
     @Override
     public void castSkill(ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {

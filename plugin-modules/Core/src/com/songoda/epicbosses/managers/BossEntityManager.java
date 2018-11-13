@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.managers;
 
+import com.google.gson.Gson;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
@@ -15,6 +16,7 @@ import com.songoda.epicbosses.managers.files.DropTableFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.managers.files.MinionsFileManager;
 import com.songoda.epicbosses.skills.custom.Minions;
+import com.songoda.epicbosses.utils.BossesGson;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.RandomUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
@@ -282,17 +284,19 @@ public class BossEntityManager {
             return;
         }
 
+        Gson gson = BossesGson.get();
+
         if(dropType.equalsIgnoreCase("SPRAY")) {
-            SprayTableElement sprayTableElement = (SprayTableElement) dropTable.getRewards();
+            SprayTableElement sprayTableElement = gson.fromJson(dropTable.getRewards(), SprayTableElement.class);
             List<ItemStack> itemStacks = this.bossDropTableManager.getSprayItems(sprayTableElement);
 
             sprayDrops(sprayTableElement, itemStacks, deadBossHolder);
         } else if(dropType.equalsIgnoreCase("GIVE")) {
-            GiveTableElement giveTableElement = (GiveTableElement) dropTable.getRewards();
+            GiveTableElement giveTableElement = gson.fromJson(dropTable.getRewards(), GiveTableElement.class);
 
             this.bossDropTableManager.handleGiveTable(giveTableElement, deadBossHolder);
         } else if(dropType.equalsIgnoreCase("DROP")) {
-            DropTableElement dropTableElement = (DropTableElement) dropTable.getRewards();
+            DropTableElement dropTableElement = gson.fromJson(dropTable.getRewards(), DropTableElement.class);
             List<ItemStack> itemStacks = this.bossDropTableManager.getDropItems(dropTableElement);
 
             itemStacks.forEach(itemStack -> deadBossHolder.getLocation().getWorld().dropItemNaturally(deadBossHolder.getLocation(), itemStack));

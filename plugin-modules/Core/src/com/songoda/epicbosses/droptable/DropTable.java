@@ -1,9 +1,9 @@
 package com.songoda.epicbosses.droptable;
 
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import lombok.Getter;
 import lombok.Setter;
-import com.songoda.epicbosses.droptable.elements.RewardsTableElement;
 
 /**
  * @author Charles Cullen
@@ -13,6 +13,6 @@ import com.songoda.epicbosses.droptable.elements.RewardsTableElement;
 public class DropTable {
 
     @Expose @Getter @Setter private String dropType;
-    @Expose @Getter @Setter private RewardsTableElement rewards;
+    @Expose @Getter @Setter private JsonObject rewards;
 
 }

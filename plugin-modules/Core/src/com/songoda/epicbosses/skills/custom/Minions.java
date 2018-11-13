@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
+import com.songoda.epicbosses.skills.ISkillHandler;
 import com.songoda.epicbosses.skills.elements.CustomMinionSkillElement;
 import com.songoda.epicbosses.skills.types.CustomSkill;
 import lombok.Getter;
@@ -17,12 +18,12 @@ import java.util.List;
  * @version 1.0.0
  * @since 11-Nov-18
  */
-public class Minions extends CustomSkill {
+public class Minions extends CustomSkill implements ISkillHandler {
 
     @Expose @Getter @Setter private CustomMinionSkillElement minions;
 
-    public Minions(CustomBosses plugin) {
-        super(plugin);
+    public Minions(String mode, String type, Double radius, String displayName, String customMessage) {
+        super(mode, type, radius, displayName, customMessage);
     }
 
     @Override

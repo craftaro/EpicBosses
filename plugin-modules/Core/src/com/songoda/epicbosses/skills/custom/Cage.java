@@ -3,6 +3,7 @@ package com.songoda.epicbosses.skills.custom;
 import com.google.gson.annotations.Expose;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
+import com.songoda.epicbosses.skills.ISkillHandler;
 import com.songoda.epicbosses.skills.custom.cage.CageLocationData;
 import com.songoda.epicbosses.skills.custom.cage.CagePlayerData;
 import com.songoda.epicbosses.skills.elements.CustomCageSkillElement;
@@ -24,7 +25,7 @@ import java.util.*;
  * @version 1.0.0
  * @since 06-Nov-18
  */
-public class Cage extends CustomSkill {
+public class Cage extends CustomSkill implements ISkillHandler {
 
     private static final MaterialConverter MATERIAL_CONVERTER = new MaterialConverter();
 
@@ -33,8 +34,8 @@ public class Cage extends CustomSkill {
 
     @Expose @Getter @Setter private CustomCageSkillElement cage;
 
-    public Cage(CustomBosses plugin) {
-        super(plugin);
+    public Cage(String mode, String type, Double radius, String displayName, String customMessage) {
+        super(mode, type, radius, displayName, customMessage);
     }
 
     @Override

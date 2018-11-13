@@ -9,9 +9,17 @@ import lombok.Setter;
  * @version 1.0.0
  * @since 05-Nov-18
  */
-public abstract class Skill implements ISkillHandler {
+public class Skill {
 
     @Expose @Getter @Setter private String mode, type, displayName, customMessage;
     @Expose @Getter @Setter private Double radius;
+
+    public Skill(String mode, String type, Double radius, String displayName, String customMessage) {
+        this.mode = mode;
+        this.type = type;
+        this.radius = radius;
+        this.displayName = displayName;
+        this.customMessage = customMessage;
+    }
 
 }
