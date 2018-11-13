@@ -4,9 +4,8 @@ import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.interfaces.IMechanicManager;
-import com.songoda.epicbosses.mechanics.*;
+import com.songoda.epicbosses.mechanics.boss.*;
 import com.songoda.epicbosses.utils.Debug;
-import com.songoda.epicbosses.utils.ILoadable;
 import com.songoda.epicbosses.utils.IMechanic;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.mechanics.IOptionalMechanic;
@@ -23,8 +22,8 @@ import java.util.Queue;
 public class BossMechanicManager implements IMechanicManager<BossEntity, ActiveBossHolder> {
 
     private final CustomBosses customBosses;
-    private Queue<IOptionalMechanic> optionalMechanics;
-    private Queue<IPrimaryMechanic> primaryMechanics;
+    private Queue<IOptionalMechanic<BossEntity>> optionalMechanics;
+    private Queue<IPrimaryMechanic<BossEntity>> primaryMechanics;
 
     public BossMechanicManager(CustomBosses customBosses) {
         this.customBosses = customBosses;
@@ -45,11 +44,11 @@ public class BossMechanicManager implements IMechanicManager<BossEntity, ActiveB
     }
 
     @Override
-    public void registerMechanic(IMechanic mechanic) {
+    public void registerMechanic(IMechanic<BossEntity> mechanic) {
         if(mechanic instanceof IPrimaryMechanic) {
-            this.primaryMechanics.add((IPrimaryMechanic) mechanic);
+            this.primaryMechanics.add((IPrimaryMechanic<BossEntity>) mechanic);
         } else if(mechanic instanceof IOptionalMechanic) {
-            this.optionalMechanics.add((IOptionalMechanic) mechanic);
+            this.optionalMechanics.add((IOptionalMechanic<BossEntity>) mechanic);
         } else {
             Debug.MECHANIC_TYPE_NOT_STORED.debug();
         }
@@ -63,10 +62,10 @@ public class BossMechanicManager implements IMechanicManager<BossEntity, ActiveB
 //                return false;
 //            }
 
-            Queue<IMechanic> queue = new LinkedList<>(this.primaryMechanics);
+            Queue<IMechanic<BossEntity>> queue = new LinkedList<>(this.primaryMechanics);
 
             while(!queue.isEmpty()) {
-                IMechanic mechanic = queue.poll();
+                IMechanic<BossEntity> mechanic = queue.poll();
 
                 if(mechanic == null) continue;
 
@@ -78,7 +77,7 @@ public class BossMechanicManager implements IMechanicManager<BossEntity, ActiveB
             queue = new LinkedList<>(this.optionalMechanics);
 
             while(!queue.isEmpty()) {
-                IMechanic mechanic = queue.poll();
+                IMechanic<BossEntity> mechanic = queue.poll();
 
                 if(mechanic == null) continue;
                 if(didMechanicApplicationFail(mechanic, bossEntity, activeBossHolder)) continue;
@@ -88,7 +87,7 @@ public class BossMechanicManager implements IMechanicManager<BossEntity, ActiveB
         return true;
     }
 
-    private boolean didMechanicApplicationFail(IMechanic mechanic, BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
+    private boolean didMechanicApplicationFail(IMechanic<BossEntity> mechanic, BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
         if(mechanic == null) return true;
 
         if(!mechanic.applyMechanic(bossEntity, activeBossHolder)) {

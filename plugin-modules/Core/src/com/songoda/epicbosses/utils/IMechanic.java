@@ -1,6 +1,5 @@
 package com.songoda.epicbosses.utils;
 
-import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 
 /**
@@ -8,8 +7,8 @@ import com.songoda.epicbosses.holder.ActiveBossHolder;
  * @version 1.0.0
  * @since 02-Jun-18
  */
-public interface IMechanic {
+public interface IMechanic<Entity> {
 
-    boolean applyMechanic(MinionEntity bossEntity, ActiveBossHolder activeBossHolder);
+    boolean applyMechanic(Entity entity, ActiveBossHolder activeBossHolder);
 
 }

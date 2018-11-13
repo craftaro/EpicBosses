@@ -21,9 +21,8 @@ public class ActiveBossHolder {
     @Getter private final Location location;
     @Getter private final String name;
 
-    @Getter private Map<Integer, LivingEntity> livingEntityMap = new HashMap<>();
+    @Getter private Map<Integer, LivingEntity> livingEntityMap = new HashMap<>(), minionEntityMap = new HashMap<>();
     @Getter private Map<UUID, Double> mapOfDamagingUsers = new HashMap<>();
-    @Getter private List<LivingEntity> minionList = new ArrayList<>();
 
     @Getter @Setter private TargetHandler targetHandler = null;
     @Getter @Setter private boolean isDead = false;

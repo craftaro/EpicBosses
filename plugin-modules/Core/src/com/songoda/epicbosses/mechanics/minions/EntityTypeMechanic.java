@@ -1,7 +1,7 @@
-package com.songoda.epicbosses.mechanics;
+package com.songoda.epicbosses.mechanics.minions;
 
 import com.songoda.epicbosses.api.BossAPI;
-import com.songoda.epicbosses.entity.BossEntity;
+import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.MainStatsElement;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
@@ -15,16 +15,12 @@ import org.bukkit.entity.LivingEntity;
  * @version 1.0.0
  * @since 01-Jun-18
  */
-public class EntityTypeMechanic implements IPrimaryMechanic {
+public class EntityTypeMechanic implements IPrimaryMechanic<MinionEntity> {
 
     @Override
-    public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        for(EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
-            System.out.println(entityStatsElement);
-
+    public boolean applyMechanic(MinionEntity minionEntity, ActiveBossHolder activeBossHolder) {
+        for(EntityStatsElement entityStatsElement : minionEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
-
-            System.out.println(mainStatsElement);
 
             String bossEntityType = mainStatsElement.getEntityType();
             String input = bossEntityType.split(":")[0];
@@ -34,18 +30,18 @@ public class EntityTypeMechanic implements IPrimaryMechanic {
             if(position == null) position = 1;
             if(entityFinder == null) return false;
 
-            LivingEntity livingEntity = entityFinder.spawnNewLivingEntity(bossEntityType, activeBossHolder.getLocation());
+            LivingEntity livingEntity = entityFinder.spawnNewLivingEntity(bossEntityType, activeBossHolder.getLivingEntity().getLocation());
 
             if(livingEntity == null) return false;
 
-            activeBossHolder.setLivingEntity(position, livingEntity);
+            activeBossHolder.getMinionEntityMap().put(position, livingEntity);
 
             if(position > 1) {
                 int lowerPosition = position - 1;
                 LivingEntity lowerLivingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(lowerPosition, null);
 
                 if(lowerLivingEntity == null) {
-                    Debug.FAILED_ATTEMPT_TO_STACK_BOSSES.debug(BossAPI.getBossEntityName(bossEntity));
+                    Debug.FAILED_ATTEMPT_TO_STACK_BOSSES.debug(BossAPI.getMinionEntityName(minionEntity));
                     return false;
                 }
 

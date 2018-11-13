@@ -139,7 +139,7 @@
     },
     "minions": {
       "amount": 5,
-      "bosses": [
+      "minionsToSpawn": [
         "Minion1"
       ]
     }

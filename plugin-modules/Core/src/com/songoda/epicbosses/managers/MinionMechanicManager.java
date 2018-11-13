@@ -4,7 +4,7 @@ import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.interfaces.IMechanicManager;
-import com.songoda.epicbosses.mechanics.*;
+import com.songoda.epicbosses.mechanics.minions.*;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.IMechanic;
 import com.songoda.epicbosses.utils.ServerUtils;
@@ -22,8 +22,8 @@ import java.util.Queue;
 public class MinionMechanicManager implements IMechanicManager<MinionEntity, ActiveBossHolder> {
 
     private final CustomBosses customBosses;
-    private Queue<IOptionalMechanic> optionalMechanics;
-    private Queue<IPrimaryMechanic> primaryMechanics;
+    private Queue<IOptionalMechanic<MinionEntity>> optionalMechanics;
+    private Queue<IPrimaryMechanic<MinionEntity>> primaryMechanics;
 
     public MinionMechanicManager(CustomBosses customBosses) {
         this.customBosses = customBosses;
@@ -32,6 +32,7 @@ public class MinionMechanicManager implements IMechanicManager<MinionEntity, Act
     @Override
     public void load() {
         this.primaryMechanics = new LinkedList<>();
+        this.optionalMechanics = new LinkedList<>();
 
         registerMechanic(new EntityTypeMechanic());
         registerMechanic(new NameMechanic());
@@ -43,11 +44,11 @@ public class MinionMechanicManager implements IMechanicManager<MinionEntity, Act
     }
 
     @Override
-    public void registerMechanic(IMechanic mechanic) {
+    public void registerMechanic(IMechanic<MinionEntity> mechanic) {
         if(mechanic instanceof IPrimaryMechanic) {
-            this.primaryMechanics.add((IPrimaryMechanic) mechanic);
+            this.primaryMechanics.add((IPrimaryMechanic<MinionEntity>) mechanic);
         } else if(mechanic instanceof IOptionalMechanic) {
-            this.optionalMechanics.add((IOptionalMechanic) mechanic);
+            this.optionalMechanics.add((IOptionalMechanic<MinionEntity>) mechanic);
         } else {
             Debug.MECHANIC_TYPE_NOT_STORED.debug();
         }
@@ -56,15 +57,15 @@ public class MinionMechanicManager implements IMechanicManager<MinionEntity, Act
     @Override
     public boolean handleMechanicApplication(MinionEntity minionEntity, ActiveBossHolder activeBossHolder) {
         if(minionEntity != null && activeBossHolder != null) {
-//            if(bossEntity.isEditing()) {
+//            if(minionEntity.isEditing()) {
 //                Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
 //                return false;
 //            }
 
-            Queue<IMechanic> queue = new LinkedList<>(this.primaryMechanics);
+            Queue<IMechanic<MinionEntity>> queue = new LinkedList<>(this.primaryMechanics);
 
             while(!queue.isEmpty()) {
-                IMechanic mechanic = queue.poll();
+                IMechanic<MinionEntity> mechanic = queue.poll();
 
                 if(mechanic == null) continue;
 
@@ -76,7 +77,7 @@ public class MinionMechanicManager implements IMechanicManager<MinionEntity, Act
             queue = new LinkedList<>(this.optionalMechanics);
 
             while(!queue.isEmpty()) {
-                IMechanic mechanic = queue.poll();
+                IMechanic<MinionEntity> mechanic = queue.poll();
 
                 if(mechanic == null) continue;
                 if(didMechanicApplicationFail(mechanic, minionEntity, activeBossHolder)) continue;
@@ -86,7 +87,7 @@ public class MinionMechanicManager implements IMechanicManager<MinionEntity, Act
         return true;
     }
 
-    private boolean didMechanicApplicationFail(IMechanic mechanic, MinionEntity minionEntity, ActiveBossHolder activeBossHolder) {
+    private boolean didMechanicApplicationFail(IMechanic<MinionEntity> mechanic, MinionEntity minionEntity, ActiveBossHolder activeBossHolder) {
         if(mechanic == null) return true;
 
         if(!mechanic.applyMechanic(minionEntity, activeBossHolder)) {

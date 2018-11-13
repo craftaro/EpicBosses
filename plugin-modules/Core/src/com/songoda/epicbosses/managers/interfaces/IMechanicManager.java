@@ -10,7 +10,7 @@ import com.songoda.epicbosses.utils.IMechanic;
  */
 public interface IMechanicManager<T, J> extends ILoadable {
 
-    void registerMechanic(IMechanic mechanic);
+    void registerMechanic(IMechanic<T> mechanic);
 
     boolean handleMechanicApplication(T t, J j);
 

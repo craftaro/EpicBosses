@@ -275,17 +275,16 @@ public class BossAPI {
      * bossEntity, under the activebossholder.
      *
      * @param activeBossHolder - targeted active boss
-     * @param minionEntity - MinionEntity to spawn
      * @param minions - Minion skill class
-     * @return ActiveBossHolder class with stored information
+     * @return boolean if the spawning of the minions succeeded or failed
      */
-    public static ActiveBossHolder spawnNewMinion(ActiveBossHolder activeBossHolder, MinionEntity minionEntity, Minions minions) {
+    public static boolean spawnNewMinion(ActiveBossHolder activeBossHolder, Minions minions) {
 //        if(minionEntity.isEditing()) {
 //            Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
 //            return null;
 //        }
 
-        return PLUGIN.getBossEntityManager().spawnMinionsOnBossHolder(activeBossHolder, minionEntity, minions);
+        return PLUGIN.getBossEntityManager().spawnMinionsOnBossHolder(activeBossHolder, minions);
     }
 
     /**

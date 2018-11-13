@@ -1,4 +1,4 @@
-package com.songoda.epicbosses.mechanics;
+package com.songoda.epicbosses.mechanics.boss;
 
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
@@ -17,7 +17,7 @@ import org.bukkit.entity.LivingEntity;
  *
  * TODO: Make a hologram above name instead of using default CustomName
  */
-public class NameMechanic implements IOptionalMechanic {
+public class NameMechanic implements IOptionalMechanic<BossEntity> {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {

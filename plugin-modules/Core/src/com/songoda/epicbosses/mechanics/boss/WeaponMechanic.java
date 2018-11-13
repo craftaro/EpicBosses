@@ -1,4 +1,4 @@
-package com.songoda.epicbosses.mechanics;
+package com.songoda.epicbosses.mechanics.boss;
 
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
  * @version 1.0.0
  * @since 27-Jun-18
  */
-public class WeaponMechanic implements IOptionalMechanic {
+public class WeaponMechanic implements IOptionalMechanic<BossEntity> {
 
     private ItemsFileManager itemStackManager;
     private VersionHandler versionHandler;

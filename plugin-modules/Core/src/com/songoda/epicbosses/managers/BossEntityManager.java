@@ -13,6 +13,7 @@ import com.songoda.epicbosses.holder.DeadBossHolder;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.DropTableFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
+import com.songoda.epicbosses.managers.files.MinionsFileManager;
 import com.songoda.epicbosses.skills.custom.Minions;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.RandomUtils;
@@ -39,6 +40,7 @@ public class BossEntityManager {
     private DropTableFileManager dropTableFileManager;
     private BossDropTableManager bossDropTableManager;
     private BossMechanicManager bossMechanicManager;
+    private MinionsFileManager minionsFileManager;
     private ItemsFileManager bossItemFileManager;
     private BossesFileManager bossesFileManager;
 
@@ -47,6 +49,7 @@ public class BossEntityManager {
         this.dropTableFileManager = customBosses.getDropTableFileManager();
         this.bossDropTableManager = customBosses.getBossDropTableManager();
         this.bossMechanicManager = customBosses.getBossMechanicManager();
+        this.minionsFileManager = customBosses.getMinionsFileManager();
         this.bossItemFileManager = customBosses.getItemStackManager();
         this.bossesFileManager = customBosses.getBossesFileManager();
     }
@@ -174,16 +177,36 @@ public class BossEntityManager {
         return activeBossHolder;
     }
 
-    public ActiveBossHolder spawnMinionsOnBossHolder(ActiveBossHolder activeBossHolder, MinionEntity minionEntity, Minions minions) {
-        //TODO: Add Minions json class
-        //TODO: Finish minions spawn method
+    public boolean spawnMinionsOnBossHolder(ActiveBossHolder activeBossHolder, Minions minions) {
+        List<String> minionsToSpawn = minions.getMinions().getMinionsToSpawn();
+        Integer amount = minions.getMinions().getAmount();
 
-        if(!this.minionMechanicManager.handleMechanicApplication(minionEntity, activeBossHolder)) {
-            Debug.FAILED_TO_CREATE_ACTIVE_BOSS_HOLDER.debug();
-            return null;
+        if(minionsToSpawn == null || minionsToSpawn.isEmpty()) {
+            Debug.FAILED_TO_SPAWN_MINIONS_FROM_SKILL.debug(minions.getDisplayName());
+            return false;
         }
 
-        return activeBossHolder;
+        if(amount == null) amount = 1;
+
+        int finalAmount = amount;
+
+        minionsToSpawn.forEach(string -> {
+            MinionEntity minionEntity = this.minionsFileManager.getMinionEntity(string);
+
+            if(minionEntity == null) {
+                Debug.FAILED_TO_FIND_MINION.debug(minions.getDisplayName(), string);
+                return;
+            }
+
+            for(int i = 1; i <= finalAmount; i++) {
+                if(!this.minionMechanicManager.handleMechanicApplication(minionEntity, activeBossHolder)) {
+                    Debug.FAILED_TO_SPAWN_MINION.debug(minions.getDisplayName(), string);
+                    return;
+                }
+            }
+        });
+
+        return true;
     }
 
     public ActiveBossHolder getActiveBossHolder(LivingEntity livingEntity) {

@@ -1,4 +1,4 @@
-package com.songoda.epicbosses.mechanics;
+package com.songoda.epicbosses.mechanics.boss;
 
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
@@ -18,7 +18,7 @@ import java.util.List;
  * @version 1.0.0
  * @since 27-Jun-18
  */
-public class PotionMechanic implements IOptionalMechanic {
+public class PotionMechanic implements IOptionalMechanic<BossEntity> {
 
     private PotionEffectConverter potionEffectConverter;
 

@@ -7,5 +7,5 @@ import com.songoda.epicbosses.utils.IMechanic;
  * @version 1.0.0
  * @since 02-Oct-18
  */
-public interface IOptionalMechanic extends IMechanic {
+public interface IOptionalMechanic<Entity> extends IMechanic<Entity> {
 }
