@@ -91,7 +91,7 @@
                         <phase>install</phase>
                         <configuration>
                             <target>
-                                <copy file="target/${build.finalName}.jar" tofile="D:/Servers/1.13/plugins/${build.finalName}.jar"/>
+                                <copy file="target/${build.finalName}.jar" tofile="D:/Servers/1.13.2/plugins/${build.finalName}.jar"/>
                             </target>
                         </configuration>
                         <goals>

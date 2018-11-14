@@ -56,7 +56,11 @@ public class BossEntityManager {
         this.bossesFileManager = customBosses.getBossesFileManager();
     }
 
+    //TODO: Add default item if spawnItem is not set.
     public ItemStack getSpawnItem(BossEntity bossEntity) {
+        if(bossEntity == null) return null;
+        if(bossEntity.getSpawnItem() == null) return null;
+
         ItemStackHolder itemStackHolder = BossAPI.getStoredItemStack(bossEntity.getSpawnItem());
 
         if(itemStackHolder == null) {

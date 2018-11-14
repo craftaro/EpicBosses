@@ -60,6 +60,8 @@ public enum Debug {
         String message = this.message;
 
         for(Object object : objects) {
+            if(object == null) continue;
+
             String placeholder = "{" + current + "}";
 
             message = message.replace(placeholder, object.toString());
