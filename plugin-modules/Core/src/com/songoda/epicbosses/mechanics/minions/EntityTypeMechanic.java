@@ -33,6 +33,7 @@ public class EntityTypeMechanic implements IPrimaryMechanic<MinionEntity> {
             LivingEntity livingEntity = entityFinder.spawnNewLivingEntity(bossEntityType, activeBossHolder.getLivingEntity().getLocation());
 
             if(livingEntity == null) return false;
+            if(!activeBossHolder.getMinionEntityMap().isEmpty()) activeBossHolder.killAllMinions(null);
 
             activeBossHolder.getMinionEntityMap().put(position, livingEntity);
 

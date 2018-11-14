@@ -80,6 +80,9 @@ public class BossMechanicManager implements IMechanicManager<BossEntity, ActiveB
                 IMechanic<BossEntity> mechanic = queue.poll();
 
                 if(mechanic == null) continue;
+
+                ServerUtils.get().logDebug("Applying " + mechanic.getClass().getSimpleName());
+
                 if(didMechanicApplicationFail(mechanic, bossEntity, activeBossHolder)) continue;
             }
         }

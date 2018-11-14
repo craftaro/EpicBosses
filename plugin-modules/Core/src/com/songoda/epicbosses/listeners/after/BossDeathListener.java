@@ -31,7 +31,6 @@ public class BossDeathListener implements Listener {
 
     private BossEntityManager bossEntityManager;
 
-
     public BossDeathListener(CustomBosses plugin) {
         this.bossEntityManager = plugin.getBossEntityManager();
     }
@@ -66,6 +65,7 @@ public class BossDeathListener implements Listener {
             PreBossDeathEvent preBossDeathEvent = new PreBossDeathEvent(activeBossHolder, location);
 
             activeBossHolder.setDead(true);
+            activeBossHolder.killAllMinions();
             ServerUtils.get().callEvent(preBossDeathEvent);
         }
     }

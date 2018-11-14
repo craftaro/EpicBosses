@@ -1,6 +1,7 @@
 Settings:
   debug: false
   bossTargetRange: 50.0
+  defaultNearbyRadius: 250.0
 
   BlockedWorlds:
     enabled: false

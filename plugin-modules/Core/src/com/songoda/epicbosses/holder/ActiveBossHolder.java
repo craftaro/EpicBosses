@@ -6,6 +6,7 @@ import com.songoda.epicbosses.targeting.TargetHandler;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.exception.AlreadySetException;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.*;
@@ -49,7 +50,41 @@ public class ActiveBossHolder {
         return null;
     }
 
+    public LivingEntity getMinionEntity() {
+        for(LivingEntity livingEntity : getMinionEntityMap().values()) {
+            if(livingEntity != null) return livingEntity;
+        }
+
+        return null;
+    }
+
     public boolean hasAttacked(UUID uuid) {
         return this.mapOfDamagingUsers.containsKey(uuid);
+    }
+
+    public void killAllMinions() {
+        this.minionEntityMap.values().forEach(LivingEntity::remove);
+        this.minionEntityMap.clear();
+    }
+
+    public void killAllMinions(World world) {
+        LivingEntity livingEntity = getMinionEntity();
+
+        if(livingEntity == null) return;
+        if(world != null && !livingEntity.getWorld().equals(world)) return;
+
+        this.minionEntityMap.values().forEach(LivingEntity::remove);
+        this.minionEntityMap.clear();
+    }
+
+    public boolean killAllSubBosses(World world) {
+        LivingEntity livingEntity = getLivingEntity();
+
+        if(livingEntity == null) return false;
+        if(world != null && !livingEntity.getWorld().equals(world)) return false;
+
+        this.livingEntityMap.values().forEach(LivingEntity::remove);
+        this.livingEntityMap.clear();
+        return true;
     }
 }

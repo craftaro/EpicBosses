@@ -26,10 +26,10 @@ public enum Message {
     Boss_Create_NoEntitySpecified("&c&l(!) &cNo entity type was specified. Make sure to add an entity type! Possible entity types are: \n&7{0}"),
     Boss_Create_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Create_SomethingWentWrong("&c&l(!) &cSomething went wrong in the API class while finalising the boss creation."),
-    Boss_Create_SuccessfullyCreated("&e&lCustomBosses &8» &7A boss has successfully been created with the name &f{0}&7 and the entity type &f{1}&7."),
+    Boss_Create_SuccessfullyCreated("&e&lEpicBosses &8» &7A boss has successfully been created with the name &f{0}&7 and the entity type &f{1}&7."),
 
     Boss_Debug_NoPermission("&c&l(!) &cYou do not have access to this command."),
-    Boss_Debug_Toggled("&e&lCustomBosses &8» &7You have toggled debug mode for &fCustomBosses &7to {0}."),
+    Boss_Debug_Toggled("&e&lEpicBosses &8» &7You have toggled debug mode for &fEpicBosses &7to {0}."),
 
     Boss_DropTable_NoPermission("&c&l(!) &cYou do not have access to this command."),
 
@@ -45,6 +45,7 @@ public enum Message {
             "&e/boss info [name] &8» &7Shows information on the specified boss.\n" +
             "&e/boss nearby (radius) &8» &7Shows the nearby bosses.\n" +
             "&e/boss reload &8» &7Reloads the boss plugin.\n" +
+            "&e/boss killall (world) &8» &7Kills all bosses/minions." +
             "&7\n" +
             "&7Use /boss help 2 to view the next page.\n" +
             "&8&m----*-----------------------------------*----"),
@@ -58,13 +59,41 @@ public enum Message {
             "&e/boss skills &8» &7Shows all current set skills.\n" +
             "&7\n" +
             "&8&m----*-----------------------------------*----"),
+    Boss_Help_Page3(
+            "&8&m----*--------&6&l[ &e&lBoss Help &7(Page 3) &6&l]&8&m--------*----\n" +
+            "&e/boss debug &8» &7Used to toggle the debug aspect of the plugin.\n" +
+            "&e/boss giveegg [name] [name] &8» &7Used to be given a spawn item of the boss.\n" +
+            "&e/boss list &8» &7Shows all the list of current boss entities.\n" +
+            "&e/boss nearby (radius) &8» &7Shows all nearby bosses.\n" +
+            "&e\n" +
+            "&e\n" +
+            "&7\n" +
+            "&8&m----*-----------------------------------*----"),
+
+    Boss_Info_NoPermission("&c&l(!) &cYou do not have access to this command."),
+    Boss_Info_InvalidArgs("&c&l(!) &cYou must use &n/boss info [name]&c to view info on a boss."),
+    Boss_Info_CouldntFindBoss("&c&l(!) &cThe specified boss was not able to be retrieved, please try again."),
+    Boss_Info_Display(
+            "&8&m----*--------&6&l[ &e&l{0} Info &6&l]&8&m--------*----\n" +
+            "&6&lEditing: &f{1}\n" +
+            "&6&lCurrently Active: &f{2}\n" +
+            "&6&lComplete enough to spawn: &f{3}"),
 
     Boss_Items_NoPermission("&c&l(!) &cYou do not have access to this command."),
 
+    Boss_KillAll_WorldNotFound("&c&l(!) &cThe specified world was not found. If you'd like to kill every boss/minion just use &f/boss killall&c without any arguments."),
+    Boss_KillAll_KilledAll("&e&lEpicBosses &8» &7You have killed {0} boss(es) and minions that were currently active on the server."),
+    Boss_KillAll_KilledWorld("&e&lEpicBosses &8» &7You have killed {0} boss(es) and minions that were in the world {1}."),
+    Boss_KillAll_NoPermission("&c&l(!) &cYou do not have access to this command."),
+
+    Boss_List_NoPermission("&c&l(!) &cYou do not have access to this command."),
+
     Boss_Menu_NoPermission("&c&l(!) &cYou do not have access to this command."),
 
+    Boss_Nearby_NoPermission("&c&l(!) &cYou do not have access to this command."),
+
     Boss_Reload_NoPermission("&c&l(!) &cYou do not have access to this command."),
-    Boss_Reload_Successful("&e&lCustomBosses &8» &7All boss data has been reloaded. The process took &f{0}ms&7."),
+    Boss_Reload_Successful("&e&lEpicBosses &8» &7All boss data has been reloaded. The process took &f{0}ms&7."),
 
     Boss_Skills_NoPermission("&c&l(!) &cYou do not have access to this command.");
 

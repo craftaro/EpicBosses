@@ -10,6 +10,7 @@ import com.songoda.epicbosses.utils.mechanics.IOptionalMechanic;
 import com.songoda.epicbosses.utils.potion.PotionEffectConverter;
 import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.potion.PotionEffect;
 
 import java.util.List;
 
@@ -38,7 +39,15 @@ public class PotionMechanic implements IOptionalMechanic<BossEntity> {
             if(livingEntity == null) return false;
 
             if(potionElements != null && !potionElements.isEmpty()) {
-                potionElements.forEach(potionElement -> livingEntity.addPotionEffect(this.potionEffectConverter.from(potionElement)));
+                potionElements.forEach(potionElement -> {
+                    PotionEffect potionEffect = this.potionEffectConverter.from(potionElement);
+
+                    System.out.println(potionEffect);
+                    System.out.println(potionEffect.getAmplifier());
+                    System.out.println(potionEffect.getDuration());
+                    System.out.println(livingEntity);
+                    livingEntity.addPotionEffect(potionEffect);
+                });
             }
         }
 

@@ -28,7 +28,7 @@ public abstract class TargetHandler implements ITarget {
     }
 
     public void runTargetCycle() {
-        ServerUtils.get().runLaterAsync(100L, () -> {
+        ServerUtils.get().runLaterAsync(10L, () -> {
             updateTarget();
 
             if(!getActiveBossHolder().isDead()) runTargetCycle();

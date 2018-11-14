@@ -21,6 +21,7 @@ import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.RandomUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
@@ -54,6 +55,60 @@ public class BossEntityManager {
         this.minionsFileManager = customBosses.getMinionsFileManager();
         this.bossItemFileManager = customBosses.getItemStackManager();
         this.bossesFileManager = customBosses.getBossesFileManager();
+    }
+
+    public double getRadius(ActiveBossHolder activeBossHolder, Location centerLocation) {
+        if(activeBossHolder.isDead()) return Double.MAX_VALUE;
+
+        LivingEntity livingEntity = activeBossHolder.getLivingEntity();
+
+        if(livingEntity == null) return Double.MAX_VALUE;
+
+        Location location = livingEntity.getLocation();
+
+        return centerLocation.distance(location);
+    }
+
+    public List<ActiveBossHolder> getActiveBossHoldersWithinRadius(double radius, Location centerLocation) {
+        List<ActiveBossHolder> activeBossHolders = new ArrayList<>();
+
+        getActiveBossHolders().forEach(activeBossHolder -> {
+            double distance = getRadius(activeBossHolder, centerLocation);
+
+            if(distance > radius) return;
+
+            activeBossHolders.add(activeBossHolder);
+        });
+
+        return activeBossHolders;
+    }
+
+    public int getCurrentlyActive(BossEntity bossEntity) {
+        int amountOfBosses = 0;
+
+        for(ActiveBossHolder activeBossHolder : getActiveBossHolders()) {
+            if(activeBossHolder.getBossEntity().equals(bossEntity)) {
+                amountOfBosses++;
+            }
+        }
+
+        return amountOfBosses;
+    }
+
+    public int killAllHolders(World world) {
+        int amountOfBosses = 0;
+
+        for(ActiveBossHolder activeBossHolder : getActiveBossHolders()) {
+            if(activeBossHolder.killAllSubBosses(world)) {
+                activeBossHolder.killAllMinions(world);
+                activeBossHolder.setDead(true);
+                amountOfBosses++;
+
+                ACTIVE_BOSS_HOLDERS.remove(activeBossHolder);
+            }
+        }
+
+        return amountOfBosses;
     }
 
     //TODO: Add default item if spawnItem is not set.
@@ -216,7 +271,7 @@ public class BossEntityManager {
     }
 
     public ActiveBossHolder getActiveBossHolder(LivingEntity livingEntity) {
-        List<ActiveBossHolder> currentList = new ArrayList<>(ACTIVE_BOSS_HOLDERS);
+        List<ActiveBossHolder> currentList = getActiveBossHolders();
 
         for(ActiveBossHolder activeBossHolder : currentList) {
             for(Map.Entry<Integer, LivingEntity> entry : activeBossHolder.getLivingEntityMap().entrySet()) {
@@ -336,6 +391,10 @@ public class BossEntityManager {
             item.setPickupDelay(20);
             item.setVelocity(vector);
         });
+    }
+
+    private List<ActiveBossHolder> getActiveBossHolders() {
+        return new ArrayList<>(ACTIVE_BOSS_HOLDERS);
     }
 
 }

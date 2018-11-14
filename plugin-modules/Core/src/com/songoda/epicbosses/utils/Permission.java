@@ -13,7 +13,8 @@ public enum Permission {
     admin("boss.admin"),
     create("boss.create"),
     debug("boss.debug"),
-    reload("boss.reload");
+    reload("boss.reload"),
+    nearby("boss.nearby");
 
     @Getter private String permission;
 

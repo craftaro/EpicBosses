@@ -33,4 +33,20 @@ public class BossEntity {
         this.messages = messages;
         this.commands = commands;
     }
+
+    public boolean isCompleteEnoughToSpawn() {
+        boolean complete = true;
+
+        if(this.entityStats == null) return false;
+
+        EntityStatsElement entityStatsElement = this.entityStats.get(0);
+
+        if(entityStatsElement == null) return false;
+
+        MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
+
+        if(mainStatsElement == null) return false;
+
+        return mainStatsElement.getPosition() != null && mainStatsElement.getEntityType() != null && mainStatsElement.getHealth() != null;
+    }
 }
