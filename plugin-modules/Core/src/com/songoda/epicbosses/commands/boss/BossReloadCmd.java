@@ -1,5 +1,7 @@
 package com.songoda.epicbosses.commands.boss;
 
+import com.songoda.epicbosses.entity.BossEntity;
+import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.Permission;
@@ -13,12 +15,14 @@ import org.bukkit.command.CommandSender;
  */
 public class BossReloadCmd extends SubCommand {
 
+    private BossEntityManager bossEntityManager;
     private IReloadable masterReloadable;
 
-    public BossReloadCmd(IReloadable reloadable) {
+    public BossReloadCmd(IReloadable reloadable, BossEntityManager bossEntityManager) {
         super("reload");
 
         this.masterReloadable = reloadable;
+        this.bossEntityManager = bossEntityManager;
     }
 
     @Override
@@ -31,6 +35,7 @@ public class BossReloadCmd extends SubCommand {
         long currentMs = System.currentTimeMillis();
 
         this.masterReloadable.reload();
+        this.bossEntityManager.killAllHolders(null);
         Message.Boss_Reload_Successful.msg(sender, (System.currentTimeMillis() - currentMs));
     }
 }

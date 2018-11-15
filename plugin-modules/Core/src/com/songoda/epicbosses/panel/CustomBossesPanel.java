@@ -6,10 +6,13 @@ import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
+import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
+import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.PanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
@@ -35,41 +38,56 @@ public class CustomBossesPanel extends PanelHandler {
         this.customBosses = customBosses;
         this.bossEntityManager = customBosses.getBossEntityManager();
         this.bossesFileManager = customBosses.getBossesFileManager();
-        this.panel.setParentPanel(this.bossPanelManager.getMainMenu().getPanel());
-
-        fillPanel();
     }
 
     @Override
-    public void fillPanel() {
+    public void initializePanel(PanelBuilder panelBuilder) {
+
+    }
+
+    @Override
+    public void fillPanel(Panel panel) {
         Map<String, BossEntity> currentEntities = new HashMap<>(this.bossesFileManager.getBossEntities());
         List<String> entryList = new ArrayList<>(currentEntities.keySet());
-        int maxPage = this.panel.getMaxPage(entryList);
+        int maxPage = panel.getMaxPage(entryList);
 
-        this.panel.setOnPageChange(((player, currentPage, requestedPage) -> {
+        panel.setOnPageChange(((player, currentPage, requestedPage) -> {
             if(requestedPage < 0 || requestedPage > maxPage) return false;
 
-            loadPage(requestedPage, currentEntities, entryList);
+            loadPage(panel, requestedPage, currentEntities, entryList);
             return true;
         }));
 
-        loadPage(0, currentEntities, entryList);
+        loadPage(panel, 0, currentEntities, entryList);
     }
 
-    private void loadPage(int page, Map<String, BossEntity> bossEntityMap, List<String> entryList) {
-        int fillTo = getPanel().getPanelBuilderSettings().getFillTo();
+    @Override
+    public void openFor(Player player) {
+        Panel panel = getPanelBuilder().getPanel()
+                .setDestroyWhenDone(true)
+                .setCancelClick(true)
+                .setCancelLowerClick(true)
+                .setParentPanel(this.bossPanelManager.getMainMenu().getPanel());
+
+        fillPanel(panel);
+
+        panel.openFor(player);
+    }
+
+    private void loadPage(Panel panel, int page, Map<String, BossEntity> bossEntityMap, List<String> entryList) {
+        int fillTo = panel.getPanelBuilderSettings().getFillTo();
         int startIndex = page * fillTo;
 
         for(int i = startIndex; i < startIndex + fillTo; i++) {
             if(i >= bossEntityMap.size()) {
-                getPanel().setItem(i-startIndex, new ItemStack(Material.AIR), e -> {});
+                panel.setItem(i-startIndex, new ItemStack(Material.AIR), e -> {});
             } else {
                 String name = entryList.get(i);
                 BossEntity entity = bossEntityMap.get(name);
-                ItemStack itemStack = this.bossEntityManager.getSpawnItem(entity);
+                ItemStack itemStack = this.bossEntityManager.getDisplaySpawnItem(entity);
 
                 if(itemStack == null) {
-                    getPanel().setItem(i-startIndex, new ItemStack(Material.AIR), e -> {});
+                    panel.setItem(i-startIndex, new ItemStack(Material.AIR), e -> {});
                     continue;
                 }
 
@@ -77,16 +95,23 @@ public class CustomBossesPanel extends PanelHandler {
                 ItemStack clone = itemStack.clone();
 
                 replaceMap.put("{name}", name);
-                replaceMap.put("{enabled}", ""+!entity.isEditing());
+                replaceMap.put("{enabled}", ""+entity.isEditing());
 
                 ItemStackUtils.applyDisplayName(clone, this.customBosses.getConfig().getString("Display.Bosses.name"), replaceMap);
                 ItemStackUtils.applyDisplayLore(clone, this.customBosses.getConfig().getStringList("Display.Bosses.lore"), replaceMap);
 
-                getPanel().setItem(i-startIndex, clone, e -> {
-                    if(e.getClick() == ClickType.LEFT || e.getClick() == ClickType.SHIFT_LEFT) {
+                panel.setItem(i-startIndex, clone, e -> {
+                    if(e.getClick() == ClickType.RIGHT || e.getClick() == ClickType.SHIFT_RIGHT) {
                         //TODO
-                    } else if(e.getClick() == ClickType.RIGHT || e.getClick() == ClickType.SHIFT_RIGHT) {
-                        e.getWhoClicked().getInventory().addItem(itemStack.clone());
+                    } else if(e.getClick() == ClickType.LEFT || e.getClick() == ClickType.SHIFT_LEFT) {
+                        ItemStack spawnItem = this.bossEntityManager.getSpawnItem(entity);
+
+                        if(spawnItem == null) {
+                            Debug.FAILED_TO_GIVE_SPAWN_EGG.debug(e.getWhoClicked().getName(), name);
+                            return;
+                        }
+
+                        e.getWhoClicked().getInventory().addItem(spawnItem);
                     }
                 });
             }

@@ -11,11 +11,13 @@ import org.bukkit.entity.Player;
  */
 public interface IPanelHandler {
 
+    PanelBuilder getPanelBuilder();
+
     Panel getPanel();
 
     void initializePanel(PanelBuilder panelBuilder);
 
-    void fillPanel();
+    void fillPanel(Panel panel);
 
     void openFor(Player player);
 

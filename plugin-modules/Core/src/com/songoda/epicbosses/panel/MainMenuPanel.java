@@ -2,6 +2,7 @@ package com.songoda.epicbosses.panel;
 
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.utils.Message;
+import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.PanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
@@ -35,6 +36,16 @@ public class MainMenuPanel extends PanelHandler {
                 .setCancelClick(true)
                 .setDestroyWhenDone(false)
                 .setCancelLowerClick(true);
+    }
+
+    @Override
+    public void fillPanel(Panel panel) {
+
+    }
+
+    @Override
+    public void openFor(Player player) {
+        this.panel.openFor(player);
     }
 
     private ClickAction getBossesAction() {

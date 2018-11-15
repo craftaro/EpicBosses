@@ -13,7 +13,7 @@
 #     BackButton: 9                       # back button slot                #
 #     ExitButton: 9                       # exit button slot                #
 MainMenu:
-  name: '&6&lCustomBosses'
+  name: '&b&lEpicBosses'
   slots: 18
   Settings:
     emptySpaceFiller: true
@@ -23,61 +23,61 @@ MainMenu:
   Items:
     '2':
       type: ZOMBIE_SPAWN_EGG
-      name: '&6&lCustomBosses'
+      name: '&b&lCustom Bosses'
       lore:
-      - '&eLeft Click »'
+      - '&3Left Click »'
       - '&7Edit any of the already created'
       - '&7custom bosses.'
       - '&7'
-      - '&eRight Click »'
+      - '&3Right Click »'
       - '&7Create a new custom boss from'
       - '&7scratch.'
       Button: CustomBosses
     '5':
       type: DIAMOND
-      name: '&6&lCustom Items'
+      name: '&b&lCustom Items'
       lore:
-      - '&eLeft Click »'
+      - '&3Left Click »'
       - '&7Edit any of the already created'
       - '&7custom items.'
       - '&7'
-      - '&eRight Click »'
+      - '&3Right Click »'
       - '&7Create a new custom item from'
       - '&7an item in your inventory.'
       Button: CustomItems
     '8':
       type: CLOCK
-      name: '&6&lAutoSpawns'
+      name: '&b&lAuto Spawns'
       lore:
-      - '&eLeft Click »'
+      - '&3Left Click »'
       - '&7Edit any of the already created'
       - '&7auto spawns.'
       - '&7'
-      - '&eRight Click »'
+      - '&3Right Click »'
       - '&7Create a new auto spawn from'
       - '&7scratch.'
       Button: AutoSpawns
     '12':
       type: OAK_PRESSURE_PLATE
-      name: '&6&lDrop Tables'
+      name: '&b&lDrop Tables'
       lore:
-      - '&eLeft Click »'
+      - '&3Left Click »'
       - '&7Edit any of the already created'
       - '&7drop tables.'
       - '&7'
-      - '&eRight Click »'
+      - '&3Right Click »'
       - '&7Create a new drop table from'
       - '&7scratch.'
       Button: DropTables
     '16':
       type: BLAZE_POWDER
-      name: '&6&lCustom Skills'
+      name: '&b&lCustom Skills'
       lore:
-      - '&eLeft Click »'
+      - '&3Left Click »'
       - '&fEdit any of the already created'
       - '&fcustom skills.'
       - '&7'
-      - '&eRight Click »'
+      - '&3Right Click »'
       - '&fCreate a new custom skill from'
       - '&fscratch.'
       Button: CustomSkills

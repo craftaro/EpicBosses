@@ -38,6 +38,7 @@ import java.util.stream.Collectors;
 public class BossEntityManager {
 
     private static final List<ActiveBossHolder> ACTIVE_BOSS_HOLDERS = new ArrayList<>();
+    private static final String DEFAULT_BOSS_MENU_ITEM = "DefaultBossMenuItem";
 
     private MinionMechanicManager minionMechanicManager;
     private DropTableFileManager dropTableFileManager;
@@ -69,18 +70,18 @@ public class BossEntityManager {
         return centerLocation.distance(location);
     }
 
-    public List<ActiveBossHolder> getActiveBossHoldersWithinRadius(double radius, Location centerLocation) {
-        List<ActiveBossHolder> activeBossHolders = new ArrayList<>();
+    public Map<ActiveBossHolder, Double> getActiveBossHoldersWithinRadius(double radius, Location centerLocation) {
+        Map<ActiveBossHolder, Double> distanceMap = new HashMap<>();
 
         getActiveBossHolders().forEach(activeBossHolder -> {
             double distance = getRadius(activeBossHolder, centerLocation);
 
             if(distance > radius) return;
 
-            activeBossHolders.add(activeBossHolder);
+            distanceMap.put(activeBossHolder, distance);
         });
 
-        return activeBossHolders;
+        return distanceMap;
     }
 
     public int getCurrentlyActive(BossEntity bossEntity) {
@@ -111,22 +112,43 @@ public class BossEntityManager {
         return amountOfBosses;
     }
 
-    //TODO: Add default item if spawnItem is not set.
-    public ItemStack getSpawnItem(BossEntity bossEntity) {
+    public ItemStack getDisplaySpawnItem(BossEntity bossEntity) {
         if(bossEntity == null) return null;
-        if(bossEntity.getSpawnItem() == null) return null;
 
-        ItemStackHolder itemStackHolder = BossAPI.getStoredItemStack(bossEntity.getSpawnItem());
+        String spawnItemName = bossEntity.getSpawnItem() == null? DEFAULT_BOSS_MENU_ITEM : bossEntity.getSpawnItem();
+        ItemStackHolder itemStackHolder = BossAPI.getStoredItemStack(spawnItemName);
 
         if(itemStackHolder == null) {
-            Debug.FAILED_TO_LOAD_CUSTOM_ITEM.debug(bossEntity.getSpawnItem());
+            Debug.FAILED_TO_LOAD_CUSTOM_ITEM.debug(spawnItemName);
             return null;
         }
 
         ItemStack itemStack = this.bossItemFileManager.getItemStackConverter().from(itemStackHolder);
 
         if(itemStack == null) {
-            Debug.FAILED_TO_LOAD_CUSTOM_ITEM.debug(bossEntity.getSpawnItem());
+            Debug.FAILED_TO_LOAD_CUSTOM_ITEM.debug(spawnItemName);
+            return null;
+        }
+
+        return itemStack;
+    }
+
+    public ItemStack getSpawnItem(BossEntity bossEntity) {
+        if(bossEntity == null) return null;
+        if(bossEntity.getSpawnItem() == null) return null;
+
+        String spawnItemName = bossEntity.getSpawnItem();
+        ItemStackHolder itemStackHolder = BossAPI.getStoredItemStack(spawnItemName);
+
+        if(itemStackHolder == null) {
+            Debug.FAILED_TO_LOAD_CUSTOM_ITEM.debug(spawnItemName);
+            return null;
+        }
+
+        ItemStack itemStack = this.bossItemFileManager.getItemStackConverter().from(itemStackHolder);
+
+        if(itemStack == null) {
+            Debug.FAILED_TO_LOAD_CUSTOM_ITEM.debug(spawnItemName);
             return null;
         }
 

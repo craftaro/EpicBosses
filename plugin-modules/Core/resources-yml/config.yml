@@ -2,6 +2,7 @@ Settings:
   debug: false
   bossTargetRange: 50.0
   defaultNearbyRadius: 250.0
+  nearbyFormat: '{name} ({distance}m)'
 
   BlockedWorlds:
     enabled: false
@@ -11,6 +12,8 @@ Settings:
 Toggles:
   endermanTeleporting: true
   potionsAffectingBoss: true
+Limits:
+  maxNearbyRadius: 500.0
 Hooks:
   ASkyBlock:
     enabled: false
@@ -30,13 +33,13 @@ Hooks:
     - 'blocked_region2'
 Display:
   Bosses:
-    name: '&e&l{name}'
+    name: '&b&l{name}'
     lore:
-    - '&eEnabled: &7{enabled}'
+    - '&3Editing: &f{enabled}'
     - '&7'
-    - '&eLeft Click »'
-    - '&7Edit the custom boss.'
-    - '&7'
-    - '&eRight Click »'
+    - '&3Left Click »'
     - '&7Get spawn item for custom'
     - '&7boss.'
+    - '&7'
+    - '&3Right Click »'
+    - '&7Edit the custom boss.'

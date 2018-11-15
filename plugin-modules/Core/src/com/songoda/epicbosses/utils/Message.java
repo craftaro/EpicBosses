@@ -26,10 +26,10 @@ public enum Message {
     Boss_Create_NoEntitySpecified("&c&l(!) &cNo entity type was specified. Make sure to add an entity type! Possible entity types are: \n&7{0}"),
     Boss_Create_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Create_SomethingWentWrong("&c&l(!) &cSomething went wrong in the API class while finalising the boss creation."),
-    Boss_Create_SuccessfullyCreated("&e&lEpicBosses &8» &7A boss has successfully been created with the name &f{0}&7 and the entity type &f{1}&7."),
+    Boss_Create_SuccessfullyCreated("&b&lEpicBosses &8» &7A boss has successfully been created with the name &f{0}&7 and the entity type &f{1}&7."),
 
     Boss_Debug_NoPermission("&c&l(!) &cYou do not have access to this command."),
-    Boss_Debug_Toggled("&e&lEpicBosses &8» &7You have toggled debug mode for &fEpicBosses &7to {0}."),
+    Boss_Debug_Toggled("&b&lEpicBosses &8» &7You have toggled debug mode for &fEpicBosses &7to {0}."),
 
     Boss_DropTable_NoPermission("&c&l(!) &cYou do not have access to this command."),
 
@@ -38,35 +38,34 @@ public enum Message {
     Boss_Edit_CannotSpawn("&c&l(!) &cYou cannot spawn this boss while editing is enabled. If you think this is a mistake please contact an administrator to disable the editing of the boss."),
 
     Boss_Help_Page1(
-            "&8&m----*--------&6&l[ &e&lBoss Help &7(Page 1) &6&l]&8&m--------*----\n" +
-            "&e/boss help (page) &8» &7Displays boss commands.\n" +
-            "&e/boss create [name] [entity] &8» &7Start the creation of a boss.\n" +
-            "&e/boss edit (name) &8» &7Edit the specified boss.\n" +
-            "&e/boss info [name] &8» &7Shows information on the specified boss.\n" +
-            "&e/boss nearby (radius) &8» &7Shows the nearby bosses.\n" +
-            "&e/boss reload &8» &7Reloads the boss plugin.\n" +
-            "&e/boss killall (world) &8» &7Kills all bosses/minions." +
+            "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 1/3) &3&l]&8&m--------*----\n" +
+            "&b/boss help (page) &8» &7Displays boss commands.\n" +
+            "&b/boss create [name] [entity] &8» &7Start the creation of a boss.\n" +
+            "&b/boss edit (name) &8» &7Edit the specified boss.\n" +
+            "&b/boss info [name] &8» &7Shows information on the specified boss.\n" +
+            "&b/boss nearby (radius) &8» &7Shows the nearby bosses.\n" +
+            "&b/boss reload &8» &7Reloads the boss plugin.\n" +
+            "&b/boss killall (world) &8» &7Kills all bosses/minions." +
             "&7\n" +
             "&7Use /boss help 2 to view the next page.\n" +
             "&8&m----*-----------------------------------*----"),
     Boss_Help_Page2(
-            "&8&m----*--------&6&l[ &e&lBoss Help &7(Page 2) &6&l]&8&m--------*----\n" +
-            "&e/boss spawn [name] (location) &8» &7Spawns a boss at your location or the specified location.\n" +
+            "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 2/3) &3&l]&8&m--------*----\n" +
+            "&b/boss spawn [name] (location) &8» &7Spawns a boss at your location or the specified location.\n" +
             " &7&o(Separate location with commas, an example is: world,0,100,0)\n" +
-            "&e/boss time (section) &8» &7Shows the time left till next auto spawn.\n" +
-            "&e/boss droptable &8» &7Shows all current drop tables.\n" +
-            "&e/boss items &8» &7Shows all current custom items.\n" +
-            "&e/boss skills &8» &7Shows all current set skills.\n" +
+            "&b/boss time (section) &8» &7Shows the time left till next auto spawn.\n" +
+            "&b/boss droptable &8» &7Shows all current drop tables.\n" +
+            "&b/boss items &8» &7Shows all current custom items.\n" +
+            "&b/boss skills &8» &7Shows all current set skills.\n" +
             "&7\n" +
             "&8&m----*-----------------------------------*----"),
     Boss_Help_Page3(
-            "&8&m----*--------&6&l[ &e&lBoss Help &7(Page 3) &6&l]&8&m--------*----\n" +
-            "&e/boss debug &8» &7Used to toggle the debug aspect of the plugin.\n" +
-            "&e/boss giveegg [name] [name] &8» &7Used to be given a spawn item of the boss.\n" +
-            "&e/boss list &8» &7Shows all the list of current boss entities.\n" +
-            "&e/boss nearby (radius) &8» &7Shows all nearby bosses.\n" +
-            "&e\n" +
-            "&e\n" +
+            "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 3/3) &3&l]&8&m--------*----\n" +
+            "&b/boss debug &8» &7Used to toggle the debug aspect of the plugin.\n" +
+            "&b/boss giveegg [name] [player] &8» &7Used to be given a spawn item of the boss.\n" +
+            "&b/boss list &8» &7Shows all the list of current boss entities.\n" +
+            "&b\n" +
+            "&b\n" +
             "&7\n" +
             "&8&m----*-----------------------------------*----"),
 
@@ -74,16 +73,16 @@ public enum Message {
     Boss_Info_InvalidArgs("&c&l(!) &cYou must use &n/boss info [name]&c to view info on a boss."),
     Boss_Info_CouldntFindBoss("&c&l(!) &cThe specified boss was not able to be retrieved, please try again."),
     Boss_Info_Display(
-            "&8&m----*--------&6&l[ &e&l{0} Info &6&l]&8&m--------*----\n" +
-            "&6&lEditing: &f{1}\n" +
-            "&6&lCurrently Active: &f{2}\n" +
-            "&6&lComplete enough to spawn: &f{3}"),
+            "&8&m----*--------&3&l[ &b&l{0} Info &3&l]&8&m--------*----\n" +
+            "&bEditing: &f{1}\n" +
+            "&bCurrently Active: &f{2}\n" +
+            "&bComplete enough to spawn: &f{3}"),
 
     Boss_Items_NoPermission("&c&l(!) &cYou do not have access to this command."),
 
     Boss_KillAll_WorldNotFound("&c&l(!) &cThe specified world was not found. If you'd like to kill every boss/minion just use &f/boss killall&c without any arguments."),
-    Boss_KillAll_KilledAll("&e&lEpicBosses &8» &7You have killed {0} boss(es) and minions that were currently active on the server."),
-    Boss_KillAll_KilledWorld("&e&lEpicBosses &8» &7You have killed {0} boss(es) and minions that were in the world {1}."),
+    Boss_KillAll_KilledAll("&b&lEpicBosses &8» &7You have killed {0} boss(es) and minions that were currently active on the server."),
+    Boss_KillAll_KilledWorld("&b&lEpicBosses &8» &7You have killed {0} boss(es) and minions that were in the world {1}."),
     Boss_KillAll_NoPermission("&c&l(!) &cYou do not have access to this command."),
 
     Boss_List_NoPermission("&c&l(!) &cYou do not have access to this command."),
@@ -91,9 +90,12 @@ public enum Message {
     Boss_Menu_NoPermission("&c&l(!) &cYou do not have access to this command."),
 
     Boss_Nearby_NoPermission("&c&l(!) &cYou do not have access to this command."),
+    Boss_Nearby_MaxRadius("&c&l(!) &cYou cannot check for bosses any further then &f{0}&c away from your position."),
+    Boss_Nearby_NoneNearby("&b&lEpicBosses &8» &7There is currently no nearby bosses."),
+    Boss_Nearby_Near("&b&lEpicBosses &8» &7Nearby bosses: &f{0}."),
 
     Boss_Reload_NoPermission("&c&l(!) &cYou do not have access to this command."),
-    Boss_Reload_Successful("&e&lEpicBosses &8» &7All boss data has been reloaded. The process took &f{0}ms&7."),
+    Boss_Reload_Successful("&b&lEpicBosses &8» &7All boss data has been reloaded. The process took &f{0}ms&7."),
 
     Boss_Skills_NoPermission("&c&l(!) &cYou do not have access to this command.");
 

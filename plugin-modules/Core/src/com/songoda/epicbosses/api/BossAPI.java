@@ -197,6 +197,7 @@ public class BossAPI {
             return null;
         }
 
+        PLUGIN.getBossesFileManager().saveBossEntity(name, bossEntity);
         PLUGIN.getBossesFileManager().save();
 
         return bossEntity;

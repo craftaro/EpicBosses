@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.utils.panel;
 
+import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import lombok.Getter;
 import com.songoda.epicbosses.utils.ICloneable;
 import com.songoda.epicbosses.utils.StringUtils;
@@ -49,6 +50,7 @@ public class Panel implements Listener, ICloneable<Panel> {
     //--------------------------------------------------
 
     private final Map<Integer, ClickAction> targettedSlotActions = new HashMap<>();
+    private final List<Inventory> connectedInventories = new ArrayList<>();
     private final List<ClickAction> allSlotActions = new ArrayList<>();
 
     private final Map<UUID, Integer> currentPageContainer = new HashMap<>();
@@ -84,6 +86,7 @@ public class Panel implements Listener, ICloneable<Panel> {
         }
 
         this.inventory = size % 9 == 0 ? Bukkit.createInventory(null, size, StringUtils.get().translateColor(title)) : Bukkit.createInventory(null, InventoryType.HOPPER, StringUtils.get().translateColor(title));
+        this.connectedInventories.add(this.inventory);
         PANELS.add(this);
     }
 
@@ -111,6 +114,7 @@ public class Panel implements Listener, ICloneable<Panel> {
 
         fillEmptySpace();
 
+        this.connectedInventories.add(this.inventory);
         PANELS.add(this);
     }
 
@@ -126,7 +130,6 @@ public class Panel implements Listener, ICloneable<Panel> {
         if(!getInventory().equals(event.getInventory())) return;
 
         Player player = (Player) event.getWhoClicked();
-        Inventory inventory = event.getInventory();
 
         if((!isCancelClick()) && (event.getRawSlot() > inventory.getSize())) {
             event.setCancelled(true);
@@ -361,6 +364,22 @@ public class Panel implements Listener, ICloneable<Panel> {
         return this;
     }
 
+    public Panel setParentPanel(PanelBuilder panelBuilder, boolean cancelClick, boolean destroyWhenDone, boolean cancelLowerClick) {
+        if(!this.panelBuilderSettings.isBackButton()) return this;
+
+        int slot = this.panelBuilderSettings.getBackButtonSlot() - 1;
+
+        setOnClick(slot, event -> {
+            Panel panel = panelBuilder.getPanel()
+                    .setCancelClick(cancelClick)
+                    .setDestroyWhenDone(destroyWhenDone)
+                    .setCancelLowerClick(cancelLowerClick);
+
+            panel.openFor((Player) event.getWhoClicked());
+        });
+        return this;
+    }
+
     public Panel setExitButton() {
         if(!this.panelBuilderSettings.isExitButton()) return this;
 
@@ -425,6 +444,23 @@ public class Panel implements Listener, ICloneable<Panel> {
                 getInventory().setItem(i, itemStack);
             }
         }
+    }
+
+    public Inventory cloneInventory() {
+        Inventory thisInventory = getInventory();
+        Inventory newInventory = Bukkit.createInventory(thisInventory.getHolder(), thisInventory.getSize(), thisInventory.getTitle());
+
+        for(int i = 0; i < thisInventory.getSize(); i++) {
+            ItemStack itemStack = thisInventory.getItem(i);
+
+            if(itemStack == null) continue;
+
+            newInventory.setItem(i, itemStack);
+        }
+
+        this.connectedInventories.add(newInventory);
+
+        return newInventory;
     }
 
     @Override

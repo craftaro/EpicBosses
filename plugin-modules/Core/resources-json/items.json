@@ -1,4 +1,7 @@
 {
+  "DefaultBossMenuItem": {
+    "type": "BARRIER"
+  },
   "SKSpawnItem": {
     "type": "SKELETON_SPAWN_EGG",
     "name": "&6&lSkeleton King Boss Spawn Egg",

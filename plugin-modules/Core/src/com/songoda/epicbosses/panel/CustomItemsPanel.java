@@ -1,8 +1,10 @@
 package com.songoda.epicbosses.panel;
 
 import com.songoda.epicbosses.managers.BossPanelManager;
+import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.PanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
+import org.bukkit.entity.Player;
 
 /**
  * @author Charles Cullen
@@ -15,12 +17,20 @@ public class CustomItemsPanel extends PanelHandler {
 
     public CustomItemsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
         super(bossPanelManager, panelBuilder);
-
-        fillPanel();
     }
 
     @Override
-    public void fillPanel() {
-        this.panel.setParentPanel(this.bossPanelManager.getMainMenu().getPanel());
+    public void initializePanel(PanelBuilder panelBuilder) {
+
+    }
+
+    @Override
+    public void fillPanel(Panel panel) {
+
+    }
+
+    @Override
+    public void openFor(Player player) {
+
     }
 }
