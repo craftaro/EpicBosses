@@ -17,7 +17,9 @@ public enum Message {
 
     General_LocationFormat("{world}, {x}, {y}, {z}"),
     General_MustBePlayer("&c&l(!) &cYou must be a player to use this command."),
+    General_NotOnline("&c&l(!) &cThe specified player, {0}, is not online or a valid player."),
     General_CannotSpawn("&c&l(!) &cYou cannot spawn a boss at this location! &c&l(!)"),
+    General_NotNumber("&c&l(!) &cThe number you have provided is not a proper number."),
     General_Disarmed("&4&l(!) &f&lYOU HAVE BEEN DISARMED! CHECK THE GROUND AROUND YOU FOR YOUR ITEM!"),
 
     Boss_Create_EntityTypeNotFound("&c&l(!) &cThe specified entity type {0} was not found. If you think this is an error please contact &fAMinecraftDev&c."),
@@ -36,6 +38,13 @@ public enum Message {
     Boss_Edit_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Edit_ItemStackHolderNull("&c&l(!) &cThe itemstack name that is provided for the spawn item doesn't exist or wasn't found."),
     Boss_Edit_CannotSpawn("&c&l(!) &cYou cannot spawn this boss while editing is enabled. If you think this is a mistake please contact an administrator to disable the editing of the boss."),
+
+    Boss_GiveEgg_NoPermission("&c&l(!) &cYou do not have access to this command."),
+    Boss_GiveEgg_InvalidArgs("&c&l(!) &cYou must use &n/boss giveegg [name] [player] (amount)&c to give an egg."),
+    Boss_GiveEgg_InvalidBoss("&c&l(!) &cThe specified boss is not a valid type."),
+    Boss_GiveEgg_NotSet("&c&l(!) &cThe spawn item for the {0} boss has not been set yet."),
+    Boss_GiveEgg_Given("&b&lEpicBosses &8» &7You have given {0} {1}x {2}'s boss spawn item."),
+    Boss_GiveEgg_Received("&b&lEpicBosses &8» &7You have received {0}x {1} boss spawn item(s)."),
 
     Boss_Help_Page1(
             "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 1/3) &3&l]&8&m--------*----\n" +
@@ -62,7 +71,7 @@ public enum Message {
     Boss_Help_Page3(
             "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 3/3) &3&l]&8&m--------*----\n" +
             "&b/boss debug &8» &7Used to toggle the debug aspect of the plugin.\n" +
-            "&b/boss giveegg [name] [player] &8» &7Used to be given a spawn item of the boss.\n" +
+            "&b/boss giveegg [name] [player] (amount) &8» &7Used to be given a spawn item of the boss.\n" +
             "&b/boss list &8» &7Shows all the list of current boss entities.\n" +
             "&b\n" +
             "&b\n" +

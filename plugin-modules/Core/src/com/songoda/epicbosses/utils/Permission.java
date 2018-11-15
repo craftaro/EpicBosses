@@ -13,6 +13,7 @@ public enum Permission {
     admin("boss.admin"),
     create("boss.create"),
     debug("boss.debug"),
+    give("boss.give"),
     reload("boss.reload"),
     nearby("boss.nearby");
 
