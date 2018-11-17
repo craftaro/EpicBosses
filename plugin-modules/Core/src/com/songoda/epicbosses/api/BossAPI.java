@@ -4,6 +4,8 @@ import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.entity.elements.*;
+import com.songoda.epicbosses.events.PreBossSpawnEvent;
+import com.songoda.epicbosses.events.PreBossSpawnItemEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.files.CommandsFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
@@ -12,9 +14,12 @@ import com.songoda.epicbosses.skills.custom.Minions;
 import com.songoda.epicbosses.skills.types.CustomSkill;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.EntityFinder;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -258,9 +263,11 @@ public class BossAPI {
      *
      * @param bossEntity - targetted BossEntity
      * @param location - Location to spawn the boss.
+     * @param player - Player who spawned the boss.
+     * @param itemStack - The itemstack used to spawn the boss.
      * @return ActiveBossHolder class with stored information
      */
-    public static ActiveBossHolder spawnNewBoss(BossEntity bossEntity, Location location) {
+    public static ActiveBossHolder spawnNewBoss(BossEntity bossEntity, Location location, Player player, ItemStack itemStack) {
 //        if(bossEntity.isEditing()) {
 //            Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
 //            return null;
@@ -268,7 +275,25 @@ public class BossAPI {
 
         String name = PLUGIN.getBossEntityContainer().getName(bossEntity);
 
-        return PLUGIN.getBossEntityManager().createActiveBossHolder(bossEntity, location, name);
+        ActiveBossHolder activeBossHolder = PLUGIN.getBossEntityManager().createActiveBossHolder(bossEntity, location, name);
+
+        if(activeBossHolder == null) {
+            Debug.FAILED_TO_CREATE_ACTIVE_BOSS_HOLDER.debug();
+            return null;
+        }
+
+        PreBossSpawnEvent preBossSpawnEvent;
+
+        if(player != null && itemStack != null) {
+            preBossSpawnEvent = new PreBossSpawnItemEvent(activeBossHolder, player, itemStack);
+        } else {
+            preBossSpawnEvent = new PreBossSpawnEvent(activeBossHolder);
+        }
+
+        PLUGIN.getBossTargetManager().initializeTargetHandler(activeBossHolder);
+        ServerUtils.get().callEvent(preBossSpawnEvent);
+
+        return activeBossHolder;
     }
 
     /**

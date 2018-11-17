@@ -6,6 +6,7 @@ import com.songoda.epicbosses.container.BossEntityContainer;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.events.BossSpawnEvent;
 import com.songoda.epicbosses.events.PreBossSpawnEvent;
+import com.songoda.epicbosses.events.PreBossSpawnItemEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.BossLocationManager;
@@ -94,18 +95,11 @@ public class BossSpawnListener implements Listener {
 
         event.setCancelled(true);
 
-        ActiveBossHolder activeBossHolder = BossAPI.spawnNewBoss(bossEntity, location);
+        ActiveBossHolder activeBossHolder = BossAPI.spawnNewBoss(bossEntity, location, player, itemStack);
 
         if(activeBossHolder == null) {
-            Debug.FAILED_TO_CREATE_ACTIVE_BOSS_HOLDER.debug();
             event.setCancelled(true);
-            return;
         }
-
-        PreBossSpawnEvent preBossSpawnEvent = new PreBossSpawnEvent(activeBossHolder, player, itemStack);
-
-        this.bossTargetManager.initializeTargetHandler(activeBossHolder);
-        ServerUtils.get().callEvent(preBossSpawnEvent);
     }
 
     @EventHandler
@@ -113,12 +107,16 @@ public class BossSpawnListener implements Listener {
         ActiveBossHolder activeBossHolder = event.getActiveBossHolder();
         BossEntity bossEntity = activeBossHolder.getBossEntity();
         Location location = activeBossHolder.getLocation();
-        ItemStack itemStack = event.getItemStackUsed().clone();
-        Player player = event.getPlayer();
 
-        itemStack.setAmount(1);
-        player.getInventory().removeItem(itemStack);
-        player.updateInventory();
+        if(event instanceof PreBossSpawnItemEvent) {
+            PreBossSpawnItemEvent preBossSpawnItemEvent = (PreBossSpawnItemEvent) event;
+            ItemStack itemStack = preBossSpawnItemEvent.getItemStackUsed().clone();
+            Player player = preBossSpawnItemEvent.getPlayer();
+
+            itemStack.setAmount(1);
+            player.getInventory().removeItem(itemStack);
+            player.updateInventory();
+        }
 
         List<String> commands = this.bossEntityManager.getOnSpawnCommands(bossEntity);
         List<String> messages = this.bossEntityManager.getOnSpawnMessage(bossEntity);

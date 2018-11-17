@@ -1,7 +1,9 @@
 package com.songoda.epicbosses.utils;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.World;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -35,6 +37,24 @@ public class StringUtils {
                 .replace("{x}", ""+x)
                 .replace("{y}", ""+y)
                 .replace("{z}", ""+z);
+    }
+
+    public Location fromStringToLocation(String input) {
+        String[] split = input.split(",");
+
+        if(split.length != 4) return null;
+
+        String worldInput = split[0];
+        String xInput = split[1];
+        String yInput = split[2];
+        String zInput = split[3];
+        World world = Bukkit.getWorld(worldInput);
+
+        if(NumberUtils.get().isInt(xInput) && NumberUtils.get().isInt(yInput) && NumberUtils.get().isInt(zInput)) {
+            return new Location(world, Integer.valueOf(xInput), Integer.valueOf(yInput), Integer.valueOf(zInput));
+        }
+
+        return null;
     }
 
     public <T> String appendList(List<T> list) {

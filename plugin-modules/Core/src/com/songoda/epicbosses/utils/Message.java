@@ -112,7 +112,14 @@ public enum Message {
     Boss_Shop_NotEnoughBalance("&c&l(!) &cYou do not have enough money to make this purchase! You need &a$&f{0}&c more."),
     Boss_Shop_Purchased("&b&lEpicBosses &8» &7You have purchased &f1x {0}&7."),
 
-    Boss_Skills_NoPermission("&c&l(!) &cYou do not have access to this command.");
+    Boss_Skills_NoPermission("&c&l(!) &cYou do not have access to this command."),
+
+    Boss_Spawn_NoPermission("&c&l(!) &cYou do not have access to this command."),
+    Boss_Spawn_InvalidArgs("&c&l(!) &cYou must use &n/boss spawn [name] (location)&c to spawn a boss."),
+    Boss_Spawn_InvalidLocation("&c&l(!) &cThe location string you have entered is not a valid location string. A valid location string should look like this: &fworld,100,65,100"),
+    Boss_Spawn_MustBePlayer("&c&l(!) &cTo use this command without an input of location you must be a player."),
+    Boss_Spawn_InvalidBoss("&c&l(!) &cThe specified boss is not a valid type."),
+    Boss_Spawn_Spawned("&c&l(!) &cYou have spawned a {0} boss at {1}.");
 
     private static FileConfiguration LANG;
 
