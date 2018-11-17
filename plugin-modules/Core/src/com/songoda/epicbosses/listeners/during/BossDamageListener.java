@@ -36,8 +36,6 @@ public class BossDamageListener implements Listener {
         double damage = event.getDamage();
         Player player = null;
 
-        System.out.println(livingEntity.getActivePotionEffects());
-
         if(activeBossHolder == null) return;
 
         if(entityDamaging instanceof Player) {

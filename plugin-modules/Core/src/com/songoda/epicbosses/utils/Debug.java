@@ -47,7 +47,9 @@ public enum Debug {
 
     SKILL_COMMANDS_ARE_EMPTY("The commands list for the skill {0} is empty."),
     SKILL_POTIONS_ARE_EMPTY("The potions list for the skill {0} is empty."),
-    SKILL_CAGE_INVALID_MATERIAL("Invalid block type {0} for the skill {1}.");
+    SKILL_CAGE_INVALID_MATERIAL("Invalid block type {0} for the skill {1}."),
+    SKILL_EMPTY_SKILLS("The skills list for the {0} boss is empty."),
+    SKILL_NOT_FOUND("The specified skill was not found!");
 
     private static CustomBosses PLUGIN;
 
