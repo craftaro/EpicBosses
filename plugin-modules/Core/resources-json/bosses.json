@@ -1,8 +1,10 @@
 {
   "SkeletonKing": {
-    "editing": true,
     "spawnItem": "SKSpawnItem",
     "targeting": "RandomNearby",
+    "editing": true,
+    "buyable": true,
+    "price": 500000.0,
     "entityStats": [
       {
         "mainStats": {

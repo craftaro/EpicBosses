@@ -42,7 +42,7 @@ public class BossCommandManager implements ILoadable {
         this.commandService.registerSubCommand(new BossMenuCmd(this.customBosses.getBossPanelManager()));
         this.commandService.registerSubCommand(new BossNearbyCmd(this.customBosses));
         this.commandService.registerSubCommand(new BossReloadCmd(this.customBosses, this.customBosses.getBossEntityManager()));
-        this.commandService.registerSubCommand(new BossShopCmd());
+        this.commandService.registerSubCommand(new BossShopCmd(this.customBosses));
         this.commandService.registerSubCommand(new BossSkillsCmd(this.customBosses.getBossPanelManager()));
         this.commandService.registerSubCommand(new BossSpawnCmd());
         this.commandService.registerSubCommand(new BossTimeCmd());

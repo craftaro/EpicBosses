@@ -10,6 +10,7 @@ Settings:
     - 'world_the_end'
     - 'world_nether'
 Toggles:
+  bossShop: true
   endermanTeleporting: true
   potionsAffectingBoss: true
 Limits:
@@ -32,7 +33,10 @@ Hooks:
     - 'blocked_region1'
     - 'blocked_region2'
 Display:
+  AutoSpawns:
+    menuName: '&b&lEpicBosses &3&lAutoSpawns'
   Bosses:
+    menuName: '&b&lEpicBosses &3&lItems'
     name: '&b&l{name}'
     lore:
     - '&3Editing: &f{enabled}'
@@ -43,3 +47,14 @@ Display:
     - '&7'
     - '&3Right Click »'
     - '&7Edit the custom boss.'
+  DropTable:
+    menuName: '&b&lEpicBosses &3&lDropTables'
+  Items:
+    menuName: '&b&lEpicBosses &3&lCustom Items'
+  Shop:
+    menuName: '&b&lEpicBosses &3&lShop'
+    name: '&b&lBuy {name}''s Egg'
+    lore:
+    - '&3Cost: &a$&f{price}'
+  Skills:
+    menuName: '&b&lEpicBosses &3&lSkills'

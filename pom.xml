@@ -19,7 +19,7 @@
     </modules>
 
     <properties>
-        <plugin.version>1.0.0-SNAPSHOT-U52</plugin.version>
+        <plugin.version>1.0.0-SNAPSHOT-U53</plugin.version>
         <plugin.name>EpicBosses</plugin.name>
         <plugin.main>com.songoda.epicbosses.CustomBosses</plugin.main>
         <plugin.author>AMinecraftDev</plugin.author>

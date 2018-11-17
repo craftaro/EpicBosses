@@ -1,6 +1,7 @@
 package com.songoda.epicbosses;
 
 import com.songoda.epicbosses.container.MinionEntityContainer;
+import com.songoda.epicbosses.utils.dependencies.VaultHelper;
 import lombok.Getter;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.commands.BossCmd;
@@ -56,19 +57,27 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     @Getter private VersionHandler versionHandler;
     @Getter private DebugManager debugManager;
 
-
     @Getter private YmlFileHandler langFileHandler, editorFileHandler, configFileHandler;
     @Getter private FileConfiguration lang, editor, config;
+
+    @Getter private VaultHelper vaultHelper;
 
     @Getter private boolean debug = false;
 
     @Override
     public void onEnable() {
+        Debug.setPlugin(this);
+
         instance = this;
+        vaultHelper = new VaultHelper();
 
         long beginMs = System.currentTimeMillis();
 
-        Debug.setPlugin(this);
+        if(!this.vaultHelper.isConnected()) {
+            Debug.FAILED_TO_CONNECT_TO_VAULT.debug();
+            return;
+        }
+
         new BossAPI(this);
         new Metrics(this);
         new ServerUtils(this);

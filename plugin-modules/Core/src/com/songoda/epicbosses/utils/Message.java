@@ -46,6 +46,7 @@ public enum Message {
     Boss_GiveEgg_Given("&b&lEpicBosses &8» &7You have given {0} {1}x {2}'s boss spawn item."),
     Boss_GiveEgg_Received("&b&lEpicBosses &8» &7You have received {0}x {1} boss spawn item(s)."),
 
+    Boss_Help_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Help_Page1(
             "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 1/3) &3&l]&8&m--------*----\n" +
             "&b/boss help (page) &8» &7Displays boss commands.\n" +
@@ -105,6 +106,11 @@ public enum Message {
 
     Boss_Reload_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Reload_Successful("&b&lEpicBosses &8» &7All boss data has been reloaded. The process took &f{0}ms&7."),
+
+    Boss_Shop_Disabled("&c&l(!) &cThe boss shop is currently disabled."),
+    Boss_Shop_NoPermission("&c&l(!) &cYou do not have access to this command."),
+    Boss_Shop_NotEnoughBalance("&c&l(!) &cYou do not have enough money to make this purchase! You need &a$&f{0}&c more."),
+    Boss_Shop_Purchased("&b&lEpicBosses &8» &7You have purchased &f1x {0}&7."),
 
     Boss_Skills_NoPermission("&c&l(!) &cYou do not have access to this command.");
 

@@ -189,7 +189,7 @@ public class BossAPI {
         MessagesElement messagesElement = new MessagesElement();
         CommandsElement commandsElement = new CommandsElement();
 
-        BossEntity bossEntity = new BossEntity(true, null, entityStatsElements, skillsElement, dropsElement, messagesElement, commandsElement);
+        BossEntity bossEntity = new BossEntity(true, null, false, 100.0, entityStatsElements, skillsElement, dropsElement, messagesElement, commandsElement);
         boolean result = PLUGIN.getBossEntityContainer().saveData(name, bossEntity);
 
         if (!result) {

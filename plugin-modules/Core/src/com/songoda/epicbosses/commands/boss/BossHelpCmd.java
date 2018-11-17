@@ -2,6 +2,7 @@ package com.songoda.epicbosses.commands.boss;
 
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.Permission;
 import com.songoda.epicbosses.utils.command.SubCommand;
 import org.bukkit.command.CommandSender;
 
@@ -18,25 +19,31 @@ public class BossHelpCmd extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        int pageNumber = 0;
+        if(Permission.admin.hasPermission(sender) || Permission.help.hasPermission(sender)) {
+            int pageNumber = 0;
 
-        if(args.length > 1) {
-            Integer newNumber = NumberUtils.get().getInteger(args[1]);
+            if(args.length > 1) {
+                Integer newNumber = NumberUtils.get().getInteger(args[1]);
 
-            if(newNumber != null) pageNumber = newNumber;
+                if(newNumber != null) pageNumber = newNumber;
+            }
+
+            switch (pageNumber) {
+                default:
+                case 1:
+                    Message.Boss_Help_Page1.msg(sender);
+                    break;
+                case 2:
+                    Message.Boss_Help_Page2.msg(sender);
+                    break;
+                case 3:
+                    Message.Boss_Help_Page3.msg(sender);
+                    break;
+            }
+
+            return;
         }
 
-        switch (pageNumber) {
-            default:
-            case 1:
-                Message.Boss_Help_Page1.msg(sender);
-                break;
-            case 2:
-                Message.Boss_Help_Page2.msg(sender);
-                break;
-            case 3:
-                Message.Boss_Help_Page3.msg(sender);
-                break;
-        }
+        Message.Boss_Help_NoPermission.msg(sender);
     }
 }

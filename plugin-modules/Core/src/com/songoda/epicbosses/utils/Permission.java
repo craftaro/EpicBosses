@@ -13,9 +13,12 @@ public enum Permission {
     admin("boss.admin"),
     create("boss.create"),
     debug("boss.debug"),
+    edit("boss.edit"),
     give("boss.give"),
+    help("boss.help"),
+    nearby("boss.nearby"),
     reload("boss.reload"),
-    nearby("boss.nearby");
+    shop("boss.shop");
 
     @Getter private String permission;
 

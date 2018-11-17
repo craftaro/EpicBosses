@@ -15,16 +15,17 @@ import java.util.List;
  */
 public class BossEntity {
 
+    @Expose @Getter @Setter private String spawnItem, targeting;
+    @Expose @Getter @Setter private boolean editing, buyable;
+    @Expose @Getter @Setter private Double price;
+
     @Expose @Getter private final List<EntityStatsElement> entityStats;
     @Expose @Getter private final MessagesElement messages;
     @Expose @Getter private final CommandsElement commands;
     @Expose @Getter private final SkillsElement skills;
     @Expose @Getter private final DropsElement drops;
 
-    @Expose @Getter @Setter private String spawnItem, targeting;
-    @Expose @Getter @Setter private boolean editing;
-
-    public BossEntity(boolean editing, String spawnItem, List<EntityStatsElement> entityStats, SkillsElement skills, DropsElement drops, MessagesElement messages, CommandsElement commands) {
+    public BossEntity(boolean editing, String spawnItem, boolean buyable, Double price, List<EntityStatsElement> entityStats, SkillsElement skills, DropsElement drops, MessagesElement messages, CommandsElement commands) {
         this.editing = editing;
         this.entityStats = entityStats;
         this.spawnItem = spawnItem;
@@ -32,11 +33,11 @@ public class BossEntity {
         this.drops = drops;
         this.messages = messages;
         this.commands = commands;
+        this.buyable = buyable;
+        this.price = price;
     }
 
     public boolean isCompleteEnoughToSpawn() {
-        boolean complete = true;
-
         if(this.entityStats == null) return false;
 
         EntityStatsElement entityStatsElement = this.entityStats.get(0);
@@ -48,5 +49,9 @@ public class BossEntity {
         if(mainStatsElement == null) return false;
 
         return mainStatsElement.getPosition() != null && mainStatsElement.getEntityType() != null && mainStatsElement.getHealth() != null;
+    }
+
+    public boolean canBeBought() {
+        return /*!isEditing() &&*/ isBuyable() && (getPrice() != null) && isCompleteEnoughToSpawn();
     }
 }

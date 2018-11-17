@@ -240,10 +240,10 @@ public class BossEntityManager {
     }
 
     public Map<BossEntity, ItemStack> getMapOfEntitiesAndSpawnItems() {
-        Map<String, BossEntity> currentEntities = new HashMap<>(this.bossesFileManager.getBossEntities());
+        List<BossEntity> currentEntities = this.bossesFileManager.getBossEntities();
         Map<BossEntity, ItemStack> newMap = new HashMap<>();
 
-        currentEntities.forEach((name, bossEntity) -> newMap.put(bossEntity, getSpawnItem(bossEntity)));
+        currentEntities.forEach(bossEntity -> newMap.put(bossEntity, getSpawnItem(bossEntity)));
 
         return newMap;
     }

@@ -9,6 +9,8 @@ import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.ISavable;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +57,11 @@ public class BossesFileManager implements ILoadable, ISavable, IReloadable {
         return this.bossEntityContainer.getData().getOrDefault(name, null);
     }
 
-    public Map<String, BossEntity> getBossEntities() {
-        return this.bossEntityContainer.getData();
+    public Map<String, BossEntity> getBossEntitiesMap() {
+        return new HashMap<>(this.bossEntityContainer.getData());
+    }
+
+    public List<BossEntity> getBossEntities() {
+        return new ArrayList<>(this.bossEntityContainer.getData().values());
     }
 }

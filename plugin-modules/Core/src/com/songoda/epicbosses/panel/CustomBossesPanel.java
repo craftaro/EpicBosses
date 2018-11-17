@@ -47,7 +47,7 @@ public class CustomBossesPanel extends PanelHandler {
 
     @Override
     public void fillPanel(Panel panel) {
-        Map<String, BossEntity> currentEntities = new HashMap<>(this.bossesFileManager.getBossEntities());
+        Map<String, BossEntity> currentEntities = this.bossesFileManager.getBossEntitiesMap();
         List<String> entryList = new ArrayList<>(currentEntities.keySet());
         int maxPage = panel.getMaxPage(entryList);
 
@@ -75,32 +75,28 @@ public class CustomBossesPanel extends PanelHandler {
     }
 
     private void loadPage(Panel panel, int page, Map<String, BossEntity> bossEntityMap, List<String> entryList) {
-        int fillTo = panel.getPanelBuilderSettings().getFillTo();
-        int startIndex = page * fillTo;
-
-        for(int i = startIndex; i < startIndex + fillTo; i++) {
-            if(i >= bossEntityMap.size()) {
-                panel.setItem(i-startIndex, new ItemStack(Material.AIR), e -> {});
+        panel.loadPage(page, (slot, realisticSlot) -> {
+            if(slot >= bossEntityMap.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
             } else {
-                String name = entryList.get(i);
+                String name = entryList.get(slot);
+
                 BossEntity entity = bossEntityMap.get(name);
                 ItemStack itemStack = this.bossEntityManager.getDisplaySpawnItem(entity);
 
                 if(itemStack == null) {
-                    panel.setItem(i-startIndex, new ItemStack(Material.AIR), e -> {});
-                    continue;
+                    itemStack = new ItemStack(Material.BARRIER);
                 }
 
                 Map<String, String> replaceMap = new HashMap<>();
-                ItemStack clone = itemStack.clone();
 
                 replaceMap.put("{name}", name);
                 replaceMap.put("{enabled}", ""+entity.isEditing());
 
-                ItemStackUtils.applyDisplayName(clone, this.customBosses.getConfig().getString("Display.Bosses.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(clone, this.customBosses.getConfig().getStringList("Display.Bosses.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.customBosses.getConfig().getString("Display.Bosses.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.customBosses.getConfig().getStringList("Display.Bosses.lore"), replaceMap);
 
-                panel.setItem(i-startIndex, clone, e -> {
+                panel.setItem(realisticSlot, itemStack, e -> {
                     if(e.getClick() == ClickType.RIGHT || e.getClick() == ClickType.SHIFT_RIGHT) {
                         //TODO
                     } else if(e.getClick() == ClickType.LEFT || e.getClick() == ClickType.SHIFT_LEFT) {
@@ -115,6 +111,6 @@ public class CustomBossesPanel extends PanelHandler {
                     }
                 });
             }
-        }
+        });
     }
 }

@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.utils.panel;
 
+import com.songoda.epicbosses.utils.panel.base.IPageHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import lombok.Getter;
 import com.songoda.epicbosses.utils.ICloneable;
@@ -345,6 +346,16 @@ public class Panel implements Listener, ICloneable<Panel> {
     public Panel setCancelLowerClick(boolean cancelClick) {
         this.cancelLowerClick = cancelClick;
         return this;
+    }
+
+
+    public void loadPage(int page, IPageHandler pageHandler) {
+        int fillTo = getPanelBuilderSettings().getFillTo();
+        int startIndex = page * fillTo;
+
+        for(int i = startIndex; i < startIndex + fillTo; i++) {
+            pageHandler.handleSlot(i, i-startIndex);
+        }
     }
 
     /**

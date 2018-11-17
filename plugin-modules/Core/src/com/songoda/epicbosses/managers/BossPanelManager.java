@@ -19,11 +19,8 @@ import java.util.Map;
  */
 public class BossPanelManager implements ILoadable, IReloadable {
 
-    @Getter private IPanelHandler mainMenu, customItems, bosses, autoSpawns, dropTables, customSkills;
+    @Getter private IPanelHandler mainMenu, customItems, bosses, autoSpawns, dropTables, customSkills, shopPanel;
 
-    private final String customItemsTitle = "&6&lCustomBosses &e&lItems", autoSpawnsTitle = "&6&lCustomBosses &e&lAutoSpawns",
-                         customBossesTitle = "&6&lCustomBosses &e&lBosses", customSkillsTitle = "&6&lCustomBosses &e&lSkills",
-                         dropTableTitle = "&6&lCustomBosses &e&lDropTable";
     private final CustomBosses customBosses;
 
     public BossPanelManager(CustomBosses customBosses) {
@@ -33,6 +30,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Override
     public void load() {
         loadMainMenu();
+        loadShopMenu();
 
         loadAutoSpawnsMenu();
         loadCustomBossesMenu();
@@ -45,6 +43,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Override
     public void reload() {
         reloadMainMenu();
+        reloadShopMenu();
 
         reloadAutoSpawnsMenu();
         reloadCustomBosses();
@@ -52,6 +51,20 @@ public class BossPanelManager implements ILoadable, IReloadable {
         reloadCustomSkills();
         reloadDropTable();
 
+    }
+
+    //---------------------------------------------
+    //
+    //  S H O P   P A N E L
+    //
+    //---------------------------------------------
+
+    private void loadShopMenu() {
+        this.shopPanel = new ShopPanel(this, getListMenu("Shop"), this.customBosses);
+    }
+
+    private void reloadShopMenu() {
+        this.shopPanel.initializePanel(getListMenu("Shop"));
     }
 
     //---------------------------------------------
@@ -79,11 +92,11 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //---------------------------------------------
 
     private void loadAutoSpawnsMenu() {
-        this.autoSpawns = new AutoSpawnsPanel(this, getListMenu(this.autoSpawnsTitle));
+        this.autoSpawns = new AutoSpawnsPanel(this, getListMenu("AutoSpawns"));
     }
 
     private void reloadAutoSpawnsMenu() {
-        this.autoSpawns.initializePanel(getListMenu(this.autoSpawnsTitle));
+        this.autoSpawns.initializePanel(getListMenu("AutoSpawns"));
     }
 
     //---------------------------------------------
@@ -93,11 +106,11 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //---------------------------------------------
 
     private void loadCustomBossesMenu() {
-        this.bosses = new CustomBossesPanel(this, getListMenu(this.customBossesTitle), this.customBosses);
+        this.bosses = new CustomBossesPanel(this, getListMenu("Bosses"), this.customBosses);
     }
 
     private void reloadCustomBosses() {
-        this.bosses.initializePanel(getListMenu(this.customBossesTitle));
+        this.bosses.initializePanel(getListMenu("Bosses"));
     }
 
     //---------------------------------------------
@@ -107,11 +120,11 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //---------------------------------------------
 
     private void loadCustomSkillsMenu() {
-        this.customSkills = new CustomSkillsPanel(this, getListMenu(this.customSkillsTitle));
+        this.customSkills = new CustomSkillsPanel(this, getListMenu("Skills"));
     }
 
     private void reloadCustomSkills() {
-        this.customSkills.initializePanel(getListMenu(this.customSkillsTitle));
+        this.customSkills.initializePanel(getListMenu("Skills"));
     }
 
     //---------------------------------------------
@@ -121,11 +134,11 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //---------------------------------------------
 
     private void loadDropTableMenu() {
-        this.dropTables = new DropTablePanel(this, getListMenu(this.dropTableTitle));
+        this.dropTables = new DropTablePanel(this, getListMenu("DropTable"));
     }
 
     private void reloadDropTable() {
-        this.dropTables.initializePanel(getListMenu(this.dropTableTitle));
+        this.dropTables.initializePanel(getListMenu("DropTable"));
     }
 
     //---------------------------------------------
@@ -135,11 +148,11 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //---------------------------------------------
 
     private void loadCustomItemsMenu() {
-        this.customItems = new CustomItemsPanel(this, getListMenu(this.customItemsTitle));
+        this.customItems = new CustomItemsPanel(this, getListMenu("Items"));
     }
 
     private void reloadCustomItems() {
-        this.customItems.initializePanel(getListMenu(this.customItemsTitle));
+        this.customItems.initializePanel(getListMenu("Items"));
     }
 
     //---------------------------------------------
@@ -148,13 +161,16 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //
     //---------------------------------------------
 
-    private PanelBuilder getListMenu(String name) {
+    private PanelBuilder getListMenu(String path) {
         Map<String, String> replaceMap = new HashMap<>();
 
-        replaceMap.put("{panelName}", StringUtils.get().translateColor(name));
+        replaceMap.put("{panelName}", StringUtils.get().translateColor(this.customBosses.getConfig().getString(getPath(path))));
 
         return new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("ListPanel"), replaceMap);
     }
 
+    private String getPath(String key) {
+        return "Display." + key + ".menuName";
+    }
 
 }

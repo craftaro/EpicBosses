@@ -38,6 +38,7 @@ public enum Debug {
     FAILED_TO_LOAD_COMMANDS("The commands name that is provided ({0}) doesn't exist or wasn't found."),
     FAILED_TO_CREATE_ACTIVE_BOSS_HOLDER("Something went wrong while trying to create an active boss holder for someone who is trying to spawn a boss."),
     FAILED_TO_GIVE_SPAWN_EGG("{0} tried to obtain a spawn egg for the boss {1} but it has not been set yet."),
+    FAILED_TO_CONNECT_TO_VAULT("Something went wrong while trying to connect to Vault. Please make sure you have an Economy and Permission plugin connected to your Vault plugin such as Essentials and GroupManager."),
 
     DROP_TABLE_FAILED_INVALID_NUMBER("The specified position ({0}) on the drop table is not a valid number."),
     DROP_TABLE_FAILED_TO_GET_ITEM("The drop table failed to get the specific item for the list."),
