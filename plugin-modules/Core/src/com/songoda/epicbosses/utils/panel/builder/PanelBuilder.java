@@ -28,7 +28,7 @@ public class PanelBuilder {
     private final ConfigurationSection configurationSection;
     private final PanelBuilderSettings panelBuilderSettings;
 
-    @Getter private final PanelBuilderCounter panelBuilderCounter;
+    @Getter private PanelBuilderCounter panelBuilderCounter;
 
     private Inventory inventory;
     private int size = 0;
@@ -50,8 +50,24 @@ public class PanelBuilder {
         return this;
     }
 
+    public PanelBuilder addReplaceData(Map<String, String> replaceMap) {
+        if(replaceMap != null) this.replaceMap.putAll(replaceMap);
+        return this;
+    }
+
     public boolean isDefaultSlot(int slot) {
         return defaultSlots.contains(slot);
+    }
+
+    public PanelBuilder cloneBuilder() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.configurationSection, this.replaceMap);
+
+        panelBuilder.inventory = this.inventory;
+        panelBuilder.size = this.size;
+        panelBuilder.defaultSlots.addAll(this.defaultSlots);
+        panelBuilder.panelBuilderCounter = getPanelBuilderCounter().cloneCounter();
+
+        return panelBuilder;
     }
 
     public Panel getPanel() {

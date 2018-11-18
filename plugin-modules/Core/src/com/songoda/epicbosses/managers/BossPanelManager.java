@@ -1,10 +1,11 @@
 package com.songoda.epicbosses.managers;
 
-import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.EquipmentElement;
 import com.songoda.epicbosses.entity.elements.HandsElement;
+import com.songoda.epicbosses.panel.bosses.MainBossEditPanel;
+import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.panel.*;
@@ -29,6 +30,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private IPanelHandler mainMenu, customItems, bosses, autoSpawns, dropTables, customSkills, shopPanel;
     @Getter private IPanelHandler addItemsMenu;
 
+    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu;
+
     private final CustomBosses customBosses;
 
     public BossPanelManager(CustomBosses customBosses) {
@@ -47,6 +50,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         loadDropTableMenu();
 
         loadAddItemsMenu();
+        loadMainEditMenu();
     }
 
     @Override
@@ -61,6 +65,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         reloadDropTable();
 
         reloadAddItemsMenu();
+        reloadMainEditMenu();
     }
 
     public int isItemStackUsed(String name) {
@@ -86,6 +91,24 @@ public class BossPanelManager implements ILoadable, IReloadable {
         }
 
         return timesUsed;
+    }
+
+    //---------------------------------------------
+    //
+    //  M A I N   E D I T   P A N E L
+    //
+    //---------------------------------------------
+
+    private void loadMainEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("MainEditorPanel"));
+
+        this.mainBossEditMenu = new MainBossEditPanel(this, panelBuilder, this.customBosses);
+    }
+
+    private void reloadMainEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("MainEditorPanel"));
+
+        this.mainBossEditMenu.initializePanel(panelBuilder);
     }
 
     //---------------------------------------------

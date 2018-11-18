@@ -80,7 +80,7 @@ public class CustomBossesPanel extends ListPanelHandler {
 
                 panel.setItem(realisticSlot, itemStack, e -> {
                     if(e.getClick() == ClickType.RIGHT || e.getClick() == ClickType.SHIFT_RIGHT) {
-                        //TODO
+                        this.bossPanelManager.getMainBossEditMenu().openFor((Player) e.getWhoClicked(), entity);
                     } else if(e.getClick() == ClickType.LEFT || e.getClick() == ClickType.SHIFT_LEFT) {
                         ItemStack spawnItem = this.bossEntityManager.getSpawnItem(entity);
 

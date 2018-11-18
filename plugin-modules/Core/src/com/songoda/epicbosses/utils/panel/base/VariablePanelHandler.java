@@ -6,11 +6,11 @@ import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 /**
  * @author Charles Cullen
  * @version 1.0.0
- * @since 10-Oct-18
+ * @since 18-Nov-18
  */
-public abstract class PanelHandler extends BasePanelHandler implements IPanelHandler {
+public abstract class VariablePanelHandler<Variable> extends BasePanelHandler implements IVariablePanelHandler<Variable> {
 
-    public PanelHandler(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
+    public VariablePanelHandler(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
         super(bossPanelManager, panelBuilder);
     }
 }

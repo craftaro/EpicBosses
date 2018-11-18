@@ -157,3 +157,86 @@ AddItemsMenu:
       - '&7of adding the item to the EpicBosses'
       - '&7database.'
       Button: Accept
+MainEditorPanel:
+  name: '&b&l{name} Editor'
+  slots: 54
+  Settings:
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Items:
+    '12':
+      type: DIAMOND
+      name: '&a&lDrops Manager'
+      lore:
+      - '&7Click here to manage the drop table'
+      - '&7that is attached to this boss.'
+      Button: Drops
+    '14':
+      type: DIAMOND_HELMET
+      name: '&c&lEquipment Manager'
+      lore:
+      - '&7Click here to manage the equipment'
+      - '&7that the boss has equipped.'
+      Button: Equipment
+    '16':
+      type: BONE
+      name: '&a&lTargeting Manager'
+      lore:
+      - '&7Click here to edit how the boss handles'
+      - '&7targeting of players and mobs.'
+      Button: Targeting
+    '22':
+      type: BOW
+      name: '&c&lWeapon Manager'
+      lore:
+      - '&7Click here to manage the weapon(s)'
+      - '&7that the boss has equipped.'
+      Button: Weapon
+    '23':
+      type: BARRIER
+      name: '&c&l!&4&l!&c&l! &4&lWARNING &c&l!&4&l!&c&l!'
+      lore:
+      - '&7While editing is enabled for this boss'
+      - '&7no one will be able to spawn it, nor'
+      - '&7will it spawn naturally.'
+    '24':
+      type: BLAZE_POWDER
+      name: '&c&lSkill Manager'
+      lore:
+      - '&7Click here to manage the assigned'
+      - '&7skill(s) the boss has and their occurrence'
+      - '&7chances.'
+      Button: Skill
+    '32':
+      type: LAPIS_LAZULI
+      name: '&a&lStatistics Manager'
+      lore:
+      - '&7Click here to edit the statistics of the'
+      - '&7boss, including things like: health,'
+      - '&7potion effects, commands on spawn, etc.'
+      Button: Stats
+    '39':
+      type: BOOK
+      name: '&a&lCommand Manager'
+      lore:
+      - '&7Click here to manage the commands that are'
+      - '&7called when the boss spawns, dies, etc.'
+      Button: Command
+    '41':
+      type: LEVER
+      name: '&a&lToggle Boss Editing'
+      lore:
+      - '&7Click here to edit how to toggle the boss'
+      - '&7editing mode.'
+      - '&7'
+      - '&bCurrently: &f{mode}'
+      Button: Editing
+    '43':
+      type: BOOK
+      name: '&a&lText Manager'
+      lore:
+      - '&7Click here to edit the taunts, sayings,'
+      - '&7etc. for this boss.'
+      Button: Text

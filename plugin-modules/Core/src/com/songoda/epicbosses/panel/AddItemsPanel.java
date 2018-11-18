@@ -80,8 +80,6 @@ public class AddItemsPanel extends PanelHandler {
 
     private ClickAction getSelectedSlotAction(PanelBuilderCounter panelBuilderCounter) {
         return event -> {
-            System.out.println("CALLED 1");
-
             Player player = (Player) event.getWhoClicked();
             UUID uuid = player.getUniqueId();
 
@@ -96,8 +94,6 @@ public class AddItemsPanel extends PanelHandler {
 
     private ClickAction getAcceptAction() {
         return event -> {
-            System.out.println("CALLED 2");
-
             Player player = (Player) event.getWhoClicked();
             UUID uuid = player.getUniqueId();
 
@@ -113,8 +109,6 @@ public class AddItemsPanel extends PanelHandler {
 
     private ClickAction getCancelAction() {
         return event -> {
-            System.out.println("CALLED 3");
-
             Player player = (Player) event.getWhoClicked();
             UUID uuid = player.getUniqueId();
 

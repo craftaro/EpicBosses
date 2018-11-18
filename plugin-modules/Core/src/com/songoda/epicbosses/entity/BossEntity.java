@@ -37,6 +37,10 @@ public class BossEntity {
         this.price = price;
     }
 
+    public String getEditingValue() {
+        return this.editing? "Enabled" : "Disabled";
+    }
+
     public boolean isCompleteEnoughToSpawn() {
         if(this.entityStats == null) return false;
 

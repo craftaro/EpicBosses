@@ -89,4 +89,17 @@ public class PanelBuilderCounter {
         return this.specialValuesCounter.getOrDefault(identifier, new HashMap<>());
     }
 
+    public PanelBuilderCounter cloneCounter() {
+        PanelBuilderCounter clone = new PanelBuilderCounter();
+
+        clone.specialValuesCounter.putAll(this.specialValuesCounter);
+        clone.slotsWithCounter.putAll(this.slotsWithCounter);
+        clone.clickActions.putAll(this.clickActions);
+        clone.buttonCounters.putAll(this.buttonCounters);
+        clone.itemStacks.putAll(this.itemStacks);
+        clone.pageData.putAll(this.pageData);
+
+        return clone;
+    }
+
 }
