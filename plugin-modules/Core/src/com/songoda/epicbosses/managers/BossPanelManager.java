@@ -1,5 +1,10 @@
 package com.songoda.epicbosses.managers;
 
+import com.songoda.epicbosses.droptable.DropTable;
+import com.songoda.epicbosses.entity.BossEntity;
+import com.songoda.epicbosses.entity.elements.EntityStatsElement;
+import com.songoda.epicbosses.entity.elements.EquipmentElement;
+import com.songoda.epicbosses.entity.elements.HandsElement;
 import lombok.Getter;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.panel.*;
@@ -9,7 +14,9 @@ import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.panel.base.IPanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,6 +27,7 @@ import java.util.Map;
 public class BossPanelManager implements ILoadable, IReloadable {
 
     @Getter private IPanelHandler mainMenu, customItems, bosses, autoSpawns, dropTables, customSkills, shopPanel;
+    @Getter private IPanelHandler addItemsMenu;
 
     private final CustomBosses customBosses;
 
@@ -38,6 +46,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         loadCustomSkillsMenu();
         loadDropTableMenu();
 
+        loadAddItemsMenu();
     }
 
     @Override
@@ -51,6 +60,50 @@ public class BossPanelManager implements ILoadable, IReloadable {
         reloadCustomSkills();
         reloadDropTable();
 
+        reloadAddItemsMenu();
+    }
+
+    public int isItemStackUsed(String name) {
+        Collection<BossEntity> values = this.customBosses.getBossEntityContainer().getData().values();
+        int timesUsed = 0;
+
+        for(BossEntity bossEntity : values) {
+            if(bossEntity.getSpawnItem().equalsIgnoreCase(name)) timesUsed += 1;
+
+            List<EntityStatsElement> entityStatsElements = bossEntity.getEntityStats();
+
+            for(EntityStatsElement entityStatsElement : entityStatsElements) {
+                EquipmentElement equipmentElement = entityStatsElement.getEquipment();
+                HandsElement handsElement = entityStatsElement.getHands();
+
+                if(handsElement.getMainHand().equalsIgnoreCase(name)) timesUsed += 1;
+                if(handsElement.getOffHand().equalsIgnoreCase(name)) timesUsed += 1;
+                if(equipmentElement.getHelmet().equalsIgnoreCase(name)) timesUsed += 1;
+                if(equipmentElement.getChestplate().equalsIgnoreCase(name)) timesUsed += 1;
+                if(equipmentElement.getLeggings().equalsIgnoreCase(name)) timesUsed += 1;
+                if(equipmentElement.getBoots().equalsIgnoreCase(name)) timesUsed += 1;
+            }
+        }
+
+        return timesUsed;
+    }
+
+    //---------------------------------------------
+    //
+    //  A D D   I T E M S   P A N E L
+    //
+    //---------------------------------------------
+
+    private void loadAddItemsMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("AddItemsMenu"));
+
+        this.addItemsMenu = new AddItemsPanel(this, panelBuilder, this.customBosses);
+    }
+
+    private void reloadAddItemsMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("AddItemsMenu"));
+
+        this.addItemsMenu.initializePanel(panelBuilder);
     }
 
     //---------------------------------------------
@@ -148,7 +201,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //---------------------------------------------
 
     private void loadCustomItemsMenu() {
-        this.customItems = new CustomItemsPanel(this, getListMenu("Items"));
+        this.customItems = new CustomItemsPanel(this, getListMenu("Items"), this.customBosses);
     }
 
     private void reloadCustomItems() {

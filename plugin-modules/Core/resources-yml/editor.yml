@@ -129,3 +129,31 @@ ListPanel:
     '54':
       type: GLASS_PANE
       name: '&7'
+AddItemsMenu:
+  name: '&b&lAdd Item Menu'
+  slots: 27
+  Settings:
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    name: '&7'
+    type: LIGHT_BLUE_STAINED_GLASS_PANE
+  Items:
+    '11':
+      type: REDSTONE
+      name: '&c&lCancel'
+      lore:
+      - '&7Click here to cancel the transaction'
+      - '&7of adding the item to the EpicBosses'
+      - '&7database.'
+      Button: Cancel
+    '14':
+      type: AIR
+      Button: SelectedSlot
+    '17':
+      type: LIME_DYE
+      name: '&a&lAccept'
+      lore:
+      - '&7Click here to accept the transaction'
+      - '&7of adding the item to the EpicBosses'
+      - '&7database.'
+      Button: Accept

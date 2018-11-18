@@ -1,6 +1,7 @@
 {
   "DefaultBossMenuItem": {
-    "type": "BARRIER"
+    "type": "BARRIER",
+    "name": "&c&lDefault Boss Menu Item"
   },
   "SKSpawnItem": {
     "type": "SKELETON_SPAWN_EGG",

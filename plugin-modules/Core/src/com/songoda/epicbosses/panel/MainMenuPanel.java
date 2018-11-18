@@ -7,6 +7,7 @@ import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.PanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
@@ -68,8 +69,7 @@ public class MainMenuPanel extends PanelHandler {
             if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
                 this.bossPanelManager.getCustomItems().openFor(player);
             } else if(event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
-                //TODO: Set up create item inventory
-                player.closeInventory();
+                this.bossPanelManager.getAddItemsMenu().openFor(player);
             }
         };
     }

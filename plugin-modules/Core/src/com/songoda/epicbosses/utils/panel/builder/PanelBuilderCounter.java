@@ -23,6 +23,18 @@ public class PanelBuilderCounter {
     @Getter private final Map<String, ItemStack> itemStacks = new HashMap<>();
     @Getter private final Map<Integer, Integer> pageData = new HashMap<>();
 
+    public boolean isButtonAtSlot(int slot) {
+        for (Set<Integer> integers : this.slotsWithCounter.values()) {
+            if(integers.contains(slot)) return true;
+        }
+
+        for(Map<Integer, Object> map : this.specialValuesCounter.values()) {
+            if(map.containsKey(slot)) return true;
+        }
+
+        return false;
+    }
+
     public PanelBuilderCounter addSpecialCounter(String identifier) {
         this.specialValuesCounter.put(identifier, new HashMap<>());
 

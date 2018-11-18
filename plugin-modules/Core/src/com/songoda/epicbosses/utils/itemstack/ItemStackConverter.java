@@ -53,14 +53,14 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
             ItemMeta itemMeta = itemStack.getItemMeta();
 
             if(itemMeta.hasDisplayName()) {
-                name = StringUtils.get().stripColor(itemMeta.getDisplayName());
+                name = itemMeta.getDisplayName().replace('§', '&');
             }
 
             if(itemMeta.hasLore()) {
                 lore = new ArrayList<>();
 
                 for(String string : itemMeta.getLore()) {
-                    lore.add(StringUtils.get().stripColor(string));
+                    lore.add(string.replace('§', '&'));
                 }
             }
 
@@ -88,14 +88,14 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
             }
         }
 
-        if(enchants == null) {
-            ItemStack craftStack = NbtFactory.getCraftItemStack(itemStack);
-            NbtFactory.NbtCompound compound = NbtFactory.fromItemTag(craftStack);
+//        if(enchants == null) {
+//            ItemStack craftStack = NbtFactory.getCraftItemStack(itemStack);
+//            NbtFactory.NbtCompound compound = NbtFactory.fromItemTag(craftStack);
+//
+//            if(compound.containsKey("ench")) isGlowing = true;
+//        }
 
-            if(compound.containsKey("ench")) isGlowing = true;
-        }
-
-        return new ItemStackHolder(amount, type, durability, name, lore, enchants, skullOwner, spawnerId, isGlowing);
+        return new ItemStackHolder(amount, type, durability, name, lore, enchants, skullOwner, spawnerId, false);
     }
 
     @Override
@@ -115,13 +115,14 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
 
         itemStack.setType(material);
 
+        Integer amount = itemStackHolder.getAmount();
         Short durability = itemStackHolder.getDurability(), spawnerId = itemStackHolder.getSpawnerId();
         String name = itemStackHolder.getName(), skullOwner = itemStackHolder.getSkullOwner();
         List<String> lore = itemStackHolder.getLore(), enchants = itemStackHolder.getEnchants();
         Boolean isGlowing = itemStackHolder.getIsGlowing();
 
         if(durability != null) itemStack.setDurability(durability);
-        if(enchants != null) itemStack.addEnchantments(this.enchantConverter.from(enchants));
+        if(enchants != null) itemStack.addUnsafeEnchantments(this.enchantConverter.from(enchants));
 
         if(name != null || skullOwner != null || lore != null || spawnerId != null) {
             ItemMeta itemMeta = itemStack.getItemMeta();
@@ -174,6 +175,10 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
 
             compound.put("ench", NbtFactory.createList());
             return craftStack;
+        }
+
+        if(amount != null && amount > 1) {
+            itemStack.setAmount(amount);
         }
 
         return itemStack;

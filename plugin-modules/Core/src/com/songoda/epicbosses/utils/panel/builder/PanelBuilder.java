@@ -57,7 +57,7 @@ public class PanelBuilder {
     public Panel getPanel() {
         build();
 
-        Panel panel = new Panel(this.inventory, this.panelBuilderCounter.getPageData(), this.panelBuilderSettings);
+        Panel panel = new Panel(this.inventory, this.panelBuilderSettings, this.panelBuilderCounter);
 
         Map<String, ItemStack> itemStackMap = this.panelBuilderCounter.getItemStacks();
         Map<String, ClickAction> clickActionMap = this.panelBuilderCounter.getClickActions();

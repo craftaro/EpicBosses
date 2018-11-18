@@ -2,6 +2,7 @@ package com.songoda.epicbosses.utils.panel;
 
 import com.songoda.epicbosses.utils.panel.base.IPageHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
+import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import lombok.Getter;
 import com.songoda.epicbosses.utils.ICloneable;
 import com.songoda.epicbosses.utils.StringUtils;
@@ -55,11 +56,11 @@ public class Panel implements Listener, ICloneable<Panel> {
     private final List<ClickAction> allSlotActions = new ArrayList<>();
 
     private final Map<UUID, Integer> currentPageContainer = new HashMap<>();
-    private final Map<Integer, Integer> pageData = new HashMap<>();
     private final List<UUID> openedUsers = new ArrayList<>();
 
     @Getter private boolean cancelClick = true, destroyWhenDone = true, cancelLowerClick = true;
     @Getter private PanelBuilderSettings panelBuilderSettings;
+    @Getter private PanelBuilderCounter panelBuilderCounter;
     @Getter private Sound clickSound = null;
     @Getter private Inventory inventory;
     @Getter private int viewers = 0;
@@ -104,14 +105,13 @@ public class Panel implements Listener, ICloneable<Panel> {
      * Creates a Panel with the specified arguments
      *
      * @param inventory - Panel inventory
-     * @param pageData - Panel page data
      */
-    public Panel(Inventory inventory, Map<Integer, Integer> pageData, PanelBuilderSettings panelBuilderSettings) {
+    public Panel(Inventory inventory, PanelBuilderSettings panelBuilderSettings, PanelBuilderCounter panelBuilderCounter) {
         Bukkit.getPluginManager().registerEvents(this, PLUGIN);
 
         this.inventory = inventory;
-        this.pageData.putAll(pageData);
         this.panelBuilderSettings = panelBuilderSettings;
+        this.panelBuilderCounter = panelBuilderCounter;
 
         fillEmptySpace();
 
@@ -132,7 +132,8 @@ public class Panel implements Listener, ICloneable<Panel> {
 
         Player player = (Player) event.getWhoClicked();
 
-        if((!isCancelClick()) && (event.getRawSlot() > inventory.getSize())) {
+        if(isCancelLowerClick() && isLowerClick(event.getRawSlot())) {
+            System.out.println("CANCELLED ");
             event.setCancelled(true);
             return;
         }
@@ -165,10 +166,10 @@ public class Panel implements Listener, ICloneable<Panel> {
     private void executeAction(int slot, InventoryClickEvent e) {
         Player clicker = (Player) e.getWhoClicked();
 
-        if(this.pageData.containsKey(slot)) {
+        if(getPanelBuilderCounter().getPageData().containsKey(slot)) {
             int currentPage = this.currentPageContainer.getOrDefault(clicker.getUniqueId(), 0);
 
-            if(this.pageData.get(slot) > 0) {
+            if(getPanelBuilderCounter().getPageData().get(slot) > 0) {
                 if(this.onPageChange.onPageAction(clicker, currentPage, currentPage+1)) {
                     this.currentPageContainer.put(clicker.getUniqueId(), currentPage+1);
                 }
@@ -348,6 +349,9 @@ public class Panel implements Listener, ICloneable<Panel> {
         return this;
     }
 
+    public boolean isLowerClick(int rawSlot) {
+        return rawSlot > inventory.getSize();
+    }
 
     public void loadPage(int page, IPageHandler pageHandler) {
         int fillTo = getPanelBuilderSettings().getFillTo();
@@ -418,7 +422,6 @@ public class Panel implements Listener, ICloneable<Panel> {
         this.currentPageContainer.clear();
         this.targettedSlotActions.clear();
         this.allSlotActions.clear();
-        this.pageData.clear();
         this.inventory = null;
 
         this.openedUsers.forEach(uuid -> {
@@ -450,6 +453,8 @@ public class Panel implements Listener, ICloneable<Panel> {
 
         for(int i = 0; i < getInventory().getSize(); i++) {
             ItemStack itemAtSlot = getInventory().getItem(i);
+
+            if(getPanelBuilderCounter().isButtonAtSlot(i)) continue;
 
             if(itemAtSlot == null || itemAtSlot.getType() == Material.AIR) {
                 getInventory().setItem(i, itemStack);
@@ -486,6 +491,7 @@ public class Panel implements Listener, ICloneable<Panel> {
         panel.destroyWhenDone = this.destroyWhenDone;
         panel.cancelLowerClick = this.cancelLowerClick;
         panel.panelBuilderSettings = this.panelBuilderSettings;
+        panel.panelBuilderCounter = this.panelBuilderCounter;
         panel.clickSound = this.clickSound;
         panel.onPageChange = this.onPageChange;
         panel.panelClose = this.panelClose;

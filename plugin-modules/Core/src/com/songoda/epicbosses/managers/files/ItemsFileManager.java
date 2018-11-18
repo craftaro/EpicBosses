@@ -7,6 +7,7 @@ import com.songoda.epicbosses.utils.ISavable;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.file.ItemStackFileHandler;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -48,6 +49,16 @@ public class ItemsFileManager implements ILoadable, ISavable, IReloadable {
 
     public ItemStackHolder getItemStackHolder(String name) {
         return this.itemStackHolders.getOrDefault(name, null);
+    }
+
+    public void addItemStack(String name, ItemStack itemStack) {
+        this.itemStackHolders.put(name, this.itemStackConverter.to(itemStack));
+        save();
+    }
+
+    public void removeItemStack(String name) {
+        this.itemStackHolders.remove(name);
+        save();
     }
 
     public Map<String, ItemStackHolder> getItemStackHolders() {
