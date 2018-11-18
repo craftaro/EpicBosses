@@ -173,7 +173,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //---------------------------------------------
 
     private void loadCustomSkillsMenu() {
-        this.customSkills = new CustomSkillsPanel(this, getListMenu("Skills"));
+        this.customSkills = new CustomSkillsPanel(this, getListMenu("Skills"), this.customBosses);
     }
 
     private void reloadCustomSkills() {
@@ -187,7 +187,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //---------------------------------------------
 
     private void loadDropTableMenu() {
-        this.dropTables = new DropTablePanel(this, getListMenu("DropTable"));
+        this.dropTables = new DropTablePanel(this, getListMenu("DropTable"), this.customBosses);
     }
 
     private void reloadDropTable() {

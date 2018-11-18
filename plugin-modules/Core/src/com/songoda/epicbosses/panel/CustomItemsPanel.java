@@ -26,7 +26,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 10-Oct-18
  */
-public class CustomItemsPanel extends PanelHandler {
+public class CustomItemsPanel extends ListPanelHandler {
 
     private ItemsFileManager itemsFileManager;
 
@@ -34,11 +34,6 @@ public class CustomItemsPanel extends PanelHandler {
         super(bossPanelManager, panelBuilder);
 
         this.itemsFileManager = plugin.getItemStackManager();
-    }
-
-    @Override
-    public void initializePanel(PanelBuilder panelBuilder) {
-
     }
 
     @Override
@@ -55,19 +50,6 @@ public class CustomItemsPanel extends PanelHandler {
         }));
 
         loadPage(panel, 0, currentItemStacks, entryList);
-    }
-
-    @Override
-    public void openFor(Player player) {
-        Panel panel = getPanelBuilder().getPanel()
-                .setDestroyWhenDone(true)
-                .setCancelClick(true)
-                .setCancelLowerClick(true)
-                .setParentPanel(this.bossPanelManager.getMainMenu().getPanel());
-
-        fillPanel(panel);
-
-        panel.openFor(player);
     }
 
     private void loadPage(Panel panel, int requestedPage, Map<String, ItemStackHolder> currentItemStacks, List<String> entryList) {

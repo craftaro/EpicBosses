@@ -4,19 +4,16 @@ import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.PanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 /**
  * @author Charles Cullen
  * @version 1.0.0
- * @since 10-Oct-18
- *
- * TODO
+ * @since 18-Nov-18
  */
-public class AutoSpawnsPanel extends PanelHandler {
+public abstract class ListPanelHandler extends PanelHandler {
 
-    public AutoSpawnsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
+    public ListPanelHandler(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
         super(bossPanelManager, panelBuilder);
     }
 
@@ -26,12 +23,15 @@ public class AutoSpawnsPanel extends PanelHandler {
     }
 
     @Override
-    public void fillPanel(Panel panel) {
-
-    }
-
-    @Override
     public void openFor(Player player) {
+        Panel panel = getPanelBuilder().getPanel()
+                .setDestroyWhenDone(true)
+                .setCancelClick(true)
+                .setCancelLowerClick(true)
+                .setParentPanel(this.bossPanelManager.getMainMenu().getPanel());
 
+        fillPanel(panel);
+
+        panel.openFor(player);
     }
 }

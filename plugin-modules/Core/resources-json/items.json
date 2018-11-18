@@ -3,6 +3,14 @@
     "type": "BARRIER",
     "name": "&c&lDefault Boss Menu Item"
   },
+  "DefaultDropTableMenuItem": {
+    "type": "OAK_PRESSURE_PLATE",
+    "name": "&c&lDefault Drop Table Menu Item"
+  },
+  "DefaultSkillMenuItem": {
+    "type": "BLAZE_POWDER",
+    "name": "&c&lDefault Skill Menu Item"
+  },
   "SKSpawnItem": {
     "type": "SKELETON_SPAWN_EGG",
     "name": "&6&lSkeleton King Boss Spawn Egg",

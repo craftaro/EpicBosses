@@ -79,6 +79,8 @@ public class StringUtils {
     }
 
     public String formatString(String string) {
+        if(string == null) return "null";
+
         string = string.toLowerCase();
 
         StringBuilder stringBuilder = new StringBuilder();

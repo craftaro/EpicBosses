@@ -26,7 +26,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 10-Oct-18
  */
-public class CustomBossesPanel extends PanelHandler {
+public class CustomBossesPanel extends ListPanelHandler {
 
     private BossEntityManager bossEntityManager;
     private BossesFileManager bossesFileManager;
@@ -38,11 +38,6 @@ public class CustomBossesPanel extends PanelHandler {
         this.customBosses = customBosses;
         this.bossEntityManager = customBosses.getBossEntityManager();
         this.bossesFileManager = customBosses.getBossesFileManager();
-    }
-
-    @Override
-    public void initializePanel(PanelBuilder panelBuilder) {
-
     }
 
     @Override
@@ -59,19 +54,6 @@ public class CustomBossesPanel extends PanelHandler {
         }));
 
         loadPage(panel, 0, currentEntities, entryList);
-    }
-
-    @Override
-    public void openFor(Player player) {
-        Panel panel = getPanelBuilder().getPanel()
-                .setDestroyWhenDone(true)
-                .setCancelClick(true)
-                .setCancelLowerClick(true)
-                .setParentPanel(this.bossPanelManager.getMainMenu().getPanel());
-
-        fillPanel(panel);
-
-        panel.openFor(player);
     }
 
     private void loadPage(Panel panel, int page, Map<String, BossEntity> bossEntityMap, List<String> entryList) {

@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  * @version 1.0.0
  * @since 17-Nov-18
  */
-public class ShopPanel extends PanelHandler {
+public class ShopPanel extends ListPanelHandler {
 
     private BossEntityManager bossEntityManager;
     private BossesFileManager bossesFileManager;
@@ -40,9 +40,6 @@ public class ShopPanel extends PanelHandler {
         this.bossEntityManager = plugin.getBossEntityManager();
         this.bossesFileManager = plugin.getBossesFileManager();
     }
-
-    @Override
-    public void initializePanel(PanelBuilder panelBuilder) {}
 
     @Override
     public void fillPanel(Panel panel) {
@@ -61,17 +58,6 @@ public class ShopPanel extends PanelHandler {
         }));
 
         loadPage(panel, 0, entryList, filteredMap);
-    }
-
-    @Override
-    public void openFor(Player player) {
-        Panel panel = getPanelBuilder().getPanel()
-                .setDestroyWhenDone(true)
-                .setCancelClick(true)
-                .setCancelLowerClick(true);
-
-        fillPanel(panel);
-        panel.openFor(player);
     }
 
     private void loadPage(Panel panel, int page, List<String> entryList, Map<String, BossEntity> filteredMap) {
