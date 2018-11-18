@@ -3,17 +3,20 @@ package com.songoda.epicbosses.listeners.during;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
+import com.songoda.epicbosses.events.BossSkillEvent;
 import com.songoda.epicbosses.events.PreBossSkillEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.managers.files.SkillsFileManager;
+import com.songoda.epicbosses.skills.ISkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.types.CommandSkillElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.skills.types.GroupSkillElement;
 import com.songoda.epicbosses.skills.types.PotionSkillElement;
 import com.songoda.epicbosses.utils.Debug;
+import com.songoda.epicbosses.utils.MessageUtils;
 import com.songoda.epicbosses.utils.RandomUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import org.bukkit.Bukkit;
@@ -26,10 +29,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Charles Cullen
@@ -65,11 +65,11 @@ public class BossSkillListener implements Listener {
 
         if(bossEntity.getSkills() == null || bossEntity.getSkills().getOverallChance() == null) return;
 
-//        if(RandomUtils.get().canPreformAction(bossEntity.getSkills().getOverallChance())) {
+        if(RandomUtils.get().canPreformAction(bossEntity.getSkills().getOverallChance())) {
             PreBossSkillEvent preBossSkillEvent = new PreBossSkillEvent(activeBossHolder, livingEntity, (LivingEntity) entityDamaging);
 
             ServerUtils.get().callEvent(preBossSkillEvent);
-//        }
+        }
     }
 
     @EventHandler
@@ -95,56 +95,39 @@ public class BossSkillListener implements Listener {
             return;
         }
 
-        List<LivingEntity> targettedEntities = getTargetedEntities(activeBossHolder, skill, activeBossHolder.getLivingEntity().getLocation(), damagingEntity);
+        List<LivingEntity> targettedEntities = this.bossSkillManager.getTargetedEntities(activeBossHolder, skill, activeBossHolder.getLivingEntity().getLocation(), damagingEntity);
+        String bossDisplayName = activeBossHolder.getName();
+        String skillDisplayName = skill.getDisplayName();
+        ISkillHandler<?> skillHandler;
 
         if(skill.getType().equalsIgnoreCase("POTION")) {
             PotionSkillElement potionSkillElement = this.bossSkillManager.getPotionSkillElement(skill);
 
             potionSkillElement.castSkill(skill, potionSkillElement, activeBossHolder, targettedEntities);
-            System.out.println("#1");
+            skillHandler = potionSkillElement;
         } else if(skill.getType().equalsIgnoreCase("COMMAND")) {
             CommandSkillElement commandSkillElement = this.bossSkillManager.getCommandSkillElement(skill);
 
             commandSkillElement.castSkill(skill, commandSkillElement, activeBossHolder, targettedEntities);
-            System.out.println("#2");
+            skillHandler = commandSkillElement;
         } else if(skill.getType().equalsIgnoreCase("GROUP")) {
             GroupSkillElement groupSkillElement = this.bossSkillManager.getGroupSkillElement(skill);
 
             groupSkillElement.castSkill(skill, groupSkillElement, activeBossHolder, targettedEntities);
-            System.out.println("#3");
+            skillHandler = groupSkillElement;
         } else if(skill.getType().equalsIgnoreCase("CUSTOM")) {
             CustomSkillElement customSkillElement = this.bossSkillManager.getCustomSkillElement(skill);
 
-            this.bossSkillManager.handleCustomSkillCasting(skill, customSkillElement, activeBossHolder, targettedEntities);
-            System.out.println("#4");
-        }
-    }
-
-    private List<LivingEntity> getTargetedEntities(ActiveBossHolder activeBossHolder, Skill skill, Location center, LivingEntity damager) {
-        double radiusSqr = skill.getRadius() * skill.getRadius();
-        List<LivingEntity> targetedList = new ArrayList<>();
-        String mode = skill.getMode();
-
-        if(mode.equalsIgnoreCase("ONE")) {
-            return Arrays.asList(damager);
-        } else if(mode.equalsIgnoreCase("BOSS")) {
-            targetedList.addAll(activeBossHolder.getLivingEntityMap().values());
+            skillHandler = this.bossSkillManager.handleCustomSkillCasting(skill, customSkillElement, activeBossHolder, targettedEntities);
         } else {
-            for(Player player : Bukkit.getOnlinePlayers()) {
-                if(!player.getWorld().equals(center.getWorld())) continue;
-                if(center.distanceSquared(player.getLocation()) > radiusSqr) continue;
-
-                if(mode.equalsIgnoreCase("ALL")) {
-                    targetedList.add(player);
-                } else if(mode.equalsIgnoreCase("RANDOM")) {
-                    if(RandomUtils.get().preformRandomAction()) {
-                        targetedList.add(player);
-                    }
-                }
-            }
+            return;
         }
 
-        return targetedList;
+        masterMessage.replaceAll(s -> s.replace("{boss}", bossDisplayName).replace("{skill}", skillDisplayName));
+        targettedEntities.forEach(livingEntity -> MessageUtils.get().sendMessage(livingEntity, masterMessage));
+
+        BossSkillEvent bossSkillEvent = new BossSkillEvent(activeBossHolder, skillHandler, skill);
+        ServerUtils.get().callEvent(bossSkillEvent);
     }
 
 }

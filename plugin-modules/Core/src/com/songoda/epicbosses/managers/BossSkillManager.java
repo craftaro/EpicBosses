@@ -11,11 +11,13 @@ import com.songoda.epicbosses.skills.types.PotionSkillElement;
 import com.songoda.epicbosses.utils.BossesGson;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.ILoadable;
+import com.songoda.epicbosses.utils.RandomUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Charles Cullen
@@ -40,16 +42,17 @@ public class BossSkillManager implements ILoadable {
         registerCustomSkill(new Warp());
     }
 
-    public void handleCustomSkillCasting(Skill skill, CustomSkillElement customSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
+    public CustomSkillHandler handleCustomSkillCasting(Skill skill, CustomSkillElement customSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
         String type = customSkillElement.getCustom().getType();
         CustomSkillHandler customSkillHandler = getCustomSkillHandler(type);
 
         if(customSkillHandler == null) {
             Debug.FAILED_TO_OBTAIN_THE_SKILL_HANDLER.debug(type);
-            return;
+            return null;
         }
 
         customSkillHandler.castSkill(skill, customSkillElement, activeBossHolder, nearbyEntities);
+        return customSkillHandler;
     }
 
     public PotionSkillElement getPotionSkillElement(Skill skill) {
@@ -97,7 +100,34 @@ public class BossSkillManager implements ILoadable {
         SKILLS.remove(customSkillHandler);
     }
 
-    public CustomSkillHandler getCustomSkillHandler(String name) {
+    public List<LivingEntity> getTargetedEntities(ActiveBossHolder activeBossHolder, Skill skill, Location center, LivingEntity damager) {
+        double radiusSqr = skill.getRadius() * skill.getRadius();
+        List<LivingEntity> targetedList = new ArrayList<>();
+        String mode = skill.getMode();
+
+        if(mode.equalsIgnoreCase("ONE")) {
+            return Arrays.asList(damager);
+        } else if(mode.equalsIgnoreCase("BOSS")) {
+            targetedList.addAll(activeBossHolder.getLivingEntityMap().values());
+        } else {
+            for(Player player : Bukkit.getOnlinePlayers()) {
+                if(!player.getWorld().equals(center.getWorld())) continue;
+                if(center.distanceSquared(player.getLocation()) > radiusSqr) continue;
+
+                if(mode.equalsIgnoreCase("ALL")) {
+                    targetedList.add(player);
+                } else if(mode.equalsIgnoreCase("RANDOM")) {
+                    if(RandomUtils.get().preformRandomAction()) {
+                        targetedList.add(player);
+                    }
+                }
+            }
+        }
+
+        return targetedList;
+    }
+
+    private CustomSkillHandler getCustomSkillHandler(String name) {
         for(CustomSkillHandler customSkillHandler : new HashSet<>(SKILLS)) {
             String skillName = customSkillHandler.getClass().getSimpleName();
 

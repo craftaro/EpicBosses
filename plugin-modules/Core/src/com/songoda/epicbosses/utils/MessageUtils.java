@@ -2,6 +2,7 @@ package com.songoda.epicbosses.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -16,11 +17,11 @@ public class MessageUtils {
 
     private static MessageUtils INSTANCE = new MessageUtils();
 
-    public void sendMessage(Player player, String... messages) {
+    public void sendMessage(LivingEntity player, String... messages) {
         sendMessage(player, Arrays.asList(messages));
     }
 
-    public void sendMessage(Player player, List<String> messages) {
+    public void sendMessage(LivingEntity player, List<String> messages) {
         for(String s : messages) {
             player.sendMessage(StringUtils.get().translateColor(s));
         }
