@@ -16,4 +16,10 @@ public class TauntElement {
     @Expose @Getter @Setter private Integer delay, radius;
     @Expose @Getter @Setter private List<String> taunts;
 
+    public TauntElement(Integer delay, Integer radius, List<String> taunts) {
+        this.delay = delay;
+        this.radius = radius;
+        this.taunts = taunts;
+    }
+
 }

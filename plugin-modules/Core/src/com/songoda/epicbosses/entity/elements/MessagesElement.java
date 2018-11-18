@@ -15,4 +15,10 @@ public class MessagesElement {
     @Expose @Getter @Setter private OnDeathMessageElement onDeath;
     @Expose @Getter @Setter private TauntElement taunts;
 
+    public MessagesElement(OnSpawnMessageElement onSpawn, OnDeathMessageElement onDeath, TauntElement tauntElement) {
+        this.onDeath = onDeath;
+        this.onSpawn = onSpawn;
+        this.taunts = tauntElement;
+    }
+
 }

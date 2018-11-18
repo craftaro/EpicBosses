@@ -17,4 +17,10 @@ public class SkillsElement {
     @Expose @Getter @Setter private String masterMessage;
     @Expose @Getter @Setter private List<String> skills;
 
+    public SkillsElement(Double overallChance, String masterMessage, List<String> skills) {
+        this.overallChance = overallChance;
+        this.masterMessage = masterMessage;
+        this.skills = skills;
+    }
+
 }

@@ -16,4 +16,11 @@ public class MainStatsElement {
     @Expose @Getter @Setter private Double health;
     @Expose @Getter @Setter private String displayName;
 
+    public MainStatsElement(Integer position, String entityType, Double health, String displayName) {
+        this.position = position;
+        this.entityType = entityType;
+        this.health = health;
+        this.displayName = displayName;
+    }
+
 }

@@ -14,4 +14,9 @@ public class OnSpawnMessageElement {
     @Expose @Getter @Setter private String message;
     @Expose @Getter @Setter private Integer radius;
 
+    public OnSpawnMessageElement(String message, Integer radius) {
+        this.message = message;
+        this.radius = radius;
+    }
+
 }

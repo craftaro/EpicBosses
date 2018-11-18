@@ -13,4 +13,9 @@ public class CommandsElement {
 
     @Expose @Getter @Setter private String onSpawn, onDeath;
 
+    public CommandsElement(String onSpawn, String onDeath) {
+        this.onDeath = onDeath;
+        this.onSpawn = onSpawn;
+    }
+
 }

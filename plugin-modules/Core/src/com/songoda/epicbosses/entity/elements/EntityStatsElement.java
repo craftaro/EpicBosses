@@ -19,4 +19,11 @@ public class EntityStatsElement {
     @Expose @Getter @Setter private HandsElement hands;
     @Expose @Getter @Setter private List<PotionEffectHolder> potions;
 
+    public EntityStatsElement(MainStatsElement mainStatsElement, EquipmentElement equipmentElement, HandsElement handsElement, List<PotionEffectHolder> potionEffectHolders) {
+        this.mainStats = mainStatsElement;
+        this.equipment = equipmentElement;
+        this.hands = handsElement;
+        this.potions = potionEffectHolders;
+    }
+
 }

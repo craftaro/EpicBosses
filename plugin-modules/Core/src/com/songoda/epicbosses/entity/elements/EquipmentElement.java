@@ -12,5 +12,12 @@ import lombok.Setter;
 public class EquipmentElement {
 
     @Expose @Getter @Setter private String helmet, chestplate, leggings, boots;
-    
+
+    public EquipmentElement(String helmet, String chestplate, String leggings, String boots) {
+        this.helmet = helmet;
+        this.chestplate = chestplate;
+        this.leggings = leggings;
+        this.boots = boots;
+    }
+
 }

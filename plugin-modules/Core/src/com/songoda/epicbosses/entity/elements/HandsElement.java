@@ -13,4 +13,9 @@ public class HandsElement {
 
     @Expose @Getter @Setter private String mainHand, offHand;
 
+    public HandsElement(String mainHand, String offHand) {
+        this.mainHand = mainHand;
+        this.offHand = offHand;
+    }
+
 }

@@ -178,24 +178,15 @@ public class BossAPI {
         if (entityFinder == null) return null;
 
         List<EntityStatsElement> entityStatsElements = new ArrayList<>();
-        EntityStatsElement entityStatsElement = new EntityStatsElement();
-        MainStatsElement mainStatsElement = new MainStatsElement();
-
-        mainStatsElement.setHealth(50D);
-        mainStatsElement.setDisplayName(name);
-        mainStatsElement.setEntityType(entityFinder.getFancyName());
-
-        entityStatsElement.setMainStats(mainStatsElement);
-        entityStatsElement.setEquipment(new EquipmentElement());
-        entityStatsElement.setHands(new HandsElement());
-        entityStatsElement.setPotions(new ArrayList<>());
+        MainStatsElement mainStatsElement = new MainStatsElement(1, entityFinder.getFancyName(), 50.0, name);
+        EntityStatsElement entityStatsElement = new EntityStatsElement(mainStatsElement, new EquipmentElement("", "", "", ""), new HandsElement("", ""), new ArrayList<>());
 
         entityStatsElements.add(entityStatsElement);
 
-        SkillsElement skillsElement = new SkillsElement();
-        DropsElement dropsElement = new DropsElement();
-        MessagesElement messagesElement = new MessagesElement();
-        CommandsElement commandsElement = new CommandsElement();
+        SkillsElement skillsElement = new SkillsElement(10.0, "", new ArrayList<>());
+        DropsElement dropsElement = new DropsElement(true, true, "");
+        MessagesElement messagesElement = new MessagesElement(new OnSpawnMessageElement("", -1), new OnDeathMessageElement("", "", -1, 5), new TauntElement(60, 100, new ArrayList<>()));
+        CommandsElement commandsElement = new CommandsElement("", "");
 
         BossEntity bossEntity = new BossEntity(true, null, false, 100.0, entityStatsElements, skillsElement, dropsElement, messagesElement, commandsElement);
         boolean result = PLUGIN.getBossEntityContainer().saveData(name, bossEntity);
@@ -233,17 +224,8 @@ public class BossAPI {
         if (entityFinder == null) return null;
 
         List<EntityStatsElement> entityStatsElements = new ArrayList<>();
-        EntityStatsElement entityStatsElement = new EntityStatsElement();
-        MainStatsElement mainStatsElement = new MainStatsElement();
-
-        mainStatsElement.setHealth(50D);
-        mainStatsElement.setDisplayName(name);
-        mainStatsElement.setEntityType(entityFinder.getFancyName());
-
-        entityStatsElement.setMainStats(mainStatsElement);
-        entityStatsElement.setEquipment(new EquipmentElement());
-        entityStatsElement.setHands(new HandsElement());
-        entityStatsElement.setPotions(new ArrayList<>());
+        MainStatsElement mainStatsElement = new MainStatsElement(1, entityFinder.getFancyName(), 50.0, name);
+        EntityStatsElement entityStatsElement = new EntityStatsElement(mainStatsElement, new EquipmentElement("", "", "", ""), new HandsElement("", ""), new ArrayList<>());
 
         entityStatsElements.add(entityStatsElement);
 

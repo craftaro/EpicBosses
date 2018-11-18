@@ -13,4 +13,11 @@ public class OnDeathMessageElement {
 
     @Expose @Getter @Setter private String message, positionMessage;
     @Expose @Getter @Setter private Integer radius, onlyShow;
+
+    public OnDeathMessageElement(String message, String positionMessage, Integer radius, Integer onlyShow) {
+        this.message = message;
+        this.positionMessage = positionMessage;
+        this.radius = radius;
+        this.onlyShow = onlyShow;
+    }
 }

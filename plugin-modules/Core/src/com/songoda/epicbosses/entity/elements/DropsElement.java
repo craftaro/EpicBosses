@@ -14,4 +14,10 @@ public class DropsElement {
     @Expose @Getter @Setter private Boolean naturalDrops, dropExp;
     @Expose @Getter @Setter private String dropTable;
 
+    public DropsElement(Boolean naturalDrops, Boolean dropExp, String dropTable) {
+        this.naturalDrops = naturalDrops;
+        this.dropExp = dropExp;
+        this.dropTable = dropTable;
+    }
+
 }

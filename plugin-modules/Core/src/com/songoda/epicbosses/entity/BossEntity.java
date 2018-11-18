@@ -48,7 +48,11 @@ public class BossEntity {
 
         if(mainStatsElement == null) return false;
 
-        return mainStatsElement.getPosition() != null && mainStatsElement.getEntityType() != null && mainStatsElement.getHealth() != null;
+        Integer position = mainStatsElement.getPosition();
+        String entityType = mainStatsElement.getEntityType();
+        Double health = mainStatsElement.getHealth();
+
+        return (position != null && entityType != null && !entityType.isEmpty() && health != null && getSpawnItem() != null && !getSpawnItem().isEmpty());
     }
 
     public boolean canBeBought() {
