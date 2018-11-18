@@ -1,8 +1,10 @@
 package com.songoda.epicbosses.skills.custom;
 
+import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
-import com.songoda.epicbosses.skills.ISkillHandler;
-import com.songoda.epicbosses.skills.types.CustomSkill;
+import com.songoda.epicbosses.skills.CustomSkillHandler;
+import com.songoda.epicbosses.skills.Skill;
+import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.RandomUtils;
 import org.bukkit.Material;
@@ -18,14 +20,10 @@ import java.util.List;
  * @version 1.0.0
  * @since 11-Nov-18
  */
-public class Disarm extends CustomSkill implements ISkillHandler {
-
-    public Disarm(String mode, String type, Double radius, String displayName, String customMessage) {
-        super(mode, type, radius, displayName, customMessage);
-    }
+public class Disarm extends CustomSkillHandler {
 
     @Override
-    public void castSkill(ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
+    public void castSkill(Skill skill, CustomSkillElement customSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
         nearbyEntities.forEach(livingEntity -> {
             EntityEquipment entityEquipment = livingEntity.getEquipment();
             int itemSlot = RandomUtils.get().getRandomNumber(5);
@@ -37,8 +35,8 @@ public class Disarm extends CustomSkill implements ISkillHandler {
                     if(livingEntity instanceof HumanEntity) {
                         HumanEntity humanEntity = (HumanEntity) livingEntity;
 
-                        itemStack = PLUGIN.getVersionHandler().getItemInHand(humanEntity);
-                        PLUGIN.getVersionHandler().setItemInHand(humanEntity, replacementItemStack);
+                        itemStack = CustomBosses.get().getVersionHandler().getItemInHand(humanEntity);
+                        CustomBosses.get().getVersionHandler().setItemInHand(humanEntity, replacementItemStack);
                         break;
                     }
                 case 1:

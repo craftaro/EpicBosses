@@ -1,5 +1,5 @@
 Settings:
-  debug: false
+  debug: true
   bossTargetRange: 50.0
   defaultNearbyRadius: 250.0
   nearbyFormat: '{name} ({distance}m)'
@@ -36,7 +36,7 @@ Display:
   AutoSpawns:
     menuName: '&b&lEpicBosses &3&lAutoSpawns'
   Bosses:
-    menuName: '&b&lEpicBosses &3&lItems'
+    menuName: '&b&lEpicBosses &3&lBosses'
     name: '&b&l{name}'
     lore:
     - '&3Editing: &f{enabled}'

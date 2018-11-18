@@ -11,7 +11,7 @@ import java.util.List;
  * @version 1.0.0
  * @since 05-Nov-18
  */
-public class CommandSkillElement {
+public class SubCommandSkillElement {
 
     @Expose @Getter @Setter private Double chance;
     @Expose @Getter @Setter private List<String> commands;

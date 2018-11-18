@@ -18,25 +18,24 @@ import java.util.List;
  * @version 1.0.0
  * @since 05-Nov-18
  */
-public class PotionSkill extends Skill implements ISkillHandler {
+public class PotionSkillElement implements ISkillHandler<PotionSkillElement> {
 
     @Expose @Getter @Setter private List<PotionEffectHolder> potions;
 
     private final PotionEffectConverter potionEffectConverter;
 
-    public PotionSkill(String mode, String type, Double radius, String displayName, String customMessage) {
-        super(mode, type, radius, displayName, customMessage);
-
+    public PotionSkillElement(List<PotionEffectHolder> potions) {
+        this.potions = potions;
         this.potionEffectConverter = new PotionEffectConverter();
     }
 
     @Override
-    public void castSkill(ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
+    public void castSkill(Skill skill, PotionSkillElement customSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
         List<PotionEffectHolder> potionElements = getPotions();
 
         if(potionElements == null) return;
         if(potionElements.isEmpty()) {
-            Debug.SKILL_POTIONS_ARE_EMPTY.debug(getDisplayName());
+            Debug.SKILL_POTIONS_ARE_EMPTY.debug();
             return;
         }
 

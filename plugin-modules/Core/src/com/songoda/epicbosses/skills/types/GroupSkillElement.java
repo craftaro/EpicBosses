@@ -15,16 +15,16 @@ import java.util.List;
  * @version 1.0.0
  * @since 05-Nov-18
  */
-public class GroupSkill extends Skill implements ISkillHandler {
+public class GroupSkillElement implements ISkillHandler<GroupSkillElement> {
 
     @Expose @Getter @Setter private List<String> groupedSkills;
 
-    public GroupSkill(String mode, String type, Double radius, String displayName, String customMessage) {
-        super(mode, type, radius, displayName, customMessage);
+    public GroupSkillElement(List<String> groupedSkills) {
+        this.groupedSkills = groupedSkills;
     }
 
     @Override
-    public void castSkill(ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
+    public void castSkill(Skill skill, GroupSkillElement groupSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
         //TODO
     }
 }

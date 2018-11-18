@@ -54,8 +54,8 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     @Getter private MinionMechanicManager minionMechanicManager;
     @Getter private MinionEntityContainer minionEntityContainer;
 
-    @Getter private VersionHandler versionHandler;
-    @Getter private DebugManager debugManager;
+    @Getter private VersionHandler versionHandler = new VersionHandler();
+    @Getter private DebugManager debugManager = new DebugManager();
 
     @Getter private YmlFileHandler langFileHandler, editorFileHandler, configFileHandler;
     @Getter private FileConfiguration lang, editor, config;
@@ -63,6 +63,11 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     @Getter private VaultHelper vaultHelper;
 
     @Getter private boolean debug = false;
+
+    @Override
+    public void onDisable() {
+        this.bossEntityManager.killAllHolders(null);
+    }
 
     @Override
     public void onEnable() {
@@ -82,8 +87,6 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         new Metrics(this);
         new ServerUtils(this);
 
-        this.debugManager = new DebugManager();
-        this.versionHandler = new VersionHandler();
         this.bossSkillManager = new BossSkillManager();
         this.bossHookManager = new BossHookManager(this);
         this.bossTauntManager = new BossTauntManager(this);
@@ -118,6 +121,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.bossPanelManager.load();
 
         //RELOAD/LOAD ALL MANAGERS
+        this.bossSkillManager.load();
         this.bossHookManager.reload();
         this.bossLocationManager.reload();
         this.bossMechanicManager.load();

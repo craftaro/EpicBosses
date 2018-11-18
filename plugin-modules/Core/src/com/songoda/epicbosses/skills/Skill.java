@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.skills;
 
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,7 @@ public class Skill {
 
     @Expose @Getter @Setter private String mode, type, displayName, customMessage;
     @Expose @Getter @Setter private Double radius;
+    @Expose @Getter @Setter private JsonObject customData;
 
     public Skill(String mode, String type, Double radius, String displayName, String customMessage) {
         this.mode = mode;

@@ -1,18 +1,16 @@
 package com.songoda.epicbosses.skills.custom;
 
-import com.google.gson.annotations.Expose;
-import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
-import com.songoda.epicbosses.skills.ISkillHandler;
+import com.songoda.epicbosses.skills.CustomSkillHandler;
+import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.custom.cage.CageLocationData;
 import com.songoda.epicbosses.skills.custom.cage.CagePlayerData;
 import com.songoda.epicbosses.skills.elements.CustomCageSkillElement;
-import com.songoda.epicbosses.skills.types.CustomSkill;
+import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.converters.MaterialConverter;
 import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
@@ -25,21 +23,15 @@ import java.util.*;
  * @version 1.0.0
  * @since 06-Nov-18
  */
-public class Cage extends CustomSkill implements ISkillHandler {
+public class Cage extends CustomSkillHandler {
 
     private static final MaterialConverter MATERIAL_CONVERTER = new MaterialConverter();
 
     @Getter private static final Map<Location, CageLocationData> cageLocationDataMap = new HashMap<>();
     @Getter private static final List<UUID> playersInCage = new ArrayList<>();
 
-    @Expose @Getter @Setter private CustomCageSkillElement cage;
-
-    public Cage(String mode, String type, Double radius, String displayName, String customMessage) {
-        super(mode, type, radius, displayName, customMessage);
-    }
-
     @Override
-    public void castSkill(ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
+    public void castSkill(Skill skill, CustomSkillElement customSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
         nearbyEntities.forEach(livingEntity -> {
             UUID uuid = livingEntity.getUniqueId();
 
@@ -53,7 +45,7 @@ public class Cage extends CustomSkill implements ISkillHandler {
             cagePlayerData.setBlockStateMaps(teleportLocation);
             livingEntity.teleport(teleportLocation);
 
-            ServerUtils.get().runLater(1L, () -> setCageBlocks(cagePlayerData));
+            ServerUtils.get().runLater(1L, () -> setCageBlocks(cagePlayerData, customSkillElement.getCustom().getCustomCageSkillData(), skill));
             ServerUtils.get().runLater(100L, () -> {
                 restoreCageBlocks(cagePlayerData);
                 getPlayersInCage().remove(uuid);
@@ -93,19 +85,19 @@ public class Cage extends CustomSkill implements ISkillHandler {
         });
     }
 
-    private void setCageBlocks(CagePlayerData cagePlayerData) {
+    private void setCageBlocks(CagePlayerData cagePlayerData, CustomCageSkillElement cage, Skill skill) {
         Map<String, Queue<BlockState>> queueMap = cagePlayerData.getMapOfCages();
 
-        setBlocks(queueMap.get("W"), getCage().getWallType());
-        setBlocks(queueMap.get("F"), getCage().getFlatType());
-        setBlocks(queueMap.get("I"), getCage().getInsideType());
+        setBlocks(queueMap.get("W"), cage.getWallType(), skill);
+        setBlocks(queueMap.get("F"), cage.getFlatType(), skill);
+        setBlocks(queueMap.get("I"), cage.getInsideType(), skill);
     }
 
-    private void setBlocks(Queue<BlockState> queue, String materialType) {
+    private void setBlocks(Queue<BlockState> queue, String materialType, Skill skill) {
         Material material = MATERIAL_CONVERTER.from(materialType);
 
         if(material == null) {
-            Debug.SKILL_CAGE_INVALID_MATERIAL.debug(materialType, getDisplayName());
+            Debug.SKILL_CAGE_INVALID_MATERIAL.debug(materialType, skill.getDisplayName());
             return;
         }
 

@@ -41,8 +41,7 @@
       "overallChance": 35.5,
       "masterMessage": "SKMainSkillMessage",
       "skills": [
-        "KNOCKBACK1",
-        "CAGE1"
+        "Lightning1"
       ]
     },
     "drops": {

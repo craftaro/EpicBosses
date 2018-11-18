@@ -10,8 +10,11 @@ import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.files.CommandsFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.managers.files.MessagesFileManager;
+import com.songoda.epicbosses.skills.CustomSkillHandler;
+import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.custom.Minions;
-import com.songoda.epicbosses.skills.types.CustomSkill;
+import com.songoda.epicbosses.skills.elements.CustomMinionSkillElement;
+import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.EntityFinder;
 import com.songoda.epicbosses.utils.ServerUtils;
@@ -101,8 +104,8 @@ public class BossAPI {
      * @param customSkill - The custom skill you are registering
      * @return boolean if the registration succeeded or failed
      */
-    public static boolean registerCustomSkill(CustomSkill customSkill) {
-        return PLUGIN.getBossSkillManager().registerSkill(customSkill);
+    public static boolean registerCustomSkill(CustomSkillHandler customSkill) {
+        return PLUGIN.getBossSkillManager().registerCustomSkill(customSkill);
     }
 
     /**
@@ -115,8 +118,8 @@ public class BossAPI {
      *
      * @param customSkill - The custom skill you are trying to remove
      */
-    public static void removeCustomSkill(CustomSkill customSkill) {
-        PLUGIN.getBossSkillManager().removeSkill(customSkill);
+    public static void removeCustomSkill(CustomSkillHandler customSkill) {
+        PLUGIN.getBossSkillManager().removeCustomSkill(customSkill);
     }
 
     /**
@@ -290,6 +293,8 @@ public class BossAPI {
             preBossSpawnEvent = new PreBossSpawnEvent(activeBossHolder);
         }
 
+        System.out.println("SPAWNING EVENT " + preBossSpawnEvent);
+
         PLUGIN.getBossTargetManager().initializeTargetHandler(activeBossHolder);
         ServerUtils.get().callEvent(preBossSpawnEvent);
 
@@ -301,16 +306,27 @@ public class BossAPI {
      * bossEntity, under the activebossholder.
      *
      * @param activeBossHolder - targeted active boss
-     * @param minions - Minion skill class
+     * @param skill - the skill from the skills.json
      * @return boolean if the spawning of the minions succeeded or failed
      */
-    public static boolean spawnNewMinion(ActiveBossHolder activeBossHolder, Minions minions) {
+    public static boolean spawnNewMinion(ActiveBossHolder activeBossHolder, Skill skill) {
 //        if(minionEntity.isEditing()) {
 //            Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
 //            return null;
 //        }
 
-        return PLUGIN.getBossEntityManager().spawnMinionsOnBossHolder(activeBossHolder, minions);
+        if(skill.getType().equalsIgnoreCase("CUSTOM")) {
+            CustomSkillElement customSkillElement = PLUGIN.getBossSkillManager().getCustomSkillElement(skill);
+
+            if(customSkillElement.getCustom().getType().equalsIgnoreCase("MINION")) {
+                CustomMinionSkillElement customMinionSkillElement = customSkillElement.getCustom().getCustomMinionSkillData();
+
+                PLUGIN.getBossEntityManager().spawnMinionsOnBossHolder(activeBossHolder, skill, customMinionSkillElement);
+            }
+        }
+
+
+        return false;
     }
 
     /**

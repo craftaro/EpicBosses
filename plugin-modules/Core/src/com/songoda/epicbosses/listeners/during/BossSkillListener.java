@@ -3,17 +3,16 @@ package com.songoda.epicbosses.listeners.during;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
-import com.songoda.epicbosses.events.BossSkillEvent;
 import com.songoda.epicbosses.events.PreBossSkillEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.managers.files.SkillsFileManager;
-import com.songoda.epicbosses.skills.ISkillHandler;
 import com.songoda.epicbosses.skills.Skill;
-import com.songoda.epicbosses.skills.types.CommandSkill;
-import com.songoda.epicbosses.skills.types.CustomSkill;
-import com.songoda.epicbosses.skills.types.PotionSkill;
+import com.songoda.epicbosses.skills.types.CommandSkillElement;
+import com.songoda.epicbosses.skills.types.CustomSkillElement;
+import com.songoda.epicbosses.skills.types.GroupSkillElement;
+import com.songoda.epicbosses.skills.types.PotionSkillElement;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.RandomUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
@@ -26,7 +25,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.potion.Potion;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,8 +40,10 @@ public class BossSkillListener implements Listener {
 
     private BossEntityManager bossEntityManager;
     private SkillsFileManager skillsFileManager;
+    private BossSkillManager bossSkillManager;
 
     public BossSkillListener(CustomBosses plugin) {
+        this.bossSkillManager = plugin.getBossSkillManager();
         this.bossEntityManager = plugin.getBossEntityManager();
         this.skillsFileManager = plugin.getSkillsFileManager();
     }
@@ -65,11 +65,11 @@ public class BossSkillListener implements Listener {
 
         if(bossEntity.getSkills() == null || bossEntity.getSkills().getOverallChance() == null) return;
 
-        if(RandomUtils.get().canPreformAction(bossEntity.getSkills().getOverallChance())) {
+//        if(RandomUtils.get().canPreformAction(bossEntity.getSkills().getOverallChance())) {
             PreBossSkillEvent preBossSkillEvent = new PreBossSkillEvent(activeBossHolder, livingEntity, (LivingEntity) entityDamaging);
 
             ServerUtils.get().callEvent(preBossSkillEvent);
-        }
+//        }
     }
 
     @EventHandler
@@ -98,17 +98,25 @@ public class BossSkillListener implements Listener {
         List<LivingEntity> targettedEntities = getTargetedEntities(activeBossHolder, skill, activeBossHolder.getLivingEntity().getLocation(), damagingEntity);
 
         if(skill.getType().equalsIgnoreCase("POTION")) {
-            PotionSkill potionSkill = (PotionSkill) skill;
+            PotionSkillElement potionSkillElement = this.bossSkillManager.getPotionSkillElement(skill);
 
-            potionSkill.castSkill(activeBossHolder, targettedEntities);
+            potionSkillElement.castSkill(skill, potionSkillElement, activeBossHolder, targettedEntities);
+            System.out.println("#1");
         } else if(skill.getType().equalsIgnoreCase("COMMAND")) {
-            CommandSkill commandSkill = (CommandSkill) skill;
+            CommandSkillElement commandSkillElement = this.bossSkillManager.getCommandSkillElement(skill);
 
-            commandSkill.castSkill(activeBossHolder, targettedEntities);
+            commandSkillElement.castSkill(skill, commandSkillElement, activeBossHolder, targettedEntities);
+            System.out.println("#2");
+        } else if(skill.getType().equalsIgnoreCase("GROUP")) {
+            GroupSkillElement groupSkillElement = this.bossSkillManager.getGroupSkillElement(skill);
+
+            groupSkillElement.castSkill(skill, groupSkillElement, activeBossHolder, targettedEntities);
+            System.out.println("#3");
         } else if(skill.getType().equalsIgnoreCase("CUSTOM")) {
-            CustomSkill customSkill = (CustomSkill) skill;
+            CustomSkillElement customSkillElement = this.bossSkillManager.getCustomSkillElement(skill);
 
-
+            this.bossSkillManager.handleCustomSkillCasting(skill, customSkillElement, activeBossHolder, targettedEntities);
+            System.out.println("#4");
         }
     }
 

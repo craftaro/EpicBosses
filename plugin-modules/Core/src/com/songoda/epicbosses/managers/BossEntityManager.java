@@ -15,7 +15,9 @@ import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.DropTableFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.managers.files.MinionsFileManager;
+import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.custom.Minions;
+import com.songoda.epicbosses.skills.elements.CustomMinionSkillElement;
 import com.songoda.epicbosses.utils.BossesGson;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.RandomUtils;
@@ -260,12 +262,12 @@ public class BossEntityManager {
         return activeBossHolder;
     }
 
-    public boolean spawnMinionsOnBossHolder(ActiveBossHolder activeBossHolder, Minions minions) {
-        List<String> minionsToSpawn = minions.getMinions().getMinionsToSpawn();
-        Integer amount = minions.getMinions().getAmount();
+    public boolean spawnMinionsOnBossHolder(ActiveBossHolder activeBossHolder, Skill skill, CustomMinionSkillElement minionSkillElement) {
+        List<String> minionsToSpawn = minionSkillElement.getMinionsToSpawn();
+        Integer amount = minionSkillElement.getAmount();
 
         if(minionsToSpawn == null || minionsToSpawn.isEmpty()) {
-            Debug.FAILED_TO_SPAWN_MINIONS_FROM_SKILL.debug(minions.getDisplayName());
+            Debug.FAILED_TO_SPAWN_MINIONS_FROM_SKILL.debug(skill.getDisplayName());
             return false;
         }
 
@@ -277,13 +279,13 @@ public class BossEntityManager {
             MinionEntity minionEntity = this.minionsFileManager.getMinionEntity(string);
 
             if(minionEntity == null) {
-                Debug.FAILED_TO_FIND_MINION.debug(minions.getDisplayName(), string);
+                Debug.FAILED_TO_FIND_MINION.debug(skill.getDisplayName(), string);
                 return;
             }
 
             for(int i = 1; i <= finalAmount; i++) {
                 if(!this.minionMechanicManager.handleMechanicApplication(minionEntity, activeBossHolder)) {
-                    Debug.FAILED_TO_SPAWN_MINION.debug(minions.getDisplayName(), string);
+                    Debug.FAILED_TO_SPAWN_MINION.debug(skill.getDisplayName(), string);
                     return;
                 }
             }

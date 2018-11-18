@@ -2,16 +2,18 @@
   "Blind1": {
     "mode": "ALL",
     "type": "POTION",
-    "radius": 10,
     "displayName": "Blind",
     "customMessage": "BlindMessage",
-    "potions": [
-      {
-        "type": "blind",
-        "level": 2,
-        "duration": 10
-      }
-    ]
+    "radius": 10,
+    "customData": {
+      "potions": [
+        {
+          "type": "blind",
+          "level": 2,
+          "duration": 10
+        }
+      ]
+    }
   },
   "Guts1": {
     "mode": "ALL",
@@ -19,35 +21,39 @@
     "radius": 10,
     "displayName": "Guts",
     "customMessage": "GutsMessage",
-    "commands": [
-      {
-        "chance": 25,
-        "commands": [
-          "Guts1",
-          "Guts2"
-        ]
-      },
-      {
-        "chance": 10,
-        "commands": [
-          "Guts3"
-        ]
-      }
-    ]
+    "customData": {
+      "commands": [
+        {
+          "chance": 25,
+          "commands": [
+            "Guts1",
+            "Guts2"
+          ]
+        },
+        {
+          "chance": 10,
+          "commands": [
+            "Guts3"
+          ]
+        }
+      ]
+    }
   },
   "Cage1": {
     "mode": "ALL",
     "type": "CUSTOM",
     "radius": 10,
     "displayName": "Cage",
-    "custom": {
-      "type": "CAGE",
-      "multiplier": 0.0
-    },
-    "cage": {
-      "flatType": "IRON_BLOCK",
-      "wallType": "IRON_BARS",
-      "insideType": "WATER"
+    "customData": {
+      "custom": {
+        "type": "CAGE",
+        "multiplier": 0.0,
+        "otherSkillData": {
+          "flatType": "IRON_BLOCK",
+          "wallType": "IRON_BARS",
+          "insideType": "WATER"
+        }
+      }
     }
   },
   "Disarm1": {
@@ -56,9 +62,11 @@
     "radius": 10,
     "displayName": "Disarm",
     "customMessage": null,
-    "custom": {
-      "type": "DISARM",
-      "multiplier": null
+    "customData": {
+      "custom": {
+        "type": "DISARM",
+        "multiplier": null
+      }
     }
   },
   "Fireball1": {
@@ -67,9 +75,11 @@
     "radius": 10,
     "displayName": "Fireball",
     "customMessage": null,
-    "custom": {
-      "type": "FIREBALL",
-      "multiplier": 3.0
+    "customData": {
+      "custom": {
+        "type": "FIREBALL",
+        "multiplier": 3.0
+      }
     }
   },
   "Grapple1": {
@@ -78,9 +88,11 @@
     "radius": 10,
     "displayName": "Grapple",
     "customMessage": null,
-    "custom": {
-      "type": "GRAPPLE",
-      "multiplier": 3.0
+    "customData": {
+      "custom": {
+        "type": "GRAPPLE",
+        "multiplier": 3.0
+      }
     }
   },
   "Insidious1": {
@@ -89,9 +101,11 @@
     "radius": 10,
     "displayName": "Insidious",
     "customMessage": null,
-    "custom": {
-      "type": "INSIDIOUS",
-      "multiplier": 2.5
+    "customData": {
+      "custom": {
+        "type": "INSIDIOUS",
+        "multiplier": 2.5
+      }
     }
   },
   "Knockback1": {
@@ -100,9 +114,11 @@
     "radius": 10,
     "displayName": "Knockback",
     "customMessage": null,
-    "custom": {
-      "type": "KNOCKBACK",
-      "multiplier": 2.5
+    "customData": {
+      "custom": {
+        "type": "KNOCKBACK",
+        "multiplier": 2.5
+      }
     }
   },
   "Launch1": {
@@ -111,9 +127,11 @@
     "radius": 10,
     "displayName": "Launch",
     "customMessage": null,
-    "custom": {
-      "type": "LAUNCH",
-      "multiplier": 3.0
+    "customData": {
+      "custom": {
+        "type": "LAUNCH",
+        "multiplier": 3.0
+      }
     }
   },
   "Lightning1": {
@@ -122,9 +140,11 @@
     "radius": 10,
     "displayName": "Lightning",
     "customMessage": null,
-    "custom": {
-      "type": "LIGHTNING",
-      "multiplier": null
+    "customData": {
+      "custom": {
+        "type": "LIGHTNING",
+        "multiplier": null
+      }
     }
   },
   "Minions1": {
@@ -133,15 +153,17 @@
     "radius": 10,
     "displayName": "Minions",
     "customMessage": null,
-    "custom": {
-      "type": "MINIONS",
-      "multiplier": null
-    },
-    "minions": {
-      "amount": 5,
-      "minionsToSpawn": [
-        "Minion1"
-      ]
+    "customData": {
+      "custom": {
+        "type": "MINIONS",
+        "multiplier": null,
+        "otherSkillData": {
+          "amount": 5,
+          "minionsToSpawn": [
+            "Minion1"
+          ]
+        }
+      }
     }
   },
   "Warp1": {
@@ -150,9 +172,11 @@
     "radius": 10,
     "displayName": "Warp",
     "customMessage": null,
-    "custom": {
-      "type": "WARP",
-      "multiplier": null
+    "customData": {
+      "custom": {
+        "type": "WARP",
+        "multiplier": null
+      }
     }
   },
   "Shazaam1": {
@@ -161,9 +185,11 @@
     "radius": 10,
     "displayName": "Shazaam",
     "customMessage": "ShazaamMessage",
-    "groupedSkills": [
-      "Blind1",
-      "Knockback1"
-    ]
+    "customData": {
+      "groupedSkills": [
+        "Blind1",
+        "Knockback1"
+      ]
+    }
   }
 }

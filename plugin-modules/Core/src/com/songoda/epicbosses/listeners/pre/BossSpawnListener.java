@@ -103,7 +103,16 @@ public class BossSpawnListener implements Listener {
     }
 
     @EventHandler
+    public void onPreBossSpawnItem(PreBossSpawnItemEvent event) {
+        handleEvent(event);
+    }
+
+    @EventHandler
     public void onPreBossSpawnEvent(PreBossSpawnEvent event) {
+        handleEvent(event);
+    }
+
+    private void handleEvent(PreBossSpawnEvent event) {
         ActiveBossHolder activeBossHolder = event.getActiveBossHolder();
         BossEntity bossEntity = activeBossHolder.getBossEntity();
         Location location = activeBossHolder.getLocation();
@@ -129,6 +138,8 @@ public class BossSpawnListener implements Listener {
         if(messages != null) {
             if(activeBossHolder.getName() != null) messages.replaceAll(s -> s.replace("{boss}", activeBossHolder.getName()));
             messages.replaceAll(s -> s.replace("{location}", StringUtils.get().translateLocation(location)));
+
+            System.out.println("MESSAGE SYSTEM");
 
             MessageUtils.get().sendMessage(location, NumberUtils.get().getSquared(messageRadius), messages);
         }

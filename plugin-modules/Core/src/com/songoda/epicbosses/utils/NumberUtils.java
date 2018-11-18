@@ -28,6 +28,8 @@ public class NumberUtils {
     }
 
     public int getSquared(int original) {
+        if(original == -1) return -1;
+
         return original * original;
     }
 

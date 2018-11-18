@@ -42,10 +42,6 @@ public class PotionMechanic implements IOptionalMechanic<BossEntity> {
                 potionElements.forEach(potionElement -> {
                     PotionEffect potionEffect = this.potionEffectConverter.from(potionElement);
 
-                    System.out.println(potionEffect);
-                    System.out.println(potionEffect.getAmplifier());
-                    System.out.println(potionEffect.getDuration());
-                    System.out.println(livingEntity);
                     livingEntity.addPotionEffect(potionEffect);
                 });
             }
