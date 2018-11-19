@@ -4,6 +4,7 @@ import com.songoda.epicbosses.holder.IActiveHolder;
 import com.songoda.epicbosses.managers.BossTargetManager;
 import com.songoda.epicbosses.utils.ServerUtils;
 import lombok.Getter;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -59,7 +60,7 @@ public abstract class TargetHandler<Holder extends IActiveHolder> implements ITa
             if(livingEntity instanceof Player) {
                 Player player = (Player) livingEntity;
 
-
+                if(player.getGameMode() == GameMode.SPECTATOR || player.getGameMode() == GameMode.CREATIVE) continue;
             }
 
             nearbyEntities.add(livingEntity);

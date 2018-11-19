@@ -2,7 +2,6 @@ package com.songoda.epicbosses.utils.itemstack;
 
 import com.songoda.epicbosses.utils.IReplaceableConverter;
 import com.songoda.epicbosses.utils.StringUtils;
-import com.songoda.epicbosses.utils.factory.NbtFactory;
 import com.songoda.epicbosses.utils.itemstack.converters.EnchantConverter;
 import com.songoda.epicbosses.utils.itemstack.converters.MaterialConverter;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
@@ -170,11 +169,7 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
         }
 
         if(isGlowing != null && isGlowing) {
-            ItemStack craftStack = NbtFactory.getCraftItemStack(itemStack);
-            NbtFactory.NbtCompound compound = NbtFactory.fromItemTag(craftStack);
-
-            compound.put("ench", NbtFactory.createList());
-            return craftStack;
+            //TODO
         }
 
         if(amount != null && amount > 1) {

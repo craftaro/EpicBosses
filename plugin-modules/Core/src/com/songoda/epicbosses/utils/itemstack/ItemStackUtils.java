@@ -2,7 +2,7 @@ package com.songoda.epicbosses.utils.itemstack;
 
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.StringUtils;
-import com.songoda.epicbosses.utils.factory.NbtFactory;
+//import com.songoda.epicbosses.utils.factory.NbtFactory;
 import com.songoda.epicbosses.utils.itemstack.enchants.GlowEnchant;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import org.bukkit.ChatColor;
@@ -62,14 +62,16 @@ public class ItemStackUtils {
 
         if(compoundData == null || compoundData.isEmpty()) return cloneStack;
 
-        ItemStack craftStack = NbtFactory.getCraftItemStack(cloneStack);
-        NbtFactory.NbtCompound compound = NbtFactory.fromItemTag(craftStack);
-
-        for(String s : compoundData.keySet()) {
-            compound.put(s, compoundData.get(s));
-        }
-
-        return craftStack;
+//        TODO
+//        ItemStack craftStack = NbtFactory.getCraftItemStack(cloneStack);
+//        NbtFactory.NbtCompound compound = NbtFactory.fromItemTag(craftStack);
+//
+//        for(String s : compoundData.keySet()) {
+//            compound.put(s, compoundData.get(s));
+//        }
+//
+//        return craftStack;
+        return cloneStack;
     }
 
     public static ItemStack createItemStack(ConfigurationSection configurationSection) {
