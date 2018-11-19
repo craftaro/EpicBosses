@@ -21,9 +21,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>net.redstoneore.legacyfactions</groupId>
+            <groupId>com.massivecraft</groupId>
             <artifactId>LegacyFactions</artifactId>
-            <version>1.4.7</version>
+            <version>LATEST</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
