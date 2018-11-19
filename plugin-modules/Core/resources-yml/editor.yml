@@ -240,3 +240,72 @@ MainEditorPanel:
       - '&7Click here to edit the taunts, sayings,'
       - '&7etc. for this boss.'
       Button: Text
+DropsEditorPanel:
+  name: '&b&l{boss} Editor'
+  slots: 54
+  Settings:
+    fillTo: 45
+  Items:
+    '46':
+      type: DIAMOND
+      name: '&b&lSelected Drop Table'
+      lore:
+      - '&7The current selected drop'
+      - '&7table is: &b{dropTable}&7.'
+      - '&7'
+      - '&b&lHints'
+      - '&b&l* &7If this shows N/A it means'
+      - '&7   there was an issue loading the'
+      - '&7   previous table, or it doesn''t'
+      - '&7   have one selected.'
+      - '&b&l* &7Click here to go straight to the'
+      - '&7   editing screen of the drop table.'
+      Button: Selected
+    '47':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '48':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page of drop tables.'
+      PreviousPage: true
+    '50':
+      type: DIAMOND_BLOCK
+      name: '&a&lCreate a new Drop Table'
+      lore:
+      - '&7Click here to create a new drop'
+      - '&7table. It will automatically be'
+      - '&7assigned to this boss when created.'
+      Button: CreateDropTable
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page of drop tables.'
+      NextPage: true
+    '52':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '53':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '54':
+      type: BOOK
+      name: '&c&lDrops Guide'
+      lore:
+      - '&7When selecting the drop table for this custom boss'
+      - '&7you can either choose from one of the above listed'
+      - '&7pre-configured drop tables or you can make a'
+      - '&7new one for this boss.'
+      - '&7'
+      - '&c&lHints'
+      - '&c&l* &7The currently selected drop table will be shown'
+      - '&7   with an emerald which states so.'
+      - '&c&l* &7Every drop table from every boss will be listed'
+      - '&7   here as an available drop table.'

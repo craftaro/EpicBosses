@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.targeting.types;
 
-import com.songoda.epicbosses.holder.ActiveBossHolder;
+import com.songoda.epicbosses.holder.IActiveHolder;
 import com.songoda.epicbosses.managers.BossTargetManager;
 import com.songoda.epicbosses.targeting.TargetHandler;
 import com.songoda.epicbosses.utils.MapUtils;
@@ -13,16 +13,16 @@ import java.util.*;
  * @version 1.0.0
  * @since 30-Oct-18
  */
-public class TopDamagerTargetHandler extends TargetHandler {
+public class TopDamagerTargetHandler<T extends IActiveHolder> extends TargetHandler<T> {
 
-    public TopDamagerTargetHandler(ActiveBossHolder activeBossHolder, BossTargetManager bossTargetManager) {
-        super(activeBossHolder, bossTargetManager);
+    public TopDamagerTargetHandler(T holder, BossTargetManager bossTargetManager) {
+        super(holder, bossTargetManager);
     }
 
     @Override
     public LivingEntity selectTarget(List<LivingEntity> nearbyEntities) {
         Map<LivingEntity, Double> nearbyDamages = new HashMap<>();
-        Map<UUID, Double> mapOfDamages = getActiveBossHolder().getMapOfDamagingUsers();
+        Map<UUID, Double> mapOfDamages = getHolder().getMapOfDamagingUsers();
 
         nearbyEntities.forEach(livingEntity -> {
             UUID uuid = livingEntity.getUniqueId();

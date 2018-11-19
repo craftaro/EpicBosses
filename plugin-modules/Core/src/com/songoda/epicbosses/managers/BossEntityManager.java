@@ -10,6 +10,7 @@ import com.songoda.epicbosses.droptable.elements.SprayTableElement;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
+import com.songoda.epicbosses.holder.ActiveMinionHolder;
 import com.songoda.epicbosses.holder.DeadBossHolder;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.DropTableFileManager;
@@ -49,6 +50,7 @@ public class BossEntityManager {
     private MinionsFileManager minionsFileManager;
     private ItemsFileManager bossItemFileManager;
     private BossesFileManager bossesFileManager;
+    private BossTargetManager bossTargetManager;
 
     public BossEntityManager(CustomBosses customBosses) {
         this.minionMechanicManager = customBosses.getMinionMechanicManager();
@@ -58,6 +60,7 @@ public class BossEntityManager {
         this.minionsFileManager = customBosses.getMinionsFileManager();
         this.bossItemFileManager = customBosses.getItemStackManager();
         this.bossesFileManager = customBosses.getBossesFileManager();
+        this.bossTargetManager = customBosses.getBossTargetManager();
     }
 
     public double getRadius(ActiveBossHolder activeBossHolder, Location centerLocation) {
@@ -253,45 +256,43 @@ public class BossEntityManager {
     public ActiveBossHolder createActiveBossHolder(BossEntity bossEntity, Location spawnLocation, String name) {
         ActiveBossHolder activeBossHolder = new ActiveBossHolder(bossEntity, spawnLocation, name);
 
-        if(!this.bossMechanicManager.handleMechanicApplication(bossEntity, activeBossHolder)) {
-            Debug.FAILED_TO_CREATE_ACTIVE_BOSS_HOLDER.debug();
-            return null;
-        }
+        this.bossMechanicManager.handleMechanicApplication(bossEntity, activeBossHolder);
 
         ACTIVE_BOSS_HOLDERS.add(activeBossHolder);
         return activeBossHolder;
     }
 
-    public boolean spawnMinionsOnBossHolder(ActiveBossHolder activeBossHolder, Skill skill, CustomMinionSkillElement minionSkillElement) {
-        List<String> minionsToSpawn = minionSkillElement.getMinionsToSpawn();
+    public void spawnMinionsOnBossHolder(ActiveBossHolder activeBossHolder, Skill skill, CustomMinionSkillElement minionSkillElement) {
+        String minionToSpawn = minionSkillElement.getMinionToSpawn();
         Integer amount = minionSkillElement.getAmount();
 
-        if(minionsToSpawn == null || minionsToSpawn.isEmpty()) {
+        if(minionToSpawn == null || minionToSpawn.isEmpty()) {
             Debug.FAILED_TO_SPAWN_MINIONS_FROM_SKILL.debug(skill.getDisplayName());
-            return false;
+            return;
         }
 
         if(amount == null) amount = 1;
 
-        int finalAmount = amount;
+        MinionEntity minionEntity = this.minionsFileManager.getMinionEntity(minionToSpawn);
+        Location location = activeBossHolder.getLivingEntity().getLocation();
 
-        minionsToSpawn.forEach(string -> {
-            MinionEntity minionEntity = this.minionsFileManager.getMinionEntity(string);
+        if(minionEntity == null) {
+            Debug.FAILED_TO_FIND_MINION.debug(skill.getDisplayName(), minionToSpawn);
+            return;
+        }
 
-            if(minionEntity == null) {
-                Debug.FAILED_TO_FIND_MINION.debug(skill.getDisplayName(), string);
-                return;
-            }
+        activeBossHolder.killAllMinions();
 
-            for(int i = 1; i <= finalAmount; i++) {
-                if(!this.minionMechanicManager.handleMechanicApplication(minionEntity, activeBossHolder)) {
-                    Debug.FAILED_TO_SPAWN_MINION.debug(skill.getDisplayName(), string);
-                    return;
-                }
-            }
-        });
+        for(int i = 1; i <= amount; i++) {
+            ActiveMinionHolder activeMinionHolder = new ActiveMinionHolder(activeBossHolder, minionEntity, location, minionToSpawn);
 
-        return true;
+            this.minionMechanicManager.handleMechanicApplication(minionEntity, activeMinionHolder);
+            this.bossTargetManager.handleMinionTargeting(activeMinionHolder);
+
+            activeBossHolder.getActiveMinionHolderMap().put(i, activeMinionHolder);
+        }
+
+        activeBossHolder.getActiveMinionHolderMap().values().forEach(activeMinionHolder -> activeMinionHolder.getTargetHandler().runTargetCycle());
     }
 
     public ActiveBossHolder getActiveBossHolder(LivingEntity livingEntity) {

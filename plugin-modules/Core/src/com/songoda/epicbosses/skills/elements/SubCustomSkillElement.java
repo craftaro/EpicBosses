@@ -32,7 +32,7 @@ public class SubCustomSkillElement {
     }
 
     public CustomMinionSkillElement getCustomMinionSkillData() {
-        if(getType().equalsIgnoreCase("MINION")) {
+        if(getType().equalsIgnoreCase("MINIONS")) {
             return BossesGson.get().fromJson(this.otherSkillData, CustomMinionSkillElement.class);
         }
 

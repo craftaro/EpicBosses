@@ -22,6 +22,7 @@ public enum Debug {
 
     ATTEMPTED_TO_UPDATE_PLUGIN("Something has attempted to update the PLUGIN variable in the BossAPI class while it is already initialized."),
     ATTEMPTED_TO_SPAWN_WHILE_DISABLED("A boss/minion attempted to spawn while editing is enabled."),
+    FAILED_TO_APPLY_MECHANIC("The {0} mechanic failed to be applied to the entity."),
     FAILED_TO_FIND_DROP_TABLE("The {0} boss has been killed however the specified drop table {1} wasn't found."),
     FAILED_TO_FIND_DROP_TABLE_TYPE("The {0} drop table type was not a valid drop table. Valid types are 'SPRAY', 'DROP', 'GIVE'."),
     FAILED_ATTEMPT_TO_SPAWN_BOSS("A boss has attempted to spawn but cannot spawn for the following reason: \n{0}"),

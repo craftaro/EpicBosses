@@ -4,10 +4,10 @@ import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.EquipmentElement;
 import com.songoda.epicbosses.entity.elements.MainStatsElement;
-import com.songoda.epicbosses.holder.ActiveBossHolder;
+import com.songoda.epicbosses.holder.ActiveMinionHolder;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
+import com.songoda.epicbosses.mechanics.IMinionMechanic;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
-import com.songoda.epicbosses.utils.mechanics.IOptionalMechanic;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
@@ -17,7 +17,7 @@ import org.bukkit.inventory.ItemStack;
  * @version 1.0.0
  * @since 03-Jun-18
  */
-public class EquipmentMechanic implements IOptionalMechanic<MinionEntity> {
+public class EquipmentMechanic implements IMinionMechanic {
 
     private ItemsFileManager itemStackManager;
 
@@ -26,12 +26,12 @@ public class EquipmentMechanic implements IOptionalMechanic<MinionEntity> {
     }
 
     @Override
-    public boolean applyMechanic(MinionEntity minionEntity, ActiveBossHolder activeBossHolder) {
-        if(activeBossHolder.getMinionEntityMap() == null || activeBossHolder.getMinionEntityMap().isEmpty()) return false;
+    public boolean applyMechanic(MinionEntity minionEntity, ActiveMinionHolder activeBossHolder) {
+        if(activeBossHolder.getLivingEntityMap() == null || activeBossHolder.getLivingEntityMap().isEmpty()) return false;
 
         for(EntityStatsElement entityStatsElement : minionEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
-            LivingEntity livingEntity = activeBossHolder.getMinionEntityMap().getOrDefault(mainStatsElement.getPosition(), null);
+            LivingEntity livingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(mainStatsElement.getPosition(), null);
 
             if(livingEntity == null) return false;
 

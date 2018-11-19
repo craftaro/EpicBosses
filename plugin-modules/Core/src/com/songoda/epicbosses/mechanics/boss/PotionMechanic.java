@@ -4,9 +4,7 @@ import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.MainStatsElement;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
-import com.songoda.epicbosses.utils.IMechanic;
-import com.songoda.epicbosses.utils.StringUtils;
-import com.songoda.epicbosses.utils.mechanics.IOptionalMechanic;
+import com.songoda.epicbosses.mechanics.IBossMechanic;
 import com.songoda.epicbosses.utils.potion.PotionEffectConverter;
 import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
 import org.bukkit.entity.LivingEntity;
@@ -19,7 +17,7 @@ import java.util.List;
  * @version 1.0.0
  * @since 27-Jun-18
  */
-public class PotionMechanic implements IOptionalMechanic<BossEntity> {
+public class PotionMechanic implements IBossMechanic {
 
     private PotionEffectConverter potionEffectConverter;
 

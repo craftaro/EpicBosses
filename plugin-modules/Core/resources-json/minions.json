@@ -1,6 +1,6 @@
 {
   "SkeletonKingMinion": {
-    "editing": true,
+    "editing": false,
     "targeting": "RandomNearby",
     "entityStats": [
       {
@@ -8,7 +8,7 @@
           "position": 1,
           "entityType": "SKELETON",
           "health": 500,
-          "displayName": "&6&lSkeleton King Boss"
+          "displayName": "&6&lSkeleton King Boss Minion"
         },
         "equipment": {
           "helmet": "SKHelmet",

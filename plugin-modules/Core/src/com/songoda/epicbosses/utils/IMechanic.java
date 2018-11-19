@@ -1,14 +1,12 @@
 package com.songoda.epicbosses.utils;
 
-import com.songoda.epicbosses.holder.ActiveBossHolder;
-
 /**
  * @author Charles Cullen
  * @version 1.0.0
  * @since 02-Jun-18
  */
-public interface IMechanic<Entity> {
+public interface IMechanic<Entity, Holder> {
 
-    boolean applyMechanic(Entity entity, ActiveBossHolder activeBossHolder);
+    boolean applyMechanic(Entity entity, Holder activeBossHolder);
 
 }

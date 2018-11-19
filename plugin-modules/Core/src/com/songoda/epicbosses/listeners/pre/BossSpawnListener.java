@@ -75,11 +75,11 @@ public class BossSpawnListener implements Listener {
 
         if(bossEntity == null) return;
 
-//        if(bossEntity.isEditing()) {
-//            Message.Boss_Edit_CannotSpawn.msg(player);
-//            event.setCancelled(true);
-//            return;
-//        }
+        if(bossEntity.isEditing()) {
+            Message.Boss_Edit_CannotSpawn.msg(player);
+            event.setCancelled(true);
+            return;
+        }
 
         Location location = block.getLocation().clone();
 
@@ -138,8 +138,6 @@ public class BossSpawnListener implements Listener {
         if(messages != null) {
             if(activeBossHolder.getName() != null) messages.replaceAll(s -> s.replace("{boss}", activeBossHolder.getName()));
             messages.replaceAll(s -> s.replace("{location}", StringUtils.get().translateLocation(location)));
-
-            System.out.println("MESSAGE SYSTEM");
 
             MessageUtils.get().sendMessage(location, NumberUtils.get().getSquared(messageRadius), messages);
         }

@@ -4,10 +4,8 @@ import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.MainStatsElement;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
-import com.songoda.epicbosses.utils.Debug;
-import com.songoda.epicbosses.utils.IMechanic;
+import com.songoda.epicbosses.mechanics.IBossMechanic;
 import com.songoda.epicbosses.utils.StringUtils;
-import com.songoda.epicbosses.utils.mechanics.IOptionalMechanic;
 import org.bukkit.entity.LivingEntity;
 
 /**
@@ -17,7 +15,7 @@ import org.bukkit.entity.LivingEntity;
  *
  * TODO: Make a hologram above name instead of using default CustomName
  */
-public class NameMechanic implements IOptionalMechanic<BossEntity> {
+public class NameMechanic implements IBossMechanic {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {

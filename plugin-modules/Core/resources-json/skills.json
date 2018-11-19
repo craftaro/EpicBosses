@@ -159,9 +159,7 @@
         "multiplier": null,
         "otherSkillData": {
           "amount": 5,
-          "minionsToSpawn": [
-            "Minion1"
-          ]
+          "minionToSpawn": "SkeletonKingMinion"
         }
       }
     }

@@ -6,7 +6,7 @@ import com.songoda.epicbosses.entity.elements.HandsElement;
 import com.songoda.epicbosses.entity.elements.MainStatsElement;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
-import com.songoda.epicbosses.utils.mechanics.IOptionalMechanic;
+import com.songoda.epicbosses.mechanics.IBossMechanic;
 import com.songoda.epicbosses.utils.version.VersionHandler;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import org.bukkit.entity.LivingEntity;
@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
  * @version 1.0.0
  * @since 27-Jun-18
  */
-public class WeaponMechanic implements IOptionalMechanic<BossEntity> {
+public class WeaponMechanic implements IBossMechanic {
 
     private ItemsFileManager itemStackManager;
     private VersionHandler versionHandler;

@@ -6,8 +6,8 @@ import com.songoda.epicbosses.entity.elements.EquipmentElement;
 import com.songoda.epicbosses.entity.elements.MainStatsElement;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
+import com.songoda.epicbosses.mechanics.IBossMechanic;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
-import com.songoda.epicbosses.utils.mechanics.IOptionalMechanic;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
@@ -17,7 +17,7 @@ import org.bukkit.inventory.ItemStack;
  * @version 1.0.0
  * @since 03-Jun-18
  */
-public class EquipmentMechanic implements IOptionalMechanic<BossEntity> {
+public class EquipmentMechanic implements IBossMechanic {
 
     private ItemsFileManager itemStackManager;
 

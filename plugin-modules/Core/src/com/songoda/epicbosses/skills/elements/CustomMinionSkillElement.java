@@ -13,12 +13,12 @@ import java.util.List;
  */
 public class CustomMinionSkillElement {
 
-    @Expose @Getter @Setter private List<String> minionsToSpawn;
+    @Expose @Getter @Setter private String minionToSpawn;
     @Expose @Getter @Setter private Integer amount;
 
-    public CustomMinionSkillElement(Integer amount, List<String> minionsToSpawn) {
+    public CustomMinionSkillElement(Integer amount, String minionToSpawn) {
         this.amount = amount;
-        this.minionsToSpawn = minionsToSpawn;
+        this.minionToSpawn = minionToSpawn;
     }
 
 }

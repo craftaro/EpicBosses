@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.targeting;
 
-import com.songoda.epicbosses.holder.ActiveBossHolder;
+import com.songoda.epicbosses.holder.IActiveHolder;
 import com.songoda.epicbosses.managers.BossTargetManager;
 import com.songoda.epicbosses.utils.ServerUtils;
 import lombok.Getter;
@@ -17,13 +17,13 @@ import java.util.List;
  * @version 1.0.0
  * @since 30-Oct-18
  */
-public abstract class TargetHandler implements ITarget {
+public abstract class TargetHandler<Holder extends IActiveHolder> implements ITarget {
 
     @Getter protected final BossTargetManager bossTargetManager;
-    @Getter protected final ActiveBossHolder activeBossHolder;
+    @Getter protected final Holder holder;
 
-    public TargetHandler(ActiveBossHolder activeBossHolder, BossTargetManager bossTargetManager) {
-        this.activeBossHolder = activeBossHolder;
+    public TargetHandler(Holder holder, BossTargetManager bossTargetManager) {
+        this.holder = holder;
         this.bossTargetManager = bossTargetManager;
     }
 
@@ -31,12 +31,12 @@ public abstract class TargetHandler implements ITarget {
         ServerUtils.get().runLaterAsync(10L, () -> {
             updateTarget();
 
-            if(!getActiveBossHolder().isDead()) runTargetCycle();
+            if(!getHolder().isDead()) runTargetCycle();
         });
     }
 
     protected LivingEntity getBossEntity() {
-        for(LivingEntity livingEntity : this.activeBossHolder.getLivingEntityMap().values()) {
+        for(LivingEntity livingEntity : getHolder().getLivingEntityMap().values()) {
             if(livingEntity != null && !livingEntity.isDead()) return livingEntity;
         }
 
@@ -56,6 +56,12 @@ public abstract class TargetHandler implements ITarget {
 
             LivingEntity livingEntity = (LivingEntity) entity;
 
+            if(livingEntity instanceof Player) {
+                Player player = (Player) livingEntity;
+
+
+            }
+
             nearbyEntities.add(livingEntity);
         }
 
@@ -63,7 +69,7 @@ public abstract class TargetHandler implements ITarget {
     }
 
     private void updateBoss(LivingEntity newTarget) {
-        this.activeBossHolder.getLivingEntityMap().values().forEach(livingEntity -> {
+        getHolder().getLivingEntityMap().values().forEach(livingEntity -> {
             if(livingEntity != null && !livingEntity.isDead()) {
                 ((Creature) livingEntity).setTarget(newTarget);
             }

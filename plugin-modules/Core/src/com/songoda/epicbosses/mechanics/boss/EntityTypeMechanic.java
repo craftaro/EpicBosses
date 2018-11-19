@@ -2,13 +2,12 @@ package com.songoda.epicbosses.mechanics.boss;
 
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
-import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.MainStatsElement;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
+import com.songoda.epicbosses.mechanics.IBossMechanic;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.EntityFinder;
-import com.songoda.epicbosses.utils.mechanics.IPrimaryMechanic;
 import org.bukkit.entity.LivingEntity;
 
 /**
@@ -16,7 +15,7 @@ import org.bukkit.entity.LivingEntity;
  * @version 1.0.0
  * @since 01-Jun-18
  */
-public class EntityTypeMechanic implements IPrimaryMechanic<BossEntity> {
+public class EntityTypeMechanic implements IBossMechanic {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {

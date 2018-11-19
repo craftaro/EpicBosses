@@ -1,11 +1,10 @@
 package com.songoda.epicbosses.mechanics.minions;
 
-import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.MainStatsElement;
-import com.songoda.epicbosses.holder.ActiveBossHolder;
-import com.songoda.epicbosses.utils.mechanics.IPrimaryMechanic;
+import com.songoda.epicbosses.holder.ActiveMinionHolder;
+import com.songoda.epicbosses.mechanics.IMinionMechanic;
 import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EntityEquipment;
@@ -15,7 +14,7 @@ import org.bukkit.inventory.EntityEquipment;
  * @version 1.0.0
  * @since 02-Jun-18
  */
-public class SettingsMechanic implements IPrimaryMechanic<MinionEntity> {
+public class SettingsMechanic implements IMinionMechanic {
 
     private VersionHandler versionHandler;
 
@@ -24,12 +23,12 @@ public class SettingsMechanic implements IPrimaryMechanic<MinionEntity> {
     }
 
     @Override
-    public boolean applyMechanic(MinionEntity minionEntity, ActiveBossHolder activeBossHolder) {
-        if(activeBossHolder.getMinionEntityMap() == null || activeBossHolder.getMinionEntityMap().isEmpty()) return false;
+    public boolean applyMechanic(MinionEntity minionEntity, ActiveMinionHolder activeMinionHolder) {
+        if(activeMinionHolder.getLivingEntityMap() == null || activeMinionHolder.getLivingEntityMap().isEmpty()) return false;
 
         for(EntityStatsElement entityStatsElement : minionEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
-            LivingEntity livingEntity = activeBossHolder.getMinionEntityMap().getOrDefault(mainStatsElement.getPosition(), null);
+            LivingEntity livingEntity = activeMinionHolder.getLivingEntityMap().getOrDefault(mainStatsElement.getPosition(), null);
 
             if(livingEntity == null) return false;
 

@@ -1,84 +1,3 @@
-MainPanel:
-  name: '&b&l{boss} Editor'
-  slots: 45
-  Settings:
-    emptySpaceFiller: true
-  EmptySpaceFiller:
-    type: '160:0'
-    name: '&7'
-  Items:
-    '12':
-      type: DIAMOND
-      name: '&c&lDrops Manager'
-      lore:
-      - '&7Click here to manage the drop table'
-      - '&7that is attached to this boss.'
-      Button: Drops
-    '14':
-      type: DIAMOND_HELMET
-      name: '&c&lEquipment Manager'
-      lore:
-      - '&7Click here to manage the equipment'
-      - '&7that the boss has equipped.'
-      Button: Equipment
-    '16':
-      type: BONE
-      name: '&a&lTargeting Manager'
-      lore:
-      - '&7Click here to edit how the boss handles'
-      - '&7targeting of players and mobs.'
-      Button: Targeting
-    '22':
-      type: BOW
-      name: '&c&lWeapon Manager'
-      lore:
-      - '&7Click here to manage the weapon(s)'
-      - '&7that the boss has equipped.'
-      Button: Weapon
-    '23':
-      type: BARRIER
-      name: '&c&l!&4&l!&c&l! &4&lWARNING &c&l!&4&l!&c&l!'
-      lore:
-      - '&7While editing is enabled for this boss'
-      - '&7no one will be able to spawn it, nor'
-      - '&7will it spawn naturally.'
-    '24':
-      type: BLAZE_POWDER
-      name: '&c&lSkill Manager'
-      lore:
-      - '&7Click here to manage the assigned'
-      - '&7skill(s) the boss has and their occurrence'
-      - '&7chances.'
-      Button: Skill
-    '32':
-      type: '351:4'
-      name: '&a&lStatistics Manager'
-      lore:
-      - '&7Click here to edit the statistics of the'
-      - '&7boss, including things like: health,'
-      - '&7potion effects, commands on spawn, etc.'
-      Button: Stats
-    '39':
-      type: REDSTONE
-      name: '&a&lParticle Manager'
-      lore:
-      - '&7Click here to manage the particles the'
-      - '&7boss has equipped during certain events.'
-      Button: Particle
-    '41':
-      type: GRASS
-      name: '&a&lSpawning Manager'
-      lore:
-      - '&7Click here to edit how the boss handles'
-      - '&7spawning.'
-      Button: Spawning
-    '43':
-      type: BOOK
-      name: '&a&lText Manager'
-      lore:
-      - '&7Click here to edit the taunts, sayings,'
-      - '&7etc. for this boss.'
-      Button: Text
 DropsPanel:
   name: '&b&l{boss} Editor'
   slots: 54
@@ -99,11 +18,12 @@ DropsPanel:
       - '&7   have one selected.'
       - '&b&l* &7Click here to go straight to the'
       - '&7   editing screen of the drop table.'
+      Button: Selected
     '47':
-      type: STAINED_GLASS_PANE
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '48':
-      type: STAINED_GLASS_PANE
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -132,10 +52,10 @@ DropsPanel:
       - '&7Currently viewing page &e{currentPage}/{maxPages}&7.'
       NextPage: true
     '52':
-      type: STAINED_GLASS_PANE
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '53':
-      type: STAINED_GLASS_PANE
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '54':
       type: BOOK
@@ -149,7 +69,7 @@ DropsPanel:
       - '&c&lHints'
       - '&c&l* &7The currently selected drop table will be shown'
       - '&7   with an emerald which states so.'
-      - '&c&l* &7Every d rop table from every boss will be listed'
+      - '&c&l* &7Every drop table from every boss will be listed'
       - '&7   here as an available drop table.'
 EquipmentPanel:
   name: '&b&l{boss} Editor'

@@ -7,6 +7,7 @@ import com.songoda.epicbosses.entity.elements.*;
 import com.songoda.epicbosses.events.PreBossSpawnEvent;
 import com.songoda.epicbosses.events.PreBossSpawnItemEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
+import com.songoda.epicbosses.holder.ActiveMinionHolder;
 import com.songoda.epicbosses.managers.files.CommandsFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.managers.files.MessagesFileManager;
@@ -275,9 +276,7 @@ public class BossAPI {
             preBossSpawnEvent = new PreBossSpawnEvent(activeBossHolder);
         }
 
-        System.out.println("SPAWNING EVENT " + preBossSpawnEvent);
-
-        PLUGIN.getBossTargetManager().initializeTargetHandler(activeBossHolder);
+        PLUGIN.getBossTargetManager().handleBossTargeting(activeBossHolder);
         ServerUtils.get().callEvent(preBossSpawnEvent);
 
         return activeBossHolder;
@@ -289,9 +288,8 @@ public class BossAPI {
      *
      * @param activeBossHolder - targeted active boss
      * @param skill - the skill from the skills.json
-     * @return boolean if the spawning of the minions succeeded or failed
      */
-    public static boolean spawnNewMinion(ActiveBossHolder activeBossHolder, Skill skill) {
+    public static void spawnNewMinion(ActiveBossHolder activeBossHolder, Skill skill) {
 //        if(minionEntity.isEditing()) {
 //            Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
 //            return null;
@@ -300,15 +298,12 @@ public class BossAPI {
         if(skill.getType().equalsIgnoreCase("CUSTOM")) {
             CustomSkillElement customSkillElement = PLUGIN.getBossSkillManager().getCustomSkillElement(skill);
 
-            if(customSkillElement.getCustom().getType().equalsIgnoreCase("MINION")) {
+            if(customSkillElement.getCustom().getType().equalsIgnoreCase("MINIONS")) {
                 CustomMinionSkillElement customMinionSkillElement = customSkillElement.getCustom().getCustomMinionSkillData();
 
                 PLUGIN.getBossEntityManager().spawnMinionsOnBossHolder(activeBossHolder, skill, customMinionSkillElement);
             }
         }
-
-
-        return false;
     }
 
     /**

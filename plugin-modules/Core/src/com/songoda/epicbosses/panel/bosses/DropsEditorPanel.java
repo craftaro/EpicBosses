@@ -19,13 +19,13 @@ import java.util.Map;
 /**
  * @author Charles Cullen
  * @version 1.0.0
- * @since 18-Nov-18
+ * @since 19-Nov-18
  */
-public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
+public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private BossesFileManager bossesFileManager;
 
-    public MainBossEditPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public DropsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.bossesFileManager = plugin.getBossesFileManager();
@@ -36,17 +36,8 @@ public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
         PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
 
         panelBuilderCounter
-                .addSlotCounter("Drops")
-                .addSlotCounter("Equipment")
-                .addSlotCounter("Targeting")
-                .addSlotCounter("Weapon")
-                .addSlotCounter("Skill")
-                .addSlotCounter("Stats")
-                .addSlotCounter("Particle")
-                .addSlotCounter("Spawning")
-                .addSlotCounter("Text")
-                .addSlotCounter("Editing")
-                .addSlotCounter("Command");
+                .addSlotCounter("Selected")
+                .addSlotCounter("CreateDropTable");
     }
 
     @Override

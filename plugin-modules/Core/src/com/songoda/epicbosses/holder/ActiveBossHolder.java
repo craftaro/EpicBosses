@@ -16,16 +16,17 @@ import java.util.*;
  * @version 1.0.0
  * @since 03-Jun-18
  */
-public class ActiveBossHolder {
+public class ActiveBossHolder implements IActiveHolder {
 
     @Getter private final BossEntity bossEntity;
     @Getter private final Location location;
     @Getter private final String name;
 
-    @Getter private Map<Integer, LivingEntity> livingEntityMap = new HashMap<>(), minionEntityMap = new HashMap<>();
+    @Getter private Map<Integer, ActiveMinionHolder> activeMinionHolderMap = new HashMap<>();
+    @Getter private Map<Integer, LivingEntity> livingEntityMap = new HashMap<>();
     @Getter private Map<UUID, Double> mapOfDamagingUsers = new HashMap<>();
 
-    @Getter @Setter private TargetHandler targetHandler = null;
+    @Getter @Setter private TargetHandler<ActiveBossHolder> targetHandler = null;
     @Getter @Setter private boolean isDead = false;
 
     public ActiveBossHolder(BossEntity bossEntity, Location spawnLocation, String name) {
@@ -42,16 +43,13 @@ public class ActiveBossHolder {
         }
     }
 
-    public LivingEntity getLivingEntity() {
-        for(LivingEntity livingEntity : getLivingEntityMap().values()) {
-            if(livingEntity != null) return livingEntity;
-        }
-
-        return null;
+    @Override
+    public void killAll() {
+        killAllSubBosses(null);
     }
 
-    public LivingEntity getMinionEntity() {
-        for(LivingEntity livingEntity : getMinionEntityMap().values()) {
+    public LivingEntity getLivingEntity() {
+        for(LivingEntity livingEntity : getLivingEntityMap().values()) {
             if(livingEntity != null) return livingEntity;
         }
 
@@ -63,18 +61,16 @@ public class ActiveBossHolder {
     }
 
     public void killAllMinions() {
-        this.minionEntityMap.values().forEach(LivingEntity::remove);
-        this.minionEntityMap.clear();
+        this.activeMinionHolderMap.values().forEach(IActiveHolder::killAll);
     }
 
     public void killAllMinions(World world) {
-        LivingEntity livingEntity = getMinionEntity();
+        LivingEntity livingEntity = getLivingEntity();
 
         if(livingEntity == null) return;
         if(world != null && !livingEntity.getWorld().equals(world)) return;
 
-        this.minionEntityMap.values().forEach(LivingEntity::remove);
-        this.minionEntityMap.clear();
+        this.activeMinionHolderMap.values().forEach(IActiveHolder::killAll);
     }
 
     public boolean killAllSubBosses(World world) {

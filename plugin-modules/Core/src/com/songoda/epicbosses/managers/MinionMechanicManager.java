@@ -2,14 +2,12 @@ package com.songoda.epicbosses.managers;
 
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.entity.MinionEntity;
-import com.songoda.epicbosses.holder.ActiveBossHolder;
+import com.songoda.epicbosses.holder.ActiveMinionHolder;
 import com.songoda.epicbosses.managers.interfaces.IMechanicManager;
+import com.songoda.epicbosses.mechanics.IMinionMechanic;
 import com.songoda.epicbosses.mechanics.minions.*;
 import com.songoda.epicbosses.utils.Debug;
-import com.songoda.epicbosses.utils.IMechanic;
 import com.songoda.epicbosses.utils.ServerUtils;
-import com.songoda.epicbosses.utils.mechanics.IOptionalMechanic;
-import com.songoda.epicbosses.utils.mechanics.IPrimaryMechanic;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -19,11 +17,10 @@ import java.util.Queue;
  * @version 1.0.0
  * @since 12-Nov-18
  */
-public class MinionMechanicManager implements IMechanicManager<MinionEntity, ActiveBossHolder> {
+public class MinionMechanicManager implements IMechanicManager<MinionEntity, ActiveMinionHolder, IMinionMechanic> {
 
+    private Queue<IMinionMechanic> mechanics;
     private final CustomBosses customBosses;
-    private Queue<IOptionalMechanic<MinionEntity>> optionalMechanics;
-    private Queue<IPrimaryMechanic<MinionEntity>> primaryMechanics;
 
     public MinionMechanicManager(CustomBosses customBosses) {
         this.customBosses = customBosses;
@@ -31,8 +28,7 @@ public class MinionMechanicManager implements IMechanicManager<MinionEntity, Act
 
     @Override
     public void load() {
-        this.primaryMechanics = new LinkedList<>();
-        this.optionalMechanics = new LinkedList<>();
+        this.mechanics = new LinkedList<>();
 
         registerMechanic(new EntityTypeMechanic());
         registerMechanic(new NameMechanic());
@@ -44,50 +40,35 @@ public class MinionMechanicManager implements IMechanicManager<MinionEntity, Act
     }
 
     @Override
-    public void registerMechanic(IMechanic<MinionEntity> mechanic) {
-        if(mechanic instanceof IPrimaryMechanic) {
-            this.primaryMechanics.add((IPrimaryMechanic<MinionEntity>) mechanic);
-        } else if(mechanic instanceof IOptionalMechanic) {
-            this.optionalMechanics.add((IOptionalMechanic<MinionEntity>) mechanic);
-        } else {
-            Debug.MECHANIC_TYPE_NOT_STORED.debug();
-        }
+    public void registerMechanic(IMinionMechanic mechanic) {
+        this.mechanics.add(mechanic);
     }
 
     @Override
-    public boolean handleMechanicApplication(MinionEntity minionEntity, ActiveBossHolder activeBossHolder) {
-        if(minionEntity != null && activeBossHolder != null) {
-//            if(minionEntity.isEditing()) {
-//                Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
-//                return false;
-//            }
+    public void handleMechanicApplication(MinionEntity minionEntity, ActiveMinionHolder activeMinionHolder) {
+        if(minionEntity != null && activeMinionHolder != null) {
+            if(minionEntity.isEditing()) {
+                Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
+                return;
+            }
 
-            Queue<IMechanic<MinionEntity>> queue = new LinkedList<>(this.primaryMechanics);
+            Queue<IMinionMechanic> queue = new LinkedList<>(this.mechanics);
 
             while(!queue.isEmpty()) {
-                IMechanic<MinionEntity> mechanic = queue.poll();
+                IMinionMechanic mechanic = queue.poll();
 
                 if(mechanic == null) continue;
 
                 ServerUtils.get().logDebug("Applying " + mechanic.getClass().getSimpleName());
 
-                if(didMechanicApplicationFail(mechanic, minionEntity, activeBossHolder)) return false;
-            }
-
-            queue = new LinkedList<>(this.optionalMechanics);
-
-            while(!queue.isEmpty()) {
-                IMechanic<MinionEntity> mechanic = queue.poll();
-
-                if(mechanic == null) continue;
-                if(didMechanicApplicationFail(mechanic, minionEntity, activeBossHolder)) continue;
+                if(didMechanicApplicationFail(mechanic, minionEntity, activeMinionHolder)) {
+                    Debug.FAILED_TO_APPLY_MECHANIC.debug(mechanic.getClass().getSimpleName());
+                }
             }
         }
-
-        return true;
     }
 
-    private boolean didMechanicApplicationFail(IMechanic<MinionEntity> mechanic, MinionEntity minionEntity, ActiveBossHolder activeBossHolder) {
+    private boolean didMechanicApplicationFail(IMinionMechanic mechanic, MinionEntity minionEntity, ActiveMinionHolder activeBossHolder) {
         if(mechanic == null) return true;
 
         if(!mechanic.applyMechanic(minionEntity, activeBossHolder)) {
