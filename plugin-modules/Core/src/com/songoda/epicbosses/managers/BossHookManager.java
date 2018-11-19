@@ -11,7 +11,7 @@ import utils.factions.FactionsM;
 import utils.factions.FactionsOne;
 import utils.factions.FactionsUUID;
 import utils.factions.LegacyFactions;
-import com.songoda.epicbosses.utils.worldguard.WorldGuardHelper;
+import com.songoda.epicbosses.utils.dependencies.WorldGuardHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;

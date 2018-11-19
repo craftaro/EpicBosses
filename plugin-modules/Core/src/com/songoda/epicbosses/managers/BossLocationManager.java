@@ -54,19 +54,20 @@ public class BossLocationManager implements IReloadable {
         }
 
         if(this.bossHookManager.isWorldguardEnabld() && this.bossHookManager.getWorldGuardHelper() != null) {
-            List<String> currentRegions = this.bossHookManager.getWorldGuardHelper().getRegionNames(location);
-            boolean blocked = false;
-
-            if(currentRegions != null) {
-                for(String s : this.bossHookManager.getWorldguardBlockedRegions()) {
-                    if(currentRegions.contains(s)) {
-                        blocked = true;
-                        break;
-                    }
-                }
-
-                if(blocked) return false;
-            }
+//            TODO: Add Blocked regions support
+//            List<String> currentRegions = this.bossHookManager.getWorldGuardHelper().getRegionNames(location);
+//            boolean blocked = false;
+//
+//            if(currentRegions != null) {
+//                for(String s : this.bossHookManager.getWorldguardBlockedRegions()) {
+//                    if(currentRegions.contains(s)) {
+//                        blocked = true;
+//                        break;
+//                    }
+//                }
+//
+//                if(blocked) return false;
+//            }
         }
 
         if(this.bossHookManager.isFactionsEnabled() && this.bossHookManager.getFactionHelper() != null) {
@@ -74,19 +75,19 @@ public class BossLocationManager implements IReloadable {
         }
 
         if(this.bossHookManager.isWorldguardEnabld() && this.bossHookManager.getWorldGuardHelper() != null) {
-            List<String> currentRegions = this.bossHookManager.getWorldGuardHelper().getRegionNames(location);
-            boolean allowed = false;
-
-            if(currentRegions != null) {
-                for(String s : this.bossHookManager.getWorldGuardSpawnRegions()) {
-                    if(currentRegions.contains(s)) {
-                        allowed = true;
-                        break;
-                    }
-                }
-
-                if(!allowed) return false;
-            }
+//            List<String> currentRegions = this.bossHookManager.getWorldGuardHelper().getRegionNames(location);
+//            boolean allowed = false;
+//
+//            if(currentRegions != null) {
+//                for(String s : this.bossHookManager.getWorldGuardSpawnRegions()) {
+//                    if(currentRegions.contains(s)) {
+//                        allowed = true;
+//                        break;
+//                    }
+//                }
+//
+//                if(!allowed) return false;
+//            }
         }
 
         if(this.bossHookManager.isAskyblockEnabled() && this.bossHookManager.getASkyblockHelper() != null) {

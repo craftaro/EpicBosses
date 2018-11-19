@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Core" />
+        <module name="FactionHelper" />
+        <module name="FactionsM" />
+        <module name="FactionsOne" />
+        <module name="FactionsUUID" />
+        <module name="LegacyFactions" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Core" target="1.8" />
+      <module name="EpicBosses" target="1.8" />
+      <module name="FactionHelper" target="1.8" />
+      <module name="FactionsM" target="1.8" />
+      <module name="FactionsOne" target="1.8" />
+      <module name="FactionsUUID" target="1.8" />
+      <module name="LegacyFactions" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
