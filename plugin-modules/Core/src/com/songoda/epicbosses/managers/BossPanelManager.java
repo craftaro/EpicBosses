@@ -9,7 +9,10 @@ import com.songoda.epicbosses.panel.bosses.BossListEquipmentEditorPanel;
 import com.songoda.epicbosses.panel.bosses.DropsEditorPanel;
 import com.songoda.epicbosses.panel.bosses.EquipmentEditorPanel;
 import com.songoda.epicbosses.panel.bosses.MainBossEditPanel;
+import com.songoda.epicbosses.panel.bosses.equipment.BootsEditorPanel;
+import com.songoda.epicbosses.panel.bosses.equipment.ChestplateEditorPanel;
 import com.songoda.epicbosses.panel.bosses.equipment.HelmetEditorPanel;
+import com.songoda.epicbosses.panel.bosses.equipment.LeggingsEditorPanel;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
@@ -37,7 +40,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private IPanelHandler addItemsMenu;
 
     @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, equipmentListEditMenu;
-    @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> equipmentEditMenu, helmetEditorMenu;
+    @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> equipmentEditMenu, helmetEditorMenu, chestplateEditorMenu, leggingsEditorMenu, bootsEditorMenu;
 
     private final CustomBosses customBosses;
 
@@ -63,6 +66,9 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
         loadEquipmentEditMenu();
         loadHelmetEditMenu();
+        loadChestplateEditMenu();
+        loadLeggingsEditMenu();
+        loadBootsEditMenu();
     }
 
     @Override
@@ -83,6 +89,9 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
         reloadEquipmentEditMenu();
         reloadHelmetEditMenu();
+        reloadChestplateEditMenu();
+        reloadLeggingsEditMenu();
+        reloadBootsEditMenu();
     }
 
     public int isItemStackUsed(String name) {
@@ -112,7 +121,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
     //---------------------------------------------
     //
-    //  H E L ME T   E D I T   P A N E L
+    //  E Q U I P M E N T   E D I T   P A N E L S
     //
     //---------------------------------------------
 
@@ -126,6 +135,42 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("HelmetEditorPanel"));
 
         this.helmetEditorMenu.initializePanel(panelBuilder);
+    }
+
+    private void loadChestplateEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("ChestplateEditorPanel"));
+
+        this.chestplateEditorMenu = new ChestplateEditorPanel(this, panelBuilder, this.customBosses);
+    }
+
+    private void reloadChestplateEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("ChestplateEditorPanel"));
+
+        this.chestplateEditorMenu.initializePanel(panelBuilder);
+    }
+
+    private void loadLeggingsEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("LeggingsEditorPanel"));
+
+        this.leggingsEditorMenu = new LeggingsEditorPanel(this, panelBuilder, this.customBosses);
+    }
+
+    private void reloadLeggingsEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("LeggingsEditorPanel"));
+
+        this.leggingsEditorMenu.initializePanel(panelBuilder);
+    }
+
+    private void loadBootsEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("BootsEditorPanel"));
+
+        this.bootsEditorMenu = new BootsEditorPanel(this, panelBuilder, this.customBosses);
+    }
+
+    private void reloadBootsEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("BootsEditorPanel"));
+
+        this.bootsEditorMenu.initializePanel(panelBuilder);
     }
 
     //---------------------------------------------

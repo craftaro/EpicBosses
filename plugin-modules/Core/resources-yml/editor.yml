@@ -421,7 +421,7 @@ HelmetEditorPanel:
     fillTo: 45
     backButton: true
   Buttons:
-    BackButton: 54
+    backButton: 54
   Items:
     '46':
       type: DIAMOND

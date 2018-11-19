@@ -28,14 +28,14 @@ import java.util.Map;
  * @version 1.0.0
  * @since 19-Nov-18
  */
-public class HelmetEditorPanel extends SubVariablePanelHandler<BossEntity, EntityStatsElement> {
+public class LeggingsEditorPanel extends SubVariablePanelHandler<BossEntity, EntityStatsElement> {
 
     private ItemStackConverter itemStackConverter;
     private BossesFileManager bossesFileManager;
     private ItemsFileManager itemsFileManager;
     private CustomBosses plugin;
 
-    public HelmetEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public LeggingsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -139,7 +139,7 @@ public class HelmetEditorPanel extends SubVariablePanelHandler<BossEntity, Entit
         itemStackHolderMap.forEach((string, holder) -> {
             ItemStack itemStack = this.itemStackConverter.from(holder);
 
-            if(itemStack.getType().name().contains("HELMET") || itemStack.getType().isBlock()) {
+            if(itemStack.getType().name().contains("LEGGINGS")) {
                 newMap.put(string, holder);
             }
         });

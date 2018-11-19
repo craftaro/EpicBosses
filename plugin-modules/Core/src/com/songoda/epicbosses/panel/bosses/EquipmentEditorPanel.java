@@ -55,8 +55,9 @@ public class EquipmentEditorPanel extends SubVariablePanelHandler<BossEntity, En
                 .setCancelLowerClick(true)
                 .setCancelClick(true)
                 .setParentPanelHandler(this.bossPanelManager.getEquipmentListEditMenu(), bossEntity);
+        PanelBuilderCounter panelBuilderCounter = panel.getPanelBuilderCounter();
 
-
+        panelBuilderCounter.getSlotsWith("Helmet").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getHelmetEditorMenu().openFor(player, bossEntity, entityStatsElement)));
 
         panel.openFor(player);
     }

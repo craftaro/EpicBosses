@@ -409,6 +409,15 @@ public class Panel implements Listener, ICloneable<Panel> {
         return this;
     }
 
+    public <T, Y> Panel setParentPanelHandler(ISubVariablePanelHandler<T, Y> variablePanelHandler, T variable, Y subVariable) {
+        if(!this.panelBuilderSettings.isBackButton()) return this;
+
+        int slot = this.panelBuilderSettings.getBackButtonSlot() - 1;
+
+        setOnClick(slot, event -> variablePanelHandler.openFor((Player) event.getWhoClicked(), variable, subVariable));
+        return this;
+    }
+
     public Panel setExitButton() {
         if(!this.panelBuilderSettings.isExitButton()) return this;
 
