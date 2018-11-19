@@ -131,6 +131,11 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
                 ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.EditDrops.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
+                    if(!bossEntity.isEditing()) {
+                        Message.General_CannotBecauseLive.msg(e.getWhoClicked());
+                        return;
+                    }
+
                     bossEntity.getDrops().setDropTable(name);
                     this.bossesFileManager.save();
 

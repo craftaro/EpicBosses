@@ -18,6 +18,7 @@ import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.file.YmlFileHandler;
 import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -66,7 +67,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
 
     @Override
     public void onDisable() {
-        this.bossEntityManager.killAllHolders(null);
+        this.bossEntityManager.killAllHolders((World) null);
     }
 
     @Override

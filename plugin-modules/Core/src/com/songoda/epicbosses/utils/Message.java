@@ -21,6 +21,7 @@ public enum Message {
     General_CannotSpawn("&c&l(!) &cYou cannot spawn a boss at this location! &c&l(!)"),
     General_NotNumber("&c&l(!) &cThe number you have provided is not a proper number."),
     General_Disarmed("&4&l(!) &f&lYOU HAVE BEEN DISARMED! CHECK THE GROUND AROUND YOU FOR YOUR ITEM!"),
+    General_CannotBecauseLive("&c&l(!) &cYou cannot do this because the boss is not in editing mode!"),
 
     Boss_Create_EntityTypeNotFound("&c&l(!) &cThe specified entity type {0} was not found. If you think this is an error please contact &fAMinecraftDev&c."),
     Boss_Create_InvalidArgs("&c&l(!) &cYou must use &n/boss create [name] [entity] &c to create a boss."),
@@ -97,8 +98,8 @@ public enum Message {
     Boss_Items_AlreadySet("&c&l(!) &cYou must take out the item you have set to add before you can add another."),
 
     Boss_KillAll_WorldNotFound("&c&l(!) &cThe specified world was not found. If you'd like to kill every boss/minion just use &f/boss killall&c without any arguments."),
-    Boss_KillAll_KilledAll("&b&lEpicBosses &8» &7You have killed {0} boss(es) and minions that were currently active on the server."),
-    Boss_KillAll_KilledWorld("&b&lEpicBosses &8» &7You have killed {0} boss(es) and minions that were in the world {1}."),
+    Boss_KillAll_KilledAll("&b&lEpicBosses &8» &7You have killed the boss(es) and minion(s) that were currently active on the server."),
+    Boss_KillAll_KilledWorld("&b&lEpicBosses &8» &7You have killed the boss(es) and minion(s) that were in the world {1}."),
     Boss_KillAll_NoPermission("&c&l(!) &cYou do not have access to this command."),
 
     Boss_List_NoPermission("&c&l(!) &cYou do not have access to this command."),

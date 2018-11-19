@@ -117,6 +117,18 @@ public class BossEntityManager {
         return amountOfBosses;
     }
 
+    public void killAllHolders(BossEntity bossEntity) {
+        for(ActiveBossHolder activeBossHolder : getActiveBossHolders()) {
+            if(activeBossHolder.getBossEntity().equals(bossEntity)) {
+                activeBossHolder.killAll();
+                activeBossHolder.killAllMinions();
+                activeBossHolder.setDead(true);
+
+                ACTIVE_BOSS_HOLDERS.remove(activeBossHolder);
+            }
+        }
+    }
+
     public ItemStack getDisplaySpawnItem(BossEntity bossEntity) {
         if(bossEntity == null) return null;
 

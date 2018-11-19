@@ -52,6 +52,8 @@ public class ActiveMinionHolder implements IActiveHolder {
 
     @Override
     public void killAll() {
+        System.out.println(this.livingEntityMap);
+
         this.livingEntityMap.values().forEach(LivingEntity::remove);
         this.livingEntityMap.clear();
     }

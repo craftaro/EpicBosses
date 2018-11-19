@@ -6,6 +6,7 @@ import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.Permission;
 import com.songoda.epicbosses.utils.command.SubCommand;
+import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 
 /**
@@ -35,7 +36,7 @@ public class BossReloadCmd extends SubCommand {
         long currentMs = System.currentTimeMillis();
 
         this.masterReloadable.reload();
-        this.bossEntityManager.killAllHolders(null);
+        this.bossEntityManager.killAllHolders((World) null);
         Message.Boss_Reload_Successful.msg(sender, (System.currentTimeMillis() - currentMs));
     }
 }

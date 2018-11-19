@@ -45,6 +45,7 @@ public class ActiveBossHolder implements IActiveHolder {
 
     @Override
     public void killAll() {
+        killAllMinions();
         killAllSubBosses(null);
     }
 
@@ -61,23 +62,17 @@ public class ActiveBossHolder implements IActiveHolder {
     }
 
     public void killAllMinions() {
-        this.activeMinionHolderMap.values().forEach(IActiveHolder::killAll);
+        this.activeMinionHolderMap.values().forEach(ActiveMinionHolder::killAll);
     }
 
     public void killAllMinions(World world) {
-        LivingEntity livingEntity = getLivingEntity();
+        if(world != null && !getLocation().getWorld().equals(world)) return;
 
-        if(livingEntity == null) return;
-        if(world != null && !livingEntity.getWorld().equals(world)) return;
-
-        this.activeMinionHolderMap.values().forEach(IActiveHolder::killAll);
+        this.activeMinionHolderMap.values().forEach(ActiveMinionHolder::killAll);
     }
 
     public boolean killAllSubBosses(World world) {
-        LivingEntity livingEntity = getLivingEntity();
-
-        if(livingEntity == null) return false;
-        if(world != null && !livingEntity.getWorld().equals(world)) return false;
+        if(world != null && !getLocation().getWorld().equals(world)) return false;
 
         this.livingEntityMap.values().forEach(LivingEntity::remove);
         this.livingEntityMap.clear();
