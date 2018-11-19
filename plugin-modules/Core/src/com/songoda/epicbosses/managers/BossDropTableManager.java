@@ -16,6 +16,7 @@ import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.RandomUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -29,6 +30,8 @@ import java.util.*;
  * @since 25-Oct-18
  */
 public class BossDropTableManager {
+
+    @Getter private final List<String> validDropTableTypes = Arrays.asList("SPRAY", "DROP", "GIVE");
 
     private final IGetDropTableListItem<ItemStack> getDropTableItemStack;
     private final IGetDropTableListItem<List<String>> getDropTableCommand;

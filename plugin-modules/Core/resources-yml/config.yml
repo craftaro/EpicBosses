@@ -33,6 +33,12 @@ Hooks:
     - 'blocked_region1'
     - 'blocked_region2'
 Display:
+  EditDrops:
+    lore:
+    - '&3Type: &7{type}'
+    - '&7'
+    - '&7Click here to select this drop'
+    - '&7table as the current one.'
   AutoSpawns:
     menuName: '&b&lEpicBosses &3&lAutoSpawns'
   Bosses:

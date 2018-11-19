@@ -15,4 +15,9 @@ public class DropTable {
     @Expose @Getter @Setter private String dropType;
     @Expose @Getter @Setter private JsonObject rewards;
 
+    public DropTable(String dropType, JsonObject rewards) {
+        this.dropType = dropType;
+        this.rewards = rewards;
+    }
+
 }

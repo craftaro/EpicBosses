@@ -35,12 +35,14 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private DropTableFileManager dropTableFileManager;
     private ItemStackConverter itemStackConverter;
+    private BossesFileManager bossesFileManager;
     private CustomBosses plugin;
 
     public DropsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.dropTableFileManager = plugin.getDropTableFileManager();
+        this.bossesFileManager = plugin.getBossesFileManager();
         this.itemStackConverter = new ItemStackConverter();
         this.plugin = plugin;
     }
@@ -88,6 +90,8 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
         PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
         fillPanel(panel, bossEntity);
+        counter.getSlotsWith("Selected").forEach(slot -> panel.setOnClick(slot, event -> {/* TODO: GO TO EDIT PANEL FOR DROP TABLE */}));
+        counter.getSlotsWith("CreateDropTable").forEach(slot -> panel.setOnClick(slot, event -> {/* TODO: CREATE NEW DROP TABLE COMMAND */}));
 
         panel.openFor(player);
     }
@@ -121,10 +125,13 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
                 replaceMap.put("{type}", StringUtils.get().formatString(dropTable.getDropType()));
 
                 ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.DropTable.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.DropTable.lore"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.EditDrops.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
+                    bossEntity.getDrops().setDropTable(name);
+                    this.bossesFileManager.save();
 
+                    openFor((Player) e.getWhoClicked(), bossEntity);
                 });
             }
         });

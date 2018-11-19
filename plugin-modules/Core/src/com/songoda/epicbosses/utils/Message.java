@@ -110,6 +110,11 @@ public enum Message {
     Boss_Nearby_NoneNearby("&b&lEpicBosses &8» &7There is currently no nearby bosses."),
     Boss_Nearby_Near("&b&lEpicBosses &8» &7Nearby bosses: &f{0}."),
 
+    Boss_New_NoPermission("&c&l(!) &cYou do not have access to this command."),
+    Boss_New_InvalidArgs("&c&l(!) &cInvalid arguments! You must use &n/boss new droptable [name] (type)&c or &n/boss new skill [name]&c!"),
+    Boss_New_DropTableAlreadyExists("&c&l(!) &cThe specified DropTable name already exists. Please try another name."),
+    Boss_New_InvalidType("&c&l(!) &cThe specified DropTable type is invalid. Please use &fGive, Drop, Spray&c."),
+
     Boss_Reload_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Reload_Successful("&b&lEpicBosses &8» &7All boss data has been reloaded. The process took &f{0}ms&7."),
 
