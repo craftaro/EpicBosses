@@ -21,9 +21,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.massivecraft.factions</groupId>
+            <groupId>com.massivecraft</groupId>
             <artifactId>FactionsUUID</artifactId>
-            <version>1.6.9.5-U0.1.21</version>
+            <version>LATEST</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
