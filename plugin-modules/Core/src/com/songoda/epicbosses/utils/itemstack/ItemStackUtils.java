@@ -220,6 +220,16 @@ public class ItemStackUtils {
         itemStack.setItemMeta(itemMeta);
     }
 
+    public static String getName(ItemStack itemStack) {
+        if(!itemStack.hasItemMeta() || !itemStack.getItemMeta().hasDisplayName()) {
+            return StringUtils.get().formatString(itemStack.getType().name());
+        }
+
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        return itemMeta.getDisplayName();
+    }
+
     public static Material getType(String string) {
         Material material = Material.getMaterial(string);
 

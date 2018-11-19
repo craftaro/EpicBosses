@@ -15,6 +15,10 @@
     "type": "BLAZE_POWDER",
     "name": "&c&lDefault Skill Menu Item"
   },
+  "DefaultBossListEditorMenuItem": {
+    "type": "ZOMBIE_SPAWN_EGG",
+    "name": "&c&lDefault Boss List Editor Menu Item"
+  },
   "SKSpawnItem": {
     "type": "SKELETON_SPAWN_EGG",
     "name": "&6&lSkeleton King Boss Spawn Egg",

@@ -401,13 +401,9 @@ public class Panel implements Listener, ICloneable<Panel> {
     }
 
     public <T> Panel setParentPanelHandler(IVariablePanelHandler<T> variablePanelHandler, T variable) {
-        System.out.println(this.panelBuilderSettings.isBackButton());
-
         if(!this.panelBuilderSettings.isBackButton()) return this;
 
         int slot = this.panelBuilderSettings.getBackButtonSlot() - 1;
-
-        System.out.println(slot);
 
         setOnClick(slot, event -> variablePanelHandler.openFor((Player) event.getWhoClicked(), variable));
         return this;

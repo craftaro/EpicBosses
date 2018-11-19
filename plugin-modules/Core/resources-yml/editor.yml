@@ -309,6 +309,48 @@ DropsEditorPanel:
       - '&7   with an emerald which states so.'
       - '&c&l* &7Every drop table from every boss will be listed'
       - '&7   here as an available drop table.'
+BossListEditorPanel:
+  name: '&b&l{name} Editor'
+  slots: 54
+  Settings:
+    backButton: true
+    fillTo: 45
+  Buttons:
+    backButton: 54
+  Items:
+    '46':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '47':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '48':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '49':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '50':
+      type: DIAMOND_BLOCK
+      name: '&a&lCreate a new Entity'
+      lore:
+      - '&7Click here to create a new entity'
+      - '&7within this boss.'
+      Button: CreateEntity
+    '51':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '52':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '53':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '54':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'
 EquipmentEditorPanel:
   name: '&b&l{name} Editor'
   slots: 9
@@ -372,3 +414,58 @@ EquipmentEditorPanel:
       - '&7the preset pieces or click the diamond'
       - '&7block to add a new piece from your'
       - '&7inventory.'
+HelmetEditorPanel:
+  name: '&b&l{name} Editor'
+  slots: 54
+  Settings:
+    fillTo: 45
+    backButton: true
+  Buttons:
+    BackButton: 54
+  Items:
+    '46':
+      type: DIAMOND
+      name: '&c&lRemove'
+      lore:
+      - '&7click here to remove the'
+      - '&7currently equipped helmet.'
+      Button: Remove
+    '47':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '48':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page of helmets.'
+      PreviousPage: true
+    '50':
+      type: DIAMOND_BLOCK
+      name: '&a&lAdd New Helmet'
+      lore:
+      - '&7Click here to add a new'
+      - '&7helmet which you have in your'
+      - '&7inventory.'
+      Button: AddNew
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page of helmets.'
+      NextPage: true
+    '52':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '53':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '54':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'

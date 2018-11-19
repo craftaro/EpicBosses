@@ -1,68 +1,5 @@
-EquipmentPanel:
-  name: '&b&l{boss} Editor'
-  slots: 9
-  Settings:
-    backButton: true
-    emptySpaceFiller: true
-  EmptySpaceFiller:
-    type: '160:0'
-    name: '&7'
-  Buttons:
-    BackButton: 9
-  Items:
-    '2':
-      type: DIAMOND_HELMET
-      name: '&c&lHelmet'
-      lore:
-      - '&7Click here to change the'
-      - '&7helmet for the &f{boss}'
-      - '&7or add one from your'
-      - '&7inventory.'
-      Button: Helmet
-    '3':
-      type: DIAMOND_CHESTPLATE
-      name: '&c&lChestplate'
-      lore:
-      - '&7Click here to change the'
-      - '&7chestplate for the &f{boss}'
-      - '&7or add one from your'
-      - '&7inventory.'
-      Button: Chestplate
-    '4':
-      type: DIAMOND_LEGGINGS
-      name: '&c&lLeggings'
-      lore:
-      - '&7Click here to change the'
-      - '&7leggings for the &f{boss}'
-      - '&7or add one from your'
-      - '&7inventory.'
-      Button: Leggings
-    '5':
-      type: DIAMOND_BOOTS
-      name: '&c&lBoots'
-      lore:
-      - '&7Click here to change the'
-      - '&7boots for the &f{boss}'
-      - '&7or add one from your'
-      - '&7inventory.'
-      Button: Boots
-    '8':
-      type: PAPER
-      name: '&e&lGo Back'
-      lore:
-      - '&7Click here to go back.'
-    '9':
-      type: BOOK
-      name: '&c&lEquipment Guide'
-      lore:
-      - '&7here you can choose what equipment'
-      - '&7this boss has. To choose simply click'
-      - '&7the desired piece, then click one of'
-      - '&7the preset pieces or click the diamond'
-      - '&7block to add a new piece from your'
-      - '&7inventory.'
 HelmetPanel:
-  name: '&b&l{boss} Editor'
+  name: '&b&l{name} Editor'
   slots: 54
   Settings:
     fillTo: 45
@@ -78,10 +15,10 @@ HelmetPanel:
       - '&7currently equipped helmet.'
       Button: Remove
     '47':
-      type: STAINED_GLASS_PANE
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '48':
-      type: STAINED_GLASS_PANE
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -89,8 +26,6 @@ HelmetPanel:
       lore:
       - '&7Click here to go to the previous'
       - '&7page of helmets.'
-      - '&7'
-      - '&7Currently viewing page &e{currentPage}/{maxPages}&7.'
       PreviousPage: true
     '50':
       type: DIAMOND_BLOCK
@@ -106,14 +41,12 @@ HelmetPanel:
       lore:
       - '&7Click here to go to the next'
       - '&7page of helmets.'
-      - '&7'
-      - '&7Currently viewing page &e{currentPage}/{maxPages}&7.'
       NextPage: true
     '52':
-      type: STAINED_GLASS_PANE
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '53':
-      type: STAINED_GLASS_PANE
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '54':
       type: PAPER

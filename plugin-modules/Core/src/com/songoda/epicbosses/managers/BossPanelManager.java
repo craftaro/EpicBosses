@@ -4,9 +4,13 @@ import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.EquipmentElement;
 import com.songoda.epicbosses.entity.elements.HandsElement;
+import com.songoda.epicbosses.entity.elements.MainStatsElement;
+import com.songoda.epicbosses.panel.bosses.BossListEquipmentEditorPanel;
 import com.songoda.epicbosses.panel.bosses.DropsEditorPanel;
 import com.songoda.epicbosses.panel.bosses.EquipmentEditorPanel;
 import com.songoda.epicbosses.panel.bosses.MainBossEditPanel;
+import com.songoda.epicbosses.panel.bosses.equipment.HelmetEditorPanel;
+import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
 import com.songoda.epicbosses.CustomBosses;
@@ -32,7 +36,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private IPanelHandler mainMenu, customItems, bosses, autoSpawns, dropTables, customSkills, shopPanel;
     @Getter private IPanelHandler addItemsMenu;
 
-    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, equipmentEditMenu;
+    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, equipmentListEditMenu;
+    @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> equipmentEditMenu, helmetEditorMenu;
 
     private final CustomBosses customBosses;
 
@@ -54,7 +59,10 @@ public class BossPanelManager implements ILoadable, IReloadable {
         loadAddItemsMenu();
         loadMainEditMenu();
         loadDropsEditMenu();
+        loadEquipmentListEditMenu();
+
         loadEquipmentEditMenu();
+        loadHelmetEditMenu();
     }
 
     @Override
@@ -71,7 +79,10 @@ public class BossPanelManager implements ILoadable, IReloadable {
         reloadAddItemsMenu();
         reloadMainEditMenu();
         reloadDropsEditMenu();
+        reloadEquipmentListEditMenu();
+
         reloadEquipmentEditMenu();
+        reloadHelmetEditMenu();
     }
 
     public int isItemStackUsed(String name) {
@@ -97,6 +108,42 @@ public class BossPanelManager implements ILoadable, IReloadable {
         }
 
         return timesUsed;
+    }
+
+    //---------------------------------------------
+    //
+    //  H E L ME T   E D I T   P A N E L
+    //
+    //---------------------------------------------
+
+    private void loadHelmetEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("HelmetEditorPanel"));
+
+        this.helmetEditorMenu = new HelmetEditorPanel(this, panelBuilder, this.customBosses);
+    }
+
+    private void reloadHelmetEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("HelmetEditorPanel"));
+
+        this.helmetEditorMenu.initializePanel(panelBuilder);
+    }
+
+    //---------------------------------------------
+    //
+    //  E Q U I P M E N T   L I S T   E D I T   P A N E L
+    //
+    //---------------------------------------------
+
+    private void loadEquipmentListEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("BossListEditorPanel"));
+
+        this.equipmentListEditMenu = new BossListEquipmentEditorPanel(this, panelBuilder, this.customBosses);
+    }
+
+    private void reloadEquipmentListEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("BossListEditorPanel"));
+
+        this.equipmentListEditMenu.initializePanel(panelBuilder);
     }
 
     //---------------------------------------------

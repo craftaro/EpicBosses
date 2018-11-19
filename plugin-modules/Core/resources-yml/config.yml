@@ -33,6 +33,18 @@ Hooks:
     - 'blocked_region1'
     - 'blocked_region2'
 Display:
+  BossListEditor:
+    name: '&3{position} Entity'
+    lore:
+    - '&3Left Click &8»'
+    - '&7Edit the {targetType} for this'
+    - '&7entity in the section.'
+    - '&7'
+    - '&3Right Click &8»'
+    - '&7Remove this section, can be done'
+    - '&7to anything above the first one.'
+  EquipmentEditor:
+    name: '{name} &a&l** Selected **'
   EditDrops:
     lore:
     - '&3Type: &7{type}'

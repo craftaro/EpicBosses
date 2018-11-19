@@ -1,0 +1,16 @@
+package com.songoda.epicbosses.utils.panel.base;
+
+import com.songoda.epicbosses.managers.BossPanelManager;
+import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
+
+/**
+ * @author Charles Cullen
+ * @version 1.0.0
+ * @since 19-Nov-18
+ */
+public abstract class SubVariablePanelHandler<Variable, SubVariable> extends BasePanelHandler implements ISubVariablePanelHandler<Variable, SubVariable> {
+
+    public SubVariablePanelHandler(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
+        super(bossPanelManager, panelBuilder);
+    }
+}
