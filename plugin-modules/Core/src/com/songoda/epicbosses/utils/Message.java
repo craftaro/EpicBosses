@@ -76,7 +76,7 @@ public enum Message {
             "&b/boss debug &8» &7Used to toggle the debug aspect of the plugin.\n" +
             "&b/boss giveegg [name] [player] (amount) &8» &7Used to be given a spawn item of the boss.\n" +
             "&b/boss list &8» &7Shows all the list of current boss entities.\n" +
-            "&b\n" +
+            "&b/boss new [droptable/skill] [name] [type] &8» &7Used to create new drop tables and skills.\n" +
             "&b\n" +
             "&7\n" +
             "&8&m----*-----------------------------------*----"),
@@ -112,8 +112,11 @@ public enum Message {
 
     Boss_New_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_New_InvalidArgs("&c&l(!) &cInvalid arguments! You must use &n/boss new droptable [name] (type)&c or &n/boss new skill [name]&c!"),
+    Boss_New_CreateArgumentsDropTable("&b&lEpicBosses &8» &7Create a new droptable with the command &f/boss new droptable [name] [type]&7."),
     Boss_New_DropTableAlreadyExists("&c&l(!) &cThe specified DropTable name already exists. Please try another name."),
-    Boss_New_InvalidType("&c&l(!) &cThe specified DropTable type is invalid. Please use &fGive, Drop, Spray&c."),
+    Boss_New_InvalidDropTableType("&c&l(!) &cThe specified DropTable type is invalid. Please use &fGive, Drop, Spray&c."),
+    Boss_New_DropTable("&b&lEpicBosses &8» &7You have created a new drop table with the name &f{0}&7 and type &f{1}&7."),
+    Boss_New_SomethingWentWrong("&c&l(!) &cSomething went wrong while trying to create a new &f{0}&c."),
 
     Boss_Reload_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Reload_Successful("&b&lEpicBosses &8» &7All boss data has been reloaded. The process took &f{0}ms&7."),

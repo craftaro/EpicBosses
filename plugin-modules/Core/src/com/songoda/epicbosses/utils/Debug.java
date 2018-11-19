@@ -16,6 +16,7 @@ public enum Debug {
     MAX_HEALTH("You cannot set the max health higher than {0}. You can adjust your max health in the spigot.yml file and restart your server to increase this."),
     MECHANIC_APPLICATION_FAILED("Some mechanics have failed to be applied. It got stuck at {0} mechanic."),
     BOSS_NAME_EXISTS("A boss was attempted to be created with the name {0} but there is already a boss with that name."),
+    DROPTABLE_NAME_EXISTS("A droptable was attempted to be created with the name {0} but there is already a drop table with that name."),
     MINION_NAME_EXISTS("A minion was attempted to be created with the name {0} but there is already a minion with that name."),
     BOSS_CONTAINER_SAVE("The BossEntity map was saved in, {0} succeeded, and {1} failed. Listed below are the saved data which already existed in the container: \n{2}"),
     MINION_CONTAINER_SAVE("The MinionEntity map was saved in, {0} succeeded, and {1} failed. Listed below are the saved data which already existed in the container: \n{2}"),
@@ -45,6 +46,7 @@ public enum Debug {
 
     DROP_TABLE_FAILED_INVALID_NUMBER("The specified position ({0}) on the drop table is not a valid number."),
     DROP_TABLE_FAILED_TO_GET_ITEM("The drop table failed to get the specific item for the list."),
+    DROP_TABLE_FAILED_TO_GET_TYPE("The drop table that was attempted to be made with type {0} failed as it's not a valid drop table type."),
 
     MECHANIC_TYPE_NOT_STORED("This mechanic type is not stored, therefore will not be applied. Valid mechanic types are IOptionalMechanic and IPrimaryMechanic."),
 

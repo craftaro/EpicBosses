@@ -91,7 +91,10 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
 
         fillPanel(panel, bossEntity);
         counter.getSlotsWith("Selected").forEach(slot -> panel.setOnClick(slot, event -> {/* TODO: GO TO EDIT PANEL FOR DROP TABLE */}));
-        counter.getSlotsWith("CreateDropTable").forEach(slot -> panel.setOnClick(slot, event -> {/* TODO: CREATE NEW DROP TABLE COMMAND */}));
+        counter.getSlotsWith("CreateDropTable").forEach(slot -> panel.setOnClick(slot, event -> {
+            player.closeInventory();
+            Message.Boss_New_CreateArgumentsDropTable.msg(event.getWhoClicked());
+        }));
 
         panel.openFor(player);
     }

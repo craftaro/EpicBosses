@@ -1,6 +1,12 @@
 package com.songoda.epicbosses.api;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.droptable.DropTable;
+import com.songoda.epicbosses.droptable.elements.DropTableElement;
+import com.songoda.epicbosses.droptable.elements.GiveTableElement;
+import com.songoda.epicbosses.droptable.elements.SprayTableElement;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.entity.elements.*;
@@ -16,6 +22,7 @@ import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.custom.Minions;
 import com.songoda.epicbosses.skills.elements.CustomMinionSkillElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
+import com.songoda.epicbosses.utils.BossesGson;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.EntityFinder;
 import com.songoda.epicbosses.utils.ServerUtils;
@@ -26,6 +33,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -155,6 +163,39 @@ public class BossAPI {
         }
 
         return null;
+    }
+
+    public static DropTable createBaseDropTable(String name, String dropType) {
+        if(PLUGIN.getDropTableFileManager().getDropTable(name) != null) {
+            Debug.DROPTABLE_NAME_EXISTS.debug(name);
+            return null;
+        }
+
+        JsonParser jsonParser = new JsonParser();
+        String jsonString;
+
+        if(dropType.equalsIgnoreCase("SPRAY")) {
+            SprayTableElement sprayTableElement = new SprayTableElement(new HashMap<>(), false, 100, 10);
+
+            jsonString = BossesGson.get().toJson(sprayTableElement);
+        } else if(dropType.equalsIgnoreCase("GIVE")) {
+            GiveTableElement giveTableElement = new GiveTableElement(new HashMap<>());
+
+            jsonString = BossesGson.get().toJson(giveTableElement);
+        } else if(dropType.equalsIgnoreCase("DROP")) {
+            DropTableElement dropTableElement = new DropTableElement(new HashMap<>(), false, 10);
+
+            jsonString = BossesGson.get().toJson(dropTableElement);
+        } else {
+            Debug.DROP_TABLE_FAILED_TO_GET_TYPE.debug(dropType);
+            return null;
+        }
+
+        DropTable dropTable = new DropTable(dropType, jsonParser.parse(jsonString).getAsJsonObject());
+
+        PLUGIN.getDropTableFileManager().saveDropTable(name, dropTable);
+
+        return dropTable;
     }
 
     /**

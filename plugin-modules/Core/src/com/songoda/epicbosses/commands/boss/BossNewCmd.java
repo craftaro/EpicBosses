@@ -1,6 +1,8 @@
 package com.songoda.epicbosses.commands.boss;
 
 import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.api.BossAPI;
+import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.managers.BossDropTableManager;
 import com.songoda.epicbosses.managers.files.DropTableFileManager;
 import com.songoda.epicbosses.utils.Message;
@@ -53,10 +55,17 @@ public class BossNewCmd extends SubCommand {
             }
 
             if(!validType) {
-                Message.Boss_New_InvalidType.msg(sender);
+                Message.Boss_New_InvalidDropTableType.msg(sender);
                 return;
             }
 
+            DropTable dropTable = BossAPI.createBaseDropTable(nameInput, typeInput);
+
+            if(dropTable == null) {
+                Message.Boss_New_SomethingWentWrong.msg(sender, "DropTable");
+            } else {
+                Message.Boss_New_DropTable.msg(sender, nameInput, typeInput);
+            }
 
             return;
         }
