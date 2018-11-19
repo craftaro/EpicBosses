@@ -470,7 +470,7 @@ HelmetEditorPanel:
       lore:
       - '&7Click here to go back.'
 ChestplateEditorPanel:
-  name: '&b&l{boss} Editor'
+  name: '&b&l{name} Editor'
   slots: 54
   Settings:
     fillTo: 45
@@ -525,7 +525,7 @@ ChestplateEditorPanel:
       lore:
       - '&7Click here to go back.'
 LeggingsEditorPanel:
-  name: '&b&l{boss} Editor'
+  name: '&b&l{name} Editor'
   slots: 54
   Settings:
     fillTo: 45
@@ -584,7 +584,7 @@ LeggingsEditorPanel:
       lore:
       - '&7Click here to go back.'
 BootsEditorPanel:
-  name: '&b&l{boss} Editor'
+  name: '&b&l{name} Editor'
   slots: 54
   Settings:
     fillTo: 45

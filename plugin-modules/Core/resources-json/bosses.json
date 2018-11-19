@@ -10,7 +10,7 @@
         "mainStats": {
           "position": 1,
           "entityType": "SKELETON",
-          "health": 5,
+          "health": 50,
           "displayName": "&6&lSkeleton King Boss"
         },
         "equipment": {

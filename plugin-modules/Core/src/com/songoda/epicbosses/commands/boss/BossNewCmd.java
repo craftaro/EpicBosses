@@ -71,7 +71,7 @@ public class BossNewCmd extends SubCommand {
         }
 
         if(args.length == 3 && args[1].equalsIgnoreCase("skill")) {
-
+            //TODO: Complete new skill command
 
             return;
         }

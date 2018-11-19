@@ -165,6 +165,14 @@ public class BossAPI {
         return null;
     }
 
+    /**
+     * Used to create a new base drop table
+     * with the specified arguments.
+     *
+     * @param name - name of the drop table.
+     * @param dropType - drop table type.
+     * @return an instance of the drop table if successful
+     */
     public static DropTable createBaseDropTable(String name, String dropType) {
         if(PLUGIN.getDropTableFileManager().getDropTable(name) != null) {
             Debug.DROPTABLE_NAME_EXISTS.debug(name);
@@ -331,11 +339,6 @@ public class BossAPI {
      * @param skill - the skill from the skills.json
      */
     public static void spawnNewMinion(ActiveBossHolder activeBossHolder, Skill skill) {
-//        if(minionEntity.isEditing()) {
-//            Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
-//            return null;
-//        }
-
         if(skill.getType().equalsIgnoreCase("CUSTOM")) {
             CustomSkillElement customSkillElement = PLUGIN.getBossSkillManager().getCustomSkillElement(skill);
 

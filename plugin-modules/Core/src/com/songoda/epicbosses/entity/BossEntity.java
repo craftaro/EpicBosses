@@ -60,6 +60,6 @@ public class BossEntity {
     }
 
     public boolean canBeBought() {
-        return /*!isEditing() &&*/ isBuyable() && (getPrice() != null) && isCompleteEnoughToSpawn();
+        return !isEditing() && isBuyable() && (getPrice() != null) && isCompleteEnoughToSpawn();
     }
 }

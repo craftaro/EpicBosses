@@ -58,6 +58,9 @@ public class EquipmentEditorPanel extends SubVariablePanelHandler<BossEntity, En
         PanelBuilderCounter panelBuilderCounter = panel.getPanelBuilderCounter();
 
         panelBuilderCounter.getSlotsWith("Helmet").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getHelmetEditorMenu().openFor(player, bossEntity, entityStatsElement)));
+        panelBuilderCounter.getSlotsWith("Chestplate").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getChestplateEditorMenu().openFor(player, bossEntity, entityStatsElement)));
+        panelBuilderCounter.getSlotsWith("Leggings").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getLeggingsEditorMenu().openFor(player, bossEntity, entityStatsElement)));
+        panelBuilderCounter.getSlotsWith("Boots").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getBootsEditorMenu().openFor(player, bossEntity, entityStatsElement)));
 
         panel.openFor(player);
     }
