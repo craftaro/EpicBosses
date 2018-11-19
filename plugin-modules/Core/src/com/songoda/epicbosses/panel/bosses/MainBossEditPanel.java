@@ -72,6 +72,7 @@ public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
         PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
         counter.getSlotsWith("Editing").forEach(slot -> panel.setOnClick(slot, getEditingAction(bossEntity)));
+        counter.getSlotsWith("Drops").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getDropsEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
 
         panel.openFor(player);
     }

@@ -7,6 +7,10 @@
     "type": "OAK_PRESSURE_PLATE",
     "name": "&c&lDefault Drop Table Menu Item"
   },
+  "SelectedDropTableItem": {
+    "type": "LIGHT_WEIGHTED_PRESSURE_PLATE",
+    "name": "&c&lSelected Defauult Drop Table Menu Item"
+  },
   "DefaultSkillMenuItem": {
     "type": "BLAZE_POWDER",
     "name": "&c&lDefault Skill Menu Item"

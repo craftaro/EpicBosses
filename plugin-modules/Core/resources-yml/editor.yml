@@ -241,7 +241,7 @@ MainEditorPanel:
       - '&7etc. for this boss.'
       Button: Text
 DropsEditorPanel:
-  name: '&b&l{boss} Editor'
+  name: '&b&l{name} Editor'
   slots: 54
   Settings:
     fillTo: 45

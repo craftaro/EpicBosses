@@ -4,7 +4,6 @@ import lombok.Getter;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.utils.IReloadable;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;

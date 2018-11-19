@@ -4,6 +4,7 @@ import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.EquipmentElement;
 import com.songoda.epicbosses.entity.elements.HandsElement;
+import com.songoda.epicbosses.panel.bosses.DropsEditorPanel;
 import com.songoda.epicbosses.panel.bosses.MainBossEditPanel;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
@@ -30,7 +31,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private IPanelHandler mainMenu, customItems, bosses, autoSpawns, dropTables, customSkills, shopPanel;
     @Getter private IPanelHandler addItemsMenu;
 
-    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu;
+    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu;
 
     private final CustomBosses customBosses;
 
@@ -51,6 +52,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
         loadAddItemsMenu();
         loadMainEditMenu();
+        loadDropsEditMenu();
     }
 
     @Override
@@ -66,6 +68,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
         reloadAddItemsMenu();
         reloadMainEditMenu();
+        reloadDropsEditMenu();
     }
 
     public int isItemStackUsed(String name) {
@@ -91,6 +94,24 @@ public class BossPanelManager implements ILoadable, IReloadable {
         }
 
         return timesUsed;
+    }
+
+    //---------------------------------------------
+    //
+    //  D R O P S   E D I T   P A N E L
+    //
+    //---------------------------------------------
+
+    private void loadDropsEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("DropsEditorPanel"));
+
+        this.dropsEditMenu = new DropsEditorPanel(this, panelBuilder, this.customBosses);
+    }
+
+    private void reloadDropsEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("DropsEditorPanel"));
+
+        this.dropsEditMenu.initializePanel(panelBuilder);
     }
 
     //---------------------------------------------
