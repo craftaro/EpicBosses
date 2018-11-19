@@ -5,6 +5,7 @@ import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.EquipmentElement;
 import com.songoda.epicbosses.entity.elements.HandsElement;
 import com.songoda.epicbosses.panel.bosses.DropsEditorPanel;
+import com.songoda.epicbosses.panel.bosses.EquipmentEditorPanel;
 import com.songoda.epicbosses.panel.bosses.MainBossEditPanel;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
@@ -31,7 +32,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private IPanelHandler mainMenu, customItems, bosses, autoSpawns, dropTables, customSkills, shopPanel;
     @Getter private IPanelHandler addItemsMenu;
 
-    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu;
+    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, equipmentEditMenu;
 
     private final CustomBosses customBosses;
 
@@ -53,6 +54,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         loadAddItemsMenu();
         loadMainEditMenu();
         loadDropsEditMenu();
+        loadEquipmentEditMenu();
     }
 
     @Override
@@ -69,6 +71,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         reloadAddItemsMenu();
         reloadMainEditMenu();
         reloadDropsEditMenu();
+        reloadEquipmentEditMenu();
     }
 
     public int isItemStackUsed(String name) {
@@ -94,6 +97,24 @@ public class BossPanelManager implements ILoadable, IReloadable {
         }
 
         return timesUsed;
+    }
+
+    //---------------------------------------------
+    //
+    //  E Q U I P M E N T   E D I T   P A N E L
+    //
+    //---------------------------------------------
+
+    private void loadEquipmentEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("EquipmentEditorPanel"));
+
+        this.equipmentEditMenu = new EquipmentEditorPanel(this, panelBuilder);
+    }
+
+    private void reloadEquipmentEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("EquipmentEditorPanel"));
+
+        this.equipmentEditMenu.initializePanel(panelBuilder);
     }
 
     //---------------------------------------------

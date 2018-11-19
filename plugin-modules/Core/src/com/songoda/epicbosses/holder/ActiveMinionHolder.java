@@ -26,8 +26,6 @@ public class ActiveMinionHolder implements IActiveHolder {
     @Getter private final Location location;
     @Getter private final String name;
 
-
-
     public ActiveMinionHolder(ActiveBossHolder activeBossHolder, MinionEntity minionEntity, Location spawnLocation, String name) {
         this.activeBossHolder = activeBossHolder;
         this.name = name;
@@ -52,8 +50,6 @@ public class ActiveMinionHolder implements IActiveHolder {
 
     @Override
     public void killAll() {
-        System.out.println(this.livingEntityMap);
-
         this.livingEntityMap.values().forEach(LivingEntity::remove);
         this.livingEntityMap.clear();
     }

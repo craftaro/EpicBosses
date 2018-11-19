@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.utils.panel;
 
-import com.songoda.epicbosses.utils.panel.base.IPageHandler;
+import com.songoda.epicbosses.utils.panel.base.*;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import lombok.Getter;
@@ -8,9 +8,6 @@ import com.songoda.epicbosses.utils.ICloneable;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
-import com.songoda.epicbosses.utils.panel.base.ClickAction;
-import com.songoda.epicbosses.utils.panel.base.PageAction;
-import com.songoda.epicbosses.utils.panel.base.PanelCloseAction;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderSettings;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -133,7 +130,6 @@ public class Panel implements Listener, ICloneable<Panel> {
         Player player = (Player) event.getWhoClicked();
 
         if(isCancelLowerClick() && isLowerClick(event.getRawSlot())) {
-            System.out.println("CANCELLED ");
             event.setCancelled(true);
             return;
         }
@@ -392,6 +388,28 @@ public class Panel implements Listener, ICloneable<Panel> {
 
             panel.openFor((Player) event.getWhoClicked());
         });
+        return this;
+    }
+
+    public Panel setParentPanelHandler(IPanelHandler panelHandler) {
+        if(!this.panelBuilderSettings.isBackButton()) return this;
+
+        int slot = this.panelBuilderSettings.getBackButtonSlot() - 1;
+
+        setOnClick(slot, event -> panelHandler.openFor((Player) event.getWhoClicked()));
+        return this;
+    }
+
+    public <T> Panel setParentPanelHandler(IVariablePanelHandler<T> variablePanelHandler, T variable) {
+        System.out.println(this.panelBuilderSettings.isBackButton());
+
+        if(!this.panelBuilderSettings.isBackButton()) return this;
+
+        int slot = this.panelBuilderSettings.getBackButtonSlot() - 1;
+
+        System.out.println(slot);
+
+        setOnClick(slot, event -> variablePanelHandler.openFor((Player) event.getWhoClicked(), variable));
         return this;
     }
 
