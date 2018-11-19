@@ -7,7 +7,7 @@
     <groupId>com.songoda.epicbosses</groupId>
     <artifactId>EpicBosses</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0</version>
+    <version>maven-version-number</version>
 
     <modules>
         <module>api-modules/FactionsM</module>
@@ -19,7 +19,7 @@
     </modules>
 
     <properties>
-        <plugin.version>1.0.0-SNAPSHOT-U63</plugin.version>
+        <plugin.version>maven-version-number-SNAPSHOT-U63</plugin.version>
         <plugin.name>EpicBosses</plugin.name>
         <plugin.main>com.songoda.epicbosses.CustomBosses</plugin.main>
         <plugin.author>AMinecraftDev</plugin.author>
