@@ -80,7 +80,7 @@ public class BootsEditorPanel extends SubVariablePanelHandler<BossEntity, Entity
 
         panelBuilderCounter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAddItemsMenu().openFor(player)));
         panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, event -> {
-            entityStatsElement.getEquipment().setHelmet("");
+            entityStatsElement.getEquipment().setBoots("");
             this.bossesFileManager.save();
 
             openFor((Player) event.getWhoClicked(), bossEntity, entityStatsElement);
@@ -101,7 +101,7 @@ public class BootsEditorPanel extends SubVariablePanelHandler<BossEntity, Entity
     }
 
     private void loadPage(Panel panel, int requestedPage, Map<String, ItemStackHolder> itemStackHolderMap, List<String> entryList, BossEntity bossEntity, EntityStatsElement entityStatsElement) {
-        String helmet = entityStatsElement.getEquipment().getHelmet();
+        String boots = entityStatsElement.getEquipment().getBoots();
 
         panel.loadPage(requestedPage, (slot, realisticSlot) -> {
             if(slot >= itemStackHolderMap.size()) {
@@ -115,7 +115,7 @@ public class BootsEditorPanel extends SubVariablePanelHandler<BossEntity, Entity
                     itemStack = new ItemStack(Material.BARRIER);
                 }
 
-                if(name.equalsIgnoreCase(helmet)) {
+                if(name.equalsIgnoreCase(boots)) {
                     Map<String, String> replaceMap = new HashMap<>();
 
                     replaceMap.put("{name}", ItemStackUtils.getName(itemStack));
@@ -124,7 +124,7 @@ public class BootsEditorPanel extends SubVariablePanelHandler<BossEntity, Entity
                 }
 
                 panel.setItem(realisticSlot, itemStack, e -> {
-                    entityStatsElement.getEquipment().setHelmet(name);
+                    entityStatsElement.getEquipment().setBoots(name);
                     this.bossesFileManager.save();
 
                     openFor((Player) e.getWhoClicked(), bossEntity, entityStatsElement);

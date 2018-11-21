@@ -51,8 +51,11 @@ public abstract class TargetHandler<Holder extends IActiveHolder> implements ITa
         if(boss == null) return;
 
         List<LivingEntity> nearbyEntities = new ArrayList<>();
+        List<Entity> nearbyBossEntities = boss.getNearbyEntities(radius, radius, radius);
 
-        for(Entity entity : boss.getNearbyEntities(radius, radius, radius)) {
+        if(nearbyBossEntities == null) return;
+
+        for(Entity entity : nearbyBossEntities) {
             if(!(entity instanceof Player)) continue;
 
             LivingEntity livingEntity = (LivingEntity) entity;

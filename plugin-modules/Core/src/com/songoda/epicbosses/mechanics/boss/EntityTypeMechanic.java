@@ -30,6 +30,8 @@ public class EntityTypeMechanic implements IBossMechanic {
             if(position == null) position = 1;
             if(entityFinder == null) return false;
 
+            System.out.println("SPAWNING BOSS #" + position);
+
             LivingEntity livingEntity = entityFinder.spawnNewLivingEntity(bossEntityType, activeBossHolder.getLocation());
 
             if(livingEntity == null) return false;
