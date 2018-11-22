@@ -5,6 +5,7 @@ import com.songoda.epicbosses.managers.BossTargetManager;
 import com.songoda.epicbosses.targeting.TargetHandler;
 import org.bukkit.entity.LivingEntity;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -24,6 +25,12 @@ public class NotDamagedNearbyTargetHandler<T extends IActiveHolder> extends Targ
             if(getHolder().hasAttacked(livingEntity.getUniqueId())) continue;
 
             return livingEntity;
+        }
+
+        if(!nearbyEntities.isEmpty()) {
+            Collections.shuffle(nearbyEntities);
+
+            return nearbyEntities.stream().findFirst().orElse(null);
         }
 
         return null;

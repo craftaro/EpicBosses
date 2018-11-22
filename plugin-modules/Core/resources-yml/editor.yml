@@ -638,3 +638,73 @@ BootsEditorPanel:
       name: '&e&lGo Back'
       lore:
       - '&7Click here to go back.'
+TargetingPanel:
+  name: '&b&l{name} Editor'
+  slots: 27
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    BackButton: 27
+  Items:
+    '5':
+      type: REDSTONE_BLOCK
+      name: '&b&lHidden Nearby Entity'
+      lore:
+      - '&7This target system will target'
+      - '&7anyone who is nearby and hasn''t'
+      - '&7attacked the boss. If there is'
+      - '&7no one nearby who hasn''t attacked'
+      - '&7the boss then it will choose a random'
+      - '&7entity/player.'
+      TargetingSystem: NotDamagedNearby
+    '12':
+      type: REDSTONE_BLOCK
+      name: '&b&lClosest to the Boss'
+      lore:
+      - '&7This target system will'
+      - '&7target the closest player'
+      - '&7to the boss.'
+      TargetingSystem: Closest
+    '13':
+      type: REDSTONE_BLOCK
+      name: '&b&lRandom Nearby Entity'
+      lore:
+      - '&7This target system will'
+      - '&7target a random target who is'
+      - '&7within reach of the boss.'
+      TargetingSystem: RandomNearby
+    '14':
+      type: REDSTONE_BLOCK
+      name: '&e&lTop Damage'
+      lore:
+      - '&7This target system will'
+      - '&7target the player who has'
+      - '&7the most damage that is'
+      - '&7nearby.'
+      TargetingSystem: TopDamager
+    '19':
+      type: ARROW
+      name: '&b&lSelected'
+      lore:
+      - '&7You have currently got &f{selected}'
+      - '&7as your targeting system.'
+    '23':
+      type: BOOK
+      name: '&c&lTargeting Guide'
+      lore:
+      - '&7Here you can choose how'
+      - '&7the boss handles targeting'
+      - '&7of players.'
+      - '&7'
+      - '&7The default boss target range is'
+      - '&f50 blocks&7. However this can be'
+      - '&7adjusted in the config.yml.'
+    '27':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'

@@ -3,6 +3,7 @@ package com.songoda.epicbosses.utils.panel.base;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
+import org.bukkit.configuration.ConfigurationSection;
 
 /**
  * @author Charles Cullen
@@ -15,6 +16,10 @@ public abstract class BasePanelHandler implements IBasicPanelHandler {
 
     private PanelBuilder panelBuilder;
     protected Panel panel = null;
+
+    public BasePanelHandler(BossPanelManager bossPanelManager, ConfigurationSection configurationSection) {
+        this(bossPanelManager, new PanelBuilder(configurationSection));
+    }
 
     public BasePanelHandler(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
         this.bossPanelManager = bossPanelManager;

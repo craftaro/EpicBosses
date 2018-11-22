@@ -2,6 +2,7 @@ package com.songoda.epicbosses.utils.panel.base;
 
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
+import org.bukkit.configuration.ConfigurationSection;
 
 /**
  * @author Charles Cullen
@@ -12,5 +13,9 @@ public abstract class SubVariablePanelHandler<Variable, SubVariable> extends Bas
 
     public SubVariablePanelHandler(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
         super(bossPanelManager, panelBuilder);
+    }
+
+    public SubVariablePanelHandler(BossPanelManager bossPanelManager, ConfigurationSection configurationSection) {
+        super(bossPanelManager, configurationSection);
     }
 }

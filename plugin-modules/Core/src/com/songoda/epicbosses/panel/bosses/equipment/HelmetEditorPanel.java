@@ -15,6 +15,7 @@ import com.songoda.epicbosses.utils.panel.base.SubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -35,8 +36,8 @@ public class HelmetEditorPanel extends SubVariablePanelHandler<BossEntity, Entit
     private ItemsFileManager itemsFileManager;
     private CustomBosses plugin;
 
-    public HelmetEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
-        super(bossPanelManager, panelBuilder);
+    public HelmetEditorPanel(BossPanelManager bossPanelManager, ConfigurationSection configurationSection, CustomBosses plugin) {
+        super(bossPanelManager, configurationSection);
 
         this.plugin = plugin;
         this.itemStackConverter = new ItemStackConverter();

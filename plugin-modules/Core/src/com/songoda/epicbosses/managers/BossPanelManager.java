@@ -4,15 +4,13 @@ import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.EquipmentElement;
 import com.songoda.epicbosses.entity.elements.HandsElement;
-import com.songoda.epicbosses.entity.elements.MainStatsElement;
-import com.songoda.epicbosses.panel.bosses.BossListEquipmentEditorPanel;
-import com.songoda.epicbosses.panel.bosses.DropsEditorPanel;
-import com.songoda.epicbosses.panel.bosses.EquipmentEditorPanel;
-import com.songoda.epicbosses.panel.bosses.MainBossEditPanel;
+import com.songoda.epicbosses.panel.bosses.*;
+import com.songoda.epicbosses.panel.bosses.list.BossListEquipmentEditorPanel;
 import com.songoda.epicbosses.panel.bosses.equipment.BootsEditorPanel;
 import com.songoda.epicbosses.panel.bosses.equipment.ChestplateEditorPanel;
 import com.songoda.epicbosses.panel.bosses.equipment.HelmetEditorPanel;
 import com.songoda.epicbosses.panel.bosses.equipment.LeggingsEditorPanel;
+import com.songoda.epicbosses.panel.bosses.list.BossListTargetingEditorPanel;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
@@ -23,6 +21,7 @@ import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.panel.base.IPanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
+import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -39,8 +38,9 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private IPanelHandler mainMenu, customItems, bosses, autoSpawns, dropTables, customSkills, shopPanel;
     @Getter private IPanelHandler addItemsMenu;
 
-    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, equipmentListEditMenu;
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> equipmentEditMenu, helmetEditorMenu, chestplateEditorMenu, leggingsEditorMenu, bootsEditorMenu;
+    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu;
+    @Getter private BossListEditorPanel equipmentListEditMenu, targetingListEditMenu;
 
     private final CustomBosses customBosses;
 
@@ -62,13 +62,11 @@ public class BossPanelManager implements ILoadable, IReloadable {
         loadAddItemsMenu();
         loadMainEditMenu();
         loadDropsEditMenu();
-        loadEquipmentListEditMenu();
+        loadEditorListMenus();
+        loadTargetingEditMenu();
 
         loadEquipmentEditMenu();
-        loadHelmetEditMenu();
-        loadChestplateEditMenu();
-        loadLeggingsEditMenu();
-        loadBootsEditMenu();
+        loadEquipmentEditMenus();
     }
 
     @Override
@@ -85,13 +83,11 @@ public class BossPanelManager implements ILoadable, IReloadable {
         reloadAddItemsMenu();
         reloadMainEditMenu();
         reloadDropsEditMenu();
-        reloadEquipmentListEditMenu();
+        reloadEditorListMenus();
+        reloadTargetingEditMenu();
 
         reloadEquipmentEditMenu();
-        reloadHelmetEditMenu();
-        reloadChestplateEditMenu();
-        reloadLeggingsEditMenu();
-        reloadBootsEditMenu();
+        reloadEquipmentEditMenus();
     }
 
     public int isItemStackUsed(String name) {
@@ -125,70 +121,46 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //
     //---------------------------------------------
 
-    private void loadHelmetEditMenu() {
-        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("HelmetEditorPanel"));
+    private void loadEquipmentEditMenus() {
+        FileConfiguration editor = this.customBosses.getEditor();
 
-        this.helmetEditorMenu = new HelmetEditorPanel(this, panelBuilder, this.customBosses);
+        this.helmetEditorMenu = new HelmetEditorPanel(this, editor.getConfigurationSection(HELMET_EDITOR_PATH), this.customBosses);
+        this.chestplateEditorMenu = new ChestplateEditorPanel(this, editor.getConfigurationSection(CHESTPLATE_EDITOR_PATH), this.customBosses);
+        this.leggingsEditorMenu = new LeggingsEditorPanel(this, editor.getConfigurationSection(LEGGINGS_EDITOR_PATH), this.customBosses);
+        this.bootsEditorMenu = new BootsEditorPanel(this, editor.getConfigurationSection(BOOTS_EDITOR_PATH), this.customBosses);
     }
 
-    private void reloadHelmetEditMenu() {
-        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("HelmetEditorPanel"));
+    private void reloadEquipmentEditMenus() {
+        FileConfiguration editor = this.customBosses.getEditor();
 
-        this.helmetEditorMenu.initializePanel(panelBuilder);
-    }
-
-    private void loadChestplateEditMenu() {
-        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("ChestplateEditorPanel"));
-
-        this.chestplateEditorMenu = new ChestplateEditorPanel(this, panelBuilder, this.customBosses);
-    }
-
-    private void reloadChestplateEditMenu() {
-        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("ChestplateEditorPanel"));
-
-        this.chestplateEditorMenu.initializePanel(panelBuilder);
-    }
-
-    private void loadLeggingsEditMenu() {
-        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("LeggingsEditorPanel"));
-
-        this.leggingsEditorMenu = new LeggingsEditorPanel(this, panelBuilder, this.customBosses);
-    }
-
-    private void reloadLeggingsEditMenu() {
-        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("LeggingsEditorPanel"));
-
-        this.leggingsEditorMenu.initializePanel(panelBuilder);
-    }
-
-    private void loadBootsEditMenu() {
-        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("BootsEditorPanel"));
-
-        this.bootsEditorMenu = new BootsEditorPanel(this, panelBuilder, this.customBosses);
-    }
-
-    private void reloadBootsEditMenu() {
-        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("BootsEditorPanel"));
-
-        this.bootsEditorMenu.initializePanel(panelBuilder);
+        this.helmetEditorMenu.initializePanel(new PanelBuilder(editor.getConfigurationSection(HELMET_EDITOR_PATH)));
+        this.chestplateEditorMenu.initializePanel(new PanelBuilder(editor.getConfigurationSection(CHESTPLATE_EDITOR_PATH)));
+        this.leggingsEditorMenu.initializePanel(new PanelBuilder(editor.getConfigurationSection(LEGGINGS_EDITOR_PATH)));
+        this.bootsEditorMenu.initializePanel(new PanelBuilder(editor.getConfigurationSection(BOOTS_EDITOR_PATH)));
     }
 
     //---------------------------------------------
     //
-    //  E Q U I P M E N T   L I S T   E D I T   P A N E L
+    //  L I S T   E D I T   P A N E LS
     //
     //---------------------------------------------
 
-    private void loadEquipmentListEditMenu() {
+    private static final String HELMET_EDITOR_PATH = "HelmetEditorPanel", CHESTPLATE_EDITOR_PATH = "ChestplateEditorPanel", LEGGINGS_EDITOR_PATH = "LeggingsEditorPanel",
+            BOOTS_EDITOR_PATH = "BootsEditorPanel";
+
+
+    private void loadEditorListMenus() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("BossListEditorPanel"));
 
         this.equipmentListEditMenu = new BossListEquipmentEditorPanel(this, panelBuilder, this.customBosses);
+        this.targetingListEditMenu = new BossListTargetingEditorPanel(this, panelBuilder, this.customBosses);
     }
 
-    private void reloadEquipmentListEditMenu() {
+    private void reloadEditorListMenus() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("BossListEditorPanel"));
 
         this.equipmentListEditMenu.initializePanel(panelBuilder);
+        this.targetingListEditMenu.initializePanel(panelBuilder);
     }
 
     //---------------------------------------------
@@ -225,6 +197,24 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("DropsEditorPanel"));
 
         this.dropsEditMenu.initializePanel(panelBuilder);
+    }
+
+    //---------------------------------------------
+    //
+    //  T A R G E T I N G   E D I T   P A N E L
+    //
+    //---------------------------------------------
+
+    private void loadTargetingEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("TargetingPanel"));
+
+        this.targetingEditMenu = new TargetingEditorPanel(this, panelBuilder, this.customBosses.getBossesFileManager());
+    }
+
+    private void reloadTargetingEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("TargetingPanel"));
+
+        this.targetingEditMenu.initializePanel(panelBuilder);
     }
 
     //---------------------------------------------

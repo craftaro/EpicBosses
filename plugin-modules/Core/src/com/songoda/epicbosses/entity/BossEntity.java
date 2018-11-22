@@ -1,6 +1,7 @@
 package com.songoda.epicbosses.entity;
 
 import com.google.gson.annotations.Expose;
+import com.songoda.epicbosses.utils.StringUtils;
 import lombok.Getter;
 import lombok.Setter;
 import com.songoda.epicbosses.entity.elements.*;
@@ -39,6 +40,14 @@ public class BossEntity {
 
     public String getEditingValue() {
         return this.editing? "Enabled" : "Disabled";
+    }
+
+    public String getTargetingValue() {
+        if(getTargeting() == null || getTargeting().isEmpty() || getTargeting().equalsIgnoreCase("")) {
+            return "N/A";
+        } else {
+            return StringUtils.get().formatString(getTargeting());
+        }
     }
 
     public boolean isCompleteEnoughToSpawn() {
