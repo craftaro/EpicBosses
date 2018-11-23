@@ -49,7 +49,7 @@ public class TargetingEditorPanel extends VariablePanelHandler<BossEntity> {
                 .setDestroyWhenDone(true)
                 .setCancelLowerClick(true)
                 .setCancelClick(true)
-                .setParentPanelHandler(this.bossPanelManager.getTargetingListEditMenu(), bossEntity);
+                .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
         PanelBuilderCounter panelBuilderCounter = panel.getPanelBuilderCounter();
 
         panelBuilderCounter.getSpecialSlotsWith("TargetingSystem").forEach((slot, returnValue) -> panel.setOnClick(slot, event -> {

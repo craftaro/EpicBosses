@@ -648,11 +648,11 @@ TargetingPanel:
     type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
-    BackButton: 27
+    backButton: 27
   Items:
     '5':
       type: REDSTONE_BLOCK
-      name: '&b&lHidden Nearby Entity'
+      name: '&e&lNot Damaged Nearby'
       lore:
       - '&7This target system will target'
       - '&7anyone who is nearby and hasn''t'
@@ -661,25 +661,25 @@ TargetingPanel:
       - '&7the boss then it will choose a random'
       - '&7entity/player.'
       TargetingSystem: NotDamagedNearby
-    '12':
+    '13':
       type: REDSTONE_BLOCK
-      name: '&b&lClosest to the Boss'
+      name: '&e&lClosest'
       lore:
       - '&7This target system will'
       - '&7target the closest player'
       - '&7to the boss.'
       TargetingSystem: Closest
-    '13':
+    '14':
       type: REDSTONE_BLOCK
-      name: '&b&lRandom Nearby Entity'
+      name: '&e&lRandom Nearby'
       lore:
       - '&7This target system will'
       - '&7target a random target who is'
       - '&7within reach of the boss.'
       TargetingSystem: RandomNearby
-    '14':
+    '15':
       type: REDSTONE_BLOCK
-      name: '&e&lTop Damage'
+      name: '&e&lTop Damager'
       lore:
       - '&7This target system will'
       - '&7target the player who has'

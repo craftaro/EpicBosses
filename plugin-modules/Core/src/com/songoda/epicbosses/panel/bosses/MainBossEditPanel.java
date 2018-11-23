@@ -77,6 +77,7 @@ public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
 
         counter.getSlotsWith("Editing").forEach(slot -> panel.setOnClick(slot, getEditingAction(bossEntity)));
         counter.getSlotsWith("Drops").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getDropsEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
+        counter.getSlotsWith("Targeting").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getTargetingEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
         counter.getSlotsWith("Equipment").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getEquipmentListEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
 
         panel.openFor(player);

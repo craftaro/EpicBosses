@@ -46,7 +46,7 @@ public class BossEntity {
         if(getTargeting() == null || getTargeting().isEmpty() || getTargeting().equalsIgnoreCase("")) {
             return "N/A";
         } else {
-            return StringUtils.get().formatString(getTargeting());
+            return getTargeting();
         }
     }
 

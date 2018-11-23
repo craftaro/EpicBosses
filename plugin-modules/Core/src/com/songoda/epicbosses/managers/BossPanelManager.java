@@ -10,7 +10,6 @@ import com.songoda.epicbosses.panel.bosses.equipment.BootsEditorPanel;
 import com.songoda.epicbosses.panel.bosses.equipment.ChestplateEditorPanel;
 import com.songoda.epicbosses.panel.bosses.equipment.HelmetEditorPanel;
 import com.songoda.epicbosses.panel.bosses.equipment.LeggingsEditorPanel;
-import com.songoda.epicbosses.panel.bosses.list.BossListTargetingEditorPanel;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
@@ -40,7 +39,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> equipmentEditMenu, helmetEditorMenu, chestplateEditorMenu, leggingsEditorMenu, bootsEditorMenu;
     @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu;
-    @Getter private BossListEditorPanel equipmentListEditMenu, targetingListEditMenu;
+    @Getter private BossListEditorPanel equipmentListEditMenu;
 
     private final CustomBosses customBosses;
 
@@ -153,14 +152,12 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("BossListEditorPanel"));
 
         this.equipmentListEditMenu = new BossListEquipmentEditorPanel(this, panelBuilder, this.customBosses);
-        this.targetingListEditMenu = new BossListTargetingEditorPanel(this, panelBuilder, this.customBosses);
     }
 
     private void reloadEditorListMenus() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("BossListEditorPanel"));
 
         this.equipmentListEditMenu.initializePanel(panelBuilder);
-        this.targetingListEditMenu.initializePanel(panelBuilder);
     }
 
     //---------------------------------------------
