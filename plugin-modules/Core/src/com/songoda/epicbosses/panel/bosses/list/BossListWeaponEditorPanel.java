@@ -12,16 +12,16 @@ import org.bukkit.entity.Player;
 /**
  * @author Charles Cullen
  * @version 1.0.0
- * @since 19-Nov-18
+ * @since 23-Nov-18
  */
-public class BossListEquipmentEditorPanel extends BossListEditorPanel {
+public class BossListWeaponEditorPanel extends BossListEditorPanel {
 
-    public BossListEquipmentEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
-        super(bossPanelManager, panelBuilder, plugin, "Equipment");
+    public BossListWeaponEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+        super(bossPanelManager, panelBuilder, plugin, "Weapons");
     }
 
     @Override
     public ClickAction getAction(BossEntity bossEntity, EntityStatsElement entityStatsElement) {
-        return event -> this.bossPanelManager.getEquipmentEditMenu().openFor((Player) event.getWhoClicked(), bossEntity, entityStatsElement);
+        return event -> this.bossPanelManager.getWeaponEditMenu().openFor((Player) event.getWhoClicked(), bossEntity, entityStatsElement);
     }
 }

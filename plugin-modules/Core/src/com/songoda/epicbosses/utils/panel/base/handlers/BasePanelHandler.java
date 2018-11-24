@@ -1,7 +1,8 @@
-package com.songoda.epicbosses.utils.panel.base;
+package com.songoda.epicbosses.utils.panel.base.handlers;
 
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.utils.panel.Panel;
+import com.songoda.epicbosses.utils.panel.base.IBasicPanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import org.bukkit.configuration.ConfigurationSection;
 

@@ -10,6 +10,9 @@ import com.songoda.epicbosses.panel.bosses.equipment.BootsEditorPanel;
 import com.songoda.epicbosses.panel.bosses.equipment.ChestplateEditorPanel;
 import com.songoda.epicbosses.panel.bosses.equipment.HelmetEditorPanel;
 import com.songoda.epicbosses.panel.bosses.equipment.LeggingsEditorPanel;
+import com.songoda.epicbosses.panel.bosses.list.BossListWeaponEditorPanel;
+import com.songoda.epicbosses.panel.bosses.weapons.MainHandEditorPanel;
+import com.songoda.epicbosses.panel.bosses.weapons.OffHandEditorPanel;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
@@ -38,8 +41,9 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private IPanelHandler addItemsMenu;
 
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> equipmentEditMenu, helmetEditorMenu, chestplateEditorMenu, leggingsEditorMenu, bootsEditorMenu;
+    @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> weaponEditMenu, offHandEditorMenu, mainHandEditorMenu;
     @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu;
-    @Getter private BossListEditorPanel equipmentListEditMenu;
+    @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu;
 
     private final CustomBosses customBosses;
 
@@ -65,6 +69,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
         loadTargetingEditMenu();
 
         loadEquipmentEditMenu();
+        loadWeaponEditMenu();
+
         loadEquipmentEditMenus();
     }
 
@@ -86,6 +92,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
         reloadTargetingEditMenu();
 
         reloadEquipmentEditMenu();
+        reloadWeaponEditMenu();
+
         reloadEquipmentEditMenus();
     }
 
@@ -120,6 +128,9 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //
     //---------------------------------------------
 
+    private static final String HELMET_EDITOR_PATH = "HelmetEditorPanel", CHESTPLATE_EDITOR_PATH = "ChestplateEditorPanel", LEGGINGS_EDITOR_PATH = "LeggingsEditorPanel",
+            BOOTS_EDITOR_PATH = "BootsEditorPanel", MAIN_HAND_EDITOR_PATH = "MainHandEditorPanel", OFF_HAND_EDITOR_PATH = "OffHandEditorPanel";
+
     private void loadEquipmentEditMenus() {
         FileConfiguration editor = this.customBosses.getEditor();
 
@@ -127,6 +138,9 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.chestplateEditorMenu = new ChestplateEditorPanel(this, editor.getConfigurationSection(CHESTPLATE_EDITOR_PATH), this.customBosses);
         this.leggingsEditorMenu = new LeggingsEditorPanel(this, editor.getConfigurationSection(LEGGINGS_EDITOR_PATH), this.customBosses);
         this.bootsEditorMenu = new BootsEditorPanel(this, editor.getConfigurationSection(BOOTS_EDITOR_PATH), this.customBosses);
+
+        this.mainHandEditorMenu = new MainHandEditorPanel(this, editor.getConfigurationSection(MAIN_HAND_EDITOR_PATH), this.customBosses);
+        this.offHandEditorMenu = new OffHandEditorPanel(this, editor.getConfigurationSection(OFF_HAND_EDITOR_PATH), this.customBosses);
     }
 
     private void reloadEquipmentEditMenus() {
@@ -136,6 +150,9 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.chestplateEditorMenu.initializePanel(new PanelBuilder(editor.getConfigurationSection(CHESTPLATE_EDITOR_PATH)));
         this.leggingsEditorMenu.initializePanel(new PanelBuilder(editor.getConfigurationSection(LEGGINGS_EDITOR_PATH)));
         this.bootsEditorMenu.initializePanel(new PanelBuilder(editor.getConfigurationSection(BOOTS_EDITOR_PATH)));
+
+        this.mainHandEditorMenu.initializePanel(new PanelBuilder(editor.getConfigurationSection(MAIN_HAND_EDITOR_PATH)));
+        this.offHandEditorMenu.initializePanel(new PanelBuilder(editor.getConfigurationSection(OFF_HAND_EDITOR_PATH)));
     }
 
     //---------------------------------------------
@@ -144,20 +161,36 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //
     //---------------------------------------------
 
-    private static final String HELMET_EDITOR_PATH = "HelmetEditorPanel", CHESTPLATE_EDITOR_PATH = "ChestplateEditorPanel", LEGGINGS_EDITOR_PATH = "LeggingsEditorPanel",
-            BOOTS_EDITOR_PATH = "BootsEditorPanel";
-
-
     private void loadEditorListMenus() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("BossListEditorPanel"));
 
-        this.equipmentListEditMenu = new BossListEquipmentEditorPanel(this, panelBuilder, this.customBosses);
+        this.equipmentListEditMenu = new BossListEquipmentEditorPanel(this, panelBuilder.cloneBuilder(), this.customBosses);
+        this.weaponListEditMenu = new BossListWeaponEditorPanel(this, panelBuilder.cloneBuilder(), this.customBosses);
     }
 
     private void reloadEditorListMenus() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("BossListEditorPanel"));
 
-        this.equipmentListEditMenu.initializePanel(panelBuilder);
+        this.equipmentListEditMenu.initializePanel(panelBuilder.cloneBuilder());
+        this.weaponListEditMenu.initializePanel(panelBuilder.cloneBuilder());
+    }
+
+    //---------------------------------------------
+    //
+    //  E Q U I P M E N T   E D I T   P A N E L
+    //
+    //---------------------------------------------
+
+    private void loadWeaponEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("WeaponEditorPanel"));
+
+        this.weaponEditMenu = new WeaponsEditorPanel(this, panelBuilder);
+    }
+
+    private void reloadWeaponEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("WeaponEditorPanel"));
+
+        this.weaponEditMenu.initializePanel(panelBuilder);
     }
 
     //---------------------------------------------

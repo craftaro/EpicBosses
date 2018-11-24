@@ -708,3 +708,154 @@ TargetingPanel:
       name: '&e&lGo Back'
       lore:
       - '&7Click here to go back.'
+WeaponEditorPanel:
+  name: '&b&l{name} Editor'
+  slots: 9
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 9
+  Items:
+    '1':
+      type: BOOK
+      name: '&c&lWeapons Guide'
+      lore:
+      - '&7here you can choose what weapons'
+      - '&7this boss has. To choose simply click'
+      - '&7the desired hand, then click one of'
+      - '&7the preset weapons or click the diamond'
+      - '&7block to add a new weapon from your'
+      - '&7inventory.'
+    '4':
+      type: DIAMOND_SWORD
+      name: '&c&lMain Hand'
+      lore:
+      - '&7Click here to modify the'
+      - '&7main hand for the &f{name}&7.'
+      Button: MainHand
+    '6':
+      type: SHIELD
+      name: '&c&lOff Hand'
+      lore:
+      - '&7Click here to modify the'
+      - '&7off hand for the &f{name}&7.'
+      Button: OffHand
+    '9':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'
+MainHandEditorPanel:
+  name: '&b&l{name} Editor'
+  slots: 54
+  Settings:
+    fillTo: 45
+    backButton: true
+  Buttons:
+    backButton: 54
+  Items:
+    '46':
+      type: DIAMOND
+      name: '&c&lRemove'
+      lore:
+      - '&7click here to remove the'
+      - '&7currently equipped main hand.'
+      Button: Remove
+    '47':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '48':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page of weapons.'
+      PreviousPage: true
+    '50':
+      type: DIAMOND_BLOCK
+      name: '&a&lAdd New Weapon'
+      lore:
+      - '&7Click here to add a new'
+      - '&7weapon which you have in your'
+      - '&7inventory.'
+      Button: AddNew
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page of weapons.'
+      NextPage: true
+    '52':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '53':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '54':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'
+OffHandEditorPanel:
+  name: '&b&l{name} Editor'
+  slots: 54
+  Settings:
+    fillTo: 45
+    backButton: true
+  Buttons:
+    backButton: 54
+  Items:
+    '46':
+      type: DIAMOND
+      name: '&c&lRemove'
+      lore:
+      - '&7click here to remove the'
+      - '&7currently equipped off hand.'
+      Button: Remove
+    '47':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '48':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page of weapons.'
+      PreviousPage: true
+    '50':
+      type: DIAMOND_BLOCK
+      name: '&a&lAdd New Weapon'
+      lore:
+      - '&7Click here to add a new'
+      - '&7weapon which you have in your'
+      - '&7inventory.'
+      Button: AddNew
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page of weapons.'
+      NextPage: true
+    '52':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '53':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '54':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'

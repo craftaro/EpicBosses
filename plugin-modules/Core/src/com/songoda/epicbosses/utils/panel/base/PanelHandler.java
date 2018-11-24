@@ -1,6 +1,7 @@
 package com.songoda.epicbosses.utils.panel.base;
 
 import com.songoda.epicbosses.managers.BossPanelManager;
+import com.songoda.epicbosses.utils.panel.base.handlers.BasePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 
 /**

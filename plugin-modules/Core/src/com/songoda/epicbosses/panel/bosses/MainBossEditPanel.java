@@ -2,7 +2,6 @@ package com.songoda.epicbosses.panel.bosses;
 
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
-import com.songoda.epicbosses.container.BossEntityContainer;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -10,7 +9,7 @@ import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
-import com.songoda.epicbosses.utils.panel.base.VariablePanelHandler;
+import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import org.bukkit.entity.Player;

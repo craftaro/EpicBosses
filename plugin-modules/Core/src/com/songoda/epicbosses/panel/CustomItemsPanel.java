@@ -1,23 +1,19 @@
 package com.songoda.epicbosses.panel;
 
 import com.songoda.epicbosses.CustomBosses;
-import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
+import com.songoda.epicbosses.panel.handlers.ListPanelHandler;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.Message;
-import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
-import com.songoda.epicbosses.utils.panel.base.PanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

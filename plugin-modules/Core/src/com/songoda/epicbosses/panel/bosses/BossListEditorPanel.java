@@ -14,7 +14,7 @@ import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
-import com.songoda.epicbosses.utils.panel.base.VariablePanelHandler;
+import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import org.bukkit.entity.Player;
@@ -67,7 +67,21 @@ public abstract class BossListEditorPanel extends VariablePanelHandler<BossEntit
             ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.BossListEditor.name"), replaceMap);
             ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.BossListEditor.lore"), replaceMap);
 
-            panel.setItem(slot, itemStack, getAction(bossEntity, entityStatsElement));
+            panel.setItem(slot, itemStack, event -> {
+                ClickType click = event.getClick();
+                Player player = (Player) event.getWhoClicked();
+
+                if (click == ClickType.LEFT || click == ClickType.SHIFT_LEFT) {
+                    getAction(bossEntity, entityStatsElement).onClick(event);
+                } else {
+                    if (entityStatsElement.getMainStats().getPosition() > 1) {
+                        bossEntity.getEntityStats().remove(entityStatsElement);
+                        this.bossesFileManager.save();
+
+                        openFor(player, bossEntity);
+                    }
+                }
+            });
             slot++;
         }
     }
