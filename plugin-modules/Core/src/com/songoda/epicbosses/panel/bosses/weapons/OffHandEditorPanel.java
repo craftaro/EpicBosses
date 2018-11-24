@@ -29,7 +29,7 @@ public class OffHandEditorPanel extends ItemStackSubListPanelHandler {
 
     @Override
     public ISubVariablePanelHandler<BossEntity, EntityStatsElement> getParentHolder() {
-        return this.bossPanelManager.getEquipmentEditMenu();
+        return this.bossPanelManager.getWeaponEditMenu();
     }
 
     @Override
