@@ -35,8 +35,12 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
         Map<String, String> replaceMap = new HashMap<>();
+        Double chance = bossEntity.getSkills().getOverallChance();
+
+        if(chance == null) chance = 0.0;
 
         replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+        replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
 
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
@@ -90,6 +94,10 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
             if(newChance < 0.0) {
                 newChance = 0.0;
+            }
+
+            if(newChance > 100.0) {
+                newChance = 100.0;
             }
 
             bossEntity.getSkills().setOverallChance(newChance);
