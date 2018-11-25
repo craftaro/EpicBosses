@@ -1,8 +1,10 @@
 package com.songoda.epicbosses.panel.bosses;
 
+import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
+import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
@@ -23,8 +25,12 @@ import java.util.Map;
  */
 public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
-    public SkillMainEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
+    private BossesFileManager bossesFileManager;
+
+    public SkillMainEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
+
+        this.bossesFileManager = plugin.getBossesFileManager();
     }
 
     @Override
@@ -36,14 +42,12 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
     public void openFor(Player player, BossEntity bossEntity) {
         Map<String, String> replaceMap = new HashMap<>();
         Double chance = bossEntity.getSkills().getOverallChance();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
         if(chance == null) chance = 0.0;
 
         replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
         replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
-
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-
         panelBuilder.addReplaceData(replaceMap);
 
         Panel panel = panelBuilder.getPanel()
@@ -54,7 +58,7 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
         fillPanel(panel, bossEntity);
         counter.getSlotsWith("OverallChance").forEach(slot -> panel.setOnClick(slot, getOverallChanceAction(bossEntity)));
-        counter.getSlotsWith("SkillList").forEach(slot -> panel.setOnClick(slot, getSkillListAction()));
+        counter.getSlotsWith("SkillList").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getSkillListBossEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
         counter.getSlotsWith("Message").forEach(slot -> panel.setOnClick(slot, getMessageAction()));
 
         panel.openFor(player);
@@ -101,13 +105,10 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
             }
 
             bossEntity.getSkills().setOverallChance(newChance);
+            this.bossesFileManager.save();
             Message.Boss_Skill_SetChance.msg(event.getWhoClicked(), modifyValue, NumberUtils.get().formatDouble(newChance));
             openFor((Player) event.getWhoClicked(), bossEntity);
         };
-    }
-
-    private ClickAction getSkillListAction() {
-        return event -> {};
     }
 
     private ClickAction getMessageAction() {

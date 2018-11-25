@@ -42,7 +42,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> equipmentEditMenu, helmetEditorMenu, chestplateEditorMenu, leggingsEditorMenu, bootsEditorMenu;
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> weaponEditMenu, offHandEditorMenu, mainHandEditorMenu;
-    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu, skillsBossEditMenu;
+    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu, skillsBossEditMenu, skillListBossEditMenu;
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu;
 
     private final CustomBosses customBosses;
@@ -186,13 +186,15 @@ public class BossPanelManager implements ILoadable, IReloadable {
     private void loadSkillsEditMenu() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("SkillMainEditorPanel"));
 
-        this.skillsBossEditMenu = new SkillMainEditorPanel(this, panelBuilder);
+        this.skillsBossEditMenu = new SkillMainEditorPanel(this, panelBuilder, this.customBosses);
+        this.skillListBossEditMenu = new SkillListEditorPanel(this, getListMenu("BossSkills"), this.customBosses);
     }
 
     private void reloadSkillsEditMenu() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("SkillMainEditorPanel"));
 
         this.skillsBossEditMenu.initializePanel(panelBuilder);
+        this.skillListBossEditMenu.initializePanel(getListMenu("BossSkills"));
     }
 
     //---------------------------------------------

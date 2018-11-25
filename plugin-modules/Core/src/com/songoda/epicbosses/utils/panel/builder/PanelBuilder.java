@@ -23,7 +23,7 @@ import java.util.Set;
  */
 public class PanelBuilder {
 
-    private final Map<String, String> replaceMap = new HashMap<>();
+    @Getter private final Map<String, String> replaceMap = new HashMap<>();
     private final Set<Integer> defaultSlots = new HashSet<>();
     private final ConfigurationSection configurationSection;
     private final PanelBuilderSettings panelBuilderSettings;
@@ -143,6 +143,13 @@ public class PanelBuilder {
             if(input.contains(entry.getKey())) {
                 input = input.replace(entry.getKey(), entry.getValue());
             }
+        }
+
+        String nameKey = "{name}";
+
+        //Apply replace twice, to go over any missed replaced values, or new values that had been set in the replacement
+        if(replaceMap.containsKey(nameKey) && input.contains(nameKey)) {
+            input = input.replace(nameKey, replaceMap.get(nameKey));
         }
 
         return input;
