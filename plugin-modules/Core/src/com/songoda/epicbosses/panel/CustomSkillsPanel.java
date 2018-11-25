@@ -4,7 +4,7 @@ import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.SkillsFileManager;
-import com.songoda.epicbosses.panel.handlers.ListPanelHandler;
+import com.songoda.epicbosses.panel.handlers.MainListPanelHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.StringUtils;
@@ -26,7 +26,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 10-Oct-18
  */
-public class CustomSkillsPanel extends ListPanelHandler {
+public class CustomSkillsPanel extends MainListPanelHandler {
 
     private ItemStackConverter itemStackConverter;
     private SkillsFileManager skillsFileManager;

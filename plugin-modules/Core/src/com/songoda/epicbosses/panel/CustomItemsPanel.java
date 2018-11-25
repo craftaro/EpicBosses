@@ -3,7 +3,7 @@ package com.songoda.epicbosses.panel;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
-import com.songoda.epicbosses.panel.handlers.ListPanelHandler;
+import com.songoda.epicbosses.panel.handlers.MainListPanelHandler;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
@@ -22,7 +22,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 10-Oct-18
  */
-public class CustomItemsPanel extends ListPanelHandler {
+public class CustomItemsPanel extends MainListPanelHandler {
 
     private ItemsFileManager itemsFileManager;
 

@@ -11,9 +11,9 @@ import org.bukkit.entity.Player;
  * @version 1.0.0
  * @since 18-Nov-18
  */
-public abstract class ListPanelHandler extends PanelHandler {
+public abstract class MainListPanelHandler extends PanelHandler {
 
-    public ListPanelHandler(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
+    public MainListPanelHandler(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
         super(bossPanelManager, panelBuilder);
     }
 

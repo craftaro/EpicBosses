@@ -5,7 +5,7 @@ import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
-import com.songoda.epicbosses.panel.handlers.ListPanelHandler;
+import com.songoda.epicbosses.panel.handlers.MainListPanelHandler;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  * @version 1.0.0
  * @since 17-Nov-18
  */
-public class ShopPanel extends ListPanelHandler {
+public class ShopPanel extends MainListPanelHandler {
 
     private BossEntityManager bossEntityManager;
     private BossesFileManager bossesFileManager;

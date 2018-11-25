@@ -859,3 +859,68 @@ OffHandEditorPanel:
       name: '&e&lGo Back'
       lore:
       - '&7Click here to go back.'
+SkillMainEditorPanel:
+  name: '&b&l{name} Editor'
+  slots: 9
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 9
+  Items:
+    '1':
+      type: BOOK
+      name: '&c&lSkill Guide'
+      lore:
+      - '&7Here you can configure the way the'
+      - '&7skill system handles for this boss.'
+      - '&7You can configure the overall chance,'
+      - '&7skill message and the list of skills'
+      - '&7that is assigned to this boss.'
+    '4':
+      type: GLOWSTONE_DUST
+      name: '&e&lOverall Chance'
+      lore:
+      - '&7The current overall chance for'
+      - '&7skills to be procced each hit is'
+      - '&f{chance}%&7.'
+      - '&7'
+      - '&bLeft Click »'
+      - '&7Increase the chance by &f1.0%&7.'
+      - '&7'
+      - '&bShift Left-Click »'
+      - '&7Increase the chance by &f0.1%&7.'
+      - '&7'
+      - '&bRight Click »'
+      - '&7Decrease the chance by &f1.0%&7.'
+      - '&7'
+      - '&bShift Right-Click »'
+      - '&7Decrease the chance by &f0.1%&7.'
+      Button: OverallChance
+    '5':
+      type: BOOK
+      name: '&e&lSkills List'
+      lore:
+      - '&7Click here to select which skills'
+      - '&7are currently selected for this boss.'
+      Button: SkillList
+    '6':
+      type: PAPER
+      name: '&e&lMaster Message'
+      lore:
+      - '&7Click here to modify the'
+      - '&7master message for when a'
+      - '&7skill is proced. If the'
+      - '&7specific skill has got a'
+      - '&7customMessage dedicated'
+      - '&7to it, this message will'
+      - '&7be ignored.'
+      Button: Message
+    '9':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'

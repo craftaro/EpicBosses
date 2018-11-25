@@ -5,7 +5,7 @@ import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.DropTableFileManager;
-import com.songoda.epicbosses.panel.handlers.ListPanelHandler;
+import com.songoda.epicbosses.panel.handlers.MainListPanelHandler;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
@@ -25,7 +25,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 10-Oct-18
  */
-public class DropTablePanel extends ListPanelHandler {
+public class DropTablePanel extends MainListPanelHandler {
 
     private DropTableFileManager dropTableFileManager;
     private ItemStackConverter itemStackConverter;

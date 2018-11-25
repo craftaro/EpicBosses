@@ -42,7 +42,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> equipmentEditMenu, helmetEditorMenu, chestplateEditorMenu, leggingsEditorMenu, bootsEditorMenu;
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> weaponEditMenu, offHandEditorMenu, mainHandEditorMenu;
-    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu;
+    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu, skillsBossEditMenu;
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu;
 
     private final CustomBosses customBosses;
@@ -67,6 +67,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         loadDropsEditMenu();
         loadEditorListMenus();
         loadTargetingEditMenu();
+        loadSkillsEditMenu();
 
         loadEquipmentEditMenu();
         loadWeaponEditMenu();
@@ -90,6 +91,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         reloadDropsEditMenu();
         reloadEditorListMenus();
         reloadTargetingEditMenu();
+        reloadSkillsEditMenu();
 
         reloadEquipmentEditMenu();
         reloadWeaponEditMenu();
@@ -173,6 +175,24 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
         this.equipmentListEditMenu.initializePanel(panelBuilder.cloneBuilder());
         this.weaponListEditMenu.initializePanel(panelBuilder.cloneBuilder());
+    }
+
+    //---------------------------------------------
+    //
+    //  S K I L L S   E D I T   P A N E L
+    //
+    //---------------------------------------------
+
+    private void loadSkillsEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("SkillMainEditorPanel"));
+
+        this.skillsBossEditMenu = new SkillMainEditorPanel(this, panelBuilder);
+    }
+
+    private void reloadSkillsEditMenu() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("SkillMainEditorPanel"));
+
+        this.skillsBossEditMenu.initializePanel(panelBuilder);
     }
 
     //---------------------------------------------
