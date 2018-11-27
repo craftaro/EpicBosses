@@ -65,6 +65,7 @@ public class BossDisplayNameHandler implements IHandler {
 
                 getEntityStatsElement().getMainStats().setDisplayName(input);
                 getBossesFileManager().save();
+                event.setCancelled(true);
                 setHandled(true);
 
                 finish();
