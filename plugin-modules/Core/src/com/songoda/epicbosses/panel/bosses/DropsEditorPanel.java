@@ -126,8 +126,8 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
                 replaceMap.put("{name}", name);
                 replaceMap.put("{type}", StringUtils.get().formatString(dropTable.getDropType()));
 
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.DropTable.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.EditDrops.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Drops.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Boss.Drops.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
                     if(!bossEntity.isEditing()) {

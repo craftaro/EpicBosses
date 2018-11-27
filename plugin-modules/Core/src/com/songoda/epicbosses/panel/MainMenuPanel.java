@@ -94,7 +94,7 @@ public class MainMenuPanel extends PanelHandler {
             if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
                 this.bossPanelManager.getDropTables().openFor(player);
             } else if(event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
-                //TODO: Set up create drop table command
+                Message.Boss_New_CreateArgumentsDropTable.msg(player);
                 player.closeInventory();
             }
         };

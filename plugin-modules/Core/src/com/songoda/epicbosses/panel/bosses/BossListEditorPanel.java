@@ -64,8 +64,8 @@ public abstract class BossListEditorPanel extends VariablePanelHandler<BossEntit
             replaceMap.put("{position}", "" + entityStatsElement.getMainStats().getPosition());
             replaceMap.put("{targetType}", this.type);
 
-            ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.BossListEditor.name"), replaceMap);
-            ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.BossListEditor.lore"), replaceMap);
+            ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.List.name"), replaceMap);
+            ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Boss.List.lore"), replaceMap);
 
             panel.setItem(slot, itemStack, event -> {
                 ClickType click = event.getClick();

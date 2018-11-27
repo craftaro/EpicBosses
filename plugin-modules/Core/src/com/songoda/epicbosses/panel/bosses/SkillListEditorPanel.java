@@ -101,12 +101,12 @@ public class SkillListEditorPanel extends VariablePanelHandler<BossEntity> {
                 replaceMap.put("{radius}", NumberUtils.get().formatDouble(skill.getRadius()));
 
                 if(bossEntity.getSkills().getSkills().contains(name)) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.BossSkills.selectedName"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Skills.selectedName"), replaceMap);
                 } else {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.BossSkills.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Skills.name"), replaceMap);
                 }
 
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.BossSkills.lore"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Boss.Skills.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
                     List<String> currentSkillList = bossEntity.getSkills().getSkills();

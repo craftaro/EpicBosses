@@ -1,4 +1,8 @@
 {
+  "DefaultTextMenuItem": {
+    "type": "BOOK",
+    "name": "&c&lDefault Text Menu Item"
+  },
   "DefaultBossMenuItem": {
     "type": "BARRIER",
     "name": "&c&lDefault Boss Menu Item"

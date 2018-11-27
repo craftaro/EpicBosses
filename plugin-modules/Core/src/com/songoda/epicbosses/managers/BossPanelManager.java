@@ -213,14 +213,14 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("SkillMainEditorPanel"));
 
         this.skillsBossEditMenu = new SkillMainEditorPanel(this, panelBuilder, this.customBosses);
-        this.skillListBossEditMenu = new SkillListEditorPanel(this, getListMenu("BossSkills"), this.customBosses);
+        this.skillListBossEditMenu = new SkillListEditorPanel(this, getListMenu("Boss.Skills"), this.customBosses);
     }
 
     private void reloadSkillsEditMenu() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("SkillMainEditorPanel"));
 
         this.skillsBossEditMenu.initializePanel(panelBuilder);
-        this.skillListBossEditMenu.initializePanel(getListMenu("BossSkills"));
+        this.skillListBossEditMenu.initializePanel(getListMenu("Boss.Skills"));
     }
 
     //---------------------------------------------

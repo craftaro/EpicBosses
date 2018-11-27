@@ -133,7 +133,7 @@ public abstract class ItemStackSubListPanelHandler extends SubVariablePanelHandl
 
                     replaceMap.put("{name}", ItemStackUtils.getName(itemStack));
 
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.EquipmentEditor.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Equipment.name"), replaceMap);
                 }
 
                 panel.setItem(realisticSlot, itemStack, e -> {

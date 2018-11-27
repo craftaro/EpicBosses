@@ -33,28 +33,41 @@ Hooks:
     - 'blocked_region1'
     - 'blocked_region2'
 Display:
-  EntityTypeEditor:
-    menuName: '&b&l{name} Editor'
-    selectedName: '&f{name} Entity &a&l** Selected **'
-    name: '&f{name} Entity'
-  BossListEditor:
-    name: '&3{position} Entity'
-    lore:
-    - '&3Left Click &8»'
-    - '&7Edit the {targetType} for this'
-    - '&7entity in the section.'
-    - '&7'
-    - '&3Right Click &8»'
-    - '&7Remove this section, can be done'
-    - '&7to anything above the first one.'
-  EquipmentEditor:
-    name: '{name} &a&l** Selected **'
-  EditDrops:
-    lore:
-    - '&3Type: &7{type}'
-    - '&7'
-    - '&7Click here to select this drop'
-    - '&7table as the current one.'
+  Boss:
+    Drops:
+      lore:
+      - '&3Type: &7{type}'
+      - '&7'
+      - '&7Click here to select this drop'
+      - '&7table as the current one.'
+    Equipment:
+      name: '{name} &a&l** Selected **'
+    EntityType:
+      menuName: '&b&l{name} Editor'
+      selectedName: '&f{name} Entity &a&l** Selected **'
+      name: '&f{name} Entity'
+    List:
+      name: '&3{position} Entity'
+      lore:
+      - '&3Left Click &8»'
+      - '&7Edit the {targetType} for this'
+      - '&7entity in the section.'
+      - '&7'
+      - '&3Right Click &8»'
+      - '&7Remove this section, can be done'
+      - '&7to anything above the first one.'
+    Skills:
+      menuName: '&b&l{name} Editor'
+      selectedName: '&b&l{name} Skill &a&l** Selected **'
+      name: '&b&l{name} Skill'
+      lore:
+      - '&3Type: &7{type}'
+      - '&3Display Name: &7{displayName}'
+      - '&3Custom Message: &7{customMessage}'
+      - '&3Radius: &7{radius}'
+      - '&7'
+      - '&7Click to add/remove the skill to'
+      - '&7or from the boss skill list.'
   AutoSpawns:
     menuName: '&b&lEpicBosses &3&lAutoSpawns'
   Bosses:
@@ -93,15 +106,3 @@ Display:
     - '&3Radius: &7{radius}'
     - '&7'
     - '&7Click to edit the custom skill.'
-  BossSkills:
-    menuName: '&b&l{name} Editor'
-    selectedName: '&b&l{name} Skill &a&l** Selected **'
-    name: '&b&l{name} Skill'
-    lore:
-    - '&3Type: &7{type}'
-    - '&3Display Name: &7{displayName}'
-    - '&3Custom Message: &7{customMessage}'
-    - '&3Radius: &7{radius}'
-    - '&7'
-    - '&7Click to add/remove the skill to'
-    - '&7or from the boss skill list.'

@@ -111,7 +111,7 @@ public class EntityTypeEditorPanel extends SubVariablePanelHandler<BossEntity, E
                     if (entityFinder != null) {
                         for (String s : entityFinder.getNames()) {
                             if (s.equalsIgnoreCase(entityType.name())) {
-                                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.EntityTypeEditor.selectedName"), replaceMap);
+                                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.EntityType.selectedName"), replaceMap);
                                 found = true;
                                 break;
                             }
@@ -120,7 +120,7 @@ public class EntityTypeEditorPanel extends SubVariablePanelHandler<BossEntity, E
                 }
 
                 if(!found) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.EntityTypeEditor.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.EntityType.name"), replaceMap);
                 }
 
                 panel.setItem(realisticSlot, itemStack, e -> {
