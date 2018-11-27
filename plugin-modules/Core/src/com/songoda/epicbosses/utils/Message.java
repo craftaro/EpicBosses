@@ -128,7 +128,7 @@ public enum Message {
     Boss_Shop_Purchased("&b&lEpicBosses &8» &7You have purchased &f1x {0}&7."),
 
     Boss_Skills_NoPermission("&c&l(!) &cYou do not have access to this command."),
-    Boss_Skill_SetChance("&b&lEpicBosses &8» &7You have {0} the overall chance for the skill map to &f{1}%&7."),
+    Boss_Skills_SetChance("&b&lEpicBosses &8» &7You have {0} the overall chance for the skill map to &f{1}%&7."),
 
     Boss_Spawn_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Spawn_InvalidArgs("&c&l(!) &cYou must use &n/boss spawn [name] (location)&c to spawn a boss."),

@@ -924,3 +924,67 @@ SkillMainEditorPanel:
       name: '&e&lGo Back'
       lore:
       - '&7Click here to go back.'
+StatisticsMainEditorPanel:
+  name: '&b&l{name} Editor'
+  slots: 9
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 9
+  Items:
+    '1':
+      type: BOOK
+      name: '&c&lStatistics Guide'
+      lore:
+      - '&7Here you can configure the way the'
+      - '&7skill system handles for this boss.'
+      - '&7You can configure the overall chance,'
+      - '&7skill message and the list of skills'
+      - '&7that is assigned to this boss.'
+    '4':
+      type: NAME_TAG
+      name: '&e&lChange the Display Name'
+      lore:
+      - '&7Here you can change the display name'
+      - '&7of the entity. It is currently:'
+      - '&f{displayName}'
+      - '&7'
+      - '&7When u click this it will close the'
+      - '&7GUI and suggest you to enter the new'
+      - '&7display name in chat.'
+      Button: DisplayName
+    '5':
+      type: SLIME_SPAWN_EGG
+      name: '&e&lChange the Entity Type'
+      lore:
+      - '&7This will open a GUI and you can select'
+      - '&7your new entity type.'
+      Button: EntityType
+    '6':
+      type: REDSTONE
+      name: '&e&lChange the Health'
+      lore:
+      - '&7The current health for this entity'
+      - '&7is &c{health}'
+      - '&7'
+      - '&bLeft Click »'
+      - '&7Increase the health by &f1.0%&7.'
+      - '&7'
+      - '&bShift Left-Click »'
+      - '&7Increase the health by &f0.1%&7.'
+      - '&7'
+      - '&bRight Click »'
+      - '&7Decrease the health by &f1.0%&7.'
+      - '&7'
+      - '&bShift Right-Click »'
+      - '&7Decrease the health by &f0.1%&7.'
+      Button: Health
+    '9':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'

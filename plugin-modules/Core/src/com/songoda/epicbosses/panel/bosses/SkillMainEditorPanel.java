@@ -53,7 +53,8 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
         Panel panel = panelBuilder.getPanel()
                 .setDestroyWhenDone(true)
                 .setCancelClick(true)
-                .setCancelLowerClick(true);
+                .setCancelLowerClick(true)
+                .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
         PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
         fillPanel(panel, bossEntity);
@@ -106,11 +107,12 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
             bossEntity.getSkills().setOverallChance(newChance);
             this.bossesFileManager.save();
-            Message.Boss_Skill_SetChance.msg(event.getWhoClicked(), modifyValue, NumberUtils.get().formatDouble(newChance));
+            Message.Boss_Skills_SetChance.msg(event.getWhoClicked(), modifyValue, NumberUtils.get().formatDouble(newChance));
             openFor((Player) event.getWhoClicked(), bossEntity);
         };
     }
 
+    //TODO
     private ClickAction getMessageAction() {
         return event -> {};
     }
