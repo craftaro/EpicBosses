@@ -33,6 +33,10 @@ Hooks:
     - 'blocked_region1'
     - 'blocked_region2'
 Display:
+  EntityTypeEditor:
+    menuName: '&b&l{name} Editor'
+    selectedName: '&f{name} Entity &a&l** Selected **'
+    name: '&f{name} Entity'
   BossListEditor:
     name: '&3{position} Entity'
     lore:

@@ -43,7 +43,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> equipmentEditMenu, helmetEditorMenu, chestplateEditorMenu, leggingsEditorMenu, bootsEditorMenu;
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> weaponEditMenu, offHandEditorMenu, mainHandEditorMenu;
-    @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> statisticMainEditMenu;
+    @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> statisticMainEditMenu, entityTypeEditMenu;
     @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu, skillsBossEditMenu, skillListBossEditMenu;
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu, statisticListEditMenu;
 
@@ -193,12 +193,14 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("StatisticsMainEditorPanel"));
 
         this.statisticMainEditMenu = new StatisticMainEditorPanel(this, panelBuilder, this.customBosses);
+        this.entityTypeEditMenu = new EntityTypeEditorPanel(this, getListMenu("EntityTypeEditor"), this.customBosses);
     }
 
     private void reloadStatEditMenu() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("StatisticsMainEditorPanel"));
 
         this.statisticMainEditMenu.initializePanel(panelBuilder);
+        this.entityTypeEditMenu.initializePanel(getListMenu("EntityTypeEditor"));
     }
 
     //---------------------------------------------

@@ -4,8 +4,10 @@ import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
+import com.songoda.epicbosses.handlers.BossDisplayNameHandler;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
+import com.songoda.epicbosses.utils.EntityFinder;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
@@ -13,6 +15,7 @@ import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
@@ -45,6 +48,7 @@ public class StatisticMainEditorPanel extends SubVariablePanelHandler<BossEntity
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
         String displayName = entityStatsElement.getMainStats().getDisplayName();
         Double health = entityStatsElement.getMainStats().getHealth();
+        PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
 
         if(health == null) health = 0.0;
         if(displayName == null) displayName = "N/A";
@@ -54,17 +58,21 @@ public class StatisticMainEditorPanel extends SubVariablePanelHandler<BossEntity
         replaceMap.put("{displayName}", displayName);
         panelBuilder.addReplaceData(replaceMap);
 
+        counter
+                .addSlotCounter("DisplayName")
+                .addSlotCounter("EntityType")
+                .addSlotCounter("Health");
+
         Panel panel = panelBuilder.getPanel()
                 .setDestroyWhenDone(true)
                 .setCancelClick(true)
                 .setCancelLowerClick(true)
                 .setParentPanelHandler(this.bossPanelManager.getStatisticListEditMenu(), bossEntity);
-        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
         fillPanel(panel, bossEntity, entityStatsElement);
 
-        counter.getSlotsWith("DisplayName").forEach(slot -> panel.setOnClick(slot, event -> {}));
-        counter.getSlotsWith("EntityType").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getSkillListBossEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
+        counter.getSlotsWith("DisplayName").forEach(slot -> panel.setOnClick(slot, getDisplayNameAction(bossEntity, entityStatsElement)));
+        counter.getSlotsWith("EntityType").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getEntityTypeEditMenu().openFor((Player) event.getWhoClicked(), bossEntity, entityStatsElement)));
         counter.getSlotsWith("Health").forEach(slot -> panel.setOnClick(slot, getHealthAction(bossEntity, entityStatsElement)));
 
         panel.openFor(player);
@@ -73,6 +81,17 @@ public class StatisticMainEditorPanel extends SubVariablePanelHandler<BossEntity
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
 
+    }
+
+    private ClickAction getDisplayNameAction(BossEntity bossEntity, EntityStatsElement entityStatsElement) {
+        return event -> {
+            Player humanEntity = (Player) event.getWhoClicked();
+            BossDisplayNameHandler bossDisplayNameHandler = new BossDisplayNameHandler(humanEntity, bossEntity, entityStatsElement, this.bossesFileManager, this);
+
+            Message.Boss_Statistics_SetDisplayName.msg(humanEntity);
+            bossDisplayNameHandler.handle();
+            humanEntity.closeInventory();
+        };
     }
 
     private ClickAction getHealthAction(BossEntity bossEntity, EntityStatsElement entityStatsElement) {
@@ -95,15 +114,15 @@ public class StatisticMainEditorPanel extends SubVariablePanelHandler<BossEntity
 
             if(currentChance == null) currentChance = 0.0;
 
-            double newChance = currentChance + healthToModifyBy;
+            double newHealth = currentChance + healthToModifyBy;
 
-            if(newChance < 0.0) {
-                newChance = 1.0;
+            if(newHealth < 0.0) {
+                newHealth = 1.0;
             }
 
-            entityStatsElement.getMainStats().setHealth(newChance);
+            entityStatsElement.getMainStats().setHealth(newHealth);
             this.bossesFileManager.save();
-            Message.Boss_Skills_SetChance.msg(event.getWhoClicked(), modifyValue, NumberUtils.get().formatDouble(newChance));
+            Message.Boss_Statistics_SetChance.msg(event.getWhoClicked(), modifyValue, NumberUtils.get().formatDouble(newHealth));
             openFor((Player) event.getWhoClicked(), bossEntity, entityStatsElement);
         };
     }
