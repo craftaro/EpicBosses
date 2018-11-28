@@ -5,6 +5,8 @@ import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.EquipmentElement;
 import com.songoda.epicbosses.entity.elements.HandsElement;
 import com.songoda.epicbosses.panel.bosses.*;
+import com.songoda.epicbosses.panel.bosses.commands.OnDeathCommandEditor;
+import com.songoda.epicbosses.panel.bosses.commands.OnSpawnCommandEditor;
 import com.songoda.epicbosses.panel.bosses.list.BossListEquipmentEditorPanel;
 import com.songoda.epicbosses.panel.bosses.equipment.BootsEditorPanel;
 import com.songoda.epicbosses.panel.bosses.equipment.ChestplateEditorPanel;
@@ -44,7 +46,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> equipmentEditMenu, helmetEditorMenu, chestplateEditorMenu, leggingsEditorMenu, bootsEditorMenu;
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> weaponEditMenu, offHandEditorMenu, mainHandEditorMenu;
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> statisticMainEditMenu, entityTypeEditMenu;
-    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu, skillsBossEditMenu, skillListBossEditMenu;
+    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu, skillsBossEditMenu, skillListBossEditMenu, commandsMainEditMenu, onSpawnCommandEditMenu, onDeathCommandEditMenu;
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu, statisticListEditMenu;
 
     private final CustomBosses customBosses;
@@ -71,6 +73,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         loadTargetingEditMenu();
         loadSkillsEditMenu();
         loadStatEditMenu();
+        loadCommandEditMenus();
 
         loadEquipmentEditMenu();
         loadWeaponEditMenu();
@@ -96,6 +99,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         reloadTargetingEditMenu();
         reloadSkillsEditMenu();
         reloadStatEditMenu();
+        reloadCommandEditMenus();
 
         reloadEquipmentEditMenu();
         reloadWeaponEditMenu();
@@ -126,6 +130,28 @@ public class BossPanelManager implements ILoadable, IReloadable {
         }
 
         return timesUsed;
+    }
+
+    //---------------------------------------------
+    //
+    //  C O M M A N D S   E D I T   P A N E L S
+    //
+    //---------------------------------------------
+
+    private void loadCommandEditMenus() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("CommandsEditorPanel"));
+
+        this.commandsMainEditMenu = new CommandsMainEditorPanel(this, panelBuilder);
+        this.onSpawnCommandEditMenu = new OnSpawnCommandEditor(this, getListMenu("Boss.Commands"), this.customBosses);
+        this.onDeathCommandEditMenu = new OnDeathCommandEditor(this, getListMenu("Boss.Commands"), this.customBosses);
+    }
+
+    private void reloadCommandEditMenus() {
+        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("CommandsEditorPanel"));
+
+        this.commandsMainEditMenu.initializePanel(panelBuilder);
+        this.onSpawnCommandEditMenu.initializePanel(getListMenu("Boss.Commands"));
+        this.onDeathCommandEditMenu.initializePanel(getListMenu("Boss.Commands"));
     }
 
     //---------------------------------------------

@@ -12,6 +12,7 @@ import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -81,6 +82,7 @@ public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
         counter.getSlotsWith("Weapon").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getWeaponListEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
         counter.getSlotsWith("Skill").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getSkillsBossEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
         counter.getSlotsWith("Stats").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getStatisticListEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
+        counter.getSlotsWith("Command").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getCommandsMainEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
 
         panel.openFor(player);
     }

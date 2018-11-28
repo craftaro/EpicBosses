@@ -988,3 +988,44 @@ StatisticsMainEditorPanel:
       name: '&e&lGo Back'
       lore:
       - '&7Click here to go back.'
+CommandsEditorPanel:
+  name: '&b&l{name} Editor'
+  slots: 9
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 9
+  Items:
+    '1':
+      type: BOOK
+      name: '&c&lCommands Guide'
+      lore:
+      - '&7Here you can configure which command set'
+      - '&7the boss has for specific events.'
+    '4':
+      type: TALL_GRASS
+      name: '&e&lOn Spawn'
+      lore:
+      - '&7Here you can change the command for'
+      - '&7the spawn of the boss.'
+      - '&7'
+      - '&fCurrently Selected: &7{onSpawn}'
+      Button: OnSpawn
+    '6':
+      type: REDSTONE
+      name: '&e&lOn Death'
+      lore:
+      - '&7Here you can change the command'
+      - '&7the death of the boss.'
+      - '&7'
+      - '&fCurrently Selected: &7{onDeath}'
+      Button: OnDeath
+    '9':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'

@@ -57,7 +57,6 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
                 .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
         PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
-        fillPanel(panel, bossEntity);
         counter.getSlotsWith("OverallChance").forEach(slot -> panel.setOnClick(slot, getOverallChanceAction(bossEntity)));
         counter.getSlotsWith("SkillList").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getSkillListBossEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
         counter.getSlotsWith("Message").forEach(slot -> panel.setOnClick(slot, getMessageAction()));
