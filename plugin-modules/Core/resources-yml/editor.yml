@@ -240,6 +240,58 @@ MainEditorPanel:
       - '&7Click here to edit the taunts, sayings,'
       - '&7etc. for this boss.'
       Button: Text
+DropsMainEditorPanel:
+  name: '&b&l{name} Editor'
+  slots: 9
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 9
+  Items:
+    '1':
+      type: BOOK
+      name: '&c&lDrops Guide'
+      lore:
+      - '&7Here you can configure the drop systems'
+      - '&7the boss has when he dies.'
+    '4':
+      type: GUN_POWDER
+      name: '&e&lNatural Drops'
+      lore:
+      - '&bCurrently: &f{naturalDrops}'
+      - '&7'
+      - '&7Click to toggle the natural drops'
+      - '&7for this boss.'
+      Button: NaturalDrops
+    '5':
+      type: BOOK
+      name: '&e&lDrop Table'
+      lore:
+      - '&bCurrently: &f{dropTable}'
+      - '&7Click here to change the drop table'
+      - '&7assigned to this boss.'
+      Button: DropTable
+    '6':
+      type: REDSTONE
+      name: '&e&lNatural EXP'
+      lore:
+      - '&bCurrently: &f{naturalExp}'
+      - '&7'
+      - '&7Click to toggle the natural drop'
+      - '&7of exp for this boss.'
+      Button: NaturalEXP
+    '9':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'
+
+
+
 DropsEditorPanel:
   name: '&b&l{name} Editor'
   slots: 54
@@ -1029,3 +1081,47 @@ CommandsEditorPanel:
       name: '&e&lGo Back'
       lore:
       - '&7Click here to go back.'
+TextEditorMainPanel:
+  name: '&b&l{name} Editor'
+  slots: 9
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 9
+  Items:
+    '1':
+      type: BOOK
+      name: '&c&lCommands Guide'
+      lore:
+      - '&7Here you can configure which command set'
+      - '&7the boss has for specific events.'
+    '4':
+      type: TALL_GRASS
+      name: '&e&lOn Spawn'
+      lore:
+      - '&7Here you can change the settings for'
+      - '&7the spawn messages of the boss.'
+      Button: OnSpawn
+    '5':
+      type: REDSTONE_TORCH
+      name: '&e&lTaunts'
+      lore:
+      - '&7Here you can adjust the settings for'
+      - '&7the taunts of the boss.'
+    '6':
+      type: REDSTONE
+      name: '&e&lOn Death'
+      lore:
+      - '&7Here you can change the settings for'
+      - '&7the death messages of the boss.'
+      Button: OnDeath
+    '9':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'
+

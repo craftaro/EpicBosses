@@ -47,6 +47,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> weaponEditMenu, offHandEditorMenu, mainHandEditorMenu;
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> statisticMainEditMenu, entityTypeEditMenu;
     @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu, skillsBossEditMenu, skillListBossEditMenu, commandsMainEditMenu, onSpawnCommandEditMenu, onDeathCommandEditMenu;
+    @Getter private IVariablePanelHandler<BossEntity> mainDropsEditMenu;
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu, statisticListEditMenu;
 
     private final CustomBosses customBosses;
@@ -219,14 +220,14 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("StatisticsMainEditorPanel"));
 
         this.statisticMainEditMenu = new StatisticMainEditorPanel(this, panelBuilder, this.customBosses);
-        this.entityTypeEditMenu = new EntityTypeEditorPanel(this, getListMenu("EntityTypeEditor"), this.customBosses);
+        this.entityTypeEditMenu = new EntityTypeEditorPanel(this, getListMenu("Boss.EntityType"), this.customBosses);
     }
 
     private void reloadStatEditMenu() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("StatisticsMainEditorPanel"));
 
         this.statisticMainEditMenu.initializePanel(panelBuilder);
-        this.entityTypeEditMenu.initializePanel(getListMenu("EntityTypeEditor"));
+        this.entityTypeEditMenu.initializePanel(getListMenu("Boss.EntityType"));
     }
 
     //---------------------------------------------
@@ -293,13 +294,17 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
     private void loadDropsEditMenu() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("DropsEditorPanel"));
+        PanelBuilder panelBuilder1 = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("DropsMainEditorPanel"));
 
+        this.mainDropsEditMenu = new DropsMainEditorPanel(this, panelBuilder1, this.customBosses);
         this.dropsEditMenu = new DropsEditorPanel(this, panelBuilder, this.customBosses);
     }
 
     private void reloadDropsEditMenu() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("DropsEditorPanel"));
+        PanelBuilder panelBuilder1 = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("DropsMainEditorPanel"));
 
+        this.mainDropsEditMenu.initializePanel(panelBuilder1);
         this.dropsEditMenu.initializePanel(panelBuilder);
     }
 
@@ -467,8 +472,10 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
     private PanelBuilder getListMenu(String path) {
         Map<String, String> replaceMap = new HashMap<>();
+        String finalPath = getPath(path);
+        String value = this.customBosses.getConfig().getString(finalPath);
 
-        replaceMap.put("{panelName}", StringUtils.get().translateColor(this.customBosses.getConfig().getString(getPath(path))));
+        replaceMap.put("{panelName}", StringUtils.get().translateColor(value));
 
         return new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("ListPanel"), replaceMap);
     }

@@ -44,6 +44,7 @@ Display:
     Taunts:
       menuName: '&b&l{name} Editor'
     Drops:
+      name: '&bDropTable: &f{name}'
       lore:
       - '&3Type: &7{type}'
       - '&7'
