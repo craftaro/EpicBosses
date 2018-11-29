@@ -106,6 +106,9 @@ public enum Message {
 
     Boss_Menu_NoPermission("&c&l(!) &cYou do not have access to this command."),
 
+    Boss_Messages_SetRadiusOnSpawn("&b&lEpicBosses &8» &7You have just {0} the radius for the onSpawn message to &f{1}&7."),
+    Boss_Messages_SetRadiusOnDeath("&b&lEpicBosses &8» &7You have just {0} the radius for the onDeath message to &f{1}&7."),
+
     Boss_Nearby_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Nearby_MaxRadius("&c&l(!) &cYou cannot check for bosses any further then &f{0}&c away from your position."),
     Boss_Nearby_NoneNearby("&b&lEpicBosses &8» &7There is currently no nearby bosses."),

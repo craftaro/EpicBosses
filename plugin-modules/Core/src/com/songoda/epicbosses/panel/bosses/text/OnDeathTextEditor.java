@@ -1,10 +1,10 @@
-package com.songoda.epicbosses.panel.bosses.commands;
+package com.songoda.epicbosses.panel.bosses.text;
 
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
-import com.songoda.epicbosses.managers.files.CommandsFileManager;
+import com.songoda.epicbosses.managers.files.MessagesFileManager;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
@@ -25,36 +25,36 @@ import java.util.Map;
 /**
  * @author Charles Cullen
  * @version 1.0.0
- * @since 28-Nov-18
+ * @since 29-Nov-18
  */
-public class OnSpawnCommandEditor extends VariablePanelHandler<BossEntity> {
+public class OnDeathTextEditor extends VariablePanelHandler<BossEntity> {
 
-    private CommandsFileManager commandsFileManager;
+    private MessagesFileManager messagesFileManager;
     private ItemStackConverter itemStackConverter;
     private CustomBosses plugin;
 
-    public OnSpawnCommandEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public OnDeathTextEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
         this.itemStackConverter = new ItemStackConverter();
-        this.commandsFileManager = plugin.getBossCommandFileManager();
+        this.messagesFileManager = plugin.getBossMessagesFileManager();
     }
 
     @Override
     public void fillPanel(Panel panel, BossEntity bossEntity) {
-        Map<String, List<String>> currentCommands = this.commandsFileManager.getCommandsMap();
-        List<String> entryList = new ArrayList<>(currentCommands.keySet());
+        Map<String, List<String>> currentTexts = this.messagesFileManager.getMessagesMap();
+        List<String> entryList = new ArrayList<>(currentTexts.keySet());
         int maxPage = panel.getMaxPage(entryList);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
             if(requestedPage < 0 || requestedPage > maxPage) return false;
 
-            loadPage(panel, requestedPage, currentCommands, entryList, bossEntity);
+            loadPage(panel, requestedPage, currentTexts, entryList, bossEntity);
             return true;
         }));
 
-        loadPage(panel, 0, currentCommands, entryList, bossEntity);
+        loadPage(panel, 0, currentTexts, entryList, bossEntity);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class OnSpawnCommandEditor extends VariablePanelHandler<BossEntity> {
                 .setDestroyWhenDone(true)
                 .setCancelClick(true)
                 .setCancelLowerClick(true)
-                .setParentPanelHandler(this.bossPanelManager.getCommandsMainEditMenu(), bossEntity);
+                .setParentPanelHandler(this.bossPanelManager.getOnDeathSubTextEditMenu(), bossEntity);
 
         fillPanel(panel, bossEntity);
 
@@ -81,13 +81,15 @@ public class OnSpawnCommandEditor extends VariablePanelHandler<BossEntity> {
 
     }
 
-    private void loadPage(Panel panel, int page, Map<String, List<String>> currentCommands, List<String> entryList, BossEntity bossEntity) {
+    private void loadPage(Panel panel, int page, Map<String, List<String>> currentMessages, List<String> entryList, BossEntity bossEntity) {
+        String current = bossEntity.getMessages().getOnDeath().getMessage();
+
         panel.loadPage(page, (slot, realisticSlot) -> {
             if(slot >= entryList.size()) {
                 panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
             } else {
                 String name = entryList.get(slot);
-                List<String> commands = currentCommands.get(name);
+                List<String> messages = currentMessages.get(name);
                 ItemStackHolder itemStackHolder = BossAPI.getStoredItemStack("DefaultTextMenuItem");
                 ItemStack itemStack = this.itemStackConverter.from(itemStackHolder);
 
@@ -95,20 +97,20 @@ public class OnSpawnCommandEditor extends VariablePanelHandler<BossEntity> {
 
                 replaceMap.put("{name}", name);
 
-                if(bossEntity.getCommands().getOnSpawn().equalsIgnoreCase(name)) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Commands.selectedName"), replaceMap);
+                if(current.equalsIgnoreCase(name)) {
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Text.selectedName"), replaceMap);
                 } else {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Commands.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Text.name"), replaceMap);
                 }
 
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                List<String> presetLore = this.plugin.getConfig().getStringList("Display.Boss.Commands.lore");
+                List<String> presetLore = this.plugin.getConfig().getStringList("Display.Boss.Text.lore");
                 List<String> newLore = new ArrayList<>();
 
                 for(String s : presetLore) {
-                    if(s.contains("{commands}")) {
-                        for(String command : commands) {
-                            newLore.add(StringUtils.get().translateColor("&7" + command));
+                    if(s.contains("{message}")) {
+                        for(String message : messages) {
+                            newLore.add(StringUtils.get().translateColor("&7" + message));
                         }
                     } else {
                         newLore.add(StringUtils.get().translateColor(s));
@@ -119,9 +121,9 @@ public class OnSpawnCommandEditor extends VariablePanelHandler<BossEntity> {
                 itemStack.setItemMeta(itemMeta);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
-                    bossEntity.getCommands().setOnSpawn(name);
+                    bossEntity.getMessages().getOnDeath().setMessage(name);
                     this.plugin.getBossesFileManager().save();
-                    loadPage(panel, page, currentCommands, entryList, bossEntity);
+                    loadPage(panel, page, currentMessages, entryList, bossEntity);
                 });
             }
         });

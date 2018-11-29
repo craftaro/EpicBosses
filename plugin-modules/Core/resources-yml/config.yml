@@ -34,6 +34,13 @@ Hooks:
     - 'blocked_region2'
 Display:
   Boss:
+    Text:
+      menuName: '&b&l{name} Editor'
+      selectedName: '&bMessage: &f{name} &a&l** Selected **'
+      name: '&bMessage: &f{name}'
+      lore:
+      - '&fStrings within this section:'
+      - '{message}'
     Commands:
       menuName: '&b&l{name} Editor'
       selectedName: '&bCommand: &f{name} &a&l** Selected **'

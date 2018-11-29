@@ -289,9 +289,6 @@ DropsMainEditorPanel:
       name: '&e&lGo Back'
       lore:
       - '&7Click here to go back.'
-
-
-
 DropsEditorPanel:
   name: '&b&l{name} Editor'
   slots: 54
@@ -1095,7 +1092,7 @@ TextEditorMainPanel:
   Items:
     '1':
       type: BOOK
-      name: '&c&lCommands Guide'
+      name: '&c&lText Guide'
       lore:
       - '&7Here you can configure which command set'
       - '&7the boss has for specific events.'
@@ -1112,6 +1109,7 @@ TextEditorMainPanel:
       lore:
       - '&7Here you can adjust the settings for'
       - '&7the taunts of the boss.'
+      Button: Taunts
     '6':
       type: REDSTONE
       name: '&e&lOn Death'
@@ -1124,4 +1122,50 @@ TextEditorMainPanel:
       name: '&e&lGo Back'
       lore:
       - '&7Click here to go back.'
-
+TextEditorSubPanel:
+  name: '&b&l{name} Editor'
+  slots: 9
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 5
+  Items:
+    '3':
+      type: TALL_GRASS
+      name: '&e&lSelect Message'
+      lore:
+      - '&7Here you can change the message that is'
+      - '&7currently selected.'
+      - '&7'
+      - '&bCurrent: &f{selected}'
+      Button: Select
+    '5':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'
+    '7':
+      type: REDSTONE
+      name: '&e&lRadius'
+      lore:
+      - '&7Here you can change the radius for'
+      - '&7this message. It is currently: &f{radius}'
+      - '&7blocks. Set it to &f-1&7 if you want it'
+      - '&7to be a server-wide broadcast.'
+      - '&7'
+      - '&bLeft Click »'
+      - '&7Increase the radius by &f1&7.'
+      - '&7'
+      - '&bShift Left-Click »'
+      - '&7Increase the radius by &f10&7.'
+      - '&7'
+      - '&bRight Click »'
+      - '&7Decrease the radius by &f1&7.'
+      - '&7'
+      - '&bShift Right-Click »'
+      - '&7Decrease the radius by &f10&7.'
+      Button: Radius
