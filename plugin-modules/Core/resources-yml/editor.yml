@@ -601,8 +601,6 @@ LeggingsEditorPanel:
       lore:
       - '&7Click here to go to the previous'
       - '&7page of leggings.'
-      - '&7'
-      - '&7Currently viewing page &e{currentPage}/{maxPages}&7.'
       PreviousPage: true
     '50':
       type: DIAMOND_BLOCK
@@ -618,8 +616,6 @@ LeggingsEditorPanel:
       lore:
       - '&7Click here to go to the next'
       - '&7page of leggings.'
-      - '&7'
-      - '&7Currently viewing page &e{currentPage}/{maxPages}&7.'
       NextPage: true
     '52':
       type: WHITE_STAINED_GLASS_PANE
@@ -937,17 +933,11 @@ SkillMainEditorPanel:
       - '&7skills to be procced each hit is'
       - '&f{chance}%&7.'
       - '&7'
-      - '&bLeft Click »'
-      - '&7Increase the chance by &f1.0%&7.'
+      - '&bLeft Click &8» &f+1.0'
+      - '&bShift Left-Click &8» &f+0.1'
       - '&7'
-      - '&bShift Left-Click »'
-      - '&7Increase the chance by &f0.1%&7.'
-      - '&7'
-      - '&bRight Click »'
-      - '&7Decrease the chance by &f1.0%&7.'
-      - '&7'
-      - '&bShift Right-Click »'
-      - '&7Decrease the chance by &f0.1%&7.'
+      - '&bRight Click &8» &f-1.0'
+      - '&bShift Right-Click &8» &f-0.1'
       Button: OverallChance
     '5':
       type: BOOK
@@ -1020,17 +1010,11 @@ StatisticsMainEditorPanel:
       - '&7The current health for this entity'
       - '&7is &c{health}'
       - '&7'
-      - '&bLeft Click »'
-      - '&7Increase the health by &f1.0%&7.'
+      - '&bLeft Click &8» &f+1.0'
+      - '&bShift Left-Click &8» &f+0.1'
       - '&7'
-      - '&bShift Left-Click »'
-      - '&7Increase the health by &f0.1%&7.'
-      - '&7'
-      - '&bRight Click »'
-      - '&7Decrease the health by &f1.0%&7.'
-      - '&7'
-      - '&bShift Right-Click »'
-      - '&7Decrease the health by &f0.1%&7.'
+      - '&bRight Click &8» &f-1.0'
+      - '&bShift Right-Click &8» &f-0.1'
       Button: Health
     '9':
       type: PAPER
@@ -1122,7 +1106,7 @@ TextEditorMainPanel:
       name: '&e&lGo Back'
       lore:
       - '&7Click here to go back.'
-TextEditorSubPanel:
+DeathTextEditorPanel:
   name: '&b&l{name} Editor'
   slots: 9
   Settings:
@@ -1134,7 +1118,76 @@ TextEditorSubPanel:
   Buttons:
     backButton: 5
   Items:
+    '2':
+      type: TALL_GRASS
+      name: '&e&lMain Message'
+      lore:
+      - '&7Here you can change the main message that is'
+      - '&7currently selected.'
+      - '&7'
+      - '&bCurrent: &f{mainMessage}'
+      Button: MainMessage
     '3':
+      type: PLAYER_HEAD
+      name: '&e&lPosition Message'
+      lore:
+      - '&7Here you can change the position message that is'
+      - '&7currently selected.'
+      - '&7'
+      - '&bCurrent: &f{positionMessage}'
+      - '&7'
+      - '&7The position message is a message that is'
+      - '&7injected in to the main message to display'
+      - '&7the positions, damage and percentage of damage'
+      - '&7that the selected amount of people did to'
+      - '&7the boss.'
+      Button: PositionMessage
+    '5':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'
+    '7':
+      type: REDSTONE_BLOCK
+      name: '&e&lOnly Show'
+      lore:
+      - '&7Here you can change the amount of damaging'
+      - '&7users it will display on the main message'
+      - '&7with the position message injection.'
+      - '&7Currently it will show the top &f{onlyShow}'
+      - '&7players on the death message.'
+      - '&7'
+      - '&bLeft Click &8» &f+1'
+      - '&bRight Click &8» &f-1'
+      Button: OnlyShow
+    '8':
+      type: REDSTONE
+      name: '&e&lRadius'
+      lore:
+      - '&7Here you can change the radius for'
+      - '&7this message. It is currently: &f{radius}'
+      - '&7blocks. Set it to &f-1&7 if you want it'
+      - '&7to be a server-wide broadcast.'
+      - '&7'
+      - '&bLeft Click &8» &f+1'
+      - '&bShift Left-Click &8» &f+10'
+      - '&7'
+      - '&bRight Click &8» &f-1'
+      - '&bShift Right-Click &8» &f-10'
+      Button: Radius
+SpawnTextEditorPanel:
+  name: '&b&l{name} Editor'
+  slots: 9
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 5
+  Items:
+    '2':
       type: TALL_GRASS
       name: '&e&lSelect Message'
       lore:
@@ -1148,7 +1201,7 @@ TextEditorSubPanel:
       name: '&e&lGo Back'
       lore:
       - '&7Click here to go back.'
-    '7':
+    '8':
       type: REDSTONE
       name: '&e&lRadius'
       lore:

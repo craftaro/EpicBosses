@@ -27,19 +27,23 @@ import java.util.Map;
  * @version 1.0.0
  * @since 29-Nov-18
  */
-public class OnSpawnTextEditor extends VariablePanelHandler<BossEntity> {
+public abstract class DeathMessageListEditor extends VariablePanelHandler<BossEntity> {
 
     private MessagesFileManager messagesFileManager;
     private ItemStackConverter itemStackConverter;
     private CustomBosses plugin;
 
-    public OnSpawnTextEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public DeathMessageListEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
         this.itemStackConverter = new ItemStackConverter();
         this.messagesFileManager = plugin.getBossMessagesFileManager();
     }
+
+    public abstract String getCurrent(BossEntity bossEntity);
+
+    public abstract void updateMessage(BossEntity bossEntity, String newPath);
 
     @Override
     public void fillPanel(Panel panel, BossEntity bossEntity) {
@@ -69,7 +73,7 @@ public class OnSpawnTextEditor extends VariablePanelHandler<BossEntity> {
                 .setDestroyWhenDone(true)
                 .setCancelClick(true)
                 .setCancelLowerClick(true)
-                .setParentPanelHandler(this.bossPanelManager.getOnSpawnSubTextEditMenu(), bossEntity);
+                .setParentPanelHandler(this.bossPanelManager.getOnDeathSubTextEditMenu(), bossEntity);
 
         fillPanel(panel, bossEntity);
 
@@ -82,7 +86,7 @@ public class OnSpawnTextEditor extends VariablePanelHandler<BossEntity> {
     }
 
     private void loadPage(Panel panel, int page, Map<String, List<String>> currentMessages, List<String> entryList, BossEntity bossEntity) {
-        String current = bossEntity.getMessages().getOnSpawn().getMessage();
+        String current = getCurrent(bossEntity);
 
         panel.loadPage(page, (slot, realisticSlot) -> {
             if(slot >= entryList.size()) {
@@ -121,7 +125,7 @@ public class OnSpawnTextEditor extends VariablePanelHandler<BossEntity> {
                 itemStack.setItemMeta(itemMeta);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
-                    bossEntity.getMessages().getOnSpawn().setMessage(name);
+                    updateMessage(bossEntity, name);
                     this.plugin.getBossesFileManager().save();
                     loadPage(panel, page, currentMessages, entryList, bossEntity);
                 });

@@ -11,6 +11,7 @@ import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
+import com.songoda.epicbosses.utils.panel.base.IPanelListHandler;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
@@ -30,7 +31,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 24-Nov-18
  */
-public abstract class ItemStackSubListPanelHandler extends SubVariablePanelHandler<BossEntity, EntityStatsElement> {
+public abstract class ItemStackSubListPanelHandler extends SubVariablePanelHandler<BossEntity, EntityStatsElement> implements IPanelListHandler<ItemStackHolder, ISubVariablePanelHandler<BossEntity, EntityStatsElement>> {
 
     protected ItemStackConverter itemStackConverter;
 
@@ -46,10 +47,6 @@ public abstract class ItemStackSubListPanelHandler extends SubVariablePanelHandl
         this.bossesFileManager = plugin.getBossesFileManager();
         this.itemStackConverter = new ItemStackConverter();
     }
-
-    public abstract Map<String, ItemStackHolder> getFilteredMap(Map<String, ItemStackHolder> originalMap);
-
-    public abstract ISubVariablePanelHandler<BossEntity, EntityStatsElement> getParentHolder();
 
     public abstract void getUpdateAction(EntityStatsElement entityStatsElement, String newName);
 

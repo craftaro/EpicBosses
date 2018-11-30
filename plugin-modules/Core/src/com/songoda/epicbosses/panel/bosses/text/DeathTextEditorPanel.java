@@ -23,11 +23,11 @@ import java.util.Map;
  * @version 1.0.0
  * @since 29-Nov-18
  */
-public class OnSpawnTextSubEditor extends VariablePanelHandler<BossEntity> {
+public class DeathTextEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private BossesFileManager bossesFileManager;
 
-    public OnSpawnTextSubEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public DeathTextEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.bossesFileManager = plugin.getBossesFileManager();
@@ -41,7 +41,7 @@ public class OnSpawnTextSubEditor extends VariablePanelHandler<BossEntity> {
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
         Map<String, String> replaceMap = new HashMap<>();
-        Integer radius = bossEntity.getMessages().getOnSpawn().getRadius();
+        Integer radius = bossEntity.getMessages().getOnDeath().getRadius();
         String message = bossEntity.getMessages().getOnDeath().getMessage();
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
@@ -60,8 +60,10 @@ public class OnSpawnTextSubEditor extends VariablePanelHandler<BossEntity> {
                 .setParentPanelHandler(this.bossPanelManager.getMainTextEditMenu(), bossEntity);
         PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
-        counter.getSlotsWith("Select").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnSpawnTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
+        counter.getSlotsWith("MainMessage").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnDeathTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
         counter.getSlotsWith("Radius").forEach(slot -> panel.setOnClick(slot, getRadiusAction(bossEntity)));
+        counter.getSlotsWith("OnlyShow").forEach(slot -> panel.setOnClick(slot, getOnlyShowAction(bossEntity)));
+        counter.getSlotsWith("PositionMessage").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnDeathPositionTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
 
         panel.openFor(player);
     }
@@ -71,7 +73,9 @@ public class OnSpawnTextSubEditor extends VariablePanelHandler<BossEntity> {
         PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
 
         panelBuilderCounter
-                .addSlotCounter("Select")
+                .addSlotCounter("MainMessage")
+                .addSlotCounter("PositionMessage")
+                .addSlotCounter("OnlyShow")
                 .addSlotCounter("Radius");
     }
 
@@ -91,7 +95,7 @@ public class OnSpawnTextSubEditor extends VariablePanelHandler<BossEntity> {
             }
 
             String modifyValue = radiusToModifyBy > 0? "increased" : "decreased";
-            Integer currentRadius = bossEntity.getMessages().getOnSpawn().getRadius();
+            Integer currentRadius = bossEntity.getMessages().getOnDeath().getRadius();
 
             if(currentRadius == null) currentRadius = 0;
 
@@ -101,9 +105,38 @@ public class OnSpawnTextSubEditor extends VariablePanelHandler<BossEntity> {
                 newRadius = -1;
             }
 
-            bossEntity.getMessages().getOnSpawn().setRadius(newRadius);
+            bossEntity.getMessages().getOnDeath().setRadius(newRadius);
             this.bossesFileManager.save();
-            Message.Boss_Messages_SetRadiusOnSpawn.msg(event.getWhoClicked(), modifyValue, NumberUtils.get().formatDouble(newRadius));
+            Message.Boss_Messages_SetRadiusOnDeath.msg(event.getWhoClicked(), modifyValue, NumberUtils.get().formatDouble(newRadius));
+            openFor((Player) event.getWhoClicked(), bossEntity);
+        };
+    }
+
+    private ClickAction getOnlyShowAction(BossEntity bossEntity) {
+        return event -> {
+            ClickType clickType = event.getClick();
+            int amountToModifyBy = 0;
+
+            if(clickType.name().contains("LEFT")) {
+                amountToModifyBy = 1;
+            } else if(clickType.name().contains("RIGHT")) {
+                amountToModifyBy = -1;
+            }
+
+            String modifyValue = amountToModifyBy > 0? "increased" : "decreased";
+            Integer currentAmount = bossEntity.getMessages().getOnDeath().getOnlyShow();
+
+            if(currentAmount == null) currentAmount = 3;
+
+            int newAmount = currentAmount + amountToModifyBy;
+
+            if(newAmount < -1) {
+                newAmount = -1;
+            }
+
+            bossEntity.getMessages().getOnDeath().setOnlyShow(newAmount);
+            this.bossesFileManager.save();
+            Message.Boss_Messages_SetOnlyShowOnDeath.msg(event.getWhoClicked(), modifyValue, NumberUtils.get().formatDouble(newAmount));
             openFor((Player) event.getWhoClicked(), bossEntity);
         };
     }

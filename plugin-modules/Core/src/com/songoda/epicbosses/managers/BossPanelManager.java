@@ -14,10 +14,10 @@ import com.songoda.epicbosses.panel.bosses.equipment.HelmetEditorPanel;
 import com.songoda.epicbosses.panel.bosses.equipment.LeggingsEditorPanel;
 import com.songoda.epicbosses.panel.bosses.list.BossListStatisticEditorPanel;
 import com.songoda.epicbosses.panel.bosses.list.BossListWeaponEditorPanel;
-import com.songoda.epicbosses.panel.bosses.text.OnDeathTextEditor;
-import com.songoda.epicbosses.panel.bosses.text.OnDeathTextSubEditor;
-import com.songoda.epicbosses.panel.bosses.text.OnSpawnTextEditor;
-import com.songoda.epicbosses.panel.bosses.text.OnSpawnTextSubEditor;
+import com.songoda.epicbosses.panel.bosses.text.DeathMessageListEditor;
+import com.songoda.epicbosses.panel.bosses.text.DeathTextEditorPanel;
+import com.songoda.epicbosses.panel.bosses.text.SpawnMessageListEditor;
+import com.songoda.epicbosses.panel.bosses.text.SpawnTextEditorPanel;
 import com.songoda.epicbosses.panel.bosses.weapons.MainHandEditorPanel;
 import com.songoda.epicbosses.panel.bosses.weapons.OffHandEditorPanel;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
@@ -51,7 +51,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> weaponEditMenu, offHandEditorMenu, mainHandEditorMenu;
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> statisticMainEditMenu, entityTypeEditMenu;
     @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu, skillsBossEditMenu, skillListBossEditMenu, commandsMainEditMenu, onSpawnCommandEditMenu, onDeathCommandEditMenu;
-    @Getter private IVariablePanelHandler<BossEntity> mainDropsEditMenu, mainTextEditMenu, mainTauntEditMenu, onSpawnTextEditMenu, onSpawnSubTextEditMenu, onDeathTextEditMenu, onDeathSubTextEditMenu;
+    @Getter private IVariablePanelHandler<BossEntity> mainDropsEditMenu, mainTextEditMenu, mainTauntEditMenu, onSpawnTextEditMenu, onSpawnSubTextEditMenu, onDeathTextEditMenu, onDeathSubTextEditMenu, onDeathPositionTextEditMenu;
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu, statisticListEditMenu;
 
     private final CustomBosses customBosses;
@@ -147,22 +147,46 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
     private void loadTextEditMenus() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("TextEditorMainPanel"));
-        PanelBuilder panelBuilder1 = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("TextEditorSubPanel"));
+        PanelBuilder panelBuilder1 = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("SpawnTextEditorPanel"));
+        PanelBuilder panelBuilder2 = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("DeathTextEditorPanel"));
 
         this.mainTextEditMenu = new TextMainEditorPanel(this, panelBuilder);
-        this.onSpawnSubTextEditMenu = new OnSpawnTextSubEditor(this, panelBuilder1.cloneBuilder(), this.customBosses);
-        this.onDeathSubTextEditMenu = new OnDeathTextSubEditor(this, panelBuilder1.cloneBuilder(), this.customBosses);
-        this.onSpawnTextEditMenu = new OnSpawnTextEditor(this, getListMenu("Boss.Text"), this.customBosses);
-        this.onDeathTextEditMenu = new OnDeathTextEditor(this, getListMenu("Boss.Text"), this.customBosses);
+        this.onSpawnSubTextEditMenu = new SpawnTextEditorPanel(this, panelBuilder1, this.customBosses);
+        this.onDeathSubTextEditMenu = new DeathTextEditorPanel(this, panelBuilder2, this.customBosses);
+        this.onSpawnTextEditMenu = new SpawnMessageListEditor(this, getListMenu("Boss.Text"), this.customBosses);
+        this.onDeathTextEditMenu = new DeathMessageListEditor(this, getListMenu("Boss.Text"), this.customBosses) {
+
+            @Override
+            public String getCurrent(BossEntity bossEntity) {
+                return bossEntity.getMessages().getOnDeath().getMessage();
+            }
+
+            @Override
+            public void updateMessage(BossEntity bossEntity, String newPath) {
+                bossEntity.getMessages().getOnDeath().setMessage(newPath);
+            }
+        };
+        this.onDeathPositionTextEditMenu = new DeathMessageListEditor(this, getListMenu("Boss.Text"), this.customBosses) {
+            @Override
+            public String getCurrent(BossEntity bossEntity) {
+                return bossEntity.getMessages().getOnDeath().getPositionMessage();
+            }
+
+            @Override
+            public void updateMessage(BossEntity bossEntity, String newPath) {
+                bossEntity.getMessages().getOnDeath().setPositionMessage(newPath);
+            }
+        };
     }
 
     private void reloadTextEditMenus() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("TextEditorMainPanel"));
-        PanelBuilder panelBuilder1 = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("TextEditorSubPanel"));
+        PanelBuilder panelBuilder1 = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("SpawnTextEditorPanel"));
+        PanelBuilder panelBuilder2 = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("DeathTextEditorPanel"));
 
         this.mainTextEditMenu.initializePanel(panelBuilder);
-        this.onSpawnSubTextEditMenu.initializePanel(panelBuilder1.cloneBuilder());
-        this.onDeathSubTextEditMenu.initializePanel(panelBuilder1.cloneBuilder());
+        this.onSpawnSubTextEditMenu.initializePanel(panelBuilder1);
+        this.onDeathSubTextEditMenu.initializePanel(panelBuilder2);
         this.onSpawnTextEditMenu.initializePanel(getListMenu("Boss.Text"));
         this.onDeathTextEditMenu.initializePanel(getListMenu("Boss.Text"));
     }

@@ -20,7 +20,7 @@
 
     <properties>
         <!--<plugin.version>maven-version-number-SNAPSHOT-U90</plugin.version>-->
-        <plugin.version>1.0.0-U91</plugin.version>
+        <plugin.version>1.0.0-U92</plugin.version>
         <plugin.name>EpicBosses</plugin.name>
         <plugin.main>com.songoda.epicbosses.CustomBosses</plugin.main>
         <plugin.author>AMinecraftDev</plugin.author>

@@ -27,13 +27,13 @@ import java.util.Map;
  * @version 1.0.0
  * @since 29-Nov-18
  */
-public class OnDeathTextEditor extends VariablePanelHandler<BossEntity> {
+public class SpawnMessageListEditor extends VariablePanelHandler<BossEntity> {
 
     private MessagesFileManager messagesFileManager;
     private ItemStackConverter itemStackConverter;
     private CustomBosses plugin;
 
-    public OnDeathTextEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public SpawnMessageListEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -69,7 +69,7 @@ public class OnDeathTextEditor extends VariablePanelHandler<BossEntity> {
                 .setDestroyWhenDone(true)
                 .setCancelClick(true)
                 .setCancelLowerClick(true)
-                .setParentPanelHandler(this.bossPanelManager.getOnDeathSubTextEditMenu(), bossEntity);
+                .setParentPanelHandler(this.bossPanelManager.getOnSpawnSubTextEditMenu(), bossEntity);
 
         fillPanel(panel, bossEntity);
 
@@ -82,7 +82,7 @@ public class OnDeathTextEditor extends VariablePanelHandler<BossEntity> {
     }
 
     private void loadPage(Panel panel, int page, Map<String, List<String>> currentMessages, List<String> entryList, BossEntity bossEntity) {
-        String current = bossEntity.getMessages().getOnDeath().getMessage();
+        String current = bossEntity.getMessages().getOnSpawn().getMessage();
 
         panel.loadPage(page, (slot, realisticSlot) -> {
             if(slot >= entryList.size()) {
@@ -121,7 +121,7 @@ public class OnDeathTextEditor extends VariablePanelHandler<BossEntity> {
                 itemStack.setItemMeta(itemMeta);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
-                    bossEntity.getMessages().getOnDeath().setMessage(name);
+                    bossEntity.getMessages().getOnSpawn().setMessage(name);
                     this.plugin.getBossesFileManager().save();
                     loadPage(panel, page, currentMessages, entryList, bossEntity);
                 });
