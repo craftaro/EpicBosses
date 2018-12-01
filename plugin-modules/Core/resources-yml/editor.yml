@@ -1260,7 +1260,7 @@ TauntEditorPanel:
       lore:
       - '&7Here you can change the delay between each'
       - '&7taunt that the boss says. The delay is'
-      - '&7currently set to {delay}s. This time is in'
+      - '&7currently set to &f{delay}s&7. This time is in'
       - '&7seconds. Once the boss has gone through the'
       - '&7list of taunts he will start again at the'
       - '&7beginning until he''s dead.'
