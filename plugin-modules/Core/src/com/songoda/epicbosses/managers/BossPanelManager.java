@@ -18,6 +18,7 @@ import com.songoda.epicbosses.panel.bosses.text.*;
 import com.songoda.epicbosses.panel.bosses.weapons.MainHandEditorPanel;
 import com.songoda.epicbosses.panel.bosses.weapons.OffHandEditorPanel;
 import com.songoda.epicbosses.panel.handlers.*;
+import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
@@ -56,6 +57,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
             onTauntTextEditMenu;
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu, statisticListEditMenu;
 
+    @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu;
+
     private final CustomBosses customBosses;
 
     public BossPanelManager(CustomBosses customBosses) {
@@ -82,10 +85,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
         loadStatEditMenu();
         loadCommandEditMenus();
         loadTextEditMenus();
-
         loadEquipmentEditMenu();
         loadWeaponEditMenu();
-
         loadEquipmentEditMenus();
     }
 
@@ -109,10 +110,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
         reloadStatEditMenu();
         reloadCommandEditMenus();
         reloadTextEditMenus();
-
         reloadEquipmentEditMenu();
         reloadWeaponEditMenu();
-
         reloadEquipmentEditMenus();
     }
 

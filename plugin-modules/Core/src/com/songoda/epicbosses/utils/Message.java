@@ -41,6 +41,7 @@ public enum Message {
     Boss_Edit_CannotSpawn("&c&l(!) &cYou cannot spawn this boss while editing is enabled. If you think this is a mistake please contact an administrator to disable the editing of the boss."),
     Boss_Edit_Toggled("&b&lEpicBosses &8» &7You have toggled the editing mode for &f{0}&7 to &f{1}&7."),
     Boss_Edit_NotCompleteEnough("&c&l(!) &cThe boss is not set up enough to be enabled. Please make sure it has: &fA Spawn Item, Entity Type, Health and Position&c before you try and enable the boss."),
+    Boss_Edit_DoesntExist("&c&l(!) &cThe specified boss does not exist. Please try again with the proper name. If you cannot figure it out please check the bosses.json file to find the one you're looking for."),
 
     Boss_GiveEgg_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_GiveEgg_InvalidArgs("&c&l(!) &cYou must use &n/boss giveegg [name] [player] (amount)&c to give an egg."),

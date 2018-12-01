@@ -16,7 +16,7 @@ import org.bukkit.command.CommandSender;
  * @since 19-Nov-18
  *
  * boss new droptable [name] [type]
- * boss new skill [name]
+ * boss new skill [name] [type] [mode]
  */
 public class BossNewCmd extends SubCommand {
 

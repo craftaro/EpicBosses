@@ -1276,3 +1276,83 @@ TauntEditorPanel:
       name: '&e&lGo Back'
       lore:
       - '&7Click here to go back.'
+SkillEditorPanel:
+  name: '&b&l{name} Skill Editor'
+  slots: 18
+  Settings:
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Items:
+    '2':
+      type: BOOK
+      name: '&e&lCustom Message'
+      lore:
+      - '&7Click here to change the custom message'
+      - '&7assigned to the skill. This will override'
+      - '&7the master message assigned to the boss when'
+      - '&7this skill is called.'
+      - '&7'
+      - '&bCurrently: &f{customMessage}'
+      - '&7'
+      - '&7To remove this message simply right click'
+      - '&7and it will then remove this and go back'
+      - '&7to using the master message assigned to the'
+      - '&7boss.'
+      Button: CustomMessage
+    '3':
+      type: REDSTONE
+      name: '&e&lRadius'
+      lore:
+      - '&7Here you can change the radius that the skill'
+      - '&7will see be called to within. It is currently'
+      - '&7set to &f{radius} blocks.'
+      - '&7'
+      - '&bLeft Click &8» &f+1'
+      - '&bShift Left-Click &8» &f+10'
+      - '&7'
+      - '&bRight Click &8» &f-1'
+      - '&bShift Right-Click &8» &f-10'
+      Button: Radius
+    '5':
+      type: DIAMOND
+      name: '&e&lCustom Data'
+      lore:
+      - '&7Click here to edit the custom data related'
+      - '&7to this skill. If it is a Potion skill you'
+      - '&7can modify the potions, etc. etc.'
+      Button: CustomData
+    '7':
+      type: TORCH
+      name: '&e&lMode'
+      lore:
+      - '&bCurrently: &f{mode}'
+      - '&7'
+      - '&7Click here to change the mode of the custom'
+      - '&7skill. It will cycle between all different'
+      - '&7types so when you find the right mode you can'
+      - '&7leave it and it will automatically save to'
+      - '&7that mode.'
+      Button: Mode
+    '8':
+      type: PAPER
+      name: '&e&lDisplay Name'
+      lore:
+      - '&bCurrently: &f{displayName}'
+      - '&7'
+      - '&7This is the skill display name. It is used'
+      - '&7in many things, from the in-game display of'
+      - '&7the skill, to the debug messages. So make'
+      - '&7sure it stands out and is unique, or not.'
+      Button: DisplayName
+    '14':
+      type: GUN_POWDER
+      name: '&e&lType'
+      lore:
+      - '&bCurrently: &f{type}'
+      - '&7Click this to change the skill type. Keep'
+      - '&7in mind that when you change your skill'
+      - '&7type the previous custom data will be erased'
+      - '&7to make room for the new custom data.'
+      Button: Type

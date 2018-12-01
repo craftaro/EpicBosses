@@ -149,6 +149,21 @@ public class BossAPI {
     }
 
     /**
+     * Used to get the Skill configuration section
+     * name from a Skill instance.
+     *
+     * @param skill - the skill instance
+     * @return name of the skill from the SkillsFileManager or null if not found.
+     */
+    public static String getSkillName(Skill skill) {
+        for(Map.Entry<String, Skill> entry : PLUGIN.getSkillsFileManager().getSkillMap().entrySet()) {
+            if(entry.getValue().equals(skill)) return entry.getKey();
+        }
+
+        return null;
+    }
+
+    /**
      * Used to get the Minion configuration section name
      * from a MinionEntity instance.
      *

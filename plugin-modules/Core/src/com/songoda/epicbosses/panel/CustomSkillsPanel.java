@@ -69,9 +69,9 @@ public class CustomSkillsPanel extends MainListPanelHandler {
                 Map<String, String> replaceMap = new HashMap<>();
 
                 replaceMap.put("{name}", name);
-                replaceMap.put("{type}", StringUtils.get().formatString(skill.getType()));
+                replaceMap.put("{type}", skill.getType());
                 replaceMap.put("{displayName}", skill.getDisplayName());
-                replaceMap.put("{customMessage}", StringUtils.get().formatString(skill.getCustomMessage()));
+                replaceMap.put("{customMessage}", skill.getCustomMessage());
                 replaceMap.put("{radius}", NumberUtils.get().formatDouble(skill.getRadius()));
 
                 ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.name"), replaceMap);
