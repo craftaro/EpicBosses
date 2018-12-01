@@ -3,7 +3,6 @@ package com.songoda.epicbosses.utils.dependencies;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.world.World;
 import com.sk89q.worldguard.WorldGuard;
-import com.sk89q.worldguard.bukkit.BukkitUtil;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.flags.StateFlag;
@@ -15,7 +14,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -119,12 +117,17 @@ public class WorldGuardHelper implements IWorldGuardHelper {
 
     @Override
     public boolean isMobSpawningAllowed(Location loc) {
-//        if(Bukkit.getServer().getPluginManager().getPlugin("WorldEdit") != null
-//                && Bukkit.getServer().getPluginManager().getPlugin("WorldGuard") != null) {
-//            ApplicableRegionSet set = WGBukkit.getPlugin().getRegionManager(loc.getWorld()).getApplicableRegions(loc);
-//
-//            if(set.queryState(null, DefaultFlag.MOB_SPAWNING) == StateFlag.State.DENY) return false;
-//        }
+        if(Bukkit.getServer().getPluginManager().getPlugin("WorldGuard") != null) {
+            if(worldGuard == null) {
+                this.worldGuard = WorldGuard.getInstance();
+            }
+
+            RegionQuery regionQuery = this.worldGuard.getPlatform().getRegionContainer().createQuery();
+            ApplicableRegionSet applicableRegionSet = regionQuery.getApplicableRegions(BukkitAdapter.adapt(loc));
+            StateFlag.State state = applicableRegionSet.queryState(null, Flags.MOB_SPAWNING);
+
+            return state != StateFlag.State.DENY;
+        }
 
         return true;
     }
