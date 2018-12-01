@@ -3,6 +3,7 @@ package com.songoda.epicbosses.panel.bosses.text;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
+import com.songoda.epicbosses.entity.elements.OnDeathMessageElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.utils.Message;
@@ -41,16 +42,23 @@ public class DeathTextEditorPanel extends VariablePanelHandler<BossEntity> {
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
         Map<String, String> replaceMap = new HashMap<>();
-        Integer radius = bossEntity.getMessages().getOnDeath().getRadius();
-        String message = bossEntity.getMessages().getOnDeath().getMessage();
+        OnDeathMessageElement onDeathMessageElement = bossEntity.getMessages().getOnDeath();
+        Integer radius = onDeathMessageElement.getRadius();
+        Integer onlyShow = onDeathMessageElement.getOnlyShow();
+        String mainMessage = onDeathMessageElement.getMessage();
+        String positionMessage = onDeathMessageElement.getPositionMessage();
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
         if(radius == null) radius = 0;
-        if(message == null) message = "N/A";
+        if(onlyShow == null) onlyShow = 3;
+        if(mainMessage == null) mainMessage = "N/A";
+        if(positionMessage == null) positionMessage = "N/A";
 
         replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
         replaceMap.put("{radius}", NumberUtils.get().formatDouble(radius));
-        replaceMap.put("{selected}", message);
+        replaceMap.put("{mainMessage}", mainMessage);
+        replaceMap.put("{positionMessage}", positionMessage);
+        replaceMap.put("{onlyShow}", NumberUtils.get().formatDouble(onlyShow));
         panelBuilder.addReplaceData(replaceMap);
 
         Panel panel = panelBuilder.getPanel()
