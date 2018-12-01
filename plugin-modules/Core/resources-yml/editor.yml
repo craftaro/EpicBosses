@@ -1210,15 +1210,69 @@ SpawnTextEditorPanel:
       - '&7blocks. Set it to &f-1&7 if you want it'
       - '&7to be a server-wide broadcast.'
       - '&7'
-      - '&bLeft Click »'
-      - '&7Increase the radius by &f1&7.'
+      - '&bLeft Click &8» &f+1'
+      - '&bShift Left-Click &8» &f+10'
       - '&7'
-      - '&bShift Left-Click »'
-      - '&7Increase the radius by &f10&7.'
-      - '&7'
-      - '&bRight Click »'
-      - '&7Decrease the radius by &f1&7.'
-      - '&7'
-      - '&bShift Right-Click »'
-      - '&7Decrease the radius by &f10&7.'
+      - '&bRight Click &8» &f-1'
+      - '&bShift Right-Click &8» &f-10'
       Button: Radius
+TauntEditorPanel:
+  name: '&b&l{name} Editor'
+  slots: 9
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 9
+  Items:
+    '3':
+      type: REDSTONE
+      name: '&e&lRadius'
+      lore:
+      - '&7Here you can change the radius that players'
+      - '&7will see the taunts in. It is currently: &f{radius}'
+      - '&7blocks. Set it to &f-1&7 if you want it'
+      - '&7to be a server-wide broadcast.'
+      - '&7'
+      - '&bLeft Click &8» &f+1'
+      - '&bShift Left-Click &8» &f+10'
+      - '&7'
+      - '&bRight Click &8» &f-1'
+      - '&bShift Right-Click &8» &f-10'
+      Button: Radius
+    '5':
+      type: BOOK
+      name: '&e&lTaunts'
+      lore:
+      - '&7Here you can select the taunts that the boss'
+      - '&7will say while he is active. If this list is'
+      - '&7empty he won''t say anything.'
+      - '&7'
+      - '&bCurrently Selected:'
+      - '&f{taunts}'
+      Button: Taunts
+    '7':
+      type: CLOCK
+      name: '&e&lDelay'
+      lore:
+      - '&7Here you can change the delay between each'
+      - '&7taunt that the boss says. The delay is'
+      - '&7currently set to {delay}s. This time is in'
+      - '&7seconds. Once the boss has gone through the'
+      - '&7list of taunts he will start again at the'
+      - '&7beginning until he''s dead.'
+      - '&7'
+      - '&bLeft Click &8» &f+1'
+      - '&bShift Left-Click &8» &f+10'
+      - '&7'
+      - '&bRight Click &8» &f-1'
+      - '&bShift Right-Click &8» &f-10'
+      Button: Delay
+    '9':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'

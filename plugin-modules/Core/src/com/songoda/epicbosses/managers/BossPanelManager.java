@@ -14,12 +14,10 @@ import com.songoda.epicbosses.panel.bosses.equipment.HelmetEditorPanel;
 import com.songoda.epicbosses.panel.bosses.equipment.LeggingsEditorPanel;
 import com.songoda.epicbosses.panel.bosses.list.BossListStatisticEditorPanel;
 import com.songoda.epicbosses.panel.bosses.list.BossListWeaponEditorPanel;
-import com.songoda.epicbosses.panel.bosses.text.DeathMessageListEditor;
-import com.songoda.epicbosses.panel.bosses.text.DeathTextEditorPanel;
-import com.songoda.epicbosses.panel.bosses.text.SpawnMessageListEditor;
-import com.songoda.epicbosses.panel.bosses.text.SpawnTextEditorPanel;
+import com.songoda.epicbosses.panel.bosses.text.*;
 import com.songoda.epicbosses.panel.bosses.weapons.MainHandEditorPanel;
 import com.songoda.epicbosses.panel.bosses.weapons.OffHandEditorPanel;
+import com.songoda.epicbosses.panel.handlers.*;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
@@ -44,14 +42,18 @@ import java.util.Map;
  */
 public class BossPanelManager implements ILoadable, IReloadable {
 
+    private static final String HELMET_EDITOR_PATH = "HelmetEditorPanel", CHESTPLATE_EDITOR_PATH = "ChestplateEditorPanel", LEGGINGS_EDITOR_PATH = "LeggingsEditorPanel",
+            BOOTS_EDITOR_PATH = "BootsEditorPanel", MAIN_HAND_EDITOR_PATH = "MainHandEditorPanel", OFF_HAND_EDITOR_PATH = "OffHandEditorPanel";
+
     @Getter private IPanelHandler mainMenu, customItems, bosses, autoSpawns, dropTables, customSkills, shopPanel;
     @Getter private IPanelHandler addItemsMenu;
 
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> equipmentEditMenu, helmetEditorMenu, chestplateEditorMenu, leggingsEditorMenu, bootsEditorMenu;
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> weaponEditMenu, offHandEditorMenu, mainHandEditorMenu;
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> statisticMainEditMenu, entityTypeEditMenu;
-    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu, skillsBossEditMenu, skillListBossEditMenu, commandsMainEditMenu, onSpawnCommandEditMenu, onDeathCommandEditMenu;
-    @Getter private IVariablePanelHandler<BossEntity> mainDropsEditMenu, mainTextEditMenu, mainTauntEditMenu, onSpawnTextEditMenu, onSpawnSubTextEditMenu, onDeathTextEditMenu, onDeathSubTextEditMenu, onDeathPositionTextEditMenu;
+    @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu, skillsBossEditMenu, skillListBossEditMenu, commandsMainEditMenu, onSpawnCommandEditMenu,
+            onDeathCommandEditMenu, mainDropsEditMenu, mainTextEditMenu, mainTauntEditMenu, onSpawnTextEditMenu, onSpawnSubTextEditMenu, onDeathTextEditMenu, onDeathSubTextEditMenu, onDeathPositionTextEditMenu,
+            onTauntTextEditMenu;
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu, statisticListEditMenu;
 
     private final CustomBosses customBosses;
@@ -146,16 +148,33 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //---------------------------------------------
 
     private void loadTextEditMenus() {
-        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("TextEditorMainPanel"));
-        PanelBuilder panelBuilder1 = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("SpawnTextEditorPanel"));
-        PanelBuilder panelBuilder2 = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("DeathTextEditorPanel"));
+        FileConfiguration editor = this.customBosses.getEditor();
+        PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("TextEditorMainPanel"));
+        PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("SpawnTextEditorPanel"));
+        PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("DeathTextEditorPanel"));
+        PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("TauntEditorPanel"));
 
         this.mainTextEditMenu = new TextMainEditorPanel(this, panelBuilder);
         this.onSpawnSubTextEditMenu = new SpawnTextEditorPanel(this, panelBuilder1, this.customBosses);
         this.onDeathSubTextEditMenu = new DeathTextEditorPanel(this, panelBuilder2, this.customBosses);
-        this.onSpawnTextEditMenu = new SpawnMessageListEditor(this, getListMenu("Boss.Text"), this.customBosses);
-        this.onDeathTextEditMenu = new DeathMessageListEditor(this, getListMenu("Boss.Text"), this.customBosses) {
+        this.mainTauntEditMenu = new TauntTextEditorPanel(this, panelBuilder3, this.customBosses);
+        this.onSpawnTextEditMenu = new SingleMessageListEditor(this, getListMenu("Boss.Text"), this.customBosses) {
+            @Override
+            public String getCurrent(BossEntity bossEntity) {
+                return bossEntity.getMessages().getOnSpawn().getMessage();
+            }
 
+            @Override
+            public void updateMessage(BossEntity bossEntity, String newPath) {
+                bossEntity.getMessages().getOnSpawn().setMessage(newPath);
+            }
+
+            @Override
+            public IVariablePanelHandler<BossEntity> getParentHolder() {
+                return getOnSpawnSubTextEditMenu();
+            }
+        };
+        this.onDeathTextEditMenu = new SingleMessageListEditor(this, getListMenu("Boss.Text"), this.customBosses) {
             @Override
             public String getCurrent(BossEntity bossEntity) {
                 return bossEntity.getMessages().getOnDeath().getMessage();
@@ -165,8 +184,13 @@ public class BossPanelManager implements ILoadable, IReloadable {
             public void updateMessage(BossEntity bossEntity, String newPath) {
                 bossEntity.getMessages().getOnDeath().setMessage(newPath);
             }
+
+            @Override
+            public IVariablePanelHandler<BossEntity> getParentHolder() {
+                return getOnDeathSubTextEditMenu();
+            }
         };
-        this.onDeathPositionTextEditMenu = new DeathMessageListEditor(this, getListMenu("Boss.Text"), this.customBosses) {
+        this.onDeathPositionTextEditMenu = new SingleMessageListEditor(this, getListMenu("Boss.Text"), this.customBosses) {
             @Override
             public String getCurrent(BossEntity bossEntity) {
                 return bossEntity.getMessages().getOnDeath().getPositionMessage();
@@ -176,19 +200,53 @@ public class BossPanelManager implements ILoadable, IReloadable {
             public void updateMessage(BossEntity bossEntity, String newPath) {
                 bossEntity.getMessages().getOnDeath().setPositionMessage(newPath);
             }
+
+            @Override
+            public IVariablePanelHandler<BossEntity> getParentHolder() {
+                return getOnDeathSubTextEditMenu();
+            }
+        };
+        this.onTauntTextEditMenu = new ListMessageListEditor(this, getListMenu("Boss.Text"), this.customBosses) {
+            @Override
+            public List<String> getCurrent(BossEntity bossEntity) {
+                return bossEntity.getMessages().getTaunts().getTaunts();
+            }
+
+            @Override
+            public void updateMessage(BossEntity bossEntity, String modifiedValue) {
+                List<String> current = getCurrent(bossEntity);
+
+                if(current.contains(modifiedValue)) {
+                    current.remove(modifiedValue);
+                } else {
+                    current.add(modifiedValue);
+                }
+
+                bossEntity.getMessages().getTaunts().setTaunts(current);
+            }
+
+            @Override
+            public IVariablePanelHandler<BossEntity> getParentHolder() {
+                return getMainTauntEditMenu();
+            }
         };
     }
 
     private void reloadTextEditMenus() {
-        PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("TextEditorMainPanel"));
-        PanelBuilder panelBuilder1 = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("SpawnTextEditorPanel"));
-        PanelBuilder panelBuilder2 = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("DeathTextEditorPanel"));
+        FileConfiguration editor = this.customBosses.getEditor();
+        PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("TextEditorMainPanel"));
+        PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("SpawnTextEditorPanel"));
+        PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("DeathTextEditorPanel"));
+        PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("TauntEditorPanel"));
 
         this.mainTextEditMenu.initializePanel(panelBuilder);
         this.onSpawnSubTextEditMenu.initializePanel(panelBuilder1);
         this.onDeathSubTextEditMenu.initializePanel(panelBuilder2);
+        this.mainTauntEditMenu.initializePanel(panelBuilder3);
         this.onSpawnTextEditMenu.initializePanel(getListMenu("Boss.Text"));
         this.onDeathTextEditMenu.initializePanel(getListMenu("Boss.Text"));
+        this.onDeathPositionTextEditMenu.initializePanel(getListMenu("Boss.Text"));
+        this.onTauntTextEditMenu.initializePanel(getListMenu("Boss.Text"));
     }
 
     //---------------------------------------------
@@ -218,9 +276,6 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //  E Q U I P M E N T   E D I T   P A N E L S
     //
     //---------------------------------------------
-
-    private static final String HELMET_EDITOR_PATH = "HelmetEditorPanel", CHESTPLATE_EDITOR_PATH = "ChestplateEditorPanel", LEGGINGS_EDITOR_PATH = "LeggingsEditorPanel",
-            BOOTS_EDITOR_PATH = "BootsEditorPanel", MAIN_HAND_EDITOR_PATH = "MainHandEditorPanel", OFF_HAND_EDITOR_PATH = "OffHandEditorPanel";
 
     private void loadEquipmentEditMenus() {
         FileConfiguration editor = this.customBosses.getEditor();

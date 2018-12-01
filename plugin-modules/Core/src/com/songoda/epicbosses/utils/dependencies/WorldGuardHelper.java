@@ -1,16 +1,20 @@
 package com.songoda.epicbosses.utils.dependencies;
 
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldedit.world.World;
 import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.BukkitUtil;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.flags.StateFlag;
+import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import com.songoda.epicbosses.utils.IWorldGuardHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -77,32 +81,37 @@ public class WorldGuardHelper implements IWorldGuardHelper {
     @Override
     public List<String> getRegionNames(Location loc) {
         if(Bukkit.getServer().getPluginManager().getPlugin("WorldGuard") != null) {
-            if(worldGuard == null) {
+            if (worldGuard == null) {
                 this.worldGuard = WorldGuard.getInstance();
             }
 
-//            ApplicableRegionSet set = this.worldGuard.getRegionManager(loc.getWorld()).getApplicableRegions(loc);
-//            LinkedList<String> parentNames = new LinkedList<String>();
-//            LinkedList<String> regions = new LinkedList<String>();
-//
-//            for(ProtectedRegion region : set) {
-//                String id = region.getId();
-//
-//                regions.add(id);
-//
-//                ProtectedRegion parent = region.getParent();
-//
-//                while(parent != null) {
-//                    parentNames.add(parent.getId());
-//                    parent = parent.getParent();
-//                }
-//            }
-//
-//            for(String name : parentNames) {
-//                regions.remove(name);
-//            }
-//
-//            return regions;
+            List<String> regions = new ArrayList<>();
+            List<String> parentNames = new ArrayList<>();
+            World world = BukkitAdapter.adapt(loc.getWorld());
+            RegionManager regionManager = this.worldGuard.getPlatform().getRegionContainer().get(world);
+
+            if (regionManager == null) return null;
+
+            ApplicableRegionSet set = regionManager.getApplicableRegions(BukkitAdapter.asVector(loc));
+
+            for (ProtectedRegion region : set) {
+                String id = region.getId();
+
+                regions.add(id);
+
+                ProtectedRegion parent = region.getParent();
+
+                while (parent != null) {
+                    parentNames.add(parent.getId());
+                    parent = parent.getParent();
+                }
+            }
+
+            for (String name : parentNames) {
+                regions.remove(name);
+            }
+
+            return regions;
         }
 
         return null;

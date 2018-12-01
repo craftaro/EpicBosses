@@ -1,4 +1,4 @@
-package com.songoda.epicbosses.panel.bosses.text;
+package com.songoda.epicbosses.panel.handlers;
 
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
@@ -10,6 +10,7 @@ import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
+import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import org.bukkit.Material;
@@ -27,19 +28,25 @@ import java.util.Map;
  * @version 1.0.0
  * @since 29-Nov-18
  */
-public class SpawnMessageListEditor extends VariablePanelHandler<BossEntity> {
+public abstract class ListMessageListEditor extends VariablePanelHandler<BossEntity> {
 
     private MessagesFileManager messagesFileManager;
     private ItemStackConverter itemStackConverter;
     private CustomBosses plugin;
 
-    public SpawnMessageListEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public ListMessageListEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
         this.itemStackConverter = new ItemStackConverter();
         this.messagesFileManager = plugin.getBossMessagesFileManager();
     }
+
+    public abstract List<String> getCurrent(BossEntity bossEntity);
+
+    public abstract void updateMessage(BossEntity bossEntity, String modifiedValue);
+
+    public abstract IVariablePanelHandler<BossEntity> getParentHolder();
 
     @Override
     public void fillPanel(Panel panel, BossEntity bossEntity) {
@@ -69,7 +76,7 @@ public class SpawnMessageListEditor extends VariablePanelHandler<BossEntity> {
                 .setDestroyWhenDone(true)
                 .setCancelClick(true)
                 .setCancelLowerClick(true)
-                .setParentPanelHandler(this.bossPanelManager.getOnSpawnSubTextEditMenu(), bossEntity);
+                .setParentPanelHandler(getParentHolder(), bossEntity);
 
         fillPanel(panel, bossEntity);
 
@@ -82,7 +89,7 @@ public class SpawnMessageListEditor extends VariablePanelHandler<BossEntity> {
     }
 
     private void loadPage(Panel panel, int page, Map<String, List<String>> currentMessages, List<String> entryList, BossEntity bossEntity) {
-        String current = bossEntity.getMessages().getOnSpawn().getMessage();
+        List<String> current = getCurrent(bossEntity);
 
         panel.loadPage(page, (slot, realisticSlot) -> {
             if(slot >= entryList.size()) {
@@ -97,7 +104,7 @@ public class SpawnMessageListEditor extends VariablePanelHandler<BossEntity> {
 
                 replaceMap.put("{name}", name);
 
-                if(current.equalsIgnoreCase(name)) {
+                if(current.contains(name)) {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Text.selectedName"), replaceMap);
                 } else {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Text.name"), replaceMap);
@@ -121,7 +128,7 @@ public class SpawnMessageListEditor extends VariablePanelHandler<BossEntity> {
                 itemStack.setItemMeta(itemMeta);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
-                    bossEntity.getMessages().getOnSpawn().setMessage(name);
+                    updateMessage(bossEntity, name);
                     this.plugin.getBossesFileManager().save();
                     loadPage(panel, page, currentMessages, entryList, bossEntity);
                 });

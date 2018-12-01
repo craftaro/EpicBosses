@@ -20,7 +20,7 @@
 
     <properties>
         <!--<plugin.version>maven-version-number-SNAPSHOT-U90</plugin.version>-->
-        <plugin.version>1.0.0-U93</plugin.version>
+        <plugin.version>1.0.0-U94</plugin.version>
         <plugin.name>EpicBosses</plugin.name>
         <plugin.main>com.songoda.epicbosses.CustomBosses</plugin.main>
         <plugin.author>AMinecraftDev</plugin.author>
@@ -74,7 +74,7 @@
     <repositories>
         <repository>
             <id>private</id>
-            <url>http://repo.songoda.com/repository/private</url>
+            <url>http://repo.songoda.com/repository/private/</url>
         </repository>
         <repository>
             <id>vault-repo</id>

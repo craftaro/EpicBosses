@@ -1,4 +1,4 @@
-package com.songoda.epicbosses.panel.bosses.text;
+package com.songoda.epicbosses.panel.handlers;
 
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
@@ -10,6 +10,7 @@ import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
+import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import org.bukkit.Material;
@@ -27,13 +28,13 @@ import java.util.Map;
  * @version 1.0.0
  * @since 29-Nov-18
  */
-public abstract class DeathMessageListEditor extends VariablePanelHandler<BossEntity> {
+public abstract class SingleMessageListEditor extends VariablePanelHandler<BossEntity> {
 
     private MessagesFileManager messagesFileManager;
     private ItemStackConverter itemStackConverter;
     private CustomBosses plugin;
 
-    public DeathMessageListEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public SingleMessageListEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -44,6 +45,8 @@ public abstract class DeathMessageListEditor extends VariablePanelHandler<BossEn
     public abstract String getCurrent(BossEntity bossEntity);
 
     public abstract void updateMessage(BossEntity bossEntity, String newPath);
+
+    public abstract IVariablePanelHandler<BossEntity> getParentHolder();
 
     @Override
     public void fillPanel(Panel panel, BossEntity bossEntity) {
@@ -73,7 +76,7 @@ public abstract class DeathMessageListEditor extends VariablePanelHandler<BossEn
                 .setDestroyWhenDone(true)
                 .setCancelClick(true)
                 .setCancelLowerClick(true)
-                .setParentPanelHandler(this.bossPanelManager.getOnDeathSubTextEditMenu(), bossEntity);
+                .setParentPanelHandler(getParentHolder(), bossEntity);
 
         fillPanel(panel, bossEntity);
 
