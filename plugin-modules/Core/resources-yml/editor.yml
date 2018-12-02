@@ -74,12 +74,12 @@ MainMenu:
       name: '&b&lCustom Skills'
       lore:
       - '&3Left Click »'
-      - '&fEdit any of the already created'
-      - '&fcustom skills.'
+      - '&7Edit any of the already created'
+      - '&7custom skills.'
       - '&7'
       - '&3Right Click »'
-      - '&fCreate a new custom skill from'
-      - '&fscratch.'
+      - '&7Create a new custom skill from'
+      - '&7scratch.'
       Button: CustomSkills
 ListPanel:
   name: '{panelName}'
@@ -1347,7 +1347,7 @@ SkillEditorPanel:
       - '&7sure it stands out and is unique, or not.'
       Button: DisplayName
     '14':
-      type: GUN_POWDER
+      type: GUNPOWDER
       name: '&e&lType'
       lore:
       - '&bCurrently: &f{type}'
@@ -1434,6 +1434,7 @@ PotionSkillEditorPanel:
   slots: 54
   Settings:
     backButton: true
+    fillTo: 45
   Buttons:
     backButton: 54
   Items:

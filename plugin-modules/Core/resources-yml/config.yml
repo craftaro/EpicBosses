@@ -126,3 +126,10 @@ Display:
       - '&7Click to edit the custom skill.'
     MainEdit:
       menuName: '&b&l{name} Skill Editor'
+    Potions:
+      name: '&b&l{effect} Potion Effect'
+      lore:
+      - '&3Duration: &7{duration}'
+      - '&3Level: &7{level}'
+      - '&7'
+      - '&7Click to remove potion effect.'
