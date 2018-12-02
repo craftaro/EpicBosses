@@ -1489,10 +1489,64 @@ PotionSkillEditorPanel:
       - '&7Click here to go back.'
 CreatePotionEffectEditorPanel:
   name: '&b&lCreate Potion Effect'
-  slots: 27
+  slots: 9
   Settings:
     emptySpaceFiller: true
   EmptySpaceFiller:
     type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Items:
+    '1':
+      type: GRAY_DYE
+      name: '&c&lCancel Potion Effect'
+      lore:
+      - '&7Click here to cancel the creation'
+      - '&7of this potion effect.'
+      Button: Cancel
+    '4':
+      type: EMERALD
+      name: '&e&lLevel'
+      lore:
+      - '&bCurrently: &f{level}'
+      - '&7'
+      - '&7Click here to change the level'
+      - '&7of the potion effect.'
+      - '&7'
+      - '&bLeft Click &8» &f+1'
+      - '&bRight Click &8» &f-1'
+      Button: Level
+    '5':
+      type: GUNPOWDER
+      name: '&e&lPotion Effect Type'
+      lore:
+      - '&bCurrently: &f{effect}'
+      - '&7'
+      - '&7Click here to change the potion'
+      - '&7effect type.'
+      Button: Effect
+    '6':
+      type: CLOCK
+      name: '&e&lDuration'
+      lore:
+      - '&bCurrently: &f{duration}s'
+      - '&7'
+      - '&7Click here to change the duration'
+      - '&7of the potion effect.'
+      - '&7'
+      - '&bLeft Click &8» &f+1'
+      - '&bShift Left-Click &8» &f+10'
+      - '&7'
+      - '&bRight Click &8» &f-1'
+      - '&bShift Right-Click &8» &f-10'
+      Button: Duration
+    '9':
+      type: LIME_DYE
+      name: '&b&lConfirm'
+      lore:
+      - '&7Click here to confirm the creation'
+      - '&7of the potion effect with data:'
+      - '&7'
+      - '&bDuration: &f{duration}s'
+      - '&bEffect: &f{effect}'
+      - '&bLevel: &f{level}'
+      Button: Confirm

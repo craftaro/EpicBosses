@@ -21,11 +21,13 @@ import com.songoda.epicbosses.panel.bosses.weapons.OffHandEditorPanel;
 import com.songoda.epicbosses.panel.handlers.*;
 import com.songoda.epicbosses.panel.skills.MainSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.SkillTypeEditorPanel;
+import com.songoda.epicbosses.panel.skills.custom.CreatePotionEffectEditorPanel;
+import com.songoda.epicbosses.panel.skills.custom.PotionEffectTypeEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.PotionSkillEditorPanel;
 import com.songoda.epicbosses.skills.Skill;
-import com.songoda.epicbosses.skills.types.PotionSkillElement;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
+import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
 import lombok.Getter;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.panel.*;
@@ -34,7 +36,6 @@ import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.panel.base.IPanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.Collection;
@@ -64,7 +65,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu, statisticListEditMenu;
 
     @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu, skillTypeEditMenu, potionSkillEditorPanel;
-    @Getter private ISubVariablePanelHandler<Skill, PotionSkillElement> createPotionEffectMenu;
+    @Getter private ISubVariablePanelHandler<Skill, PotionEffectHolder> createPotionEffectMenu, potionEffectTypeEditMenu;
 
     private final CustomBosses customBosses;
 
@@ -163,6 +164,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("SkillEditorPanel"));
         PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("SkillTypeEditorPanel"));
         PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("PotionSkillEditorPanel"));
+        PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("CreatePotionEffectEditorPanel"));
 
         this.mainSkillEditMenu = new MainSkillEditorPanel(this, panelBuilder, this.customBosses);
         this.customMessageEditMenu = new SingleMessageListEditor<Skill>(this, getListMenu("Skills.MainEdit"), this.customBosses) {
@@ -190,6 +192,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
         };
         this.skillTypeEditMenu = new SkillTypeEditorPanel(this, panelBuilder1, this.customBosses);
         this.potionSkillEditorPanel = new PotionSkillEditorPanel(this, panelBuilder2, this.customBosses);
+        this.createPotionEffectMenu = new CreatePotionEffectEditorPanel(this, panelBuilder3, this.customBosses);
+        this.potionEffectTypeEditMenu = new PotionEffectTypeEditorPanel(this, getListMenu("Skills.CreatePotion"), this.customBosses);
     }
 
     private void reloadSkillEditMenus() {
@@ -197,11 +201,14 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("SkillEditorPanel"));
         PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("SkillTypeEditorPanel"));
         PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("PotionSkillEditorPanel"));
+        PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("CreatePotionEffectEditorPanel"));
 
         this.mainSkillEditMenu.initializePanel(panelBuilder);
         this.customMessageEditMenu.initializePanel(getListMenu("Skills.MainEdit"));
         this.skillTypeEditMenu.initializePanel(panelBuilder1);
         this.potionSkillEditorPanel.initializePanel(panelBuilder2);
+        this.createPotionEffectMenu.initializePanel(panelBuilder3);
+        this.potionEffectTypeEditMenu.initializePanel(getListMenu("Skills.CreatePotion"));
     }
 
     //---------------------------------------------

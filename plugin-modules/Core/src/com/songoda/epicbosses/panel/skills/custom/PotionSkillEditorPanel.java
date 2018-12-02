@@ -76,14 +76,14 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
         panelBuilder.addReplaceData(replaceMap);
 
         PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
-        PotionSkillElement potionSkillElement = this.bossSkillManager.getPotionSkillElement(skill);
         Panel panel = panelBuilder.getPanel()
                 .setDestroyWhenDone(true)
                 .setCancelClick(true)
                 .setCancelLowerClick(true)
                 .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
 
-        counter.getSlotsWith("PotionEffect").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getCreatePotionEffectMenu().openFor((Player) event.getWhoClicked(), skill, potionSkillElement)));
+        counter.getSlotsWith("PotionEffect").forEach(slot -> panel.setOnClick(slot,
+                event -> this.bossPanelManager.getCreatePotionEffectMenu().openFor((Player) event.getWhoClicked(), skill, new PotionEffectHolder("", 1, 1))));
         fillPanel(panel, skill);
 
         panel.openFor(player);

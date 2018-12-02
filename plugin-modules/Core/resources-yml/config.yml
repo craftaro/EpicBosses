@@ -133,3 +133,7 @@ Display:
       - '&3Level: &7{level}'
       - '&7'
       - '&7Click to remove potion effect.'
+    CreatePotion:
+      menuName: '&b&lSelect Potion Effect Type'
+      name: '&bEffect: &f{effect}'
+      selectedName: '&bEffect: &f{effect} &a&l** Selected **'
