@@ -74,7 +74,7 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
         counter.getSlotsWith("Mode").forEach(slot -> panel.setOnClick(slot, getModeAction(skill)));
         counter.getSlotsWith("DisplayName").forEach(slot -> panel.setOnClick(slot, getDisplayNameAction(skill)));
         counter.getSlotsWith("CustomMessage").forEach(slot -> panel.setOnClick(slot, getCustomMessageAction(skill)));
-        counter.getSlotsWith("Type").forEach(slot -> {});
+        counter.getSlotsWith("Type").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getSkillTypeEditMenu().openFor((Player) event.getWhoClicked(), skill)));
 
         panel.openFor(player);
     }
@@ -90,13 +90,6 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
                 .addSlotCounter("Mode")
                 .addSlotCounter("DisplayName")
                 .addSlotCounter("Type");
-    }
-
-    private ClickAction getTypeAction(Skill skill) {
-        return event -> {
-            Player player = (Player) event.getWhoClicked();
-
-        };
     }
 
     private ClickAction getDisplayNameAction(Skill skill) {

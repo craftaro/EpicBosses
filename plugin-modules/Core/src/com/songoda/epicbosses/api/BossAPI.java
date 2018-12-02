@@ -21,7 +21,11 @@ import com.songoda.epicbosses.skills.CustomSkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.custom.Minions;
 import com.songoda.epicbosses.skills.elements.CustomMinionSkillElement;
+import com.songoda.epicbosses.skills.elements.SubCustomSkillElement;
+import com.songoda.epicbosses.skills.types.CommandSkillElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
+import com.songoda.epicbosses.skills.types.GroupSkillElement;
+import com.songoda.epicbosses.skills.types.PotionSkillElement;
 import com.songoda.epicbosses.utils.BossesGson;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.EntityFinder;
@@ -178,6 +182,33 @@ public class BossAPI {
         }
 
         return null;
+    }
+
+    public static JsonObject createNewSkillCustomData(String type) {
+        JsonParser jsonParser = new JsonParser();
+        String jsonString;
+
+        if(type.equalsIgnoreCase("COMMAND")) {
+            CommandSkillElement commandSkillElement = new CommandSkillElement(new ArrayList<>());
+
+            jsonString = BossesGson.get().toJson(commandSkillElement);
+        } else if(type.equalsIgnoreCase("POTION")) {
+            PotionSkillElement potionSkillElement = new PotionSkillElement(new ArrayList<>());
+
+            jsonString = BossesGson.get().toJson(potionSkillElement);
+        } else if(type.equalsIgnoreCase("CUSTOM")) {
+            CustomSkillElement customSkillElement = new CustomSkillElement(new SubCustomSkillElement("", 0.0, null));
+
+            jsonString = BossesGson.get().toJson(customSkillElement);
+        } else if(type.equalsIgnoreCase("GROUP")) {
+            GroupSkillElement groupSkillElement = new GroupSkillElement(new ArrayList<>());
+
+            jsonString = BossesGson.get().toJson(groupSkillElement);
+        } else {
+            return null;
+        }
+
+        return jsonParser.parse(jsonString).getAsJsonObject();
     }
 
     /**
