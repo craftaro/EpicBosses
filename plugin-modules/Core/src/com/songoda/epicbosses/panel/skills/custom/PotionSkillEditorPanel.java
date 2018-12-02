@@ -111,7 +111,6 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
 
                 if(potionType == null) potionType = PotionType.WATER;
 
-                potionMeta.addCustomEffect(potionEffect, true);
                 potionMeta.setBasePotionData(new PotionData(potionType));
                 itemStack.setItemMeta(potionMeta);
 

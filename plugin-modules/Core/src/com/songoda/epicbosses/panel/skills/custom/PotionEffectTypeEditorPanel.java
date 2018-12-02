@@ -5,6 +5,7 @@ import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.skills.Skill;
+import com.songoda.epicbosses.skills.types.PotionSkillElement;
 import com.songoda.epicbosses.utils.*;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
@@ -43,7 +44,7 @@ public class PotionEffectTypeEditorPanel extends SubVariablePanelHandler<Skill, 
 
     @Override
     public void fillPanel(Panel panel, Skill skill, PotionEffectHolder potionEffectHolder) {
-        List<PotionEffectType> list = Arrays.stream(PotionEffectType.values()).collect(Collectors.toList());
+        List<PotionEffectType> list = Arrays.stream(PotionEffectType.values()).filter(potionEffectType -> potionEffectType != null).collect(Collectors.toList());
         int maxPage = panel.getMaxPage(list);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
@@ -91,7 +92,7 @@ public class PotionEffectTypeEditorPanel extends SubVariablePanelHandler<Skill, 
                 Map<String, String> replaceMap = new HashMap<>();
                 boolean found = false;
 
-                replaceMap.put("{name}", StringUtils.get().formatString(potionEffectType.getName()));
+                replaceMap.put("{effect}", StringUtils.get().formatString(potionEffectType.getName()));
 
                 if(type != null && !type.isEmpty()) {
                     PotionEffectFinder potionEffectFinder = PotionEffectFinder.getByName(type);
@@ -111,7 +112,6 @@ public class PotionEffectTypeEditorPanel extends SubVariablePanelHandler<Skill, 
 
                     if(potionEffectFinder != null) {
                         potionEffectHolder.setType(potionEffectFinder.getFancyName());
-                        this.plugin.getSkillsFileManager().save();
 
                         this.bossPanelManager.getCreatePotionEffectMenu().openFor((Player) e.getWhoClicked(), skill, potionEffectHolder);
                     }

@@ -211,6 +211,34 @@ public class BossAPI {
         return jsonParser.parse(jsonString).getAsJsonObject();
     }
 
+    public static JsonObject convertSkillElement(CommandSkillElement commandSkillElement) {
+        JsonParser jsonParser = new JsonParser();
+        String jsonString = BossesGson.get().toJson(commandSkillElement);
+
+        return jsonParser.parse(jsonString).getAsJsonObject();
+    }
+
+    public static JsonObject convertSkillElement(PotionSkillElement potionSkillElement) {
+        JsonParser jsonParser = new JsonParser();
+        String jsonString = BossesGson.get().toJson(potionSkillElement);
+
+        return jsonParser.parse(jsonString).getAsJsonObject();
+    }
+
+    public static JsonObject convertSkillElement(CustomSkillElement customSkillElement) {
+        JsonParser jsonParser = new JsonParser();
+        String jsonString = BossesGson.get().toJson(customSkillElement);
+
+        return jsonParser.parse(jsonString).getAsJsonObject();
+    }
+
+    public static JsonObject convertSkillElement(GroupSkillElement groupSkillElement) {
+        JsonParser jsonParser = new JsonParser();
+        String jsonString = BossesGson.get().toJson(groupSkillElement);
+
+        return jsonParser.parse(jsonString).getAsJsonObject();
+    }
+
     /**
      * Used to create a new base drop table
      * with the specified arguments.

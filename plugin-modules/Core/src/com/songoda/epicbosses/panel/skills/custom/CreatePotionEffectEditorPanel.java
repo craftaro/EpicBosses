@@ -1,6 +1,8 @@
 package com.songoda.epicbosses.panel.skills.custom;
 
+import com.google.gson.JsonObject;
 import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.managers.files.SkillsFileManager;
@@ -157,6 +159,10 @@ public class CreatePotionEffectEditorPanel extends SubVariablePanelHandler<Skill
 
                     currentList.add(potionEffectHolder);
                     potionSkillElement.setPotions(currentList);
+
+                    JsonObject jsonObject = BossAPI.convertSkillElement(potionSkillElement);
+
+                    skill.setCustomData(jsonObject);
                     this.skillsFileManager.save();
                 } else {
                     Message.Boss_Skills_NotCompleteEnough.msg(event.getWhoClicked());
