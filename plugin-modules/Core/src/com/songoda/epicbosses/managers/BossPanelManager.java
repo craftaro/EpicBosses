@@ -21,7 +21,9 @@ import com.songoda.epicbosses.panel.bosses.weapons.OffHandEditorPanel;
 import com.songoda.epicbosses.panel.handlers.*;
 import com.songoda.epicbosses.panel.skills.MainSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.SkillTypeEditorPanel;
+import com.songoda.epicbosses.panel.skills.custom.PotionSkillEditorPanel;
 import com.songoda.epicbosses.skills.Skill;
+import com.songoda.epicbosses.skills.types.PotionSkillElement;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
@@ -61,7 +63,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
             onTauntTextEditMenu;
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu, statisticListEditMenu;
 
-    @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu, skillTypeEditMenu;
+    @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu, skillTypeEditMenu, potionSkillEditorPanel;
+    @Getter private ISubVariablePanelHandler<Skill, PotionSkillElement> createPotionEffectMenu;
 
     private final CustomBosses customBosses;
 
@@ -159,6 +162,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         FileConfiguration editor = this.customBosses.getEditor();
         PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("SkillEditorPanel"));
         PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("SkillTypeEditorPanel"));
+        PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("PotionSkillEditorPanel"));
 
         this.mainSkillEditMenu = new MainSkillEditorPanel(this, panelBuilder, this.customBosses);
         this.customMessageEditMenu = new SingleMessageListEditor<Skill>(this, getListMenu("Skills.MainEdit"), this.customBosses) {
@@ -185,16 +189,19 @@ public class BossPanelManager implements ILoadable, IReloadable {
             }
         };
         this.skillTypeEditMenu = new SkillTypeEditorPanel(this, panelBuilder1, this.customBosses);
+        this.potionSkillEditorPanel = new PotionSkillEditorPanel(this, panelBuilder2, this.customBosses);
     }
 
     private void reloadSkillEditMenus() {
         FileConfiguration editor = this.customBosses.getEditor();
         PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("SkillEditorPanel"));
         PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("SkillTypeEditorPanel"));
+        PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("PotionSkillEditorPanel"));
 
         this.mainSkillEditMenu.initializePanel(panelBuilder);
         this.customMessageEditMenu.initializePanel(getListMenu("Skills.MainEdit"));
         this.skillTypeEditMenu.initializePanel(panelBuilder1);
+        this.potionSkillEditorPanel.initializePanel(panelBuilder2);
     }
 
     //---------------------------------------------
