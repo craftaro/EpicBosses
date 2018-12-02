@@ -114,12 +114,15 @@ Display:
     lore:
     - '&3Cost: &a$&f{price}'
   Skills:
-    menuName: '&b&lEpicBosses &3&lSkills'
-    name: '&b&l{name} Skill'
-    lore:
-    - '&3Type: &7{type}'
-    - '&3Display Name: &7{displayName}'
-    - '&3Custom Message: &7{customMessage}'
-    - '&3Radius: &7{radius}'
-    - '&7'
-    - '&7Click to edit the custom skill.'
+    Main:
+      menuName: '&b&lEpicBosses &3&lSkills'
+      name: '&b&l{name} Skill'
+      lore:
+      - '&3Type: &7{type}'
+      - '&3Display Name: &7{displayName}'
+      - '&3Custom Message: &7{customMessage}'
+      - '&3Radius: &7{radius}'
+      - '&7'
+      - '&7Click to edit the custom skill.'
+    MainEdit:
+      menuName: '&b&l{name} Skill Editor'

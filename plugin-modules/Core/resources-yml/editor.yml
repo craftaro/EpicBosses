@@ -1356,3 +1356,76 @@ SkillEditorPanel:
       - '&7type the previous custom data will be erased'
       - '&7to make room for the new custom data.'
       Button: Type
+SkillTypeEditorPanel:
+  name: '&b&l{name} Skill Editor'
+  slots: 9
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 5
+  Items:
+    '2':
+      type: BOOK
+      name: '&e&lCommand Skill Type'
+      lore:
+      - '&7If you set this to the skill type'
+      - '&7then you will be able to set commands'
+      - '&7to be applied to the targeted players'
+      - '&7when this skill is called.'
+      - '&7'
+      - '&c&lWARNING'
+      - '&7This will remove any previous'
+      - '&7custom skill data.'
+      Button: Command
+    '3':
+      type: EMERALD
+      name: '&e&lCustom Skill Type'
+      lore:
+      - '&7If you want to use a custom skill for'
+      - '&7this skill, select this skill type then'
+      - '&7in your custom data configuration you'
+      - '&7can select which custom skill it is'
+      - '&7assigned to.'
+      - '&7'
+      - '&c&lWARNING'
+      - '&7This will remove any previous'
+      - '&7custom skill data.'
+      Button: Custom
+    '5':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'
+    '7':
+      type: SPLASH_POTION
+      name: '&e&lPotion Skill Type'
+      lore:
+      - '&7If you want to apply potions to'
+      - '&7the targeted players when this skill is'
+      - '&7called you can use this skill type.'
+      - '&7'
+      - '&c&lWARNING'
+      - '&7This will remove any previous'
+      - '&7custom skill data.'
+      Button: Potion
+    '8':
+      type: CREEPER_HEAD
+      name: '&e&lGroup Skill Type'
+      lore:
+      - '&7If you want to have multiple skills under'
+      - '&7one skill select this skill type and you'
+      - '&7can connect it to some of the already existing'
+      - '&7skills so you can have more then one go off'
+      - '&7from one skill calling. Only this displayName'
+      - '&7and customMessage will be used, the connected'
+      - '&7skill displayName and customMessage will be'
+      - '&7ignored.'
+      - '&7'
+      - '&c&lWARNING'
+      - '&7This will remove any previous'
+      - '&7custom skill data.'
+      Button: Group

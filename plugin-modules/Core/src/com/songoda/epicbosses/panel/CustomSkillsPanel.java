@@ -14,6 +14,7 @@ import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -74,13 +75,11 @@ public class CustomSkillsPanel extends MainListPanelHandler {
                 replaceMap.put("{customMessage}", skill.getCustomMessage());
                 replaceMap.put("{radius}", NumberUtils.get().formatDouble(skill.getRadius()));
 
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Skills.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.Main.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Skills.Main.lore"), replaceMap);
 
 
-                panel.setItem(realisticSlot, itemStack, e -> {
-                    //TODO: Add Edit Skill
-                });
+                panel.setItem(realisticSlot, itemStack, e -> this.bossPanelManager.getMainSkillEditMenu().openFor((Player) e.getWhoClicked(), skill));
             }
         });
     }

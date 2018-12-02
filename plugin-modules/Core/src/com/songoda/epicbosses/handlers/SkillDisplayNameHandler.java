@@ -1,13 +1,9 @@
 package com.songoda.epicbosses.handlers;
 
-import com.songoda.epicbosses.entity.BossEntity;
-import com.songoda.epicbosses.entity.elements.EntityStatsElement;
-import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.SkillsFileManager;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.utils.IHandler;
 import com.songoda.epicbosses.utils.ServerUtils;
-import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
 import lombok.Setter;

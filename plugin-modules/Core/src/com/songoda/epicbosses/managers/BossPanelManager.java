@@ -20,6 +20,7 @@ import com.songoda.epicbosses.panel.bosses.weapons.MainHandEditorPanel;
 import com.songoda.epicbosses.panel.bosses.weapons.OffHandEditorPanel;
 import com.songoda.epicbosses.panel.handlers.*;
 import com.songoda.epicbosses.panel.skills.MainSkillEditorPanel;
+import com.songoda.epicbosses.panel.skills.SkillTypeEditorPanel;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
@@ -31,6 +32,7 @@ import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.panel.base.IPanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.Collection;
@@ -59,7 +61,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
             onTauntTextEditMenu;
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu, statisticListEditMenu;
 
-    @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu;
+    @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu, skillTypeEditMenu;
 
     private final CustomBosses customBosses;
 
@@ -156,9 +158,10 @@ public class BossPanelManager implements ILoadable, IReloadable {
     private void loadSkillEditMenus() {
         FileConfiguration editor = this.customBosses.getEditor();
         PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("SkillEditorPanel"));
+        PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("SkillTypeEditorPanel"));
 
         this.mainSkillEditMenu = new MainSkillEditorPanel(this, panelBuilder, this.customBosses);
-        this.customMessageEditMenu = new SingleMessageListEditor<Skill>(this, getListMenu("Skill.Main"), this.customBosses) {
+        this.customMessageEditMenu = new SingleMessageListEditor<Skill>(this, getListMenu("Skills.MainEdit"), this.customBosses) {
 
             @Override
             public String getCurrent(Skill object) {
@@ -181,14 +184,17 @@ public class BossPanelManager implements ILoadable, IReloadable {
                 return BossAPI.getSkillName(object);
             }
         };
+        this.skillTypeEditMenu = new SkillTypeEditorPanel(this, panelBuilder1, this.customBosses);
     }
 
     private void reloadSkillEditMenus() {
         FileConfiguration editor = this.customBosses.getEditor();
         PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("SkillEditorPanel"));
+        PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("SkillTypeEditorPanel"));
 
         this.mainSkillEditMenu.initializePanel(panelBuilder);
-        this.customMessageEditMenu.initializePanel(getListMenu("Skill.Main"));
+        this.customMessageEditMenu.initializePanel(getListMenu("Skills.MainEdit"));
+        this.skillTypeEditMenu.initializePanel(panelBuilder1);
     }
 
     //---------------------------------------------
@@ -607,11 +613,11 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //---------------------------------------------
 
     private void loadCustomSkillsMenu() {
-        this.customSkills = new CustomSkillsPanel(this, getListMenu("Skills"), this.customBosses);
+        this.customSkills = new CustomSkillsPanel(this, getListMenu("Skills.Main"), this.customBosses);
     }
 
     private void reloadCustomSkills() {
-        this.customSkills.initializePanel(getListMenu("Skills"));
+        this.customSkills.initializePanel(getListMenu("Skills.Main"));
     }
 
     //---------------------------------------------
