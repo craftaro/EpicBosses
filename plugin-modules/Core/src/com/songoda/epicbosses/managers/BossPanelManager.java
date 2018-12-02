@@ -21,6 +21,7 @@ import com.songoda.epicbosses.panel.bosses.weapons.OffHandEditorPanel;
 import com.songoda.epicbosses.panel.handlers.*;
 import com.songoda.epicbosses.panel.skills.MainSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.SkillTypeEditorPanel;
+import com.songoda.epicbosses.panel.skills.custom.CommandSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.CreatePotionEffectEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.PotionEffectTypeEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.PotionSkillEditorPanel;
@@ -64,7 +65,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
             onTauntTextEditMenu;
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu, statisticListEditMenu;
 
-    @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu, skillTypeEditMenu, potionSkillEditorPanel;
+    @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu, skillTypeEditMenu, potionSkillEditorPanel, commandSkillEditorPanel;
     @Getter private ISubVariablePanelHandler<Skill, PotionEffectHolder> createPotionEffectMenu, potionEffectTypeEditMenu;
 
     private final CustomBosses customBosses;
@@ -165,6 +166,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("SkillTypeEditorPanel"));
         PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("PotionSkillEditorPanel"));
         PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("CreatePotionEffectEditorPanel"));
+        PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("CommandSkillEditorPanel"));
 
         this.mainSkillEditMenu = new MainSkillEditorPanel(this, panelBuilder, this.customBosses);
         this.customMessageEditMenu = new SingleMessageListEditor<Skill>(this, getListMenu("Skills.MainEdit"), this.customBosses) {
@@ -194,6 +196,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.potionSkillEditorPanel = new PotionSkillEditorPanel(this, panelBuilder2, this.customBosses);
         this.createPotionEffectMenu = new CreatePotionEffectEditorPanel(this, panelBuilder3, this.customBosses);
         this.potionEffectTypeEditMenu = new PotionEffectTypeEditorPanel(this, getListMenu("Skills.CreatePotion"), this.customBosses);
+        this.commandSkillEditorPanel = new CommandSkillEditorPanel(this, panelBuilder4, this.customBosses);
     }
 
     private void reloadSkillEditMenus() {
@@ -202,6 +205,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("SkillTypeEditorPanel"));
         PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("PotionSkillEditorPanel"));
         PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("CreatePotionEffectEditorPanel"));
+        PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("CommandSkillEditorPanel"));
 
         this.mainSkillEditMenu.initializePanel(panelBuilder);
         this.customMessageEditMenu.initializePanel(getListMenu("Skills.MainEdit"));
@@ -209,6 +213,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.potionSkillEditorPanel.initializePanel(panelBuilder2);
         this.createPotionEffectMenu.initializePanel(panelBuilder3);
         this.potionEffectTypeEditMenu.initializePanel(getListMenu("Skills.CreatePotion"));
+        this.commandSkillEditorPanel.initializePanel(panelBuilder4);
     }
 
     //---------------------------------------------
@@ -291,7 +296,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
                 return BossAPI.getBossEntityName(object);
             }
         };
-        this.onTauntTextEditMenu = new ListMessageListEditor(this, getListMenu("Boss.Text"), this.customBosses) {
+        this.onTauntTextEditMenu = new ListMessageListEditor<BossEntity>(this, getListMenu("Boss.Text"), this.customBosses) {
             @Override
             public List<String> getCurrent(BossEntity bossEntity) {
                 return bossEntity.getMessages().getTaunts().getTaunts();
@@ -313,6 +318,11 @@ public class BossPanelManager implements ILoadable, IReloadable {
             @Override
             public IVariablePanelHandler<BossEntity> getParentHolder() {
                 return getMainTauntEditMenu();
+            }
+
+            @Override
+            public String getName(BossEntity object) {
+                return BossAPI.getBossEntityName(object);
             }
         };
     }

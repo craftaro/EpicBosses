@@ -137,3 +137,11 @@ Display:
       menuName: '&b&lSelect Potion Effect Type'
       name: '&bEffect: &f{effect}'
       selectedName: '&bEffect: &f{effect} &a&l** Selected **'
+    Commands:
+      name: '&b&lCommand Section'
+      lore:
+      - '&3Left Click &8»'
+      - '&7Modify the assigned commands.'
+      - '&7'
+      - '&3Right Click &8»'
+      - '&7Modify the chance for this section.'
