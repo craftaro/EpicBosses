@@ -70,7 +70,7 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
         PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
         counter.getSlotsWith("Radius").forEach(slot -> panel.setOnClick(slot, getRadiusAction(skill)));
-        counter.getSlotsWith("CustomData").forEach(slot -> {});
+        counter.getSlotsWith("CustomData").forEach(slot -> panel.setOnClick(slot, getCustomDataAction(skill)));
         counter.getSlotsWith("Mode").forEach(slot -> panel.setOnClick(slot, getModeAction(skill)));
         counter.getSlotsWith("DisplayName").forEach(slot -> panel.setOnClick(slot, getDisplayNameAction(skill)));
         counter.getSlotsWith("CustomMessage").forEach(slot -> panel.setOnClick(slot, getCustomMessageAction(skill)));
@@ -90,6 +90,23 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
                 .addSlotCounter("Mode")
                 .addSlotCounter("DisplayName")
                 .addSlotCounter("Type");
+    }
+
+    private ClickAction getCustomDataAction(Skill skill) {
+        return event -> {
+            String type = skill.getType();
+            Player player = (Player) event.getWhoClicked();
+
+            if(type.equalsIgnoreCase("POTION")) {
+                this.bossPanelManager.getPotionSkillEditorPanel().openFor(player, skill);
+            } else if(type.equalsIgnoreCase("GROUP")) {
+
+            } else if(type.equalsIgnoreCase("CUSTOM")) {
+
+            } else if(type.equalsIgnoreCase("COMMAND")) {
+
+            }
+        };
     }
 
     private ClickAction getDisplayNameAction(Skill skill) {

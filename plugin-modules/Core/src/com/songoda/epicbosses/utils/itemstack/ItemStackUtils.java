@@ -148,6 +148,8 @@ public class ItemStackUtils {
             }
         }
 
+        if(mat == null) return null;
+
         ItemStack itemStack = new ItemStack(mat, amount, meta);
         ItemMeta itemMeta = itemStack.getItemMeta();
 

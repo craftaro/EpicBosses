@@ -68,12 +68,21 @@ public class CustomSkillsPanel extends MainListPanelHandler {
                 ItemStack itemStack = this.itemStackConverter.from(itemStackHolder);
 
                 Map<String, String> replaceMap = new HashMap<>();
+                String displayName = skill.getDisplayName();
+                String customMessage = skill.getCustomMessage();
+                Double radius = skill.getRadius();
+                String type = skill.getType();
+
+                if(customMessage == null || customMessage.equals("")) customMessage = "N/A";
+                if(radius == null) radius = 100.0;
+                if(displayName == null || displayName.equals("")) displayName = "N/A";
+                if(type == null || type.equals("")) type = "N/A";
 
                 replaceMap.put("{name}", name);
-                replaceMap.put("{type}", skill.getType());
-                replaceMap.put("{displayName}", skill.getDisplayName());
-                replaceMap.put("{customMessage}", skill.getCustomMessage());
-                replaceMap.put("{radius}", NumberUtils.get().formatDouble(skill.getRadius()));
+                replaceMap.put("{type}", type);
+                replaceMap.put("{displayName}", displayName);
+                replaceMap.put("{customMessage}", customMessage);
+                replaceMap.put("{radius}", NumberUtils.get().formatDouble(radius));
 
                 ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.Main.name"), replaceMap);
                 ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Skills.Main.lore"), replaceMap);

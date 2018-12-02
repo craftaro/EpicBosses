@@ -259,7 +259,7 @@ DropsMainEditorPanel:
       - '&7Here you can configure the drop systems'
       - '&7the boss has when he dies.'
     '4':
-      type: GUN_POWDER
+      type: GUNPOWDER
       name: '&e&lNatural Drops'
       lore:
       - '&bCurrently: &f{naturalDrops}'
@@ -1486,3 +1486,12 @@ PotionSkillEditorPanel:
       name: '&e&lGo Back'
       lore:
       - '&7Click here to go back.'
+CreatePotionEffectEditorPanel:
+  name: '&b&lCreate Potion Effect'
+  slots: 27
+  Settings:
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Items:
