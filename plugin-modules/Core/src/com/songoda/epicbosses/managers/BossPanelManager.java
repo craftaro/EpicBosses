@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.managers;
 
+import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.EquipmentElement;
@@ -18,6 +19,7 @@ import com.songoda.epicbosses.panel.bosses.text.*;
 import com.songoda.epicbosses.panel.bosses.weapons.MainHandEditorPanel;
 import com.songoda.epicbosses.panel.bosses.weapons.OffHandEditorPanel;
 import com.songoda.epicbosses.panel.handlers.*;
+import com.songoda.epicbosses.panel.skills.MainSkillEditorPanel;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
@@ -57,7 +59,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
             onTauntTextEditMenu;
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu, statisticListEditMenu;
 
-    @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu;
+    @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu;
 
     private final CustomBosses customBosses;
 
@@ -88,6 +90,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
         loadEquipmentEditMenu();
         loadWeaponEditMenu();
         loadEquipmentEditMenus();
+
+        loadSkillEditMenus();
     }
 
     @Override
@@ -113,6 +117,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
         reloadEquipmentEditMenu();
         reloadWeaponEditMenu();
         reloadEquipmentEditMenus();
+
+        reloadSkillEditMenus();
     }
 
     public int isItemStackUsed(String name) {
@@ -140,6 +146,51 @@ public class BossPanelManager implements ILoadable, IReloadable {
         return timesUsed;
     }
 
+
+    //---------------------------------------------
+    //
+    //  S K I L L   E D I T   P A N E L S
+    //
+    //---------------------------------------------
+
+    private void loadSkillEditMenus() {
+        FileConfiguration editor = this.customBosses.getEditor();
+        PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("SkillEditorPanel"));
+
+        this.mainSkillEditMenu = new MainSkillEditorPanel(this, panelBuilder, this.customBosses);
+        this.customMessageEditMenu = new SingleMessageListEditor<Skill>(this, getListMenu("Skill.Main"), this.customBosses) {
+
+            @Override
+            public String getCurrent(Skill object) {
+                return object.getCustomMessage();
+            }
+
+            @Override
+            public void updateMessage(Skill object, String newPath) {
+                object.setCustomMessage(newPath);
+                BossPanelManager.this.customBosses.getSkillsFileManager().save();
+            }
+
+            @Override
+            public IVariablePanelHandler<Skill> getParentHolder() {
+                return getMainSkillEditMenu();
+            }
+
+            @Override
+            public String getName(Skill object) {
+                return BossAPI.getSkillName(object);
+            }
+        };
+    }
+
+    private void reloadSkillEditMenus() {
+        FileConfiguration editor = this.customBosses.getEditor();
+        PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("SkillEditorPanel"));
+
+        this.mainSkillEditMenu.initializePanel(panelBuilder);
+        this.customMessageEditMenu.initializePanel(getListMenu("Skill.Main"));
+    }
+
     //---------------------------------------------
     //
     //  T E X T   E D I T   P A N E L S
@@ -157,7 +208,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.onSpawnSubTextEditMenu = new SpawnTextEditorPanel(this, panelBuilder1, this.customBosses);
         this.onDeathSubTextEditMenu = new DeathTextEditorPanel(this, panelBuilder2, this.customBosses);
         this.mainTauntEditMenu = new TauntTextEditorPanel(this, panelBuilder3, this.customBosses);
-        this.onSpawnTextEditMenu = new SingleMessageListEditor(this, getListMenu("Boss.Text"), this.customBosses) {
+        this.onSpawnTextEditMenu = new SingleMessageListEditor<BossEntity>(this, getListMenu("Boss.Text"), this.customBosses) {
             @Override
             public String getCurrent(BossEntity bossEntity) {
                 return bossEntity.getMessages().getOnSpawn().getMessage();
@@ -172,8 +223,13 @@ public class BossPanelManager implements ILoadable, IReloadable {
             public IVariablePanelHandler<BossEntity> getParentHolder() {
                 return getOnSpawnSubTextEditMenu();
             }
+
+            @Override
+            public String getName(BossEntity object) {
+                return BossAPI.getBossEntityName(object);
+            }
         };
-        this.onDeathTextEditMenu = new SingleMessageListEditor(this, getListMenu("Boss.Text"), this.customBosses) {
+        this.onDeathTextEditMenu = new SingleMessageListEditor<BossEntity>(this, getListMenu("Boss.Text"), this.customBosses) {
             @Override
             public String getCurrent(BossEntity bossEntity) {
                 return bossEntity.getMessages().getOnDeath().getMessage();
@@ -188,8 +244,13 @@ public class BossPanelManager implements ILoadable, IReloadable {
             public IVariablePanelHandler<BossEntity> getParentHolder() {
                 return getOnDeathSubTextEditMenu();
             }
+
+            @Override
+            public String getName(BossEntity object) {
+                return BossAPI.getBossEntityName(object);
+            }
         };
-        this.onDeathPositionTextEditMenu = new SingleMessageListEditor(this, getListMenu("Boss.Text"), this.customBosses) {
+        this.onDeathPositionTextEditMenu = new SingleMessageListEditor<BossEntity>(this, getListMenu("Boss.Text"), this.customBosses) {
             @Override
             public String getCurrent(BossEntity bossEntity) {
                 return bossEntity.getMessages().getOnDeath().getPositionMessage();
@@ -203,6 +264,11 @@ public class BossPanelManager implements ILoadable, IReloadable {
             @Override
             public IVariablePanelHandler<BossEntity> getParentHolder() {
                 return getOnDeathSubTextEditMenu();
+            }
+
+            @Override
+            public String getName(BossEntity object) {
+                return BossAPI.getBossEntityName(object);
             }
         };
         this.onTauntTextEditMenu = new ListMessageListEditor(this, getListMenu("Boss.Text"), this.customBosses) {

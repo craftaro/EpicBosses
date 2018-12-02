@@ -1,17 +1,23 @@
 package com.songoda.epicbosses.panel.skills;
 
+import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
+import com.songoda.epicbosses.handlers.SkillDisplayNameHandler;
 import com.songoda.epicbosses.managers.BossPanelManager;
+import com.songoda.epicbosses.managers.files.SkillsFileManager;
 import com.songoda.epicbosses.skills.Skill;
+import com.songoda.epicbosses.skills.SkillMode;
+import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
+import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Charles Cullen
@@ -20,8 +26,12 @@ import java.util.Map;
  */
 public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
 
-    public MainSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
+    private SkillsFileManager skillsFileManager;
+
+    public MainSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
+
+        this.skillsFileManager = plugin.getSkillsFileManager();
     }
 
     @Override
@@ -59,11 +69,11 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
                 .setCancelLowerClick(true);
         PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
-        counter.getSlotsWith("Radius").forEach(slot -> {});
+        counter.getSlotsWith("Radius").forEach(slot -> panel.setOnClick(slot, getRadiusAction(skill)));
         counter.getSlotsWith("CustomData").forEach(slot -> {});
-        counter.getSlotsWith("Mode").forEach(slot -> {});
-        counter.getSlotsWith("DisplayName").forEach(slot -> {});
-        counter.getSlotsWith("CustomMessage").forEach(slot -> {});
+        counter.getSlotsWith("Mode").forEach(slot -> panel.setOnClick(slot, getModeAction(skill)));
+        counter.getSlotsWith("DisplayName").forEach(slot -> panel.setOnClick(slot, getDisplayNameAction(skill)));
+        counter.getSlotsWith("CustomMessage").forEach(slot -> panel.setOnClick(slot, getCustomMessageAction(skill)));
         counter.getSlotsWith("Type").forEach(slot -> {});
 
         panel.openFor(player);
@@ -81,4 +91,86 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
                 .addSlotCounter("DisplayName")
                 .addSlotCounter("Type");
     }
+
+    private ClickAction getTypeAction(Skill skill) {
+        return event -> {
+            Player player = (Player) event.getWhoClicked();
+
+        };
+    }
+
+    private ClickAction getDisplayNameAction(Skill skill) {
+        return event -> {
+            Player player = (Player) event.getWhoClicked();
+            SkillDisplayNameHandler skillDisplayNameHandler = new SkillDisplayNameHandler(player, skill, this.skillsFileManager, this);
+
+            Message.Boss_Skills_SetDisplayName.msg(player);
+            skillDisplayNameHandler.handle();
+            player.closeInventory();
+        };
+    }
+
+    private ClickAction getCustomMessageAction(Skill skill) {
+        return event -> {
+            ClickType clickType = event.getClick();
+            Player player = (Player) event.getWhoClicked();
+
+            if(clickType.name().contains("RIGHT")) {
+                skill.setCustomMessage("");
+                saveSkill(skill, player);
+            } else {
+                this.bossPanelManager.getCustomMessageEditMenu().openFor(player, skill);
+            }
+        };
+    }
+
+    private ClickAction getModeAction(Skill skill) {
+        return event -> {
+            String current = skill.getMode();
+            SkillMode skillMode = SkillMode.getCurrent(current);
+            SkillMode nextMode = skillMode.getNext();
+
+            skill.setMode(nextMode.name());
+            saveSkill(skill, (Player) event.getWhoClicked());
+            Message.Boss_Skills_SetMode.msg(event.getWhoClicked(), nextMode.name());
+        };
+    }
+
+    private ClickAction getRadiusAction(Skill skill) {
+        return event -> {
+            ClickType clickType = event.getClick();
+            int radiusToModifyBy = 0;
+
+            if(clickType == ClickType.LEFT) {
+                radiusToModifyBy = 1;
+            } else if(clickType == ClickType.SHIFT_LEFT) {
+                radiusToModifyBy = 10;
+            } else if(clickType == ClickType.RIGHT) {
+                radiusToModifyBy = -1;
+            } else if(clickType == ClickType.SHIFT_RIGHT) {
+                radiusToModifyBy = -10;
+            }
+
+            String modifyValue = radiusToModifyBy > 0? "increased" : "decreased";
+            Double currentRadius = skill.getRadius();
+
+            if(currentRadius == null) currentRadius = 0.0;
+
+            double newRadius = currentRadius + radiusToModifyBy;
+
+            if(newRadius < 0) {
+                newRadius = 0;
+            }
+
+            skill.setRadius(newRadius);
+            saveSkill(skill, (Player) event.getWhoClicked());
+            Message.Boss_Skills_SetRadius.msg(event.getWhoClicked(), modifyValue, NumberUtils.get().formatDouble(newRadius));
+        };
+    }
+
+    private void saveSkill(Skill skill, Player player) {
+        this.skillsFileManager.save();
+        openFor(player, skill);
+    }
+
 }

@@ -2,7 +2,6 @@ package com.songoda.epicbosses.panel.handlers;
 
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
-import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.MessagesFileManager;
 import com.songoda.epicbosses.utils.StringUtils;
@@ -28,7 +27,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 29-Nov-18
  */
-public abstract class SingleMessageListEditor extends VariablePanelHandler<BossEntity> {
+public abstract class SingleMessageListEditor<T> extends VariablePanelHandler<T> {
 
     private MessagesFileManager messagesFileManager;
     private ItemStackConverter itemStackConverter;
@@ -42,14 +41,16 @@ public abstract class SingleMessageListEditor extends VariablePanelHandler<BossE
         this.messagesFileManager = plugin.getBossMessagesFileManager();
     }
 
-    public abstract String getCurrent(BossEntity bossEntity);
+    public abstract String getCurrent(T object);
 
-    public abstract void updateMessage(BossEntity bossEntity, String newPath);
+    public abstract void updateMessage(T object, String newPath);
 
-    public abstract IVariablePanelHandler<BossEntity> getParentHolder();
+    public abstract IVariablePanelHandler<T> getParentHolder();
+
+    public abstract String getName(T object);
 
     @Override
-    public void fillPanel(Panel panel, BossEntity bossEntity) {
+    public void fillPanel(Panel panel, T object) {
         Map<String, List<String>> currentTexts = this.messagesFileManager.getMessagesMap();
         List<String> entryList = new ArrayList<>(currentTexts.keySet());
         int maxPage = panel.getMaxPage(entryList);
@@ -57,28 +58,28 @@ public abstract class SingleMessageListEditor extends VariablePanelHandler<BossE
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
             if(requestedPage < 0 || requestedPage > maxPage) return false;
 
-            loadPage(panel, requestedPage, currentTexts, entryList, bossEntity);
+            loadPage(panel, requestedPage, currentTexts, entryList, object);
             return true;
         }));
 
-        loadPage(panel, 0, currentTexts, entryList, bossEntity);
+        loadPage(panel, 0, currentTexts, entryList, object);
     }
 
     @Override
-    public void openFor(Player player, BossEntity bossEntity) {
+    public void openFor(Player player, T object) {
         Map<String, String> replaceMap = new HashMap<>();
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+        replaceMap.put("{name}", getName(object));
         panelBuilder.addReplaceData(replaceMap);
 
         Panel panel = panelBuilder.getPanel()
                 .setDestroyWhenDone(true)
                 .setCancelClick(true)
                 .setCancelLowerClick(true)
-                .setParentPanelHandler(getParentHolder(), bossEntity);
+                .setParentPanelHandler(getParentHolder(), object);
 
-        fillPanel(panel, bossEntity);
+        fillPanel(panel, object);
 
         panel.openFor(player);
     }
@@ -88,8 +89,8 @@ public abstract class SingleMessageListEditor extends VariablePanelHandler<BossE
 
     }
 
-    private void loadPage(Panel panel, int page, Map<String, List<String>> currentMessages, List<String> entryList, BossEntity bossEntity) {
-        String current = getCurrent(bossEntity);
+    private void loadPage(Panel panel, int page, Map<String, List<String>> currentMessages, List<String> entryList, T object) {
+        String current = getCurrent(object);
 
         panel.loadPage(page, (slot, realisticSlot) -> {
             if(slot >= entryList.size()) {
@@ -128,9 +129,8 @@ public abstract class SingleMessageListEditor extends VariablePanelHandler<BossE
                 itemStack.setItemMeta(itemMeta);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
-                    updateMessage(bossEntity, name);
-                    this.plugin.getBossesFileManager().save();
-                    loadPage(panel, page, currentMessages, entryList, bossEntity);
+                    updateMessage(object, name);
+                    loadPage(panel, page, currentMessages, entryList, object);
                 });
             }
         });
