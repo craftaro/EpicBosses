@@ -22,10 +22,11 @@ import com.songoda.epicbosses.panel.handlers.*;
 import com.songoda.epicbosses.panel.skills.MainSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.SkillTypeEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.CommandSkillEditorPanel;
-import com.songoda.epicbosses.panel.skills.custom.CreatePotionEffectEditorPanel;
-import com.songoda.epicbosses.panel.skills.custom.PotionEffectTypeEditorPanel;
+import com.songoda.epicbosses.panel.skills.custom.potions.CreatePotionEffectEditorPanel;
+import com.songoda.epicbosses.panel.skills.custom.potions.PotionEffectTypeEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.PotionSkillEditorPanel;
 import com.songoda.epicbosses.skills.Skill;
+import com.songoda.epicbosses.skills.elements.SubCommandSkillElement;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
@@ -67,6 +68,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
     @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu, skillTypeEditMenu, potionSkillEditorPanel, commandSkillEditorPanel;
     @Getter private ISubVariablePanelHandler<Skill, PotionEffectHolder> createPotionEffectMenu, potionEffectTypeEditMenu;
+    @Getter private ISubVariablePanelHandler<Skill, SubCommandSkillElement> modifyCommandEditMenu;
 
     private final CustomBosses customBosses;
 

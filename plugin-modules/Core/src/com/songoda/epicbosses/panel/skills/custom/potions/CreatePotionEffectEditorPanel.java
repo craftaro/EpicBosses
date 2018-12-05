@@ -1,4 +1,4 @@
-package com.songoda.epicbosses.panel.skills.custom;
+package com.songoda.epicbosses.panel.skills.custom.potions;
 
 import com.google.gson.JsonObject;
 import com.songoda.epicbosses.CustomBosses;

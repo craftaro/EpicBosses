@@ -93,11 +93,11 @@ Display:
     lore:
     - '&3Editing: &f{enabled}'
     - '&7'
-    - '&3Left Click »'
+    - '&3Left Click &8»'
     - '&7Get spawn item for custom'
     - '&7boss.'
     - '&7'
-    - '&3Right Click »'
+    - '&3Right Click &8»'
     - '&7Edit the custom boss.'
   DropTable:
     menuName: '&b&lEpicBosses &3&lDropTables'
@@ -140,8 +140,7 @@ Display:
     Commands:
       name: '&b&lCommand Section'
       lore:
-      - '&3Left Click &8»'
-      - '&7Modify the assigned commands.'
-      - '&7'
-      - '&3Right Click &8»'
-      - '&7Modify the chance for this section.'
+      - '&3Chance &8» &f{chance}%'
+      - '&'
+      - '&3Commands &8»'
+      - '&f{commands}'

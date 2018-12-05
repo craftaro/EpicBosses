@@ -29,6 +29,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,23 +105,22 @@ public class CommandSkillEditorPanel extends VariablePanelHandler<Skill> {
                 panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
             } else {
                 SubCommandSkillElement subCommandSkillElement = subCommandSkillElements.get(slot);
+                Map<String, String> replaceMap = new HashMap<>();
+                Double chance = subCommandSkillElement.getChance();
+                List<String> commands = subCommandSkillElement.getCommands();
+
+                if(chance == null) chance = 100.0;
+                if(commands == null) commands = new ArrayList<>();
+
+                replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
+                replaceMap.put("{commands}", StringUtils.get().appendList(commands));
 
                 ItemStack itemStack = new ItemStack(Material.BOOK);
 
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Skills.Commands.lore"));
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.Commands.name"));
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Skills.Commands.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.Commands.name"), replaceMap);
 
-                panel.setItem(realisticSlot, itemStack, event -> {
-                    ClickType clickType = event.getClick();
-
-                    if(clickType.name().contains("RIGHT")) {
-                        //TODO: Modify Chance
-                    } else {
-                        //TODO: Modify commands
-                    }
-
-                    loadPage(panel, page, subCommandSkillElements, skill);
-                });
+                panel.setItem(realisticSlot, itemStack, event -> this.bossPanelManager.getModifyCommandEditMenu().openFor((Player) event.getWhoClicked(), skill, subCommandSkillElement));
             }
         });
     }
