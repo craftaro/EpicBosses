@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.panel.skills.custom;
 
+import com.google.gson.JsonObject;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -60,11 +61,11 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
             if(requestedPage < 0 || requestedPage > maxPage) return false;
 
-            loadPage(panel, requestedPage, potionEffectHolders, potionSkillElement);
+            loadPage(panel, requestedPage, potionEffectHolders, potionSkillElement, skill);
             return true;
         }));
 
-        loadPage(panel, 0, potionEffectHolders, potionSkillElement);
+        loadPage(panel, 0, potionEffectHolders, potionSkillElement, skill);
     }
 
     @Override
@@ -97,7 +98,7 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
                 .addSlotCounter("PotionEffect");
     }
 
-    private void loadPage(Panel panel, int page, List<PotionEffectHolder> potionEffectHolders, PotionSkillElement potionSkillElement) {
+    private void loadPage(Panel panel, int page, List<PotionEffectHolder> potionEffectHolders, PotionSkillElement potionSkillElement, Skill skill) {
         panel.loadPage(page, (slot, realisticSlot) -> {
             if(slot >= potionEffectHolders.size()) {
                 panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
@@ -126,9 +127,14 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
                 panel.setItem(realisticSlot, itemStack, e -> {
                     potionEffectHolders.remove(potionEffectHolder);
                     potionSkillElement.setPotions(potionEffectHolders);
+
+
+                    JsonObject jsonObject = BossAPI.convertSkillElement(potionSkillElement);
+
+                    skill.setCustomData(jsonObject);
                     this.skillsFileManager.save();
 
-                    loadPage(panel, page, potionEffectHolders, potionSkillElement);
+                    loadPage(panel, page, potionEffectHolders, potionSkillElement, skill);
                 });
             }
         });

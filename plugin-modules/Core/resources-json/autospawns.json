@@ -1,3 +1,14 @@
 {
-  
+  "Section1": {
+    "location": "world,0,150,0",
+    "entities": [
+      "SkeletonKing"
+    ],
+    "settings": {
+      "spawnWhenChunkIsntLoaded": false,
+      "maxAliveAtOnce": 1,
+      "amountPerSpawn": 1,
+      "placeholder": "{custombosses_1}"
+    }
+  }
 }
