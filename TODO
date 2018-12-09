@@ -1,0 +1,27 @@
+-> Add the Group Skill Editing GUIs
+-> Add the Custom Skill Editing GUIs
+-> Add the new Command aspect (via command)
+-> Add the new Message aspect (via command)
+-> Add the DropTable Main Editing GUI (Will have buttons for DropType and Rewards)
+-> Add the DropTable Rewards Editing GUI
+ -> Spray - Has a button for Rewards List (with chances), button for RandomSpray, button for MaxDistance, button for MaxDrops
+ -> Drop - Has a button for Rewards List (with chances), button for RandomDrops, button for MaxDrops
+ -> Give - Is a list panel with the positions and a button for adding a new position
+  -> Is a list panel of reward sections, button to add a new section
+   -> Panel with Items button, Commands button, maxDrops button, maxCommands button, randomDrops button, randomCommands button, requiredPercentage button
+    -> Items panel is Rewards List (with chances)
+    -> Commands panel is Rewards List (with chances)
+-> Add full AutoSpawns system
+ -> Interval based spawn system, so bosses will spawn at location after certain time
+
+ -> Randomly in the wilderness, bosses will spawn with x chance within coords as a player is loading chunks
+ -> Randomly from a spawner, bosses will spawn with x chance within coords when a spawner is spawning mobs of the same type
+-> Add the AutoSpawns Editing GUI (with a button for toggling the type of the autospawn, from wilderness, to spawner, to interval and a button for editing data)
+ -> Interval - Button to change coords, list of possible spawns, spawnIfChunkIsntLoaded, maxActiveBosses, bossesPerInterval, spawnRate, spawnType (Interval or Random), placeholder, message
+
+ -> Wilderness - Button to change max coords, boss that autospawn applies to, maxActiveBosses, spawnChance
+ -> Spawner - Button to change max coords, boss that autospawn applies to, maxActiveBosses, spawnChance
+-> Complete the /boss new skill command
+-> Connect the /boss time [section] to the AutoSpawns timer (can only be applied to Interval AutoSpawns)
+-> Add support for HolographicDisplays placeholder as the entityName for bosses and minions
+-> Add a new branch for the plugin and add support for Legacy version
