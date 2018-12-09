@@ -129,6 +129,52 @@ ListPanel:
     '54':
       type: GLASS_PANE
       name: '&7'
+CustomItemsMenu:
+  name: '&b&lEpicBosses &3&lCustom Items'
+  slots: 54
+  Settings:
+    fillTo: 45
+  Items:
+    '46':
+      type: GLASS_PANE
+      name: '&7'
+    '47':
+      type: GLASS_PANE
+      name: '&7'
+    '48':
+      type: GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page of custom drops.'
+      PreviousPage: true
+    '50':
+      type: DIAMOND_BLOCK
+      name: '&a&lAdd New Item'
+      lore:
+      - '&7Click here to add a new'
+      - '&7item which you have in your'
+      - '&7inventory.'
+      Button: AddNew
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page of custom drops.'
+      NextPage: true
+    '52':
+      type: GLASS_PANE
+      name: '&7'
+    '53':
+      type: GLASS_PANE
+      name: '&7'
+    '54':
+      type: GLASS_PANE
+      name: '&7'
 AddItemsMenu:
   name: '&b&lAdd Item Menu'
   slots: 27
@@ -1648,3 +1694,4 @@ ModifyCommandEditorPanel:
       - '&7'
       - '&bRight Click &8» &f-1.0'
       - '&bShift Right-Click &8» &f-0.1'
+      Button: Chance

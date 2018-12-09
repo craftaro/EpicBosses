@@ -78,13 +78,7 @@ public class DeathTextEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
 
-        panelBuilderCounter
-                .addSlotCounter("MainMessage")
-                .addSlotCounter("PositionMessage")
-                .addSlotCounter("OnlyShow")
-                .addSlotCounter("Radius");
     }
 
     private ClickAction getRadiusAction(BossEntity bossEntity) {

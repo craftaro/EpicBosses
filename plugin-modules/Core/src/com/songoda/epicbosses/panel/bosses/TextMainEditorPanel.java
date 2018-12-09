@@ -52,11 +52,6 @@ public class TextMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
 
-        panelBuilderCounter
-                .addSlotCounter("OnSpawn")
-                .addSlotCounter("OnDeath")
-                .addSlotCounter("Taunts");
     }
 }

@@ -123,8 +123,6 @@ public abstract class BossListEditorPanel extends VariablePanelHandler<BossEntit
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
 
-        panelBuilderCounter.addSlotCounter("CreateEntity");
     }
 }

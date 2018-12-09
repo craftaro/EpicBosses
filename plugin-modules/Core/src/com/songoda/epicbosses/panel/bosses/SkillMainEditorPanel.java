@@ -66,12 +66,7 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
 
-        panelBuilderCounter
-                .addSlotCounter("OverallChance")
-                .addSlotCounter("SkillList")
-                .addSlotCounter("Message");
     }
 
     private ClickAction getOverallChanceAction(BossEntity bossEntity) {

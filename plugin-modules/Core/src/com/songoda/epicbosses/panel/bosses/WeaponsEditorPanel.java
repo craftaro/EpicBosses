@@ -54,10 +54,6 @@ public class WeaponsEditorPanel extends SubVariablePanelHandler<BossEntity, Enti
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
 
-        panelBuilderCounter
-                .addSlotCounter("MainHand")
-                .addSlotCounter("OffHand");
     }
 }

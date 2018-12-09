@@ -64,8 +64,6 @@ public class TargetingEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
 
-        panelBuilderCounter.addSpecialCounter("TargetingSystem");
     }
 }

@@ -10,6 +10,7 @@ import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
@@ -46,6 +47,7 @@ public class CustomItemsPanel extends MainListPanelHandler {
         }));
 
         loadPage(panel, 0, currentItemStacks, entryList);
+        panel.getPanelBuilderCounter().getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAddItemsMenu().openFor((Player) event.getWhoClicked())));
     }
 
     private void loadPage(Panel panel, int requestedPage, Map<String, ItemStackHolder> currentItemStacks, List<String> entryList) {

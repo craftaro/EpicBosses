@@ -109,9 +109,9 @@ public class PanelBuilder {
                 if(innerSection.contains("NextPage") && innerSection.getBoolean("NextPage")) this.panelBuilderCounter.addPageData(slot, 1);
                 if(innerSection.contains("PreviousPage") && innerSection.getBoolean("PreviousPage")) this.panelBuilderCounter.addPageData(slot, -1);
 
-                if(innerSection.contains("Button") && slotsWith.containsKey(innerSection.getString("Button"))) {
+                if(innerSection.contains("Button")) {
                     String identifier = innerSection.getString("Button");
-                    Set<Integer> current = slotsWith.get(identifier);
+                    Set<Integer> current = slotsWith.getOrDefault(identifier, new HashSet<>());
 
                     current.add(slot);
                     this.panelBuilderCounter.getSlotsWithCounter().put(identifier, current);

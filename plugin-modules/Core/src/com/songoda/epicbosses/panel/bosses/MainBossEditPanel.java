@@ -37,20 +37,7 @@ public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
 
-        panelBuilderCounter
-                .addSlotCounter("Drops")
-                .addSlotCounter("Equipment")
-                .addSlotCounter("Targeting")
-                .addSlotCounter("Weapon")
-                .addSlotCounter("Skill")
-                .addSlotCounter("Stats")
-                .addSlotCounter("Particle")
-                .addSlotCounter("Spawning")
-                .addSlotCounter("Text")
-                .addSlotCounter("Editing")
-                .addSlotCounter("Command");
     }
 
     @Override

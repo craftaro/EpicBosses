@@ -68,11 +68,7 @@ public class SpawnTextEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
 
-        panelBuilderCounter
-                .addSlotCounter("Select")
-                .addSlotCounter("Radius");
     }
 
     private ClickAction getRadiusAction(BossEntity bossEntity) {

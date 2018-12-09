@@ -81,15 +81,15 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-
-        panelBuilderCounter
-                .addSlotCounter("CustomMessage")
-                .addSlotCounter("Radius")
-                .addSlotCounter("CustomData")
-                .addSlotCounter("Mode")
-                .addSlotCounter("DisplayName")
-                .addSlotCounter("Type");
+//        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
+//
+//        panelBuilderCounter
+//                .addSlotCounter("CustomMessage")
+//                .addSlotCounter("Radius")
+//                .addSlotCounter("CustomData")
+//                .addSlotCounter("Mode")
+//                .addSlotCounter("DisplayName")
+//                .addSlotCounter("Type");
     }
 
     private ClickAction getCustomDataAction(Skill skill) {

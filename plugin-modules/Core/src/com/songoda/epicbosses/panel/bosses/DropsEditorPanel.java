@@ -48,11 +48,7 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
 
-        panelBuilderCounter
-                .addSlotCounter("Selected")
-                .addSlotCounter("CreateDropTable");
     }
 
     @Override

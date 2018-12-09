@@ -26,13 +26,7 @@ public class EquipmentEditorPanel extends SubVariablePanelHandler<BossEntity, En
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
 
-        panelBuilderCounter
-                .addSlotCounter("Helmet")
-                .addSlotCounter("Chestplate")
-                .addSlotCounter("Leggings")
-                .addSlotCounter("Boots");
     }
 
     @Override

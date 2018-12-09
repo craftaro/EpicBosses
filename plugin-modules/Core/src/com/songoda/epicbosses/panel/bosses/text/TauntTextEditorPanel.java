@@ -77,12 +77,7 @@ public class TauntTextEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
 
-        panelBuilderCounter
-                .addSlotCounter("Radius")
-                .addSlotCounter("Delay")
-                .addSlotCounter("Taunts");
     }
 
     private ClickAction getRadiusAction(BossEntity bossEntity) {

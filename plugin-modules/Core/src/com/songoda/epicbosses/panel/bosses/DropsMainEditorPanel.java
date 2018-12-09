@@ -73,12 +73,7 @@ public class DropsMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
 
-        panelBuilderCounter
-                .addSlotCounter("NaturalDrops")
-                .addSlotCounter("DropTable")
-                .addSlotCounter("NaturalEXP");
     }
 
     private ClickAction getNaturalDropsAction(BossEntity bossEntity, Boolean current) {

@@ -92,10 +92,10 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-
-        panelBuilderCounter
-                .addSlotCounter("PotionEffect");
+//        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
+//
+//        panelBuilderCounter
+//                .addSlotCounter("PotionEffect");
     }
 
     private void loadPage(Panel panel, int page, List<PotionEffectHolder> potionEffectHolders, PotionSkillElement potionSkillElement, Skill skill) {

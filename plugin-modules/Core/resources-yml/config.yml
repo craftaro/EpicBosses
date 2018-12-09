@@ -106,8 +106,6 @@ Display:
     - '&3Type: &7{type}'
     - '&7'
     - '&7Click to edit the drop table.'
-  Items:
-    menuName: '&b&lEpicBosses &3&lCustom Items'
   Shop:
     menuName: '&b&lEpicBosses &3&lShop'
     name: '&b&lBuy {name}''s Egg'
@@ -141,6 +139,8 @@ Display:
       name: '&b&lCommand Section'
       lore:
       - '&3Chance &8» &f{chance}%'
-      - '&'
+      - '&7'
       - '&3Commands &8»'
       - '&f{commands}'
+      - '&7'
+      - '&7Click to edit command section.'

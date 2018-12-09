@@ -101,12 +101,6 @@ public abstract class ItemStackSubListPanelHandler extends SubVariablePanelHandl
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-
-        panelBuilderCounter
-                .addSlotCounter("Remove")
-                .addSlotCounter("AddNew");
-
 
     }
 

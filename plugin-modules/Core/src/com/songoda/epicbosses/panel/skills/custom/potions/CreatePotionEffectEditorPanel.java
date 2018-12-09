@@ -43,14 +43,14 @@ public class CreatePotionEffectEditorPanel extends SubVariablePanelHandler<Skill
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-
-        panelBuilderCounter
-                .addSlotCounter("Cancel")
-                .addSlotCounter("Level")
-                .addSlotCounter("Effect")
-                .addSlotCounter("Duration")
-                .addSlotCounter("Confirm");
+//        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
+//
+//        panelBuilderCounter
+//                .addSlotCounter("Cancel")
+//                .addSlotCounter("Level")
+//                .addSlotCounter("Effect")
+//                .addSlotCounter("Duration")
+//                .addSlotCounter("Confirm");
     }
 
     @Override
