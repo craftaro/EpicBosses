@@ -1,9 +1,13 @@
 package com.songoda.epicbosses.skills.types;
 
 import com.google.gson.annotations.Expose;
+import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
+import com.songoda.epicbosses.managers.BossSkillManager;
+import com.songoda.epicbosses.managers.files.SkillsFileManager;
 import com.songoda.epicbosses.skills.ISkillHandler;
 import com.songoda.epicbosses.skills.Skill;
+import com.songoda.epicbosses.utils.Debug;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.LivingEntity;
@@ -25,6 +29,20 @@ public class GroupSkillElement implements ISkillHandler<GroupSkillElement> {
 
     @Override
     public void castSkill(Skill skill, GroupSkillElement groupSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
-        //TODO
+        List<String> currentGroupedSkills = getGroupedSkills();
+        CustomBosses plugin = CustomBosses.get();
+        SkillsFileManager skillsFileManager = plugin.getSkillsFileManager();
+        BossSkillManager bossSkillManager = plugin.getBossSkillManager();
+
+        currentGroupedSkills.forEach(string -> {
+            Skill innerSkill = skillsFileManager.getSkill(string);
+
+            if(innerSkill == null) {
+                Debug.SKILL_NOT_FOUND.debug();
+                return;
+            }
+
+            bossSkillManager.handleSkill(null, skill, nearbyEntities, activeBossHolder, false, true);
+        });
     }
 }

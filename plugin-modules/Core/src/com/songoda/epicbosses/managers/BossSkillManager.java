@@ -1,17 +1,16 @@
 package com.songoda.epicbosses.managers;
 
+import com.songoda.epicbosses.events.BossSkillEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
+import com.songoda.epicbosses.skills.ISkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.custom.*;
 import com.songoda.epicbosses.skills.types.CommandSkillElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.skills.types.GroupSkillElement;
 import com.songoda.epicbosses.skills.types.PotionSkillElement;
-import com.songoda.epicbosses.utils.BossesGson;
-import com.songoda.epicbosses.utils.Debug;
-import com.songoda.epicbosses.utils.ILoadable;
-import com.songoda.epicbosses.utils.RandomUtils;
+import com.songoda.epicbosses.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
@@ -42,17 +41,48 @@ public class BossSkillManager implements ILoadable {
         registerCustomSkill(new Warp());
     }
 
-    public CustomSkillHandler handleCustomSkillCasting(Skill skill, CustomSkillElement customSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
-        String type = customSkillElement.getCustom().getType();
-        CustomSkillHandler customSkillHandler = getCustomSkillHandler(type);
-
-        if(customSkillHandler == null) {
-            Debug.FAILED_TO_OBTAIN_THE_SKILL_HANDLER.debug(type);
-            return null;
+    public void handleSkill(List<String> masterMessage, Skill skill, List<LivingEntity> targetedEntities, ActiveBossHolder activeBossHolder, boolean message, boolean subSkill) {
+        if(skill == null) {
+            Debug.SKILL_NOT_FOUND.debug();
+            return;
         }
 
-        customSkillHandler.castSkill(skill, customSkillElement, activeBossHolder, nearbyEntities);
-        return customSkillHandler;
+        ISkillHandler<?> skillHandler;
+        String bossDisplayName = activeBossHolder.getName();
+        String skillDisplayName = skill.getDisplayName();
+
+        if(skill.getType().equalsIgnoreCase("POTION")) {
+            PotionSkillElement potionSkillElement = getPotionSkillElement(skill);
+
+            potionSkillElement.castSkill(skill, potionSkillElement, activeBossHolder, targetedEntities);
+            skillHandler = potionSkillElement;
+        } else if(skill.getType().equalsIgnoreCase("COMMAND")) {
+            CommandSkillElement commandSkillElement = getCommandSkillElement(skill);
+
+            commandSkillElement.castSkill(skill, commandSkillElement, activeBossHolder, targetedEntities);
+            skillHandler = commandSkillElement;
+        } else if(skill.getType().equalsIgnoreCase("GROUP")) {
+            if(subSkill) return;
+
+            GroupSkillElement groupSkillElement = getGroupSkillElement(skill);
+
+            groupSkillElement.castSkill(skill, groupSkillElement, activeBossHolder, targetedEntities);
+            skillHandler = groupSkillElement;
+        } else if(skill.getType().equalsIgnoreCase("CUSTOM")) {
+            CustomSkillElement customSkillElement = getCustomSkillElement(skill);
+
+            skillHandler = handleCustomSkillCasting(skill, customSkillElement, activeBossHolder, targetedEntities);
+        } else {
+            return;
+        }
+
+        if(message && masterMessage != null) {
+            masterMessage.replaceAll(s -> s.replace("{boss}", bossDisplayName).replace("{skill}", skillDisplayName));
+            targetedEntities.forEach(livingEntity -> MessageUtils.get().sendMessage(livingEntity, masterMessage));
+        }
+
+        BossSkillEvent bossSkillEvent = new BossSkillEvent(activeBossHolder, skillHandler, skill);
+        ServerUtils.get().callEvent(bossSkillEvent);
     }
 
     public PotionSkillElement getPotionSkillElement(Skill skill) {
@@ -125,6 +155,19 @@ public class BossSkillManager implements ILoadable {
         }
 
         return targetedList;
+    }
+
+    private CustomSkillHandler handleCustomSkillCasting(Skill skill, CustomSkillElement customSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
+        String type = customSkillElement.getCustom().getType();
+        CustomSkillHandler customSkillHandler = getCustomSkillHandler(type);
+
+        if(customSkillHandler == null) {
+            Debug.FAILED_TO_OBTAIN_THE_SKILL_HANDLER.debug(type);
+            return null;
+        }
+
+        customSkillHandler.castSkill(skill, customSkillElement, activeBossHolder, nearbyEntities);
+        return customSkillHandler;
     }
 
     private CustomSkillHandler getCustomSkillHandler(String name) {

@@ -96,38 +96,8 @@ public class BossSkillListener implements Listener {
         }
 
         List<LivingEntity> targettedEntities = this.bossSkillManager.getTargetedEntities(activeBossHolder, skill, activeBossHolder.getLivingEntity().getLocation(), damagingEntity);
-        String bossDisplayName = activeBossHolder.getName();
-        String skillDisplayName = skill.getDisplayName();
-        ISkillHandler<?> skillHandler;
 
-        if(skill.getType().equalsIgnoreCase("POTION")) {
-            PotionSkillElement potionSkillElement = this.bossSkillManager.getPotionSkillElement(skill);
-
-            potionSkillElement.castSkill(skill, potionSkillElement, activeBossHolder, targettedEntities);
-            skillHandler = potionSkillElement;
-        } else if(skill.getType().equalsIgnoreCase("COMMAND")) {
-            CommandSkillElement commandSkillElement = this.bossSkillManager.getCommandSkillElement(skill);
-
-            commandSkillElement.castSkill(skill, commandSkillElement, activeBossHolder, targettedEntities);
-            skillHandler = commandSkillElement;
-        } else if(skill.getType().equalsIgnoreCase("GROUP")) {
-            GroupSkillElement groupSkillElement = this.bossSkillManager.getGroupSkillElement(skill);
-
-            groupSkillElement.castSkill(skill, groupSkillElement, activeBossHolder, targettedEntities);
-            skillHandler = groupSkillElement;
-        } else if(skill.getType().equalsIgnoreCase("CUSTOM")) {
-            CustomSkillElement customSkillElement = this.bossSkillManager.getCustomSkillElement(skill);
-
-            skillHandler = this.bossSkillManager.handleCustomSkillCasting(skill, customSkillElement, activeBossHolder, targettedEntities);
-        } else {
-            return;
-        }
-
-        masterMessage.replaceAll(s -> s.replace("{boss}", bossDisplayName).replace("{skill}", skillDisplayName));
-        targettedEntities.forEach(livingEntity -> MessageUtils.get().sendMessage(livingEntity, masterMessage));
-
-        BossSkillEvent bossSkillEvent = new BossSkillEvent(activeBossHolder, skillHandler, skill);
-        ServerUtils.get().callEvent(bossSkillEvent);
+        this.bossSkillManager.handleSkill(masterMessage, skill, targettedEntities, activeBossHolder, true, false);
     }
 
 }
