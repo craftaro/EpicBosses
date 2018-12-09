@@ -94,6 +94,7 @@ public enum Message {
 
     Boss_Items_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Items_CannotBeRemoved("&c&l(!) &cThe selected item cannot be removed because it is still used in {0} different positions on the bosses."),
+    Boss_Items_DefaultCannotBeRemoved("&c&l(!) &cThe selected item cannot be removed because it is the default item for something in one of the boss menu's."),
     Boss_Items_Removed("&b&lEpicBosses &8» &7The selected item has been removed from the EpicBosses custom items database."),
     Boss_Items_Added("&b&lEpicBosses &8» &7You have added an item to the EpicBosses custom items database."),
     Boss_Items_AlreadySet("&c&l(!) &cYou must take out the item you have set to add before you can add another."),

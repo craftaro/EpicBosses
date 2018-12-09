@@ -11,7 +11,7 @@
     "type": "OAK_PRESSURE_PLATE",
     "name": "&c&lDefault Drop Table Menu Item"
   },
-  "SelectedDropTableItem": {
+  "DefaultSelectedDropTableItem": {
     "type": "LIGHT_WEIGHTED_PRESSURE_PLATE",
     "name": "&c&lSelected Defauult Drop Table Menu Item"
   },

@@ -118,7 +118,10 @@ public abstract class SingleMessageListEditor<T> extends VariablePanelHandler<T>
                 for(String s : presetLore) {
                     if(s.contains("{message}")) {
                         for(String message : messages) {
-                            newLore.add(StringUtils.get().translateColor("&7" + message));
+                            List<String> split = StringUtils.get().splitString(message, 45);
+
+                            split.forEach(string -> newLore.add(StringUtils.get().translateColor("&7") + string));
+                            newLore.add(" ");
                         }
                     } else {
                         newLore.add(StringUtils.get().translateColor(s));

@@ -66,6 +66,8 @@ public class CustomItemsPanel extends MainListPanelHandler {
 
                         if(timesUsed > 0) {
                             Message.Boss_Items_CannotBeRemoved.msg(e.getWhoClicked(), timesUsed);
+                        } else if(name.contains("Default")) {
+                            Message.Boss_Items_DefaultCannotBeRemoved.msg(e.getWhoClicked(), timesUsed);
                         } else {
                             this.itemsFileManager.removeItemStack(name);
                             currentItemStacks.remove(name);

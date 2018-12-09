@@ -106,7 +106,7 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
                 ItemStackHolder itemStackHolder;
 
                 if(dropTableName.equalsIgnoreCase(name)) {
-                    itemStackHolder = BossAPI.getStoredItemStack("SelectedDropTableItem");
+                    itemStackHolder = BossAPI.getStoredItemStack("DefaultSelectedDropTableItem");
                 } else {
                     itemStackHolder = BossAPI.getStoredItemStack("DefaultDropTableMenuItem");
                 }
