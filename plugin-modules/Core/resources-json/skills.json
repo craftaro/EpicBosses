@@ -24,6 +24,7 @@
     "customData": {
       "commands": [
         {
+          "name": "a",
           "chance": 25,
           "commands": [
             "Guts1",
@@ -31,6 +32,7 @@
           ]
         },
         {
+          "name": "b",
           "chance": 10,
           "commands": [
             "Guts3"

@@ -13,7 +13,15 @@ import java.util.List;
  */
 public class SubCommandSkillElement {
 
+    @Expose @Getter private final String name;
+
     @Expose @Getter @Setter private Double chance;
     @Expose @Getter @Setter private List<String> commands;
+
+    public SubCommandSkillElement(String name, Double chance, List<String> commands) {
+        this.name = name;
+        this.chance = chance;
+        this.commands = commands;
+    }
 
 }

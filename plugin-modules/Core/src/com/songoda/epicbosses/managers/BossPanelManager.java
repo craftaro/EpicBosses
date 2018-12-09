@@ -22,6 +22,8 @@ import com.songoda.epicbosses.panel.handlers.*;
 import com.songoda.epicbosses.panel.skills.MainSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.SkillTypeEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.CommandSkillEditorPanel;
+import com.songoda.epicbosses.panel.skills.custom.commands.CommandListSkillEditorPanel;
+import com.songoda.epicbosses.panel.skills.custom.commands.ModifyCommandEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.potions.CreatePotionEffectEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.potions.PotionEffectTypeEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.PotionSkillEditorPanel;
@@ -68,7 +70,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
     @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu, skillTypeEditMenu, potionSkillEditorPanel, commandSkillEditorPanel;
     @Getter private ISubVariablePanelHandler<Skill, PotionEffectHolder> createPotionEffectMenu, potionEffectTypeEditMenu;
-    @Getter private ISubVariablePanelHandler<Skill, SubCommandSkillElement> modifyCommandEditMenu;
+    @Getter private ISubVariablePanelHandler<Skill, SubCommandSkillElement> modifyCommandEditMenu, commandListSkillEditMenu;
 
     private final CustomBosses customBosses;
 
@@ -169,6 +171,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("PotionSkillEditorPanel"));
         PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("CreatePotionEffectEditorPanel"));
         PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("CommandSkillEditorPanel"));
+        PanelBuilder panelBuilder5 = new PanelBuilder(editor.getConfigurationSection("ModifyCommandEditorPanel"));
 
         this.mainSkillEditMenu = new MainSkillEditorPanel(this, panelBuilder, this.customBosses);
         this.customMessageEditMenu = new SingleMessageListEditor<Skill>(this, getListMenu("Skills.MainEdit"), this.customBosses) {
@@ -199,6 +202,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.createPotionEffectMenu = new CreatePotionEffectEditorPanel(this, panelBuilder3, this.customBosses);
         this.potionEffectTypeEditMenu = new PotionEffectTypeEditorPanel(this, getListMenu("Skills.CreatePotion"), this.customBosses);
         this.commandSkillEditorPanel = new CommandSkillEditorPanel(this, panelBuilder4, this.customBosses);
+        this.modifyCommandEditMenu = new ModifyCommandEditorPanel(this, panelBuilder5, this.customBosses);
+        this.commandListSkillEditMenu = new CommandListSkillEditorPanel(this, getListMenu("Skills.CommandList"), this.customBosses);
     }
 
     private void reloadSkillEditMenus() {
@@ -208,6 +213,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("PotionSkillEditorPanel"));
         PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("CreatePotionEffectEditorPanel"));
         PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("CommandSkillEditorPanel"));
+        PanelBuilder panelBuilder5 = new PanelBuilder(editor.getConfigurationSection("ModifyCommandEditorPanel"));
 
         this.mainSkillEditMenu.initializePanel(panelBuilder);
         this.customMessageEditMenu.initializePanel(getListMenu("Skills.MainEdit"));
@@ -216,6 +222,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.createPotionEffectMenu.initializePanel(panelBuilder3);
         this.potionEffectTypeEditMenu.initializePanel(getListMenu("Skills.CreatePotion"));
         this.commandSkillEditorPanel.initializePanel(panelBuilder4);
+        this.modifyCommandEditMenu.initializePanel(panelBuilder5);
+        this.commandListSkillEditMenu.initializePanel(getListMenu("Skills.CommandList"));
     }
 
     //---------------------------------------------

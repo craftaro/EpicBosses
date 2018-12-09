@@ -81,15 +81,7 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-//        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-//
-//        panelBuilderCounter
-//                .addSlotCounter("CustomMessage")
-//                .addSlotCounter("Radius")
-//                .addSlotCounter("CustomData")
-//                .addSlotCounter("Mode")
-//                .addSlotCounter("DisplayName")
-//                .addSlotCounter("Type");
+
     }
 
     private ClickAction getCustomDataAction(Skill skill) {
@@ -104,7 +96,7 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
             } else if(type.equalsIgnoreCase("CUSTOM")) {
 
             } else if(type.equalsIgnoreCase("COMMAND")) {
-
+                this.bossPanelManager.getCommandSkillEditorPanel().openFor(player, skill);
             }
         };
     }

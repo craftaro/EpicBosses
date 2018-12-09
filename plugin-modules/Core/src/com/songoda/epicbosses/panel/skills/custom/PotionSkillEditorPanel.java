@@ -92,10 +92,7 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-//        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-//
-//        panelBuilderCounter
-//                .addSlotCounter("PotionEffect");
+
     }
 
     private void loadPage(Panel panel, int page, List<PotionEffectHolder> potionEffectHolders, PotionSkillElement potionSkillElement, Skill skill) {
@@ -129,7 +126,7 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
                     potionSkillElement.setPotions(potionEffectHolders);
 
 
-                    JsonObject jsonObject = BossAPI.convertSkillElement(potionSkillElement);
+                    JsonObject jsonObject = BossAPI.convertObjectToJsonObject(potionSkillElement);
 
                     skill.setCustomData(jsonObject);
                     this.skillsFileManager.save();

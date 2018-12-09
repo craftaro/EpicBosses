@@ -211,30 +211,11 @@ public class BossAPI {
         return jsonParser.parse(jsonString).getAsJsonObject();
     }
 
-    public static JsonObject convertSkillElement(CommandSkillElement commandSkillElement) {
+
+
+    public static <T> JsonObject convertObjectToJsonObject(T object) {
         JsonParser jsonParser = new JsonParser();
-        String jsonString = BossesGson.get().toJson(commandSkillElement);
-
-        return jsonParser.parse(jsonString).getAsJsonObject();
-    }
-
-    public static JsonObject convertSkillElement(PotionSkillElement potionSkillElement) {
-        JsonParser jsonParser = new JsonParser();
-        String jsonString = BossesGson.get().toJson(potionSkillElement);
-
-        return jsonParser.parse(jsonString).getAsJsonObject();
-    }
-
-    public static JsonObject convertSkillElement(CustomSkillElement customSkillElement) {
-        JsonParser jsonParser = new JsonParser();
-        String jsonString = BossesGson.get().toJson(customSkillElement);
-
-        return jsonParser.parse(jsonString).getAsJsonObject();
-    }
-
-    public static JsonObject convertSkillElement(GroupSkillElement groupSkillElement) {
-        JsonParser jsonParser = new JsonParser();
-        String jsonString = BossesGson.get().toJson(groupSkillElement);
+        String jsonString = BossesGson.get().toJson(object);
 
         return jsonParser.parse(jsonString).getAsJsonObject();
     }

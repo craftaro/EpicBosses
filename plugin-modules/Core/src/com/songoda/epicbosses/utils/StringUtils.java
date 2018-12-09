@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -17,6 +18,18 @@ import java.util.Queue;
 public class StringUtils {
 
     private static StringUtils INSTANCE = new StringUtils();
+
+    public List<String> splitString(String input, int splitSize) {
+        List<String> messages = new ArrayList<>();
+        int index = 0;
+
+        while (index < input.length()) {
+            messages.add(input.substring(index, Math.min(index + splitSize, input.length())));
+            index += splitSize;
+        }
+
+        return messages;
+    }
 
     public String stripColor(String string) {
         return ChatColor.stripColor(string);

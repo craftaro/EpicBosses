@@ -1671,9 +1671,8 @@ ModifyCommandEditorPanel:
       type: BOOK
       name: '&e&lCommands'
       lore:
-      - '&7Currently selected commands:'
-      - '&7'
-      - '{commands}'
+      - '&fCurrently selected commands:'
+      - '&7{commands}'
       Button: Commands
     '5':
       type: PAPER
@@ -1684,14 +1683,14 @@ ModifyCommandEditorPanel:
       type: GUNPOWDER
       name: '&e&lChance'
       lore:
-      - '&bCurrently: &f{chance}'
+      - '&bCurrently: &f{chance}%'
       - '&7'
       - '&7Click here to modify the chance'
       - '&7value for this boss.'
       - '&7'
-      - '&bLeft Click &8» &f+1.0'
-      - '&bShift Left-Click &8» &f+0.1'
+      - '&bLeft Click &8» &f+1.0%'
+      - '&bShift Left-Click &8» &f+0.1%'
       - '&7'
-      - '&bRight Click &8» &f-1.0'
-      - '&bShift Right-Click &8» &f-0.1'
+      - '&bRight Click &8» &f-1.0%'
+      - '&bShift Right-Click &8» &f-0.1%'
       Button: Chance

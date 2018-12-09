@@ -144,3 +144,10 @@ Display:
       - '&f{commands}'
       - '&7'
       - '&7Click to edit command section.'
+    CommandList:
+      menuName: '&b&l{name} Skill Editor'
+      selectedName: '&bCommand: &f{name} &a&l** Selected **'
+      name: '&bCommand: &f{name}'
+      lore:
+      - '&fCommands within this section:'
+      - '{commands}'

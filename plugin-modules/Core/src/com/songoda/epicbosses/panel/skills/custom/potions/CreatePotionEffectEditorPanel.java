@@ -43,14 +43,7 @@ public class CreatePotionEffectEditorPanel extends SubVariablePanelHandler<Skill
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-//        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-//
-//        panelBuilderCounter
-//                .addSlotCounter("Cancel")
-//                .addSlotCounter("Level")
-//                .addSlotCounter("Effect")
-//                .addSlotCounter("Duration")
-//                .addSlotCounter("Confirm");
+
     }
 
     @Override
@@ -160,7 +153,7 @@ public class CreatePotionEffectEditorPanel extends SubVariablePanelHandler<Skill
                     currentList.add(potionEffectHolder);
                     potionSkillElement.setPotions(currentList);
 
-                    JsonObject jsonObject = BossAPI.convertSkillElement(potionSkillElement);
+                    JsonObject jsonObject = BossAPI.convertObjectToJsonObject(potionSkillElement);
 
                     skill.setCustomData(jsonObject);
                     this.skillsFileManager.save();
