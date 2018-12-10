@@ -48,6 +48,9 @@ public class BossNewCmd extends SubCommand {
             return;
         }
 
+        //-------------------
+        // C O M M A N D
+        //-------------------
         if(args.length >= 4 && args[1].equalsIgnoreCase("command")) {
             String nameInput = args[2];
 
@@ -56,32 +59,8 @@ public class BossNewCmd extends SubCommand {
                 return;
             }
 
-            int length = args.length;
-            List<String> commands = new ArrayList<>();
-            StringBuilder current = new StringBuilder();
+            List<String> commands = appendList(args);
 
-            for(int i = 4; i < length; i++) {
-                String arg = args[i];
-
-                if(arg.contains("||")) {
-                    String[] split = arg.split("||");
-
-                    current.append(split[0]);
-                    commands.add(current.toString());
-
-                    if(split.length >= 2) {
-                        current = new StringBuilder(split[1]);
-                    } else {
-                        current = new StringBuilder();
-                    }
-
-                    continue;
-                }
-
-                current.append(arg);
-            }
-
-            commands.add(current.toString());
             this.commandsFileManager.addNewCommand(nameInput, commands);
             this.commandsFileManager.save();
 
@@ -89,6 +68,9 @@ public class BossNewCmd extends SubCommand {
             return;
         }
 
+        //-------------------
+        // M E S S A G E
+        //-------------------
         if(args.length >= 4 && args[1].equalsIgnoreCase("message")) {
             String nameInput = args[2];
 
@@ -96,8 +78,19 @@ public class BossNewCmd extends SubCommand {
                 Message.Boss_New_AlreadyExists.msg(sender, "Message");
                 return;
             }
+
+            List<String> messages = appendList(args);
+
+            this.messagesFileManager.addNewMessage(nameInput, messages);
+            this.messagesFileManager.save();
+
+            Message.Boss_New_Message.msg(sender, nameInput);
+            return;
         }
 
+        //----------------------
+        // D R O P   T A B L E
+        //----------------------
         if(args.length == 4 && args[1].equalsIgnoreCase("droptable")) {
             String nameInput = args[2];
             String typeInput = args[3];
@@ -131,6 +124,9 @@ public class BossNewCmd extends SubCommand {
             return;
         }
 
+        //-------------------
+        // S K I L L
+        //-------------------
         if(args.length == 3 && args[1].equalsIgnoreCase("skill")) {
             //TODO: Complete new skill command
 
@@ -139,5 +135,35 @@ public class BossNewCmd extends SubCommand {
 
         Message.Boss_New_InvalidArgs.msg(sender);
         return;
+    }
+
+    private List<String> appendList(String[] args) {
+        int length = args.length;
+        List<String> listOfElement = new ArrayList<>();
+        StringBuilder current = new StringBuilder();
+
+        for(int i = 4; i < length; i++) {
+            String arg = args[i];
+
+            if(arg.contains("||")) {
+                String[] split = arg.split("||");
+
+                current.append(split[0]);
+                listOfElement.add(current.toString());
+
+                if(split.length >= 2) {
+                    current = new StringBuilder(split[1]);
+                } else {
+                    current = new StringBuilder();
+                }
+
+                continue;
+            }
+
+            current.append(arg);
+        }
+
+        listOfElement.add(current.toString());
+        return listOfElement;
     }
 }

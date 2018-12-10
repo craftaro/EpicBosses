@@ -144,6 +144,7 @@ public enum Message {
     Boss_New_InvalidDropTableType("&c&l(!) &cThe specified DropTable type is invalid. Please use &fGive, Drop, Spray&c."),
     Boss_New_DropTable("&b&lEpicBosses &8» &7You have created a new drop table with the name &f{0}&7 and type &f{1}&7."),
     Boss_New_Command("&b&lEpicBosses &8» &7You have created a new command with the name &f{0}&7."),
+    Boss_New_Message("&b&lEpicBosses &8» &7You have created a new message with the name &f{0}&7."),
     Boss_New_SomethingWentWrong("&c&l(!) &cSomething went wrong while trying to create a new &f{0}&c."),
 
     Boss_Reload_NoPermission("&c&l(!) &cYou do not have access to this command."),
