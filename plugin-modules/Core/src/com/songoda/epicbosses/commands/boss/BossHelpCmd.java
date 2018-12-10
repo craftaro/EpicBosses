@@ -39,6 +39,9 @@ public class BossHelpCmd extends SubCommand {
                 case 3:
                     Message.Boss_Help_Page3.msg(sender);
                     break;
+                case 4:
+                    Message.Boss_Help_Page4.msg(sender);
+                    break;
             }
 
             return;

@@ -52,35 +52,51 @@ public enum Message {
 
     Boss_Help_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Help_Page1(
-            "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 1/3) &3&l]&8&m--------*----\n" +
+            "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 1/4) &3&l]&8&m--------*----\n" +
             "&b/boss help (page) &8» &7Displays boss commands.\n" +
             "&b/boss create [name] [entity] &8» &7Start the creation of a boss.\n" +
             "&b/boss edit (name) &8» &7Edit the specified boss.\n" +
             "&b/boss info [name] &8» &7Shows information on the specified boss.\n" +
             "&b/boss nearby (radius) &8» &7Shows the nearby bosses.\n" +
             "&b/boss reload &8» &7Reloads the boss plugin.\n" +
-            "&b/boss killall (world) &8» &7Kills all bosses/minions." +
+            "&b/boss killall (world) &8» &7Kills all bosses/minions.\n" +
             "&7\n" +
             "&7Use /boss help 2 to view the next page.\n" +
             "&8&m----*-----------------------------------*----"),
     Boss_Help_Page2(
-            "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 2/3) &3&l]&8&m--------*----\n" +
-            "&b/boss spawn [name] (location) &8» &7Spawns a boss at your location or the specified location.\n" +
-            " &7&o(Separate location with commas, an example is: world,0,100,0)\n" +
+            "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 2/4) &3&l]&8&m--------*----\n" +
+            "&b/boss spawn [name] (location) &8» &7Spawns a boss at your" +
+            " location or the specified location.\n" +
+            "&7&o(Separate location with commas, an example is: world,0,100,0)\n" +
             "&b/boss time (section) &8» &7Shows the time left till next auto spawn.\n" +
             "&b/boss droptable &8» &7Shows all current drop tables.\n" +
             "&b/boss items &8» &7Shows all current custom items.\n" +
             "&b/boss skills &8» &7Shows all current set skills.\n" +
             "&7\n" +
+            "&7Use /boss help 3 to view the next page.\n" +
             "&8&m----*-----------------------------------*----"),
     Boss_Help_Page3(
-            "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 3/3) &3&l]&8&m--------*----\n" +
+            "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 3/4) &3&l]&8&m--------*----\n" +
             "&b/boss debug &8» &7Used to toggle the debug aspect of the plugin.\n" +
-            "&b/boss giveegg [name] [player] (amount) &8» &7Used to be given a spawn item of the boss.\n" +
+            "&b/boss giveegg [name] [player] (amount) &8» &7Used to be given a " +
+            "spawn item of the boss.\n" +
             "&b/boss list &8» &7Shows all the list of current boss entities.\n" +
-            "&b/boss new [droptable/skill] [name] [type] &8» &7Used to create new drop tables and skills.\n" +
-            "&b\n" +
+            "&b/boss new skill [name] [type] [mode] &8» &7Used to create a new skill section.\n" +
+            "&b/boss new droptable [name] [type] &8» &7Used to create a new drop table.\n" +
             "&7\n" +
+            "&7Use /boss help 4 to view the next page.\n" +
+            "&8&m----*-----------------------------------*----"),
+    Boss_Help_Page4(
+            "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 4/4) &3&l]&8&m--------*----\n" +
+            "&b/boss new command [name] [commands] &8» &7Used to create a new command section.\n" +
+            "&7&o(To add a new line use &7||&7&o in-between the messages.)\n" +
+            "&b/boss new message [name] [messages] &8» &7Used to create a new message section.\n" +
+            "&7&o(To add a new line use &7||&7&o in-between the messages.)\n" +
+            "&7\n" +
+            "&7\n" +
+            "&7\n" +
+            "&7\n" +
+            "&7Use /boss help [page] to view the next page.\n" +
             "&8&m----*-----------------------------------*----"),
 
     Boss_Info_NoPermission("&c&l(!) &cYou do not have access to this command."),
@@ -122,6 +138,8 @@ public enum Message {
     Boss_New_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_New_InvalidArgs("&c&l(!) &cInvalid arguments! You must use &n/boss new droptable [name] (type)&c or &n/boss new skill [name]&c!"),
     Boss_New_CreateArgumentsDropTable("&b&lEpicBosses &8» &7Create a new droptable with the command &f/boss new droptable [name] [type]&7."),
+    Boss_New_CreateArgumentsMessage("&b&lEpicBosses &8» &7Create a new message with the command &f/boss new message [name] [message(s)]. \n&7&oUse &f|| &7&oto reference a new line."),
+    Boss_New_CreateArgumentsCommand("&b&lEpicBosses &8» &7Create a new command with the command &f/boss new command [name] [command(s)]. \n&7&oUse &f|| &7&oto reference a new line."),
     Boss_New_DropTableAlreadyExists("&c&l(!) &cThe specified DropTable name already exists. Please try another name."),
     Boss_New_InvalidDropTableType("&c&l(!) &cThe specified DropTable type is invalid. Please use &fGive, Drop, Spray&c."),
     Boss_New_DropTable("&b&lEpicBosses &8» &7You have created a new drop table with the name &f{0}&7 and type &f{1}&7."),

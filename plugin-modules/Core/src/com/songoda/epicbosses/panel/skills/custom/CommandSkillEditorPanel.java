@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.panel.skills.custom;
 
+import com.google.gson.JsonObject;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -18,10 +19,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Charles Cullen
@@ -79,7 +77,20 @@ public class CommandSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     private ClickAction getAddNewAction(Skill skill) {
         return event -> {
+            SubCommandSkillElement subCommandSkillElement = new SubCommandSkillElement(UUID.randomUUID().toString(), 100.0, new ArrayList<>());
+            CommandSkillElement commandSkillElement = this.plugin.getBossSkillManager().getCommandSkillElement(skill);
 
+            List<SubCommandSkillElement> subElements = commandSkillElement.getCommands();
+
+            subElements.add(subCommandSkillElement);
+            commandSkillElement.setCommands(subElements);
+
+            JsonObject jsonObject = BossAPI.convertObjectToJsonObject(commandSkillElement);
+
+            skill.setCustomData(jsonObject);
+            this.plugin.getSkillsFileManager().save();
+
+            openFor((Player) event.getWhoClicked(), skill);
         };
     }
 

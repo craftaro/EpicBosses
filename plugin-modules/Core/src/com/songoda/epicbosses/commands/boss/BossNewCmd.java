@@ -39,6 +39,15 @@ public class BossNewCmd extends SubCommand {
             return;
         }
 
+        if(args.length >= 4 && args[1].equalsIgnoreCase("command")) {
+
+            return;
+        }
+
+        if(args.length >= 4 && args[1].equalsIgnoreCase("message")) {
+
+        }
+
         if(args.length == 4 && args[1].equalsIgnoreCase("droptable")) {
             String nameInput = args[2];
             String typeInput = args[3];
