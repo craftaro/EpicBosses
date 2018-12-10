@@ -1,6 +1,7 @@
 -> Add the Custom Skill Editing GUIs
 -> Add the new Command aspect (via command)
 -> Add the new Message aspect (via command)
+-> Add the new Skill aspect (via command)
 -> Add the DropTable Main Editing GUI (Will have buttons for DropType and Rewards)
 -> Add the DropTable Rewards Editing GUI
  -> Spray - Has a button for Rewards List (with chances), button for RandomSpray, button for MaxDistance, button for MaxDrops

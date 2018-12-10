@@ -45,7 +45,7 @@ public class BossNewCmd extends SubCommand {
         }
 
         if(args.length >= 4 && args[1].equalsIgnoreCase("message")) {
-
+            String nameInput = args[2];
         }
 
         if(args.length == 4 && args[1].equalsIgnoreCase("droptable")) {
