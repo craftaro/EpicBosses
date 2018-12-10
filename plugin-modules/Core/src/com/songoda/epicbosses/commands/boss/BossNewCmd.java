@@ -4,11 +4,16 @@ import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.managers.BossDropTableManager;
+import com.songoda.epicbosses.managers.files.CommandsFileManager;
 import com.songoda.epicbosses.managers.files.DropTableFileManager;
+import com.songoda.epicbosses.managers.files.MessagesFileManager;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.Permission;
 import com.songoda.epicbosses.utils.command.SubCommand;
 import org.bukkit.command.CommandSender;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Charles Cullen
@@ -24,12 +29,16 @@ public class BossNewCmd extends SubCommand {
 
     private DropTableFileManager dropTableFileManager;
     private BossDropTableManager bossDropTableManager;
+    private MessagesFileManager messagesFileManager;
+    private CommandsFileManager commandsFileManager;
 
     public BossNewCmd(CustomBosses plugin) {
         super("new");
 
         this.dropTableFileManager = plugin.getDropTableFileManager();
         this.bossDropTableManager = plugin.getBossDropTableManager();
+        this.messagesFileManager = plugin.getBossMessagesFileManager();
+        this.commandsFileManager = plugin.getBossCommandFileManager();
     }
 
     @Override
@@ -40,12 +49,53 @@ public class BossNewCmd extends SubCommand {
         }
 
         if(args.length >= 4 && args[1].equalsIgnoreCase("command")) {
+            String nameInput = args[2];
 
+            if(this.commandsFileManager.getCommands(nameInput) != null) {
+                Message.Boss_New_AlreadyExists.msg(sender, "Command");
+                return;
+            }
+
+            int length = args.length;
+            List<String> commands = new ArrayList<>();
+            StringBuilder current = new StringBuilder();
+
+            for(int i = 4; i < length; i++) {
+                String arg = args[i];
+
+                if(arg.contains("||")) {
+                    String[] split = arg.split("||");
+
+                    current.append(split[0]);
+                    commands.add(current.toString());
+
+                    if(split.length >= 2) {
+                        current = new StringBuilder(split[1]);
+                    } else {
+                        current = new StringBuilder();
+                    }
+
+                    continue;
+                }
+
+                current.append(arg);
+            }
+
+            commands.add(current.toString());
+            this.commandsFileManager.addNewCommand(nameInput, commands);
+            this.commandsFileManager.save();
+
+            Message.Boss_New_Command.msg(sender, nameInput);
             return;
         }
 
         if(args.length >= 4 && args[1].equalsIgnoreCase("message")) {
             String nameInput = args[2];
+
+            if(this.commandsFileManager.getCommands(nameInput) != null) {
+                Message.Boss_New_AlreadyExists.msg(sender, "Message");
+                return;
+            }
         }
 
         if(args.length == 4 && args[1].equalsIgnoreCase("droptable")) {
@@ -54,7 +104,7 @@ public class BossNewCmd extends SubCommand {
             boolean validType = false;
 
             if(this.dropTableFileManager.getDropTable(nameInput) != null) {
-                Message.Boss_New_DropTableAlreadyExists.msg(sender);
+                Message.Boss_New_AlreadyExists.msg(sender, "DropTable");
                 return;
             }
 

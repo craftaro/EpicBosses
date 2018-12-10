@@ -81,8 +81,8 @@ public enum Message {
             "&b/boss giveegg [name] [player] (amount) &8» &7Used to be given a " +
             "spawn item of the boss.\n" +
             "&b/boss list &8» &7Shows all the list of current boss entities.\n" +
-            "&b/boss new skill [name] [type] [mode] &8» &7Used to create a new skill section.\n" +
-            "&b/boss new droptable [name] [type] &8» &7Used to create a new drop table.\n" +
+            "&b/boss new skill [name] [type] [mode] &8» &7Create a new skill section.\n" +
+            "&b/boss new droptable [name] [type] &8» &7Create a new drop table section.\n" +
             "&7\n" +
             "&7Use /boss help 4 to view the next page.\n" +
             "&8&m----*-----------------------------------*----"),
@@ -140,9 +140,10 @@ public enum Message {
     Boss_New_CreateArgumentsDropTable("&b&lEpicBosses &8» &7Create a new droptable with the command &f/boss new droptable [name] [type]&7."),
     Boss_New_CreateArgumentsMessage("&b&lEpicBosses &8» &7Create a new message with the command &f/boss new message [name] [message(s)]. \n&7&oUse &f|| &7&oto reference a new line."),
     Boss_New_CreateArgumentsCommand("&b&lEpicBosses &8» &7Create a new command with the command &f/boss new command [name] [command(s)]. \n&7&oUse &f|| &7&oto reference a new line."),
-    Boss_New_DropTableAlreadyExists("&c&l(!) &cThe specified DropTable name already exists. Please try another name."),
+    Boss_New_AlreadyExists("&c&l(!) &cThe specified {0} name already exists. Please try another name."),
     Boss_New_InvalidDropTableType("&c&l(!) &cThe specified DropTable type is invalid. Please use &fGive, Drop, Spray&c."),
     Boss_New_DropTable("&b&lEpicBosses &8» &7You have created a new drop table with the name &f{0}&7 and type &f{1}&7."),
+    Boss_New_Command("&b&lEpicBosses &8» &7You have created a new command with the name &f{0}&7."),
     Boss_New_SomethingWentWrong("&c&l(!) &cSomething went wrong while trying to create a new &f{0}&c."),
 
     Boss_Reload_NoPermission("&c&l(!) &cYou do not have access to this command."),
