@@ -151,3 +151,13 @@ Display:
       lore:
       - '&fCommands within this section:'
       - '{commands}'
+    Group:
+      menuName: '&b&l{name} Skill Editor'
+      selectedName: '&bSkill: &f{name} &a&l** Selected **'
+      name: '&bSkill: &f{name}'
+      lore:
+      - '&3Mode: &7{mode}'
+      - '&3Type: &7{type}'
+      - '&3Display Name: &7{displayName}'
+      - '&3Custom Message: &7{customMessage}'
+      - '&3Radius: &7{radius}'

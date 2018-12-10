@@ -22,6 +22,7 @@ import com.songoda.epicbosses.panel.handlers.*;
 import com.songoda.epicbosses.panel.skills.MainSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.SkillTypeEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.CommandSkillEditorPanel;
+import com.songoda.epicbosses.panel.skills.custom.GroupSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.commands.CommandListSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.commands.ModifyCommandEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.potions.CreatePotionEffectEditorPanel;
@@ -68,7 +69,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
             onTauntTextEditMenu;
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu, statisticListEditMenu;
 
-    @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu, skillTypeEditMenu, potionSkillEditorPanel, commandSkillEditorPanel;
+    @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu, skillTypeEditMenu, potionSkillEditorPanel, commandSkillEditorPanel, groupSkillEditorPanel;
     @Getter private ISubVariablePanelHandler<Skill, PotionEffectHolder> createPotionEffectMenu, potionEffectTypeEditMenu;
     @Getter private ISubVariablePanelHandler<Skill, SubCommandSkillElement> modifyCommandEditMenu, commandListSkillEditMenu;
 
@@ -204,6 +205,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.commandSkillEditorPanel = new CommandSkillEditorPanel(this, panelBuilder4, this.customBosses);
         this.modifyCommandEditMenu = new ModifyCommandEditorPanel(this, panelBuilder5, this.customBosses);
         this.commandListSkillEditMenu = new CommandListSkillEditorPanel(this, getListMenu("Skills.CommandList"), this.customBosses);
+        this.groupSkillEditorPanel = new GroupSkillEditorPanel(this, getListMenu("Skills.Group"), this.customBosses);
     }
 
     private void reloadSkillEditMenus() {
@@ -224,6 +226,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.commandSkillEditorPanel.initializePanel(panelBuilder4);
         this.modifyCommandEditMenu.initializePanel(panelBuilder5);
         this.commandListSkillEditMenu.initializePanel(getListMenu("Skills.CommandList"));
+        this.groupSkillEditorPanel.initializePanel(getListMenu("Skills.Group"));
     }
 
     //---------------------------------------------

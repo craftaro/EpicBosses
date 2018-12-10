@@ -3,31 +3,20 @@ package com.songoda.epicbosses.panel.skills.custom;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
-import com.songoda.epicbosses.managers.files.MessagesFileManager;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.elements.SubCommandSkillElement;
 import com.songoda.epicbosses.skills.types.CommandSkillElement;
-import com.songoda.epicbosses.skills.types.PotionSkillElement;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.StringUtils;
-import com.songoda.epicbosses.utils.command.SubCommand;
-import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
-import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionData;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.potion.PotionType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,8 +30,6 @@ import java.util.Map;
  */
 public class CommandSkillEditorPanel extends VariablePanelHandler<Skill> {
 
-    private MessagesFileManager messagesFileManager;
-    private ItemStackConverter itemStackConverter;
     private CustomBosses plugin;
 
     public CommandSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {

@@ -92,7 +92,7 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
             if(type.equalsIgnoreCase("POTION")) {
                 this.bossPanelManager.getPotionSkillEditorPanel().openFor(player, skill);
             } else if(type.equalsIgnoreCase("GROUP")) {
-
+                this.bossPanelManager.getGroupSkillEditorPanel().openFor(player, skill);
             } else if(type.equalsIgnoreCase("CUSTOM")) {
 
             } else if(type.equalsIgnoreCase("COMMAND")) {
