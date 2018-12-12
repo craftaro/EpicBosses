@@ -9,6 +9,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -16,6 +17,16 @@ import java.util.List;
  * @since 11-Nov-18
  */
 public class Knockback extends CustomSkillHandler {
+
+    @Override
+    public boolean doesUseMultiplier() {
+        return true;
+    }
+
+    @Override
+    public Map<String, Class<?>> getOtherSkillData() {
+        return null;
+    }
 
     @Override
     public void castSkill(Skill skill, CustomSkillElement customSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {

@@ -5,6 +5,7 @@ import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -12,6 +13,10 @@ import java.util.List;
  * @since 05-Nov-18
  */
 public interface ISkillHandler<T> {
+
+    boolean doesUseMultiplier();
+
+    Map<String, Class<?>> getOtherSkillData();
 
     void castSkill(Skill skill, T t, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities);
 

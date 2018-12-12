@@ -7,6 +7,7 @@ import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -14,6 +15,16 @@ import java.util.List;
  * @since 11-Nov-18
  */
 public class Lightning extends CustomSkillHandler {
+
+    @Override
+    public boolean doesUseMultiplier() {
+        return false;
+    }
+
+    @Override
+    public Map<String, Class<?>> getOtherSkillData() {
+        return null;
+    }
 
     @Override
     public void castSkill(Skill skill, CustomSkillElement customSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
