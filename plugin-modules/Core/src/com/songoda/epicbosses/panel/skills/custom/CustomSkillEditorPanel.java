@@ -1,14 +1,23 @@
 package com.songoda.epicbosses.panel.skills.custom;
 
+import com.google.gson.JsonObject;
 import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.managers.files.SkillsFileManager;
 import com.songoda.epicbosses.skills.Skill;
+import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.panel.Panel;
+import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
+import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -30,17 +39,81 @@ public class CustomSkillEditorPanel extends VariablePanelHandler<Skill> {
     }
 
     @Override
-    public void fillPanel(Panel panel, Skill skill) {
+    public void openFor(Player player, Skill skill) {
+        Map<String, String> replaceMap = new HashMap<>();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
+        replaceMap.put("{name}", BossAPI.getSkillName(skill));
+        panelBuilder.addReplaceData(replaceMap);
+
+        PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
+        Panel panel = panelBuilder.getPanel()
+                .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
+
+        counter.getSlotsWith("Type").forEach(slot -> panel.setOnClick(slot, event -> {}));
+        counter.getSlotsWith("SpecialSettings").forEach(slot -> panel.setOnClick(slot, event -> {}));
+        counter.getSlotsWith("Multiplier").forEach(slot -> panel.setOnClick(slot, getMultiplierAction(skill)));
+
+        panel.openFor(player);
     }
 
     @Override
-    public void openFor(Player player, Skill skill) {
+    public void fillPanel(Panel panel, Skill skill) {
 
     }
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
 
+    }
+
+    private ClickAction getMultiplierAction(Skill skill) {
+        return event -> {
+            ClickType clickType = event.getClick();
+            CustomSkillElement customSkillElement = this.bossSkillManager.getCustomSkillElement(skill);
+            Double amountToModifyBy;
+
+            if(clickType == ClickType.SHIFT_LEFT) {
+                amountToModifyBy = 0.1;
+            } else if(clickType == ClickType.RIGHT) {
+                amountToModifyBy = -1.0;
+            } else if(clickType == ClickType.SHIFT_RIGHT) {
+                amountToModifyBy = -0.1;
+            } else if(clickType == ClickType.MIDDLE) {
+                amountToModifyBy = null;
+            } else {
+                amountToModifyBy = 1.0;
+            }
+
+            Double currentAmount = customSkillElement.getCustom().getMultiplier();
+            String modifyValue;
+            Double newAmount;
+
+            if(currentAmount == null) currentAmount = 0.0;
+
+            if(amountToModifyBy == null) {
+                modifyValue = "removed";
+                newAmount = null;
+            } else if(amountToModifyBy > 0.0) {
+                modifyValue = "increased";
+                newAmount = currentAmount + amountToModifyBy;
+            } else {
+                modifyValue = "decreased";
+                newAmount = currentAmount + amountToModifyBy;
+            }
+
+            if(newAmount != null) {
+                if(newAmount < 0.0) {
+                    newAmount = 1.0;
+                }
+            }
+
+            customSkillElement.getCustom().setMultiplier(newAmount);
+
+            JsonObject jsonObject = BossAPI.convertObjectToJsonObject(customSkillElement);
+
+            skill.setCustomData(jsonObject);
+            this.skillsFileManager.save();
+        };
     }
 }
