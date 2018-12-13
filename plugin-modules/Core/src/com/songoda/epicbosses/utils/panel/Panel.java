@@ -155,42 +155,6 @@ public class Panel implements Listener, ICloneable<Panel> {
 
     //--------------------------------------------------
     //
-    // P A N E L   E X E C U T E   A C T I O N
-    //
-    //--------------------------------------------------
-
-    private void executeAction(int slot, InventoryClickEvent e) {
-        Player clicker = (Player) e.getWhoClicked();
-
-        if(getPanelBuilderCounter().getPageData().containsKey(slot)) {
-            int currentPage = this.currentPageContainer.getOrDefault(clicker.getUniqueId(), 0);
-
-            if(getPanelBuilderCounter().getPageData().get(slot) > 0) {
-                if(this.onPageChange.onPageAction(clicker, currentPage, currentPage+1)) {
-                    this.currentPageContainer.put(clicker.getUniqueId(), currentPage+1);
-                }
-            } else {
-                if(currentPage != 0) {
-                    if (this.onPageChange.onPageAction(clicker, currentPage, currentPage-1)) {
-                        this.currentPageContainer.put(clicker.getUniqueId(), currentPage - 1);
-                    }
-                }
-            }
-        }
-
-        if(this.targettedSlotActions.containsKey(slot)) {
-            this.targettedSlotActions.get(slot).onClick(e);
-        }
-
-        if(!this.allSlotActions.isEmpty()) {
-            for(ClickAction clickAction : this.allSlotActions) {
-                clickAction.onClick(e);
-            }
-        }
-    }
-
-    //--------------------------------------------------
-    //
     // P A N E L   S E T   M E T H O D S
     //
     //--------------------------------------------------
@@ -349,18 +313,9 @@ public class Panel implements Listener, ICloneable<Panel> {
         return rawSlot > inventory.getSize();
     }
 
-    public void loadPage(int page, IPageHandler pageHandler) {
-        int fillTo = getPanelBuilderSettings().getFillTo();
-        int startIndex = page * fillTo;
-
-        for(int i = startIndex; i < startIndex + fillTo; i++) {
-            pageHandler.handleSlot(i, i-startIndex);
-        }
-    }
-
     /**
      * Used to set the parent panel for this Panel, which
-     * will be used if the Back Button is set up for this
+     * will be used if the Back Button is also set up for this
      * panel.
      *
      * @param parentPanel - the parent Panel
@@ -375,6 +330,17 @@ public class Panel implements Listener, ICloneable<Panel> {
         return this;
     }
 
+    /**
+     * Used to set the parent panel for this Panel, which
+     * will be used if the Back Button is also set up for this
+     * panel.
+     *
+     * @param panelBuilder - the parent panelBuilder
+     * @param cancelClick - cancelClick on the parent panel
+     * @param cancelLowerClick - cancelLowerClick on the parent panel
+     * @param destroyWhenDone - destroy parent panel when done
+     * @return the current Panel
+     */
     public Panel setParentPanel(PanelBuilder panelBuilder, boolean cancelClick, boolean destroyWhenDone, boolean cancelLowerClick) {
         if(!this.panelBuilderSettings.isBackButton()) return this;
 
@@ -391,6 +357,14 @@ public class Panel implements Listener, ICloneable<Panel> {
         return this;
     }
 
+    /**
+     * Used to set the parent panel for this Panel, which
+     * will be used if the Back Button is also set up for this
+     * panel.
+     *
+     * @param panelHandler - the parent Panel handler
+     * @return the current Panel
+     */
     public Panel setParentPanelHandler(IPanelHandler panelHandler) {
         if(!this.panelBuilderSettings.isBackButton()) return this;
 
@@ -400,6 +374,15 @@ public class Panel implements Listener, ICloneable<Panel> {
         return this;
     }
 
+    /**
+     * Used to set the parent panel for this Panel, which
+     * will be used if the Back Button is also set up for this
+     * panel.
+     *
+     * @param variablePanelHandler - the parent variable panel handler
+     * @param variable - the variable to handle when opening the parent panel
+     * @return the current Panel
+     */
     public <T> Panel setParentPanelHandler(IVariablePanelHandler<T> variablePanelHandler, T variable) {
         if(!this.panelBuilderSettings.isBackButton()) return this;
 
@@ -409,6 +392,16 @@ public class Panel implements Listener, ICloneable<Panel> {
         return this;
     }
 
+    /**
+     * Used to set the parent panel for this Panel, which
+     * will be used if the Back Button is also set up for this
+     * panel.
+     *
+     * @param variablePanelHandler - the parent variable panel handler
+     * @param variable - the main variable to handle when opening the parent panel
+     * @param subVariable - the sub variable to handle when opening the parent panel
+     * @return the current Panel
+     */
     public <T, Y> Panel setParentPanelHandler(ISubVariablePanelHandler<T, Y> variablePanelHandler, T variable, Y subVariable) {
         if(!this.panelBuilderSettings.isBackButton()) return this;
 
@@ -418,6 +411,12 @@ public class Panel implements Listener, ICloneable<Panel> {
         return this;
     }
 
+    /**
+     * Updates the panel with setting the panel
+     * exit button to the specified slot if set
+     *
+     * @return the current panel
+     */
     public Panel setExitButton() {
         if(!this.panelBuilderSettings.isExitButton()) return this;
 
@@ -439,7 +438,6 @@ public class Panel implements Listener, ICloneable<Panel> {
      * are in it or what's happening in it.
      *
      * ** ONLY USE THIS IF YOU KNOW WHAT YOU'RE DOING **
-     *
      */
     public void destroy() {
         this.currentPageContainer.clear();
@@ -462,29 +460,11 @@ public class Panel implements Listener, ICloneable<Panel> {
     }
 
     /**
-     * Used to fill the empty spaces in the panel with the specified
-     * EmptySpaceFiller item if it's set up in the config.
+     * Used to obtain a cloned Inventory of
+     * what is currently in the GUI.
+     *
+     * @return Inventory instance of the cloned inventory
      */
-    public void fillEmptySpace() {
-        ItemStackHolder itemStackHolder = this.panelBuilderSettings.getEmptySpaceFillerItem();
-
-        if(itemStackHolder == null) return;
-
-        ItemStack itemStack = ITEM_STACK_CONVERTER.from(itemStackHolder);
-
-        if(itemStack == null) return;
-
-        for(int i = 0; i < getInventory().getSize(); i++) {
-            ItemStack itemAtSlot = getInventory().getItem(i);
-
-            if(getPanelBuilderCounter().isButtonAtSlot(i)) continue;
-
-            if(itemAtSlot == null || itemAtSlot.getType() == Material.AIR) {
-                getInventory().setItem(i, itemStack);
-            }
-        }
-    }
-
     public Inventory cloneInventory() {
         Inventory thisInventory = getInventory();
         Inventory newInventory = Bukkit.createInventory(thisInventory.getHolder(), thisInventory.getSize(), thisInventory.getTitle());
@@ -530,12 +510,114 @@ public class Panel implements Listener, ICloneable<Panel> {
         return panel;
     }
 
+    //--------------------------------------------------
+    //
+    // P A N E L   P A G E   M E T H O D S
+    //
+    //--------------------------------------------------
+
+    /**
+     * Load the specified page of the list panel
+     * with the new page data.
+     *
+     * @param page - page number to load
+     * @param pageHandler - page handler that is used when loading the page
+     */
+    public void loadPage(int page, IPageHandler pageHandler) {
+        int fillTo = getPanelBuilderSettings().getFillTo();
+        int startIndex = page * fillTo;
+
+        for(int i = startIndex; i < startIndex + fillTo; i++) {
+            pageHandler.handleSlot(i, i-startIndex);
+        }
+    }
+
+    /**
+     * Used to find the max page number to be used when handling
+     * custom page data.
+     *
+     * @param list - the list to gain size from
+     * @return integer amount of pages
+     */
     public int getMaxPage(List<?> list) {
         return (int) Math.ceil((double) list.size() / (double) getPanelBuilderSettings().getFillTo()) - 1;
     }
 
+    /**
+     * Used to find the max page number to be used when handling
+     * custom page data.
+     *
+     * @param map - the map to gain size from
+     * @return integer amount of pages
+     */
     public int getMaxPage(Map<?,?> map) {
         return (int) Math.ceil((double) map.size() / (double) getPanelBuilderSettings().getFillTo()) - 1;
+    }
+
+    //--------------------------------------------------
+    //
+    // P A N E L   E X E C U T E   A C T I O N
+    //
+    //--------------------------------------------------
+
+    private void executeAction(int slot, InventoryClickEvent e) {
+        Player clicker = (Player) e.getWhoClicked();
+
+        if(getPanelBuilderCounter().getPageData().containsKey(slot)) {
+            int currentPage = this.currentPageContainer.getOrDefault(clicker.getUniqueId(), 0);
+
+            if(getPanelBuilderCounter().getPageData().get(slot) > 0) {
+                if(this.onPageChange.onPageAction(clicker, currentPage, currentPage+1)) {
+                    this.currentPageContainer.put(clicker.getUniqueId(), currentPage+1);
+                }
+            } else {
+                if(currentPage != 0) {
+                    if (this.onPageChange.onPageAction(clicker, currentPage, currentPage-1)) {
+                        this.currentPageContainer.put(clicker.getUniqueId(), currentPage - 1);
+                    }
+                }
+            }
+        }
+
+        if(this.targettedSlotActions.containsKey(slot)) {
+            this.targettedSlotActions.get(slot).onClick(e);
+        }
+
+        if(!this.allSlotActions.isEmpty()) {
+            for(ClickAction clickAction : this.allSlotActions) {
+                clickAction.onClick(e);
+            }
+        }
+    }
+
+    //--------------------------------------------------
+    //
+    // P A N E L   P R I V A T E   M E T H O D
+    //
+    //--------------------------------------------------
+
+    /**
+     * Used to fill the empty spaces in the panel with the specified
+     * EmptySpaceFiller item if it's set up in the config.
+     */
+    private void fillEmptySpace() {
+        ItemStackHolder itemStackHolder = this.panelBuilderSettings.getEmptySpaceFillerItem();
+
+        if(itemStackHolder == null) return;
+
+        ItemStack itemStack = ITEM_STACK_CONVERTER.from(itemStackHolder);
+
+        if(itemStack == null) return;
+
+        for(int i = 0; i < getInventory().getSize(); i++) {
+            ItemStack itemAtSlot = getInventory().getItem(i);
+
+            if(getPanelBuilderCounter().isButtonAtSlot(i)) continue;
+
+            if(itemAtSlot == null || itemAtSlot.getType() == Material.AIR) {
+                getInventory().setItem(i, itemStack);
+            }
+        }
     }
 
     //--------------------------------------------------
