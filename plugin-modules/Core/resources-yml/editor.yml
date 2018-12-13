@@ -1753,3 +1753,71 @@ CustomSkillEditorPanel:
       name: '&e&lGo Back'
       lore:
       - '&7Click here to go back.'
+CustomSkillTypeEditorPanel:
+  name: '&b&l{name} Skill Editor'
+  slots: 54
+  Settings:
+    backButton: true
+    fillTo: 45
+  Buttons:
+    backButton: 54
+  Items:
+    '46':
+      type: BOOK
+      name: '&c&lSkill Type Guide'
+      lore:
+      - '&7When selecting the custom skill type'
+      - '&7it is easiest to know what it is if'
+      - '&7you keep it related to the name of the'
+      - '&7skill. All you need to change the type'
+      - '&7is click on a new type from within this'
+      - '&7menu.'
+      - '&7'
+      - '&7To import new custom skill types you'
+      - '&7can get them custom made and injected'
+      - '&7in to the plugin or you can suggest them'
+      - '&7to be added in to the plugin.'
+    '47':
+      type: GLASS_PANE
+      name: '&7'
+    '48':
+      type: GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page of custom drops.'
+      PreviousPage: true
+    '50':
+      type: EMERALD_BLOCK
+      name: '&b&lSelected Custom Skill Type'
+      lore:
+      - '&bCurrently: &f{selected}'
+      - '&7'
+      - '&7This is the currently assigned'
+      - '&7custom skill type to the skill.'
+      - '&7If you would like to change this'
+      - '&7simply click another one in this'
+      - '&7menu.'
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page of custom drops.'
+      NextPage: true
+    '52':
+      type: GLASS_PANE
+      name: '&7'
+    '53':
+      type: GLASS_PANE
+      name: '&7'
+    '54':
+      type: REDSTONE
+      name: '&cClick here to go back'
+      lore:
+      - '&7Click this button to go back to'
+      - '&7the main page where you can choose'
+      - '&7to configure blocks or mobs.'

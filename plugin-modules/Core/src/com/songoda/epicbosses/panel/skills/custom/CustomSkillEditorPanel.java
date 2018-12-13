@@ -8,6 +8,8 @@ import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.managers.files.SkillsFileManager;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
+import com.songoda.epicbosses.utils.Message;
+import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
@@ -114,6 +116,7 @@ public class CustomSkillEditorPanel extends VariablePanelHandler<Skill> {
 
             skill.setCustomData(jsonObject);
             this.skillsFileManager.save();
+            Message.Boss_Skills_SetMultiplier.msg(event.getWhoClicked(), modifyValue, NumberUtils.get().formatDouble((newAmount == null? 0.0 : newAmount)));
         };
     }
 }

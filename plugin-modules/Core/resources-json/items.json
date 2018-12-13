@@ -11,9 +11,17 @@
     "type": "OAK_PRESSURE_PLATE",
     "name": "&c&lDefault Drop Table Menu Item"
   },
+  "DefaultCustomSkillTypeItem": {
+    "type": "STICK",
+    "name": "&c&lDefault Custom Skill Type Item"
+  },
+  "DefaultSelectedCustomSkillTypeItem": {
+    "type": "BLAZE_ROD",
+    "name": "&c&lDefault Selected Custom Skill Type Item"
+  },
   "DefaultSelectedDropTableItem": {
     "type": "LIGHT_WEIGHTED_PRESSURE_PLATE",
-    "name": "&c&lSelected Defauult Drop Table Menu Item"
+    "name": "&c&lSelected Default Drop Table Menu Item"
   },
   "DefaultSkillMenuItem": {
     "type": "BLAZE_POWDER",
