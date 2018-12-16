@@ -94,7 +94,7 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
             } else if(type.equalsIgnoreCase("GROUP")) {
                 this.bossPanelManager.getGroupSkillEditorPanel().openFor(player, skill);
             } else if(type.equalsIgnoreCase("CUSTOM")) {
-                this.bossPanelManager.getCustomMessageEditMenu().openFor(player, skill);
+                this.bossPanelManager.getCustomSkillEditorPanel().openFor(player, skill);
             } else if(type.equalsIgnoreCase("COMMAND")) {
                 this.bossPanelManager.getCommandSkillEditorPanel().openFor(player, skill);
             }

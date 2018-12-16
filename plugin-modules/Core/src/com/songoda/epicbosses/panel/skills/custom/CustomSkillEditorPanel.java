@@ -44,12 +44,16 @@ public class CustomSkillEditorPanel extends VariablePanelHandler<Skill> {
     public void openFor(Player player, Skill skill) {
         Map<String, String> replaceMap = new HashMap<>();
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        CustomSkillElement customSkillElement = this.bossSkillManager.getCustomSkillElement(skill);
+        Double multiplier = customSkillElement.getCustom().getMultiplier();
+        String multiplierValue = multiplier == null? "N/A" : NumberUtils.get().formatDouble(multiplier);
 
         replaceMap.put("{name}", BossAPI.getSkillName(skill));
+        replaceMap.put("{type}", customSkillElement.getCustom().getType());
+        replaceMap.put("{multiplier}", multiplierValue);
         panelBuilder.addReplaceData(replaceMap);
 
         PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
-        CustomSkillElement customSkillElement = this.bossSkillManager.getCustomSkillElement(skill);
         Panel panel = panelBuilder.getPanel()
                 .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
 
@@ -105,8 +109,9 @@ public class CustomSkillEditorPanel extends VariablePanelHandler<Skill> {
             }
 
             if(newAmount != null) {
-                if(newAmount < 0.0) {
-                    newAmount = 1.0;
+                if(newAmount <= 0.0) {
+                    newAmount = null;
+                    modifyValue = "removed";
                 }
             }
 
@@ -117,6 +122,8 @@ public class CustomSkillEditorPanel extends VariablePanelHandler<Skill> {
             skill.setCustomData(jsonObject);
             this.skillsFileManager.save();
             Message.Boss_Skills_SetMultiplier.msg(event.getWhoClicked(), modifyValue, NumberUtils.get().formatDouble((newAmount == null? 0.0 : newAmount)));
+
+            openFor((Player) event.getWhoClicked(), skill);
         };
     }
 }

@@ -105,7 +105,7 @@ public abstract class SingleMessageListEditor<T> extends VariablePanelHandler<T>
 
                 replaceMap.put("{name}", name);
 
-                if(current.equalsIgnoreCase(name)) {
+                if(current != null && current.equalsIgnoreCase(name)) {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Text.selectedName"), replaceMap);
                 } else {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Text.name"), replaceMap);

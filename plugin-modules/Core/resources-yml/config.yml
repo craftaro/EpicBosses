@@ -165,6 +165,5 @@ Display:
       selectedName: '&bCustom Skill: &f{name} &a** Selected **'
       name: '&bCustom Skill: &f{name}'
       lore:
-      - '&3Type: &7{type}'
-      - '&3Multiplier: &7{multiplier}'
+      - '&3Uses Multiplier: &7{multiplier}'
       - '&3Has Custom Data: &7{customData}'

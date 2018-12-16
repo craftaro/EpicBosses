@@ -14,8 +14,6 @@ import java.util.Map;
  */
 public interface ISkillHandler<T> {
 
-    String getSkillName();
-
     boolean doesUseMultiplier();
 
     Map<String, Class<?>> getOtherSkillData();

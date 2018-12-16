@@ -86,7 +86,7 @@ public class CustomSkillTypeEditorPanel extends SubVariablePanelHandler<Skill, C
                 CustomSkillHandler customSkillHandler = customSkillHandlers.get(slot);
                 String name = customSkillHandler.getSkillName();
                 Map<String, String> replaceMap = new HashMap<>();
-                String hasCustomData = customSkillHandler.getOtherSkillData().isEmpty()? "false" : "true";
+                String hasCustomData = customSkillHandler.getOtherSkillData() == null? "false" : customSkillHandler.getOtherSkillData().isEmpty()? "false" : "true";
 
                 replaceMap.put("{name}", name);
                 replaceMap.put("{multiplier}", ""+customSkillHandler.doesUseMultiplier());
