@@ -88,7 +88,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         new Metrics(this);
         new ServerUtils(this);
 
-        this.bossSkillManager = new BossSkillManager();
+        this.bossSkillManager = new BossSkillManager(this);
         this.bossHookManager = new BossHookManager(this);
         this.bossTauntManager = new BossTauntManager(this);
         this.bossTargetManager = new BossTargetManager(this);
