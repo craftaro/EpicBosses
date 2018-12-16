@@ -49,12 +49,13 @@ public class CustomSkillEditorPanel extends VariablePanelHandler<Skill> {
         panelBuilder.addReplaceData(replaceMap);
 
         PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
+        CustomSkillElement customSkillElement = this.bossSkillManager.getCustomSkillElement(skill);
         Panel panel = panelBuilder.getPanel()
                 .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
 
-        counter.getSlotsWith("Type").forEach(slot -> panel.setOnClick(slot, event -> {}));
+        counter.getSlotsWith("Type").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getCustomSkillTypeEditorMenu().openFor((Player) event.getWhoClicked(), skill, customSkillElement)));
         counter.getSlotsWith("SpecialSettings").forEach(slot -> panel.setOnClick(slot, event -> {}));
-        counter.getSlotsWith("Multiplier").forEach(slot -> panel.setOnClick(slot, getMultiplierAction(skill)));
+        counter.getSlotsWith("Multiplier").forEach(slot -> panel.setOnClick(slot, getMultiplierAction(skill, customSkillElement)));
 
         panel.openFor(player);
     }
@@ -69,10 +70,9 @@ public class CustomSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     }
 
-    private ClickAction getMultiplierAction(Skill skill) {
+    private ClickAction getMultiplierAction(Skill skill, CustomSkillElement customSkillElement) {
         return event -> {
             ClickType clickType = event.getClick();
-            CustomSkillElement customSkillElement = this.bossSkillManager.getCustomSkillElement(skill);
             Double amountToModifyBy;
 
             if(clickType == ClickType.SHIFT_LEFT) {
