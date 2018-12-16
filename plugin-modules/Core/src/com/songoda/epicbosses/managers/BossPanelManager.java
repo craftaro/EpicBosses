@@ -26,11 +26,14 @@ import com.songoda.epicbosses.panel.skills.custom.CustomSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.GroupSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.commands.CommandListSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.commands.ModifyCommandEditorPanel;
+import com.songoda.epicbosses.panel.skills.custom.custom.CustomSkillTypeEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.potions.CreatePotionEffectEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.potions.PotionEffectTypeEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.PotionSkillEditorPanel;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.elements.SubCommandSkillElement;
+import com.songoda.epicbosses.skills.elements.SubCustomSkillElement;
+import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
@@ -73,6 +76,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu, skillTypeEditMenu, potionSkillEditorPanel, commandSkillEditorPanel, groupSkillEditorPanel, customSkillEditorPanel;
     @Getter private ISubVariablePanelHandler<Skill, PotionEffectHolder> createPotionEffectMenu, potionEffectTypeEditMenu;
     @Getter private ISubVariablePanelHandler<Skill, SubCommandSkillElement> modifyCommandEditMenu, commandListSkillEditMenu;
+    @Getter private ISubVariablePanelHandler<Skill, CustomSkillElement> customSkillTypeEditorMenu;
 
     private final CustomBosses customBosses;
 
@@ -175,6 +179,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("CommandSkillEditorPanel"));
         PanelBuilder panelBuilder5 = new PanelBuilder(editor.getConfigurationSection("ModifyCommandEditorPanel"));
         PanelBuilder panelBuilder6 = new PanelBuilder(editor.getConfigurationSection("CustomSkillEditorPanel"));
+        PanelBuilder panelBuilder7 = new PanelBuilder(editor.getConfigurationSection("CustomSkillTypeEditorPanel"));
 
         this.mainSkillEditMenu = new MainSkillEditorPanel(this, panelBuilder, this.customBosses);
         this.customMessageEditMenu = new SingleMessageListEditor<Skill>(this, getListMenu("Skills.MainEdit"), this.customBosses) {
@@ -209,6 +214,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.commandListSkillEditMenu = new CommandListSkillEditorPanel(this, getListMenu("Skills.CommandList"), this.customBosses);
         this.groupSkillEditorPanel = new GroupSkillEditorPanel(this, getListMenu("Skills.Group"), this.customBosses);
         this.customSkillEditorPanel = new CustomSkillEditorPanel(this, panelBuilder6, this.customBosses);
+        this.customSkillTypeEditorMenu = new CustomSkillTypeEditorPanel(this, panelBuilder7, this.customBosses);
     }
 
     private void reloadSkillEditMenus() {
@@ -220,6 +226,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("CommandSkillEditorPanel"));
         PanelBuilder panelBuilder5 = new PanelBuilder(editor.getConfigurationSection("ModifyCommandEditorPanel"));
         PanelBuilder panelBuilder6 = new PanelBuilder(editor.getConfigurationSection("CustomSkillEditorPanel"));
+        PanelBuilder panelBuilder7 = new PanelBuilder(editor.getConfigurationSection("CustomSkillTypeEditorPanel"));
 
         this.mainSkillEditMenu.initializePanel(panelBuilder);
         this.customMessageEditMenu.initializePanel(getListMenu("Skills.MainEdit"));
@@ -232,6 +239,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.commandListSkillEditMenu.initializePanel(getListMenu("Skills.CommandList"));
         this.groupSkillEditorPanel.initializePanel(getListMenu("Skills.Group"));
         this.customSkillEditorPanel.initializePanel(panelBuilder6);
+        this.customSkillTypeEditorMenu.initializePanel(panelBuilder7);
     }
 
     //---------------------------------------------

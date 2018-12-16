@@ -1,16 +1,24 @@
 package com.songoda.epicbosses.panel.skills.custom.custom;
 
+import com.google.gson.JsonObject;
+import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
+import com.songoda.epicbosses.managers.BossSkillManager;
+import com.songoda.epicbosses.skills.CustomSkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
+import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
+import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
-import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,8 +28,16 @@ import java.util.Map;
  */
 public class CustomSkillTypeEditorPanel extends SubVariablePanelHandler<Skill, CustomSkillElement> {
 
-    public CustomSkillTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder) {
+    private ItemStackConverter itemStackConverter;
+    private BossSkillManager bossSkillManager;
+    private CustomBosses plugin;
+
+    public CustomSkillTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
+
+        this.plugin = plugin;
+        this.itemStackConverter = new ItemStackConverter();
+        this.bossSkillManager = plugin.getBossSkillManager();
     }
 
     @Override
@@ -32,11 +48,8 @@ public class CustomSkillTypeEditorPanel extends SubVariablePanelHandler<Skill, C
         replaceMap.put("{name}", BossAPI.getSkillName(skill));
         panelBuilder.addReplaceData(replaceMap);
 
-        PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
         Panel panel = panelBuilder.getPanel()
                 .setParentPanelHandler(this.bossPanelManager.getCustomSkillEditorPanel(), skill);
-
-
 
         fillPanel(panel, skill, customSkillElement);
 
@@ -45,11 +58,65 @@ public class CustomSkillTypeEditorPanel extends SubVariablePanelHandler<Skill, C
 
     @Override
     public void fillPanel(Panel panel, Skill skill, CustomSkillElement customSkillElement) {
+        List<CustomSkillHandler> customSkillHandlers = this.bossSkillManager.getSkills();
+        int maxPage = panel.getMaxPage(customSkillHandlers);
 
+        panel.setOnPageChange(((player, currentPage, requestedPage) -> {
+            if(requestedPage < 0 || requestedPage > maxPage) return false;
+
+            loadPage(panel, requestedPage, skill, customSkillElement, customSkillHandlers);
+            return true;
+        }));
+
+        loadPage(panel, 0, skill, customSkillElement, customSkillHandlers);
     }
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
 
+    }
+
+    private void loadPage(Panel panel, int page, Skill skill, CustomSkillElement customSkillElement, List<CustomSkillHandler> customSkillHandlers) {
+        String current = customSkillElement.getCustom().getType();
+
+        panel.loadPage(page, ((slot, realisticSlot) -> {
+            if(slot >= customSkillHandlers.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            } else {
+                CustomSkillHandler customSkillHandler = customSkillHandlers.get(slot);
+                String name = customSkillHandler.getSkillName();
+                Map<String, String> replaceMap = new HashMap<>();
+                String hasCustomData = customSkillHandler.getOtherSkillData().isEmpty()? "false" : "true";
+
+                replaceMap.put("{name}", name);
+                replaceMap.put("{multiplier}", ""+customSkillHandler.doesUseMultiplier());
+                replaceMap.put("{customData}", hasCustomData);
+
+                ItemStack itemStack;
+
+                if(name.equalsIgnoreCase(current)) {
+                    itemStack = this.itemStackConverter.from(this.plugin.getItemStackManager().getItemStackHolder("DefaultSelectedCustomSkillTypeItem"));
+
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.CustomType.selectedName"), replaceMap);
+                } else {
+                    itemStack = this.itemStackConverter.from(this.plugin.getItemStackManager().getItemStackHolder("DefaultCustomSkillTypeItem"));
+
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.CustomType.name"), replaceMap);
+                }
+
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Skills.CustomType.lore"), replaceMap);
+
+                panel.setItem(realisticSlot, itemStack, event -> {
+                    customSkillElement.getCustom().setType(name);
+
+                    JsonObject jsonObject = BossAPI.convertObjectToJsonObject(customSkillElement);
+
+                    skill.setCustomData(jsonObject);
+                    this.plugin.getSkillsFileManager().save();
+
+                    loadPage(panel, page, skill, customSkillElement, customSkillHandlers);
+                });
+            }
+        }));
     }
 }

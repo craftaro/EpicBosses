@@ -117,8 +117,13 @@ public class BossSkillManager implements ILoadable {
         return null;
     }
 
+    public List<CustomSkillHandler> getSkills() {
+        return new ArrayList<>(SKILLS);
+    }
+
     public boolean registerCustomSkill(CustomSkillHandler customSkillHandler) {
         if(SKILLS.contains(customSkillHandler)) return false;
+        if(customSkillHandler == null) return false;
 
         SKILLS.add(customSkillHandler);
         return true;
@@ -126,6 +131,7 @@ public class BossSkillManager implements ILoadable {
 
     public void removeCustomSkill(CustomSkillHandler customSkillHandler) {
         if(!SKILLS.contains(customSkillHandler)) return;
+        if(customSkillHandler == null) return;
 
         SKILLS.remove(customSkillHandler);
     }
@@ -172,7 +178,7 @@ public class BossSkillManager implements ILoadable {
 
     private CustomSkillHandler getCustomSkillHandler(String name) {
         for(CustomSkillHandler customSkillHandler : new HashSet<>(SKILLS)) {
-            String skillName = customSkillHandler.getClass().getSimpleName();
+            String skillName = customSkillHandler.getSkillName();
 
             if(skillName.equalsIgnoreCase(name)) return customSkillHandler;
         }

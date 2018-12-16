@@ -8,4 +8,10 @@ import com.songoda.epicbosses.skills.types.CustomSkillElement;
  * @since 18-Nov-18
  */
 public abstract class CustomSkillHandler implements ISkillHandler<CustomSkillElement> {
+
+    @Override
+    public String getSkillName() {
+        return getClass().getSimpleName();
+    }
+
 }

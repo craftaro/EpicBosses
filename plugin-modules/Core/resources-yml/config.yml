@@ -161,3 +161,10 @@ Display:
       - '&3Display Name: &7{displayName}'
       - '&3Custom Message: &7{customMessage}'
       - '&3Radius: &7{radius}'
+    CustomType:
+      selectedName: '&bCustom Skill: &f{name} &a** Selected **'
+      name: '&bCustom Skill: &f{name}'
+      lore:
+      - '&3Type: &7{type}'
+      - '&3Multiplier: &7{multiplier}'
+      - '&3Has Custom Data: &7{customData}'
