@@ -14,10 +14,6 @@ import java.util.Map;
  */
 public interface ISkillHandler<T> {
 
-    boolean doesUseMultiplier();
-
-    Map<String, Class<?>> getOtherSkillData();
-
     void castSkill(Skill skill, T t, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities);
 
 }

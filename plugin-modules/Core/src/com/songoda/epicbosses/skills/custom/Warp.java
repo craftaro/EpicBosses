@@ -4,6 +4,7 @@ import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
+import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
@@ -23,6 +24,11 @@ public class Warp extends CustomSkillHandler {
 
     @Override
     public Map<String, Class<?>> getOtherSkillData() {
+        return null;
+    }
+
+    @Override
+    public Map<Integer, ClickAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
         return null;
     }
 

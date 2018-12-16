@@ -31,16 +31,6 @@ public class PotionSkillElement implements ISkillHandler<PotionSkillElement> {
     }
 
     @Override
-    public boolean doesUseMultiplier() {
-        return false;
-    }
-
-    @Override
-    public Map<String, Class<?>> getOtherSkillData() {
-        return null;
-    }
-
-    @Override
     public void castSkill(Skill skill, PotionSkillElement customSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
         List<PotionEffectHolder> potionElements = getPotions();
 

@@ -29,16 +29,6 @@ public class GroupSkillElement implements ISkillHandler<GroupSkillElement> {
     }
 
     @Override
-    public boolean doesUseMultiplier() {
-        return false;
-    }
-
-    @Override
-    public Map<String, Class<?>> getOtherSkillData() {
-        return null;
-    }
-
-    @Override
     public void castSkill(Skill skill, GroupSkillElement groupSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
         List<String> currentGroupedSkills = getGroupedSkills();
         CustomBosses plugin = CustomBosses.get();

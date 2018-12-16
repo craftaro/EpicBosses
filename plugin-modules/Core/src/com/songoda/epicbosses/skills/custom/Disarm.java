@@ -7,6 +7,7 @@ import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.RandomUtils;
+import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.LivingEntity;
@@ -30,6 +31,11 @@ public class Disarm extends CustomSkillHandler {
 
     @Override
     public Map<String, Class<?>> getOtherSkillData() {
+        return null;
+    }
+
+    @Override
+    public Map<Integer, ClickAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
         return null;
     }
 

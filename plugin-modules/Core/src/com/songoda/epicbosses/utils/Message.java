@@ -163,6 +163,7 @@ public enum Message {
     Boss_Skills_SetDisplayName("&b&lEpicBosses &8» &7Your next input in to chat will be the display name for the skill. If you enter &f-&7 it will remove/clear the display name of the skill. For color codes use the &f& &7sign."),
     Boss_Skills_NotCompleteEnough("&c&l(!) &cThe potion effect was unable to be created due to it not having enough information. Please make sure that the potion effect type is selected."),
     Boss_Skills_SetCommandChance("&b&lEpicBosses &8» &7You have {0} the chance for the command skill to &f{1}%&7."),
+    Boss_Skills_SetMinionAmount("&b&lEpicBosses &8» &&You have {0} the amount of minions to spawn from this skill to &f{1}&7."),
 
     Boss_Spawn_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Spawn_InvalidArgs("&c&l(!) &cYou must use &n/boss spawn [name] (location)&c to spawn a boss."),

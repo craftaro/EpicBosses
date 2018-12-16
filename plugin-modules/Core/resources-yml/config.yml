@@ -167,3 +167,7 @@ Display:
       lore:
       - '&3Uses Multiplier: &7{multiplier}'
       - '&3Has Custom Data: &7{customData}'
+    Material:
+      menuName: '&b&lSelect Material'
+      selectedName: '&bMaterial: &f{type} &a** Selected **'
+      name: '&bMaterial: &f{type}'

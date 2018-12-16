@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.managers;
 
+import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.events.BossSkillEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
@@ -27,9 +28,15 @@ public class BossSkillManager implements ILoadable {
 
     private static final Set<CustomSkillHandler> SKILLS = new HashSet<>();
 
+    private CustomBosses plugin;
+
+    public BossSkillManager(CustomBosses plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public void load() {
-        registerCustomSkill(new Cage());
+        registerCustomSkill(new Cage(this.plugin));
         registerCustomSkill(new Disarm());
         registerCustomSkill(new Fireball());
         registerCustomSkill(new Grapple());
@@ -37,7 +44,7 @@ public class BossSkillManager implements ILoadable {
         registerCustomSkill(new Knockback());
         registerCustomSkill(new Launch());
         registerCustomSkill(new Lightning());
-        registerCustomSkill(new Minions());
+        registerCustomSkill(new Minions(this.plugin));
         registerCustomSkill(new Warp());
     }
 

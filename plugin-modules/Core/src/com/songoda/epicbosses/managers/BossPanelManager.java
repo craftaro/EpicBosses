@@ -27,6 +27,7 @@ import com.songoda.epicbosses.panel.skills.custom.GroupSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.commands.CommandListSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.commands.ModifyCommandEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.custom.CustomSkillTypeEditorPanel;
+import com.songoda.epicbosses.panel.skills.custom.custom.MaterialTypeEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.potions.CreatePotionEffectEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.potions.PotionEffectTypeEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.PotionSkillEditorPanel;
@@ -163,6 +164,21 @@ public class BossPanelManager implements ILoadable, IReloadable {
         return timesUsed;
     }
 
+    //---------------------------------------------
+    //
+    //  G E N E R A L   L I S T   P A N E L
+    //
+    //---------------------------------------------
+
+    public PanelBuilder getListMenu(String path) {
+        Map<String, String> replaceMap = new HashMap<>();
+        String finalPath = getPath(path);
+        String value = this.customBosses.getConfig().getString(finalPath);
+
+        replaceMap.put("{panelName}", StringUtils.get().translateColor(value));
+
+        return new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("ListPanel"), replaceMap);
+    }
 
     //---------------------------------------------
     //
@@ -700,22 +716,6 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("CustomItemsMenu"));
 
         this.customItems.initializePanel(panelBuilder);
-    }
-
-    //---------------------------------------------
-    //
-    //  G E N E R A L   L I S T   P A N E L
-    //
-    //---------------------------------------------
-
-    private PanelBuilder getListMenu(String path) {
-        Map<String, String> replaceMap = new HashMap<>();
-        String finalPath = getPath(path);
-        String value = this.customBosses.getConfig().getString(finalPath);
-
-        replaceMap.put("{panelName}", StringUtils.get().translateColor(value));
-
-        return new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("ListPanel"), replaceMap);
     }
 
     private String getPath(String key) {

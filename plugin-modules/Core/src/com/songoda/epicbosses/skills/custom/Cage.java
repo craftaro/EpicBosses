@@ -1,6 +1,10 @@
 package com.songoda.epicbosses.skills.custom;
 
+import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
+import com.songoda.epicbosses.managers.BossPanelManager;
+import com.songoda.epicbosses.panel.skills.custom.custom.MaterialTypeEditorPanel;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.custom.cage.CageLocationData;
@@ -10,11 +14,16 @@ import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.converters.MaterialConverter;
+import com.songoda.epicbosses.utils.panel.Panel;
+import com.songoda.epicbosses.utils.panel.base.ClickAction;
+import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
+import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
 import java.util.*;
 
@@ -30,6 +39,19 @@ public class Cage extends CustomSkillHandler {
     @Getter private static final Map<Location, CageLocationData> cageLocationDataMap = new HashMap<>();
     @Getter private static final List<UUID> playersInCage = new ArrayList<>();
 
+    private final MaterialTypeEditorPanel flatTypeEditor, wallTypeEditor, insideTypeEditor;
+    private BossPanelManager bossPanelManager;
+    private CustomBosses plugin;
+
+    public Cage(CustomBosses plugin) {
+        this.plugin = plugin;
+        this.bossPanelManager = plugin.getBossPanelManager();
+
+        this.flatTypeEditor = getFlatTypeEditor();
+        this.wallTypeEditor = getWallTypeEditor();
+        this.insideTypeEditor = getInsideTypeEditor();
+    }
+
     @Override
     public boolean doesUseMultiplier() {
         return false;
@@ -44,6 +66,17 @@ public class Cage extends CustomSkillHandler {
         map.put("insideType", String.class);
 
         return map;
+    }
+
+    @Override
+    public Map<Integer, ClickAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
+        Map<Integer, ClickAction> clickActionMap = new HashMap<>();
+
+        clickActionMap.put(1, event -> this.flatTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
+        clickActionMap.put(2, event -> this.wallTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
+        clickActionMap.put(3, event -> this.insideTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
+
+        return clickActionMap;
     }
 
     @Override
@@ -137,4 +170,77 @@ public class Cage extends CustomSkillHandler {
 
         return currentLocation.clone().add(0.5, 0, 0.5);
     }
+
+    private MaterialTypeEditorPanel getFlatTypeEditor() {
+        return new MaterialTypeEditorPanel(this.bossPanelManager, this.bossPanelManager.getListMenu("Skills.Material"), this.plugin) {
+            @Override
+            public void saveSetting(Skill skill, CustomSkillElement customSkillElement, String newValue) {
+                CustomCageSkillElement customCageSkillElement = customSkillElement.getCustom().getCustomCageSkillData();
+
+                customCageSkillElement.setFlatType(newValue);
+                customSkillElement.getCustom().setOtherSkillData(BossAPI.convertObjectToJsonObject(customCageSkillElement));
+                skill.setCustomData(BossAPI.convertObjectToJsonObject(customSkillElement));
+                Cage.this.plugin.getSkillsFileManager().save();
+            }
+
+            @Override
+            public String getCurrentSetting(CustomSkillElement customSkillElement) {
+                return customSkillElement.getCustom().getCustomCageSkillData().getFlatType();
+            }
+
+            @Override
+            public IVariablePanelHandler<Skill> getParentHolder(Skill skill) {
+                return this.bossPanelManager.getCustomSkillEditorPanel();
+            }
+        };
+    }
+
+    private MaterialTypeEditorPanel getWallTypeEditor() {
+        return new MaterialTypeEditorPanel(this.bossPanelManager, this.bossPanelManager.getListMenu("Skills.Material"), this.plugin) {
+            @Override
+            public void saveSetting(Skill skill, CustomSkillElement customSkillElement, String newValue) {
+                CustomCageSkillElement customCageSkillElement = customSkillElement.getCustom().getCustomCageSkillData();
+
+                customCageSkillElement.setWallType(newValue);
+                customSkillElement.getCustom().setOtherSkillData(BossAPI.convertObjectToJsonObject(customCageSkillElement));
+                skill.setCustomData(BossAPI.convertObjectToJsonObject(customSkillElement));
+                Cage.this.plugin.getSkillsFileManager().save();
+            }
+
+            @Override
+            public String getCurrentSetting(CustomSkillElement customSkillElement) {
+                return customSkillElement.getCustom().getCustomCageSkillData().getWallType();
+            }
+
+            @Override
+            public IVariablePanelHandler<Skill> getParentHolder(Skill skill) {
+                return this.bossPanelManager.getCustomSkillEditorPanel();
+            }
+        };
+    }
+
+    private MaterialTypeEditorPanel getInsideTypeEditor() {
+        return new MaterialTypeEditorPanel(this.bossPanelManager, this.bossPanelManager.getListMenu("Skills.Material"), this.plugin) {
+            @Override
+            public void saveSetting(Skill skill, CustomSkillElement customSkillElement, String newValue) {
+                CustomCageSkillElement customCageSkillElement = customSkillElement.getCustom().getCustomCageSkillData();
+
+                customCageSkillElement.setInsideType(newValue);
+                customSkillElement.getCustom().setOtherSkillData(BossAPI.convertObjectToJsonObject(customCageSkillElement));
+                skill.setCustomData(BossAPI.convertObjectToJsonObject(customSkillElement));
+                Cage.this.plugin.getSkillsFileManager().save();
+            }
+
+            @Override
+            public String getCurrentSetting(CustomSkillElement customSkillElement) {
+                return customSkillElement.getCustom().getCustomCageSkillData().getInsideType();
+            }
+
+            @Override
+            public IVariablePanelHandler<Skill> getParentHolder(Skill skill) {
+                return this.bossPanelManager.getCustomSkillEditorPanel();
+            }
+        };
+    }
+
 }
