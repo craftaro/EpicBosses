@@ -6,6 +6,7 @@ import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.utils.ILoadable;
 import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.ISavable;
+import lombok.var;
 
 import java.io.File;
 import java.util.HashMap;

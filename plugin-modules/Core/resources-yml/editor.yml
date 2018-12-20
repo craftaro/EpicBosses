@@ -104,21 +104,19 @@ ListPanel:
       name: '&e&l&m<-&e&l Previous Page'
       lore:
       - '&7Click here to go to the previous'
-      - '&7page of custom drops.'
+      - '&7page.'
       PreviousPage: true
     '50':
       type: REDSTONE
       name: '&cClick here to go back'
       lore:
-      - '&7Click this button to go back to'
-      - '&7the main page where you can choose'
-      - '&7to configure blocks or mobs.'
+      - '&7Click this button to go back.'
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
       - '&7Click here to go to the next'
-      - '&7page of custom drops.'
+      - '&7page.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -1506,7 +1504,7 @@ PotionSkillEditorPanel:
       name: '&e&l&m<-&e&l Previous Page'
       lore:
       - '&7Click here to go to the previous'
-      - '&7page of custom drops.'
+      - '&7page of custom potion effects.'
       PreviousPage: true
     '50':
       type: EMERALD_BLOCK
@@ -1520,7 +1518,7 @@ PotionSkillEditorPanel:
       name: '&e&lNext Page &e&l&m->'
       lore:
       - '&7Click here to go to the next'
-      - '&7page of custom drops.'
+      - '&7page of custom potion effects.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -1628,7 +1626,7 @@ CommandSkillEditorPanel:
       name: '&e&l&m<-&e&l Previous Page'
       lore:
       - '&7Click here to go to the previous'
-      - '&7page of custom drops.'
+      - '&7page of command sections.'
       PreviousPage: true
     '50':
       type: EMERALD_BLOCK
@@ -1642,7 +1640,7 @@ CommandSkillEditorPanel:
       name: '&e&lNext Page &e&l&m->'
       lore:
       - '&7Click here to go to the next'
-      - '&7page of custom drops.'
+      - '&7page of command sections.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -1788,7 +1786,7 @@ CustomSkillTypeEditorPanel:
       name: '&e&l&m<-&e&l Previous Page'
       lore:
       - '&7Click here to go to the previous'
-      - '&7page of custom drops.'
+      - '&7page of custom skill types.'
       PreviousPage: true
     '50':
       type: EMERALD_BLOCK
@@ -1806,7 +1804,7 @@ CustomSkillTypeEditorPanel:
       name: '&e&lNext Page &e&l&m->'
       lore:
       - '&7Click here to go to the next'
-      - '&7page of custom drops.'
+      - '&7page of custom skill types.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -1819,5 +1817,67 @@ CustomSkillTypeEditorPanel:
       name: '&cClick here to go back'
       lore:
       - '&7Click this button to go back to'
-      - '&7the main page where you can choose'
-      - '&7to configure blocks or mobs.'
+      - '&7the skill editor panel to configure'
+      - '&7the general skill options.'
+SpecialSettingsEditorPanel:
+  name: '&b&l{name} Special Settings'
+  slots: 54
+  Settings:
+    backButton: true
+    fillTo: 45
+  Buttons:
+    backButton: 54
+  Items:
+    '46':
+      type: BOOK
+      name: '&c&lSpecial Settings Guide'
+      lore:
+      - '&7Here any special settings that have'
+      - '&7been assigned to a skill type will'
+      - '&7show up. If this GUI is empty then there'
+      - '&7is no special settings related to the'
+      - '&7skill.'
+    '47':
+      type: GLASS_PANE
+      name: '&7'
+    '48':
+      type: GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page of special settings.'
+      PreviousPage: true
+    '50':
+      type: EMERALD_BLOCK
+      name: '&b&lSelected Custom Skill Type'
+      lore:
+      - '&bCurrently: &f{selected}'
+      - '&7'
+      - '&7This is the currently assigned'
+      - '&7custom skill type to the skill.'
+      - '&7If you would like to change this'
+      - '&7simply click another one in the'
+      - '&7skill type menu.'
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page of special settings.'
+      NextPage: true
+    '52':
+      type: GLASS_PANE
+      name: '&7'
+    '53':
+      type: GLASS_PANE
+      name: '&7'
+    '54':
+      type: REDSTONE
+      name: '&cClick here to go back'
+      lore:
+      - '&7Click this button to go back to'
+      - '&7the skill editor panel to configure'
+      - '&7the general skill options.'

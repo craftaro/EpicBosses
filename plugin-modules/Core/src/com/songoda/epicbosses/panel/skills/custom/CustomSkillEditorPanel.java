@@ -58,7 +58,7 @@ public class CustomSkillEditorPanel extends VariablePanelHandler<Skill> {
                 .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
 
         counter.getSlotsWith("Type").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getCustomSkillTypeEditorMenu().openFor((Player) event.getWhoClicked(), skill, customSkillElement)));
-        counter.getSlotsWith("SpecialSettings").forEach(slot -> panel.setOnClick(slot, event -> {}));
+        counter.getSlotsWith("SpecialSettings").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getSpecialSettingsEditorMenu().openFor((Player) event.getWhoClicked(), skill, customSkillElement)));
         counter.getSlotsWith("Multiplier").forEach(slot -> panel.setOnClick(slot, getMultiplierAction(skill, customSkillElement)));
 
         panel.openFor(player);
