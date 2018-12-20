@@ -43,6 +43,7 @@ public enum Debug {
     FAILED_TO_CONNECT_TO_VAULT("Something went wrong while trying to connect to Vault. Please make sure you have an Economy and Permission plugin connected to your Vault plugin such as Essentials and GroupManager."),
     FAILED_TO_OBTAIN_THE_SKILL_HANDLER("Something went wrong when trying to detect the skill handler for {0}."),
     FAILED_TO_GIVE_CUSTOM_ITEM("{0} tried to obtain a custom item from the Custom Items list but failed due to the item not being set properly."),
+    FAILED_TO_FIND_ASSIGNED_CUSTOMSKILLHANDLER("Failed to find the assigned custom skill handler that matches the skill name {0}."),
 
     DROP_TABLE_FAILED_INVALID_NUMBER("The specified position ({0}) on the drop table is not a valid number."),
     DROP_TABLE_FAILED_TO_GET_ITEM("The drop table failed to get the specific item for the list."),

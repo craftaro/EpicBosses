@@ -7,6 +7,7 @@ import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.elements.CustomMinionSkillElement;
+import com.songoda.epicbosses.skills.interfaces.ICustomSkillAction;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
@@ -15,6 +16,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,13 +50,12 @@ public class Minions extends CustomSkillHandler {
     }
 
     @Override
-    public Map<Integer, ClickAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
-        Map<Integer, ClickAction> clickActionMap = new HashMap<>();
+    public List<ICustomSkillAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
+        List<ICustomSkillAction> clickActions = new ArrayList<>();
 
-        clickActionMap.put(1, getAmountAction(skill, customSkillElement));
+//        clickActions.add(getAmountAction(skill, customSkillElement));
 
-
-        return clickActionMap;
+        return clickActions;
     }
 
     @Override

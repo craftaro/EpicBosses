@@ -1,8 +1,9 @@
-package com.songoda.epicbosses.skills;
+package com.songoda.epicbosses.skills.interfaces;
 
+import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
-import com.songoda.epicbosses.utils.panel.base.ClickAction;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,7 +17,7 @@ public interface ICustomSkillHandler extends ISkillHandler<CustomSkillElement> {
 
     Map<String, Class<?>> getOtherSkillData();
 
-    Map<Integer, ClickAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement);
+    List<ICustomSkillAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement);
 
     String getSkillName();
 

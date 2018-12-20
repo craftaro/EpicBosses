@@ -5,7 +5,7 @@ import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.managers.files.SkillsFileManager;
-import com.songoda.epicbosses.skills.ISkillHandler;
+import com.songoda.epicbosses.skills.interfaces.ISkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.utils.Debug;
 import lombok.Getter;
@@ -13,7 +13,6 @@ import lombok.Setter;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Charles Cullen

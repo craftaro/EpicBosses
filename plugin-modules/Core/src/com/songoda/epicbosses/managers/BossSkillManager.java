@@ -4,7 +4,8 @@ import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.events.BossSkillEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
-import com.songoda.epicbosses.skills.ISkillHandler;
+import com.songoda.epicbosses.skills.interfaces.ICustomSkillAction;
+import com.songoda.epicbosses.skills.interfaces.ISkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.custom.*;
 import com.songoda.epicbosses.skills.types.CommandSkillElement;
@@ -12,10 +13,13 @@ import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.skills.types.GroupSkillElement;
 import com.songoda.epicbosses.skills.types.PotionSkillElement;
 import com.songoda.epicbosses.utils.*;
+import com.songoda.epicbosses.utils.panel.base.ClickAction;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 
@@ -191,5 +195,37 @@ public class BossSkillManager implements ILoadable {
         }
 
         return null;
+    }
+
+    public static ICustomSkillAction createCustomSkillAction(String name, ItemStack displayStack, ClickAction clickAction) {
+        return new CustomSkillActionCreator(name, displayStack, clickAction);
+    }
+
+    private static class CustomSkillActionCreator implements ICustomSkillAction {
+
+        private final ClickAction clickAction;
+        private final String name;
+        private final ItemStack itemStack;
+
+        public CustomSkillActionCreator(String name, ItemStack itemStack, ClickAction clickAction) {
+            this.name = name;
+            this.itemStack = itemStack;
+            this.clickAction = clickAction;
+        }
+
+        @Override
+        public ClickAction getAction() {
+            return null;
+        }
+
+        @Override
+        public String getSettingName() {
+            return null;
+        }
+
+        @Override
+        public ItemStack getDisplayItemStack() {
+            return null;
+        }
     }
 }

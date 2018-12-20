@@ -1,7 +1,7 @@
 package com.songoda.epicbosses.events;
 
 import com.songoda.epicbosses.holder.ActiveBossHolder;
-import com.songoda.epicbosses.skills.ISkillHandler;
+import com.songoda.epicbosses.skills.interfaces.ISkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import lombok.Getter;
 import org.bukkit.event.Event;

@@ -3,6 +3,7 @@ package com.songoda.epicbosses.skills.custom;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
 import com.songoda.epicbosses.skills.Skill;
+import com.songoda.epicbosses.skills.interfaces.ICustomSkillAction;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import org.bukkit.entity.LivingEntity;
@@ -28,7 +29,7 @@ public class Insidious extends CustomSkillHandler {
     }
 
     @Override
-    public Map<Integer, ClickAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
+    public List<ICustomSkillAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
         return null;
     }
 

@@ -1,11 +1,10 @@
-package com.songoda.epicbosses.skills;
+package com.songoda.epicbosses.skills.interfaces;
 
 import com.songoda.epicbosses.holder.ActiveBossHolder;
-import com.songoda.epicbosses.skills.types.CustomSkillElement;
+import com.songoda.epicbosses.skills.Skill;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Charles Cullen

@@ -4,8 +4,10 @@ import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossPanelManager;
+import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.panel.skills.custom.custom.MaterialTypeEditorPanel;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
+import com.songoda.epicbosses.skills.interfaces.ICustomSkillAction;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.custom.cage.CageLocationData;
 import com.songoda.epicbosses.skills.custom.cage.CagePlayerData;
@@ -14,9 +16,6 @@ import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.converters.MaterialConverter;
-import com.songoda.epicbosses.utils.panel.Panel;
-import com.songoda.epicbosses.utils.panel.base.ClickAction;
-import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
 import org.bukkit.Location;
@@ -24,6 +23,7 @@ import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 
@@ -69,14 +69,14 @@ public class Cage extends CustomSkillHandler {
     }
 
     @Override
-    public Map<Integer, ClickAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
-        Map<Integer, ClickAction> clickActionMap = new HashMap<>();
+    public List<ICustomSkillAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
+        List<ICustomSkillAction> clickActions = new ArrayList<>();
 
-        clickActionMap.put(1, event -> this.flatTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
-        clickActionMap.put(2, event -> this.wallTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
-        clickActionMap.put(3, event -> this.insideTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
+//        clickActions.add(BossSkillManager.createCustomSkillAction("Flat Type Editor", new ItemStack(Material.STONE_PRESSURE_PLATE), event -> this.flatTypeEditor.openFor((Player) event.getWhoClicked()), skill, customSkillElement));
+//        clickActions.add(event -> this.wallTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
+//        clickActions.add(event -> this.insideTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
 
-        return clickActionMap;
+        return clickActions;
     }
 
     @Override

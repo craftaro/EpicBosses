@@ -2,7 +2,7 @@ package com.songoda.epicbosses.skills.types;
 
 import com.google.gson.annotations.Expose;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
-import com.songoda.epicbosses.skills.ISkillHandler;
+import com.songoda.epicbosses.skills.interfaces.ISkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.potion.PotionEffectConverter;
@@ -12,7 +12,6 @@ import lombok.Setter;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Charles Cullen
