@@ -57,7 +57,7 @@ public class Minions extends CustomSkillHandler {
         List<ICustomSkillAction> clickActions = new ArrayList<>();
 
         clickActions.add(BossSkillManager.createCustomSkillAction("Amount Editor", getAmountCurrent(customSkillElement), new ItemStack(Material.REDSTONE), getAmountAction(skill, customSkillElement)));
-        clickActions.add(BossSkillManager.createCustomSkillAction("Minion to Spawn Editor", new ItemStack(Material.CREEPER_SPAWN_EGG), getMinionToSpawnAction(skill, customSkillElement)));
+        clickActions.add(BossSkillManager.createCustomSkillAction("Minion to Spawn Editor", getMinionToSpawnCurrent(customSkillElement), new ItemStack(Material.CREEPER_SPAWN_EGG), getMinionToSpawnAction(skill, customSkillElement)));
 
         return clickActions;
     }
@@ -65,6 +65,12 @@ public class Minions extends CustomSkillHandler {
     @Override
     public void castSkill(Skill skill, CustomSkillElement customSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
         BossAPI.spawnNewMinion(activeBossHolder, skill);
+    }
+
+    private String getMinionToSpawnCurrent(CustomSkillElement customSkillElement) {
+        CustomMinionSkillElement customMinionSkillElement = customSkillElement.getCustom().getCustomMinionSkillData();
+
+        return customMinionSkillElement.getMinionToSpawn();
     }
 
     private ClickAction getMinionToSpawnAction(Skill skill, CustomSkillElement customSkillElement) {

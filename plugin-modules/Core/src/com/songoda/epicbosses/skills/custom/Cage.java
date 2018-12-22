@@ -77,9 +77,9 @@ public class Cage extends CustomSkillHandler {
         ClickAction wallAction = (event -> this.wallTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
         ClickAction insideAction = (event -> this.insideTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
 
-        clickActions.add(BossSkillManager.createCustomSkillAction("Flat Type Editor", clickStack.clone(), flatAction));
-        clickActions.add(BossSkillManager.createCustomSkillAction("Wall Type Editor", clickStack.clone(), wallAction));
-        clickActions.add(BossSkillManager.createCustomSkillAction("Inside Type Editor", clickStack.clone(), insideAction));
+        clickActions.add(BossSkillManager.createCustomSkillAction("Flat Type Editor", getFlatTypeCurrent(customSkillElement), clickStack.clone(), flatAction));
+        clickActions.add(BossSkillManager.createCustomSkillAction("Wall Type Editor", getWallTypeCurrent(customSkillElement), clickStack.clone(), wallAction));
+        clickActions.add(BossSkillManager.createCustomSkillAction("Inside Type Editor", getInsideTypeCurrent(customSkillElement), clickStack.clone(), insideAction));
 
         return clickActions;
     }
@@ -176,6 +176,12 @@ public class Cage extends CustomSkillHandler {
         return currentLocation.clone().add(0.5, 0, 0.5);
     }
 
+    private String getFlatTypeCurrent(CustomSkillElement customSkillElement) {
+        CustomCageSkillElement customCageSkillElement = customSkillElement.getCustom().getCustomCageSkillData();
+
+        return customCageSkillElement.getFlatType();
+    }
+
     private MaterialTypeEditorPanel getFlatTypeEditor() {
         return new MaterialTypeEditorPanel(this.bossPanelManager, this.bossPanelManager.getListMenu("Skills.Material"), this.plugin) {
             @Override
@@ -200,6 +206,12 @@ public class Cage extends CustomSkillHandler {
         };
     }
 
+    private String getWallTypeCurrent(CustomSkillElement customSkillElement) {
+        CustomCageSkillElement customCageSkillElement = customSkillElement.getCustom().getCustomCageSkillData();
+
+        return customCageSkillElement.getWallType();
+    }
+
     private MaterialTypeEditorPanel getWallTypeEditor() {
         return new MaterialTypeEditorPanel(this.bossPanelManager, this.bossPanelManager.getListMenu("Skills.Material"), this.plugin) {
             @Override
@@ -222,6 +234,12 @@ public class Cage extends CustomSkillHandler {
                 return this.bossPanelManager.getCustomSkillEditorPanel();
             }
         };
+    }
+
+    private String getInsideTypeCurrent(CustomSkillElement customSkillElement) {
+        CustomCageSkillElement customCageSkillElement = customSkillElement.getCustom().getCustomCageSkillData();
+
+        return customCageSkillElement.getInsideType();
     }
 
     private MaterialTypeEditorPanel getInsideTypeEditor() {

@@ -1,18 +1,13 @@
 package com.songoda.epicbosses.panel.skills.custom.custom;
 
-import com.google.gson.JsonObject;
 import com.songoda.epicbosses.CustomBosses;
-import com.songoda.epicbosses.api.BossAPI;
-import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
-import com.songoda.epicbosses.managers.files.MinionsFileManager;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
 import com.songoda.epicbosses.skills.interfaces.ICustomSkillAction;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Debug;
-import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
@@ -33,8 +28,6 @@ import java.util.Map;
  */
 public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, CustomSkillElement> {
 
-    private ItemStackConverter itemStackConverter;
-    private MinionsFileManager minionsFileManager;
     private BossSkillManager bossSkillManager;
     private CustomBosses plugin;
 
@@ -42,9 +35,7 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
-        this.itemStackConverter = new ItemStackConverter();
         this.bossSkillManager = plugin.getBossSkillManager();
-        this.minionsFileManager = plugin.getMinionsFileManager();
     }
 
     @Override
@@ -68,10 +59,19 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
         }
 
         List<ICustomSkillAction> customButtons = customSkillHandler.getOtherSkillDataActions(skill, customSkillElement);
+        int maxPage = panel.getMaxPage(customButtons);
 
         if(customButtons == null || customButtons.isEmpty()) return;
 
-        loadPage(panel, 0, skill, customSkillElement, customSkillHandler, customButtons);
+        panel.setOnPageChange(((player, currentPage, requestedPage) -> {
+            if(requestedPage < 0 || requestedPage > maxPage) return false;
+
+            loadPage(panel, requestedPage, customButtons);
+            return true;
+        }));
+
+
+        loadPage(panel, 0, customButtons);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
 
     }
 
-    private void loadPage(Panel panel, int page, Skill skill, CustomSkillElement customSkillElement, CustomSkillHandler customSkillHandler, List<ICustomSkillAction> clickActions) {
+    private void loadPage(Panel panel, int page, List<ICustomSkillAction> clickActions) {
         panel.loadPage(page, ((slot, realisticSlot) -> {
             if(slot >= clickActions.size()) {
                 panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
@@ -87,10 +87,21 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
                 ICustomSkillAction customSkillAction = clickActions.get(slot);
                 ClickAction clickAction = customSkillAction.getAction();
                 String name = customSkillAction.getSettingName();
-                ItemStack displayStack = customSkillAction.getDisplayItemStack();
+                ItemStack displayStack = customSkillAction.getDisplayItemStack().clone();
+                String currently = customSkillAction.getCurrent();
 
-                
+                Map<String, String> replaceMap = new HashMap<>();
 
+                replaceMap.put("{setting}", name);
+                replaceMap.put("{currently}", currently);
+
+                ItemStackUtils.applyDisplayName(displayStack, this.plugin.getConfig().getString("Display.Skills.CustomSettings.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(displayStack, this.plugin.getConfig().getStringList("Display.Skills.CustomSettings.lore"), replaceMap);
+
+                panel.setItem(realisticSlot, displayStack, event -> {
+                    clickAction.onClick(event);
+                    loadPage(panel, page, clickActions);
+                });
             }
         }));
     }
