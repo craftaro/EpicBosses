@@ -197,35 +197,41 @@ public class BossSkillManager implements ILoadable {
         return null;
     }
 
-    public static ICustomSkillAction createCustomSkillAction(String name, ItemStack displayStack, ClickAction clickAction) {
-        return new CustomSkillActionCreator(name, displayStack, clickAction);
+    public static ICustomSkillAction createCustomSkillAction(String name, String current, ItemStack displayStack, ClickAction clickAction) {
+        return new CustomSkillActionCreator(name, current, displayStack, clickAction);
     }
 
     private static class CustomSkillActionCreator implements ICustomSkillAction {
 
         private final ClickAction clickAction;
-        private final String name;
+        private final String name, current;
         private final ItemStack itemStack;
 
-        public CustomSkillActionCreator(String name, ItemStack itemStack, ClickAction clickAction) {
+        public CustomSkillActionCreator(String name, String current, ItemStack itemStack, ClickAction clickAction) {
             this.name = name;
+            this.current = current;
             this.itemStack = itemStack;
             this.clickAction = clickAction;
         }
 
         @Override
         public ClickAction getAction() {
-            return null;
+            return this.clickAction;
         }
 
         @Override
         public String getSettingName() {
-            return null;
+            return this.name;
         }
 
         @Override
         public ItemStack getDisplayItemStack() {
-            return null;
+            return this.itemStack;
+        }
+
+        @Override
+        public String getCurrent() {
+            return this.current;
         }
     }
 }

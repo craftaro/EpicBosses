@@ -16,4 +16,5 @@ public interface ICustomSkillAction {
 
     ItemStack getDisplayItemStack();
 
+    String getCurrent();
 }

@@ -15,7 +15,7 @@ public interface ICustomSkillHandler extends ISkillHandler<CustomSkillElement> {
 
     boolean doesUseMultiplier();
 
-    Map<String, Class<?>> getOtherSkillData();
+    Map<String, Object> getOtherSkillData();
 
     List<ICustomSkillAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement);
 

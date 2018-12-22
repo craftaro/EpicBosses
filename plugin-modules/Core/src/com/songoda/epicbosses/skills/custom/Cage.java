@@ -16,6 +16,7 @@ import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.converters.MaterialConverter;
+import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
 import org.bukkit.Location;
@@ -58,12 +59,12 @@ public class Cage extends CustomSkillHandler {
     }
 
     @Override
-    public Map<String, Class<?>> getOtherSkillData() {
-        Map<String, Class<?>> map = new HashMap<>();
+    public Map<String, Object> getOtherSkillData() {
+        Map<String, Object> map = new HashMap<>();
 
-        map.put("flatType", String.class);
-        map.put("wallType", String.class);
-        map.put("insideType", String.class);
+        map.put("flatType", "IRON_BLOCK");
+        map.put("wallType", "IRON_BARS");
+        map.put("insideType", "AIR");
 
         return map;
     }
@@ -71,10 +72,14 @@ public class Cage extends CustomSkillHandler {
     @Override
     public List<ICustomSkillAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
         List<ICustomSkillAction> clickActions = new ArrayList<>();
+        ItemStack clickStack = new ItemStack(Material.STONE_PRESSURE_PLATE);
+        ClickAction flatAction = (event -> this.flatTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
+        ClickAction wallAction = (event -> this.wallTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
+        ClickAction insideAction = (event -> this.insideTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
 
-//        clickActions.add(BossSkillManager.createCustomSkillAction("Flat Type Editor", new ItemStack(Material.STONE_PRESSURE_PLATE), event -> this.flatTypeEditor.openFor((Player) event.getWhoClicked()), skill, customSkillElement));
-//        clickActions.add(event -> this.wallTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
-//        clickActions.add(event -> this.insideTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
+        clickActions.add(BossSkillManager.createCustomSkillAction("Flat Type Editor", clickStack.clone(), flatAction));
+        clickActions.add(BossSkillManager.createCustomSkillAction("Wall Type Editor", clickStack.clone(), wallAction));
+        clickActions.add(BossSkillManager.createCustomSkillAction("Inside Type Editor", clickStack.clone(), insideAction));
 
         return clickActions;
     }

@@ -3,8 +3,10 @@ package com.songoda.epicbosses.panel.skills.custom.custom;
 import com.google.gson.JsonObject;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
+import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
+import com.songoda.epicbosses.managers.files.MinionsFileManager;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
 import com.songoda.epicbosses.skills.interfaces.ICustomSkillAction;
 import com.songoda.epicbosses.skills.Skill;
@@ -32,6 +34,7 @@ import java.util.Map;
 public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, CustomSkillElement> {
 
     private ItemStackConverter itemStackConverter;
+    private MinionsFileManager minionsFileManager;
     private BossSkillManager bossSkillManager;
     private CustomBosses plugin;
 
@@ -41,6 +44,7 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
         this.plugin = plugin;
         this.itemStackConverter = new ItemStackConverter();
         this.bossSkillManager = plugin.getBossSkillManager();
+        this.minionsFileManager = plugin.getMinionsFileManager();
     }
 
     @Override
@@ -84,11 +88,8 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
                 ClickAction clickAction = customSkillAction.getAction();
                 String name = customSkillAction.getSettingName();
                 ItemStack displayStack = customSkillAction.getDisplayItemStack();
-                Map<String, String> replaceMap = new HashMap<>();
 
-//                replaceMap.put("{name}", name);
-//                replaceMap.put("{multiplier}", ""+customSkillHandler.doesUseMultiplier());
-//                replaceMap.put("{customData}", hasCustomData);
+                
 
             }
         }));

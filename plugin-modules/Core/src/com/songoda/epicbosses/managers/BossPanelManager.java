@@ -28,6 +28,7 @@ import com.songoda.epicbosses.panel.skills.custom.commands.CommandListSkillEdito
 import com.songoda.epicbosses.panel.skills.custom.commands.ModifyCommandEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.custom.CustomSkillTypeEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.custom.MaterialTypeEditorPanel;
+import com.songoda.epicbosses.panel.skills.custom.custom.MinionSelectEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.custom.SpecialSettingsEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.potions.CreatePotionEffectEditorPanel;
 import com.songoda.epicbosses.panel.skills.custom.potions.PotionEffectTypeEditorPanel;
@@ -78,7 +79,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu, skillTypeEditMenu, potionSkillEditorPanel, commandSkillEditorPanel, groupSkillEditorPanel, customSkillEditorPanel;
     @Getter private ISubVariablePanelHandler<Skill, PotionEffectHolder> createPotionEffectMenu, potionEffectTypeEditMenu;
     @Getter private ISubVariablePanelHandler<Skill, SubCommandSkillElement> modifyCommandEditMenu, commandListSkillEditMenu;
-    @Getter private ISubVariablePanelHandler<Skill, CustomSkillElement> customSkillTypeEditorMenu, specialSettingsEditorMenu;
+    @Getter private ISubVariablePanelHandler<Skill, CustomSkillElement> customSkillTypeEditorMenu, specialSettingsEditorMenu, minionSelectEditorMenu;
 
     private final CustomBosses customBosses;
 
@@ -197,7 +198,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder5 = new PanelBuilder(editor.getConfigurationSection("ModifyCommandEditorPanel"));
         PanelBuilder panelBuilder6 = new PanelBuilder(editor.getConfigurationSection("CustomSkillEditorPanel"));
         PanelBuilder panelBuilder7 = new PanelBuilder(editor.getConfigurationSection("CustomSkillTypeEditorPanel"));
-        PanelBuilder panelBuilder8 = new PanelBuilder(editor.getConfigurationSection("CustomSkillTypeEditorPanel"));
+        PanelBuilder panelBuilder8 = new PanelBuilder(editor.getConfigurationSection("SpecialSettingsEditorPanel"));
 
         this.mainSkillEditMenu = new MainSkillEditorPanel(this, panelBuilder, this.customBosses);
         this.customMessageEditMenu = new SingleMessageListEditor<Skill>(this, getListMenu("Skills.MainEdit"), this.customBosses) {
@@ -234,6 +235,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.customSkillEditorPanel = new CustomSkillEditorPanel(this, panelBuilder6, this.customBosses);
         this.customSkillTypeEditorMenu = new CustomSkillTypeEditorPanel(this, panelBuilder7, this.customBosses);
         this.specialSettingsEditorMenu = new SpecialSettingsEditorPanel(this, panelBuilder8, this.customBosses);
+        this.minionSelectEditorMenu = new MinionSelectEditorPanel(this, getListMenu("Skills.MinionList"), this.customBosses);
     }
 
     private void reloadSkillEditMenus() {
@@ -246,7 +248,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder5 = new PanelBuilder(editor.getConfigurationSection("ModifyCommandEditorPanel"));
         PanelBuilder panelBuilder6 = new PanelBuilder(editor.getConfigurationSection("CustomSkillEditorPanel"));
         PanelBuilder panelBuilder7 = new PanelBuilder(editor.getConfigurationSection("CustomSkillTypeEditorPanel"));
-        PanelBuilder panelBuilder8 = new PanelBuilder(editor.getConfigurationSection("CustomSkillTypeEditorPanel"));
+        PanelBuilder panelBuilder8 = new PanelBuilder(editor.getConfigurationSection("SpecialSettingsEditorPanel"));
 
         this.mainSkillEditMenu.initializePanel(panelBuilder);
         this.customMessageEditMenu.initializePanel(getListMenu("Skills.MainEdit"));
@@ -261,6 +263,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.customSkillEditorPanel.initializePanel(panelBuilder6);
         this.customSkillTypeEditorMenu.initializePanel(panelBuilder7);
         this.specialSettingsEditorMenu.initializePanel(panelBuilder8);
+        this.minionSelectEditorMenu.initializePanel(getListMenu("Skills.MinionList"));
     }
 
     //---------------------------------------------

@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
+import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.elements.CustomMinionSkillElement;
@@ -12,9 +13,11 @@ import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
+import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,11 +43,11 @@ public class Minions extends CustomSkillHandler {
     }
 
     @Override
-    public Map<String, Class<?>> getOtherSkillData() {
-        Map<String, Class<?>> map = new HashMap<>();
+    public Map<String, Object> getOtherSkillData() {
+        Map<String, Object> map = new HashMap<>();
 
-        map.put("amount", Integer.class);
-        map.put("minionToSpawn", String.class);
+        map.put("amount", 1);
+        map.put("minionToSpawn", "");
 
         return map;
     }
@@ -53,7 +56,8 @@ public class Minions extends CustomSkillHandler {
     public List<ICustomSkillAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
         List<ICustomSkillAction> clickActions = new ArrayList<>();
 
-//        clickActions.add(getAmountAction(skill, customSkillElement));
+        clickActions.add(BossSkillManager.createCustomSkillAction("Amount Editor", getAmountCurrent(customSkillElement), new ItemStack(Material.REDSTONE), getAmountAction(skill, customSkillElement)));
+        clickActions.add(BossSkillManager.createCustomSkillAction("Minion to Spawn Editor", new ItemStack(Material.CREEPER_SPAWN_EGG), getMinionToSpawnAction(skill, customSkillElement)));
 
         return clickActions;
     }
@@ -61,6 +65,16 @@ public class Minions extends CustomSkillHandler {
     @Override
     public void castSkill(Skill skill, CustomSkillElement customSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
         BossAPI.spawnNewMinion(activeBossHolder, skill);
+    }
+
+    private ClickAction getMinionToSpawnAction(Skill skill, CustomSkillElement customSkillElement) {
+        return event -> this.plugin.getBossPanelManager().getMinionSelectEditorMenu().openFor((Player) event.getWhoClicked(), skill, customSkillElement);
+    }
+
+    private String getAmountCurrent(CustomSkillElement customSkillElement) {
+        CustomMinionSkillElement customMinionSkillElement = customSkillElement.getCustom().getCustomMinionSkillData();
+
+        return ""+customMinionSkillElement.getAmount();
     }
 
     private ClickAction getAmountAction(Skill skill, CustomSkillElement customSkillElement) {

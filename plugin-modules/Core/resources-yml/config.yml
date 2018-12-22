@@ -171,3 +171,14 @@ Display:
       menuName: '&b&lSelect Material'
       selectedName: '&bMaterial: &f{type} &a** Selected **'
       name: '&bMaterial: &f{type}'
+    MinionList:
+      menuName: '&b&lSelect Minion For Skill'
+      selectedName: '&bMinion: &f{name} &a** Selected **'
+      name: '&bMinion: &f{name}'
+      lore:
+      - '&3Editing: &7{editing}'
+      - '&3Targeting: &7{targeting}'
+    CustomSetting:
+      name: '&bSetting: &f{setting}'
+      lore:
+      - '&3Currently: &7{currently}'

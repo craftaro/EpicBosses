@@ -25,7 +25,7 @@ public class Fireball extends CustomSkillHandler {
     }
 
     @Override
-    public Map<String, Class<?>> getOtherSkillData() {
+    public Map<String, Object> getOtherSkillData() {
         return null;
     }
 

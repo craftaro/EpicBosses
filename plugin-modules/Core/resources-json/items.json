@@ -1,4 +1,8 @@
 {
+  "DefaultMinionMenuSpawnItem": {
+    "type": "ZOMBIE_SPAWN_EGG",
+    "name": "&c&lDefault Minion Menu Spawn Item"
+  },
   "DefaultTextMenuItem": {
     "type": "BOOK",
     "name": "&c&lDefault Text Menu Item"
