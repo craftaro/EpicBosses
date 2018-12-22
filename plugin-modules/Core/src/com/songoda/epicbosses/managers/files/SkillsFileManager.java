@@ -43,6 +43,13 @@ public class SkillsFileManager implements ILoadable, IReloadable, ISavable {
         this.skillsFileHandler.saveFile(this.skillMap);
     }
 
+    public void saveSkill(String name, Skill skill) {
+        if(this.skillMap.containsKey(name)) return;
+
+        this.skillMap.put(name, skill);
+        save();
+    }
+
     public Skill getSkill(String name) {
         return this.skillMap.getOrDefault(name, null);
     }

@@ -17,6 +17,7 @@ public enum Debug {
     MECHANIC_APPLICATION_FAILED("Some mechanics have failed to be applied. It got stuck at {0} mechanic."),
     BOSS_NAME_EXISTS("A boss was attempted to be created with the name {0} but there is already a boss with that name."),
     DROPTABLE_NAME_EXISTS("A droptable was attempted to be created with the name {0} but there is already a drop table with that name."),
+    SKILL_NAME_EXISTS("A skill was attempted to be created with the name {0} but there is already a skill with that name."),
     MINION_NAME_EXISTS("A minion was attempted to be created with the name {0} but there is already a minion with that name."),
     BOSS_CONTAINER_SAVE("The BossEntity map was saved in, {0} succeeded, and {1} failed. Listed below are the saved data which already existed in the container: \n{2}"),
     MINION_CONTAINER_SAVE("The MinionEntity map was saved in, {0} succeeded, and {1} failed. Listed below are the saved data which already existed in the container: \n{2}"),

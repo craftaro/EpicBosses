@@ -4,9 +4,13 @@ import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.managers.BossDropTableManager;
+import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.managers.files.CommandsFileManager;
 import com.songoda.epicbosses.managers.files.DropTableFileManager;
 import com.songoda.epicbosses.managers.files.MessagesFileManager;
+import com.songoda.epicbosses.managers.files.SkillsFileManager;
+import com.songoda.epicbosses.skills.Skill;
+import com.songoda.epicbosses.skills.SkillMode;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.Permission;
 import com.songoda.epicbosses.utils.command.SubCommand;
@@ -31,10 +35,14 @@ public class BossNewCmd extends SubCommand {
     private BossDropTableManager bossDropTableManager;
     private MessagesFileManager messagesFileManager;
     private CommandsFileManager commandsFileManager;
+    private SkillsFileManager skillsFileManager;
+    private BossSkillManager bossSkillManager;
 
     public BossNewCmd(CustomBosses plugin) {
         super("new");
 
+        this.bossSkillManager = plugin.getBossSkillManager();
+        this.skillsFileManager = plugin.getSkillsFileManager();
         this.dropTableFileManager = plugin.getDropTableFileManager();
         this.bossDropTableManager = plugin.getBossDropTableManager();
         this.messagesFileManager = plugin.getBossMessagesFileManager();
@@ -127,8 +135,49 @@ public class BossNewCmd extends SubCommand {
         //-------------------
         // S K I L L
         //-------------------
-        if(args.length == 3 && args[1].equalsIgnoreCase("skill")) {
-            //TODO: Complete new skill command
+        if(args.length == 5 && args[1].equalsIgnoreCase("skill")) {
+            String nameInput = args[2];
+            String typeInput = args[3];
+            String modeInput = args[4];
+            boolean validType = false, validMode = false;
+            List<SkillMode> skillModes = SkillMode.getSkillModes();
+
+            if(this.skillsFileManager.getSkill(nameInput) != null) {
+                Message.Boss_New_AlreadyExists.msg(sender, "Skill");
+                return;
+            }
+
+            for(String s : this.bossSkillManager.getValidSkillTypes()) {
+                if(s.equalsIgnoreCase(typeInput)) {
+                    validType = true;
+                    break;
+                }
+            }
+
+            for(SkillMode skillMode : skillModes) {
+                if(skillMode.name().equalsIgnoreCase(modeInput)) {
+                    validMode = true;
+                    break;
+                }
+            }
+
+            if(!validType) {
+                Message.Boss_New_InvalidSkillType.msg(sender);
+                return;
+            }
+
+            if(!validMode) {
+                Message.Boss_New_InvalidSkillMode.msg(sender);
+                return;
+            }
+
+            Skill skill = BossAPI.createBaseSkill(nameInput, typeInput, modeInput);
+
+            if(skill == null) {
+                Message.Boss_New_SomethingWentWrong.msg(sender, "Skill");
+            } else {
+                Message.Boss_New_Skill.msg(sender, nameInput, typeInput);
+            }
 
             return;
         }

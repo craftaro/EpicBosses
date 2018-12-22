@@ -32,6 +32,7 @@ public class BossSkillManager implements ILoadable {
 
     private static final Set<CustomSkillHandler> SKILLS = new HashSet<>();
 
+    @Getter private final List<String> validSkillTypes = Arrays.asList("Potion", "Group", "Custom", "Command");
     private CustomBosses plugin;
 
     public BossSkillManager(CustomBosses plugin) {

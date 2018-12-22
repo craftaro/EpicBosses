@@ -211,13 +211,39 @@ public class BossAPI {
         return jsonParser.parse(jsonString).getAsJsonObject();
     }
 
-
-
+    /**
+     * Used to create convert a class in to a
+     * JsonObject for file saving.
+     *
+     * @param object - object to convert
+     * @return a jsonObject of what was trying to be converted
+     */
     public static <T> JsonObject convertObjectToJsonObject(T object) {
         JsonParser jsonParser = new JsonParser();
         String jsonString = BossesGson.get().toJson(object);
 
         return jsonParser.parse(jsonString).getAsJsonObject();
+    }
+
+    /**
+     * Used to create a new base skill table
+     * with the specified arguments.
+     *
+     * @param name - name of the skill table.
+     * @param type - skill table type.
+     * @param mode - skill table mode.
+     * @return an instance of the drop table if successful
+     */
+    public static Skill createBaseSkill(String name, String type, String mode) {
+        if(PLUGIN.getSkillsFileManager().getSkill(name) != null) {
+            Debug.SKILL_NAME_EXISTS.debug(name);
+            return null;
+        }
+
+        Skill skill = new Skill(mode, type, 100.0, "", "");
+
+        PLUGIN.getSkillsFileManager().saveSkill(name, skill);
+        return skill;
     }
 
     /**

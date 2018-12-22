@@ -1,5 +1,8 @@
 package com.songoda.epicbosses.skills;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Charles Cullen
  * @version 1.0.0
@@ -31,6 +34,16 @@ public enum SkillMode {
         }
 
         return BLANK;
+    }
+
+    public static List<SkillMode> getSkillModes() {
+        List<SkillMode> list = new ArrayList<>();
+
+        for(SkillMode skillMode : values()) {
+            if(skillMode.rank > 0) list.add(skillMode);
+        }
+
+        return list;
     }
 
     private static SkillMode get(int rank) {
