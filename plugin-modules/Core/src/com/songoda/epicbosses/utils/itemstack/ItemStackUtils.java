@@ -198,6 +198,8 @@ public class ItemStackUtils {
             }
         }
 
+        if(itemMeta == null) return;
+
         itemMeta.setDisplayName(StringUtils.get().translateColor(name));
         itemStack.setItemMeta(itemMeta);
     }

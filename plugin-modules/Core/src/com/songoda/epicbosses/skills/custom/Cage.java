@@ -17,7 +17,7 @@ import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.converters.MaterialConverter;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
-import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
+import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -200,8 +200,8 @@ public class Cage extends CustomSkillHandler {
             }
 
             @Override
-            public IVariablePanelHandler<Skill> getParentHolder(Skill skill) {
-                return this.bossPanelManager.getCustomSkillEditorPanel();
+            public ISubVariablePanelHandler<Skill, CustomSkillElement> getParentHolder() {
+                return this.bossPanelManager.getSpecialSettingsEditorMenu();
             }
         };
     }
@@ -230,8 +230,8 @@ public class Cage extends CustomSkillHandler {
             }
 
             @Override
-            public IVariablePanelHandler<Skill> getParentHolder(Skill skill) {
-                return this.bossPanelManager.getCustomSkillEditorPanel();
+            public ISubVariablePanelHandler<Skill, CustomSkillElement> getParentHolder() {
+                return this.bossPanelManager.getSpecialSettingsEditorMenu();
             }
         };
     }
@@ -260,8 +260,8 @@ public class Cage extends CustomSkillHandler {
             }
 
             @Override
-            public IVariablePanelHandler<Skill> getParentHolder(Skill skill) {
-                return this.bossPanelManager.getCustomSkillEditorPanel();
+            public ISubVariablePanelHandler<Skill, CustomSkillElement> getParentHolder() {
+                return this.bossPanelManager.getSpecialSettingsEditorMenu();
             }
         };
     }

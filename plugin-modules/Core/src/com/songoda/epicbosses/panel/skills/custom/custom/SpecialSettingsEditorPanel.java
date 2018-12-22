@@ -1,6 +1,7 @@
 package com.songoda.epicbosses.panel.skills.custom.custom;
 
 import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
@@ -40,7 +41,14 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
 
     @Override
     public void openFor(Player player, Skill skill, CustomSkillElement customSkillElement) {
-        Panel panel = getPanelBuilder().getPanel()
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        Map<String, String> replaceMap = new HashMap<>();
+
+        replaceMap.put("{name}", BossAPI.getSkillName(skill));
+        replaceMap.put("{selected}", customSkillElement.getCustom().getType());
+        panelBuilder.addReplaceData(replaceMap);
+
+        Panel panel = panelBuilder.getPanel()
                 .setParentPanelHandler(this.bossPanelManager.getCustomSkillEditorPanel(), skill);
 
         fillPanel(panel, skill, customSkillElement);
@@ -59,9 +67,10 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
         }
 
         List<ICustomSkillAction> customButtons = customSkillHandler.getOtherSkillDataActions(skill, customSkillElement);
-        int maxPage = panel.getMaxPage(customButtons);
 
         if(customButtons == null || customButtons.isEmpty()) return;
+
+        int maxPage = panel.getMaxPage(customButtons);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
             if(requestedPage < 0 || requestedPage > maxPage) return false;
@@ -95,13 +104,12 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
                 replaceMap.put("{setting}", name);
                 replaceMap.put("{currently}", currently);
 
-                ItemStackUtils.applyDisplayName(displayStack, this.plugin.getConfig().getString("Display.Skills.CustomSettings.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(displayStack, this.plugin.getConfig().getStringList("Display.Skills.CustomSettings.lore"), replaceMap);
+                if(displayStack == null || displayStack.getType() == Material.AIR) return;
 
-                panel.setItem(realisticSlot, displayStack, event -> {
-                    clickAction.onClick(event);
-                    loadPage(panel, page, clickActions);
-                });
+                ItemStackUtils.applyDisplayName(displayStack, this.plugin.getConfig().getString("Display.Skills.CustomSetting.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(displayStack, this.plugin.getConfig().getStringList("Display.Skills.CustomSetting.lore"), replaceMap);
+
+                panel.setItem(realisticSlot, displayStack, clickAction);
             }
         }));
     }

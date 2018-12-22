@@ -7,6 +7,7 @@ import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
+import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
@@ -35,7 +36,7 @@ public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Sk
 
     public abstract String getCurrentSetting(CustomSkillElement customSkillElement);
 
-    public abstract IVariablePanelHandler<Skill> getParentHolder(Skill skill);
+    public abstract ISubVariablePanelHandler<Skill, CustomSkillElement> getParentHolder();
 
     @Override
     public void fillPanel(Panel panel, Skill skill, CustomSkillElement customSkillElement) {
@@ -46,17 +47,17 @@ public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Sk
         panel.setOnPageChange((player, currentPage, requestedPage) -> {
             if(requestedPage < 0 || requestedPage > maxPage) return false;
 
-            loadPage(panel, requestedPage, materials, skill, customSkillElement);
+            loadPage(panel, requestedPage, filteredList, skill, customSkillElement);
             return true;
         });
 
-        loadPage(panel, 0, materials, skill, customSkillElement);
+        loadPage(panel, 0, filteredList, skill, customSkillElement);
     }
 
     @Override
     public void openFor(Player player, Skill skill, CustomSkillElement customSkillElement) {
         Panel panel = getPanelBuilder().getPanel()
-                .setParentPanelHandler(getParentHolder(skill), skill);
+                .setParentPanelHandler(getParentHolder(), skill, customSkillElement);
 
         fillPanel(panel, skill, customSkillElement);
         panel.openFor(player);
@@ -77,6 +78,9 @@ public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Sk
                 Material material = filteredList.get(slot);
                 ItemStack itemStack = new ItemStack(material);
                 Map<String, String> replaceMap = new HashMap<>();
+
+                if(itemStack.getType() == Material.AIR) return;
+
                 String name = material.name();
 
                 replaceMap.put("{type}", StringUtils.get().formatString(name));
@@ -99,7 +103,7 @@ public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Sk
         List<Material> materials = new ArrayList<>();
 
         masterList.forEach(material -> {
-            if(material.isItem()) {
+            if(material.isBlock() && material.isSolid() && material.isOccluding()) {
                 materials.add(material);
             }
         });
