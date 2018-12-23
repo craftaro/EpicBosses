@@ -61,13 +61,7 @@ public class SkillTypeEditorPanel extends VariablePanelHandler<Skill> {
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-//        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-//
-//        panelBuilderCounter
-//                .addSlotCounter("Command")
-//                .addSlotCounter("Custom")
-//                .addSlotCounter("Potion")
-//                .addSlotCounter("Group");
+
     }
 
     private ClickAction getCommandAction(Skill skill) {

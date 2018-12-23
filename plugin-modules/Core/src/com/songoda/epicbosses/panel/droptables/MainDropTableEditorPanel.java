@@ -40,7 +40,7 @@ public class MainDropTableEditorPanel extends VariablePanelHandler<DropTable> {
         Panel panel = panelBuilder.getPanel()
                 .setParentPanelHandler(this.bossPanelManager.getDropTables());
 
-        panelBuilderCounter.getSlotsWith("Type").forEach(slot -> panel.setOnClick(slot, event -> {}));
+        panelBuilderCounter.getSlotsWith("Type").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getDropTableTypeEditMenu().openFor(player, dropTable)));
         panelBuilderCounter.getSlotsWith("Rewards").forEach(slot -> panel.setOnClick(slot, event -> {}));
 
         panel.openFor(player);

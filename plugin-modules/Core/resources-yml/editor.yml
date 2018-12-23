@@ -1882,7 +1882,7 @@ SpecialSettingsEditorPanel:
       - '&7the skill editor panel to configure'
       - '&7the general skill options.'
 DropTableMainEditorPanel:
-  name: '&b&l{name} Editor'
+  name: '&b&l{name} Drop Table Editor'
   slots: 9
   Settings:
     emptySpaceFiller: true
@@ -1926,3 +1926,59 @@ DropTableMainEditorPanel:
       lore:
       - '&7Click this button to go back to'
       - '&7the drop table list page.'
+DropTableTypeEditorPanel:
+  name: '&b&l{name} Drop Table Editor'
+  slots: 9
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 5
+  Items:
+    '3':
+      type: SPLASH_POTION
+      name: '&e&lSpray Drop Table Type'
+      lore:
+      - '&7If you set this to the drop table type'
+      - '&7then you will be able to set rewards that'
+      - '&7will be sprayed out from the bosses'
+      - '&7location in to random locations around him.'
+      - '&7'
+      - '&c&lWARNING'
+      - '&7This will remove any previous'
+      - '&7custom reward data.'
+      Button: Spray
+    '5':
+      type: HOPPER
+      name: '&e&lDrop Drop Table Type'
+      lore:
+      - '&7If you set this to the drop table type'
+      - '&7then you will be able to set rewards that'
+      - '&7will be drop on the bosses death location'
+      - '&7for players to loot.'
+      - '&7'
+      - '&c&lWARNING'
+      - '&7This will remove any previous'
+      - '&7custom reward data.'
+      Button: Drop
+    '7':
+      type: EMERALD
+      name: '&e&lGive Drop Table Type'
+      lore:
+      - '&7If you set this to the drop table type'
+      - '&7then you will be able to set rewards that'
+      - '&7will be given to the specified damaging'
+      - '&7positions on the boss damage map.'
+      - '&7'
+      - '&c&lWARNING'
+      - '&7This will remove any previous'
+      - '&7custom reward data.'
+      Button: Give
+    '9':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'

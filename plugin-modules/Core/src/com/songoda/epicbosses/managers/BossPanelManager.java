@@ -19,6 +19,7 @@ import com.songoda.epicbosses.panel.bosses.list.BossListWeaponEditorPanel;
 import com.songoda.epicbosses.panel.bosses.text.*;
 import com.songoda.epicbosses.panel.bosses.weapons.MainHandEditorPanel;
 import com.songoda.epicbosses.panel.bosses.weapons.OffHandEditorPanel;
+import com.songoda.epicbosses.panel.droptables.DropTableTypeEditorPanel;
 import com.songoda.epicbosses.panel.droptables.MainDropTableEditorPanel;
 import com.songoda.epicbosses.panel.handlers.*;
 import com.songoda.epicbosses.panel.skills.MainSkillEditorPanel;
@@ -83,7 +84,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private ISubVariablePanelHandler<Skill, SubCommandSkillElement> modifyCommandEditMenu, commandListSkillEditMenu;
     @Getter private ISubVariablePanelHandler<Skill, CustomSkillElement> customSkillTypeEditorMenu, specialSettingsEditorMenu, minionSelectEditorMenu;
 
-    @Getter private IVariablePanelHandler<DropTable> mainDropTableEditMenu;
+    @Getter private IVariablePanelHandler<DropTable> mainDropTableEditMenu, dropTableTypeEditMenu;
 
     private final CustomBosses customBosses;
 
@@ -197,15 +198,19 @@ public class BossPanelManager implements ILoadable, IReloadable {
     private void loadDropTableEditMenus() {
         FileConfiguration editor = this.customBosses.getEditor();
         PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("DropTableMainEditorPanel"));
+        PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("DropTableTypeEditorPanel"));
 
         this.mainDropTableEditMenu = new MainDropTableEditorPanel(this, panelBuilder);
+        this.dropTableTypeEditMenu = new DropTableTypeEditorPanel(this, panelBuilder1, this.customBosses);
     }
 
     private void reloadDropTableEditMenus() {
         FileConfiguration editor = this.customBosses.getEditor();
         PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("DropTableMainEditorPanel"));
+        PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("DropTableTypeEditorPanel"));
 
         this.mainDropTableEditMenu.initializePanel(panelBuilder);
+        this.dropTableTypeEditMenu.initializePanel(panelBuilder1);
     }
 
     //---------------------------------------------
