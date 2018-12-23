@@ -17,10 +17,6 @@
 
 01:00  -> Wilderness - Button to change max coords, boss that autospawn applies to, maxActiveBosses, spawnChance
 01:00  -> Spawner - Button to change max coords, boss that autospawn applies to, maxActiveBosses, spawnChance
-00:30 -> Complete the /boss new skill command
 00:30 -> Connect the /boss time [section] to the AutoSpawns timer (can only be applied to Interval AutoSpawns)
 00:30 -> Add support for HolographicDisplays placeholder as the entityName for bosses and minions
 01:00 -> Add a new branch for the plugin and add support for Legacy version
-
-------
-28.15hrs

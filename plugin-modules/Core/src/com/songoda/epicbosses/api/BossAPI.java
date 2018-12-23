@@ -168,6 +168,21 @@ public class BossAPI {
     }
 
     /**
+     * Used to get the DropTable configuration section
+     * name from a DropTable instance.
+     *
+     * @param dropTable - the dropTable instance
+     * @return name of the dropTable from the DropTableFileManager or null if not found.
+     */
+    public static String getDropTableName(DropTable dropTable) {
+        for(Map.Entry<String, DropTable> entry : PLUGIN.getDropTableFileManager().getDropTables().entrySet()) {
+            if(entry.getValue().equals(dropTable)) return entry.getKey();
+        }
+
+        return null;
+    }
+
+    /**
      * Used to get the Minion configuration section name
      * from a MinionEntity instance.
      *
@@ -384,10 +399,10 @@ public class BossAPI {
      * @return ActiveBossHolder class with stored information
      */
     public static ActiveBossHolder spawnNewBoss(BossEntity bossEntity, Location location, Player player, ItemStack itemStack) {
-//        if(bossEntity.isEditing()) {
-//            Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
-//            return null;
-//        }
+        if(bossEntity.isEditing()) {
+            Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
+            return null;
+        }
 
         String name = PLUGIN.getBossEntityContainer().getName(bossEntity);
 

@@ -138,6 +138,7 @@ public enum Message {
     Boss_New_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_New_InvalidArgs("&c&l(!) &cInvalid arguments! You must use &n/boss new droptable [name] (type)&c or &n/boss new skill [name]&c!"),
     Boss_New_CreateArgumentsDropTable("&b&lEpicBosses &8» &7Create a new droptable with the command &f/boss new droptable [name] [type]&7."),
+    Boss_New_CreateArgumentsSkill("&b&lEpicBosses &8» &7Create a new skill with the command &f/boss new skill [name] [type] [mode]&7."),
     Boss_New_CreateArgumentsMessage("&b&lEpicBosses &8» &7Create a new message with the command &f/boss new message [name] [message(s)]. \n&7&oUse &f|| &7&oto reference a new line."),
     Boss_New_CreateArgumentsCommand("&b&lEpicBosses &8» &7Create a new command with the command &f/boss new command [name] [command(s)]. \n&7&oUse &f|| &7&oto reference a new line."),
     Boss_New_AlreadyExists("&c&l(!) &cThe specified {0} name already exists. Please try another name."),

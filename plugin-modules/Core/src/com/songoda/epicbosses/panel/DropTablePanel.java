@@ -13,6 +13,7 @@ import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -77,9 +78,7 @@ public class DropTablePanel extends MainListPanelHandler {
                 ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.DropTable.name"), replaceMap);
                 ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.DropTable.lore"), replaceMap);
 
-                panel.setItem(realisticSlot, itemStack, e -> {
-                    //TODO: Add Drop Table editing
-                });
+                panel.setItem(realisticSlot, itemStack, e -> this.bossPanelManager.getMainDropTableEditMenu().openFor((Player) e.getWhoClicked(), dropTable));
             }
         });
     }

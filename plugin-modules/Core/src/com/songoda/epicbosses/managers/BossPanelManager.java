@@ -1,6 +1,7 @@
 package com.songoda.epicbosses.managers;
 
 import com.songoda.epicbosses.api.BossAPI;
+import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.EquipmentElement;
@@ -18,6 +19,7 @@ import com.songoda.epicbosses.panel.bosses.list.BossListWeaponEditorPanel;
 import com.songoda.epicbosses.panel.bosses.text.*;
 import com.songoda.epicbosses.panel.bosses.weapons.MainHandEditorPanel;
 import com.songoda.epicbosses.panel.bosses.weapons.OffHandEditorPanel;
+import com.songoda.epicbosses.panel.droptables.MainDropTableEditorPanel;
 import com.songoda.epicbosses.panel.handlers.*;
 import com.songoda.epicbosses.panel.skills.MainSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.SkillTypeEditorPanel;
@@ -81,6 +83,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private ISubVariablePanelHandler<Skill, SubCommandSkillElement> modifyCommandEditMenu, commandListSkillEditMenu;
     @Getter private ISubVariablePanelHandler<Skill, CustomSkillElement> customSkillTypeEditorMenu, specialSettingsEditorMenu, minionSelectEditorMenu;
 
+    @Getter private IVariablePanelHandler<DropTable> mainDropTableEditMenu;
+
     private final CustomBosses customBosses;
 
     public BossPanelManager(CustomBosses customBosses) {
@@ -112,6 +116,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         loadEquipmentEditMenus();
 
         loadSkillEditMenus();
+        loadDropTableEditMenus();
     }
 
     @Override
@@ -139,6 +144,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         reloadEquipmentEditMenus();
 
         reloadSkillEditMenus();
+        reloadDropTableEditMenus();
     }
 
     public int isItemStackUsed(String name) {
@@ -180,6 +186,26 @@ public class BossPanelManager implements ILoadable, IReloadable {
         replaceMap.put("{panelName}", StringUtils.get().translateColor(value));
 
         return new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("ListPanel"), replaceMap);
+    }
+
+    //---------------------------------------------
+    //
+    //  D R O P   T A B L E   E D I T   P A N E L S
+    //
+    //---------------------------------------------
+
+    private void loadDropTableEditMenus() {
+        FileConfiguration editor = this.customBosses.getEditor();
+        PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("DropTableMainEditorPanel"));
+
+        this.mainDropTableEditMenu = new MainDropTableEditorPanel(this, panelBuilder);
+    }
+
+    private void reloadDropTableEditMenus() {
+        FileConfiguration editor = this.customBosses.getEditor();
+        PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("DropTableMainEditorPanel"));
+
+        this.mainDropTableEditMenu.initializePanel(panelBuilder);
     }
 
     //---------------------------------------------

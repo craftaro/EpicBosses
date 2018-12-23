@@ -1881,3 +1881,48 @@ SpecialSettingsEditorPanel:
       - '&7Click this button to go back to'
       - '&7the skill editor panel to configure'
       - '&7the general skill options.'
+DropTableMainEditorPanel:
+  name: '&b&l{name} Editor'
+  slots: 9
+  Settings:
+    emptySpaceFiller: true
+    backButton: true
+  Buttons:
+    backButton: 9
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Items:
+    '1':
+      type: BOOK
+      name: '&c&lDrop Table Guide'
+      lore:
+      - '&7Here you are able to configure'
+      - '&7each aspect of the drop table to'
+      - '&7your liking. Remember that the moment'
+      - '&7something changes then it will also'
+      - '&7change for any live bosses.'
+    '4':
+      type: GUNPOWDER
+      name: '&e&lType'
+      lore:
+      - '&bCurrently: &f{type}'
+      - '&7Click this to change the skill type. Keep'
+      - '&7in mind that when you change your skill'
+      - '&7type the previous custom data will be erased'
+      - '&7to make room for the new custom data.'
+      Button: Type
+    '6':
+      type: DIAMOND
+      name: '&e&lRewards'
+      lore:
+      - '&7Click here to edit the rewards related to'
+      - '&7this drop table. The menu that appears will'
+      - '&7be relevant to the drop table type.'
+      Button: Rewards
+    '9':
+      type: REDSTONE
+      name: '&cClick here to go back'
+      lore:
+      - '&7Click this button to go back to'
+      - '&7the drop table list page.'

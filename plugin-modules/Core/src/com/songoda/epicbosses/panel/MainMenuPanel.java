@@ -107,7 +107,7 @@ public class MainMenuPanel extends PanelHandler {
             if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
                 this.bossPanelManager.getCustomSkills().openFor(player);
             } else if(event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
-                //TODO: Set up create skills command
+                Message.Boss_New_CreateArgumentsSkill.msg(player);
                 player.closeInventory();
             }
         };
