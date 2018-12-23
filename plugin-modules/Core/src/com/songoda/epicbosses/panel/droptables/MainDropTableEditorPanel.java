@@ -3,6 +3,7 @@ package com.songoda.epicbosses.panel.droptables;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.managers.BossPanelManager;
+import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
@@ -34,6 +35,7 @@ public class MainDropTableEditorPanel extends VariablePanelHandler<DropTable> {
         Map<String, String> replaceMap = new HashMap<>();
 
         replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
+        replaceMap.put("{type}", StringUtils.get().formatString(dropTable.getDropType()));
         panelBuilder.addReplaceData(replaceMap);
 
         PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();

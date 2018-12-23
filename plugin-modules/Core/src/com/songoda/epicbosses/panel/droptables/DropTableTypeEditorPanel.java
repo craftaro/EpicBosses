@@ -47,9 +47,9 @@ public class DropTableTypeEditorPanel extends VariablePanelHandler<DropTable> {
         Panel panel = panelBuilder.getPanel()
                 .setParentPanelHandler(this.bossPanelManager.getMainDropTableEditMenu(), dropTable);
 
-        panelBuilderCounter.getSlotsWith("Spray").forEach(slot -> panel.setOnClick(slot, getAction(dropTable, "Spray")));
-        panelBuilderCounter.getSlotsWith("Drop").forEach(slot -> panel.setOnClick(slot, getAction(dropTable, "Drop")));
-        panelBuilderCounter.getSlotsWith("Give").forEach(slot -> panel.setOnClick(slot, getAction(dropTable, "Give")));
+        panelBuilderCounter.getSlotsWith("Spray").forEach(slot -> panel.setOnClick(slot, getSprayAction(dropTable)));
+        panelBuilderCounter.getSlotsWith("Drop").forEach(slot -> panel.setOnClick(slot, getDropAction(dropTable)));
+        panelBuilderCounter.getSlotsWith("Give").forEach(slot -> panel.setOnClick(slot, getGiveAction(dropTable)));
 
         panel.openFor(player);
     }
@@ -59,9 +59,26 @@ public class DropTableTypeEditorPanel extends VariablePanelHandler<DropTable> {
 
     }
 
-    private ClickAction getAction(DropTable dropTable, String button) {
+    private ClickAction getSprayAction(DropTable dropTable) {
         return event -> {
-            dropTable.setDropType(button.toUpperCase());
+            dropTable.setDropType("SPRAY");
+            dropTable.setRewards(BossAPI.createNewDropTableRewards(dropTable.getDropType()));
+            save(dropTable, event);
+        };
+    }
+
+    private ClickAction getDropAction(DropTable dropTable) {
+        return event -> {
+            dropTable.setDropType("DROP");
+            dropTable.setRewards(BossAPI.createNewDropTableRewards(dropTable.getDropType()));
+            save(dropTable, event);
+        };
+    }
+
+    private ClickAction getGiveAction(DropTable dropTable) {
+        return event -> {
+            dropTable.setDropType("GIVE");
+            dropTable.setRewards(BossAPI.createNewDropTableRewards(dropTable.getDropType()));
             save(dropTable, event);
         };
     }

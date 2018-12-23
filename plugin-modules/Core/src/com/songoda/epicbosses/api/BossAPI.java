@@ -199,6 +199,24 @@ public class BossAPI {
         return null;
     }
 
+    public static JsonObject createNewDropTableRewards(String type) {
+        if(type.equalsIgnoreCase("SPRAY")) {
+            SprayTableElement sprayTableElement = new SprayTableElement(new HashMap<>(), false, 15, 15);
+
+            return convertObjectToJsonObject(sprayTableElement);
+        } else if(type.equalsIgnoreCase("DROP")) {
+            DropTableElement dropTableElement = new DropTableElement(new HashMap<>(), false, 15);
+
+            return convertObjectToJsonObject(dropTableElement);
+        } else if(type.equalsIgnoreCase("GIVE")) {
+            GiveTableElement giveTableElement = new GiveTableElement(new HashMap<>());
+
+            return convertObjectToJsonObject(giveTableElement);
+        } else {
+            return null;
+        }
+    }
+
     public static JsonObject createNewSkillCustomData(String type) {
         JsonParser jsonParser = new JsonParser();
         String jsonString;

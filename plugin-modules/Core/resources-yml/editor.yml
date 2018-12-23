@@ -1882,7 +1882,7 @@ SpecialSettingsEditorPanel:
       - '&7the skill editor panel to configure'
       - '&7the general skill options.'
 DropTableMainEditorPanel:
-  name: '&b&l{name} Drop Table Editor'
+  name: '&b&l{name} Editor'
   slots: 9
   Settings:
     emptySpaceFiller: true
@@ -1927,7 +1927,7 @@ DropTableMainEditorPanel:
       - '&7Click this button to go back to'
       - '&7the drop table list page.'
 DropTableTypeEditorPanel:
-  name: '&b&l{name} Drop Table Editor'
+  name: '&b&l{name} Editor'
   slots: 9
   Settings:
     backButton: true
@@ -1936,7 +1936,7 @@ DropTableTypeEditorPanel:
     type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
-    backButton: 5
+    backButton: 9
   Items:
     '3':
       type: SPLASH_POTION
