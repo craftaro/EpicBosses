@@ -35,6 +35,9 @@ public enum Message {
     Boss_Debug_Toggled("&b&lEpicBosses &8» &7You have toggled debug mode for &fEpicBosses &7to {0}."),
 
     Boss_DropTable_NoPermission("&c&l(!) &cYou do not have access to this command."),
+    Boss_DropTable_SetMaxDrops("&b&lEpicBosses &8» &7You have {0} the max drops for the drop table to &f{1}&7."),
+    Boss_DropTable_SetMaxDistance("&b&lEpicBosses &8» &7You have {0} the max distance for the drop table to &f{1}&7."),
+    Boss_DropTable_SetRandomDrops("&b&lEpicBosses &8» &7You have set the random drops mode for the drop table to &f{0}&7."),
 
     Boss_Edit_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Edit_ItemStackHolderNull("&c&l(!) &cThe itemstack name that is provided for the spawn item doesn't exist or wasn't found."),

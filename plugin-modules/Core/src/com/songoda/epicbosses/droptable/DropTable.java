@@ -33,7 +33,7 @@ public class DropTable {
     }
 
     public SprayTableElement getSprayTableData() {
-        if(getDropType().equalsIgnoreCase("GIVE")) {
+        if(getDropType().equalsIgnoreCase("SPRAY")) {
             return BossesGson.get().fromJson(this.rewards, SprayTableElement.class);
         }
 

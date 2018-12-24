@@ -209,8 +209,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("DropTableMainEditorPanel"));
         PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("DropTableTypeEditorPanel"));
         PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
-        PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("GiveDropTableMainEditMenu"));
-        PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("DropDropTableMainEditMenu"));
+        PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
+        PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
 
         this.mainDropTableEditMenu = new MainDropTableEditorPanel(this, panelBuilder);
         this.dropTableTypeEditMenu = new DropTableTypeEditorPanel(this, panelBuilder1, this.customBosses);
@@ -224,8 +224,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("DropTableMainEditorPanel"));
         PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("DropTableTypeEditorPanel"));
         PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
-        PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("GiveDropTableMainEditMenu"));
-        PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("DropDropTableMainEditMenu"));
+        PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
+        PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
 
         this.mainDropTableEditMenu.initializePanel(panelBuilder);
         this.dropTableTypeEditMenu.initializePanel(panelBuilder1);

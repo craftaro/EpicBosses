@@ -2017,12 +2017,12 @@ SprayDropTableMainEditMenu:
       - '&7bottom through the list.'
       Button: RandomDrops
     '5':
-      type: PAPER
+      type: REDSTONE
       name: '&e&lGo Back'
       lore:
       - '&7Click here to go back.'
     '7':
-      type: REDSTONE
+      type: PAPER
       name: '&e&lMax Distance'
       lore:
       - '&bCurrently: &f{maxDistance}'

@@ -383,16 +383,16 @@ public class BossEntityManager {
         Gson gson = BossesGson.get();
 
         if(dropType.equalsIgnoreCase("SPRAY")) {
-            SprayTableElement sprayTableElement = gson.fromJson(dropTable.getRewards(), SprayTableElement.class);
+            SprayTableElement sprayTableElement = dropTable.getSprayTableData();
             List<ItemStack> itemStacks = this.bossDropTableManager.getSprayItems(sprayTableElement);
 
             sprayDrops(sprayTableElement, itemStacks, deadBossHolder);
         } else if(dropType.equalsIgnoreCase("GIVE")) {
-            GiveTableElement giveTableElement = gson.fromJson(dropTable.getRewards(), GiveTableElement.class);
+            GiveTableElement giveTableElement = dropTable.getGiveTableData();
 
             this.bossDropTableManager.handleGiveTable(giveTableElement, deadBossHolder);
         } else if(dropType.equalsIgnoreCase("DROP")) {
-            DropTableElement dropTableElement = gson.fromJson(dropTable.getRewards(), DropTableElement.class);
+            DropTableElement dropTableElement = dropTable.getDropTableData();
             List<ItemStack> itemStacks = this.bossDropTableManager.getDropItems(dropTableElement);
 
             itemStacks.forEach(itemStack -> deadBossHolder.getLocation().getWorld().dropItemNaturally(deadBossHolder.getLocation(), itemStack));
