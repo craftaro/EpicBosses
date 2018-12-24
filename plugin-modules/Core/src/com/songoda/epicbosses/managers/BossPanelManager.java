@@ -2,6 +2,9 @@ package com.songoda.epicbosses.managers;
 
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
+import com.songoda.epicbosses.droptable.elements.DropTableElement;
+import com.songoda.epicbosses.droptable.elements.GiveTableElement;
+import com.songoda.epicbosses.droptable.elements.SprayTableElement;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.EquipmentElement;
@@ -21,6 +24,9 @@ import com.songoda.epicbosses.panel.bosses.weapons.MainHandEditorPanel;
 import com.songoda.epicbosses.panel.bosses.weapons.OffHandEditorPanel;
 import com.songoda.epicbosses.panel.droptables.DropTableTypeEditorPanel;
 import com.songoda.epicbosses.panel.droptables.MainDropTableEditorPanel;
+import com.songoda.epicbosses.panel.droptables.types.drop.DropDropTableMainEditorPanel;
+import com.songoda.epicbosses.panel.droptables.types.give.GiveDropTableMainEditorPanel;
+import com.songoda.epicbosses.panel.droptables.types.spray.SprayDropTableMainEditorPanel;
 import com.songoda.epicbosses.panel.handlers.*;
 import com.songoda.epicbosses.panel.skills.MainSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.SkillTypeEditorPanel;
@@ -85,6 +91,9 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private ISubVariablePanelHandler<Skill, CustomSkillElement> customSkillTypeEditorMenu, specialSettingsEditorMenu, minionSelectEditorMenu;
 
     @Getter private IVariablePanelHandler<DropTable> mainDropTableEditMenu, dropTableTypeEditMenu;
+    @Getter private ISubVariablePanelHandler<DropTable, SprayTableElement> sprayDropTableMainEditMenu;
+    @Getter private ISubVariablePanelHandler<DropTable, GiveTableElement> giveDropTableMainEditMenu;
+    @Getter private ISubVariablePanelHandler<DropTable, DropTableElement> dropDropTableMainEditMenu;
 
     private final CustomBosses customBosses;
 
@@ -199,18 +208,30 @@ public class BossPanelManager implements ILoadable, IReloadable {
         FileConfiguration editor = this.customBosses.getEditor();
         PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("DropTableMainEditorPanel"));
         PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("DropTableTypeEditorPanel"));
+        PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
+        PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("GiveDropTableMainEditMenu"));
+        PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("DropDropTableMainEditMenu"));
 
         this.mainDropTableEditMenu = new MainDropTableEditorPanel(this, panelBuilder);
         this.dropTableTypeEditMenu = new DropTableTypeEditorPanel(this, panelBuilder1, this.customBosses);
+        this.sprayDropTableMainEditMenu = new SprayDropTableMainEditorPanel(this, panelBuilder2, this.customBosses);
+        this.giveDropTableMainEditMenu = new GiveDropTableMainEditorPanel(this, panelBuilder3, this.customBosses);
+        this.dropDropTableMainEditMenu = new DropDropTableMainEditorPanel(this, panelBuilder4, this.customBosses);
     }
 
     private void reloadDropTableEditMenus() {
         FileConfiguration editor = this.customBosses.getEditor();
         PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("DropTableMainEditorPanel"));
         PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("DropTableTypeEditorPanel"));
+        PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
+        PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("GiveDropTableMainEditMenu"));
+        PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("DropDropTableMainEditMenu"));
 
         this.mainDropTableEditMenu.initializePanel(panelBuilder);
         this.dropTableTypeEditMenu.initializePanel(panelBuilder1);
+        this.sprayDropTableMainEditMenu.initializePanel(panelBuilder2);
+        this.giveDropTableMainEditMenu.initializePanel(panelBuilder3);
+        this.dropDropTableMainEditMenu.initializePanel(panelBuilder4);
     }
 
     //---------------------------------------------
