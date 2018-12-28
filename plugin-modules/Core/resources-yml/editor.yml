@@ -2193,3 +2193,50 @@ SprayNewRewardEditMenu:
       lore:
       - '&7Click this button to go back to'
       - '&7the drop table reward list menu.'
+SprayRewardMainEditMenu:
+  name: '&b&l{name} DropTable'
+  slots: 9
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 9
+  Items:
+    '3':
+      type: GUNPOWDER
+      name: '&e&lSelected ItemStack'
+      lore:
+      - '&bCurrently: &f{itemStack}'
+      - '&7This is the selected itemStack for this'
+      - '&7reward section.'
+      Button: Selected
+    '4':
+      type: EMERALD
+      name: '&e&lChance'
+      lore:
+      - '&bCurrently: &f{chance}'
+      - '&7Click here to modify the chance of this'
+      - '&7reward '
+      - '&7'
+      - '&bLeft Click &8» &f+1%'
+      - '&bShift Left-Click &8» &f+0.1%'
+      - '&7'
+      - '&bRight Click &8» &f-1%'
+      - '&bShift Right-Click &8» &f-0.1%'
+      Button: Chance
+    '5':
+      type: BARRIER
+      name: '&e&lClick here to remove'
+      lore:
+      - '&7Click here to remove this rewards section.'
+      - '&7You can always re-create this section if'
+      - '&7was a mistake.'
+      Button: Remove
+    '9':
+      type: REDSTONE
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'

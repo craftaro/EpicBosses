@@ -1,4 +1,3 @@
-01:00 -> Add the DropTable Rewards Editing GUI (1hr)
 01:00 -> Spray - Has a button for Rewards List (with chances), button for RandomSpray, button for MaxDistance, button for MaxDrops (1hr)
 01:00 -> Drop - Has a button for Rewards List (with chances), button for RandomDrops, button for MaxDrops (1hr)
 01:00 -> Give - Is a list panel with the positions and a button for adding a new position (1hr)
@@ -21,4 +20,4 @@
 01:00 -> Add a new branch for the plugin and add support for Legacy version
 
 -----------
-21:15 hrs
+20:15 hrs
