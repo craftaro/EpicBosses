@@ -75,8 +75,8 @@ public class DropTablePanel extends MainListPanelHandler {
                 replaceMap.put("{name}", name);
                 replaceMap.put("{type}", StringUtils.get().formatString(dropTable.getDropType()));
 
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.DropTable.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.DropTable.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.DropTable.Main.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.DropTable.Main.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, e -> this.bossPanelManager.getMainDropTableEditMenu().openFor((Player) e.getWhoClicked(), dropTable));
             }

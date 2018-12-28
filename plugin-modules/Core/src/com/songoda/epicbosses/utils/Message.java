@@ -116,6 +116,7 @@ public enum Message {
     Boss_Items_DefaultCannotBeRemoved("&c&l(!) &cThe selected item cannot be removed because it is the default item for something in one of the boss menu's."),
     Boss_Items_Removed("&b&lEpicBosses &8» &7The selected item has been removed from the EpicBosses custom items database."),
     Boss_Items_Added("&b&lEpicBosses &8» &7You have added an item to the EpicBosses custom items database."),
+    Boss_Items_Cloned("&b&lEpicBosses &8» &7You have cloned an item in the EpicBosses custom items database and the clone item now has the name of &f{0}&7."),
     Boss_Items_AlreadySet("&c&l(!) &cYou must take out the item you have set to add before you can add another."),
 
     Boss_KillAll_WorldNotFound("&c&l(!) &cThe specified world was not found. If you'd like to kill every boss/minion just use &f/boss killall&c without any arguments."),

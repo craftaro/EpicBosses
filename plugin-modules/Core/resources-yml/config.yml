@@ -100,12 +100,20 @@ Display:
     - '&3Right Click &8»'
     - '&7Edit the custom boss.'
   DropTable:
-    menuName: '&b&lEpicBosses &3&lDropTables'
-    name: '&b&l{name} Drop Table'
-    lore:
-    - '&3Type: &7{type}'
-    - '&7'
-    - '&7Click to edit the drop table.'
+    Main:
+      menuName: '&b&lEpicBosses &3&lDropTables'
+      name: '&b&l{name} Drop Table'
+      lore:
+      - '&3Type: &7{type}'
+      - '&7'
+      - '&7Click to edit the drop table.'
+    RewardList:
+      name: '&bReward Section'
+      lore:
+      - '&bSelected Item: &f{itemName}'
+      - '&3Chance: &f{chance}%'
+      - '&7'
+      - '&7Click to modify this reward.'
   Shop:
     menuName: '&b&lEpicBosses &3&lShop'
     name: '&b&lBuy {name}''s Egg'

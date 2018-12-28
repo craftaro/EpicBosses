@@ -134,8 +134,21 @@ CustomItemsMenu:
     fillTo: 45
   Items:
     '46':
-      type: GLASS_PANE
-      name: '&7'
+      type: BOOK
+      name: '&c&lCustom Items Guide'
+      lore:
+      - '&7In this menu you can view all the'
+      - '&7custom items for the plugin, as well'
+      - '&7as manipulate them to your liking.'
+      - '&7'
+      - '&3Left Click &8»'
+      - '&7Obtain ItemStack in your inventory.'
+      - '&7'
+      - '&3Middle Click &8» '
+      - '&7Clone ItemStack section to a new section.'
+      - '&7'
+      - '&3Right Click &8» '
+      - '&7Remove section from list if not bound.'
     '47':
       type: GLASS_PANE
       name: '&7'
@@ -2053,3 +2066,130 @@ SprayDropTableMainEditMenu:
       - '&bRight Click &8» &f-1'
       - '&bShift Right-Click &8» &f-10'
       Button: MaxDrops
+SprayRewardsListEditMenu:
+  name: '&b&l{name} DropTable'
+  slots: 54
+  Settings:
+    backButton: true
+    fillTo: 45
+  Buttons:
+    backButton: 54
+  Items:
+    '46':
+      type: BOOK
+      name: '&c&lSpray Rewards Guide'
+      lore:
+      - '&7Here you can adjust the rewards for'
+      - '&7the skill with the spray layout. To'
+      - '&7adjust the chance of a section or to'
+      - '&7remove a section, then all you have'
+      - '&7to do is click on the section you''d'
+      - '&7like to modify and then click the'
+      - '&7corresponding button.'
+      - '&7To add a new section click on the'
+      - '&7emerald block in the bottom middle of'
+      - '&7the menu in between the page buttons.'
+    '47':
+      type: GLASS_PANE
+      name: '&7'
+    '48':
+      type: GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page of special settings.'
+      PreviousPage: true
+    '50':
+      type: EMERALD_BLOCK
+      name: '&b&lAdd a New Reward Section'
+      lore:
+      - '&7Click here if you would like to add'
+      - '&7a new reward section to this drop'
+      - '&7table.'
+      Button: NewReward
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page of special settings.'
+      NextPage: true
+    '52':
+      type: GLASS_PANE
+      name: '&7'
+    '53':
+      type: GLASS_PANE
+      name: '&7'
+    '54':
+      type: REDSTONE
+      name: '&cClick here to go back'
+      lore:
+      - '&7Click this button to go back to'
+      - '&7the drop table main edit menu.'
+SprayNewRewardEditMenu:
+  name: '&b&lNew Reward for DropTable'
+  slots: 54
+  Settings:
+    backButton: true
+    fillTo: 45
+  Buttons:
+    backButton: 54
+  Items:
+    '46':
+      type: BOOK
+      name: '&c&lNew Spray Reward Guide'
+      lore:
+      - '&7Once u click an item within this'
+      - '&7menu it will create a new reward'
+      - '&7section with that selected item'
+      - '&7to the drop table you were working'
+      - '&7on. From there you can adjust the'
+      - '&7chance for it to be sprayed.'
+      - '&7'
+      - '&c&lWARNING'
+      - '&7At this moment you cannot have'
+      - '&7two sections for the same item,'
+      - '&7an easy way to bypass this is to'
+      - '&7add a new Item with the same'
+      - '&7itemstack, therefore giving it'
+      - '&7a new name, and allowing for'
+      - '&7another new section of the same'
+      - '&7item.'
+    '47':
+      type: GLASS_PANE
+      name: '&7'
+    '48':
+      type: GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page of special settings.'
+      PreviousPage: true
+    '50':
+      type: GLASS_PANE
+      name: '&7'
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page of special settings.'
+      NextPage: true
+    '52':
+      type: GLASS_PANE
+      name: '&7'
+    '53':
+      type: GLASS_PANE
+      name: '&7'
+    '54':
+      type: REDSTONE
+      name: '&cClick here to go back'
+      lore:
+      - '&7Click this button to go back to'
+      - '&7the drop table reward list menu.'

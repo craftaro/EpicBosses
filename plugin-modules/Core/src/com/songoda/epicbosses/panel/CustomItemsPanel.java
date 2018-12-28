@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author Charles Cullen
@@ -58,10 +59,11 @@ public class CustomItemsPanel extends MainListPanelHandler {
                 String name = entryList.get(slot);
                 ItemStackHolder itemStackHolder = currentItemStacks.get(name);
                 ItemStack itemStack = this.itemsFileManager.getItemStackConverter().from(itemStackHolder);
-                ItemStack cloneStack = itemStack.clone();
 
-                panel.setItem(realisticSlot, itemStack, e -> {
-                    if(e.getClick() == ClickType.RIGHT || e.getClick() == ClickType.SHIFT_RIGHT) {
+                panel.setItem(realisticSlot, itemStack.clone(), e -> {
+                    ClickType clickType = e.getClick();
+
+                    if(clickType == ClickType.RIGHT || clickType == ClickType.SHIFT_RIGHT) {
                         int timesUsed = this.bossPanelManager.isItemStackUsed(name);
 
                         if(timesUsed > 0) {
@@ -76,13 +78,15 @@ public class CustomItemsPanel extends MainListPanelHandler {
                             loadPage(panel, requestedPage, currentItemStacks, entryList);
                             Message.Boss_Items_Removed.msg(e.getWhoClicked());
                         }
-                    } else if(e.getClick() == ClickType.LEFT || e.getClick() == ClickType.SHIFT_LEFT) {
-                        if(cloneStack == null) {
-                            Debug.FAILED_TO_GIVE_CUSTOM_ITEM.debug(e.getWhoClicked().getName());
-                            return;
-                        }
+                    } else if(clickType == ClickType.LEFT || clickType == ClickType.SHIFT_LEFT) {
+                        e.getWhoClicked().getInventory().addItem(itemStack.clone());
+                    } else if(clickType == ClickType.MIDDLE) {
+                        String newName = UUID.randomUUID().toString();
+                        ItemStack newItemStack = itemStack.clone();
 
-                        e.getWhoClicked().getInventory().addItem(cloneStack);
+                        Message.Boss_Items_Cloned.msg(e.getWhoClicked(), newName);
+                        this.itemsFileManager.addItemStack(newName, newItemStack);
+                        fillPanel(panel);
                     }
                 });
             }
