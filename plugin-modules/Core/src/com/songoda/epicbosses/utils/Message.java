@@ -38,6 +38,7 @@ public enum Message {
     Boss_DropTable_SetMaxDrops("&b&lEpicBosses &8» &7You have {0} the max drops for the drop table to &f{1}&7."),
     Boss_DropTable_SetMaxDistance("&b&lEpicBosses &8» &7You have {0} the max distance for the drop table to &f{1}&7."),
     Boss_DropTable_SetRandomDrops("&b&lEpicBosses &8» &7You have set the random drops mode for the drop table to &f{0}&7."),
+    Boss_DropTable_SprayAddedNewReward("&b&lEpicBosses &8» &7You have added a new reward to the drop table &f{0}&7. Now opening the editing panel for the new reward."),
 
     Boss_Edit_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Edit_ItemStackHolderNull("&c&l(!) &cThe itemstack name that is provided for the spawn item doesn't exist or wasn't found."),

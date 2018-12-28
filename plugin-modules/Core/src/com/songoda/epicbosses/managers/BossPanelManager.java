@@ -216,7 +216,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
         PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("SprayRewardsListEditMenu"));
         PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu")); //TODO
-        PanelBuilder panelBuilder5 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu")); //TODO
+        PanelBuilder panelBuilder5 = new PanelBuilder(editor.getConfigurationSection("SprayNewRewardEditMenu"));
 
         this.mainDropTableEditMenu = new MainDropTableEditorPanel(this, panelBuilder);
         this.dropTableTypeEditMenu = new DropTableTypeEditorPanel(this, panelBuilder1, this.customBosses);
@@ -233,7 +233,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
         PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("SprayRewardsListEditMenu"));
         PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu")); //TODO
-        PanelBuilder panelBuilder5 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu")); //TODO
+        PanelBuilder panelBuilder5 = new PanelBuilder(editor.getConfigurationSection("SprayNewRewardEditMenu"));
 
         this.mainDropTableEditMenu.initializePanel(panelBuilder);
         this.dropTableTypeEditMenu.initializePanel(panelBuilder1);

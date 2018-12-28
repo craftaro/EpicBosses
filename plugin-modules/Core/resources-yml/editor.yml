@@ -2142,7 +2142,7 @@ SprayNewRewardEditMenu:
       type: BOOK
       name: '&c&lNew Spray Reward Guide'
       lore:
-      - '&7Once u click an item within this'
+      - '&7Once you click an item within this'
       - '&7menu it will create a new reward'
       - '&7section with that selected item'
       - '&7to the drop table you were working'
