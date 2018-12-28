@@ -2212,7 +2212,6 @@ SprayRewardMainEditMenu:
       - '&bCurrently: &f{itemStack}'
       - '&7This is the selected itemStack for this'
       - '&7reward section.'
-      Button: Selected
     '4':
       type: EMERALD
       name: '&e&lChance'

@@ -6,6 +6,7 @@ import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.droptable.elements.SprayTableElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.DropTableFileManager;
+import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
@@ -14,6 +15,7 @@ import com.songoda.epicbosses.utils.panel.base.handlers.SubSubVariablePanelHandl
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,8 +51,7 @@ public class SprayRewardMainEditorPanel extends SubSubVariablePanelHandler<DropT
         Panel panel = panelBuilder.getPanel()
                 .setParentPanelHandler(this.bossPanelManager.getSprayRewardListEditMenu(), dropTable, sprayTableElement);
 
-        panelBuilderCounter.getSlotsWith("Selected").forEach(slot -> {});
-        panelBuilderCounter.getSlotsWith("Chance").forEach(slot -> {});
+        panelBuilderCounter.getSlotsWith("Chance").forEach(slot -> panel.setOnClick(slot, getChanceAction(dropTable, sprayTableElement, string)));
         panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, getRemoveAction(dropTable, sprayTableElement, string)));
 
         panel.openFor(player);
@@ -61,17 +62,58 @@ public class SprayRewardMainEditorPanel extends SubSubVariablePanelHandler<DropT
 
     }
 
+    private ClickAction getChanceAction(DropTable dropTable, SprayTableElement sprayTableElement, String name) {
+        return event -> {
+            ClickType clickType = event.getClick();
+            double amountToModifyBy;
+
+            if(clickType == ClickType.SHIFT_LEFT) {
+                amountToModifyBy = 0.1;
+            } else if(clickType == ClickType.RIGHT) {
+                amountToModifyBy = -1.0;
+            } else if(clickType == ClickType.SHIFT_RIGHT) {
+                amountToModifyBy = -0.1;
+            } else {
+                amountToModifyBy = 1.0;
+            }
+
+            String modifyValue = amountToModifyBy > 0? "increased" : "decreased";
+            Map<String, Double> rewards = sprayTableElement.getSprayRewards();
+            double currentValue = rewards.getOrDefault(name, 50.0);
+            double newValue = currentValue + amountToModifyBy;
+
+            if(newValue < 0) {
+                newValue = 0;
+            }
+
+            if(newValue > 100) {
+                newValue = 100;
+            }
+
+            rewards.put(name, newValue);
+            sprayTableElement.setSprayRewards(rewards);
+            save(dropTable, sprayTableElement);
+            openFor((Player) event.getWhoClicked(), dropTable, sprayTableElement, name);
+
+            Message.Boss_DropTable_SprayRewardChance.msg(event.getWhoClicked(), modifyValue, BossAPI.getDropTableName(dropTable), NumberUtils.get().formatDouble(newValue));
+        };
+    }
+
     private ClickAction getRemoveAction(DropTable dropTable, SprayTableElement sprayTableElement, String name) {
         return event -> {
             Map<String, Double> current = sprayTableElement.getSprayRewards();
 
             current.remove(name);
             sprayTableElement.setSprayRewards(current);
-            dropTable.setRewards(BossAPI.convertObjectToJsonObject(sprayTableElement));
-            this.dropTableFileManager.save();
+            save(dropTable, sprayTableElement);
 
             Message.Boss_DropTable_SprayRewardRemoved.msg(event.getWhoClicked());
             this.bossPanelManager.getSprayRewardListEditMenu().openFor((Player) event.getWhoClicked(), dropTable, sprayTableElement);
         };
+    }
+
+    private void save(DropTable dropTable, SprayTableElement sprayTableElement) {
+        dropTable.setRewards(BossAPI.convertObjectToJsonObject(sprayTableElement));
+        this.dropTableFileManager.save();
     }
 }
