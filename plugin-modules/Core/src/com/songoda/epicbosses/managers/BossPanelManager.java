@@ -25,6 +25,9 @@ import com.songoda.epicbosses.panel.bosses.weapons.OffHandEditorPanel;
 import com.songoda.epicbosses.panel.droptables.DropTableTypeEditorPanel;
 import com.songoda.epicbosses.panel.droptables.MainDropTableEditorPanel;
 import com.songoda.epicbosses.panel.droptables.types.drop.DropDropTableMainEditorPanel;
+import com.songoda.epicbosses.panel.droptables.types.drop.DropNewRewardEditorPanel;
+import com.songoda.epicbosses.panel.droptables.types.drop.DropRewardMainEditorPanel;
+import com.songoda.epicbosses.panel.droptables.types.drop.DropRewardsListEditorPanel;
 import com.songoda.epicbosses.panel.droptables.types.give.GiveDropTableMainEditorPanel;
 import com.songoda.epicbosses.panel.droptables.types.spray.SprayDropTableMainEditorPanel;
 import com.songoda.epicbosses.panel.droptables.types.spray.SprayNewRewardEditorPanel;
@@ -98,7 +101,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private ISubVariablePanelHandler<DropTable, SprayTableElement> sprayDropTableMainEditMenu, sprayRewardListEditMenu, sprayNewRewardEditMenu;
     @Getter private ISubSubVariablePanelHandler<DropTable, SprayTableElement, String> sprayRewardMainEditMenu;
     @Getter private ISubVariablePanelHandler<DropTable, GiveTableElement> giveDropTableMainEditMenu;
-    @Getter private ISubVariablePanelHandler<DropTable, DropTableElement> dropDropTableMainEditMenu;
+    @Getter private ISubVariablePanelHandler<DropTable, DropTableElement> dropDropTableMainEditMenu, dropRewardListEditMenu, dropNewRewardEditMenu;
+    @Getter private ISubSubVariablePanelHandler<DropTable, DropTableElement, String> dropRewardMainEditMenu;
 
     private final CustomBosses customBosses;
 
@@ -215,15 +219,26 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("DropTableTypeEditorPanel"));
         PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
         PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("SprayRewardsListEditMenu"));
-        PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu")); //TODO
+        PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
         PanelBuilder panelBuilder5 = new PanelBuilder(editor.getConfigurationSection("SprayNewRewardEditMenu"));
+
+        PanelBuilder panelBuilder6 = new PanelBuilder(editor.getConfigurationSection("DropDropTableMainEditMenu"));
+        PanelBuilder panelBuilder7 = new PanelBuilder(editor.getConfigurationSection("DropRewardsListEditMenu"));
+        PanelBuilder panelBuilder8 = new PanelBuilder(editor.getConfigurationSection("DropDropTableMainEditMenu"));
+        PanelBuilder panelBuilder9 = new PanelBuilder(editor.getConfigurationSection("DropNewRewardEditMenu"));
 
         this.mainDropTableEditMenu = new MainDropTableEditorPanel(this, panelBuilder);
         this.dropTableTypeEditMenu = new DropTableTypeEditorPanel(this, panelBuilder1, this.customBosses);
+
         this.sprayDropTableMainEditMenu = new SprayDropTableMainEditorPanel(this, panelBuilder2, this.customBosses);
         this.sprayRewardListEditMenu = new SprayRewardsListEditorPanel(this, panelBuilder3, this.customBosses);
         this.sprayRewardMainEditMenu = new SprayRewardMainEditorPanel(this, panelBuilder4, this.customBosses);
         this.sprayNewRewardEditMenu = new SprayNewRewardEditorPanel(this, panelBuilder5, this.customBosses);
+
+        this.dropDropTableMainEditMenu = new DropDropTableMainEditorPanel(this, panelBuilder6, this.customBosses);
+        this.dropRewardListEditMenu = new DropRewardsListEditorPanel(this, panelBuilder7, this.customBosses);
+        this.dropRewardMainEditMenu = new DropRewardMainEditorPanel(this, panelBuilder8, this.customBosses);
+        this.dropNewRewardEditMenu = new DropNewRewardEditorPanel(this, panelBuilder9, this.customBosses);
     }
 
     private void reloadDropTableEditMenus() {
@@ -232,15 +247,26 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("DropTableTypeEditorPanel"));
         PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
         PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("SprayRewardsListEditMenu"));
-        PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu")); //TODO
+        PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
         PanelBuilder panelBuilder5 = new PanelBuilder(editor.getConfigurationSection("SprayNewRewardEditMenu"));
+
+        PanelBuilder panelBuilder6 = new PanelBuilder(editor.getConfigurationSection("DropDropTableMainEditMenu"));
+        PanelBuilder panelBuilder7 = new PanelBuilder(editor.getConfigurationSection("DropRewardsListEditMenu"));
+        PanelBuilder panelBuilder8 = new PanelBuilder(editor.getConfigurationSection("DropDropTableMainEditMenu"));
+        PanelBuilder panelBuilder9 = new PanelBuilder(editor.getConfigurationSection("DropNewRewardEditMenu"));
 
         this.mainDropTableEditMenu.initializePanel(panelBuilder);
         this.dropTableTypeEditMenu.initializePanel(panelBuilder1);
+
         this.sprayDropTableMainEditMenu.initializePanel(panelBuilder2);
         this.sprayRewardListEditMenu.initializePanel(panelBuilder3);
         this.sprayRewardMainEditMenu.initializePanel(panelBuilder4);
         this.sprayNewRewardEditMenu.initializePanel(panelBuilder5);
+
+        this.dropDropTableMainEditMenu.initializePanel(panelBuilder6);
+        this.dropRewardListEditMenu.initializePanel(panelBuilder7);
+        this.dropRewardMainEditMenu.initializePanel(panelBuilder8);
+        this.dropNewRewardEditMenu.initializePanel(panelBuilder9);
     }
 
     //---------------------------------------------

@@ -2239,3 +2239,59 @@ SprayRewardMainEditMenu:
       name: '&e&lGo Back'
       lore:
       - '&7Click here to go back.'
+DropDropTableMainEditMenu:
+  name: '&b&l{name} Editor'
+  slots: 9
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 9
+  Items:
+    '3':
+      type: DIAMOND
+      name: '&e&lRewards'
+      lore:
+      - '&7Click here to modify the rewards and their'
+      - '&7assigned drop chances. You can add more by'
+      - '&7clicking the emerald block at the middle'
+      - '&7bottom of the rewards menu.'
+      Button: Rewards
+    '4':
+      type: GUNPOWDER
+      name: '&e&lRandom Drops'
+      lore:
+      - '&bCurrently: &f{randomDrops}'
+      - '&7Click here to toggle the random drop mode.'
+      - '&7If this is set to &ftrue&7 then when the'
+      - '&7drop table is called it will shuffle the'
+      - '&7list contents so it''s not in the same order.'
+      - '&7If this is set to &ffalse&7 then when the'
+      - '&7drop table is called it will go from top to'
+      - '&7bottom through the list.'
+      Button: RandomDrops
+    '5':
+      type: EMERALD
+      name: '&e&lMax Drops'
+      lore:
+      - '&bCurrently: &f{maxDrops}'
+      - '&7Click here to modify the maximum amount of'
+      - '&7drops this drop table can have. Keep in mind'
+      - '&7that when getting drops the drop table will'
+      - '&7only cycle through the list once. Not until'
+      - '&7this amount of drops has been met.'
+      - '&7'
+      - '&bLeft Click &8» &f+1'
+      - '&bShift Left-Click &8» &f+10'
+      - '&7'
+      - '&bRight Click &8» &f-1'
+      - '&bShift Right-Click &8» &f-10'
+      Button: MaxDrops
+    '9':
+      type: REDSTONE
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'
