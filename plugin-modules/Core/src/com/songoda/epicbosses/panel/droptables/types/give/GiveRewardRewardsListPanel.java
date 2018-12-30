@@ -135,19 +135,20 @@ public class GiveRewardRewardsListPanel extends SubSubVariablePanelHandler<DropT
 
     private ClickAction getNewRewardSectionAction(DropTable dropTable, GiveTableElement giveTableElement, String key) {
         return event -> {
-            Map<String, Map<String, GiveTableSubElement>> rewards = giveTableElement.getGiveRewards();
-            Map<String, GiveTableSubElement> rewardSections = rewards.get(key);
-            List<String> keys = new ArrayList<>(giveTableElement.getGiveRewards().keySet());
+            Map<String, Map<String, GiveTableSubElement>> rewardSections = giveTableElement.getGiveRewards();
+            Map<String, GiveTableSubElement> rewards = rewardSections.get(key);
+            List<String> keys = new ArrayList<>(rewards.keySet());
             int nextAvailable = NumberUtils.get().getNextAvailablePosition(keys);
             String nextKey = ""+nextAvailable;
 
-            if(rewardSections.containsKey(nextKey)) {
+            if(rewards.containsKey(nextKey)) {
                 Debug.FAILED_TO_CREATE_NEWPOSITION.debug(nextKey, BossAPI.getDropTableName(dropTable));
                 return;
             }
 
-            rewardSections.put(nextKey, new GiveTableSubElement(new HashMap<>(), new HashMap<>(), 3, 3, false, false, 0.0));
-            giveTableElement.setGiveRewards(rewards);
+            rewards.put(nextKey, new GiveTableSubElement(new HashMap<>(), new HashMap<>(), 3, 3, false, false, 0.0));
+            rewardSections.put(key, rewards);
+            giveTableElement.setGiveRewards(rewardSections);
             saveDropTable((Player) event.getWhoClicked(), dropTable, giveTableElement, key);
         };
     }
