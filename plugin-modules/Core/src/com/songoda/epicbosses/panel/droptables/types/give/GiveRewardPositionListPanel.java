@@ -106,7 +106,7 @@ public class GiveRewardPositionListPanel extends SubVariablePanelHandler<DropTab
                         giveTableElement.setGiveRewards(rewards);
                         saveDropTable((Player) event.getWhoClicked(), dropTable, giveTableElement, BossAPI.convertObjectToJsonObject(giveTableElement));
                     } else {
-                        //TODO OPEN REWARDREWARDSLIST
+                        this.bossPanelManager.getGiveRewardRewardsListMenu().openFor((Player) event.getWhoClicked(), dropTable, giveTableElement, position);
                     }
                 });
             }

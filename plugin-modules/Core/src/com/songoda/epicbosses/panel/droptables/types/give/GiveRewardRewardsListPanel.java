@@ -1,6 +1,5 @@
 package com.songoda.epicbosses.panel.droptables.types.give;
 
-import com.google.gson.JsonObject;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
