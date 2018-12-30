@@ -69,7 +69,7 @@ public class GiveRewardPositionListPanel extends SubVariablePanelHandler<DropTab
 
         PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
         Panel panel = panelBuilder.getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getDropTables());
+                .setParentPanelHandler(this.bossPanelManager.getMainDropTableEditMenu(), dropTable);
 
         panelBuilderCounter.getSlotsWith("NewPosition").forEach(slot -> panel.setOnClick(slot, getNewPositionAction(dropTable, giveTableElement)));
         fillPanel(panel, dropTable, giveTableElement);
@@ -95,8 +95,8 @@ public class GiveRewardPositionListPanel extends SubVariablePanelHandler<DropTab
                 replaceMap.put("{position}", NumberUtils.get().formatDouble(Integer.valueOf(position)));
                 replaceMap.put("{dropAmount}", NumberUtils.get().formatDouble(dropAmount));
 
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.DropTable.GiveRewardList.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.DropTable.GiveRewardList.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.DropTable.GivePositionList.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.DropTable.GivePositionList.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, event -> {
                     ClickType clickType = event.getClick();
@@ -106,7 +106,7 @@ public class GiveRewardPositionListPanel extends SubVariablePanelHandler<DropTab
                         giveTableElement.setGiveRewards(rewards);
                         saveDropTable((Player) event.getWhoClicked(), dropTable, giveTableElement, BossAPI.convertObjectToJsonObject(giveTableElement));
                     } else {
-
+                        //TODO OPEN REWARDREWARDSLIST
                     }
                 });
             }
@@ -117,7 +117,7 @@ public class GiveRewardPositionListPanel extends SubVariablePanelHandler<DropTab
         return event -> {
             Map<String, Map<String, GiveTableSubElement>> rewards = giveTableElement.getGiveRewards();
             List<String> keys = new ArrayList<>(giveTableElement.getGiveRewards().keySet());
-            int nextAvailable = getNextAvailablePosition(keys);
+            int nextAvailable = NumberUtils.get().getNextAvailablePosition(keys);
             String nextKey = ""+nextAvailable;
 
             if(rewards.containsKey(nextKey)) {
@@ -129,23 +129,6 @@ public class GiveRewardPositionListPanel extends SubVariablePanelHandler<DropTab
             giveTableElement.setGiveRewards(rewards);
             saveDropTable((Player) event.getWhoClicked(), dropTable, giveTableElement, BossAPI.convertObjectToJsonObject(giveTableElement));
         };
-    }
-
-    private int getNextAvailablePosition(List<String> keys) {
-        if(keys.isEmpty()) return 1;
-
-        List<Integer> currentIds = new ArrayList<>();
-
-        keys.stream().filter(NumberUtils.get()::isInt).forEach(s -> currentIds.add(Integer.valueOf(s)));
-        currentIds.sort(Comparator.naturalOrder());
-
-        for(int i = 1; i <= currentIds.size(); i++) {
-            if(i < currentIds.get(i-1)) {
-                return i;
-            }
-        }
-
-        return currentIds.size()+1;
     }
 
     private void saveDropTable(Player player, DropTable dropTable, GiveTableElement giveTableElement, JsonObject jsonObject) {

@@ -3,6 +3,10 @@
     "type": "DIAMOND",
     "name": "&c&lDefault DropTable Reward Item"
   },
+  "DefaultDropTableRewardsListItem": {
+    "type": "CHEST",
+    "name": "&c&lDefault DropTable Rewards List Item"
+  },
   "DefaultMinionMenuSpawnItem": {
     "type": "ZOMBIE_SPAWN_EGG",
     "name": "&c&lDefault Minion Menu Spawn Item"

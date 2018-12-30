@@ -1,6 +1,9 @@
 package com.songoda.epicbosses.utils;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * @author Charles Cullen
@@ -53,6 +56,23 @@ public class NumberUtils {
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###,###.##");
 
         return decimalFormat.format(d);
+    }
+
+    public int getNextAvailablePosition(List<String> keys) {
+        if (keys.isEmpty()) return 1;
+
+        List<Integer> currentIds = new ArrayList<>();
+
+        keys.stream().filter(NumberUtils.get()::isInt).forEach(s -> currentIds.add(Integer.valueOf(s)));
+        currentIds.sort(Comparator.naturalOrder());
+
+        for (int i = 1; i <= currentIds.size(); i++) {
+            if (i < currentIds.get(i - 1)) {
+                return i;
+            }
+        }
+
+        return currentIds.size() + 1;
     }
 
     public static NumberUtils get() {

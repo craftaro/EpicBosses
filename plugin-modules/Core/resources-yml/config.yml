@@ -114,11 +114,27 @@ Display:
       - '&3Chance: &f{chance}%'
       - '&7'
       - '&7Click to modify this reward.'
-    GiveRewardList:
+    GivePositionList:
       name: '&bReward Section'
       lore:
       - '&3Position: &f{position}'
       - '&3Drops: &f{dropAmount}'
+      - '&7'
+      - '&7Shift Right-Click to remove.'
+      - '&7Left-Click to edit.'
+    GiveRewardsList:
+      name: '&bReward Section'
+      lore:
+      - '&3Position: &f{position}'
+      - '&3Required Percentage: &f{percentage}%'
+      - '&7'
+      - '&3Item Drops: &f{items}'
+      - '&3Max Drops: &f{maxDrops}'
+      - '&3Random Drops: &f{randomDrops}'
+      - '&7'
+      - '&3Command Drops: &f{commands}'
+      - '&3Max Commands: &f{maxCommands}'
+      - '&3Random Commands: &f{randomCommands}'
       - '&7'
       - '&7Shift Right-Click to remove.'
       - '&7Left-Click to edit.'

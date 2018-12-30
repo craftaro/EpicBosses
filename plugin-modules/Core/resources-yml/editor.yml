@@ -2531,3 +2531,65 @@ GiveRewardPositionListMenu:
       lore:
       - '&7Click this button to go back to'
       - '&7the drop table main edit menu.'
+GiveRewardRewardsListMenu:
+  name: '&b&l{name} DropTable'
+  slots: 54
+  Settings:
+    backButton: true
+    fillTo: 45
+  Buttons:
+    backButton: 54
+  Items:
+    '46':
+      type: BOOK
+      name: '&c&lGive Reward Rewards Guide'
+      lore:
+      - '&7In this list it displays the drop sections'
+      - '&7assigned to the drop position of &f{position}&7.'
+      - '&7To edit the drops simply click on the drop'
+      - '&7section you wish to edit and then you can'
+      - '&7modify the data there.'
+      - '&7To remove a drop section simply shift-right'
+      - '&7click the section you want to remove.'
+    '47':
+      type: GLASS_PANE
+      name: '&7'
+    '48':
+      type: GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page of drop sections.'
+      PreviousPage: true
+    '50':
+      type: EMERALD_BLOCK
+      name: '&e&lAdd new Drop Section'
+      lore:
+      - '&7Click here to add a new drop section'
+      - '&7to the drop table. This will find'
+      - '&7the next available drop section and'
+      - '&7create a new drop section for'
+      - '&7that position.'
+      Button: NewRewardSection
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page of drop sections.'
+      NextPage: true
+    '52':
+      type: GLASS_PANE
+      name: '&7'
+    '53':
+      type: GLASS_PANE
+      name: '&7'
+    '54':
+      type: REDSTONE
+      name: '&cClick here to go back'
+      lore:
+      - '&7Click this button to go back to'
+      - '&7the reward position list menu.'
