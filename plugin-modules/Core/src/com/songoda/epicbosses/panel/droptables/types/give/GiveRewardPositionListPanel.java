@@ -49,6 +49,14 @@ public class GiveRewardPositionListPanel extends SubVariablePanelHandler<DropTab
         List<String> keys = new ArrayList<>(rewardSections.keySet());
         int maxPage = panel.getMaxPage(keys);
 
+        panel.setOnPageChange(((player, currentPage, requestedPage) -> {
+            if(requestedPage < 0 || requestedPage > maxPage) return false;
+
+            loadPage(panel, requestedPage, dropTable, giveTableElement, keys, rewardSections);
+            return true;
+        }));
+
+        loadPage(panel, 0, dropTable, giveTableElement, keys, rewardSections);
     }
 
     @Override
