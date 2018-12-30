@@ -66,7 +66,7 @@ public class MainDropTableEditorPanel extends VariablePanelHandler<DropTable> {
             if(dropTableType.equalsIgnoreCase("SPRAY")) {
                 this.bossPanelManager.getSprayDropTableMainEditMenu().openFor(player, dropTable, dropTable.getSprayTableData());
             } else if(dropTableType.equalsIgnoreCase("GIVE")) {
-                this.bossPanelManager.getGiveDropTableMainEditMenu().openFor(player, dropTable, dropTable.getGiveTableData());
+                this.bossPanelManager.getGiveRewardPositionListMenu().openFor(player, dropTable, dropTable.getGiveTableData());
             } else if(dropTableType.equalsIgnoreCase("DROP")) {
                 this.bossPanelManager.getDropDropTableMainEditMenu().openFor(player, dropTable, dropTable.getDropTableData());
             } else {
