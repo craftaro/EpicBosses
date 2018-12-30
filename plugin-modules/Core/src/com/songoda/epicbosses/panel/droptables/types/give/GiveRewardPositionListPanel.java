@@ -1,17 +1,28 @@
 package com.songoda.epicbosses.panel.droptables.types.give;
 
+import com.google.gson.JsonObject;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.droptable.elements.GiveTableElement;
 import com.songoda.epicbosses.droptable.elements.GiveTableSubElement;
+import com.songoda.epicbosses.droptable.elements.SprayTableElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
+import com.songoda.epicbosses.managers.files.ItemsFileManager;
+import com.songoda.epicbosses.utils.Debug;
+import com.songoda.epicbosses.utils.Message;
+import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
+import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 
@@ -22,8 +33,14 @@ import java.util.*;
  */
 public class GiveRewardPositionListPanel extends SubVariablePanelHandler<DropTable, GiveTableElement> {
 
+    private ItemsFileManager itemsFileManager;
+    private CustomBosses plugin;
+
     public GiveRewardPositionListPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
+
+        this.plugin = plugin;
+        this.itemsFileManager = plugin.getItemStackManager();
     }
 
     @Override
@@ -56,13 +73,76 @@ public class GiveRewardPositionListPanel extends SubVariablePanelHandler<DropTab
 
     }
 
-    private int getNextAvailablePosition(List<String> keys) {
+    private void loadPage(Panel panel, int page, DropTable dropTable, GiveTableElement giveTableElement, List<String> keys, Map<String, Map<String, GiveTableSubElement>> rewards) {
+        panel.loadPage(page, (slot, realisticSlot) -> {
+            if(slot >= keys.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e->{});
+            } else {
+                String position = keys.get(slot);
+                Map<String, GiveTableSubElement> innerRewards = rewards.get(position);
+                ItemStack itemStack = this.itemsFileManager.getItemStackConverter().from(this.itemsFileManager.getItemStackHolder("DefaultDropTableRewardItem"));
+                int dropAmount = innerRewards.keySet().size();
+                Map<String, String> replaceMap = new HashMap<>();
 
+                replaceMap.put("{position}", NumberUtils.get().formatDouble(Integer.valueOf(position)));
+                replaceMap.put("{dropAmount}", NumberUtils.get().formatDouble(dropAmount));
 
-        return 0;
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.DropTable.GiveRewardList.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.DropTable.GiveRewardList.lore"), replaceMap);
+
+                panel.setItem(realisticSlot, itemStack, event -> {
+                    ClickType clickType = event.getClick();
+
+                    if(clickType == ClickType.SHIFT_RIGHT) {
+                        rewards.remove(position);
+                        giveTableElement.setGiveRewards(rewards);
+                        saveDropTable((Player) event.getWhoClicked(), dropTable, giveTableElement, BossAPI.convertObjectToJsonObject(giveTableElement));
+                    } else {
+
+                    }
+                });
+            }
+        });
     }
 
     private ClickAction getNewPositionAction(DropTable dropTable, GiveTableElement giveTableElement) {
-        return event -> {};
+        return event -> {
+            Map<String, Map<String, GiveTableSubElement>> rewards = giveTableElement.getGiveRewards();
+            List<String> keys = new ArrayList<>(giveTableElement.getGiveRewards().keySet());
+            int nextAvailable = getNextAvailablePosition(keys);
+            String nextKey = ""+nextAvailable;
+
+            if(rewards.containsKey(nextKey)) {
+                Debug.FAILED_TO_CREATE_NEWPOSITION.debug(nextKey, BossAPI.getDropTableName(dropTable));
+                return;
+            }
+
+            rewards.put(nextKey, new HashMap<>());
+            giveTableElement.setGiveRewards(rewards);
+            saveDropTable((Player) event.getWhoClicked(), dropTable, giveTableElement, BossAPI.convertObjectToJsonObject(giveTableElement));
+        };
+    }
+
+    private int getNextAvailablePosition(List<String> keys) {
+        if(keys.isEmpty()) return 1;
+
+        List<Integer> currentIds = new ArrayList<>();
+
+        keys.stream().filter(NumberUtils.get()::isInt).forEach(s -> currentIds.add(Integer.valueOf(s)));
+        currentIds.sort(Comparator.naturalOrder());
+
+        for(int i = 1; i <= currentIds.size(); i++) {
+            if(i < currentIds.get(i-1)) {
+                return i;
+            }
+        }
+
+        return currentIds.size()+1;
+    }
+
+    private void saveDropTable(Player player, DropTable dropTable, GiveTableElement giveTableElement, JsonObject jsonObject) {
+        dropTable.setRewards(jsonObject);
+        this.plugin.getDropTableFileManager().save();
+        openFor(player, dropTable, giveTableElement);
     }
 }

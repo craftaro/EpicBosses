@@ -110,10 +110,18 @@ Display:
     RewardList:
       name: '&bReward Section'
       lore:
-      - '&bSelected Item: &f{itemName}'
+      - '&3Selected Item: &f{itemName}'
       - '&3Chance: &f{chance}%'
       - '&7'
       - '&7Click to modify this reward.'
+    GiveRewardList:
+      name: '&bReward Section'
+      lore:
+      - '&3Position: &f{position}'
+      - '&3Drops: &f{dropAmount}'
+      - '&7'
+      - '&7Shift Right-Click to remove.'
+      - '&7Left-Click to edit.'
   Shop:
     menuName: '&b&lEpicBosses &3&lShop'
     name: '&b&lBuy {name}''s Egg'

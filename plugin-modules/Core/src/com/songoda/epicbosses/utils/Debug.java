@@ -38,6 +38,7 @@ public enum Debug {
     FAILED_TO_LOAD_BOSSLISTENERMANAGER("The boss listener manager tried to load again, but it has already loaded previously."),
     FAILED_TO_LOAD_CUSTOM_ITEM("The itemstack name that is provided ({0}) for the spawn item doesn't exist or wasn't found."),
     FAILED_TO_LOAD_MESSAGES("The messages name that is provided ({0}) doesn't exist or wasn't found."),
+    FAILED_TO_CREATE_NEWPOSITION("A new position with the number of {0} was attempted to be added to the {1} droptable, however there was already a position filled there."),
     FAILED_TO_LOAD_COMMANDS("The commands name that is provided ({0}) doesn't exist or wasn't found."),
     FAILED_TO_CREATE_ACTIVE_BOSS_HOLDER("Something went wrong while trying to create an active boss holder for someone who is trying to spawn a boss."),
     FAILED_TO_GIVE_SPAWN_EGG("{0} tried to obtain a spawn egg for the boss {1} but it has not been set yet."),
