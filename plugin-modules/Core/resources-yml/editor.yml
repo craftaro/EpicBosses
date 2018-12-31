@@ -2593,3 +2593,117 @@ GiveRewardRewardsListMenu:
       lore:
       - '&7Click this button to go back to'
       - '&7the reward position list menu.'
+GiveRewardMainEditMenu:
+  name: '&b&l{name} DropTable'
+  slots: 27
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 23
+  Items:
+    '5':
+      type: DIAMOND
+      name: '&b&lPosition: &f{position}'
+    '11':
+      type: GUNPOWDER
+      name: '&e&lRandom Drops'
+      lore:
+      - '&bCurrently: &f{randomDrops}'
+      - '&7Click here to toggle the random drop mode.'
+      - '&7If this is set to &ftrue&7 then when the'
+      - '&7drop table is called it will shuffle the'
+      - '&7list contents so it''s not in the same order.'
+      - '&7If this is set to &ffalse&7 then when the'
+      - '&7drop table is called it will go from top to'
+      - '&7bottom through the list.'
+      Button: RandomDrops
+    '12':
+      type: EMERALD
+      name: '&e&lMax Drops'
+      lore:
+      - '&bCurrently: &f{maxDrops}'
+      - '&7Click here to modify the maximum amount of'
+      - '&7drops this drop section can have. Keep in mind'
+      - '&7that when getting drops the drop section will'
+      - '&7only cycle through the list once. Not until'
+      - '&7this amount of drops has been met.'
+      - '&7'
+      - '&bLeft Click &8» &f+1'
+      - '&bShift Left-Click &8» &f+10'
+      - '&7'
+      - '&bRight Click &8» &f-1'
+      - '&bShift Right-Click &8» &f-10'
+      Button: MaxDrops
+    '13':
+      type: CHEST
+      name: '&e&lItem Drops'
+      lore:
+      - '&7Click here to modify the custom item drops'
+      - '&7and their drop chance for this drop section.'
+      - '&7There is currently &f{drops}&7 drops set up.'
+      Button: ItemDrops
+    '14':
+      type: GLOWSTONE_DUST
+      name: '&e&lRequired Percentage'
+      lore:
+      - '&bCurrently: &f{requiredPercentage}%'
+      - '&7Click here to modify the required percentage to'
+      - '&7receive this drop section. If the percentage is'
+      - '&75% then you need to do 5% damage to the boss to'
+      - '&7get the rewards in this drop section.'
+      - '&7'
+      - '&bLeft Click &8» &f+1'
+      - '&bShift Left-Click &8» &f+10'
+      - '&7'
+      - '&bRight Click &8» &f-1'
+      - '&bShift Right-Click &8» &f-10'
+      Button: RequiredPercentage
+    '15':
+      type: CHEST
+      name: '&e&lCommand Drops'
+      lore:
+      - '&7Click here to modify the custom command drops'
+      - '&7and their drop chance for this drop section.'
+      - '&7There is currently &f{commands}&7 commands'
+      - '&7set up.'
+      Button: CommandDrops
+    '16':
+      type: EMERALD
+      name: '&e&lMax Commands'
+      lore:
+      - '&bCurrently: &f{maxCommands}'
+      - '&7Click here to modify the maximum amount of'
+      - '&7commands this drop section can have. Keep in mind'
+      - '&7that when getting drops the drop section will'
+      - '&7only cycle through the list once. Not until'
+      - '&7this amount of commands has been met.'
+      - '&7'
+      - '&bLeft Click &8» &f+1'
+      - '&bShift Left-Click &8» &f+10'
+      - '&7'
+      - '&bRight Click &8» &f-1'
+      - '&bShift Right-Click &8» &f-10'
+      Button: MaxCommands
+    '17':
+      type: GUNPOWDER
+      name: '&e&lRandom Commands'
+      lore:
+      - '&bCurrently: &f{randomCommands}'
+      - '&7Click here to toggle the random command mode.'
+      - '&7If this is set to &ftrue&7 then when the'
+      - '&7commands are called it will shuffle the'
+      - '&7list contents so it''s not in the same order.'
+      - '&7If this is set to &ffalse&7 then when the'
+      - '&7commands are called it will go from top to'
+      - '&7bottom through the list.'
+      Button: RandomDrops
+    '23':
+      type: REDSTONE
+      name: '&cClick here to go back'
+      lore:
+      - '&7Click this button to go back to'
+      - '&7the reward drop section list menu.'
