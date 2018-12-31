@@ -7,6 +7,7 @@ import com.songoda.epicbosses.droptable.elements.GiveTableElement;
 import com.songoda.epicbosses.droptable.elements.GiveTableSubElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
+import com.songoda.epicbosses.panel.droptables.types.give.handlers.GiveRewardEditHandler;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ObjectUtils;
@@ -119,13 +120,14 @@ public class GiveRewardRewardsListPanel extends SubSubVariablePanelHandler<DropT
                     ClickType clickType = event.getClick();
 
                     if(clickType == ClickType.SHIFT_RIGHT) {
-
                         rewards.remove(rewardSectionPosition);
                         rewardSections.put(key, rewards);
                         giveTableElement.setGiveRewards(rewardSections);
                         saveDropTable((Player) event.getWhoClicked(), dropTable, giveTableElement, key);
                     } else {
-                        //TODO OPEN Reward Editor
+                        GiveRewardEditHandler giveRewardEditHandler = new GiveRewardEditHandler(key, rewardSectionPosition, dropTable, giveTableElement);
+
+                        this.bossPanelManager.getGiveRewardMainEditMenu().openFor((Player) event.getWhoClicked(), dropTable, giveRewardEditHandler);
                     }
                 });
             }
