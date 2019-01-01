@@ -125,7 +125,7 @@ public class GiveRewardRewardsListPanel extends SubSubVariablePanelHandler<DropT
                         giveTableElement.setGiveRewards(rewardSections);
                         saveDropTable((Player) event.getWhoClicked(), dropTable, giveTableElement, key);
                     } else {
-                        GiveRewardEditHandler giveRewardEditHandler = new GiveRewardEditHandler(key, rewardSectionPosition, dropTable, giveTableElement);
+                        GiveRewardEditHandler giveRewardEditHandler = new GiveRewardEditHandler(key, rewardSectionPosition, dropTable, giveTableElement, giveTableSubElement);
 
                         this.bossPanelManager.getGiveRewardMainEditMenu().openFor((Player) event.getWhoClicked(), dropTable, giveRewardEditHandler);
                     }
