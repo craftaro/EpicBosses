@@ -3,6 +3,8 @@ package com.songoda.epicbosses.autospawns;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.songoda.epicbosses.autospawns.settings.AutoSpawnSettings;
+import com.songoda.epicbosses.autospawns.types.IntervalSpawnElement;
+import com.songoda.epicbosses.utils.BossesGson;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +27,14 @@ public class AutoSpawn {
         this.editing = editing;
         this.entities = entities;
         this.settings = autoSpawnSettings;
+    }
+
+    public IntervalSpawnElement getIntervalSpawnData() {
+        if(getType().equalsIgnoreCase("INTERVAL")) {
+            return BossesGson.get().fromJson(this.customData, IntervalSpawnElement.class);
+        }
+
+        return null;
     }
 
 }

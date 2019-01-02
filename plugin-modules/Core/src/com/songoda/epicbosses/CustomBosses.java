@@ -34,6 +34,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
 
     @Getter private MessagesFileManager bossMessagesFileManager;
     @Getter private CommandsFileManager bossCommandFileManager;
+    @Getter private AutoSpawnFileManager autoSpawnFileManager;
     @Getter private DropTableFileManager dropTableFileManager;
     @Getter private MinionsFileManager minionsFileManager;
     @Getter private BossesFileManager bossesFileManager;
@@ -119,6 +120,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.bossCommandFileManager.reload();
         this.bossMessagesFileManager.reload();
         this.dropTableFileManager.reload();
+        this.autoSpawnFileManager.reload();
 
         this.bossCommandManager = new BossCommandManager(new BossCmd(), this);
         this.bossListenerManager = new BossListenerManager(this);
@@ -149,6 +151,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.skillsFileManager.reload();
         this.itemStackManager.reload();
         this.dropTableFileManager.reload();
+        this.autoSpawnFileManager.reload();
 
         this.bossMechanicManager.load();
 
@@ -170,6 +173,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.bossMessagesFileManager = new MessagesFileManager(this);
         this.dropTableFileManager = new DropTableFileManager(this);
         this.skillsFileManager = new SkillsFileManager(this);
+        this.autoSpawnFileManager = new AutoSpawnFileManager(this);
 
         this.langFileHandler = new LangFileHandler(this);
         this.editorFileHandler = new EditorFileHandler(this);

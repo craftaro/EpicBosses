@@ -14,8 +14,8 @@
     },
     "customData": {
       "location": "world,0,150,0",
-      "spawnRate": "30",
-      "placeholder": "{customBosses_1}"
+      "placeholder": "{customBosses_1}",
+      "spawnRate": 30
     }
   }
 }
