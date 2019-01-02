@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.mechanics.minions;
 
+import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.MainStatsElement;
@@ -12,10 +13,10 @@ import org.bukkit.entity.LivingEntity;
  * @author Charles Cullen
  * @version 1.0.0
  * @since 27-Jun-18
- *
- * TODO: Make a hologram above name instead of using default CustomName
  */
 public class NameMechanic implements IMinionMechanic {
+
+    private CustomBosses plugin = CustomBosses.get();
 
     @Override
     public boolean applyMechanic(MinionEntity minionEntity, ActiveMinionHolder activeMinionHolder) {
@@ -29,8 +30,15 @@ public class NameMechanic implements IMinionMechanic {
             if(livingEntity == null) return false;
 
             if(customName != null) {
-                livingEntity.setCustomName(StringUtils.get().translateColor(customName));
-                livingEntity.setCustomNameVisible(true);
+                String formattedName = StringUtils.get().translateColor(customName);
+
+                if(CustomBosses.get().getConfig().getBoolean("Hooks.HolographicDisplays.enabled", false) && this.plugin.getHolographicDisplayHelper().isConnected()) {
+                    this.plugin.getHolographicDisplayHelper().createHologram(livingEntity, formattedName);
+                    livingEntity.setCustomNameVisible(false);
+                } else {
+                    livingEntity.setCustomName(formattedName);
+                    livingEntity.setCustomNameVisible(true);
+                }
             }
         }
 

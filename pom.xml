@@ -20,7 +20,7 @@
 
     <properties>
         <!--<plugin.version>maven-version-number-SNAPSHOT-U90</plugin.version>-->
-        <plugin.version>1.0.0-U165</plugin.version>
+        <plugin.version>1.0.0-U166</plugin.version>
         <plugin.name>EpicBosses</plugin.name>
         <plugin.main>com.songoda.epicbosses.CustomBosses</plugin.main>
         <plugin.author>AMinecraftDev</plugin.author>
@@ -69,9 +69,19 @@
             <version>1.2</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.gmail.filoghost.holographicdisplays</groupId>
+            <artifactId>holographicdisplays-api</artifactId>
+            <version>2.3.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <repositories>
+        <repository>
+            <id>filoghost-repo</id>
+            <url>https://ci.filoghost.me/plugin/repository/everything/</url>
+        </repository>
         <repository>
             <id>private</id>
             <url>http://repo.songoda.com/repository/private/</url>

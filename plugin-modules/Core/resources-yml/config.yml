@@ -22,6 +22,8 @@ Hooks:
   Factions:
     enabled: false
     useWarzoneSpawnRegion: false
+  HolographicDisplays:
+    enabled: false
   StackMob:
     enabled: false
   WorldGuard:

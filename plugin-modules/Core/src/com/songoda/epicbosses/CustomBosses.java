@@ -1,6 +1,7 @@
 package com.songoda.epicbosses;
 
 import com.songoda.epicbosses.container.MinionEntityContainer;
+import com.songoda.epicbosses.utils.dependencies.HolographicDisplayHelper;
 import com.songoda.epicbosses.utils.dependencies.VaultHelper;
 import lombok.Getter;
 import com.songoda.epicbosses.api.BossAPI;
@@ -61,6 +62,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     @Getter private YmlFileHandler langFileHandler, editorFileHandler, configFileHandler;
     @Getter private FileConfiguration lang, editor, config;
 
+    @Getter private HolographicDisplayHelper holographicDisplayHelper;
     @Getter private VaultHelper vaultHelper;
 
     @Getter private boolean debug = false;
@@ -75,7 +77,9 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         Debug.setPlugin(this);
 
         instance = this;
-        vaultHelper = new VaultHelper();
+
+        this.vaultHelper = new VaultHelper();
+        this.holographicDisplayHelper = new HolographicDisplayHelper();
 
         long beginMs = System.currentTimeMillis();
 
