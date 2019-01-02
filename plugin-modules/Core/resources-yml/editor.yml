@@ -2656,11 +2656,11 @@ GiveRewardMainEditMenu:
       - '&75% then you need to do 5% damage to the boss to'
       - '&7get the rewards in this drop section.'
       - '&7'
-      - '&bLeft Click &8» &f+1'
-      - '&bShift Left-Click &8» &f+10'
+      - '&bLeft Click &8» &f+1%'
+      - '&bShift Left-Click &8» &f+10%'
       - '&7'
-      - '&bRight Click &8» &f-1'
-      - '&bShift Right-Click &8» &f-10'
+      - '&bRight Click &8» &f-1%'
+      - '&bShift Right-Click &8» &f-10%'
       Button: RequiredPercentage
     '15':
       type: CHEST

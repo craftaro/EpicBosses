@@ -44,6 +44,11 @@ public enum Message {
     Boss_DropTable_DropAddedNewReward("&b&lEpicBosses &8» &7You have added a new reward to the drop table &f{0}&7. Now opening the editing panel for the new reward."),
     Boss_DropTable_DropRewardChance("&b&lEpicBosses &8» &7You have {0} the chance for the reward section for &f{1}&7 to &f{2}%&7."),
     Boss_DropTable_DropRewardRemoved("&b&lEpicBosses &8» &7You have removed the reward section from the drop drop table."),
+    Boss_DropTable_GiveRandomDrops("&b&lEpicBosses &8» &7You have set the random drops for the &f{0}&7 drop table to &f{1}&7."),
+    Boss_DropTable_GiveRandomCommands("&b&lEpicBosses &8» &7You have set the random commands for the &f{0}&7 drop table to &f{1}&7."),
+    Boss_DropTable_GiveMaxDrops("&b&lEpicBosses &8» &7You have {0} the max drops for the &f{1}&7 damage section to &f{1}&7."),
+    Boss_DropTable_GiveMaxCommands("&b&lEpicBosses &8» &7You have {0} the max commands for the &f{1}&7 damage section to &f{1}&7."),
+    Boss_DropTable_GiveRequiredPercentage("&b&lEpicBosses &8» &7You have {0} the required percentage for the &f{1}&7 damage section to &f{1}&7."),
 
     Boss_Edit_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Edit_ItemStackHolderNull("&c&l(!) &cThe itemstack name that is provided for the spawn item doesn't exist or wasn't found."),
