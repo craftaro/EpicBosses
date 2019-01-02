@@ -34,6 +34,9 @@ import com.songoda.epicbosses.panel.droptables.types.drop.DropDropTableMainEdito
 import com.songoda.epicbosses.panel.droptables.types.give.GiveRewardMainEditPanel;
 import com.songoda.epicbosses.panel.droptables.types.give.GiveRewardPositionListPanel;
 import com.songoda.epicbosses.panel.droptables.types.give.GiveRewardRewardsListPanel;
+import com.songoda.epicbosses.panel.droptables.types.give.drops.GiveDropNewRewardPanel;
+import com.songoda.epicbosses.panel.droptables.types.give.drops.GiveDropRewardListPanel;
+import com.songoda.epicbosses.panel.droptables.types.give.drops.GiveDropRewardMainEditPanel;
 import com.songoda.epicbosses.panel.droptables.types.give.handlers.GiveRewardEditHandler;
 import com.songoda.epicbosses.panel.droptables.types.spray.SprayDropNewRewardPanel;
 import com.songoda.epicbosses.panel.droptables.types.spray.SprayDropRewardListPanel;
@@ -261,6 +264,9 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.giveRewardPositionListMenu = new GiveRewardPositionListPanel(this, panelBuilder10, this.customBosses);
         this.giveRewardRewardsListMenu = new GiveRewardRewardsListPanel(this, panelBuilder11, this.customBosses);
         this.giveRewardMainEditMenu = new GiveRewardMainEditPanel(this, panelBuilder12, this.customBosses);
+        this.giveDropNewRewardEditPanel = new GiveDropNewRewardPanel(this, panelBuilder4, this.customBosses);
+        this.giveDropRewardListPanel = new GiveDropRewardListPanel(this, panelBuilder5, this.customBosses);
+        this.giveDropRewardMainEditPanel = new GiveDropRewardMainEditPanel(this, panelBuilder3, this.customBosses);
     }
 
     private void reloadDropTableEditMenus() {
@@ -295,6 +301,9 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.giveRewardPositionListMenu.initializePanel(panelBuilder10);
         this.giveRewardPositionListMenu.initializePanel(panelBuilder11);
         this.giveRewardMainEditMenu.initializePanel(panelBuilder12);
+        this.giveDropNewRewardEditPanel.initializePanel(panelBuilder4);
+        this.giveDropRewardListPanel.initializePanel(panelBuilder5);
+        this.giveDropRewardMainEditPanel.initializePanel(panelBuilder3);
     }
 
     //---------------------------------------------
