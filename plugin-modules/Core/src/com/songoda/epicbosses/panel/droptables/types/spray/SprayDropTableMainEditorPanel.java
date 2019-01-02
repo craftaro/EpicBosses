@@ -62,7 +62,7 @@ public class SprayDropTableMainEditorPanel extends SubVariablePanelHandler<DropT
         Panel panel = panelBuilder.getPanel()
                 .setParentPanelHandler(this.bossPanelManager.getMainDropTableEditMenu(), dropTable);
 
-        panelBuilderCounter.getSlotsWith("Rewards").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getSprayRewardListEditMenu().openFor((Player) event.getWhoClicked(), dropTable, sprayTableElement)));
+        panelBuilderCounter.getSlotsWith("Rewards").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getSprayDropRewardListPanel().openFor((Player) event.getWhoClicked(), dropTable, sprayTableElement)));
         panelBuilderCounter.getSlotsWith("RandomDrops").forEach(slot -> panel.setOnClick(slot, getRandomDropsAction(dropTable, sprayTableElement)));
         panelBuilderCounter.getSlotsWith("MaxDistance").forEach(slot -> panel.setOnClick(slot, getMaxDistanceAction(dropTable, sprayTableElement)));
         panelBuilderCounter.getSlotsWith("MaxDrops").forEach(slot -> panel.setOnClick(slot, getMaxDropsAction(dropTable, sprayTableElement)));

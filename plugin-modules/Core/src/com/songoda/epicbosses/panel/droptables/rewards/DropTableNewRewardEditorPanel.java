@@ -1,11 +1,11 @@
-package com.songoda.epicbosses.panel.droptables.types.drop;
+package com.songoda.epicbosses.panel.droptables.rewards;
 
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
-import com.songoda.epicbosses.droptable.elements.DropTableElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
+import com.songoda.epicbosses.panel.droptables.rewards.interfaces.IDropTableNewRewardEditor;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
@@ -22,14 +22,14 @@ import java.util.Map;
 /**
  * @author Charles Cullen
  * @version 1.0.0
- * @since 29-Dec-18
+ * @since 02-Jan-19
  */
-public class DropNewRewardEditorPanel extends SubVariablePanelHandler<DropTable, DropTableElement> {
+public abstract class DropTableNewRewardEditorPanel<SubVariable> extends SubVariablePanelHandler<DropTable, SubVariable> implements IDropTableNewRewardEditor<SubVariable> {
 
     private ItemsFileManager itemsFileManager;
     private CustomBosses plugin;
 
-    public DropNewRewardEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public DropTableNewRewardEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.itemsFileManager = plugin.getItemStackManager();
@@ -37,28 +37,28 @@ public class DropNewRewardEditorPanel extends SubVariablePanelHandler<DropTable,
     }
 
     @Override
-    public void fillPanel(Panel panel, DropTable dropTable, DropTableElement dropTableElement) {
+    public void fillPanel(Panel panel, DropTable dropTable, SubVariable subVariable) {
         Map<String, ItemStackHolder> itemStacks = this.itemsFileManager.getItemStackHolders();
-        List<String> currentKeys = new ArrayList<>(dropTableElement.getDropRewards().keySet());
+        List<String> currentKeys = getCurrentKeys(subVariable);
         List<String> filteredKeys = getFilteredKeys(itemStacks, currentKeys);
         int maxPage = panel.getMaxPage(filteredKeys);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
             if(requestedPage < 0 || requestedPage > maxPage) return false;
 
-            loadPage(panel, requestedPage, dropTable, dropTableElement, filteredKeys, itemStacks);
+            loadPage(panel, requestedPage, dropTable, subVariable, filteredKeys, itemStacks);
             return true;
         }));
 
-        loadPage(panel, 0, dropTable, dropTableElement, filteredKeys, itemStacks);
+        loadPage(panel, 0, dropTable, subVariable, filteredKeys, itemStacks);
     }
 
     @Override
-    public void openFor(Player player, DropTable dropTable, DropTableElement dropTableElement) {
+    public void openFor(Player player, DropTable dropTable, SubVariable subVariable) {
         Panel panel = getPanelBuilder().getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getDropRewardListEditMenu(), dropTable, dropTableElement);
+                .setParentPanelHandler(getParentPanelHandler(), dropTable, subVariable);
 
-        fillPanel(panel, dropTable, dropTableElement);
+        fillPanel(panel, dropTable, subVariable);
         panel.openFor(player);
     }
 
@@ -67,7 +67,7 @@ public class DropNewRewardEditorPanel extends SubVariablePanelHandler<DropTable,
 
     }
 
-    private void loadPage(Panel panel, int page, DropTable dropTable, DropTableElement dropTableElement, List<String> filteredKeys, Map<String, ItemStackHolder> itemStacks) {
+    private void loadPage(Panel panel, int page, DropTable dropTable, SubVariable subVariable, List<String> filteredKeys, Map<String, ItemStackHolder> itemStacks) {
         panel.loadPage(page, (slot, realisticSlot) -> {
             if(slot >= filteredKeys.size()) {
                 panel.setItem(realisticSlot, new ItemStack(Material.AIR), e->{});
@@ -77,14 +77,13 @@ public class DropNewRewardEditorPanel extends SubVariablePanelHandler<DropTable,
                 ItemStack itemStack = this.itemsFileManager.getItemStackConverter().from(itemStackHolder);
 
                 panel.setItem(realisticSlot, itemStack, event -> {
-                    Map<String, Double> currentRewards = dropTableElement.getDropRewards();
+                    Map<String, Double> currentRewards = getRewards(subVariable);
 
                     currentRewards.put(name, 50.0);
-                    dropTable.setRewards(BossAPI.convertObjectToJsonObject(dropTableElement));
-                    this.plugin.getDropTableFileManager().save();
+                    saveDropTable(this.plugin.getDropTableFileManager(), dropTable, subVariable);
 
-                    this.bossPanelManager.getDropRewardMainEditMenu().openFor((Player) event.getWhoClicked(), dropTable, dropTableElement, name);
-                    Message.Boss_DropTable_DropAddedNewReward.msg(event.getWhoClicked(), BossAPI.getDropTableName(dropTable));
+                    getRewardMainEditMenu().openFor((Player) event.getWhoClicked(), dropTable, subVariable, name);
+                    Message.Boss_DropTable_AddedNewReward.msg(event.getWhoClicked(), BossAPI.getDropTableName(dropTable));
                 });
             }
         });

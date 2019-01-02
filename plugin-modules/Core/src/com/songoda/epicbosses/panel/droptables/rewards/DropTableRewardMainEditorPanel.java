@@ -1,14 +1,14 @@
-package com.songoda.epicbosses.panel.droptables.types.drop;
+package com.songoda.epicbosses.panel.droptables.rewards;
 
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
-import com.songoda.epicbosses.droptable.elements.DropTableElement;
-import com.songoda.epicbosses.droptable.elements.SprayTableElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.DropTableFileManager;
+import com.songoda.epicbosses.panel.droptables.rewards.interfaces.IDropTableRewardMainEditor;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ObjectUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubSubVariablePanelHandler;
@@ -23,25 +23,23 @@ import java.util.Map;
 /**
  * @author Charles Cullen
  * @version 1.0.0
- * @since 29-Dec-18
+ * @since 02-Jan-19
  */
-public class DropRewardMainEditorPanel extends SubSubVariablePanelHandler<DropTable, DropTableElement, String> {
+public abstract class DropTableRewardMainEditorPanel<SubVariable> extends SubSubVariablePanelHandler<DropTable, SubVariable, String> implements IDropTableRewardMainEditor<SubVariable> {
 
     private DropTableFileManager dropTableFileManager;
 
-    public DropRewardMainEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public DropTableRewardMainEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.dropTableFileManager = plugin.getDropTableFileManager();
     }
 
     @Override
-    public void openFor(Player player, DropTable dropTable, DropTableElement dropTableElement, String s) {
+    public void openFor(Player player, DropTable dropTable, SubVariable subVariable, String s) {
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
         Map<String, String> replaceMap = new HashMap<>();
-        Double chance = dropTableElement.getDropRewards().get(s);
-
-        if(chance == null) chance = 50.0;
+        double chance = ObjectUtils.getValue(getChance(subVariable, s), 50.0);
 
         replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
         replaceMap.put("{itemStack}", s);
@@ -49,10 +47,10 @@ public class DropRewardMainEditorPanel extends SubSubVariablePanelHandler<DropTa
 
         PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
         Panel panel = panelBuilder.getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getDropRewardListEditMenu(), dropTable, dropTableElement);
+                .setParentPanelHandler(getParentPanelHandler(), dropTable, subVariable);
 
-        panelBuilderCounter.getSlotsWith("Chance").forEach(slot -> panel.setOnClick(slot, getChanceAction(dropTable, dropTableElement, s)));
-        panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, getRemoveAction(dropTable, dropTableElement, s)));
+        panelBuilderCounter.getSlotsWith("Chance").forEach(slot -> panel.setOnClick(slot, getChanceAction(dropTable, subVariable, s)));
+        panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, getRemoveAction(dropTable, subVariable, s)));
 
         panel.openFor(player);
     }
@@ -62,7 +60,7 @@ public class DropRewardMainEditorPanel extends SubSubVariablePanelHandler<DropTa
 
     }
 
-    private ClickAction getChanceAction(DropTable dropTable, DropTableElement dropTableElement, String name) {
+    private ClickAction getChanceAction(DropTable dropTable, SubVariable subVariable, String name) {
         return event -> {
             ClickType clickType = event.getClick();
             double amountToModifyBy;
@@ -78,7 +76,7 @@ public class DropRewardMainEditorPanel extends SubSubVariablePanelHandler<DropTa
             }
 
             String modifyValue = amountToModifyBy > 0? "increased" : "decreased";
-            Map<String, Double> rewards = dropTableElement.getDropRewards();
+            Map<String, Double> rewards = getRewards(subVariable);
             double currentValue = rewards.getOrDefault(name, 50.0);
             double newValue = currentValue + amountToModifyBy;
 
@@ -91,29 +89,24 @@ public class DropRewardMainEditorPanel extends SubSubVariablePanelHandler<DropTa
             }
 
             rewards.put(name, newValue);
-            dropTableElement.setDropRewards(rewards);
-            save(dropTable, dropTableElement);
-            openFor((Player) event.getWhoClicked(), dropTable, dropTableElement, name);
+            setRewards(subVariable, rewards);
+            saveDropTable(this.dropTableFileManager, dropTable, subVariable);
+            openFor((Player) event.getWhoClicked(), dropTable, subVariable, name);
 
-            Message.Boss_DropTable_DropRewardChance.msg(event.getWhoClicked(), modifyValue, BossAPI.getDropTableName(dropTable), NumberUtils.get().formatDouble(newValue));
+            Message.Boss_DropTable_RewardChance.msg(event.getWhoClicked(), modifyValue, BossAPI.getDropTableName(dropTable), NumberUtils.get().formatDouble(newValue));
         };
     }
 
-    private ClickAction getRemoveAction(DropTable dropTable, DropTableElement dropTableElement, String name) {
+    private ClickAction getRemoveAction(DropTable dropTable, SubVariable subVariable, String name) {
         return event -> {
-            Map<String, Double> current = dropTableElement.getDropRewards();
+            Map<String, Double> rewards = getRewards(subVariable);
 
-            current.remove(name);
-            dropTableElement.setDropRewards(current);
-            save(dropTable, dropTableElement);
+            rewards.remove(name);
+            setRewards(subVariable, rewards);
+            saveDropTable(this.dropTableFileManager, dropTable, subVariable);
 
-            Message.Boss_DropTable_DropRewardRemoved.msg(event.getWhoClicked());
-            this.bossPanelManager.getDropRewardListEditMenu().openFor((Player) event.getWhoClicked(), dropTable, dropTableElement);
+            Message.Boss_DropTable_RewardRemoved.msg(event.getWhoClicked());
+            getParentPanelHandler().openFor((Player) event.getWhoClicked(), dropTable, subVariable);
         };
-    }
-
-    private void save(DropTable dropTable, DropTableElement dropTableElement) {
-        dropTable.setRewards(BossAPI.convertObjectToJsonObject(dropTableElement));
-        this.dropTableFileManager.save();
     }
 }

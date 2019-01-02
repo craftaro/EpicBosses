@@ -59,7 +59,7 @@ public class DropDropTableMainEditorPanel extends SubVariablePanelHandler<DropTa
         Panel panel = panelBuilder.getPanel()
                 .setParentPanelHandler(this.bossPanelManager.getMainDropTableEditMenu(), dropTable);
 
-        panelBuilderCounter.getSlotsWith("Rewards").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getDropRewardListEditMenu().openFor((Player) event.getWhoClicked(), dropTable, dropTableElement)));
+        panelBuilderCounter.getSlotsWith("Rewards").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getDropDropRewardListPanel().openFor((Player) event.getWhoClicked(), dropTable, dropTableElement)));
         panelBuilderCounter.getSlotsWith("RandomDrops").forEach(slot -> panel.setOnClick(slot, getRandomDropsAction(dropTable, dropTableElement)));
         panelBuilderCounter.getSlotsWith("MaxDrops").forEach(slot -> panel.setOnClick(slot, getMaxDropsAction(dropTable, dropTableElement)));
 

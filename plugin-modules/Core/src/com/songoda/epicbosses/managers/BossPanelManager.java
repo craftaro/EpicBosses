@@ -24,18 +24,21 @@ import com.songoda.epicbosses.panel.bosses.weapons.MainHandEditorPanel;
 import com.songoda.epicbosses.panel.bosses.weapons.OffHandEditorPanel;
 import com.songoda.epicbosses.panel.droptables.DropTableTypeEditorPanel;
 import com.songoda.epicbosses.panel.droptables.MainDropTableEditorPanel;
+import com.songoda.epicbosses.panel.droptables.rewards.DropTableNewRewardEditorPanel;
+import com.songoda.epicbosses.panel.droptables.rewards.DropTableRewardMainEditorPanel;
+import com.songoda.epicbosses.panel.droptables.rewards.DropTableRewardsListEditorPanel;
+import com.songoda.epicbosses.panel.droptables.types.drop.DropDropNewRewardPanel;
+import com.songoda.epicbosses.panel.droptables.types.drop.DropDropRewardListPanel;
+import com.songoda.epicbosses.panel.droptables.types.drop.DropDropRewardMainEditPanel;
 import com.songoda.epicbosses.panel.droptables.types.drop.DropDropTableMainEditorPanel;
-import com.songoda.epicbosses.panel.droptables.types.drop.DropNewRewardEditorPanel;
-import com.songoda.epicbosses.panel.droptables.types.drop.DropRewardMainEditorPanel;
-import com.songoda.epicbosses.panel.droptables.types.drop.DropRewardsListEditorPanel;
 import com.songoda.epicbosses.panel.droptables.types.give.GiveRewardMainEditPanel;
 import com.songoda.epicbosses.panel.droptables.types.give.GiveRewardPositionListPanel;
 import com.songoda.epicbosses.panel.droptables.types.give.GiveRewardRewardsListPanel;
 import com.songoda.epicbosses.panel.droptables.types.give.handlers.GiveRewardEditHandler;
+import com.songoda.epicbosses.panel.droptables.types.spray.SprayDropNewRewardPanel;
+import com.songoda.epicbosses.panel.droptables.types.spray.SprayDropRewardListPanel;
+import com.songoda.epicbosses.panel.droptables.types.spray.SprayDropRewardMainEditPanel;
 import com.songoda.epicbosses.panel.droptables.types.spray.SprayDropTableMainEditorPanel;
-import com.songoda.epicbosses.panel.droptables.types.spray.SprayNewRewardEditorPanel;
-import com.songoda.epicbosses.panel.droptables.types.spray.SprayRewardMainEditorPanel;
-import com.songoda.epicbosses.panel.droptables.types.spray.SprayRewardsListEditorPanel;
 import com.songoda.epicbosses.panel.handlers.*;
 import com.songoda.epicbosses.panel.skills.MainSkillEditorPanel;
 import com.songoda.epicbosses.panel.skills.SkillTypeEditorPanel;
@@ -99,15 +102,23 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private ISubVariablePanelHandler<Skill, CustomSkillElement> customSkillTypeEditorMenu, specialSettingsEditorMenu, minionSelectEditorMenu;
 
     @Getter private IVariablePanelHandler<DropTable> mainDropTableEditMenu, dropTableTypeEditMenu;
-    @Getter private ISubVariablePanelHandler<DropTable, SprayTableElement> sprayDropTableMainEditMenu, sprayRewardListEditMenu, sprayNewRewardEditMenu;
-    @Getter private ISubSubVariablePanelHandler<DropTable, SprayTableElement, String> sprayRewardMainEditMenu;
+
+    @Getter private ISubVariablePanelHandler<DropTable, SprayTableElement> sprayDropTableMainEditMenu;
+    @Getter private DropTableRewardMainEditorPanel<SprayTableElement> sprayDropRewardMainEditPanel;
+    @Getter private DropTableNewRewardEditorPanel<SprayTableElement> sprayDropNewRewardEditPanel;
+    @Getter private DropTableRewardsListEditorPanel<SprayTableElement> sprayDropRewardListPanel;
 
     @Getter private ISubSubVariablePanelHandler<DropTable, GiveTableElement, String> giveRewardRewardsListMenu;
     @Getter private ISubVariablePanelHandler<DropTable, GiveTableElement> giveRewardPositionListMenu;
     @Getter private ISubVariablePanelHandler<DropTable, GiveRewardEditHandler> giveRewardMainEditMenu;
+    @Getter private DropTableRewardMainEditorPanel<GiveRewardEditHandler> giveDropRewardMainEditPanel;
+    @Getter private DropTableNewRewardEditorPanel<GiveRewardEditHandler> giveDropNewRewardEditPanel;
+    @Getter private DropTableRewardsListEditorPanel<GiveRewardEditHandler> giveDropRewardListPanel;
 
-    @Getter private ISubVariablePanelHandler<DropTable, DropTableElement> dropDropTableMainEditMenu, dropRewardListEditMenu, dropNewRewardEditMenu;
-    @Getter private ISubSubVariablePanelHandler<DropTable, DropTableElement, String> dropRewardMainEditMenu;
+    @Getter private ISubVariablePanelHandler<DropTable, DropTableElement> dropDropTableMainEditMenu;
+    @Getter private DropTableRewardMainEditorPanel<DropTableElement> dropDropRewardMainEditPanel;
+    @Getter private DropTableNewRewardEditorPanel<DropTableElement> dropDropNewRewardEditPanel;
+    @Getter private DropTableRewardsListEditorPanel<DropTableElement> dropDropRewardListPanel;
 
     private final CustomBosses customBosses;
 
@@ -223,14 +234,12 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("DropTableMainEditorPanel"));
         PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("DropTableTypeEditorPanel"));
         PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
-        PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("SprayRewardsListEditMenu"));
-        PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
-        PanelBuilder panelBuilder5 = new PanelBuilder(editor.getConfigurationSection("SprayNewRewardEditMenu"));
+
+        PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("DropTableRewardsListEditMenu"));
+        PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("DropTableNewRewardEditMenu"));
+        PanelBuilder panelBuilder5 = new PanelBuilder(editor.getConfigurationSection("DropTableRewardMainEditMenu"));
 
         PanelBuilder panelBuilder6 = new PanelBuilder(editor.getConfigurationSection("DropDropTableMainEditMenu"));
-        PanelBuilder panelBuilder7 = new PanelBuilder(editor.getConfigurationSection("DropRewardsListEditMenu"));
-        PanelBuilder panelBuilder8 = new PanelBuilder(editor.getConfigurationSection("DropDropTableMainEditMenu"));
-        PanelBuilder panelBuilder9 = new PanelBuilder(editor.getConfigurationSection("DropNewRewardEditMenu"));
 
         PanelBuilder panelBuilder10 = new PanelBuilder(editor.getConfigurationSection("GiveRewardPositionListMenu"));
         PanelBuilder panelBuilder11 = new PanelBuilder(editor.getConfigurationSection("GiveRewardRewardsListMenu"));
@@ -240,14 +249,14 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.dropTableTypeEditMenu = new DropTableTypeEditorPanel(this, panelBuilder1, this.customBosses);
 
         this.sprayDropTableMainEditMenu = new SprayDropTableMainEditorPanel(this, panelBuilder2, this.customBosses);
-        this.sprayRewardListEditMenu = new SprayRewardsListEditorPanel(this, panelBuilder3, this.customBosses);
-        this.sprayRewardMainEditMenu = new SprayRewardMainEditorPanel(this, panelBuilder4, this.customBosses);
-        this.sprayNewRewardEditMenu = new SprayNewRewardEditorPanel(this, panelBuilder5, this.customBosses);
+        this.sprayDropNewRewardEditPanel = new SprayDropNewRewardPanel(this, panelBuilder4, this.customBosses);
+        this.sprayDropRewardListPanel = new SprayDropRewardListPanel(this, panelBuilder3, this.customBosses);
+        this.sprayDropRewardMainEditPanel = new SprayDropRewardMainEditPanel(this, panelBuilder5, this.customBosses);
 
         this.dropDropTableMainEditMenu = new DropDropTableMainEditorPanel(this, panelBuilder6, this.customBosses);
-        this.dropRewardListEditMenu = new DropRewardsListEditorPanel(this, panelBuilder7, this.customBosses);
-        this.dropRewardMainEditMenu = new DropRewardMainEditorPanel(this, panelBuilder8, this.customBosses);
-        this.dropNewRewardEditMenu = new DropNewRewardEditorPanel(this, panelBuilder9, this.customBosses);
+        this.dropDropNewRewardEditPanel = new DropDropNewRewardPanel(this, panelBuilder4, this.customBosses);
+        this.dropDropRewardListPanel = new DropDropRewardListPanel(this, panelBuilder3, this.customBosses);
+        this.dropDropRewardMainEditPanel = new DropDropRewardMainEditPanel(this, panelBuilder5, this.customBosses);
 
         this.giveRewardPositionListMenu = new GiveRewardPositionListPanel(this, panelBuilder10, this.customBosses);
         this.giveRewardRewardsListMenu = new GiveRewardRewardsListPanel(this, panelBuilder11, this.customBosses);
@@ -259,14 +268,12 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("DropTableMainEditorPanel"));
         PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("DropTableTypeEditorPanel"));
         PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
-        PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("SprayRewardsListEditMenu"));
-        PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("SprayDropTableMainEditMenu"));
-        PanelBuilder panelBuilder5 = new PanelBuilder(editor.getConfigurationSection("SprayNewRewardEditMenu"));
+
+        PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("DropTableRewardsListEditMenu"));
+        PanelBuilder panelBuilder4 = new PanelBuilder(editor.getConfigurationSection("DropTableNewRewardEditMenu"));
+        PanelBuilder panelBuilder5 = new PanelBuilder(editor.getConfigurationSection("DropTableRewardMainEditMenu"));
 
         PanelBuilder panelBuilder6 = new PanelBuilder(editor.getConfigurationSection("DropDropTableMainEditMenu"));
-        PanelBuilder panelBuilder7 = new PanelBuilder(editor.getConfigurationSection("DropRewardsListEditMenu"));
-        PanelBuilder panelBuilder8 = new PanelBuilder(editor.getConfigurationSection("DropDropTableMainEditMenu"));
-        PanelBuilder panelBuilder9 = new PanelBuilder(editor.getConfigurationSection("DropNewRewardEditMenu"));
 
         PanelBuilder panelBuilder10 = new PanelBuilder(editor.getConfigurationSection("GiveRewardPositionListMenu"));
         PanelBuilder panelBuilder11 = new PanelBuilder(editor.getConfigurationSection("GiveRewardRewardsListMenu"));
@@ -276,14 +283,14 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.dropTableTypeEditMenu.initializePanel(panelBuilder1);
 
         this.sprayDropTableMainEditMenu.initializePanel(panelBuilder2);
-        this.sprayRewardListEditMenu.initializePanel(panelBuilder3);
-        this.sprayRewardMainEditMenu.initializePanel(panelBuilder4);
-        this.sprayNewRewardEditMenu.initializePanel(panelBuilder5);
+        this.sprayDropNewRewardEditPanel.initializePanel(panelBuilder4);
+        this.sprayDropRewardListPanel.initializePanel(panelBuilder5);
+        this.sprayDropRewardMainEditPanel.initializePanel(panelBuilder3);
 
         this.dropDropTableMainEditMenu.initializePanel(panelBuilder6);
-        this.dropRewardListEditMenu.initializePanel(panelBuilder7);
-        this.dropRewardMainEditMenu.initializePanel(panelBuilder8);
-        this.dropNewRewardEditMenu.initializePanel(panelBuilder9);
+        this.dropDropNewRewardEditPanel.initializePanel(panelBuilder4);
+        this.dropDropRewardListPanel.initializePanel(panelBuilder5);
+        this.dropDropRewardMainEditPanel.initializePanel(panelBuilder3);
 
         this.giveRewardPositionListMenu.initializePanel(panelBuilder10);
         this.giveRewardPositionListMenu.initializePanel(panelBuilder11);
