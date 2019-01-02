@@ -69,7 +69,7 @@ public class GiveRewardMainEditPanel extends SubVariablePanelHandler<DropTable, 
 
         counter.getSlotsWith("RandomDrops").forEach(slot -> panel.setOnClick(slot, getRandomDropsAction(dropTable, giveRewardEditHandler)));
         counter.getSlotsWith("MaxDrops").forEach(slot -> panel.setOnClick(slot, getMaxDropsAction(dropTable, giveRewardEditHandler)));
-        counter.getSlotsWith("ItemDrops").forEach(slot -> {});
+        counter.getSlotsWith("ItemDrops").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getGiveDropRewardListPanel().openFor((Player) event.getWhoClicked(), dropTable, giveRewardEditHandler)));
         counter.getSlotsWith("RequiredPercentage").forEach(slot -> panel.setOnClick(slot, getRequiredPercentageAction(dropTable, giveRewardEditHandler)));
         counter.getSlotsWith("CommandDrops").forEach(slot -> {});
         counter.getSlotsWith("MaxCommands").forEach(slot -> panel.setOnClick(slot, getMaxCommandsAction(dropTable, giveRewardEditHandler)));
