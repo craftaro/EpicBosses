@@ -19,7 +19,6 @@ import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -71,7 +70,7 @@ public class GiveRewardMainEditPanel extends SubVariablePanelHandler<DropTable, 
         counter.getSlotsWith("MaxDrops").forEach(slot -> panel.setOnClick(slot, getMaxDropsAction(dropTable, giveRewardEditHandler)));
         counter.getSlotsWith("ItemDrops").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getGiveDropRewardListPanel().openFor((Player) event.getWhoClicked(), dropTable, giveRewardEditHandler)));
         counter.getSlotsWith("RequiredPercentage").forEach(slot -> panel.setOnClick(slot, getRequiredPercentageAction(dropTable, giveRewardEditHandler)));
-        counter.getSlotsWith("CommandDrops").forEach(slot -> {});
+        counter.getSlotsWith("CommandDrops").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getGiveCommandRewardListPanel().openFor((Player) event.getWhoClicked(), dropTable, giveRewardEditHandler)));
         counter.getSlotsWith("MaxCommands").forEach(slot -> panel.setOnClick(slot, getMaxCommandsAction(dropTable, giveRewardEditHandler)));
         counter.getSlotsWith("RandomDrops").forEach(slot -> panel.setOnClick(slot, getRandomCommandsAction(dropTable, giveRewardEditHandler)));
 

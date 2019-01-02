@@ -34,6 +34,9 @@ import com.songoda.epicbosses.panel.droptables.types.drop.DropDropTableMainEdito
 import com.songoda.epicbosses.panel.droptables.types.give.GiveRewardMainEditPanel;
 import com.songoda.epicbosses.panel.droptables.types.give.GiveRewardPositionListPanel;
 import com.songoda.epicbosses.panel.droptables.types.give.GiveRewardRewardsListPanel;
+import com.songoda.epicbosses.panel.droptables.types.give.commands.GiveCommandNewRewardPanel;
+import com.songoda.epicbosses.panel.droptables.types.give.commands.GiveCommandRewardListPanel;
+import com.songoda.epicbosses.panel.droptables.types.give.commands.GiveCommandRewardMainEditPanel;
 import com.songoda.epicbosses.panel.droptables.types.give.drops.GiveDropNewRewardPanel;
 import com.songoda.epicbosses.panel.droptables.types.give.drops.GiveDropRewardListPanel;
 import com.songoda.epicbosses.panel.droptables.types.give.drops.GiveDropRewardMainEditPanel;
@@ -111,9 +114,10 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private DropTableNewRewardEditorPanel<SprayTableElement> sprayDropNewRewardEditPanel;
     @Getter private DropTableRewardsListEditorPanel<SprayTableElement> sprayDropRewardListPanel;
 
+    @Getter private ISubVariablePanelHandler<DropTable, GiveRewardEditHandler> giveRewardMainEditMenu, giveCommandRewardListPanel, giveCommandNewRewardPanel;
+    @Getter private ISubSubVariablePanelHandler<DropTable, GiveRewardEditHandler, String> giveCommandRewardMainEditMenu;
     @Getter private ISubSubVariablePanelHandler<DropTable, GiveTableElement, String> giveRewardRewardsListMenu;
     @Getter private ISubVariablePanelHandler<DropTable, GiveTableElement> giveRewardPositionListMenu;
-    @Getter private ISubVariablePanelHandler<DropTable, GiveRewardEditHandler> giveRewardMainEditMenu;
     @Getter private DropTableRewardMainEditorPanel<GiveRewardEditHandler> giveDropRewardMainEditPanel;
     @Getter private DropTableNewRewardEditorPanel<GiveRewardEditHandler> giveDropNewRewardEditPanel;
     @Getter private DropTableRewardsListEditorPanel<GiveRewardEditHandler> giveDropRewardListPanel;
@@ -264,9 +268,13 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.giveRewardPositionListMenu = new GiveRewardPositionListPanel(this, panelBuilder10, this.customBosses);
         this.giveRewardRewardsListMenu = new GiveRewardRewardsListPanel(this, panelBuilder11, this.customBosses);
         this.giveRewardMainEditMenu = new GiveRewardMainEditPanel(this, panelBuilder12, this.customBosses);
+
         this.giveDropNewRewardEditPanel = new GiveDropNewRewardPanel(this, panelBuilder4, this.customBosses);
         this.giveDropRewardListPanel = new GiveDropRewardListPanel(this, panelBuilder5, this.customBosses);
         this.giveDropRewardMainEditPanel = new GiveDropRewardMainEditPanel(this, panelBuilder3, this.customBosses);
+        this.giveCommandNewRewardPanel = new GiveCommandNewRewardPanel(this, panelBuilder4, this.customBosses);
+        this.giveCommandRewardListPanel = new GiveCommandRewardListPanel(this, panelBuilder5, this.customBosses);
+        this.giveCommandRewardMainEditMenu = new GiveCommandRewardMainEditPanel(this, panelBuilder3, this.customBosses);
     }
 
     private void reloadDropTableEditMenus() {
@@ -304,6 +312,9 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.giveDropNewRewardEditPanel.initializePanel(panelBuilder4);
         this.giveDropRewardListPanel.initializePanel(panelBuilder5);
         this.giveDropRewardMainEditPanel.initializePanel(panelBuilder3);
+        this.giveCommandNewRewardPanel.initializePanel(panelBuilder4);
+        this.giveCommandRewardListPanel.initializePanel(panelBuilder5);
+        this.giveCommandRewardMainEditMenu.initializePanel(panelBuilder3);
     }
 
     //---------------------------------------------

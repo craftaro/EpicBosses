@@ -3,10 +3,16 @@ package com.songoda.epicbosses.panel.droptables.types.give.commands;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
+import com.songoda.epicbosses.droptable.elements.GiveTableElement;
+import com.songoda.epicbosses.droptable.elements.GiveTableSubElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.CommandsFileManager;
+import com.songoda.epicbosses.managers.files.DropTableFileManager;
 import com.songoda.epicbosses.panel.droptables.types.give.handlers.GiveRewardEditHandler;
 import com.songoda.epicbosses.utils.Message;
+import com.songoda.epicbosses.utils.StringUtils;
+import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
+import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
@@ -14,8 +20,10 @@ import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,13 +34,17 @@ import java.util.Map;
  */
 public class GiveCommandNewRewardPanel extends SubVariablePanelHandler<DropTable, GiveRewardEditHandler> {
 
+    private DropTableFileManager dropTableFileManager;
     private CommandsFileManager commandsFileManager;
+    private ItemStackConverter itemStackConverter;
     private CustomBosses plugin;
 
     public GiveCommandNewRewardPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.commandsFileManager = plugin.getBossCommandFileManager();
+        this.dropTableFileManager = plugin.getDropTableFileManager();
+        this.itemStackConverter = new ItemStackConverter();
         this.plugin = plugin;
     }
 
@@ -55,8 +67,8 @@ public class GiveCommandNewRewardPanel extends SubVariablePanelHandler<DropTable
 
     @Override
     public void openFor(Player player, DropTable dropTable, GiveRewardEditHandler giveRewardEditHandler) {
-        Panel panel = getPanelBuilder().getPanel();
-//                .setParentPanelHandler(this.bossPanelManager.getGiveCommandRewardListPanel(), dropTable, giveRewardEditHandler);
+        Panel panel = getPanelBuilder().getPanel()
+                .setParentPanelHandler(this.bossPanelManager.getGiveCommandRewardListPanel(), dropTable, giveRewardEditHandler);
 
         fillPanel(panel, dropTable, giveRewardEditHandler);
         panel.openFor(player);
@@ -67,27 +79,52 @@ public class GiveCommandNewRewardPanel extends SubVariablePanelHandler<DropTable
 
     }
 
-    private void loadPage(Panel panel, int page, DropTable dropTable, GiveRewardEditHandler subVariable, List<String> filteredKeys, Map<String, List<String>> commands) {
+    private void loadPage(Panel panel, int page, DropTable dropTable, GiveRewardEditHandler giveRewardEditHandler, List<String> filteredKeys, Map<String, List<String>> commands) {
         panel.loadPage(page, (slot, realisticSlot) -> {
             if(slot >= filteredKeys.size()) {
                 panel.setItem(realisticSlot, new ItemStack(Material.AIR), e->{});
             } else {
                 String name = filteredKeys.get(slot);
-//                ItemStackHolder itemStackHolder = itemStacks.get(name);
-//                ItemStack itemStack = this.itemsFileManager.getItemStackConverter().from(itemStackHolder);
+                List<String> innerCommands = commands.get(name);
+                ItemStackHolder itemStackHolder = BossAPI.getStoredItemStack("DefaultTextMenuItem");
+                ItemStack itemStack = this.itemStackConverter.from(itemStackHolder);
 
-//                panel.setItem(realisticSlot, itemStack, event -> {
-//                    Map<String, Double> currentRewards = getRewards(subVariable);
-//
-//                    currentRewards.put(name, 50.0);
-//                    saveDropTable(this.plugin.getDropTableFileManager(), dropTable, subVariable);
-//
-//                    getRewardMainEditMenu().openFor((Player) event.getWhoClicked(), dropTable, subVariable, name);
-//                    Message.Boss_DropTable_AddedNewReward.msg(event.getWhoClicked(), BossAPI.getDropTableName(dropTable));
-//                });
+                Map<String, String> replaceMap = new HashMap<>();
+
+                replaceMap.put("{name}", name);
+
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Commands.name"), replaceMap);
+
+                ItemMeta itemMeta = itemStack.getItemMeta();
+                List<String> presetLore = this.plugin.getConfig().getStringList("Display.Boss.Commands.lore");
+                List<String> newLore = new ArrayList<>();
+
+                for(String s : presetLore) {
+                    if(s.contains("{commands}")) {
+                        for(String command : innerCommands) {
+                            newLore.add(StringUtils.get().translateColor("&7" + command));
+                        }
+                    } else {
+                        newLore.add(StringUtils.get().translateColor(s));
+                    }
+                }
+
+                itemMeta.setLore(newLore);
+                itemStack.setItemMeta(itemMeta);
+
+                panel.setItem(realisticSlot, itemStack, event -> {
+                    Map<String, Double> rewards = giveRewardEditHandler.getGiveTableSubElement().getCommands();
+
+                    rewards.put(name, 50.0);
+                    saveDropTable(this.dropTableFileManager, dropTable, giveRewardEditHandler);
+
+                    this.bossPanelManager.getGiveCommandRewardMainEditMenu().openFor((Player) event.getWhoClicked(), dropTable, giveRewardEditHandler, name);
+                    Message.Boss_DropTable_AddedNewReward.msg(event.getWhoClicked(), BossAPI.getDropTableName(dropTable));
+                });
             }
         });
     }
+
 
 
     private List<String> getCurrentKeys(GiveRewardEditHandler giveRewardEditHandler) {
@@ -104,5 +141,18 @@ public class GiveCommandNewRewardPanel extends SubVariablePanelHandler<DropTable
         });
 
         return filteredList;
+    }
+
+    private void saveDropTable(DropTableFileManager dropTableFileManager, DropTable dropTable, GiveRewardEditHandler giveRewardEditHandler) {
+        GiveTableSubElement giveTableSubElement = giveRewardEditHandler.getGiveTableSubElement();
+        GiveTableElement giveTableElement = giveRewardEditHandler.getGiveTableElement();
+        Map<String, Map<String, GiveTableSubElement>> positionMap = giveTableElement.getGiveRewards();
+        Map<String, GiveTableSubElement> rewardMap = positionMap.get(giveRewardEditHandler.getDamagePosition());
+
+        rewardMap.put(giveRewardEditHandler.getDropSection(), giveTableSubElement);
+        positionMap.put(giveRewardEditHandler.getDamagePosition(), rewardMap);
+        giveTableElement.setGiveRewards(positionMap);
+        dropTable.setRewards(BossAPI.convertObjectToJsonObject(giveTableElement));
+        dropTableFileManager.save();
     }
 }

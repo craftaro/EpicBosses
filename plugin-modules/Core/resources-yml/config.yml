@@ -114,6 +114,13 @@ Display:
       - '&3Chance: &f{chance}%'
       - '&7'
       - '&7Click to modify this reward.'
+    CommandRewardList:
+      name: '&bReward Section'
+      lore:
+      - '&3Selected Command: &f{commandName}'
+      - '&3Chance: &f{chance}%'
+      - '&7'
+      - '&7Click to modify this reward.'
     GivePositionList:
       name: '&bReward Section'
       lore:
