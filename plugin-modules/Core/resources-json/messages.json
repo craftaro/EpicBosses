@@ -1,4 +1,7 @@
 {
+  "MiddleOfTheEarthSpawnMessage": [
+    "&6&lEpicBosses &8» &fA mysterious boss has just been spawned at the middle of the earth in the world &e{world} at the coordinates &e{x}, {y}, {z}&f!"
+  ],
   "SKMainSkillMessage": [
     "&6&l{boss} &7has used the &e{skill} &7skill."
   ],

@@ -1,14 +1,21 @@
 {
-  "Section1": {
-    "location": "world,0,150,0",
+  "MiddleOfTheEarth": {
+    "editing": true,
+    "type": "INTERVAL",
     "entities": [
       "SkeletonKing"
     ],
     "settings": {
-      "spawnWhenChunkIsntLoaded": false,
       "maxAliveAtOnce": 1,
       "amountPerSpawn": 1,
-      "placeholder": "{custombosses_1}"
+      "spawnWhenChunkIsntLoaded": false,
+      "overrideDefaultSpawnMessage": true,
+      "spawnMessage": "MiddleOfTheEarthSpawnMessage"
+    },
+    "customData": {
+      "location": "world,0,150,0",
+      "spawnRate": "30",
+      "placeholder": "{customBosses_1}"
     }
   }
 }
