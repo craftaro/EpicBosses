@@ -6,6 +6,7 @@
       "SkeletonKing"
     ],
     "autoSpawnSettings": {
+      "shuffleEntitiesList": true,
       "maxAliveAtOnce": 1,
       "amountPerSpawn": 1,
       "spawnWhenChunkIsntLoaded": false,
@@ -13,6 +14,7 @@
       "spawnMessage": "MiddleOfTheEarthSpawnMessage"
     },
     "customData": {
+      "spawnAfterLastBossIsKilled": false,
       "location": "world,0,150,0",
       "placeholder": "{customBosses_1}",
       "spawnRate": 30

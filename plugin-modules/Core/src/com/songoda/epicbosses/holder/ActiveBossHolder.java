@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.holder;
 
+import com.songoda.epicbosses.listeners.IBossDeathHandler;
 import lombok.Getter;
 import lombok.Setter;
 import com.songoda.epicbosses.targeting.TargetHandler;
@@ -24,6 +25,7 @@ public class ActiveBossHolder implements IActiveHolder {
 
     @Getter private Map<Integer, ActiveMinionHolder> activeMinionHolderMap = new HashMap<>();
     @Getter private Map<Integer, LivingEntity> livingEntityMap = new HashMap<>();
+    @Getter private List<IBossDeathHandler> postBossDeathHandlers = new ArrayList<>();
     @Getter private Map<UUID, Double> mapOfDamagingUsers = new HashMap<>();
 
     @Getter @Setter private TargetHandler<ActiveBossHolder> targetHandler = null;
