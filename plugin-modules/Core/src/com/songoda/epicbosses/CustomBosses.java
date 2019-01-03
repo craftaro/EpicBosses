@@ -54,6 +54,8 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     @Getter private BossTauntManager bossTauntManager;
     @Getter private BossHookManager bossHookManager;
 
+    @Getter private AutoSpawnManager autoSpawnManager;
+
     @Getter private MinionMechanicManager minionMechanicManager;
     @Getter private MinionEntityContainer minionEntityContainer;
 
@@ -70,6 +72,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
 
     @Override
     public void onDisable() {
+        this.autoSpawnManager.stopIntervalSystems();
         this.bossEntityManager.killAllHolders((World) null);
     }
 
@@ -110,6 +113,8 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.bossPanelManager = new BossPanelManager(this);
         this.bossEntityManager = new BossEntityManager(this);
 
+        this.autoSpawnManager = new AutoSpawnManager(this);
+
         createFiles();
         reloadFiles();
 
@@ -138,6 +143,8 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
 
         this.bossCommandManager.load();
         this.bossListenerManager.load();
+
+        this.autoSpawnManager.startIntervalSystems();
 
         ServerUtils.get().logDebug("Loaded all fields and managers, saved messages and plugin is initialized and ready to go. (took " + (System.currentTimeMillis() - beginMs) + "ms).");
     }

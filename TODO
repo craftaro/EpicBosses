@@ -1,10 +1,9 @@
-04:00 -> Add the AutoSpawns Editing GUI (with a button for toggling the type of the autospawn, from wilderness, to spawner, to interval and a button for editing data)
+02:00 -> Add the AutoSpawns Editing GUI (with a button for toggling the type of the autospawn, from wilderness, to spawner, to interval and a button for editing data)
 01:00   -> Interval - Button to change coords, list of possible spawns, spawnIfChunkIsntLoaded, maxActiveBosses, bossesPerInterval, spawnRate, spawnType (Interval or Random), placeholder, message
-00:30 -> Connect the /boss time [section] to the AutoSpawns timer (can only be applied to Interval AutoSpawns)
 00:30 -> Add HolographicDisplay/PlaceholderAPI support for custom placeholders on AutoSpawnInterval times
 01:00 -> Add a new branch for the plugin and add support for Legacy version
 -----------
-8:30 hrs
+4:30 hrs
 
 
 
@@ -18,4 +17,4 @@
 01:00  -> Biome - Button to change max bosses per biome, boss that autospawn applies to, spawnChance
 
 -----------
-4:45 hrs
+8:45 hrs

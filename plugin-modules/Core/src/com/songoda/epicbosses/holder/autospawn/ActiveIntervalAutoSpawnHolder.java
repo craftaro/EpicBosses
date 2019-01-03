@@ -84,6 +84,15 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
         });
     }
 
+    public void stopInterval() {
+        if(this.intervalTask != null) ServerUtils.get().cancelTask(this.intervalTask);
+
+        this.nextCompletedTime = 0;
+
+        getActiveBossHolders().forEach(ActiveBossHolder::killAll);
+        getActiveBossHolders().clear();
+    }
+
     public long getRemainingMs() {
         long currentMs = System.currentTimeMillis();
 
@@ -105,15 +114,6 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
                 }
             }
         };
-    }
-
-    private void stopInterval() {
-        if(this.intervalTask != null) ServerUtils.get().cancelTask(this.intervalTask);
-
-        this.nextCompletedTime = 0;
-
-        getActiveBossHolders().forEach(ActiveBossHolder::killAll);
-        getActiveBossHolders().clear();
     }
 
     private void updateNextCompleteTime(long delayMs) {

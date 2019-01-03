@@ -22,6 +22,7 @@ public enum Message {
     General_NotNumber("&c&l(!) &cThe number you have provided is not a proper number."),
     General_Disarmed("&4&l(!) &f&lYOU HAVE BEEN DISARMED! CHECK THE GROUND AROUND YOU FOR YOUR ITEM!"),
     General_CannotBecauseLive("&c&l(!) &cYou cannot do this because the boss is not in editing mode!"),
+    General_TimeLayout("{hours}h, {mins}m, {sec}s"),
 
     Boss_Create_EntityTypeNotFound("&c&l(!) &cThe specified entity type {0} was not found. If you think this is an error please contact &fAMinecraftDev&c."),
     Boss_Create_InvalidArgs("&c&l(!) &cYou must use &n/boss create [name] [entity] &c to create a boss."),
@@ -82,7 +83,7 @@ public enum Message {
             "&b/boss spawn [name] (location) &8» &7Spawns a boss at your" +
             " location or the specified location.\n" +
             "&7&o(Separate location with commas, an example is: world,0,100,0)\n" +
-            "&b/boss time (section) &8» &7Shows the time left till next auto spawn.\n" +
+            "&b/boss time [section] &8» &7Shows the time left till next auto spawn.\n" +
             "&b/boss droptable &8» &7Shows all current drop tables.\n" +
             "&b/boss items &8» &7Shows all current custom items.\n" +
             "&b/boss skills &8» &7Shows all current set skills.\n" +
@@ -193,7 +194,12 @@ public enum Message {
 
     Boss_Statistics_SetChance("&b&lEpicBosses &8» &7You have {0} the health of the entity to &f{1}&7."),
     Boss_Statistics_SetDisplayName("&b&lEpicBosses &8» &7Your next input in to chat will be the display name for the entity. If you enter &f-&7 it will remove/clear the display name of the entity. For color codes use the &f& &7sign."),
-    Boss_Statistics_SetEntityFinder("&b&lEpicBosses &8» &7You have selected &f{0}&7 as the entity type for the boss.");
+    Boss_Statistics_SetEntityFinder("&b&lEpicBosses &8» &7You have selected &f{0}&7 as the entity type for the boss."),
+
+    Boss_Time_NoPermission("&c&l(!) &cYou do not have access to this command."),
+    Boss_Time_InvalidArgs("&c&l(!) &cYou must use &n/boss time [section]&c to check the time left on a boss spawn."),
+    Boss_Time_DoesntExist("&c&l(!) &cThe specified interval spawn system doesn't exist. Please use one of the following active system names: &f{0}&c."),
+    Boss_Time_GetRemainingTime("&b&lEpicBosses &8» &7There is currently &f{0}&7 remaining on the &f{1}&7 interval spawn system.");
 
     private static FileConfiguration LANG;
 
