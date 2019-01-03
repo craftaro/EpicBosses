@@ -1,12 +1,17 @@
 package com.songoda.epicbosses.autospawns.types;
 
 import com.google.gson.annotations.Expose;
+import com.songoda.epicbosses.api.BossAPI;
+import com.songoda.epicbosses.autospawns.AutoSpawn;
+import com.songoda.epicbosses.autospawns.settings.AutoSpawnSettings;
+import com.songoda.epicbosses.holder.ActiveBossHolder;
+import com.songoda.epicbosses.holder.autospawn.ActiveIntervalAutoSpawnHolder;
 import com.songoda.epicbosses.listeners.IBossDeathHandler;
+import com.songoda.epicbosses.utils.ObjectUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Location;
-import org.bukkit.event.Listener;
 
 /**
  * @author Charles Cullen
@@ -26,7 +31,14 @@ public class IntervalSpawnElement {
         this.spawnAfterLastBossIsKilled = spawnAfterLastBossIsKilled;
     }
 
-    public boolean attemptSpawn(IBossDeathHandler bossDeathHandler) {
+    public boolean attemptSpawn(ActiveIntervalAutoSpawnHolder activeAutoSpawnHolder) {
+        IBossDeathHandler bossDeathHandler = activeAutoSpawnHolder.getPostDeathHandler();
+        AutoSpawn autoSpawn = activeAutoSpawnHolder.getAutoSpawn();
+        AutoSpawnSettings autoSpawnSettings = autoSpawn.getAutoSpawnSettings();
+        boolean customSpawnMessage = ObjectUtils.getValue(autoSpawnSettings.getOverrideDefaultSpawnMessage(), false);
+        int amountToSpawn = ObjectUtils.getValue(autoSpawnSettings.getAmountPerSpawn(), 1);
+        boolean shuffleList = ObjectUtils.getValue(autoSpawnSettings.getShuffleEntitiesList(), false);
+
 
         return true;
     }

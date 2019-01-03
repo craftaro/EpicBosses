@@ -50,6 +50,7 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
 
         if(location == null) return false;
         if(!spawnIfChunkNotLoaded && !location.getChunk().isLoaded()) return false;
+        if(spawnAfterLastBossIsKilled && !getActiveBossHolders().isEmpty()) return false;
 
         return currentActiveAmount < maxAmount;
     }
@@ -72,12 +73,14 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
         updateNextCompleteTime(delayMs);
 
         this.intervalTask = ServerUtils.get().runTimer(delayMs, delayMs, () -> {
-            updateNextCompleteTime(delayMs);
-
             if(!canSpawn()) return;
-            if(this.intervalSpawnElement.attemptSpawn(getPostDeathHandler()) && spawnAfterLastBossIsKilled) {
+
+            if(this.intervalSpawnElement.attemptSpawn(this) && spawnAfterLastBossIsKilled) {
                 stopInterval();
+                return;
             }
+
+            updateNextCompleteTime(delayMs);
         });
     }
 
@@ -87,6 +90,21 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
         if(currentMs > this.nextCompletedTime) return 0;
 
         return this.nextCompletedTime - currentMs;
+    }
+
+    public IBossDeathHandler getPostDeathHandler() {
+        return event -> {
+            boolean spawnAfterLastBossIsKilled = ObjectUtils.getValue(this.intervalSpawnElement.getSpawnAfterLastBossIsKilled(), false);
+            ActiveBossHolder activeBossHolder = event.getActiveBossHolder();
+
+            if(getActiveBossHolders().contains(activeBossHolder)) {
+                getActiveBossHolders().remove(activeBossHolder);
+
+                if(spawnAfterLastBossIsKilled) {
+                    restartInterval();
+                }
+            }
+        };
     }
 
     private void stopInterval() {
@@ -100,20 +118,5 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
 
     private void updateNextCompleteTime(long delayMs) {
         this.nextCompletedTime = System.currentTimeMillis() + delayMs;
-    }
-
-    private IBossDeathHandler getPostDeathHandler() {
-        return event -> {
-            boolean spawnAfterLastBossIsKilled = ObjectUtils.getValue(this.intervalSpawnElement.getSpawnAfterLastBossIsKilled(), false);
-            ActiveBossHolder activeBossHolder = event.getActiveBossHolder();
-
-            if(getActiveBossHolders().contains(activeBossHolder)) {
-                getActiveBossHolders().remove(activeBossHolder);
-
-                if(spawnAfterLastBossIsKilled) {
-                    restartInterval();
-                }
-            }
-        };
     }
 }

@@ -29,7 +29,7 @@ public class ActiveBossHolder implements IActiveHolder {
     @Getter private Map<UUID, Double> mapOfDamagingUsers = new HashMap<>();
 
     @Getter @Setter private TargetHandler<ActiveBossHolder> targetHandler = null;
-    @Getter @Setter private boolean isDead = false;
+    @Getter @Setter private boolean isDead = false, customSpawnMessage = false;
 
     public ActiveBossHolder(BossEntity bossEntity, Location spawnLocation, String name) {
         this.location = spawnLocation;

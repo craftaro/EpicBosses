@@ -432,7 +432,7 @@ public class BossAPI {
      * @param itemStack - The itemstack used to spawn the boss.
      * @return ActiveBossHolder class with stored information
      */
-    public static ActiveBossHolder spawnNewBoss(BossEntity bossEntity, Location location, Player player, ItemStack itemStack) {
+    public static ActiveBossHolder spawnNewBoss(BossEntity bossEntity, Location location, Player player, ItemStack itemStack, boolean customSpawnMessage) {
         if(bossEntity.isEditing()) {
             Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
             return null;
@@ -446,6 +446,8 @@ public class BossAPI {
             Debug.FAILED_TO_CREATE_ACTIVE_BOSS_HOLDER.debug();
             return null;
         }
+
+        activeBossHolder.setCustomSpawnMessage(customSpawnMessage);
 
         PreBossSpawnEvent preBossSpawnEvent;
 

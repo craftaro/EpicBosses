@@ -66,7 +66,7 @@ public class BossSpawnCmd extends SubCommand {
             return;
         }
 
-        BossAPI.spawnNewBoss(bossEntity, spawnLocation, null, null);
+        BossAPI.spawnNewBoss(bossEntity, spawnLocation, null, null, false);
         Message.Boss_Spawn_Spawned.msg(sender, bossInput, StringUtils.get().translateLocation(spawnLocation));
     }
 }

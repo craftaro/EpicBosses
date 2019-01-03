@@ -95,7 +95,7 @@ public class BossSpawnListener implements Listener {
 
         event.setCancelled(true);
 
-        ActiveBossHolder activeBossHolder = BossAPI.spawnNewBoss(bossEntity, location, player, itemStack);
+        ActiveBossHolder activeBossHolder = BossAPI.spawnNewBoss(bossEntity, location, player, itemStack, false);
 
         if(activeBossHolder == null) {
             event.setCancelled(true);
