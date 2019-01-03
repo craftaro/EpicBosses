@@ -154,6 +154,17 @@ public class BossAPI {
     }
 
     /**
+     * Used to get a BossEntity instance from a
+     * name.
+     *
+     * @param name - the specified boss you are looking for
+     * @return a bossEntity instance if found, or null if not found
+     */
+    public static BossEntity getBossEntity(String name) {
+        return PLUGIN.getBossEntityContainer().getData().getOrDefault(name, null);
+    }
+
+    /**
      * Used to get the Skill configuration section
      * name from a Skill instance.
      *
