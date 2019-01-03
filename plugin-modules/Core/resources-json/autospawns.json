@@ -5,7 +5,7 @@
     "entities": [
       "SkeletonKing"
     ],
-    "settings": {
+    "autoSpawnSettings": {
       "maxAliveAtOnce": 1,
       "amountPerSpawn": 1,
       "spawnWhenChunkIsntLoaded": false,

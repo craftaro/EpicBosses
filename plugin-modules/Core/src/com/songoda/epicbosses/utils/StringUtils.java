@@ -53,6 +53,8 @@ public class StringUtils {
     }
 
     public Location fromStringToLocation(String input) {
+        if(input == null) return null;
+
         String[] split = input.split(",");
 
         if(split.length != 4) return null;

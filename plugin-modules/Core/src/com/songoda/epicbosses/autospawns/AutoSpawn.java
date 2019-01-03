@@ -20,13 +20,13 @@ public class AutoSpawn {
     @Expose @Getter @Setter private Boolean editing;
     @Expose @Getter @Setter private String type;
     @Expose @Getter @Setter private List<String> entities;
-    @Expose @Getter @Setter private AutoSpawnSettings settings;
+    @Expose @Getter @Setter private AutoSpawnSettings autoSpawnSettings;
     @Expose @Getter @Setter private JsonObject customData;
 
     public AutoSpawn(boolean editing, List<String> entities, AutoSpawnSettings autoSpawnSettings) {
         this.editing = editing;
         this.entities = entities;
-        this.settings = autoSpawnSettings;
+        this.autoSpawnSettings = autoSpawnSettings;
     }
 
     public IntervalSpawnElement getIntervalSpawnData() {
@@ -37,6 +37,9 @@ public class AutoSpawn {
         return null;
     }
 
+    public boolean isLocked() {
+        return this.editing != null && this.editing;
+    }
 
 
 }

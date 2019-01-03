@@ -24,4 +24,12 @@ public class ActiveAutoSpawnHolder {
         this.spawnType = spawnType;
     }
 
+    public int getCurrentActiveBossHolders() {
+        return this.activeBossHolders.size();
+    }
+
+    protected boolean canSpawn() {
+        return true;
+    }
+
 }
