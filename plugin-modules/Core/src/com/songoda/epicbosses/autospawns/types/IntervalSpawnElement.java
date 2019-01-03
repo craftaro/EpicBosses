@@ -20,4 +20,8 @@ public class IntervalSpawnElement {
         this.spawnRate = spawnRate;
     }
 
+    public void attemptSpawn() {
+
+    }
+
 }

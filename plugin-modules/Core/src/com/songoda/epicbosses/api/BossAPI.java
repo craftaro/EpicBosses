@@ -3,6 +3,7 @@ package com.songoda.epicbosses.api;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.droptable.elements.DropTableElement;
 import com.songoda.epicbosses.droptable.elements.GiveTableElement;
@@ -162,6 +163,21 @@ public class BossAPI {
     public static String getSkillName(Skill skill) {
         for(Map.Entry<String, Skill> entry : PLUGIN.getSkillsFileManager().getSkillMap().entrySet()) {
             if(entry.getValue().equals(skill)) return entry.getKey();
+        }
+
+        return null;
+    }
+
+    /**
+     * Used to get the AutoSpawn configuration section
+     * name from a AutoSpawn instance.
+     *
+     * @param autoSpawn - the autospawn instance
+     * @return name of the skill from the SkillsFileManager or null if not found.
+     */
+    public static String getAutoSpawnName(AutoSpawn autoSpawn) {
+        for(Map.Entry<String, AutoSpawn> entry : PLUGIN.getAutoSpawnFileManager().getAutoSpawnMap().entrySet()) {
+            if(entry.getValue().equals(autoSpawn)) return entry.getKey();
         }
 
         return null;
