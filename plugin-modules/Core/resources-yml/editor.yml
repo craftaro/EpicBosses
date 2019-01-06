@@ -2534,3 +2534,60 @@ DropTableRewardMainEditMenu:
       name: '&e&lGo Back'
       lore:
       - '&7Click here to go back.'
+MainAutoSpawnEditMenu:
+  name: '&b&l{name} AutoSpawn'
+  slots: 9
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 9
+  Items:
+    '2':
+      type: DIAMOND
+      name: '&e&lSpecial Settings'
+      lore:
+      - '&7Click here to edit the finer settings'
+      - '&7related to this auto spawn section.'
+      Button: SpecialSettings
+    '3':
+      type: GUNPOWDER
+      name: '&e&lType'
+      lore:
+      - '&bCurrently: &f{type}'
+      - '&7This is the current auto spawn'
+      - '&7section type. Click here to open'
+      - '&7a menu to select the type.'
+      Button: Type
+    '5':
+      type: LEVER
+      name: '&e&lToggle Editing'
+      lore:
+      - '&7Click here to toggle the auto spawn'
+      - '&7editing mode.'
+      - '&7This will disable the auto spawn until'
+      - '&7it is enabled again.'
+      - '&7'
+      - '&bCurrently Running: &f{editing}'
+      Button: Editing
+    '7':
+      type: PAPER
+      name: '&e&lEntities'
+      lore:
+      - '&7Click here to edit the assigned boss'
+      - '&7entities to this auto spawn section.'
+      - '&7'
+      - '&bCurrently:'
+      - '&f{entities}'
+      Button: Entities
+    '8':
+      type: EMERALD
+      name: '&e&lCustom Settings'
+      lore:
+      - '&7Click here to edit any custom settings that'
+      - '&7are also included in this auto spawn type. If'
+      - '&7there is none then the GUI up next will be empty.'
+      Button: CustomSettings

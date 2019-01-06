@@ -1,6 +1,7 @@
 package com.songoda.epicbosses.managers;
 
 import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.autospawns.SpawnType;
 import com.songoda.epicbosses.holder.ActiveAutoSpawnHolder;
@@ -86,6 +87,10 @@ public class AutoSpawnManager {
         this.activeAutoSpawnHolders.put(name, autoSpawnHolder);
     }
 
+    public ActiveAutoSpawnHolder getActiveAutoSpawnHolder(AutoSpawn autoSpawn) {
+        return getActiveAutoSpawnHolder(BossAPI.getAutoSpawnName(autoSpawn));
+    }
+
     public ActiveAutoSpawnHolder getActiveAutoSpawnHolder(String name) {
         return this.activeAutoSpawnHolders.getOrDefault(name, null);
     }
@@ -104,6 +109,13 @@ public class AutoSpawnManager {
 
         autoSpawnHolderMap.forEach((name, autoSpawnHolder) -> removeActiveAutoSpawnHolder(name));
     }
+
+    public void stopInterval(AutoSpawn autoSpawn) {
+        String name = BossAPI.getAutoSpawnName(autoSpawn);
+
+        stopInterval(name);
+    }
+
 
     public void stopInterval(String name) {
         ActiveAutoSpawnHolder autoSpawnHolder = this.activeAutoSpawnHolders.getOrDefault(name, null);

@@ -40,12 +40,13 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
     @Override
     public boolean canSpawn() {
         if(getAutoSpawn().isLocked()) return false;
+        if(!getAutoSpawn().getType().equalsIgnoreCase("INTERVAL")) return false;
 
         int currentActiveAmount = getCurrentActiveBossHolders();
         int maxAmount = getAutoSpawn().getAutoSpawnSettings().getMaxAliveAtOnce();
 
         Location location = this.intervalSpawnElement.getSpawnLocation();
-        boolean spawnIfChunkNotLoaded = ObjectUtils.getValue(getAutoSpawn().getAutoSpawnSettings().getSpawnWhenCheckIsntLoaded(), false);
+        boolean spawnIfChunkNotLoaded = ObjectUtils.getValue(getAutoSpawn().getAutoSpawnSettings().getSpawnWhenChunkIsntLoaded(), false);
         boolean spawnAfterLastBossIsKilled = ObjectUtils.getValue(this.intervalSpawnElement.getSpawnAfterLastBossIsKilled(), false);
 
         if(location == null) return false;

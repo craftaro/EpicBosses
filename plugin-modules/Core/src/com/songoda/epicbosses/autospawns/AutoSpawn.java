@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class AutoSpawn {
 
-    @Expose @Getter @Setter private Boolean editing;
+    @Expose @Getter @Setter private boolean editing;
     @Expose @Getter @Setter private String type;
     @Expose @Getter @Setter private List<String> entities;
     @Expose @Getter @Setter private AutoSpawnSettings autoSpawnSettings;
@@ -38,8 +38,17 @@ public class AutoSpawn {
     }
 
     public boolean isLocked() {
-        return this.editing != null && this.editing;
+        return this.editing;
     }
 
+    public boolean isCompleteEnoughToSpawn() {
+        if(this.type == null) return false;
+
+        List<String> entities = this.entities;
+
+        if(this.entities == null || this.entities.isEmpty()) return false;
+
+        return true;
+    }
 
 }
