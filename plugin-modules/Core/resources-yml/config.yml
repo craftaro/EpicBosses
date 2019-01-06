@@ -103,6 +103,15 @@ Display:
       - '&3Override Spawn Messages: &f{overrideSpawnMessages}'
       - '&3Shuffle Entities: &f{shuffleEntities}'
       - '&3Custom Spawn Message: &f{customSpawnMessage}'
+    Entities:
+      selectedName: '&bBoss: &f{name} &a*** Selected ***'
+      name: '&bBoss: &f{name}'
+      lore:
+      - '&3Editing: &f{editing}'
+      - '&3Targeting: &f{targeting}'
+      - '&3Drop Table: &f{dropTable}'
+      - '&7'
+      - '&7Click to select or deselect this boss.'
   Bosses:
     menuName: '&b&lEpicBosses &3&lBosses'
     name: '&b&l{name}'
