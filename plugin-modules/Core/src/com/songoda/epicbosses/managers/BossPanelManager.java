@@ -1,6 +1,7 @@
 package com.songoda.epicbosses.managers;
 
 import com.songoda.epicbosses.api.BossAPI;
+import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.droptable.elements.DropTableElement;
 import com.songoda.epicbosses.droptable.elements.GiveTableElement;
@@ -126,6 +127,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private DropTableRewardMainEditorPanel<DropTableElement> dropDropRewardMainEditPanel;
     @Getter private DropTableNewRewardEditorPanel<DropTableElement> dropDropNewRewardEditPanel;
     @Getter private DropTableRewardsListEditorPanel<DropTableElement> dropDropRewardListPanel;
+
+    @Getter private IVariablePanelHandler<AutoSpawn> mainAutoSpawnEditPanel;
 
     private final CustomBosses customBosses;
 
@@ -794,7 +797,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //---------------------------------------------
 
     private void loadAutoSpawnsMenu() {
-        this.autoSpawns = new AutoSpawnsPanel(this, getListMenu("AutoSpawns"));
+        this.autoSpawns = new AutoSpawnsPanel(this, getListMenu("AutoSpawns.Main"), this.customBosses);
     }
 
     private void reloadAutoSpawnsMenu() {

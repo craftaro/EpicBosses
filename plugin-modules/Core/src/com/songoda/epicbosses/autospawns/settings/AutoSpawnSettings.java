@@ -12,13 +12,13 @@ import lombok.Setter;
 public class AutoSpawnSettings {
 
     @Expose @Getter @Setter private Integer maxAliveAtOnce, amountPerSpawn;
-    @Expose @Getter @Setter private Boolean spawnWhenCheckIsntLoaded, overrideDefaultSpawnMessage, shuffleEntitiesList;
+    @Expose @Getter @Setter private Boolean spawnWhenChunkIsntLoaded, overrideDefaultSpawnMessage, shuffleEntitiesList;
     @Expose @Getter @Setter private String spawnMessage;
 
-    public AutoSpawnSettings(int maxAliveAtOnce, int amountPerSpawn, boolean spawnWhenCheckIsntLoaded, boolean shuffleEntitiesList) {
+    public AutoSpawnSettings(int maxAliveAtOnce, int amountPerSpawn, boolean spawnWhenChunkIsntLoaded, boolean shuffleEntitiesList) {
         this.maxAliveAtOnce = maxAliveAtOnce;
         this.amountPerSpawn = amountPerSpawn;
-        this.spawnWhenCheckIsntLoaded = spawnWhenCheckIsntLoaded;
+        this.spawnWhenChunkIsntLoaded = spawnWhenChunkIsntLoaded;
         this.shuffleEntitiesList = shuffleEntitiesList;
     }
 

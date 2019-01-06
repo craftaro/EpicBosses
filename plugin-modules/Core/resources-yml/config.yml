@@ -88,7 +88,21 @@ Display:
       - '&7Click to add/remove the skill to'
       - '&7or from the boss skill list.'
   AutoSpawns:
-    menuName: '&b&lEpicBosses &3&lAutoSpawns'
+    Main:
+      menuName: '&b&lEpicBosses &3&lAutoSpawns'
+      name: '&bAuto Spawn: &f{name}'
+      lore:
+      - '&3Editing: &f{enabled}'
+      - '&7'
+      - '&3Spawn Type: &f{type}'
+      - '&3Entities: &f{entities}'
+      - '&7'
+      - '&3Max Alive: &f{maxAlive}'
+      - '&3Amount per Spawn: &f{amountPerSpawn}'
+      - '&3When Chunk Isnt Loaded: &f{chunkIsntLoaded}'
+      - '&3Override Spawn Messages: &f{overrideSpawnMessages}'
+      - '&3Shuffle Entities: &f{shuffleEntities}'
+      - '&3Custom Spawn Message: &f{customSpawnMessage}'
   Bosses:
     menuName: '&b&lEpicBosses &3&lBosses'
     name: '&b&l{name}'

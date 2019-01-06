@@ -1,4 +1,8 @@
 {
+  "DefaultAutoSpawnListItem": {
+    "type": "GRASS_BLOCK",
+    "name": "&c&lDefault AutoSpawn List Item"
+  },
   "DefaultDropTableRewardItem": {
     "type": "DIAMOND",
     "name": "&c&lDefault DropTable Reward Item"
