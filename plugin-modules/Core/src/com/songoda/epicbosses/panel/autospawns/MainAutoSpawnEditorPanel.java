@@ -20,7 +20,6 @@ import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -63,9 +62,9 @@ public class MainAutoSpawnEditorPanel extends VariablePanelHandler<AutoSpawn> {
         PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
         counter.getSlotsWith("Editing").forEach(slot -> panel.setOnClick(slot, getEditingAction(autoSpawn)));
-        counter.getSlotsWith("SpecialSettings").forEach(slot -> {});
-        counter.getSlotsWith("Type").forEach(slot -> {});
-        counter.getSlotsWith("Entities").forEach(slot -> {});
+        counter.getSlotsWith("SpecialSettings").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnSpecialSettingsEditorPanel().openFor(player, autoSpawn)));
+        counter.getSlotsWith("Type").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnTypeEditorPanel().openFor(player, autoSpawn)));
+        counter.getSlotsWith("Entities").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnEntitiesEditPanel().openFor(player, autoSpawn)));
         counter.getSlotsWith("CustomSettings").forEach(slot -> {});
 
         panel.openFor(player);
