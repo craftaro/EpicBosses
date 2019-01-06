@@ -9,6 +9,7 @@ import com.songoda.epicbosses.skills.CustomSkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.elements.CustomMinionSkillElement;
 import com.songoda.epicbosses.skills.interfaces.ICustomSkillAction;
+import com.songoda.epicbosses.skills.interfaces.IOtherSkillDataElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
@@ -43,13 +44,8 @@ public class Minions extends CustomSkillHandler {
     }
 
     @Override
-    public Map<String, Object> getOtherSkillData() {
-        Map<String, Object> map = new HashMap<>();
-
-        map.put("amount", 1);
-        map.put("minionToSpawn", "");
-
-        return map;
+    public IOtherSkillDataElement getOtherSkillData() {
+        return new CustomMinionSkillElement(1, "");
     }
 
     @Override

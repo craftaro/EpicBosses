@@ -7,6 +7,7 @@ import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
 import com.songoda.epicbosses.skills.Skill;
+import com.songoda.epicbosses.skills.interfaces.IOtherSkillDataElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
@@ -46,6 +47,7 @@ public class CustomSkillTypeEditorPanel extends SubVariablePanelHandler<Skill, C
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
         replaceMap.put("{name}", BossAPI.getSkillName(skill));
+        replaceMap.put("{selected}", customSkillElement.getCustom().getType());
         panelBuilder.addReplaceData(replaceMap);
 
         Panel panel = panelBuilder.getPanel()
@@ -86,7 +88,7 @@ public class CustomSkillTypeEditorPanel extends SubVariablePanelHandler<Skill, C
                 CustomSkillHandler customSkillHandler = customSkillHandlers.get(slot);
                 String name = customSkillHandler.getSkillName();
                 Map<String, String> replaceMap = new HashMap<>();
-                String hasCustomData = customSkillHandler.getOtherSkillData() == null? "false" : customSkillHandler.getOtherSkillData().isEmpty()? "false" : "true";
+                String hasCustomData = customSkillHandler.getOtherSkillData() == null? "false" : "true";
 
                 replaceMap.put("{name}", name);
                 replaceMap.put("{multiplier}", ""+customSkillHandler.doesUseMultiplier());
@@ -107,14 +109,18 @@ public class CustomSkillTypeEditorPanel extends SubVariablePanelHandler<Skill, C
                 ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Skills.CustomType.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, event -> {
+                    IOtherSkillDataElement otherSkillDataElement = customSkillHandler.getOtherSkillData();
+                    JsonObject otherData = otherSkillDataElement == null? null : BossAPI.convertObjectToJsonObject(otherSkillDataElement);
+
                     customSkillElement.getCustom().setType(name);
+                    customSkillElement.getCustom().setOtherSkillData(otherData);
 
                     JsonObject jsonObject = BossAPI.convertObjectToJsonObject(customSkillElement);
 
                     skill.setCustomData(jsonObject);
                     this.plugin.getSkillsFileManager().save();
 
-                    loadPage(panel, page, skill, customSkillElement, customSkillHandlers);
+                    openFor((Player) event.getWhoClicked(), skill, customSkillElement);
                 });
             }
         }));

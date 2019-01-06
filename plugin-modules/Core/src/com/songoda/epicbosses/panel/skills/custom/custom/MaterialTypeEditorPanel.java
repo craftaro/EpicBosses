@@ -76,7 +76,11 @@ public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Sk
                 panel.setItem(realisticSlot, new ItemStack(Material.AIR), e->{});
             } else {
                 Material material = filteredList.get(slot);
-                ItemStack itemStack = new ItemStack(material);
+                ItemStack itemStack;
+
+                if(material == Material.AIR) itemStack = new ItemStack(Material.GLASS);
+                else itemStack = new ItemStack(material);
+
                 Map<String, String> replaceMap = new HashMap<>();
 
                 if(itemStack.getType() == Material.AIR) return;
@@ -103,7 +107,7 @@ public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Sk
         List<Material> materials = new ArrayList<>();
 
         masterList.forEach(material -> {
-            if(material.isBlock() && material.isSolid() && material.isOccluding()) {
+            if((material.isBlock() && material.isSolid() && material.isItem()) || (material == Material.AIR)) {
                 materials.add(material);
             }
         });

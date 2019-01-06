@@ -12,8 +12,10 @@ import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.custom.cage.CageLocationData;
 import com.songoda.epicbosses.skills.custom.cage.CagePlayerData;
 import com.songoda.epicbosses.skills.elements.CustomCageSkillElement;
+import com.songoda.epicbosses.skills.interfaces.IOtherSkillDataElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Debug;
+import com.songoda.epicbosses.utils.ObjectUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.converters.MaterialConverter;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
@@ -59,14 +61,8 @@ public class Cage extends CustomSkillHandler {
     }
 
     @Override
-    public Map<String, Object> getOtherSkillData() {
-        Map<String, Object> map = new HashMap<>();
-
-        map.put("flatType", "IRON_BLOCK");
-        map.put("wallType", "IRON_BARS");
-        map.put("insideType", "AIR");
-
-        return map;
+    public IOtherSkillDataElement getOtherSkillData() {
+        return new CustomCageSkillElement("IRON_BLOCK", "IRON_BARS", "AIR");
     }
 
     @Override
@@ -179,7 +175,7 @@ public class Cage extends CustomSkillHandler {
     private String getFlatTypeCurrent(CustomSkillElement customSkillElement) {
         CustomCageSkillElement customCageSkillElement = customSkillElement.getCustom().getCustomCageSkillData();
 
-        return customCageSkillElement.getFlatType();
+        return ObjectUtils.getValue(customCageSkillElement.getFlatType(), "");
     }
 
     private MaterialTypeEditorPanel getFlatTypeEditor() {
@@ -209,7 +205,7 @@ public class Cage extends CustomSkillHandler {
     private String getWallTypeCurrent(CustomSkillElement customSkillElement) {
         CustomCageSkillElement customCageSkillElement = customSkillElement.getCustom().getCustomCageSkillData();
 
-        return customCageSkillElement.getWallType();
+        return ObjectUtils.getValue(customCageSkillElement.getWallType(), "");
     }
 
     private MaterialTypeEditorPanel getWallTypeEditor() {
@@ -239,7 +235,7 @@ public class Cage extends CustomSkillHandler {
     private String getInsideTypeCurrent(CustomSkillElement customSkillElement) {
         CustomCageSkillElement customCageSkillElement = customSkillElement.getCustom().getCustomCageSkillData();
 
-        return customCageSkillElement.getInsideType();
+        return ObjectUtils.getValue(customCageSkillElement.getInsideType(), "");
     }
 
     private MaterialTypeEditorPanel getInsideTypeEditor() {

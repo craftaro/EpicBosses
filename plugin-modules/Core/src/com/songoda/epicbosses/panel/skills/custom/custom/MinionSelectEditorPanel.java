@@ -91,7 +91,7 @@ public class MinionSelectEditorPanel extends SubVariablePanelHandler<Skill, Cust
                 ItemStack itemStack = this.itemStackConverter.from(itemStackHolder);
                 Map<String, String> replaceMap = new HashMap<>();
 
-                replaceMap.put("{name}", StringUtils.get().formatString(name));
+                replaceMap.put("{name}", name);
                 replaceMap.put("{editing}", ""+minionEntity.isEditing());
                 replaceMap.put("{targeting}", minionEntity.getTargeting());
 
