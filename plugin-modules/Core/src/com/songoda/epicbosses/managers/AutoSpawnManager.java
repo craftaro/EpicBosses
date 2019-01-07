@@ -7,6 +7,9 @@ import com.songoda.epicbosses.autospawns.SpawnType;
 import com.songoda.epicbosses.holder.ActiveAutoSpawnHolder;
 import com.songoda.epicbosses.holder.autospawn.ActiveIntervalAutoSpawnHolder;
 import com.songoda.epicbosses.managers.files.AutoSpawnFileManager;
+import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
+import com.songoda.epicbosses.utils.panel.base.ClickAction;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -130,6 +133,44 @@ public class AutoSpawnManager {
 
                 intervalAutoSpawnHolder.stopInterval();
             }
+        }
+    }
+
+    public static ICustomSettingAction createAutoSpawnAction(String name, String current, ItemStack displayStack, ClickAction clickAction) {
+        return new CustomAutoSpawnActionCreator(name, current, displayStack, clickAction);
+    }
+
+    private static class CustomAutoSpawnActionCreator implements ICustomSettingAction {
+
+        private final ClickAction clickAction;
+        private final String name, current;
+        private final ItemStack itemStack;
+
+        public CustomAutoSpawnActionCreator(String name, String current, ItemStack itemStack, ClickAction clickAction) {
+            this.name = name;
+            this.current = current;
+            this.itemStack = itemStack;
+            this.clickAction = clickAction;
+        }
+
+        @Override
+        public ClickAction getAction() {
+            return this.clickAction;
+        }
+
+        @Override
+        public String getSettingName() {
+            return this.name;
+        }
+
+        @Override
+        public ItemStack getDisplayItemStack() {
+            return this.itemStack;
+        }
+
+        @Override
+        public String getCurrent() {
+            return this.current;
         }
     }
 
