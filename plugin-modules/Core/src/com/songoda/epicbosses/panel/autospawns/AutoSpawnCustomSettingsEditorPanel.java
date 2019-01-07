@@ -18,6 +18,8 @@ import java.util.Map;
  * @author Charles Cullen
  * @version 1.0.0
  * @since 07-Jan-19
+ *
+ * TODO Handle Extra Information
  */
 public class AutoSpawnCustomSettingsEditorPanel extends VariablePanelHandler<AutoSpawn> {
 

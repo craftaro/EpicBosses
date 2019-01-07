@@ -26,6 +26,7 @@ public enum Message {
 
     Boss_AutoSpawn_ToggleEditing("&b&lEpicBosses &8» &7You have toggled the editing mode for the &f{0}&7 auto spawn to &f{1}&7."),
     Boss_AutoSpawn_NotCompleteEnough("&c&l(!) &cThe auto spawn is not set up enough to be enabled. Please make sure it has: &fA Spawn Entity(s) and Type&c before you try and enable the auto spawn."),
+    Boss_AutoSpawn_SpawnRate("&b&lEpicBosses &8» &7You have {0} the spawn rate of the auto spawn to &f{1}&7."),
 
     Boss_Create_EntityTypeNotFound("&c&l(!) &cThe specified entity type {0} was not found. If you think this is an error please contact &fAMinecraftDev&c."),
     Boss_Create_InvalidArgs("&c&l(!) &cYou must use &n/boss create [name] [entity] &c to create a boss."),

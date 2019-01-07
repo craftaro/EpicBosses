@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface IAutoSpawnCustomSettingsHandler {
 
-    List<ICustomSettingAction> getCustomSettingActions();
+    List<ICustomSettingAction> getCustomSettingActions(AutoSpawn autoSpawn);
 
 }

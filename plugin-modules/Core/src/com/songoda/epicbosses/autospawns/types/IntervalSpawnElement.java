@@ -1,6 +1,7 @@
 package com.songoda.epicbosses.autospawns.types;
 
 import com.google.gson.annotations.Expose;
+import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.autospawns.IAutoSpawnCustomSettingsHandler;
 import com.songoda.epicbosses.autospawns.handlers.IntervalSpawnHandler;
 import com.songoda.epicbosses.holder.autospawn.ActiveIntervalAutoSpawnHolder;
@@ -37,18 +38,18 @@ public class IntervalSpawnElement implements IAutoSpawnCustomSettingsHandler {
     }
 
     @Override
-    public List<ICustomSettingAction> getCustomSettingActions() {
+    public List<ICustomSettingAction> getCustomSettingActions(AutoSpawn autoSpawn) {
         List<ICustomSettingAction> clickActions = new ArrayList<>();
         ItemStack clickStack = new ItemStack(Material.IRON_BLOCK);
         ClickAction lastBossKilledAction = this.intervalSpawnHandler.getSpawnAfterLastBossIsKilledAction(this);
         ClickAction locationAction = this.intervalSpawnHandler.getLocationAction(this);
         ClickAction placeholderAction = this.intervalSpawnHandler.getPlaceholderAction(this);
-        ClickAction spawnRateAction = this.intervalSpawnHandler.getSpawnRateAction(this);
+        ClickAction spawnRateAction = this.intervalSpawnHandler.getSpawnRateAction(this, autoSpawn);
 
-        clickActions.add(AutoSpawnManager.createAutoSpawnAction("Spawn After Last Boss Is Killed", getSpawnAfterLastBossIsKilled()+"", clickStack.clone(), lastBossKilledAction));
-        clickActions.add(AutoSpawnManager.createAutoSpawnAction("Location", getLocation(), clickStack.clone(), locationAction));
-        clickActions.add(AutoSpawnManager.createAutoSpawnAction("Placeholder", getPlaceholder(), clickStack.clone(), placeholderAction));
-        clickActions.add(AutoSpawnManager.createAutoSpawnAction("Spawn Rate", getSpawnRate()+"", clickStack.clone(), spawnRateAction));
+        clickActions.add(AutoSpawnManager.createAutoSpawnAction("Spawn After Last Boss Is Killed", getSpawnAfterLastBossIsKilled()+"", this.intervalSpawnHandler.getSpawnAfterLastBossIsKilledExtraInformation(), clickStack.clone(), lastBossKilledAction));
+        clickActions.add(AutoSpawnManager.createAutoSpawnAction("Location", getLocation(), this.intervalSpawnHandler.getLocationExtraInformation(), clickStack.clone(), locationAction));
+        clickActions.add(AutoSpawnManager.createAutoSpawnAction("Placeholder", getPlaceholder(), this.intervalSpawnHandler.getPlaceholderExtraInformation(), clickStack.clone(), placeholderAction));
+        clickActions.add(AutoSpawnManager.createAutoSpawnAction("Spawn Rate", getSpawnRate()+"", this.intervalSpawnHandler.getSpawnRateExtraInformation(), clickStack.clone(), spawnRateAction));
 
         return clickActions;
     }

@@ -112,6 +112,11 @@ Display:
       - '&3Drop Table: &f{dropTable}'
       - '&7'
       - '&7Click to select or deselect this boss.'
+    CustomSettings:
+      name: '&bCustom Setting: &f{name}'
+      lore:
+      - '&3Currently: &f{currently}'
+      - '{extraInformation}'
   Bosses:
     menuName: '&b&lEpicBosses &3&lBosses'
     name: '&b&l{name}'

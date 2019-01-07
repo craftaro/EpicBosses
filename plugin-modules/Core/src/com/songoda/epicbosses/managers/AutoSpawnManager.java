@@ -136,21 +136,23 @@ public class AutoSpawnManager {
         }
     }
 
-    public static ICustomSettingAction createAutoSpawnAction(String name, String current, ItemStack displayStack, ClickAction clickAction) {
-        return new CustomAutoSpawnActionCreator(name, current, displayStack, clickAction);
+    public static ICustomSettingAction createAutoSpawnAction(String name, String current, List<String> extraInformation, ItemStack displayStack, ClickAction clickAction) {
+        return new CustomAutoSpawnActionCreator(name, current, extraInformation, displayStack, clickAction);
     }
 
     private static class CustomAutoSpawnActionCreator implements ICustomSettingAction {
 
+        private final List<String> extraInformation;
         private final ClickAction clickAction;
         private final String name, current;
         private final ItemStack itemStack;
 
-        public CustomAutoSpawnActionCreator(String name, String current, ItemStack itemStack, ClickAction clickAction) {
+        public CustomAutoSpawnActionCreator(String name, String current, List<String> extraInformation, ItemStack itemStack, ClickAction clickAction) {
             this.name = name;
             this.current = current;
             this.itemStack = itemStack;
             this.clickAction = clickAction;
+            this.extraInformation = extraInformation;
         }
 
         @Override
@@ -171,6 +173,11 @@ public class AutoSpawnManager {
         @Override
         public String getCurrent() {
             return this.current;
+        }
+
+        @Override
+        public List<String> getExtraInformation() {
+            return this.extraInformation;
         }
     }
 

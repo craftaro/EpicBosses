@@ -234,5 +234,10 @@ public class BossSkillManager implements ILoadable {
         public String getCurrent() {
             return this.current;
         }
+
+        @Override
+        public List<String> getExtraInformation() {
+            return null;
+        }
     }
 }
