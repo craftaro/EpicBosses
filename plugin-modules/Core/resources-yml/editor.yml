@@ -2637,3 +2637,49 @@ AutoSpawnEntitiesEditMenu:
     '54':
       type: GLASS_PANE
       name: '&7'
+AutoSpawnCustomSettingsEditMenu:
+  name: '&b&l{name} AutoSpawn'
+  slots: 54
+  Settings:
+    backButton: true
+    fillTo: 45
+  Buttons:
+    backButton: 50
+  Items:
+    '46':
+      type: GLASS_PANE
+      name: '&7'
+    '47':
+      type: GLASS_PANE
+      name: '&7'
+    '48':
+      type: GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page.'
+      PreviousPage: true
+    '50':
+      type: REDSTONE
+      name: '&cClick here to go back'
+      lore:
+      - '&7Click this button to go back.'
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page.'
+      NextPage: true
+    '52':
+      type: GLASS_PANE
+      name: '&7'
+    '53':
+      type: GLASS_PANE
+      name: '&7'
+    '54':
+      type: GLASS_PANE
+      name: '&7'

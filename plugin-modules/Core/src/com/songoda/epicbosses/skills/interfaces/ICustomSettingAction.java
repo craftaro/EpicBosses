@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
  * @version 1.0.0
  * @since 20-Dec-18
  */
-public interface ICustomSkillAction {
+public interface ICustomSettingAction {
 
     ClickAction getAction();
 

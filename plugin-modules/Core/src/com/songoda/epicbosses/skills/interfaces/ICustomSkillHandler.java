@@ -17,7 +17,7 @@ public interface ICustomSkillHandler extends ISkillHandler<CustomSkillElement> {
 
     IOtherSkillDataElement getOtherSkillData();
 
-    List<ICustomSkillAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement);
+    List<ICustomSettingAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement);
 
     String getSkillName();
 

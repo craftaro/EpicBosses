@@ -1,17 +1,12 @@
 package com.songoda.epicbosses.panel.autospawns;
 
-import com.google.gson.JsonObject;
 import com.songoda.epicbosses.CustomBosses;
-import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.entity.BossEntity;
-import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.AutoSpawnFileManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
-import com.songoda.epicbosses.skills.Skill;
-import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.ObjectUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;

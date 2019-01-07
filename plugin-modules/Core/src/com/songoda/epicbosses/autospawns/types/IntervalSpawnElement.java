@@ -3,11 +3,13 @@ package com.songoda.epicbosses.autospawns.types;
 import com.google.gson.annotations.Expose;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
+import com.songoda.epicbosses.autospawns.IAutoSpawnCustomSettingsHandler;
 import com.songoda.epicbosses.autospawns.settings.AutoSpawnSettings;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.holder.autospawn.ActiveIntervalAutoSpawnHolder;
 import com.songoda.epicbosses.listeners.IBossDeathHandler;
+import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.utils.MessageUtils;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ObjectUtils;
@@ -23,7 +25,7 @@ import java.util.*;
  * @version 1.0.0
  * @since 02-Jan-19
  */
-public class IntervalSpawnElement {
+public class IntervalSpawnElement implements IAutoSpawnCustomSettingsHandler {
 
     @Expose @Getter @Setter private Boolean spawnAfterLastBossIsKilled;
     @Expose @Getter @Setter private String location, placeholder;
@@ -34,6 +36,11 @@ public class IntervalSpawnElement {
         this.placeholder = placeholder;
         this.spawnRate = spawnRate;
         this.spawnAfterLastBossIsKilled = spawnAfterLastBossIsKilled;
+    }
+
+    @Override
+    public List<ICustomSettingAction> getCustomSettingActions() {
+        return null;
     }
 
     public boolean attemptSpawn(ActiveIntervalAutoSpawnHolder activeAutoSpawnHolder) {
@@ -86,5 +93,4 @@ public class IntervalSpawnElement {
     public Location getSpawnLocation() {
         return StringUtils.get().fromStringToLocation(this.location);
     }
-
 }

@@ -5,7 +5,7 @@ import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
-import com.songoda.epicbosses.skills.interfaces.ICustomSkillAction;
+import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Debug;
@@ -66,7 +66,7 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
             return;
         }
 
-        List<ICustomSkillAction> customButtons = customSkillHandler.getOtherSkillDataActions(skill, customSkillElement);
+        List<ICustomSettingAction> customButtons = customSkillHandler.getOtherSkillDataActions(skill, customSkillElement);
 
         if(customButtons == null || customButtons.isEmpty()) return;
 
@@ -88,12 +88,12 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
 
     }
 
-    private void loadPage(Panel panel, int page, List<ICustomSkillAction> clickActions) {
+    private void loadPage(Panel panel, int page, List<ICustomSettingAction> clickActions) {
         panel.loadPage(page, ((slot, realisticSlot) -> {
             if(slot >= clickActions.size()) {
                 panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
             } else {
-                ICustomSkillAction customSkillAction = clickActions.get(slot);
+                ICustomSettingAction customSkillAction = clickActions.get(slot);
                 ClickAction clickAction = customSkillAction.getAction();
                 String name = customSkillAction.getSettingName();
                 ItemStack displayStack = customSkillAction.getDisplayItemStack().clone();

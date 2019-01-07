@@ -4,12 +4,11 @@ import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
 import com.songoda.epicbosses.skills.Skill;
-import com.songoda.epicbosses.skills.interfaces.ICustomSkillAction;
+import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.skills.interfaces.IOtherSkillDataElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.RandomUtils;
-import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.LivingEntity;
@@ -17,7 +16,6 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -37,7 +35,7 @@ public class Disarm extends CustomSkillHandler {
     }
 
     @Override
-    public List<ICustomSkillAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
+    public List<ICustomSettingAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
         return null;
     }
 

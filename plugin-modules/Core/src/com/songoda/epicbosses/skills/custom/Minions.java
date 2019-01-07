@@ -1,6 +1,5 @@
 package com.songoda.epicbosses.skills.custom;
 
-import com.google.gson.JsonObject;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
@@ -8,7 +7,7 @@ import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.elements.CustomMinionSkillElement;
-import com.songoda.epicbosses.skills.interfaces.ICustomSkillAction;
+import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.skills.interfaces.IOtherSkillDataElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Message;
@@ -21,9 +20,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -49,8 +46,8 @@ public class Minions extends CustomSkillHandler {
     }
 
     @Override
-    public List<ICustomSkillAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
-        List<ICustomSkillAction> clickActions = new ArrayList<>();
+    public List<ICustomSettingAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
+        List<ICustomSettingAction> clickActions = new ArrayList<>();
 
         clickActions.add(BossSkillManager.createCustomSkillAction("Amount Editor", getAmountCurrent(customSkillElement), new ItemStack(Material.REDSTONE), getAmountAction(skill, customSkillElement)));
         clickActions.add(BossSkillManager.createCustomSkillAction("Minion to Spawn Editor", getMinionToSpawnCurrent(customSkillElement), new ItemStack(Material.CREEPER_SPAWN_EGG), getMinionToSpawnAction(skill, customSkillElement)));

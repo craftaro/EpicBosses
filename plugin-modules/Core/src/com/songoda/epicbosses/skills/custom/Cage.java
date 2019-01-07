@@ -7,7 +7,7 @@ import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.panel.skills.custom.custom.MaterialTypeEditorPanel;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
-import com.songoda.epicbosses.skills.interfaces.ICustomSkillAction;
+import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.custom.cage.CageLocationData;
 import com.songoda.epicbosses.skills.custom.cage.CagePlayerData;
@@ -66,8 +66,8 @@ public class Cage extends CustomSkillHandler {
     }
 
     @Override
-    public List<ICustomSkillAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
-        List<ICustomSkillAction> clickActions = new ArrayList<>();
+    public List<ICustomSettingAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
+        List<ICustomSettingAction> clickActions = new ArrayList<>();
         ItemStack clickStack = new ItemStack(Material.STONE_PRESSURE_PLATE);
         ClickAction flatAction = (event -> this.flatTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
         ClickAction wallAction = (event -> this.wallTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));

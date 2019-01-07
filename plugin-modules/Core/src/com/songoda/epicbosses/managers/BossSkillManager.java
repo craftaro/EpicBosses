@@ -4,7 +4,7 @@ import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.events.BossSkillEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
-import com.songoda.epicbosses.skills.interfaces.ICustomSkillAction;
+import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.skills.interfaces.ISkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.custom.*;
@@ -198,11 +198,11 @@ public class BossSkillManager implements ILoadable {
         return null;
     }
 
-    public static ICustomSkillAction createCustomSkillAction(String name, String current, ItemStack displayStack, ClickAction clickAction) {
+    public static ICustomSettingAction createCustomSkillAction(String name, String current, ItemStack displayStack, ClickAction clickAction) {
         return new CustomSkillActionCreator(name, current, displayStack, clickAction);
     }
 
-    private static class CustomSkillActionCreator implements ICustomSkillAction {
+    private static class CustomSkillActionCreator implements ICustomSettingAction {
 
         private final ClickAction clickAction;
         private final String name, current;
