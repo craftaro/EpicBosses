@@ -12,6 +12,7 @@ import com.songoda.epicbosses.holder.autospawn.ActiveIntervalAutoSpawnHolder;
 import com.songoda.epicbosses.listeners.IBossDeathHandler;
 import com.songoda.epicbosses.utils.*;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
+import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -88,7 +89,7 @@ public class IntervalSpawnHandler {
         return Arrays.asList("&7Click here to update the location", "&7of this interval spawn section.", "&7", "&7This will ask you to put something in chat", "&7in the specific format of the new", "&7location.");
     }
 
-    public ClickAction getPlaceholderAction(IntervalSpawnElement intervalSpawnElement) {
+    public ClickAction getPlaceholderAction(IntervalSpawnElement intervalSpawnElement, AutoSpawn autoSpawn, VariablePanelHandler<AutoSpawn> variablePanelHandler) {
         return event -> {};
     }
 

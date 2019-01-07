@@ -9,6 +9,7 @@ import com.songoda.epicbosses.managers.AutoSpawnManager;
 import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
+import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Location;
@@ -38,12 +39,12 @@ public class IntervalSpawnElement implements IAutoSpawnCustomSettingsHandler {
     }
 
     @Override
-    public List<ICustomSettingAction> getCustomSettingActions(AutoSpawn autoSpawn) {
+    public List<ICustomSettingAction> getCustomSettingActions(AutoSpawn autoSpawn, VariablePanelHandler<AutoSpawn> variablePanelHandler) {
         List<ICustomSettingAction> clickActions = new ArrayList<>();
         ItemStack clickStack = new ItemStack(Material.IRON_BLOCK);
         ClickAction lastBossKilledAction = this.intervalSpawnHandler.getSpawnAfterLastBossIsKilledAction(this);
         ClickAction locationAction = this.intervalSpawnHandler.getLocationAction(this);
-        ClickAction placeholderAction = this.intervalSpawnHandler.getPlaceholderAction(this);
+        ClickAction placeholderAction = this.intervalSpawnHandler.getPlaceholderAction(this, autoSpawn, variablePanelHandler);
         ClickAction spawnRateAction = this.intervalSpawnHandler.getSpawnRateAction(this, autoSpawn);
 
         clickActions.add(AutoSpawnManager.createAutoSpawnAction("Spawn After Last Boss Is Killed", getSpawnAfterLastBossIsKilled()+"", this.intervalSpawnHandler.getSpawnAfterLastBossIsKilledExtraInformation(), clickStack.clone(), lastBossKilledAction));

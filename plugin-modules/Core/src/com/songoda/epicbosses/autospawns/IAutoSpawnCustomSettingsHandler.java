@@ -1,6 +1,7 @@
 package com.songoda.epicbosses.autospawns;
 
 import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
+import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 
 import java.util.List;
 
@@ -11,6 +12,6 @@ import java.util.List;
  */
 public interface IAutoSpawnCustomSettingsHandler {
 
-    List<ICustomSettingAction> getCustomSettingActions(AutoSpawn autoSpawn);
+    List<ICustomSettingAction> getCustomSettingActions(AutoSpawn autoSpawn, VariablePanelHandler<AutoSpawn> variablePanelHandler);
 
 }

@@ -3,10 +3,8 @@ package com.songoda.epicbosses.panel.autospawns;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
-import com.songoda.epicbosses.managers.AutoSpawnManager;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
-import com.songoda.epicbosses.utils.ObjectUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
@@ -39,7 +37,7 @@ public class AutoSpawnCustomSettingsEditorPanel extends VariablePanelHandler<Aut
 
     @Override
     public void fillPanel(Panel panel, AutoSpawn autoSpawn) {
-        List<ICustomSettingAction> customButtons = autoSpawn.getIntervalSpawnData().getCustomSettingActions(autoSpawn);
+        List<ICustomSettingAction> customButtons = autoSpawn.getIntervalSpawnData().getCustomSettingActions(autoSpawn, this);
 
         if(customButtons == null || customButtons.isEmpty()) return;
 
