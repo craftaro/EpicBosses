@@ -12,6 +12,7 @@ import com.songoda.epicbosses.entity.elements.EquipmentElement;
 import com.songoda.epicbosses.entity.elements.HandsElement;
 import com.songoda.epicbosses.panel.autospawns.AutoSpawnCustomSettingsEditorPanel;
 import com.songoda.epicbosses.panel.autospawns.AutoSpawnEntitiesEditorPanel;
+import com.songoda.epicbosses.panel.autospawns.AutoSpawnSpecialSettingsEditorPanel;
 import com.songoda.epicbosses.panel.autospawns.MainAutoSpawnEditorPanel;
 import com.songoda.epicbosses.panel.bosses.*;
 import com.songoda.epicbosses.panel.bosses.commands.OnDeathCommandEditor;
@@ -131,7 +132,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private DropTableNewRewardEditorPanel<DropTableElement> dropDropNewRewardEditPanel;
     @Getter private DropTableRewardsListEditorPanel<DropTableElement> dropDropRewardListPanel;
 
-    @Getter private IVariablePanelHandler<AutoSpawn> mainAutoSpawnEditPanel, autoSpawnEntitiesEditPanel, autoSpawnSpecialSettingsEditorPanel, autoSpawnTypeEditorPanel;
+    @Getter private IVariablePanelHandler<AutoSpawn> mainAutoSpawnEditPanel, autoSpawnEntitiesEditPanel, autoSpawnSpecialSettingsEditorPanel, autoSpawnTypeEditorPanel, autoSpawnCustomSettingsEditorPanel,
+            autoSpawnMessageEditorPanel;
 
     private final CustomBosses customBosses;
 
@@ -249,10 +251,12 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("MainAutoSpawnEditMenu"));
         PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("AutoSpawnEntitiesEditMenu"));
         PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("AutoSpawnCustomSettingsEditMenu"));
+        PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("AutoSpawnSpecialSettingsEditMenu"));
 
         this.mainAutoSpawnEditPanel = new MainAutoSpawnEditorPanel(this, panelBuilder, this.customBosses);
         this.autoSpawnEntitiesEditPanel = new AutoSpawnEntitiesEditorPanel(this, panelBuilder1, this.customBosses);
-        this.autoSpawnSpecialSettingsEditorPanel = new AutoSpawnCustomSettingsEditorPanel(this, panelBuilder2, this.customBosses);
+        this.autoSpawnCustomSettingsEditorPanel = new AutoSpawnCustomSettingsEditorPanel(this, panelBuilder2, this.customBosses);
+        this.autoSpawnSpecialSettingsEditorPanel = new AutoSpawnSpecialSettingsEditorPanel(this, panelBuilder3, this.customBosses);
     }
 
     private void reloadAutoSpawnEditMenus() {
@@ -260,10 +264,12 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder = new PanelBuilder(editor.getConfigurationSection("MainAutoSpawnEditMenu"));
         PanelBuilder panelBuilder1 = new PanelBuilder(editor.getConfigurationSection("AutoSpawnEntitiesEditMenu"));
         PanelBuilder panelBuilder2 = new PanelBuilder(editor.getConfigurationSection("AutoSpawnCustomSettingsEditMenu"));
+        PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("AutoSpawnSpecialSettingsEditMenu"));
 
         this.mainAutoSpawnEditPanel.initializePanel(panelBuilder);
         this.autoSpawnEntitiesEditPanel.initializePanel(panelBuilder1);
-        this.autoSpawnSpecialSettingsEditorPanel.initializePanel(panelBuilder2);
+        this.autoSpawnCustomSettingsEditorPanel.initializePanel(panelBuilder2);
+        this.autoSpawnSpecialSettingsEditorPanel.initializePanel(panelBuilder3);
     }
 
     //---------------------------------------------

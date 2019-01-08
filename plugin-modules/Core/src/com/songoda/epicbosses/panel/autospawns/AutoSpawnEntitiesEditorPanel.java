@@ -7,6 +7,7 @@ import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.AutoSpawnFileManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
+import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.ObjectUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
@@ -100,6 +101,11 @@ public class AutoSpawnEntitiesEditorPanel extends VariablePanelHandler<AutoSpawn
                 ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.AutoSpawns.Entities.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, event -> {
+                    if(!autoSpawn.isEditing()) {
+                        Message.Boss_AutoSpawn_MustToggleEditing.msg(event.getWhoClicked());
+                        return;
+                    }
+
                     if(current.contains(name)) {
                         current.remove(name);
                     } else {

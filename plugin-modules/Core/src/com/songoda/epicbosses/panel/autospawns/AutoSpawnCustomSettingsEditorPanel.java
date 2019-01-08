@@ -5,6 +5,7 @@ import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
+import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
@@ -46,12 +47,12 @@ public class AutoSpawnCustomSettingsEditorPanel extends VariablePanelHandler<Aut
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
             if(requestedPage < 0 || requestedPage > maxPage) return false;
 
-            loadPage(panel, requestedPage, customButtons);
+            loadPage(panel, requestedPage, customButtons, autoSpawn);
             return true;
         }));
 
 
-        loadPage(panel, 0, customButtons);
+        loadPage(panel, 0, customButtons, autoSpawn);
     }
 
     @Override
@@ -74,7 +75,7 @@ public class AutoSpawnCustomSettingsEditorPanel extends VariablePanelHandler<Aut
 
     }
 
-    private void loadPage(Panel panel, int page, List<ICustomSettingAction> clickActions) {
+    private void loadPage(Panel panel, int page, List<ICustomSettingAction> clickActions, AutoSpawn autoSpawn) {
         panel.loadPage(page, ((slot, realisticSlot) -> {
             if(slot >= clickActions.size()) {
                 panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
@@ -120,7 +121,13 @@ public class AutoSpawnCustomSettingsEditorPanel extends VariablePanelHandler<Aut
                 itemMeta.setLore(newLore);
                 displayStack.setItemMeta(itemMeta);
 
-                panel.setItem(realisticSlot, displayStack, clickAction);
+                panel.setItem(realisticSlot, displayStack, event -> {
+                    if(!autoSpawn.isEditing()) {
+                        Message.Boss_AutoSpawn_MustToggleEditing.msg(event.getWhoClicked());
+                    } else {
+                        clickAction.onClick(event);
+                    }
+                });
             }
         }));
     }

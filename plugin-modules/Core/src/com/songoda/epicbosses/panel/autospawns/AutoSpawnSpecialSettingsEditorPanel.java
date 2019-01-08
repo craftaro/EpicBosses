@@ -6,13 +6,17 @@ import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.autospawns.settings.AutoSpawnSettings;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.AutoSpawnFileManager;
+import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ObjectUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
+import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,12 +68,12 @@ public class AutoSpawnSpecialSettingsEditorPanel extends VariablePanelHandler<Au
                 .setParentPanelHandler(this.bossPanelManager.getMainAutoSpawnEditPanel(), autoSpawn);
         PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
-        counter.getSlotsWith("ShuffleEntities").forEach(slot -> {});
-        counter.getSlotsWith("MaxAliveEntities").forEach(slot -> {});
-        counter.getSlotsWith("AmountPerSpawn").forEach(slot -> {});
-        counter.getSlotsWith("ChunkIsntLoaded").forEach(slot -> {});
-        counter.getSlotsWith("OverrideSpawnMessage").forEach(slot -> {});
-        counter.getSlotsWith("SpawnMessage").forEach(slot -> {});
+        counter.getSlotsWith("ShuffleEntities").forEach(slot -> panel.setOnClick(slot, getShuffleEntitiesButton(autoSpawn)));
+        counter.getSlotsWith("MaxAliveEntities").forEach(slot -> panel.setOnClick(slot, getMaxAliveEntitiesButton(autoSpawn)));
+        counter.getSlotsWith("AmountPerSpawn").forEach(slot -> panel.setOnClick(slot, getAmountPerSpawnButton(autoSpawn)));
+        counter.getSlotsWith("ChunkIsntLoaded").forEach(slot -> panel.setOnClick(slot, getChunkIsntLoadedButton(autoSpawn)));
+        counter.getSlotsWith("OverrideSpawnMessage").forEach(slot -> panel.setOnClick(slot, getOverrideSpawnMessageButton(autoSpawn)));
+        counter.getSlotsWith("SpawnMessage").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnMessageEditorPanel().openFor((Player) event.getWhoClicked(), autoSpawn)));
 
         panel.openFor(player);
     }
@@ -77,5 +81,100 @@ public class AutoSpawnSpecialSettingsEditorPanel extends VariablePanelHandler<Au
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
 
+    }
+
+    private ClickAction getShuffleEntitiesButton(AutoSpawn autoSpawn) {
+        return event -> {
+            if(isBlocked(autoSpawn, event)) return;
+
+            AutoSpawnSettings settings = autoSpawn.getAutoSpawnSettings();
+
+            settings.setShuffleEntitiesList(!ObjectUtils.getValue(settings.getShuffleEntitiesList(), false));
+            save(autoSpawn, event);
+        };
+    }
+
+    private ClickAction getMaxAliveEntitiesButton(AutoSpawn autoSpawn) {
+        return event -> {
+            if(isBlocked(autoSpawn, event)) return;
+
+            AutoSpawnSettings settings = autoSpawn.getAutoSpawnSettings();
+            ClickType clickType = event.getClick();
+            int amountToModifyBy;
+
+            if(clickType.name().contains("RIGHT")) {
+                amountToModifyBy = -1;
+            } else {
+                amountToModifyBy = +1;
+            }
+
+            int currentAmount = ObjectUtils.getValue(settings.getMaxAliveAtOnce(), 1);
+            int newAmount = currentAmount + amountToModifyBy;
+
+            if(newAmount <= 1) newAmount = 1;
+
+            settings.setMaxAliveAtOnce(newAmount);
+            save(autoSpawn, event);
+        };
+    }
+
+    private ClickAction getAmountPerSpawnButton(AutoSpawn autoSpawn) {
+        return event -> {
+            if(isBlocked(autoSpawn, event)) return;
+
+            AutoSpawnSettings settings = autoSpawn.getAutoSpawnSettings();
+            ClickType clickType = event.getClick();
+            int amountToModifyBy;
+
+            if(clickType.name().contains("RIGHT")) {
+                amountToModifyBy = -1;
+            } else {
+                amountToModifyBy = +1;
+            }
+
+            int currentAmount = ObjectUtils.getValue(settings.getAmountPerSpawn(), 1);
+            int newAmount = currentAmount + amountToModifyBy;
+
+            if(newAmount <= 1) newAmount = 1;
+
+            settings.setAmountPerSpawn(newAmount);
+            save(autoSpawn, event);
+        };
+    }
+
+    private ClickAction getChunkIsntLoadedButton(AutoSpawn autoSpawn) {
+        return event -> {
+            if(isBlocked(autoSpawn, event)) return;
+
+            AutoSpawnSettings settings = autoSpawn.getAutoSpawnSettings();
+
+            settings.setSpawnWhenChunkIsntLoaded(!ObjectUtils.getValue(settings.getSpawnWhenChunkIsntLoaded(), false));
+            save(autoSpawn, event);
+        };
+    }
+
+    private ClickAction getOverrideSpawnMessageButton(AutoSpawn autoSpawn) {
+        return event -> {
+            if(isBlocked(autoSpawn, event)) return;
+
+            AutoSpawnSettings settings = autoSpawn.getAutoSpawnSettings();
+
+            settings.setOverrideDefaultSpawnMessage(!ObjectUtils.getValue(settings.getOverrideDefaultSpawnMessage(), false));
+            save(autoSpawn, event);
+        };
+    }
+
+    private boolean isBlocked(AutoSpawn autoSpawn, InventoryClickEvent event) {
+        if(!autoSpawn.isEditing()) {
+            Message.Boss_AutoSpawn_MustToggleEditing.msg(event.getWhoClicked());
+            return true;
+        }
+
+        return false;
+    }
+
+    private void save(AutoSpawn autoSpawn, InventoryClickEvent event) {
+        this.autoSpawnFileManager.save();
+        openFor((Player) event.getWhoClicked(), autoSpawn);
     }
 }

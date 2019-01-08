@@ -25,6 +25,7 @@ public enum Message {
     General_TimeLayout("{hours}h, {mins}m, {sec}s"),
 
     Boss_AutoSpawn_ToggleEditing("&b&lEpicBosses &8» &7You have toggled the editing mode for the &f{0}&7 auto spawn to &f{1}&7."),
+    Boss_AutoSpawn_MustToggleEditing("&c&l(!) &cIn order to modify aspects of this plugin you must first toggle editing mode so that it disables the current auto spawn system."),
     Boss_AutoSpawn_NotCompleteEnough("&c&l(!) &cThe auto spawn is not set up enough to be enabled. Please make sure it has: &fA Spawn Entity(s) and Type&c before you try and enable the auto spawn."),
     Boss_AutoSpawn_SpawnRate("&b&lEpicBosses &8» &7You have {0} the spawn rate of the auto spawn to &f{1}&7."),
     Boss_AutoSpawn_InvalidLocation("&c&l(!) &cThe specified location string, &f{0}&c, is invalid. A correct example should be &fworld,10,150,-30&c . If you want to cancel the location update type &f- &cand you will be brought back to the settings menu."),
