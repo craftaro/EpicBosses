@@ -76,9 +76,15 @@ public class IntervalSpawnHandler {
         return true;
     }
 
-    public ClickAction getSpawnAfterLastBossIsKilledAction(IntervalSpawnElement intervalSpawnElement) {
+    public ClickAction getSpawnAfterLastBossIsKilledAction(IntervalSpawnElement intervalSpawnElement, AutoSpawn autoSpawn, VariablePanelHandler<AutoSpawn> panelHandler) {
         return event -> {
-            
+            Player player = (Player) event.getWhoClicked();
+
+            intervalSpawnElement.setSpawnAfterLastBossIsKilled(!ObjectUtils.getValue(intervalSpawnElement.getSpawnAfterLastBossIsKilled(), false));
+            autoSpawn.setCustomData(BossAPI.convertObjectToJsonObject(intervalSpawnElement));
+            CustomBosses.get().getAutoSpawnFileManager().save();
+
+            panelHandler.openFor(player, autoSpawn);
         };
     }
 
