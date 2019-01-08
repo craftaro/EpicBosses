@@ -42,8 +42,8 @@ public class IntervalSpawnElement implements IAutoSpawnCustomSettingsHandler {
     public List<ICustomSettingAction> getCustomSettingActions(AutoSpawn autoSpawn, VariablePanelHandler<AutoSpawn> variablePanelHandler) {
         List<ICustomSettingAction> clickActions = new ArrayList<>();
         ItemStack clickStack = new ItemStack(Material.IRON_BLOCK);
-        ClickAction lastBossKilledAction = this.intervalSpawnHandler.getSpawnAfterLastBossIsKilledAction(this);
-        ClickAction locationAction = this.intervalSpawnHandler.getLocationAction(this);
+        ClickAction lastBossKilledAction = this.intervalSpawnHandler.getSpawnAfterLastBossIsKilledAction(this, autoSpawn, variablePanelHandler);
+        ClickAction locationAction = this.intervalSpawnHandler.getLocationAction(this, autoSpawn, variablePanelHandler);
         ClickAction placeholderAction = this.intervalSpawnHandler.getPlaceholderAction(this, autoSpawn, variablePanelHandler);
         ClickAction spawnRateAction = this.intervalSpawnHandler.getSpawnRateAction(this, autoSpawn);
 
