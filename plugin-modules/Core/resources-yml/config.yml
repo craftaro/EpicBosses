@@ -104,7 +104,7 @@ Display:
       - '&3Shuffle Entities: &f{shuffleEntities}'
       - '&3Custom Spawn Message: &f{customSpawnMessage}'
     Entities:
-      selectedName: '&bBoss: &f{name} &a*** Selected ***'
+      selectedName: '&bBoss: &f{name} &a** Selected **'
       name: '&bBoss: &f{name}'
       lore:
       - '&3Editing: &f{editing}'
@@ -117,6 +117,13 @@ Display:
       lore:
       - '&3Currently: &f{currently}'
       - '{extraInformation}'
+    SpawnMessage:
+      menuName: '&b&l{name} AutoSpawn'
+      selectedName: '&bMessage: &f{name} &a** Selected **'
+      name: '&bMessage: &f{name}'
+      lore:
+      - '&fStrings within this section:'
+      - '{message}'
   Bosses:
     menuName: '&b&lEpicBosses &3&lBosses'
     name: '&b&l{name}'

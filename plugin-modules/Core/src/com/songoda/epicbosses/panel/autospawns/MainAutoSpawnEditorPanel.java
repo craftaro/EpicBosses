@@ -65,7 +65,7 @@ public class MainAutoSpawnEditorPanel extends VariablePanelHandler<AutoSpawn> {
         counter.getSlotsWith("SpecialSettings").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnSpecialSettingsEditorPanel().openFor(player, autoSpawn)));
         counter.getSlotsWith("Type").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnTypeEditorPanel().openFor(player, autoSpawn)));
         counter.getSlotsWith("Entities").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnEntitiesEditPanel().openFor(player, autoSpawn)));
-        counter.getSlotsWith("CustomSettings").forEach(slot -> {});
+        counter.getSlotsWith("CustomSettings").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnCustomSettingsEditorPanel().openFor(player, autoSpawn)));
 
         panel.openFor(player);
     }

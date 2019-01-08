@@ -2774,3 +2774,59 @@ AutoSpawnSpecialSettingsEditMenu:
       - '&7overriding of the default message is true'
       - '&7only then will this message be used.'
       Button: SpawnMessage
+AutoSpawnTypeEditMenu:
+  name: '&b&l{name} AutoSpawn'
+  slots: 9
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 9
+  Items:
+    '2':
+      type: CLOCK
+      name: '&e&lInterval Spawn System'
+      lore:
+      - '&7Select this spawn system if you want to make'
+      - '&7the bosses spawn at a certain interval at a'
+      - '&7specific location.'
+      Button: IntervalSystem
+    '3':
+      type: GRASS_BLOCK
+      name: '&e&lWilderness Spawn System'
+      lore:
+      - '&7Select this spawn system if you want to make'
+      - '&7the boss(es) spawn randomly in the wilderness'
+      - '&7as players load the chunks.'
+      - '&7'
+      - '&c&lComing soon...'
+      Button: WildernessSystem
+    '4':
+      type: MAGMA_CREAM
+      name: '&e&lBiome Spawn System'
+      lore:
+      - '&7Select this spawn system if you want to make'
+      - '&7the boss(es) spawn randomly in specific biomes'
+      - '&7as players load and unload the chunks which are'
+      - '&7the selected biome.'
+      - '&7'
+      - '&c&lComing soon...'
+      Button: BiomeSystem
+    '5':
+      type: MOB_SPAWNER
+      name: '&e&lMob Spawner Spawn System'
+      lore:
+      - '&7Select this spawn system if you want to make'
+      - '&7the boss(es) spawn randomly within the selected'
+      - '&7spawner types.'
+      - '&7'
+      - '&c&lComing soon...'
+      Button: SpawnerSystem
+    '9':
+      type: REDSTONE
+      name: '&cClick here to go back'
+      lore:
+      - '&7Click this button to go back.'
