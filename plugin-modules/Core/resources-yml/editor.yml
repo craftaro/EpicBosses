@@ -2683,3 +2683,94 @@ AutoSpawnCustomSettingsEditMenu:
     '54':
       type: GLASS_PANE
       name: '&7'
+AutoSpawnSpecialSettingsEditMenu:
+  name: '&b&l{name} AutoSpawn'
+  slots: 9
+  Settings:
+    backButton: true
+    emptySpaceFiller: true
+  EmptySpaceFiller:
+    type: WHITE_STAINED_GLASS_PANE
+    name: '&7'
+  Buttons:
+    backButton: 5
+  Items:
+    '1':
+      type: DIAMOND
+      name: '&e&lShuffle Entities'
+      lore:
+      - '&bCurrently: &f{shuffleEntities}'
+      - '&7'
+      - '&7Click here to toggle the entities being'
+      - '&7shuffled before being called.'
+      Button: ShuffleEntities
+    '2':
+      type: GUNPOWDER
+      name: '&e&lMax Alive Entities At Once'
+      lore:
+      - '&bCurrently: &f{maxAliveEntities}'
+      - '&7'
+      - '&7This is the max alive entities from this'
+      - '&7auto spawn section at once. If more then'
+      - '&7this amount of entities is spawned at once'
+      - '&7then you will have to kill all entities'
+      - '&7before another can spawn.'
+      - '&7'
+      - '&bLeft Click &8» &f+1'
+      - '&bRight Click &8» &f-1'
+      Button: MaxAliveEntities
+    '3':
+      type: FIREWORK_CHARGE
+      name: '&e&lAmount of Bosses Per Spawn'
+      lore:
+      - '&bCurrently: &f{amountPerSpawn}'
+      - '&7'
+      - '&7This is the amount of bosses to be spawned'
+      - '&7at one interval. This can be higher then the'
+      - '&7max alive entities at once but you will need'
+      - '&7to kill the amount of bosses till it the currently'
+      - '&7active amount is less then the max amount so'
+      - '&7it can spawn again.'
+      - '&7'
+      - '&bLeft Click &8» &f+1'
+      - '&bRight Click &8» &f-1'
+      Button: AmountPerSpawn
+    '5':
+      type: REDSTONE
+      name: '&cClick here to go back'
+      lore:
+      - '&7Click this button to go back.'
+    '7':
+      type: PAPER
+      name: '&e&lSpawn When Chunk Isn''t Loaded'
+      lore:
+      - '&bCurrently: &f{chunkIsntLoaded}'
+      - '&7'
+      - '&7This will determine if the boss can spawn'
+      - '&7even when the chunk is unloaded. This will'
+      - '&7load the chunk and keep it loaded while the'
+      - '&7boss is alive if this is set to true.'
+      Button: ChunkIsntLoaded
+    '8':
+      type: EMERALD
+      name: '&e&lOverride Default Spawn Message'
+      lore:
+      - '&bCurrently: &f{overrideDefaultMessage}'
+      - '&7'
+      - '&7Click here to toggle the overriding of the'
+      - '&7default spawn messages. If this is set to'
+      - '&7true it won''t use the default boss spawn'
+      - '&7messages and it will use the one assigned'
+      - '&7to this auto spawn section.'
+      Button: OverrideSpawnMessage
+    '9':
+      type: CHEST
+      name: '&e&lSpawn Message'
+      lore:
+      - '&bCurrently: &f{spawnMessage}'
+      - '&7'
+      - '&7Click here to change which spawn message'
+      - '&7is used for the auto spawn section. If the'
+      - '&7overriding of the default message is true'
+      - '&7only then will this message be used.'
+      Button: SpawnMessage

@@ -78,29 +78,35 @@ public class MainAutoSpawnEditorPanel extends VariablePanelHandler<AutoSpawn> {
     private ClickAction getEditingAction(AutoSpawn autoSpawn) {
         return event -> {
             Player player = (Player) event.getWhoClicked();
+            boolean editing = autoSpawn.isEditing();
 
-            if(autoSpawn.isCompleteEnoughToSpawn()) {
-                autoSpawn.setEditing(!autoSpawn.isEditing());
-                this.autoSpawnFileManager.save();
-                player.closeInventory();
+            if(!editing) {
+                autoSpawn.setEditing(true);
+            } else {
+                if(!autoSpawn.isCompleteEnoughToSpawn()) {
+                    Message.Boss_AutoSpawn_NotCompleteEnough.msg(player);
+                    return;
+                }
 
-                Message.Boss_AutoSpawn_ToggleEditing.msg(player, BossAPI.getAutoSpawnName(autoSpawn), autoSpawn.isEditing());
+                autoSpawn.setEditing(false);
+            }
 
-                if(autoSpawn.isEditing()) {
-                    this.autoSpawnManager.stopInterval(autoSpawn);
-                } else {
-                    ActiveAutoSpawnHolder autoSpawnHolder = this.autoSpawnManager.getActiveAutoSpawnHolder(autoSpawn);
+            Message.Boss_AutoSpawn_ToggleEditing.msg(player, BossAPI.getAutoSpawnName(autoSpawn), autoSpawn.isEditing());
+            this.autoSpawnFileManager.save();
+            player.closeInventory();
 
-                    if(autoSpawnHolder != null) {
-                        if(autoSpawnHolder.getSpawnType() == SpawnType.INTERVAL) {
-                            ActiveIntervalAutoSpawnHolder intervalAutoSpawnHolder = (ActiveIntervalAutoSpawnHolder) autoSpawnHolder;
+            if(autoSpawn.isEditing()) {
+                this.autoSpawnManager.stopInterval(autoSpawn);
+            } else {
+                ActiveAutoSpawnHolder autoSpawnHolder = this.autoSpawnManager.getActiveAutoSpawnHolder(autoSpawn);
 
-                            intervalAutoSpawnHolder.restartInterval();
-                        }
+                if(autoSpawnHolder != null) {
+                    if(autoSpawnHolder.getSpawnType() == SpawnType.INTERVAL) {
+                        ActiveIntervalAutoSpawnHolder intervalAutoSpawnHolder = (ActiveIntervalAutoSpawnHolder) autoSpawnHolder;
+
+                        intervalAutoSpawnHolder.restartInterval();
                     }
                 }
-            } else {
-                Message.Boss_AutoSpawn_NotCompleteEnough.msg(player);
             }
         };
     }
