@@ -1,6 +1,8 @@
 package com.songoda.epicbosses.handlers;
 
+import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
+import com.songoda.epicbosses.autospawns.types.IntervalSpawnElement;
 import com.songoda.epicbosses.managers.files.AutoSpawnFileManager;
 import com.songoda.epicbosses.utils.IHandler;
 import com.songoda.epicbosses.utils.Message;
@@ -20,27 +22,31 @@ import java.util.UUID;
 /**
  * @author Charles Cullen
  * @version 1.0.0
- * @since 07-Jan-19
+ * @since 08-Jan-19
  */
-public class AutoSpawnLocationHandler implements IHandler {
+public abstract class AutoSpawnVariableHandler implements IHandler {
 
     @Getter private final IVariablePanelHandler<AutoSpawn> panelHandler;
 
-    @Getter private AutoSpawnFileManager autoSpawnFileManager;
+    @Getter private final IntervalSpawnElement intervalSpawnElement;
+    @Getter private final AutoSpawnFileManager autoSpawnFileManager;
     @Getter private final AutoSpawn autoSpawn;
     @Getter private final Player player;
 
     @Getter @Setter private boolean handled = false;
     private Listener listener;
 
-    public AutoSpawnLocationHandler(Player player, AutoSpawn autoSpawn, AutoSpawnFileManager autoSpawnFileManager, IVariablePanelHandler<AutoSpawn> panelHandler) {
+    public AutoSpawnVariableHandler(Player player, AutoSpawn autoSpawn, IntervalSpawnElement intervalSpawnElement, AutoSpawnFileManager autoSpawnFileManager, IVariablePanelHandler<AutoSpawn> panelHandler) {
         this.player = player;
         this.autoSpawn = autoSpawn;
         this.panelHandler = panelHandler;
         this.autoSpawnFileManager = autoSpawnFileManager;
+        this.intervalSpawnElement = intervalSpawnElement;
 
         this.listener = getListener();
     }
+
+    protected abstract boolean confirmValue(String input, IntervalSpawnElement intervalSpawnElement);
 
     @Override
     public void handle() {
@@ -64,17 +70,13 @@ public class AutoSpawnLocationHandler implements IHandler {
                 }
 
                 if(input == null) {
-
-                }
-
-                Location location = StringUtils.get().fromStringToLocation(input);
-
-                if(location == null) {
-                    Message.Boss_AutoSpawn_InvalidLocation.msg(getPlayer(), input);
+                    finish();
                     return;
                 }
 
-                autoSpawn.getIntervalSpawnData().setLocation(input);
+                if(!confirmValue(input, getIntervalSpawnElement())) return;
+
+                getAutoSpawn().setCustomData(BossAPI.convertObjectToJsonObject(getIntervalSpawnElement()));
                 getAutoSpawnFileManager().save();
                 event.setCancelled(true);
                 setHandled(true);

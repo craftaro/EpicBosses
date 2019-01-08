@@ -7,6 +7,9 @@ import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.autospawns.settings.AutoSpawnSettings;
 import com.songoda.epicbosses.autospawns.types.IntervalSpawnElement;
 import com.songoda.epicbosses.entity.BossEntity;
+import com.songoda.epicbosses.handlers.AutoSpawnVariableHandler;
+import com.songoda.epicbosses.handlers.variables.AutoSpawnLocationVariableHandler;
+import com.songoda.epicbosses.handlers.variables.AutoSpawnPlaceholderVariableHandler;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.holder.autospawn.ActiveIntervalAutoSpawnHolder;
 import com.songoda.epicbosses.listeners.IBossDeathHandler;
@@ -74,15 +77,24 @@ public class IntervalSpawnHandler {
     }
 
     public ClickAction getSpawnAfterLastBossIsKilledAction(IntervalSpawnElement intervalSpawnElement) {
-        return event -> {};
+        return event -> {
+            
+        };
     }
 
     public List<String> getSpawnAfterLastBossIsKilledExtraInformation() {
         return Arrays.asList("&7Click here to toggle the timer", "&7being enabled/reset after the last boss is killed.", "&7This will make it so only one active", "&7boss from this section can be spawned", "&7at a time.");
     }
 
-    public ClickAction getLocationAction(IntervalSpawnElement intervalSpawnElement) {
-        return event -> {};
+    public ClickAction getLocationAction(IntervalSpawnElement intervalSpawnElement, AutoSpawn autoSpawn, VariablePanelHandler<AutoSpawn> variablePanelHandler) {
+        return event -> {
+            Player player = (Player) event.getWhoClicked();
+            AutoSpawnVariableHandler autoSpawnVariableHandler = new AutoSpawnLocationVariableHandler(player, autoSpawn, intervalSpawnElement, CustomBosses.get().getAutoSpawnFileManager(), variablePanelHandler);
+
+            Message.Boss_AutoSpawn_SetLocation.msg(player);
+            autoSpawnVariableHandler.handle();
+            player.closeInventory();
+        };
     }
 
     public List<String> getLocationExtraInformation() {
@@ -90,7 +102,14 @@ public class IntervalSpawnHandler {
     }
 
     public ClickAction getPlaceholderAction(IntervalSpawnElement intervalSpawnElement, AutoSpawn autoSpawn, VariablePanelHandler<AutoSpawn> variablePanelHandler) {
-        return event -> {};
+        return event -> {
+            Player player = (Player) event.getWhoClicked();
+            AutoSpawnVariableHandler autoSpawnVariableHandler = new AutoSpawnPlaceholderVariableHandler(player, autoSpawn, intervalSpawnElement, CustomBosses.get().getAutoSpawnFileManager(), variablePanelHandler);
+
+            Message.Boss_AutoSpawn_SetLocation.msg(player);
+            autoSpawnVariableHandler.handle();
+            player.closeInventory();
+        };
     }
 
     public List<String> getPlaceholderExtraInformation() {
