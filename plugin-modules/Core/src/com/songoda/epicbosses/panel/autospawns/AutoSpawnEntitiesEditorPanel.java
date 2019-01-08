@@ -1,6 +1,7 @@
 package com.songoda.epicbosses.panel.autospawns;
 
 import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -62,7 +63,13 @@ public class AutoSpawnEntitiesEditorPanel extends VariablePanelHandler<AutoSpawn
 
     @Override
     public void openFor(Player player, AutoSpawn autoSpawn) {
-        Panel panel = getPanelBuilder().getPanel()
+        Map<String, String> replaceMap = new HashMap<>();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+
+        replaceMap.put("{name}", BossAPI.getAutoSpawnName(autoSpawn));
+        panelBuilder.addReplaceData(replaceMap);
+
+        Panel panel = panelBuilder.getPanel()
                 .setParentPanelHandler(this.bossPanelManager.getMainAutoSpawnEditPanel(), autoSpawn);
 
         fillPanel(panel, autoSpawn);

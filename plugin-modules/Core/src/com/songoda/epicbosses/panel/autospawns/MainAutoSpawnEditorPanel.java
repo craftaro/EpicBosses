@@ -48,7 +48,7 @@ public class MainAutoSpawnEditorPanel extends VariablePanelHandler<AutoSpawn> {
     public void openFor(Player player, AutoSpawn autoSpawn) {
         Map<String, String> replaceMap = new HashMap<>();
         String type = ObjectUtils.getValue(autoSpawn.getType(), "INTERVAL");
-        String editing = ""+ObjectUtils.getValue(!autoSpawn.isLocked(), false);
+        String editing = ""+ObjectUtils.getValue(autoSpawn.isEditing(), false);
         String entities = StringUtils.get().appendList(autoSpawn.getEntities());
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 

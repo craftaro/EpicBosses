@@ -89,7 +89,7 @@ public class AutoSpawnCustomSettingsEditorPanel extends VariablePanelHandler<Aut
 
                 Map<String, String> replaceMap = new HashMap<>();
 
-                replaceMap.put("{setting}", name);
+                replaceMap.put("{name}", name);
                 replaceMap.put("{currently}", currently);
 
                 if(displayStack == null || displayStack.getType() == Material.AIR) return;

@@ -2571,7 +2571,7 @@ MainAutoSpawnEditMenu:
       - '&7This will disable the auto spawn until'
       - '&7it is enabled again.'
       - '&7'
-      - '&bCurrently Running: &f{editing}'
+      - '&bCurrently Disabled for Editing: &f{editing}'
       Button: Editing
     '7':
       type: PAPER
@@ -2720,7 +2720,7 @@ AutoSpawnSpecialSettingsEditMenu:
       - '&bRight Click &8» &f-1'
       Button: MaxAliveEntities
     '3':
-      type: FIREWORK_CHARGE
+      type: FIREWORK_STAR
       name: '&e&lAmount of Bosses Per Spawn'
       lore:
       - '&bCurrently: &f{amountPerSpawn}'
@@ -2816,7 +2816,7 @@ AutoSpawnTypeEditMenu:
       - '&c&lComing soon...'
       Button: BiomeSystem
     '5':
-      type: MOB_SPAWNER
+      type: SPAWNER
       name: '&e&lMob Spawner Spawn System'
       lore:
       - '&7Select this spawn system if you want to make'

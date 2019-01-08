@@ -29,53 +29,6 @@ import java.util.*;
  */
 public class IntervalSpawnHandler {
 
-    public boolean attemptSpawn(ActiveIntervalAutoSpawnHolder activeAutoSpawnHolder, IntervalSpawnElement intervalSpawnElement) {
-        IBossDeathHandler bossDeathHandler = activeAutoSpawnHolder.getPostDeathHandler();
-        AutoSpawn autoSpawn = activeAutoSpawnHolder.getAutoSpawn();
-        AutoSpawnSettings autoSpawnSettings = autoSpawn.getAutoSpawnSettings();
-        boolean customSpawnMessage = ObjectUtils.getValue(autoSpawnSettings.getOverrideDefaultSpawnMessage(), false);
-        String spawnMessage = autoSpawnSettings.getSpawnMessage();
-        int amountToSpawn = ObjectUtils.getValue(autoSpawnSettings.getAmountPerSpawn(), 1);
-        boolean shuffleList = ObjectUtils.getValue(autoSpawnSettings.getShuffleEntitiesList(), false);
-        List<String> bosses = autoSpawn.getEntities();
-        Location location = intervalSpawnElement.getSpawnLocation();
-
-        if(bosses == null || bosses.isEmpty()) return false;
-
-        if(shuffleList) Collections.shuffle(bosses);
-
-        Queue<String> queue = new LinkedList<>(bosses);
-
-        for(int i = 1; i <= amountToSpawn; i++) {
-            if(queue.isEmpty()) queue = new LinkedList<>(bosses);
-
-            BossEntity bossEntity = BossAPI.getBossEntity(queue.poll());
-            ActiveBossHolder activeBossHolder = BossAPI.spawnNewBoss(bossEntity, location, null, null, customSpawnMessage);
-
-            if(activeBossHolder == null) continue;
-
-            activeBossHolder.getPostBossDeathHandlers().add(bossDeathHandler);
-            activeAutoSpawnHolder.getActiveBossHolders().add(activeBossHolder);
-        }
-
-        if(customSpawnMessage && spawnMessage != null) {
-            String x = NumberUtils.get().formatDouble(location.getBlockX());
-            String y = NumberUtils.get().formatDouble(location.getBlockY());
-            String z = NumberUtils.get().formatDouble(location.getBlockZ());
-            String world = StringUtils.get().formatString(location.getWorld().getName());
-
-            List<String> spawnMessages = BossAPI.getStoredMessages(spawnMessage);
-
-            if(spawnMessages != null) {
-                spawnMessages.replaceAll(s -> s.replace("{x}", x).replace("{y}", y).replace("{z}", z).replace("{world}", world));
-
-                MessageUtils.get().sendMessage(location, -1, spawnMessages);
-            }
-        }
-
-        return true;
-    }
-
     public ClickAction getSpawnAfterLastBossIsKilledAction(IntervalSpawnElement intervalSpawnElement, AutoSpawn autoSpawn, VariablePanelHandler<AutoSpawn> panelHandler) {
         return event -> {
             Player player = (Player) event.getWhoClicked();
@@ -122,7 +75,7 @@ public class IntervalSpawnHandler {
         return Arrays.asList("&7Click here to modify the placeholder", "&7that is used to display the timer for this", "&7auto spawn section in a hologram or", "&7through PlaceholderAPI.");
     }
 
-    public ClickAction getSpawnRateAction(IntervalSpawnElement intervalSpawnElement, AutoSpawn autoSpawn) {
+    public ClickAction getSpawnRateAction(IntervalSpawnElement intervalSpawnElement, AutoSpawn autoSpawn, VariablePanelHandler<AutoSpawn> panelHandler) {
         return event -> {
             ClickType clickType = event.getClick();
             int amountToModifyBy;
@@ -160,6 +113,7 @@ public class IntervalSpawnHandler {
             autoSpawn.setCustomData(jsonObject);
             CustomBosses.get().getAutoSpawnFileManager().save();
             Message.Boss_AutoSpawn_SpawnRate.msg(event.getWhoClicked(), modifyValue, NumberUtils.get().formatDouble(newAmount));
+            panelHandler.openFor((Player) event.getWhoClicked(), autoSpawn);
         };
     }
 

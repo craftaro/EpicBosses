@@ -76,6 +76,7 @@ import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.panel.base.IPanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.Collection;

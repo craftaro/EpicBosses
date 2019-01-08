@@ -40,7 +40,7 @@ public class AutoSpawnsPanel extends MainListPanelHandler {
     @Override
     public void fillPanel(Panel panel) {
         Map<String, AutoSpawn> autoSpawnMap = this.autoSpawnFileManager.getAutoSpawnMap();
-        List<String> entryList = new ArrayList<>();
+        List<String> entryList = new ArrayList<>(autoSpawnMap.keySet());
         int maxPage = panel.getMaxPage(entryList);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
@@ -79,7 +79,7 @@ public class AutoSpawnsPanel extends MainListPanelHandler {
 
                 replaceMap.put("{name}", name);
                 replaceMap.put("{type}", StringUtils.get().formatString(autoSpawn.getType()));
-                replaceMap.put("{enabled}", (!autoSpawn.isLocked())+"");
+                replaceMap.put("{enabled}", (autoSpawn.isEditing())+"");
                 replaceMap.put("{entities}", entitiesSize);
                 replaceMap.put("{maxAlive}", maxAlive);
                 replaceMap.put("{amountPerSpawn}", amountToSpawn);
