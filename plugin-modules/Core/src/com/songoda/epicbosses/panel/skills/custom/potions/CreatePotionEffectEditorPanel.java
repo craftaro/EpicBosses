@@ -11,6 +11,7 @@ import com.songoda.epicbosses.skills.types.PotionSkillElement;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.PotionEffectFinder;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
@@ -53,35 +54,35 @@ public class CreatePotionEffectEditorPanel extends SubVariablePanelHandler<Skill
 
     @Override
     public void openFor(Player player, Skill skill, PotionEffectHolder potionEffectHolder) {
-        Map<String, String> replaceMap = new HashMap<>();
-        String effect = potionEffectHolder.getType();
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            String effect = potionEffectHolder.getType();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        if(effect == null || effect.isEmpty()) effect = "N/A";
+            if(effect == null || effect.isEmpty()) effect = "N/A";
 
-        replaceMap.put("{duration}", NumberUtils.get().formatDouble(potionEffectHolder.getDuration()));
-        replaceMap.put("{level}", NumberUtils.get().formatDouble(potionEffectHolder.getLevel()));
-        replaceMap.put("{effect}", effect);
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{duration}", NumberUtils.get().formatDouble(potionEffectHolder.getDuration()));
+            replaceMap.put("{level}", NumberUtils.get().formatDouble(potionEffectHolder.getLevel()));
+            replaceMap.put("{effect}", effect);
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel()
-                .setCancelClick(true)
-                .setCancelLowerClick(true)
-                .setDestroyWhenDone(true)
-                .setParentPanelHandler(this.bossPanelManager.getPotionSkillEditorPanel(), skill);
+            Panel panel = panelBuilder.getPanel()
+                    .setCancelClick(true)
+                    .setCancelLowerClick(true)
+                    .setDestroyWhenDone(true)
+                    .setParentPanelHandler(this.bossPanelManager.getPotionSkillEditorPanel(), skill);
 
-        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+            PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
-        counter.getSlotsWith("Cancel").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getPotionSkillEditorPanel().openFor((Player) event.getWhoClicked(), skill)));
-        counter.getSlotsWith("Confirm").forEach(slot -> panel.setOnClick(slot, getConfirmAction(skill, potionEffectHolder)));
-        counter.getSlotsWith("Level").forEach(slot -> panel.setOnClick(slot, getLevelAction(skill, potionEffectHolder)));
-        counter.getSlotsWith("Duration").forEach(slot -> panel.setOnClick(slot, getDurationAction(skill, potionEffectHolder)));
-        counter.getSlotsWith("Effect").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getPotionEffectTypeEditMenu().openFor((Player) event.getWhoClicked(), skill, potionEffectHolder)));
+            counter.getSlotsWith("Cancel").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getPotionSkillEditorPanel().openFor((Player) event.getWhoClicked(), skill)));
+            counter.getSlotsWith("Confirm").forEach(slot -> panel.setOnClick(slot, getConfirmAction(skill, potionEffectHolder)));
+            counter.getSlotsWith("Level").forEach(slot -> panel.setOnClick(slot, getLevelAction(skill, potionEffectHolder)));
+            counter.getSlotsWith("Duration").forEach(slot -> panel.setOnClick(slot, getDurationAction(skill, potionEffectHolder)));
+            counter.getSlotsWith("Effect").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getPotionEffectTypeEditMenu().openFor((Player) event.getWhoClicked(), skill, potionEffectHolder)));
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
-
-
 
     private ClickAction getDurationAction(Skill skill, PotionEffectHolder potionEffectHolder) {
         return event -> {

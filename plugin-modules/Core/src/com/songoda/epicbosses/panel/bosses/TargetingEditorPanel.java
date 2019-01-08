@@ -4,6 +4,7 @@ import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
@@ -35,31 +36,33 @@ public class TargetingEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
-        Map<String, String> replaceMap = new HashMap<>();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
 
-        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-        replaceMap.put("{selected}", bossEntity.getTargetingValue());
+            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+            replaceMap.put("{selected}", bossEntity.getTargetingValue());
 
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        panelBuilder.addReplaceData(replaceMap);
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel()
-                .setDestroyWhenDone(true)
-                .setCancelLowerClick(true)
-                .setCancelClick(true)
-                .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
-        PanelBuilderCounter panelBuilderCounter = panel.getPanelBuilderCounter();
+            Panel panel = panelBuilder.getPanel()
+                    .setDestroyWhenDone(true)
+                    .setCancelLowerClick(true)
+                    .setCancelClick(true)
+                    .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
+            PanelBuilderCounter panelBuilderCounter = panel.getPanelBuilderCounter();
 
-        panelBuilderCounter.getSpecialSlotsWith("TargetingSystem").forEach((slot, returnValue) -> panel.setOnClick(slot, event -> {
-            bossEntity.setTargeting((String) returnValue);
-            this.bossesFileManager.save();
+            panelBuilderCounter.getSpecialSlotsWith("TargetingSystem").forEach((slot, returnValue) -> panel.setOnClick(slot, event -> {
+                bossEntity.setTargeting((String) returnValue);
+                this.bossesFileManager.save();
 
-            openFor(player, bossEntity);
+                openFor(player, bossEntity);
 
-        }));
+            }));
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

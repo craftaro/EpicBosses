@@ -8,6 +8,7 @@ import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
@@ -44,35 +45,37 @@ public class TauntTextEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
-        Map<String, String> replaceMap = new HashMap<>();
-        TauntElement tauntElement = bossEntity.getMessages().getTaunts();
-        Integer radius = tauntElement.getRadius();
-        Integer delay = tauntElement.getDelay();
-        List<String> taunts = tauntElement.getTaunts();
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            TauntElement tauntElement = bossEntity.getMessages().getTaunts();
+            Integer radius = tauntElement.getRadius();
+            Integer delay = tauntElement.getDelay();
+            List<String> taunts = tauntElement.getTaunts();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        if(radius == null) radius = 100;
-        if(delay == null) delay = 60;
-        if(taunts == null || taunts.isEmpty()) taunts = Arrays.asList("N/A");
+            if(radius == null) radius = 100;
+            if(delay == null) delay = 60;
+            if(taunts == null || taunts.isEmpty()) taunts = Arrays.asList("N/A");
 
-        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-        replaceMap.put("{radius}", NumberUtils.get().formatDouble(radius));
-        replaceMap.put("{delay}", NumberUtils.get().formatDouble(delay));
-        replaceMap.put("{taunts}", StringUtils.get().appendList(taunts));
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+            replaceMap.put("{radius}", NumberUtils.get().formatDouble(radius));
+            replaceMap.put("{delay}", NumberUtils.get().formatDouble(delay));
+            replaceMap.put("{taunts}", StringUtils.get().appendList(taunts));
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel()
-                .setDestroyWhenDone(true)
-                .setCancelClick(true)
-                .setCancelLowerClick(true)
-                .setParentPanelHandler(this.bossPanelManager.getMainTextEditMenu(), bossEntity);
-        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+            Panel panel = panelBuilder.getPanel()
+                    .setDestroyWhenDone(true)
+                    .setCancelClick(true)
+                    .setCancelLowerClick(true)
+                    .setParentPanelHandler(this.bossPanelManager.getMainTextEditMenu(), bossEntity);
+            PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
-        counter.getSlotsWith("Radius").forEach(slot -> panel.setOnClick(slot, getRadiusAction(bossEntity)));
-        counter.getSlotsWith("Delay").forEach(slot -> panel.setOnClick(slot, getDelayAction(bossEntity)));
-        counter.getSlotsWith("Taunts").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnTauntTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
+            counter.getSlotsWith("Radius").forEach(slot -> panel.setOnClick(slot, getRadiusAction(bossEntity)));
+            counter.getSlotsWith("Delay").forEach(slot -> panel.setOnClick(slot, getDelayAction(bossEntity)));
+            counter.getSlotsWith("Taunts").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnTauntTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

@@ -67,18 +67,20 @@ public class CommandListSkillEditorPanel extends SubVariablePanelHandler<Skill, 
 
     @Override
     public void openFor(Player player, Skill skill, SubCommandSkillElement subCommandSkillElement) {
-        Map<String, String> replaceMap = new HashMap<>();
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        replaceMap.put("{name}", BossAPI.getSkillName(skill));
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getSkillName(skill));
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getCommandSkillEditorPanel(), skill);
+            Panel panel = panelBuilder.getPanel()
+                    .setParentPanelHandler(this.bossPanelManager.getCommandSkillEditorPanel(), skill);
 
-        fillPanel(panel, skill, subCommandSkillElement);
+            fillPanel(panel, skill, subCommandSkillElement);
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

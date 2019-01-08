@@ -12,6 +12,7 @@ import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
@@ -61,19 +62,21 @@ public class GiveRewardPositionListPanel extends SubVariablePanelHandler<DropTab
 
     @Override
     public void openFor(Player player, DropTable dropTable, GiveTableElement giveTableElement) {
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-        Map<String, String> replaceMap = new HashMap<>();
+        ServerUtils.get().runTaskAsync(() -> {
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+            Map<String, String> replaceMap = new HashMap<>();
 
-        replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
+            panelBuilder.addReplaceData(replaceMap);
 
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-        Panel panel = panelBuilder.getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getMainDropTableEditMenu(), dropTable);
+            PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
+            Panel panel = panelBuilder.getPanel()
+                    .setParentPanelHandler(this.bossPanelManager.getMainDropTableEditMenu(), dropTable);
 
-        panelBuilderCounter.getSlotsWith("NewPosition").forEach(slot -> panel.setOnClick(slot, getNewPositionAction(dropTable, giveTableElement)));
-        fillPanel(panel, dropTable, giveTableElement);
-        panel.openFor(player);
+            panelBuilderCounter.getSlotsWith("NewPosition").forEach(slot -> panel.setOnClick(slot, getNewPositionAction(dropTable, giveTableElement)));
+            fillPanel(panel, dropTable, giveTableElement);
+            panel.openFor(player);
+        });
     }
 
     @Override

@@ -2,13 +2,12 @@ package com.songoda.epicbosses.commands.boss;
 
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
+import com.songoda.epicbosses.autospawns.AutoSpawn;
+import com.songoda.epicbosses.autospawns.SpawnType;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.managers.BossDropTableManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
-import com.songoda.epicbosses.managers.files.CommandsFileManager;
-import com.songoda.epicbosses.managers.files.DropTableFileManager;
-import com.songoda.epicbosses.managers.files.MessagesFileManager;
-import com.songoda.epicbosses.managers.files.SkillsFileManager;
+import com.songoda.epicbosses.managers.files.*;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.SkillMode;
 import com.songoda.epicbosses.utils.Message;
@@ -28,9 +27,11 @@ import java.util.List;
  * boss new skill [name] [type] [mode]
  * boss new command [name] [commands]
  * boss new message [name] [message]
+ * boss new autospawn [name] [type]
  */
 public class BossNewCmd extends SubCommand {
 
+    private AutoSpawnFileManager autoSpawnFileManager;
     private DropTableFileManager dropTableFileManager;
     private BossDropTableManager bossDropTableManager;
     private MessagesFileManager messagesFileManager;
@@ -47,6 +48,7 @@ public class BossNewCmd extends SubCommand {
         this.bossDropTableManager = plugin.getBossDropTableManager();
         this.messagesFileManager = plugin.getBossMessagesFileManager();
         this.commandsFileManager = plugin.getBossCommandFileManager();
+        this.autoSpawnFileManager = plugin.getAutoSpawnFileManager();
     }
 
     @Override
@@ -55,6 +57,29 @@ public class BossNewCmd extends SubCommand {
             Message.Boss_New_NoPermission.msg(sender);
             return;
         }
+
+        //--------------------
+        // A U T O   S P A W N
+        //--------------------
+        if(args.length == 4 && args[1].equalsIgnoreCase("autospawn")) {
+            String nameInput = args[2];
+
+            if(this.autoSpawnFileManager.getAutoSpawn(nameInput) != null) {
+                Message.Boss_New_AlreadyExists.msg(sender, "AutoSpawn");
+                return;
+            }
+
+            AutoSpawn autoSpawn = BossAPI.createBaseAutoSpawn(nameInput);
+
+            if(autoSpawn == null) {
+                Message.Boss_New_SomethingWentWrong.msg(sender, "AutoSpawn");
+            } else {
+                Message.Boss_New_AutoSpawn.msg(sender, nameInput);
+            }
+
+            return;
+        }
+
 
         //-------------------
         // C O M M A N D

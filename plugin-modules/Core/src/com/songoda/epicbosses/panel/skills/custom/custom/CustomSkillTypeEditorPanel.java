@@ -9,6 +9,7 @@ import com.songoda.epicbosses.skills.CustomSkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.interfaces.IOtherSkillDataElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
@@ -43,19 +44,21 @@ public class CustomSkillTypeEditorPanel extends SubVariablePanelHandler<Skill, C
 
     @Override
     public void openFor(Player player, Skill skill, CustomSkillElement customSkillElement) {
-        Map<String, String> replaceMap = new HashMap<>();
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        replaceMap.put("{name}", BossAPI.getSkillName(skill));
-        replaceMap.put("{selected}", customSkillElement.getCustom().getType());
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getSkillName(skill));
+            replaceMap.put("{selected}", customSkillElement.getCustom().getType());
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getCustomSkillEditorPanel(), skill);
+            Panel panel = panelBuilder.getPanel()
+                    .setParentPanelHandler(this.bossPanelManager.getCustomSkillEditorPanel(), skill);
 
-        fillPanel(panel, skill, customSkillElement);
+            fillPanel(panel, skill, customSkillElement);
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

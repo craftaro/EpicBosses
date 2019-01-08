@@ -59,12 +59,14 @@ public class PotionEffectTypeEditorPanel extends SubVariablePanelHandler<Skill, 
 
     @Override
     public void openFor(Player player, Skill skill, PotionEffectHolder potionEffectHolder) {
-        Panel panel = getPanelBuilder().getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getCreatePotionEffectMenu(), skill, potionEffectHolder);
+        ServerUtils.get().runTaskAsync(() -> {
+            Panel panel = getPanelBuilder().getPanel()
+                    .setParentPanelHandler(this.bossPanelManager.getCreatePotionEffectMenu(), skill, potionEffectHolder);
 
-        fillPanel(panel, skill, potionEffectHolder);
+            fillPanel(panel, skill, potionEffectHolder);
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

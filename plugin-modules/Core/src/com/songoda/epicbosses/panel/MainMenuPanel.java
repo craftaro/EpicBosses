@@ -81,7 +81,7 @@ public class MainMenuPanel extends PanelHandler {
             if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
                 this.bossPanelManager.getAutoSpawns().openFor(player);
             } else if(event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
-                //TODO: Set up create auto spawn command
+                Message.Boss_New_CreateArgumentsAutoSpawn.msg(event.getWhoClicked());
                 player.closeInventory();
             }
         };

@@ -4,6 +4,7 @@ import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.utils.Message;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.PanelHandler;
@@ -50,32 +51,34 @@ public class AddItemsPanel extends PanelHandler {
 
     @Override
     public void openFor(Player player) {
-        Panel panel = getPanelBuilder().getPanel()
-                .setDestroyWhenDone(true)
-                .setCancelClick(true)
-                .setCancelLowerClick(false);
+        ServerUtils.get().runTaskAsync(() -> {
+            Panel panel = getPanelBuilder().getPanel()
+                    .setDestroyWhenDone(true)
+                    .setCancelClick(true)
+                    .setCancelLowerClick(false);
 
-        panel.setOnClick(event -> {
-            Player playerWhoClicked = (Player) event.getWhoClicked();
-            UUID uuid = playerWhoClicked.getUniqueId();
-            int rawSlot = event.getRawSlot();
-            int slot = event.getSlot();
+            panel.setOnClick(event -> {
+                Player playerWhoClicked = (Player) event.getWhoClicked();
+                UUID uuid = playerWhoClicked.getUniqueId();
+                int rawSlot = event.getRawSlot();
+                int slot = event.getSlot();
 
-            if(panel.isLowerClick(rawSlot)) {
-                if(this.storedItemStacks.containsKey(uuid)) {
-                    Message.Boss_Items_AlreadySet.msg(playerWhoClicked);
-                    return;
+                if(panel.isLowerClick(rawSlot)) {
+                    if(this.storedItemStacks.containsKey(uuid)) {
+                        Message.Boss_Items_AlreadySet.msg(playerWhoClicked);
+                        return;
+                    }
+
+                    ItemStack itemStack = event.getClickedInventory().getItem(slot);
+
+                    this.storedItemStacks.put(uuid, itemStack.clone());
+                    panel.getPanelBuilderCounter().getSlotsWith("SelectedSlot").forEach(s -> event.getInventory().setItem(s, itemStack.clone()));
+                    event.getClickedInventory().setItem(slot, new ItemStack(Material.AIR));
                 }
+            });
 
-                ItemStack itemStack = event.getClickedInventory().getItem(slot);
-
-                this.storedItemStacks.put(uuid, itemStack.clone());
-                panel.getPanelBuilderCounter().getSlotsWith("SelectedSlot").forEach(s -> event.getInventory().setItem(s, itemStack.clone()));
-                event.getClickedInventory().setItem(slot, new ItemStack(Material.AIR));
-            }
+            panel.openFor(player);
         });
-
-        panel.openFor(player);
     }
 
     private ClickAction getSelectedSlotAction(PanelBuilderCounter panelBuilderCounter) {

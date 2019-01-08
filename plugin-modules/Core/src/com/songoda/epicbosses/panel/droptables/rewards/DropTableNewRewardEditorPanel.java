@@ -7,6 +7,7 @@ import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.panel.droptables.rewards.interfaces.IDropTableNewRewardEditor;
 import com.songoda.epicbosses.utils.Message;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
@@ -55,11 +56,13 @@ public abstract class DropTableNewRewardEditorPanel<SubVariable> extends SubVari
 
     @Override
     public void openFor(Player player, DropTable dropTable, SubVariable subVariable) {
-        Panel panel = getPanelBuilder().getPanel()
-                .setParentPanelHandler(getParentPanelHandler(), dropTable, subVariable);
+        ServerUtils.get().runTaskAsync(() -> {
+            Panel panel = getPanelBuilder().getPanel()
+                    .setParentPanelHandler(getParentPanelHandler(), dropTable, subVariable);
 
-        fillPanel(panel, dropTable, subVariable);
-        panel.openFor(player);
+            fillPanel(panel, dropTable, subVariable);
+            panel.openFor(player);
+        });
     }
 
     @Override

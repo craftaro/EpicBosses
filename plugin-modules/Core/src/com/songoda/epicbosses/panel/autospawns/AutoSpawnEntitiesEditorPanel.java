@@ -10,6 +10,7 @@ import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.ObjectUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
@@ -63,17 +64,19 @@ public class AutoSpawnEntitiesEditorPanel extends VariablePanelHandler<AutoSpawn
 
     @Override
     public void openFor(Player player, AutoSpawn autoSpawn) {
-        Map<String, String> replaceMap = new HashMap<>();
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        replaceMap.put("{name}", BossAPI.getAutoSpawnName(autoSpawn));
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getAutoSpawnName(autoSpawn));
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getMainAutoSpawnEditPanel(), autoSpawn);
+            Panel panel = panelBuilder.getPanel()
+                    .setParentPanelHandler(this.bossPanelManager.getMainAutoSpawnEditPanel(), autoSpawn);
 
-        fillPanel(panel, autoSpawn);
-        panel.openFor(player);
+            fillPanel(panel, autoSpawn);
+            panel.openFor(player);
+        });
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.AutoSpawnFileManager;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.ObjectUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
@@ -46,28 +47,30 @@ public class MainAutoSpawnEditorPanel extends VariablePanelHandler<AutoSpawn> {
 
     @Override
     public void openFor(Player player, AutoSpawn autoSpawn) {
-        Map<String, String> replaceMap = new HashMap<>();
-        String type = ObjectUtils.getValue(autoSpawn.getType(), "INTERVAL");
-        String editing = ""+ObjectUtils.getValue(autoSpawn.isEditing(), false);
-        String entities = StringUtils.get().appendList(autoSpawn.getEntities());
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            String type = ObjectUtils.getValue(autoSpawn.getType(), "INTERVAL");
+            String editing = ""+ObjectUtils.getValue(autoSpawn.isEditing(), false);
+            String entities = StringUtils.get().appendList(autoSpawn.getEntities());
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        replaceMap.put("{name}", BossAPI.getAutoSpawnName(autoSpawn));
-        replaceMap.put("{type}", type);
-        replaceMap.put("{editing}", editing);
-        replaceMap.put("{entities}", entities);
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getAutoSpawnName(autoSpawn));
+            replaceMap.put("{type}", type);
+            replaceMap.put("{editing}", editing);
+            replaceMap.put("{entities}", entities);
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel();
-        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+            Panel panel = panelBuilder.getPanel();
+            PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
-        counter.getSlotsWith("Editing").forEach(slot -> panel.setOnClick(slot, getEditingAction(autoSpawn)));
-        counter.getSlotsWith("SpecialSettings").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnSpecialSettingsEditorPanel().openFor(player, autoSpawn)));
-        counter.getSlotsWith("Type").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnTypeEditorPanel().openFor(player, autoSpawn)));
-        counter.getSlotsWith("Entities").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnEntitiesEditPanel().openFor(player, autoSpawn)));
-        counter.getSlotsWith("CustomSettings").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnCustomSettingsEditorPanel().openFor(player, autoSpawn)));
+            counter.getSlotsWith("Editing").forEach(slot -> panel.setOnClick(slot, getEditingAction(autoSpawn)));
+            counter.getSlotsWith("SpecialSettings").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnSpecialSettingsEditorPanel().openFor(player, autoSpawn)));
+            counter.getSlotsWith("Type").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnTypeEditorPanel().openFor(player, autoSpawn)));
+            counter.getSlotsWith("Entities").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnEntitiesEditPanel().openFor(player, autoSpawn)));
+            counter.getSlotsWith("CustomSettings").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnCustomSettingsEditorPanel().openFor(player, autoSpawn)));
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

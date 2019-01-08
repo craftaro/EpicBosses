@@ -10,6 +10,7 @@ import com.songoda.epicbosses.managers.files.CommandsFileManager;
 import com.songoda.epicbosses.managers.files.DropTableFileManager;
 import com.songoda.epicbosses.panel.droptables.types.give.handlers.GiveRewardEditHandler;
 import com.songoda.epicbosses.utils.Message;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
@@ -67,11 +68,13 @@ public class GiveCommandNewRewardPanel extends SubVariablePanelHandler<DropTable
 
     @Override
     public void openFor(Player player, DropTable dropTable, GiveRewardEditHandler giveRewardEditHandler) {
-        Panel panel = getPanelBuilder().getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getGiveCommandRewardListPanel(), dropTable, giveRewardEditHandler);
+        ServerUtils.get().runTaskAsync(() -> {
+            Panel panel = getPanelBuilder().getPanel()
+                    .setParentPanelHandler(this.bossPanelManager.getGiveCommandRewardListPanel(), dropTable, giveRewardEditHandler);
 
-        fillPanel(panel, dropTable, giveRewardEditHandler);
-        panel.openFor(player);
+            fillPanel(panel, dropTable, giveRewardEditHandler);
+            panel.openFor(player);
+        });
     }
 
     @Override

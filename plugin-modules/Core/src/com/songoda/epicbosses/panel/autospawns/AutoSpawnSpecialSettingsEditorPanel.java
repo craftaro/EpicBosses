@@ -9,6 +9,7 @@ import com.songoda.epicbosses.managers.files.AutoSpawnFileManager;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ObjectUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
@@ -29,13 +30,11 @@ import java.util.Map;
 public class AutoSpawnSpecialSettingsEditorPanel extends VariablePanelHandler<AutoSpawn> {
 
     private AutoSpawnFileManager autoSpawnFileManager;
-    private CustomBosses plugin;
 
     public AutoSpawnSpecialSettingsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.autoSpawnFileManager = plugin.getAutoSpawnFileManager();
-        this.plugin = plugin;
     }
 
     @Override
@@ -45,37 +44,39 @@ public class AutoSpawnSpecialSettingsEditorPanel extends VariablePanelHandler<Au
 
     @Override
     public void openFor(Player player, AutoSpawn autoSpawn) {
-        Map<String, String> replaceMap = new HashMap<>();
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-        AutoSpawnSettings autoSpawnSettings = autoSpawn.getAutoSpawnSettings();
-        String shuffleEntities = ObjectUtils.getValue(autoSpawnSettings.getShuffleEntitiesList(), false)+"";
-        String maxAliveAtOnce = NumberUtils.get().formatDouble(ObjectUtils.getValue(autoSpawnSettings.getMaxAliveAtOnce(), 1));
-        String amountPerSpawn = NumberUtils.get().formatDouble(ObjectUtils.getValue(autoSpawnSettings.getAmountPerSpawn(), 1));
-        String chunkIsntLoaded = ObjectUtils.getValue(autoSpawnSettings.getSpawnWhenChunkIsntLoaded(), false)+"";
-        String overrideSpawnMessage = ObjectUtils.getValue(autoSpawnSettings.getOverrideDefaultSpawnMessage(), false)+"";
-        String spawnMessage = ObjectUtils.getValue(autoSpawnSettings.getSpawnMessage(), "");
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+            AutoSpawnSettings autoSpawnSettings = autoSpawn.getAutoSpawnSettings();
+            String shuffleEntities = ObjectUtils.getValue(autoSpawnSettings.getShuffleEntitiesList(), false)+"";
+            String maxAliveAtOnce = NumberUtils.get().formatDouble(ObjectUtils.getValue(autoSpawnSettings.getMaxAliveAtOnce(), 1));
+            String amountPerSpawn = NumberUtils.get().formatDouble(ObjectUtils.getValue(autoSpawnSettings.getAmountPerSpawn(), 1));
+            String chunkIsntLoaded = ObjectUtils.getValue(autoSpawnSettings.getSpawnWhenChunkIsntLoaded(), false)+"";
+            String overrideSpawnMessage = ObjectUtils.getValue(autoSpawnSettings.getOverrideDefaultSpawnMessage(), false)+"";
+            String spawnMessage = ObjectUtils.getValue(autoSpawnSettings.getSpawnMessage(), "");
 
-        replaceMap.put("{name}", BossAPI.getAutoSpawnName(autoSpawn));
-        replaceMap.put("{shuffleEntities}", shuffleEntities);
-        replaceMap.put("{maxAliveEntities}", maxAliveAtOnce);
-        replaceMap.put("{amountPerSpawn}", amountPerSpawn);
-        replaceMap.put("{chunkIsntLoaded}", chunkIsntLoaded);
-        replaceMap.put("{overrideDefaultMessage}", overrideSpawnMessage);
-        replaceMap.put("{spawnMessage}", spawnMessage);
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getAutoSpawnName(autoSpawn));
+            replaceMap.put("{shuffleEntities}", shuffleEntities);
+            replaceMap.put("{maxAliveEntities}", maxAliveAtOnce);
+            replaceMap.put("{amountPerSpawn}", amountPerSpawn);
+            replaceMap.put("{chunkIsntLoaded}", chunkIsntLoaded);
+            replaceMap.put("{overrideDefaultMessage}", overrideSpawnMessage);
+            replaceMap.put("{spawnMessage}", spawnMessage);
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getMainAutoSpawnEditPanel(), autoSpawn);
-        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+            Panel panel = panelBuilder.getPanel()
+                    .setParentPanelHandler(this.bossPanelManager.getMainAutoSpawnEditPanel(), autoSpawn);
+            PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
-        counter.getSlotsWith("ShuffleEntities").forEach(slot -> panel.setOnClick(slot, getShuffleEntitiesButton(autoSpawn)));
-        counter.getSlotsWith("MaxAliveEntities").forEach(slot -> panel.setOnClick(slot, getMaxAliveEntitiesButton(autoSpawn)));
-        counter.getSlotsWith("AmountPerSpawn").forEach(slot -> panel.setOnClick(slot, getAmountPerSpawnButton(autoSpawn)));
-        counter.getSlotsWith("ChunkIsntLoaded").forEach(slot -> panel.setOnClick(slot, getChunkIsntLoadedButton(autoSpawn)));
-        counter.getSlotsWith("OverrideSpawnMessage").forEach(slot -> panel.setOnClick(slot, getOverrideSpawnMessageButton(autoSpawn)));
-        counter.getSlotsWith("SpawnMessage").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnMessageEditorPanel().openFor((Player) event.getWhoClicked(), autoSpawn)));
+            counter.getSlotsWith("ShuffleEntities").forEach(slot -> panel.setOnClick(slot, getShuffleEntitiesButton(autoSpawn)));
+            counter.getSlotsWith("MaxAliveEntities").forEach(slot -> panel.setOnClick(slot, getMaxAliveEntitiesButton(autoSpawn)));
+            counter.getSlotsWith("AmountPerSpawn").forEach(slot -> panel.setOnClick(slot, getAmountPerSpawnButton(autoSpawn)));
+            counter.getSlotsWith("ChunkIsntLoaded").forEach(slot -> panel.setOnClick(slot, getChunkIsntLoadedButton(autoSpawn)));
+            counter.getSlotsWith("OverrideSpawnMessage").forEach(slot -> panel.setOnClick(slot, getOverrideSpawnMessageButton(autoSpawn)));
+            counter.getSlotsWith("SpawnMessage").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAutoSpawnMessageEditorPanel().openFor((Player) event.getWhoClicked(), autoSpawn)));
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

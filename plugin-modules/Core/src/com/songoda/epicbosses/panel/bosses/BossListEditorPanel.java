@@ -9,6 +9,7 @@ import com.songoda.epicbosses.entity.elements.HandsElement;
 import com.songoda.epicbosses.entity.elements.MainStatsElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
@@ -88,37 +89,39 @@ public abstract class BossListEditorPanel extends VariablePanelHandler<BossEntit
 
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
-        Map<String, String> replaceMap = new HashMap<>();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
 
-        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
 
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        panelBuilder.addReplaceData(replaceMap);
+            panelBuilder.addReplaceData(replaceMap);
 
-        int nextNumber = bossEntity.getEntityStats().size() + 1;
-        Panel panel = panelBuilder.getPanel()
-                .setDestroyWhenDone(true)
-                .setCancelClick(true)
-                .setCancelLowerClick(true)
-                .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
+            int nextNumber = bossEntity.getEntityStats().size() + 1;
+            Panel panel = panelBuilder.getPanel()
+                    .setDestroyWhenDone(true)
+                    .setCancelClick(true)
+                    .setCancelLowerClick(true)
+                    .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
 
-        fillPanel(panel, bossEntity);
+            fillPanel(panel, bossEntity);
 
-        panel.getPanelBuilderCounter().getSlotsWith("CreateEntity").forEach(slot -> panel.setOnClick(slot, event -> {
-            MainStatsElement mainStatsElement = new MainStatsElement(nextNumber, "", 50.0, "");
-            EquipmentElement equipmentElement = new EquipmentElement("", "", "", "");
-            HandsElement handsElement = new HandsElement("", "");
+            panel.getPanelBuilderCounter().getSlotsWith("CreateEntity").forEach(slot -> panel.setOnClick(slot, event -> {
+                MainStatsElement mainStatsElement = new MainStatsElement(nextNumber, "", 50.0, "");
+                EquipmentElement equipmentElement = new EquipmentElement("", "", "", "");
+                HandsElement handsElement = new HandsElement("", "");
 
-            EntityStatsElement entityStatsElement = new EntityStatsElement(mainStatsElement, equipmentElement, handsElement, new ArrayList<>());
+                EntityStatsElement entityStatsElement = new EntityStatsElement(mainStatsElement, equipmentElement, handsElement, new ArrayList<>());
 
-            bossEntity.getEntityStats().add(entityStatsElement);
-            this.bossesFileManager.save();
+                bossEntity.getEntityStats().add(entityStatsElement);
+                this.bossesFileManager.save();
 
-            openFor((Player) event.getWhoClicked(), bossEntity);
-        }));
+                openFor((Player) event.getWhoClicked(), bossEntity);
+            }));
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

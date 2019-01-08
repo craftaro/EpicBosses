@@ -10,6 +10,7 @@ import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.utils.EntityFinder;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
@@ -44,38 +45,39 @@ public class StatisticMainEditorPanel extends SubVariablePanelHandler<BossEntity
 
     @Override
     public void openFor(Player player, BossEntity bossEntity, EntityStatsElement entityStatsElement) {
-        Map<String, String> replaceMap = new HashMap<>();
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-        String displayName = entityStatsElement.getMainStats().getDisplayName();
-        Double health = entityStatsElement.getMainStats().getHealth();
-        PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+            String displayName = entityStatsElement.getMainStats().getDisplayName();
+            Double health = entityStatsElement.getMainStats().getHealth();
+            PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
 
-        if(health == null) health = 0.0;
-        if(displayName == null) displayName = "N/A";
+            if(health == null) health = 0.0;
+            if(displayName == null) displayName = "N/A";
 
-        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-        replaceMap.put("{health}", NumberUtils.get().formatDouble(health));
-        replaceMap.put("{displayName}", displayName);
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+            replaceMap.put("{health}", NumberUtils.get().formatDouble(health));
+            replaceMap.put("{displayName}", displayName);
+            panelBuilder.addReplaceData(replaceMap);
 
-        counter
-                .addSlotCounter("DisplayName")
-                .addSlotCounter("EntityType")
-                .addSlotCounter("Health");
+            counter.addSlotCounter("DisplayName")
+                    .addSlotCounter("EntityType")
+                    .addSlotCounter("Health");
 
-        Panel panel = panelBuilder.getPanel()
-                .setDestroyWhenDone(true)
-                .setCancelClick(true)
-                .setCancelLowerClick(true)
-                .setParentPanelHandler(this.bossPanelManager.getStatisticListEditMenu(), bossEntity);
+            Panel panel = panelBuilder.getPanel()
+                    .setDestroyWhenDone(true)
+                    .setCancelClick(true)
+                    .setCancelLowerClick(true)
+                    .setParentPanelHandler(this.bossPanelManager.getStatisticListEditMenu(), bossEntity);
 
-        fillPanel(panel, bossEntity, entityStatsElement);
+            fillPanel(panel, bossEntity, entityStatsElement);
 
-        counter.getSlotsWith("DisplayName").forEach(slot -> panel.setOnClick(slot, getDisplayNameAction(bossEntity, entityStatsElement)));
-        counter.getSlotsWith("EntityType").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getEntityTypeEditMenu().openFor((Player) event.getWhoClicked(), bossEntity, entityStatsElement)));
-        counter.getSlotsWith("Health").forEach(slot -> panel.setOnClick(slot, getHealthAction(bossEntity, entityStatsElement)));
+            counter.getSlotsWith("DisplayName").forEach(slot -> panel.setOnClick(slot, getDisplayNameAction(bossEntity, entityStatsElement)));
+            counter.getSlotsWith("EntityType").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getEntityTypeEditMenu().openFor((Player) event.getWhoClicked(), bossEntity, entityStatsElement)));
+            counter.getSlotsWith("Health").forEach(slot -> panel.setOnClick(slot, getHealthAction(bossEntity, entityStatsElement)));
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

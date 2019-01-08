@@ -5,6 +5,7 @@ import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.CommandsFileManager;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
@@ -59,21 +60,23 @@ public class OnSpawnCommandEditor extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
-        Map<String, String> replaceMap = new HashMap<>();
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel()
-                .setDestroyWhenDone(true)
-                .setCancelClick(true)
-                .setCancelLowerClick(true)
-                .setParentPanelHandler(this.bossPanelManager.getCommandsMainEditMenu(), bossEntity);
+            Panel panel = panelBuilder.getPanel()
+                    .setDestroyWhenDone(true)
+                    .setCancelClick(true)
+                    .setCancelLowerClick(true)
+                    .setParentPanelHandler(this.bossPanelManager.getCommandsMainEditMenu(), bossEntity);
 
-        fillPanel(panel, bossEntity);
+            fillPanel(panel, bossEntity);
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

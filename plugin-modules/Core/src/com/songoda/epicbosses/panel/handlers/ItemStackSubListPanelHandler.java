@@ -7,6 +7,7 @@ import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
@@ -71,32 +72,34 @@ public abstract class ItemStackSubListPanelHandler extends SubVariablePanelHandl
 
     @Override
     public void openFor(Player player, BossEntity bossEntity, EntityStatsElement entityStatsElement) {
-        Map<String, String> replaceMap = new HashMap<>();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
 
-        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
 
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        panelBuilder.addReplaceData(replaceMap);
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel()
-                .setDestroyWhenDone(true)
-                .setCancelLowerClick(true)
-                .setCancelClick(true)
-                .setParentPanelHandler(getParentHolder(), bossEntity, entityStatsElement);
-        PanelBuilderCounter panelBuilderCounter = panel.getPanelBuilderCounter();
+            Panel panel = panelBuilder.getPanel()
+                    .setDestroyWhenDone(true)
+                    .setCancelLowerClick(true)
+                    .setCancelClick(true)
+                    .setParentPanelHandler(getParentHolder(), bossEntity, entityStatsElement);
+            PanelBuilderCounter panelBuilderCounter = panel.getPanelBuilderCounter();
 
-        panelBuilderCounter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAddItemsMenu().openFor(player)));
-        panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, event -> {
-            getUpdateAction(entityStatsElement, "");
-            this.bossesFileManager.save();
+            panelBuilderCounter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAddItemsMenu().openFor(player)));
+            panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, event -> {
+                getUpdateAction(entityStatsElement, "");
+                this.bossesFileManager.save();
 
-            openFor((Player) event.getWhoClicked(), bossEntity, entityStatsElement);
-        }));
+                openFor((Player) event.getWhoClicked(), bossEntity, entityStatsElement);
+            }));
 
-        fillPanel(panel, bossEntity, entityStatsElement);
+            fillPanel(panel, bossEntity, entityStatsElement);
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

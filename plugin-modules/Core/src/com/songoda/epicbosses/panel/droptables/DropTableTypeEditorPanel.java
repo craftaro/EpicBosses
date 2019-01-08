@@ -4,6 +4,7 @@ import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.managers.BossPanelManager;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
@@ -37,21 +38,23 @@ public class DropTableTypeEditorPanel extends VariablePanelHandler<DropTable> {
 
     @Override
     public void openFor(Player player, DropTable dropTable) {
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-        Map<String, String> replaceMap = new HashMap<>();
+        ServerUtils.get().runTaskAsync(() -> {
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+            Map<String, String> replaceMap = new HashMap<>();
 
-        replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
+            panelBuilder.addReplaceData(replaceMap);
 
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-        Panel panel = panelBuilder.getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getMainDropTableEditMenu(), dropTable);
+            PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
+            Panel panel = panelBuilder.getPanel()
+                    .setParentPanelHandler(this.bossPanelManager.getMainDropTableEditMenu(), dropTable);
 
-        panelBuilderCounter.getSlotsWith("Spray").forEach(slot -> panel.setOnClick(slot, getSprayAction(dropTable)));
-        panelBuilderCounter.getSlotsWith("Drop").forEach(slot -> panel.setOnClick(slot, getDropAction(dropTable)));
-        panelBuilderCounter.getSlotsWith("Give").forEach(slot -> panel.setOnClick(slot, getGiveAction(dropTable)));
+            panelBuilderCounter.getSlotsWith("Spray").forEach(slot -> panel.setOnClick(slot, getSprayAction(dropTable)));
+            panelBuilderCounter.getSlotsWith("Drop").forEach(slot -> panel.setOnClick(slot, getDropAction(dropTable)));
+            panelBuilderCounter.getSlotsWith("Give").forEach(slot -> panel.setOnClick(slot, getGiveAction(dropTable)));
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

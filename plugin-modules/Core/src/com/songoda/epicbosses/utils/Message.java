@@ -115,7 +115,7 @@ public enum Message {
             "&7&o(To add a new line use &7||&7&o in-between the messages.)\n" +
             "&b/boss new message [name] [messages] &8» &7Used to create a new message section.\n" +
             "&7&o(To add a new line use &7||&7&o in-between the messages.)\n" +
-            "&7\n" +
+            "&7/boss new autospawn [name] &8» &7Used to create a new auto spawn section.\n" +
             "&7\n" +
             "&7\n" +
             "&7\n" +
@@ -165,11 +165,13 @@ public enum Message {
     Boss_New_CreateArgumentsSkill("&b&lEpicBosses &8» &7Create a new skill with the command &f/boss new skill [name] [type] [mode]&7."),
     Boss_New_CreateArgumentsMessage("&b&lEpicBosses &8» &7Create a new message with the command &f/boss new message [name] [message(s)]. \n&7&oUse &f|| &7&oto reference a new line."),
     Boss_New_CreateArgumentsCommand("&b&lEpicBosses &8» &7Create a new command with the command &f/boss new command [name] [command(s)]. \n&7&oUse &f|| &7&oto reference a new line."),
+    Boss_New_CreateArgumentsAutoSpawn("&b&lEpicBosses &8» &7Create a new auto spawn with the command &f/boss new autospawn [name]."),
     Boss_New_AlreadyExists("&c&l(!) &cThe specified {0} name already exists. Please try another name."),
     Boss_New_InvalidDropTableType("&c&l(!) &cThe specified DropTable type is invalid. Please use &fGive, Drop, Spray&c."),
     Boss_New_InvalidSkillType("&c&l(!) &cThe specified Skill type is invalid. Please use &fCustom, Command, Group, Potion&c."),
     Boss_New_InvalidSkillMode("&c&l(!) &cThe specified Skill mode is invalid. Please use &fAll, Random, One, Boss&c."),
     Boss_New_DropTable("&b&lEpicBosses &8» &7You have created a new drop table with the name &f{0}&7 and type &f{1}&7."),
+    Boss_New_AutoSpawn("&b&lEpicBosses &8» &7You have created a new auto spawn with the name &f{0}&7."),
     Boss_New_Skill("&b&lEpicBosses &8» &7You have created a new skill with the name &f{0}&7 and type &f{1}&7."),
     Boss_New_Command("&b&lEpicBosses &8» &7You have created a new command with the name &f{0}&7."),
     Boss_New_Message("&b&lEpicBosses &8» &7You have created a new message with the name &f{0}&7."),

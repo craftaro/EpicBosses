@@ -7,6 +7,7 @@ import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.SkillsFileManager;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
@@ -60,21 +61,23 @@ public class SkillListEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
-        Map<String, String> replaceMap = new HashMap<>();
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel()
-                .setDestroyWhenDone(true)
-                .setCancelClick(true)
-                .setCancelLowerClick(true)
-                .setParentPanelHandler(this.bossPanelManager.getSkillsBossEditMenu(), bossEntity);
+            Panel panel = panelBuilder.getPanel()
+                    .setDestroyWhenDone(true)
+                    .setCancelClick(true)
+                    .setCancelLowerClick(true)
+                    .setParentPanelHandler(this.bossPanelManager.getSkillsBossEditMenu(), bossEntity);
 
-        fillPanel(panel, bossEntity);
+            fillPanel(panel, bossEntity);
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

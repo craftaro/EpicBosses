@@ -1,6 +1,7 @@
 package com.songoda.epicbosses.panel.handlers;
 
 import com.songoda.epicbosses.managers.BossPanelManager;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.PanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
@@ -24,14 +25,16 @@ public abstract class MainListPanelHandler extends PanelHandler {
 
     @Override
     public void openFor(Player player) {
-        Panel panel = getPanelBuilder().getPanel()
-                .setDestroyWhenDone(true)
-                .setCancelClick(true)
-                .setCancelLowerClick(true)
-                .setParentPanel(this.bossPanelManager.getMainMenu().getPanel());
+        ServerUtils.get().runTaskAsync(() -> {
+            Panel panel = getPanelBuilder().getPanel()
+                    .setDestroyWhenDone(true)
+                    .setCancelClick(true)
+                    .setCancelLowerClick(true)
+                    .setParentPanel(this.bossPanelManager.getMainMenu().getPanel());
 
-        fillPanel(panel);
+            fillPanel(panel);
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 }

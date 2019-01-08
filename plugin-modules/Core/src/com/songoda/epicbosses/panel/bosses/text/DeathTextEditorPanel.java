@@ -8,6 +8,7 @@ import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
@@ -41,39 +42,41 @@ public class DeathTextEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
-        Map<String, String> replaceMap = new HashMap<>();
-        OnDeathMessageElement onDeathMessageElement = bossEntity.getMessages().getOnDeath();
-        Integer radius = onDeathMessageElement.getRadius();
-        Integer onlyShow = onDeathMessageElement.getOnlyShow();
-        String mainMessage = onDeathMessageElement.getMessage();
-        String positionMessage = onDeathMessageElement.getPositionMessage();
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            OnDeathMessageElement onDeathMessageElement = bossEntity.getMessages().getOnDeath();
+            Integer radius = onDeathMessageElement.getRadius();
+            Integer onlyShow = onDeathMessageElement.getOnlyShow();
+            String mainMessage = onDeathMessageElement.getMessage();
+            String positionMessage = onDeathMessageElement.getPositionMessage();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        if(radius == null) radius = 0;
-        if(onlyShow == null) onlyShow = 3;
-        if(mainMessage == null) mainMessage = "N/A";
-        if(positionMessage == null) positionMessage = "N/A";
+            if(radius == null) radius = 0;
+            if(onlyShow == null) onlyShow = 3;
+            if(mainMessage == null) mainMessage = "N/A";
+            if(positionMessage == null) positionMessage = "N/A";
 
-        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-        replaceMap.put("{radius}", NumberUtils.get().formatDouble(radius));
-        replaceMap.put("{mainMessage}", mainMessage);
-        replaceMap.put("{positionMessage}", positionMessage);
-        replaceMap.put("{onlyShow}", NumberUtils.get().formatDouble(onlyShow));
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+            replaceMap.put("{radius}", NumberUtils.get().formatDouble(radius));
+            replaceMap.put("{mainMessage}", mainMessage);
+            replaceMap.put("{positionMessage}", positionMessage);
+            replaceMap.put("{onlyShow}", NumberUtils.get().formatDouble(onlyShow));
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel()
-                .setDestroyWhenDone(true)
-                .setCancelClick(true)
-                .setCancelLowerClick(true)
-                .setParentPanelHandler(this.bossPanelManager.getMainTextEditMenu(), bossEntity);
-        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+            Panel panel = panelBuilder.getPanel()
+                    .setDestroyWhenDone(true)
+                    .setCancelClick(true)
+                    .setCancelLowerClick(true)
+                    .setParentPanelHandler(this.bossPanelManager.getMainTextEditMenu(), bossEntity);
+            PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
-        counter.getSlotsWith("MainMessage").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnDeathTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
-        counter.getSlotsWith("Radius").forEach(slot -> panel.setOnClick(slot, getRadiusAction(bossEntity)));
-        counter.getSlotsWith("OnlyShow").forEach(slot -> panel.setOnClick(slot, getOnlyShowAction(bossEntity)));
-        counter.getSlotsWith("PositionMessage").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnDeathPositionTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
+            counter.getSlotsWith("MainMessage").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnDeathTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
+            counter.getSlotsWith("Radius").forEach(slot -> panel.setOnClick(slot, getRadiusAction(bossEntity)));
+            counter.getSlotsWith("OnlyShow").forEach(slot -> panel.setOnClick(slot, getOnlyShowAction(bossEntity)));
+            counter.getSlotsWith("PositionMessage").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnDeathPositionTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

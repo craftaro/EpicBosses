@@ -7,6 +7,7 @@ import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
@@ -40,28 +41,30 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
-        Map<String, String> replaceMap = new HashMap<>();
-        Double chance = bossEntity.getSkills().getOverallChance();
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            Double chance = bossEntity.getSkills().getOverallChance();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        if(chance == null) chance = 0.0;
+            if(chance == null) chance = 0.0;
 
-        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-        replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+            replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel()
-                .setDestroyWhenDone(true)
-                .setCancelClick(true)
-                .setCancelLowerClick(true)
-                .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
-        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+            Panel panel = panelBuilder.getPanel()
+                    .setDestroyWhenDone(true)
+                    .setCancelClick(true)
+                    .setCancelLowerClick(true)
+                    .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
+            PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
-        counter.getSlotsWith("OverallChance").forEach(slot -> panel.setOnClick(slot, getOverallChanceAction(bossEntity)));
-        counter.getSlotsWith("SkillList").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getSkillListBossEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
-        counter.getSlotsWith("Message").forEach(slot -> panel.setOnClick(slot, getMessageAction()));
+            counter.getSlotsWith("OverallChance").forEach(slot -> panel.setOnClick(slot, getOverallChanceAction(bossEntity)));
+            counter.getSlotsWith("SkillList").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getSkillListBossEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
+            counter.getSlotsWith("Message").forEach(slot -> panel.setOnClick(slot, getMessageAction()));
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

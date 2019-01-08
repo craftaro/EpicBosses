@@ -7,6 +7,7 @@ import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.panel.droptables.types.give.handlers.GiveRewardEditHandler;
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
@@ -57,20 +58,22 @@ public class GiveCommandRewardListPanel extends SubVariablePanelHandler<DropTabl
 
     @Override
     public void openFor(Player player, DropTable dropTable, GiveRewardEditHandler giveRewardEditHandler) {
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-        Map<String, String> replaceMap = new HashMap<>();
+        ServerUtils.get().runTaskAsync(() -> {
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+            Map<String, String> replaceMap = new HashMap<>();
 
-        replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
+            panelBuilder.addReplaceData(replaceMap);
 
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-        Panel panel = panelBuilder.getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getGiveRewardMainEditMenu(), dropTable, giveRewardEditHandler);
+            PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
+            Panel panel = panelBuilder.getPanel()
+                    .setParentPanelHandler(this.bossPanelManager.getGiveRewardMainEditMenu(), dropTable, giveRewardEditHandler);
 
-        panelBuilderCounter.getSlotsWith("NewReward").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getGiveCommandNewRewardPanel().openFor((Player) event.getWhoClicked(), dropTable, giveRewardEditHandler)));
-        fillPanel(panel, dropTable, giveRewardEditHandler);
+            panelBuilderCounter.getSlotsWith("NewReward").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getGiveCommandNewRewardPanel().openFor((Player) event.getWhoClicked(), dropTable, giveRewardEditHandler)));
+            fillPanel(panel, dropTable, giveRewardEditHandler);
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

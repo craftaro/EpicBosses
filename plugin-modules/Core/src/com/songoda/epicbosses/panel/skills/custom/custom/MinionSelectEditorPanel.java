@@ -10,6 +10,7 @@ import com.songoda.epicbosses.managers.files.MinionsFileManager;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.elements.CustomMinionSkillElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
@@ -65,11 +66,13 @@ public class MinionSelectEditorPanel extends SubVariablePanelHandler<Skill, Cust
 
     @Override
     public void openFor(Player player, Skill skill, CustomSkillElement customSkillElement) {
-        Panel panel = getPanelBuilder().getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getSpecialSettingsEditorMenu(), skill, customSkillElement);
+        ServerUtils.get().runTaskAsync(() -> {
+            Panel panel = getPanelBuilder().getPanel()
+                    .setParentPanelHandler(this.bossPanelManager.getSpecialSettingsEditorMenu(), skill, customSkillElement);
 
-        fillPanel(panel, skill, customSkillElement);
-        panel.openFor(player);
+            fillPanel(panel, skill, customSkillElement);
+            panel.openFor(player);
+        });
     }
 
     @Override

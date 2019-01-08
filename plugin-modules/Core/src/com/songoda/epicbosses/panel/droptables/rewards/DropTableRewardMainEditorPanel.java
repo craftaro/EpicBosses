@@ -9,6 +9,7 @@ import com.songoda.epicbosses.panel.droptables.rewards.interfaces.IDropTableRewa
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ObjectUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubSubVariablePanelHandler;
@@ -37,22 +38,24 @@ public abstract class DropTableRewardMainEditorPanel<SubVariable> extends SubSub
 
     @Override
     public void openFor(Player player, DropTable dropTable, SubVariable subVariable, String s) {
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-        Map<String, String> replaceMap = new HashMap<>();
-        double chance = ObjectUtils.getValue(getChance(subVariable, s), 50.0);
+        ServerUtils.get().runTaskAsync(() -> {
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+            Map<String, String> replaceMap = new HashMap<>();
+            double chance = ObjectUtils.getValue(getChance(subVariable, s), 50.0);
 
-        replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
-        replaceMap.put("{itemStack}", s);
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
+            replaceMap.put("{itemStack}", s);
+            panelBuilder.addReplaceData(replaceMap);
 
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-        Panel panel = panelBuilder.getPanel()
-                .setParentPanelHandler(getParentPanelHandler(), dropTable, subVariable);
+            PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
+            Panel panel = panelBuilder.getPanel()
+                    .setParentPanelHandler(getParentPanelHandler(), dropTable, subVariable);
 
-        panelBuilderCounter.getSlotsWith("Chance").forEach(slot -> panel.setOnClick(slot, getChanceAction(dropTable, subVariable, s)));
-        panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, getRemoveAction(dropTable, subVariable, s)));
+            panelBuilderCounter.getSlotsWith("Chance").forEach(slot -> panel.setOnClick(slot, getChanceAction(dropTable, subVariable, s)));
+            panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, getRemoveAction(dropTable, subVariable, s)));
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

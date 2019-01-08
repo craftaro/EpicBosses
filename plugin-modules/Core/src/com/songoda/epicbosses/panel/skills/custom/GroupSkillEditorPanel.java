@@ -8,6 +8,7 @@ import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.types.GroupSkillElement;
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
@@ -60,18 +61,20 @@ public class GroupSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     @Override
     public void openFor(Player player, Skill skill) {
-        Map<String, String> replaceMap = new HashMap<>();
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        replaceMap.put("{name}", BossAPI.getSkillName(skill));
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getSkillName(skill));
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
+            Panel panel = panelBuilder.getPanel()
+                    .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
 
-        fillPanel(panel, skill);
+            fillPanel(panel, skill);
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

@@ -4,6 +4,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
+import com.songoda.epicbosses.autospawns.settings.AutoSpawnSettings;
+import com.songoda.epicbosses.autospawns.types.IntervalSpawnElement;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.droptable.elements.DropTableElement;
 import com.songoda.epicbosses.droptable.elements.GiveTableElement;
@@ -431,6 +433,28 @@ public class BossAPI {
         PLUGIN.getMinionsFileManager().save();
 
         return minionEntity;
+    }
+
+    /**
+     * Used to create a new base auto spawn
+     * with the specified arguments.
+     *
+     * @param name - name of the auto spawn.
+     * @return an instance of the auto spawn if successful
+     */
+    public static AutoSpawn createBaseAutoSpawn(String name) {
+        if(PLUGIN.getAutoSpawnFileManager().getAutoSpawn(name) != null) {
+            Debug.AUTOSPAWN_NAME_EXISTS.debug(name);
+            return null;
+        }
+
+        IntervalSpawnElement intervalSpawnElement = new IntervalSpawnElement("world,0,100,0", "{boss_" + name + "}", 30, false);
+        AutoSpawn autoSpawn = new AutoSpawn(true, new ArrayList<>(), new AutoSpawnSettings(1, 1, false, false));
+
+        autoSpawn.setCustomData(BossAPI.convertObjectToJsonObject(intervalSpawnElement));
+        PLUGIN.getAutoSpawnFileManager().saveAutoSpawn(name, autoSpawn);
+
+        return autoSpawn;
     }
 
     /**

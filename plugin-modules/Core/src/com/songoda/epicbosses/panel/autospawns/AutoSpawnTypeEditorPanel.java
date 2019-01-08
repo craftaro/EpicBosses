@@ -7,6 +7,7 @@ import com.songoda.epicbosses.autospawns.types.IntervalSpawnElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.AutoSpawnFileManager;
 import com.songoda.epicbosses.utils.Message;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
@@ -39,22 +40,24 @@ public class AutoSpawnTypeEditorPanel extends VariablePanelHandler<AutoSpawn> {
 
     @Override
     public void openFor(Player player, AutoSpawn autoSpawn) {
-        Map<String, String> replaceMap = new HashMap<>();
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        replaceMap.put("{name}", BossAPI.getAutoSpawnName(autoSpawn));
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getAutoSpawnName(autoSpawn));
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getMainAutoSpawnEditPanel(), autoSpawn);
-        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+            Panel panel = panelBuilder.getPanel()
+                    .setParentPanelHandler(this.bossPanelManager.getMainAutoSpawnEditPanel(), autoSpawn);
+            PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
-        counter.getSlotsWith("IntervalSystem").forEach(slot -> panel.setOnClick(slot, getIntervalSystem(autoSpawn)));
-        counter.getSlotsWith("WildernessSystem");
-        counter.getSlotsWith("BiomeSystem");
-        counter.getSlotsWith("SpawnerSystem");
+            counter.getSlotsWith("IntervalSystem").forEach(slot -> panel.setOnClick(slot, getIntervalSystem(autoSpawn)));
+            counter.getSlotsWith("WildernessSystem");
+            counter.getSlotsWith("BiomeSystem");
+            counter.getSlotsWith("SpawnerSystem");
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.songoda.epicbosses.panel.bosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
@@ -30,24 +31,26 @@ public class TextMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
-        Map<String, String> replaceMap = new HashMap<>();
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel()
-                .setDestroyWhenDone(true)
-                .setCancelClick(true)
-                .setCancelLowerClick(true)
-                .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
-        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+            Panel panel = panelBuilder.getPanel()
+                    .setDestroyWhenDone(true)
+                    .setCancelClick(true)
+                    .setCancelLowerClick(true)
+                    .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
+            PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
-        counter.getSlotsWith("OnSpawn").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnSpawnSubTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
-        counter.getSlotsWith("OnDeath").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnDeathSubTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
-        counter.getSlotsWith("Taunts").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getMainTauntEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
+            counter.getSlotsWith("OnSpawn").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnSpawnSubTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
+            counter.getSlotsWith("OnDeath").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnDeathSubTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
+            counter.getSlotsWith("Taunts").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getMainTauntEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

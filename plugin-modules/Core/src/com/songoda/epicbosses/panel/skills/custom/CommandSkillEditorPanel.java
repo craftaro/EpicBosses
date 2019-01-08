@@ -8,6 +8,7 @@ import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.elements.SubCommandSkillElement;
 import com.songoda.epicbosses.skills.types.CommandSkillElement;
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
@@ -54,20 +55,22 @@ public class CommandSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     @Override
     public void openFor(Player player, Skill skill) {
-        Map<String, String> replaceMap = new HashMap<>();
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        replaceMap.put("{name}", BossAPI.getSkillName(skill));
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getSkillName(skill));
+            panelBuilder.addReplaceData(replaceMap);
 
-        PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
-        Panel panel = panelBuilder.getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
+            PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
+            Panel panel = panelBuilder.getPanel()
+                    .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
 
-        counter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, getAddNewAction(skill)));
-        fillPanel(panel, skill);
+            counter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, getAddNewAction(skill)));
+            fillPanel(panel, skill);
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override

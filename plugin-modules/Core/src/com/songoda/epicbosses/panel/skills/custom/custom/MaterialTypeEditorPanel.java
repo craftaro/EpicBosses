@@ -4,6 +4,7 @@ import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
@@ -56,11 +57,13 @@ public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Sk
 
     @Override
     public void openFor(Player player, Skill skill, CustomSkillElement customSkillElement) {
-        Panel panel = getPanelBuilder().getPanel()
-                .setParentPanelHandler(getParentHolder(), skill, customSkillElement);
+        ServerUtils.get().runTaskAsync(() -> {
+            Panel panel = getPanelBuilder().getPanel()
+                    .setParentPanelHandler(getParentHolder(), skill, customSkillElement);
 
-        fillPanel(panel, skill, customSkillElement);
-        panel.openFor(player);
+            fillPanel(panel, skill, customSkillElement);
+            panel.openFor(player);
+        });
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.utils.Message;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
@@ -57,17 +58,19 @@ public class AutoSpawnCustomSettingsEditorPanel extends VariablePanelHandler<Aut
 
     @Override
     public void openFor(Player player, AutoSpawn autoSpawn) {
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-        Map<String, String> replaceMap = new HashMap<>();
+        ServerUtils.get().runTaskAsync(() -> {
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+            Map<String, String> replaceMap = new HashMap<>();
 
-        replaceMap.put("{name}", BossAPI.getAutoSpawnName(autoSpawn));
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{name}", BossAPI.getAutoSpawnName(autoSpawn));
+            panelBuilder.addReplaceData(replaceMap);
 
-        Panel panel = panelBuilder.getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getMainAutoSpawnEditPanel(), autoSpawn);
+            Panel panel = panelBuilder.getPanel()
+                    .setParentPanelHandler(this.bossPanelManager.getMainAutoSpawnEditPanel(), autoSpawn);
 
-        fillPanel(panel, autoSpawn);
-        panel.openFor(player);
+            fillPanel(panel, autoSpawn);
+            panel.openFor(player);
+        });
     }
 
     @Override

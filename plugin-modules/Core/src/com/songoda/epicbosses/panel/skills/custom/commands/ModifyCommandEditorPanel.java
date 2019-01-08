@@ -11,6 +11,7 @@ import com.songoda.epicbosses.skills.elements.SubCommandSkillElement;
 import com.songoda.epicbosses.skills.types.CommandSkillElement;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
@@ -49,26 +50,28 @@ public class ModifyCommandEditorPanel extends SubVariablePanelHandler<Skill, Sub
 
     @Override
     public void openFor(Player player, Skill skill, SubCommandSkillElement subCommandSkillElement) {
-        Map<String, String> replaceMap = new HashMap<>();
-        List<String> commands = subCommandSkillElement.getCommands();
-        Double chance = subCommandSkillElement.getChance();
-        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        ServerUtils.get().runTaskAsync(() -> {
+            Map<String, String> replaceMap = new HashMap<>();
+            List<String> commands = subCommandSkillElement.getCommands();
+            Double chance = subCommandSkillElement.getChance();
+            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        if(commands == null) commands = new ArrayList<>();
-        if(chance == null) chance = 100.0;
+            if(commands == null) commands = new ArrayList<>();
+            if(chance == null) chance = 100.0;
 
-        replaceMap.put("{commands}", StringUtils.get().appendList(commands));
-        replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
-        panelBuilder.addReplaceData(replaceMap);
+            replaceMap.put("{commands}", StringUtils.get().appendList(commands));
+            replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
+            panelBuilder.addReplaceData(replaceMap);
 
-        PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
-        Panel panel = panelBuilder.getPanel()
-                .setParentPanelHandler(this.bossPanelManager.getCommandSkillEditorPanel(), skill);
+            PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
+            Panel panel = panelBuilder.getPanel()
+                    .setParentPanelHandler(this.bossPanelManager.getCommandSkillEditorPanel(), skill);
 
-        counter.getSlotsWith("Chance").forEach(slot -> panel.setOnClick(slot, getChanceAction(skill, subCommandSkillElement)));
-        counter.getSlotsWith("Commands").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getCommandListSkillEditMenu().openFor((Player) event.getWhoClicked(), skill, subCommandSkillElement)));
+            counter.getSlotsWith("Chance").forEach(slot -> panel.setOnClick(slot, getChanceAction(skill, subCommandSkillElement)));
+            counter.getSlotsWith("Commands").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getCommandListSkillEditMenu().openFor((Player) event.getWhoClicked(), skill, subCommandSkillElement)));
 
-        panel.openFor(player);
+            panel.openFor(player);
+        });
     }
 
     @Override
