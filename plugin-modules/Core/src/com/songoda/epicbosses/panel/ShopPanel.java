@@ -9,15 +9,19 @@ import com.songoda.epicbosses.panel.handlers.MainListPanelHandler;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.dependencies.VaultHelper;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
+import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
+import com.songoda.epicbosses.utils.panel.base.PanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -25,7 +29,7 @@ import java.util.stream.Collectors;
  * @version 1.0.0
  * @since 17-Nov-18
  */
-public class ShopPanel extends MainListPanelHandler {
+public class ShopPanel extends PanelHandler {
 
     private BossEntityManager bossEntityManager;
     private BossesFileManager bossesFileManager;
@@ -44,9 +48,7 @@ public class ShopPanel extends MainListPanelHandler {
     @Override
     public void fillPanel(Panel panel) {
         Map<String, BossEntity> currentEntities = this.bossesFileManager.getBossEntitiesMap();
-        Map<String, BossEntity> filteredMap = currentEntities.entrySet().stream()
-                .filter(entry -> entry.getValue().canBeBought())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        Map<String, BossEntity> filteredMap = getFilteredMap(currentEntities);
         List<String> entryList = new ArrayList<>(filteredMap.keySet());
         int maxPage = panel.getMaxPage(filteredMap);
 
@@ -58,6 +60,14 @@ public class ShopPanel extends MainListPanelHandler {
         }));
 
         loadPage(panel, 0, entryList, filteredMap);
+    }
+
+    @Override
+    public void openFor(Player player) {
+        Panel panel = getPanelBuilder().getPanel();
+
+        ServerUtils.get().runTaskAsync(() -> fillPanel(panel));
+        panel.openFor(player);
     }
 
     private void loadPage(Panel panel, int page, List<String> entryList, Map<String, BossEntity> filteredMap) {
@@ -104,5 +114,22 @@ public class ShopPanel extends MainListPanelHandler {
                 });
             }
         }));
+    }
+
+    private Map<String, BossEntity> getFilteredMap(Map<String, BossEntity> originalMap) {
+        Map<String, BossEntity> newMap = new HashMap<>();
+
+        originalMap.forEach((s, bossEntity) -> {
+            if(bossEntity.canBeBought()) {
+                newMap.put(s, bossEntity);
+            }
+        });
+
+        return newMap;
+    }
+
+    @Override
+    public void initializePanel(PanelBuilder panelBuilder) {
+
     }
 }

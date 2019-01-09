@@ -7,6 +7,7 @@ import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.utils.Message;
+import com.songoda.epicbosses.utils.ObjectUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
@@ -52,6 +53,7 @@ public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
 
         replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
         replaceMap.put("{mode}", bossEntity.getEditingValue());
+        replaceMap.put("{spawnItem}", ObjectUtils.getValue(bossEntity.getSpawnItem(), "N/A"));
 
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
@@ -73,6 +75,7 @@ public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
             counter.getSlotsWith("Stats").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getStatisticListEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
             counter.getSlotsWith("Command").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getCommandsMainEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
             counter.getSlotsWith("Text").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getMainTextEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
+            counter.getSlotsWith("SpawnItem").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getSpawnItemEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
         });
 
         panel.openFor(player);

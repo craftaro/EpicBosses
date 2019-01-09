@@ -102,7 +102,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> statisticMainEditMenu, entityTypeEditMenu;
     @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu, skillsBossEditMenu, skillListBossEditMenu, commandsMainEditMenu, onSpawnCommandEditMenu,
             onDeathCommandEditMenu, mainDropsEditMenu, mainTextEditMenu, mainTauntEditMenu, onSpawnTextEditMenu, onSpawnSubTextEditMenu, onDeathTextEditMenu, onDeathSubTextEditMenu, onDeathPositionTextEditMenu,
-            onTauntTextEditMenu;
+            onTauntTextEditMenu, spawnItemEditMenu;
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu, statisticListEditMenu;
 
     @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu, skillTypeEditMenu, potionSkillEditorPanel, commandSkillEditorPanel, groupSkillEditorPanel, customSkillEditorPanel;
@@ -606,6 +606,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
     private void loadEquipmentEditMenus() {
         FileConfiguration editor = this.customBosses.getEditor();
 
+        this.spawnItemEditMenu = new SpawnItemEditorPanel(this, new PanelBuilder(editor.getConfigurationSection("SpawnItemEditorPanel")), this.customBosses);
+
         this.helmetEditorMenu = new HelmetEditorPanel(this, editor.getConfigurationSection(HELMET_EDITOR_PATH), this.customBosses);
         this.chestplateEditorMenu = new ChestplateEditorPanel(this, editor.getConfigurationSection(CHESTPLATE_EDITOR_PATH), this.customBosses);
         this.leggingsEditorMenu = new LeggingsEditorPanel(this, editor.getConfigurationSection(LEGGINGS_EDITOR_PATH), this.customBosses);
@@ -617,6 +619,8 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
     private void reloadEquipmentEditMenus() {
         FileConfiguration editor = this.customBosses.getEditor();
+
+        this.spawnItemEditMenu.initializePanel(new PanelBuilder(editor.getConfigurationSection("SpawnItemEditorPanel")));
 
         this.helmetEditorMenu.initializePanel(new PanelBuilder(editor.getConfigurationSection(HELMET_EDITOR_PATH)));
         this.chestplateEditorMenu.initializePanel(new PanelBuilder(editor.getConfigurationSection(CHESTPLATE_EDITOR_PATH)));
@@ -808,11 +812,11 @@ public class BossPanelManager implements ILoadable, IReloadable {
     //---------------------------------------------
 
     private void loadShopMenu() {
-        this.shopPanel = new ShopPanel(this, getListMenu("Shop"), this.customBosses);
+        this.shopPanel = new ShopPanel(this, new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("ShopListPanel")), this.customBosses);
     }
 
     private void reloadShopMenu() {
-        this.shopPanel.initializePanel(getListMenu("Shop"));
+        this.shopPanel.initializePanel(new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("ShopListPanel")));
     }
 
     //---------------------------------------------

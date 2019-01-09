@@ -151,12 +151,12 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
 
     @Override
     public void reload() {
-        this.bossMessagesFileManager.reload();
-        this.bossCommandFileManager.reload();
-        this.minionsFileManager.reload();
-        this.bossesFileManager.reload();
-        this.skillsFileManager.reload();
         this.itemStackManager.reload();
+        this.bossesFileManager.reload();
+        this.minionsFileManager.reload();
+        this.skillsFileManager.reload();
+        this.bossCommandFileManager.reload();
+        this.bossMessagesFileManager.reload();
         this.dropTableFileManager.reload();
         this.autoSpawnFileManager.reload();
 

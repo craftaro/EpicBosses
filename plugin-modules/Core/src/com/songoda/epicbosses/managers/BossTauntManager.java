@@ -53,7 +53,7 @@ public class BossTauntManager {
 
             @Override
             public void run() {
-                if(activeBossHolder.isDead()) {
+                if(activeBossHolder.isDead() || BossTauntManager.this.plugin.getBossEntityManager().isAllEntitiesDead(activeBossHolder)) {
                     cancel();
                     return;
                 }

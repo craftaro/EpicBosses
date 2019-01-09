@@ -81,6 +81,50 @@ MainMenu:
       - '&7Create a new custom skill from'
       - '&7scratch.'
       Button: CustomSkills
+ShopListPanel:
+  name: '&b&lEpicBosses &3&lShop'
+  slots: 54
+  Settings:
+    backButton: true
+    fillTo: 45
+  Buttons:
+    backButton: 50
+  Items:
+    '46':
+      type: GLASS_PANE
+      name: '&7'
+    '47':
+      type: GLASS_PANE
+      name: '&7'
+    '48':
+      type: GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page.'
+      PreviousPage: true
+    '50':
+      type: GLASS_PANE
+      name: '&7'
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page.'
+      NextPage: true
+    '52':
+      type: GLASS_PANE
+      name: '&7'
+    '53':
+      type: GLASS_PANE
+      name: '&7'
+    '54':
+      type: GLASS_PANE
+      name: '&7'
 ListPanel:
   name: '{panelName}'
   slots: 54
@@ -266,6 +310,16 @@ MainEditorPanel:
       - '&7skill(s) the boss has and their occurrence'
       - '&7chances.'
       Button: Skill
+    '30':
+      type: STICK
+      name: '&a&lSpawn Item Manager'
+      lore:
+      - '&bCurrently: &f{spawnItem}'
+      - '&7'
+      - '&7Click here to select a spawn item for this'
+      - '&7boss section from all the current items saved'
+      - '&7in the plugin.'
+      Button: SpawnItem
     '32':
       type: LAPIS_LAZULI
       name: '&a&lStatistics Manager'
@@ -274,6 +328,13 @@ MainEditorPanel:
       - '&7boss, including things like: health,'
       - '&7potion effects, commands on spawn, etc.'
       Button: Stats
+    '34':
+      type: GOLD_BLOCK
+      name: '&a&lShop Manager'
+      lore:
+      - '&7Click here to modify the shop settings for'
+      - '&7this boss.'
+      Button: Shop
     '39':
       type: BOOK
       name: '&a&lCommand Manager'
@@ -297,6 +358,61 @@ MainEditorPanel:
       - '&7Click here to edit the taunts, sayings,'
       - '&7etc. for this boss.'
       Button: Text
+SpawnItemEditorPanel:
+  name: '&b&l{name} Editor'
+  slots: 54
+  Settings:
+    fillTo: 45
+    backButton: true
+  Buttons:
+    backButton: 54
+  Items:
+    '46':
+      type: DIAMOND
+      name: '&c&lRemove'
+      lore:
+      - '&7click here to remove the currently'
+      - '&7equipped spawn item.'
+      Button: Remove
+    '47':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '48':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '49':
+      type: ARROW
+      name: '&e&l&m<-&e&l Previous Page'
+      lore:
+      - '&7Click here to go to the previous'
+      - '&7page of spawn item.'
+      PreviousPage: true
+    '50':
+      type: DIAMOND_BLOCK
+      name: '&a&lAdd New Spawn Item'
+      lore:
+      - '&7Click here to add a new spawn'
+      - '&7item which you have in your'
+      - '&7inventory.'
+      Button: AddNew
+    '51':
+      type: ARROW
+      name: '&e&lNext Page &e&l&m->'
+      lore:
+      - '&7Click here to go to the next'
+      - '&7page of spawn item.'
+      NextPage: true
+    '52':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '53':
+      type: WHITE_STAINED_GLASS_PANE
+      name: '&7'
+    '54':
+      type: PAPER
+      name: '&e&lGo Back'
+      lore:
+      - '&7Click here to go back.'
 DropsMainEditorPanel:
   name: '&b&l{name} Editor'
   slots: 9

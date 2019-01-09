@@ -183,7 +183,6 @@ Display:
       - '&7Shift Right-Click to remove.'
       - '&7Left-Click to edit.'
   Shop:
-    menuName: '&b&lEpicBosses &3&lShop'
     name: '&b&lBuy {name}''s Egg'
     lore:
     - '&3Cost: &a$&f{price}'
