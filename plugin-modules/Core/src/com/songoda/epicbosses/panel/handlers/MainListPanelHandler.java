@@ -25,16 +25,13 @@ public abstract class MainListPanelHandler extends PanelHandler {
 
     @Override
     public void openFor(Player player) {
-        ServerUtils.get().runTaskAsync(() -> {
-            Panel panel = getPanelBuilder().getPanel()
-                    .setDestroyWhenDone(true)
-                    .setCancelClick(true)
-                    .setCancelLowerClick(true)
-                    .setParentPanel(this.bossPanelManager.getMainMenu().getPanel());
+        Panel panel = getPanelBuilder().getPanel()
+                .setDestroyWhenDone(true)
+                .setCancelClick(true)
+                .setCancelLowerClick(true)
+                .setParentPanel(this.bossPanelManager.getMainMenu().getPanel());
 
-            fillPanel(panel);
-
-            panel.openFor(player);
-        });
+        ServerUtils.get().runTaskAsync(() -> fillPanel(panel));
+        panel.openFor(player);
     }
 }

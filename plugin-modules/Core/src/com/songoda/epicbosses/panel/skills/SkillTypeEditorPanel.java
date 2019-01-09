@@ -39,27 +39,27 @@ public class SkillTypeEditorPanel extends VariablePanelHandler<Skill> {
 
     @Override
     public void openFor(Player player, Skill skill) {
+        Map<String, String> replaceMap = new HashMap<>();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+
+        replaceMap.put("{name}", BossAPI.getSkillName(skill));
+        panelBuilder.addReplaceData(replaceMap);
+
+        Panel panel = panelBuilder.getPanel()
+                .setDestroyWhenDone(true)
+                .setCancelClick(true)
+                .setCancelLowerClick(true)
+                .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
+        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+
         ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-
-            replaceMap.put("{name}", BossAPI.getSkillName(skill));
-            panelBuilder.addReplaceData(replaceMap);
-
-            Panel panel = panelBuilder.getPanel()
-                    .setDestroyWhenDone(true)
-                    .setCancelClick(true)
-                    .setCancelLowerClick(true)
-                    .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
-            PanelBuilderCounter counter = panel.getPanelBuilderCounter();
-
             counter.getSlotsWith("Command").forEach(slot -> panel.setOnClick(slot, getCommandAction(skill)));
             counter.getSlotsWith("Custom").forEach(slot -> panel.setOnClick(slot, getCustomAction(skill)));
             counter.getSlotsWith("Potion").forEach(slot -> panel.setOnClick(slot, getPotionAction(skill)));
             counter.getSlotsWith("Group").forEach(slot -> panel.setOnClick(slot, getGroupAction(skill)));
-
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 
     @Override

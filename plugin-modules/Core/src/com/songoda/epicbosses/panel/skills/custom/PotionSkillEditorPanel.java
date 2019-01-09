@@ -71,26 +71,26 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     @Override
     public void openFor(Player player, Skill skill) {
+        Map<String, String> replaceMap = new HashMap<>();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+
+        replaceMap.put("{name}", BossAPI.getSkillName(skill));
+        panelBuilder.addReplaceData(replaceMap);
+
+        PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
+        Panel panel = panelBuilder.getPanel()
+                .setDestroyWhenDone(true)
+                .setCancelClick(true)
+                .setCancelLowerClick(true)
+                .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
+
         ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-
-            replaceMap.put("{name}", BossAPI.getSkillName(skill));
-            panelBuilder.addReplaceData(replaceMap);
-
-            PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
-            Panel panel = panelBuilder.getPanel()
-                    .setDestroyWhenDone(true)
-                    .setCancelClick(true)
-                    .setCancelLowerClick(true)
-                    .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
-
             counter.getSlotsWith("PotionEffect").forEach(slot -> panel.setOnClick(slot,
                     event -> this.bossPanelManager.getCreatePotionEffectMenu().openFor((Player) event.getWhoClicked(), skill, new PotionEffectHolder("", 1, 1))));
             fillPanel(panel, skill);
-
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 
     @Override

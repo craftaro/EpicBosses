@@ -68,13 +68,11 @@ public class GiveCommandNewRewardPanel extends SubVariablePanelHandler<DropTable
 
     @Override
     public void openFor(Player player, DropTable dropTable, GiveRewardEditHandler giveRewardEditHandler) {
-        ServerUtils.get().runTaskAsync(() -> {
-            Panel panel = getPanelBuilder().getPanel()
-                    .setParentPanelHandler(this.bossPanelManager.getGiveCommandRewardListPanel(), dropTable, giveRewardEditHandler);
+        Panel panel = getPanelBuilder().getPanel()
+                .setParentPanelHandler(this.bossPanelManager.getGiveCommandRewardListPanel(), dropTable, giveRewardEditHandler);
 
-            fillPanel(panel, dropTable, giveRewardEditHandler);
-            panel.openFor(player);
-        });
+        ServerUtils.get().runTaskAsync(() -> fillPanel(panel, dropTable, giveRewardEditHandler));
+        panel.openFor(player);
     }
 
     @Override

@@ -62,8 +62,11 @@ public class SpawnTextEditorPanel extends VariablePanelHandler<BossEntity> {
                     .setParentPanelHandler(this.bossPanelManager.getMainTextEditMenu(), bossEntity);
             PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
-            counter.getSlotsWith("Select").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnSpawnTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
-            counter.getSlotsWith("Radius").forEach(slot -> panel.setOnClick(slot, getRadiusAction(bossEntity)));
+            ServerUtils.get().runTaskAsync(() -> {
+                counter.getSlotsWith("Select").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnSpawnTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
+                counter.getSlotsWith("Radius").forEach(slot -> panel.setOnClick(slot, getRadiusAction(bossEntity)));
+
+            });
 
             panel.openFor(player);
         });

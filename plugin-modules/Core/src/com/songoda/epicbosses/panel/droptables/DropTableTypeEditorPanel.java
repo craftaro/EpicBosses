@@ -38,23 +38,23 @@ public class DropTableTypeEditorPanel extends VariablePanelHandler<DropTable> {
 
     @Override
     public void openFor(Player player, DropTable dropTable) {
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        Map<String, String> replaceMap = new HashMap<>();
+
+        replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
+        panelBuilder.addReplaceData(replaceMap);
+
+        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
+        Panel panel = panelBuilder.getPanel()
+                .setParentPanelHandler(this.bossPanelManager.getMainDropTableEditMenu(), dropTable);
+
         ServerUtils.get().runTaskAsync(() -> {
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-            Map<String, String> replaceMap = new HashMap<>();
-
-            replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
-            panelBuilder.addReplaceData(replaceMap);
-
-            PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-            Panel panel = panelBuilder.getPanel()
-                    .setParentPanelHandler(this.bossPanelManager.getMainDropTableEditMenu(), dropTable);
-
             panelBuilderCounter.getSlotsWith("Spray").forEach(slot -> panel.setOnClick(slot, getSprayAction(dropTable)));
             panelBuilderCounter.getSlotsWith("Drop").forEach(slot -> panel.setOnClick(slot, getDropAction(dropTable)));
             panelBuilderCounter.getSlotsWith("Give").forEach(slot -> panel.setOnClick(slot, getGiveAction(dropTable)));
-
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 
     @Override

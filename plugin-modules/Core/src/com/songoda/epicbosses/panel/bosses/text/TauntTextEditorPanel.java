@@ -70,9 +70,11 @@ public class TauntTextEditorPanel extends VariablePanelHandler<BossEntity> {
                     .setParentPanelHandler(this.bossPanelManager.getMainTextEditMenu(), bossEntity);
             PanelBuilderCounter counter = panel.getPanelBuilderCounter();
 
-            counter.getSlotsWith("Radius").forEach(slot -> panel.setOnClick(slot, getRadiusAction(bossEntity)));
-            counter.getSlotsWith("Delay").forEach(slot -> panel.setOnClick(slot, getDelayAction(bossEntity)));
-            counter.getSlotsWith("Taunts").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnTauntTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
+            ServerUtils.get().runTaskAsync(() -> {
+                counter.getSlotsWith("Radius").forEach(slot -> panel.setOnClick(slot, getRadiusAction(bossEntity)));
+                counter.getSlotsWith("Delay").forEach(slot -> panel.setOnClick(slot, getDelayAction(bossEntity)));
+                counter.getSlotsWith("Taunts").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnTauntTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
+            });
 
             panel.openFor(player);
         });

@@ -64,19 +64,17 @@ public class AutoSpawnEntitiesEditorPanel extends VariablePanelHandler<AutoSpawn
 
     @Override
     public void openFor(Player player, AutoSpawn autoSpawn) {
-        ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        Map<String, String> replaceMap = new HashMap<>();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-            replaceMap.put("{name}", BossAPI.getAutoSpawnName(autoSpawn));
-            panelBuilder.addReplaceData(replaceMap);
+        replaceMap.put("{name}", BossAPI.getAutoSpawnName(autoSpawn));
+        panelBuilder.addReplaceData(replaceMap);
 
-            Panel panel = panelBuilder.getPanel()
-                    .setParentPanelHandler(this.bossPanelManager.getMainAutoSpawnEditPanel(), autoSpawn);
+        Panel panel = panelBuilder.getPanel()
+                .setParentPanelHandler(this.bossPanelManager.getMainAutoSpawnEditPanel(), autoSpawn);
 
-            fillPanel(panel, autoSpawn);
-            panel.openFor(player);
-        });
+        ServerUtils.get().runTaskAsync(() -> fillPanel(panel, autoSpawn));
+        panel.openFor(player);
     }
 
     @Override

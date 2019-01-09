@@ -43,28 +43,28 @@ public class CustomSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     @Override
     public void openFor(Player player, Skill skill) {
+        Map<String, String> replaceMap = new HashMap<>();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        CustomSkillElement customSkillElement = this.bossSkillManager.getCustomSkillElement(skill);
+        Double multiplier = customSkillElement.getCustom().getMultiplier();
+        String multiplierValue = multiplier == null? "N/A" : NumberUtils.get().formatDouble(multiplier);
+
+        replaceMap.put("{name}", BossAPI.getSkillName(skill));
+        replaceMap.put("{type}", customSkillElement.getCustom().getType());
+        replaceMap.put("{multiplier}", multiplierValue);
+        panelBuilder.addReplaceData(replaceMap);
+
+        PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
+        Panel panel = panelBuilder.getPanel()
+                .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
+
         ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-            CustomSkillElement customSkillElement = this.bossSkillManager.getCustomSkillElement(skill);
-            Double multiplier = customSkillElement.getCustom().getMultiplier();
-            String multiplierValue = multiplier == null? "N/A" : NumberUtils.get().formatDouble(multiplier);
-
-            replaceMap.put("{name}", BossAPI.getSkillName(skill));
-            replaceMap.put("{type}", customSkillElement.getCustom().getType());
-            replaceMap.put("{multiplier}", multiplierValue);
-            panelBuilder.addReplaceData(replaceMap);
-
-            PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
-            Panel panel = panelBuilder.getPanel()
-                    .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
-
             counter.getSlotsWith("Type").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getCustomSkillTypeEditorMenu().openFor((Player) event.getWhoClicked(), skill, customSkillElement)));
             counter.getSlotsWith("SpecialSettings").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getSpecialSettingsEditorMenu().openFor((Player) event.getWhoClicked(), skill, customSkillElement)));
             counter.getSlotsWith("Multiplier").forEach(slot -> panel.setOnClick(slot, getMultiplierAction(skill, customSkillElement)));
-
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 
     @Override

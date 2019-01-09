@@ -69,23 +69,21 @@ public abstract class ListCommandListEditor<T> extends VariablePanelHandler<T> {
 
     @Override
     public void openFor(Player player, T object) {
-        ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        Map<String, String> replaceMap = new HashMap<>();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-            replaceMap.put("{name}", getName(object));
-            panelBuilder.addReplaceData(replaceMap);
+        replaceMap.put("{name}", getName(object));
+        panelBuilder.addReplaceData(replaceMap);
 
-            Panel panel = panelBuilder.getPanel()
-                    .setDestroyWhenDone(true)
-                    .setCancelClick(true)
-                    .setCancelLowerClick(true)
-                    .setParentPanelHandler(getParentHolder(), object);
+        Panel panel = panelBuilder.getPanel()
+                .setDestroyWhenDone(true)
+                .setCancelClick(true)
+                .setCancelLowerClick(true)
+                .setParentPanelHandler(getParentHolder(), object);
 
-            fillPanel(panel, object);
+        ServerUtils.get().runTaskAsync(() -> fillPanel(panel, object));
 
-            panel.openFor(player);
-        });
+        panel.openFor(player);
     }
 
     @Override

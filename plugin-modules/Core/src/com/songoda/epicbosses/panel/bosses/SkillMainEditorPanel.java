@@ -41,30 +41,30 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
+        Map<String, String> replaceMap = new HashMap<>();
+        Double chance = bossEntity.getSkills().getOverallChance();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+
+        if(chance == null) chance = 0.0;
+
+        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+        replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
+        panelBuilder.addReplaceData(replaceMap);
+
+        Panel panel = panelBuilder.getPanel()
+                .setDestroyWhenDone(true)
+                .setCancelClick(true)
+                .setCancelLowerClick(true)
+                .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
+        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+
         ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-            Double chance = bossEntity.getSkills().getOverallChance();
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-
-            if(chance == null) chance = 0.0;
-
-            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-            replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
-            panelBuilder.addReplaceData(replaceMap);
-
-            Panel panel = panelBuilder.getPanel()
-                    .setDestroyWhenDone(true)
-                    .setCancelClick(true)
-                    .setCancelLowerClick(true)
-                    .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
-            PanelBuilderCounter counter = panel.getPanelBuilderCounter();
-
             counter.getSlotsWith("OverallChance").forEach(slot -> panel.setOnClick(slot, getOverallChanceAction(bossEntity)));
             counter.getSlotsWith("SkillList").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getSkillListBossEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
             counter.getSlotsWith("Message").forEach(slot -> panel.setOnClick(slot, getMessageAction()));
-
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 
     @Override

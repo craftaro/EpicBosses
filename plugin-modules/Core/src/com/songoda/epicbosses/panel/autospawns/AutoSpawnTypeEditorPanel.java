@@ -40,24 +40,24 @@ public class AutoSpawnTypeEditorPanel extends VariablePanelHandler<AutoSpawn> {
 
     @Override
     public void openFor(Player player, AutoSpawn autoSpawn) {
+        Map<String, String> replaceMap = new HashMap<>();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+
+        replaceMap.put("{name}", BossAPI.getAutoSpawnName(autoSpawn));
+        panelBuilder.addReplaceData(replaceMap);
+
+        Panel panel = panelBuilder.getPanel()
+                .setParentPanelHandler(this.bossPanelManager.getMainAutoSpawnEditPanel(), autoSpawn);
+        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+
         ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-
-            replaceMap.put("{name}", BossAPI.getAutoSpawnName(autoSpawn));
-            panelBuilder.addReplaceData(replaceMap);
-
-            Panel panel = panelBuilder.getPanel()
-                    .setParentPanelHandler(this.bossPanelManager.getMainAutoSpawnEditPanel(), autoSpawn);
-            PanelBuilderCounter counter = panel.getPanelBuilderCounter();
-
             counter.getSlotsWith("IntervalSystem").forEach(slot -> panel.setOnClick(slot, getIntervalSystem(autoSpawn)));
             counter.getSlotsWith("WildernessSystem");
             counter.getSlotsWith("BiomeSystem");
             counter.getSlotsWith("SpawnerSystem");
-
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 
     @Override

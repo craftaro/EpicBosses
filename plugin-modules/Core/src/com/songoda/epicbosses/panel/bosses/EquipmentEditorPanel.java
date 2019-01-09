@@ -37,28 +37,28 @@ public class EquipmentEditorPanel extends SubVariablePanelHandler<BossEntity, En
 
     @Override
     public void openFor(Player player, BossEntity bossEntity, EntityStatsElement entityStatsElement) {
+        Map<String, String> replaceMap = new HashMap<>();
+
+        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+
+        panelBuilder.addReplaceData(replaceMap);
+
+        Panel panel = panelBuilder.getPanel()
+                .setDestroyWhenDone(true)
+                .setCancelLowerClick(true)
+                .setCancelClick(true)
+                .setParentPanelHandler(this.bossPanelManager.getEquipmentListEditMenu(), bossEntity);
+        PanelBuilderCounter panelBuilderCounter = panel.getPanelBuilderCounter();
+
         ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-
-            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-
-            panelBuilder.addReplaceData(replaceMap);
-
-            Panel panel = panelBuilder.getPanel()
-                    .setDestroyWhenDone(true)
-                    .setCancelLowerClick(true)
-                    .setCancelClick(true)
-                    .setParentPanelHandler(this.bossPanelManager.getEquipmentListEditMenu(), bossEntity);
-            PanelBuilderCounter panelBuilderCounter = panel.getPanelBuilderCounter();
-
             panelBuilderCounter.getSlotsWith("Helmet").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getHelmetEditorMenu().openFor(player, bossEntity, entityStatsElement)));
             panelBuilderCounter.getSlotsWith("Chestplate").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getChestplateEditorMenu().openFor(player, bossEntity, entityStatsElement)));
             panelBuilderCounter.getSlotsWith("Leggings").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getLeggingsEditorMenu().openFor(player, bossEntity, entityStatsElement)));
             panelBuilderCounter.getSlotsWith("Boots").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getBootsEditorMenu().openFor(player, bossEntity, entityStatsElement)));
-
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 }

@@ -43,34 +43,35 @@ public class SprayDropTableMainEditorPanel extends SubVariablePanelHandler<DropT
 
     @Override
     public void openFor(Player player, DropTable dropTable, SprayTableElement sprayTableElement) {
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        Map<String, String> replaceMap = new HashMap<>();
+        Boolean randomSprayDrops = sprayTableElement.getRandomSprayDrops();
+        Integer maxDrops = sprayTableElement.getSprayMaxDrops();
+        Integer maxDistance = sprayTableElement.getSprayMaxDistance();
+
+        if(randomSprayDrops == null) randomSprayDrops = false;
+        if(maxDrops == null) maxDrops = -1;
+        if(maxDistance == null) maxDistance = 100;
+
+        replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
+        replaceMap.put("{randomDrops}", StringUtils.get().formatString(""+randomSprayDrops));
+        replaceMap.put("{maxDrops}", NumberUtils.get().formatDouble(maxDrops));
+        replaceMap.put("{maxDistance}", NumberUtils.get().formatDouble(maxDistance));
+        panelBuilder.addReplaceData(replaceMap);
+
+        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
+        Panel panel = panelBuilder.getPanel()
+                .setParentPanelHandler(this.bossPanelManager.getMainDropTableEditMenu(), dropTable);
+
         ServerUtils.get().runTaskAsync(() -> {
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-            Map<String, String> replaceMap = new HashMap<>();
-            Boolean randomSprayDrops = sprayTableElement.getRandomSprayDrops();
-            Integer maxDrops = sprayTableElement.getSprayMaxDrops();
-            Integer maxDistance = sprayTableElement.getSprayMaxDistance();
-
-            if(randomSprayDrops == null) randomSprayDrops = false;
-            if(maxDrops == null) maxDrops = -1;
-            if(maxDistance == null) maxDistance = 100;
-
-            replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
-            replaceMap.put("{randomDrops}", StringUtils.get().formatString(""+randomSprayDrops));
-            replaceMap.put("{maxDrops}", NumberUtils.get().formatDouble(maxDrops));
-            replaceMap.put("{maxDistance}", NumberUtils.get().formatDouble(maxDistance));
-            panelBuilder.addReplaceData(replaceMap);
-
-            PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-            Panel panel = panelBuilder.getPanel()
-                    .setParentPanelHandler(this.bossPanelManager.getMainDropTableEditMenu(), dropTable);
-
             panelBuilderCounter.getSlotsWith("Rewards").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getSprayDropRewardListPanel().openFor((Player) event.getWhoClicked(), dropTable, sprayTableElement)));
             panelBuilderCounter.getSlotsWith("RandomDrops").forEach(slot -> panel.setOnClick(slot, getRandomDropsAction(dropTable, sprayTableElement)));
             panelBuilderCounter.getSlotsWith("MaxDistance").forEach(slot -> panel.setOnClick(slot, getMaxDistanceAction(dropTable, sprayTableElement)));
             panelBuilderCounter.getSlotsWith("MaxDrops").forEach(slot -> panel.setOnClick(slot, getMaxDropsAction(dropTable, sprayTableElement)));
 
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 
     @Override

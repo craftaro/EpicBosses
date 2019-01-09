@@ -57,13 +57,11 @@ public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Sk
 
     @Override
     public void openFor(Player player, Skill skill, CustomSkillElement customSkillElement) {
-        ServerUtils.get().runTaskAsync(() -> {
-            Panel panel = getPanelBuilder().getPanel()
-                    .setParentPanelHandler(getParentHolder(), skill, customSkillElement);
+        Panel panel = getPanelBuilder().getPanel()
+                .setParentPanelHandler(getParentHolder(), skill, customSkillElement);
 
-            fillPanel(panel, skill, customSkillElement);
-            panel.openFor(player);
-        });
+        ServerUtils.get().runTaskAsync(() -> fillPanel(panel, skill, customSkillElement));
+        panel.openFor(player);
     }
 
     @Override

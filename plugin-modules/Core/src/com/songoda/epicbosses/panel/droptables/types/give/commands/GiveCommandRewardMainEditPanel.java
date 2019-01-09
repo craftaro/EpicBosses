@@ -54,8 +54,10 @@ public class GiveCommandRewardMainEditPanel extends SubSubVariablePanelHandler<D
             Panel panel = panelBuilder.getPanel()
                     .setParentPanelHandler(this.bossPanelManager.getGiveCommandRewardListPanel(), dropTable, giveRewardEditHandler);
 
-            panelBuilderCounter.getSlotsWith("Chance").forEach(slot -> panel.setOnClick(slot, getChanceAction(dropTable, giveRewardEditHandler, s)));
-            panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, getRemoveAction(dropTable, giveRewardEditHandler, s)));
+            ServerUtils.get().runTaskAsync(() -> {
+                panelBuilderCounter.getSlotsWith("Chance").forEach(slot -> panel.setOnClick(slot, getChanceAction(dropTable, giveRewardEditHandler, s)));
+                panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, getRemoveAction(dropTable, giveRewardEditHandler, s)));
+            });
 
             panel.openFor(player);
         });

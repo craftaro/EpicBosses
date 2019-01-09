@@ -38,24 +38,24 @@ public abstract class DropTableRewardMainEditorPanel<SubVariable> extends SubSub
 
     @Override
     public void openFor(Player player, DropTable dropTable, SubVariable subVariable, String s) {
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        Map<String, String> replaceMap = new HashMap<>();
+        double chance = ObjectUtils.getValue(getChance(subVariable, s), 50.0);
+
+        replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
+        replaceMap.put("{itemStack}", s);
+        panelBuilder.addReplaceData(replaceMap);
+
+        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
+        Panel panel = panelBuilder.getPanel()
+                .setParentPanelHandler(getParentPanelHandler(), dropTable, subVariable);
+
         ServerUtils.get().runTaskAsync(() -> {
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-            Map<String, String> replaceMap = new HashMap<>();
-            double chance = ObjectUtils.getValue(getChance(subVariable, s), 50.0);
-
-            replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
-            replaceMap.put("{itemStack}", s);
-            panelBuilder.addReplaceData(replaceMap);
-
-            PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-            Panel panel = panelBuilder.getPanel()
-                    .setParentPanelHandler(getParentPanelHandler(), dropTable, subVariable);
-
             panelBuilderCounter.getSlotsWith("Chance").forEach(slot -> panel.setOnClick(slot, getChanceAction(dropTable, subVariable, s)));
             panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, getRemoveAction(dropTable, subVariable, s)));
-
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 
     @Override

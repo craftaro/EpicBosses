@@ -48,22 +48,22 @@ public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
+        Map<String, String> replaceMap = new HashMap<>();
+
+        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+        replaceMap.put("{mode}", bossEntity.getEditingValue());
+
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+
+        panelBuilder.addReplaceData(replaceMap);
+
+        Panel panel = panelBuilder.getPanel()
+                .setDestroyWhenDone(true)
+                .setCancelClick(true)
+                .setCancelLowerClick(true);
+        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+
         ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-
-            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-            replaceMap.put("{mode}", bossEntity.getEditingValue());
-
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-
-            panelBuilder.addReplaceData(replaceMap);
-
-            Panel panel = panelBuilder.getPanel()
-                    .setDestroyWhenDone(true)
-                    .setCancelClick(true)
-                    .setCancelLowerClick(true);
-            PanelBuilderCounter counter = panel.getPanelBuilderCounter();
-
             counter.getSlotsWith("Editing").forEach(slot -> panel.setOnClick(slot, getEditingAction(bossEntity)));
             counter.getSlotsWith("Drops").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getMainDropsEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
             counter.getSlotsWith("Targeting").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getTargetingEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
@@ -73,9 +73,9 @@ public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
             counter.getSlotsWith("Stats").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getStatisticListEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
             counter.getSlotsWith("Command").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getCommandsMainEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
             counter.getSlotsWith("Text").forEach(slot -> panel.setOnClick(slot, e -> this.bossPanelManager.getMainTextEditMenu().openFor((Player) e.getWhoClicked(), bossEntity)));
-
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 
     private ClickAction getEditingAction(BossEntity bossEntity) {

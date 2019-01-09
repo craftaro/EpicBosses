@@ -62,21 +62,22 @@ public class GiveRewardPositionListPanel extends SubVariablePanelHandler<DropTab
 
     @Override
     public void openFor(Player player, DropTable dropTable, GiveTableElement giveTableElement) {
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        Map<String, String> replaceMap = new HashMap<>();
+
+        replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
+        panelBuilder.addReplaceData(replaceMap);
+
+        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
+        Panel panel = panelBuilder.getPanel()
+                .setParentPanelHandler(this.bossPanelManager.getMainDropTableEditMenu(), dropTable);
+
         ServerUtils.get().runTaskAsync(() -> {
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-            Map<String, String> replaceMap = new HashMap<>();
-
-            replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
-            panelBuilder.addReplaceData(replaceMap);
-
-            PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-            Panel panel = panelBuilder.getPanel()
-                    .setParentPanelHandler(this.bossPanelManager.getMainDropTableEditMenu(), dropTable);
-
             panelBuilderCounter.getSlotsWith("NewPosition").forEach(slot -> panel.setOnClick(slot, getNewPositionAction(dropTable, giveTableElement)));
             fillPanel(panel, dropTable, giveTableElement);
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 
     @Override

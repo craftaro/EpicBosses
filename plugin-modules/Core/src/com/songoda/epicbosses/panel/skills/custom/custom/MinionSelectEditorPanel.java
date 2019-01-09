@@ -66,13 +66,11 @@ public class MinionSelectEditorPanel extends SubVariablePanelHandler<Skill, Cust
 
     @Override
     public void openFor(Player player, Skill skill, CustomSkillElement customSkillElement) {
-        ServerUtils.get().runTaskAsync(() -> {
-            Panel panel = getPanelBuilder().getPanel()
-                    .setParentPanelHandler(this.bossPanelManager.getSpecialSettingsEditorMenu(), skill, customSkillElement);
+        Panel panel = getPanelBuilder().getPanel()
+                .setParentPanelHandler(this.bossPanelManager.getSpecialSettingsEditorMenu(), skill, customSkillElement);
 
-            fillPanel(panel, skill, customSkillElement);
-            panel.openFor(player);
-        });
+        ServerUtils.get().runTaskAsync(() -> fillPanel(panel, skill, customSkillElement));
+        panel.openFor(player);
     }
 
     @Override

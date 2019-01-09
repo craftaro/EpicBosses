@@ -39,39 +39,39 @@ public class DropsMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
+        Map<String, String> replaceMap = new HashMap<>();
+        Boolean naturalDrops = bossEntity.getDrops().getNaturalDrops();
+        Boolean naturalExp = bossEntity.getDrops().getDropExp();
+        String dropTable = bossEntity.getDrops().getDropTable();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+
+        if(naturalDrops == null) naturalDrops = true;
+        if(naturalExp == null) naturalExp = true;
+        if(dropTable == null) dropTable = "N/A";
+
+        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+        replaceMap.put("{naturalDrops}", ""+naturalDrops);
+        replaceMap.put("{naturalExp}", ""+naturalExp);
+        replaceMap.put("{dropTable}", dropTable);
+        panelBuilder.addReplaceData(replaceMap);
+
+        Panel panel = panelBuilder.getPanel()
+                .setDestroyWhenDone(true)
+                .setCancelClick(true)
+                .setCancelLowerClick(true)
+                .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
+        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+
+        Boolean finalNaturalDrops = naturalDrops;
+        Boolean finalNaturalEXP = naturalExp;
+
         ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-            Boolean naturalDrops = bossEntity.getDrops().getNaturalDrops();
-            Boolean naturalExp = bossEntity.getDrops().getDropExp();
-            String dropTable = bossEntity.getDrops().getDropTable();
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-
-            if(naturalDrops == null) naturalDrops = true;
-            if(naturalExp == null) naturalExp = true;
-            if(dropTable == null) dropTable = "N/A";
-
-            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-            replaceMap.put("{naturalDrops}", ""+naturalDrops);
-            replaceMap.put("{naturalExp}", ""+naturalExp);
-            replaceMap.put("{dropTable}", dropTable);
-            panelBuilder.addReplaceData(replaceMap);
-
-            Panel panel = panelBuilder.getPanel()
-                    .setDestroyWhenDone(true)
-                    .setCancelClick(true)
-                    .setCancelLowerClick(true)
-                    .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
-            PanelBuilderCounter counter = panel.getPanelBuilderCounter();
-
-            Boolean finalNaturalDrops = naturalDrops;
-            Boolean finalNaturalEXP = naturalExp;
-
             counter.getSlotsWith("NaturalDrops").forEach(slot -> panel.setOnClick(slot, getNaturalDropsAction(bossEntity, finalNaturalDrops)));
             counter.getSlotsWith("DropTable").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getDropsEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
             counter.getSlotsWith("NaturalEXP").forEach(slot -> panel.setOnClick(slot, getNaturalExpAction(bossEntity, finalNaturalEXP)));
-
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 
     @Override

@@ -58,22 +58,22 @@ public class GiveCommandRewardListPanel extends SubVariablePanelHandler<DropTabl
 
     @Override
     public void openFor(Player player, DropTable dropTable, GiveRewardEditHandler giveRewardEditHandler) {
-        ServerUtils.get().runTaskAsync(() -> {
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-            Map<String, String> replaceMap = new HashMap<>();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        Map<String, String> replaceMap = new HashMap<>();
 
-            replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
-            panelBuilder.addReplaceData(replaceMap);
+        replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
+        panelBuilder.addReplaceData(replaceMap);
 
-            PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-            Panel panel = panelBuilder.getPanel()
-                    .setParentPanelHandler(this.bossPanelManager.getGiveRewardMainEditMenu(), dropTable, giveRewardEditHandler);
+        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
+        Panel panel = panelBuilder.getPanel()
+                .setParentPanelHandler(this.bossPanelManager.getGiveRewardMainEditMenu(), dropTable, giveRewardEditHandler);
 
+        ServerUtils.get().runTaskAsync(() ->{
             panelBuilderCounter.getSlotsWith("NewReward").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getGiveCommandNewRewardPanel().openFor((Player) event.getWhoClicked(), dropTable, giveRewardEditHandler)));
             fillPanel(panel, dropTable, giveRewardEditHandler);
-
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 
     @Override

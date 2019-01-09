@@ -51,12 +51,12 @@ public class AddItemsPanel extends PanelHandler {
 
     @Override
     public void openFor(Player player) {
-        ServerUtils.get().runTaskAsync(() -> {
-            Panel panel = getPanelBuilder().getPanel()
-                    .setDestroyWhenDone(true)
-                    .setCancelClick(true)
-                    .setCancelLowerClick(false);
+        Panel panel = getPanelBuilder().getPanel()
+                .setDestroyWhenDone(true)
+                .setCancelClick(true)
+                .setCancelLowerClick(false);
 
+        ServerUtils.get().runTaskAsync(() ->
             panel.setOnClick(event -> {
                 Player playerWhoClicked = (Player) event.getWhoClicked();
                 UUID uuid = playerWhoClicked.getUniqueId();
@@ -75,10 +75,10 @@ public class AddItemsPanel extends PanelHandler {
                     panel.getPanelBuilderCounter().getSlotsWith("SelectedSlot").forEach(s -> event.getInventory().setItem(s, itemStack.clone()));
                     event.getClickedInventory().setItem(slot, new ItemStack(Material.AIR));
                 }
-            });
+            })
+        );
 
-            panel.openFor(player);
-        });
+        panel.openFor(player);
     }
 
     private ClickAction getSelectedSlotAction(PanelBuilderCounter panelBuilderCounter) {

@@ -52,23 +52,21 @@ public class EntityTypeEditorPanel extends SubVariablePanelHandler<BossEntity, E
 
     @Override
     public void openFor(Player player, BossEntity bossEntity, EntityStatsElement entityStatsElement) {
-        ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        Map<String, String> replaceMap = new HashMap<>();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-            panelBuilder.addReplaceData(replaceMap);
+        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+        panelBuilder.addReplaceData(replaceMap);
 
-            Panel panel = panelBuilder.getPanel()
-                    .setDestroyWhenDone(true)
-                    .setCancelClick(true)
-                    .setCancelLowerClick(true)
-                    .setParentPanelHandler(this.bossPanelManager.getStatisticMainEditMenu(), bossEntity, entityStatsElement);
+        Panel panel = panelBuilder.getPanel()
+                .setDestroyWhenDone(true)
+                .setCancelClick(true)
+                .setCancelLowerClick(true)
+                .setParentPanelHandler(this.bossPanelManager.getStatisticMainEditMenu(), bossEntity, entityStatsElement);
 
-            fillPanel(panel, bossEntity, entityStatsElement);
+        ServerUtils.get().runTaskAsync(() -> fillPanel(panel, bossEntity, entityStatsElement));
 
-            panel.openFor(player);
-        });
+        panel.openFor(player);
     }
 
     @Override

@@ -42,44 +42,44 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     @Override
     public void openFor(Player player, Skill skill) {
+        Map<String, String> replaceMap = new HashMap<>();
+        String customMessage = skill.getCustomMessage();
+        Double radius = skill.getRadius();
+        String mode = skill.getMode();
+        String displayName = skill.getDisplayName();
+        String type = skill.getType();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+
+        if(customMessage == null || customMessage.equals("")) customMessage = "N/A";
+        if(radius == null) radius = 100.0;
+        if(mode == null || mode.equals("")) mode = "N/A";
+        if(displayName == null || displayName.equals("")) displayName = "N/A";
+        if(type == null || type.equals("")) type = "N/A";
+
+        replaceMap.put("{name}", BossAPI.getSkillName(skill));
+        replaceMap.put("{customMessage}", customMessage);
+        replaceMap.put("{radius}", NumberUtils.get().formatDouble(radius));
+        replaceMap.put("{mode}", mode);
+        replaceMap.put("{displayName}", displayName);
+        replaceMap.put("{type}", type);
+        panelBuilder.addReplaceData(replaceMap);
+
+        Panel panel = panelBuilder.getPanel()
+                .setDestroyWhenDone(true)
+                .setCancelClick(true)
+                .setCancelLowerClick(true);
+        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+
         ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-            String customMessage = skill.getCustomMessage();
-            Double radius = skill.getRadius();
-            String mode = skill.getMode();
-            String displayName = skill.getDisplayName();
-            String type = skill.getType();
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-
-            if(customMessage == null || customMessage.equals("")) customMessage = "N/A";
-            if(radius == null) radius = 100.0;
-            if(mode == null || mode.equals("")) mode = "N/A";
-            if(displayName == null || displayName.equals("")) displayName = "N/A";
-            if(type == null || type.equals("")) type = "N/A";
-
-            replaceMap.put("{name}", BossAPI.getSkillName(skill));
-            replaceMap.put("{customMessage}", customMessage);
-            replaceMap.put("{radius}", NumberUtils.get().formatDouble(radius));
-            replaceMap.put("{mode}", mode);
-            replaceMap.put("{displayName}", displayName);
-            replaceMap.put("{type}", type);
-            panelBuilder.addReplaceData(replaceMap);
-
-            Panel panel = panelBuilder.getPanel()
-                    .setDestroyWhenDone(true)
-                    .setCancelClick(true)
-                    .setCancelLowerClick(true);
-            PanelBuilderCounter counter = panel.getPanelBuilderCounter();
-
             counter.getSlotsWith("Radius").forEach(slot -> panel.setOnClick(slot, getRadiusAction(skill)));
             counter.getSlotsWith("CustomData").forEach(slot -> panel.setOnClick(slot, getCustomDataAction(skill)));
             counter.getSlotsWith("Mode").forEach(slot -> panel.setOnClick(slot, getModeAction(skill)));
             counter.getSlotsWith("DisplayName").forEach(slot -> panel.setOnClick(slot, getDisplayNameAction(skill)));
             counter.getSlotsWith("CustomMessage").forEach(slot -> panel.setOnClick(slot, getCustomMessageAction(skill)));
             counter.getSlotsWith("Type").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getSkillTypeEditMenu().openFor((Player) event.getWhoClicked(), skill)));
-
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 
     @Override

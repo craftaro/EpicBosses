@@ -42,21 +42,19 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
 
     @Override
     public void openFor(Player player, Skill skill, CustomSkillElement customSkillElement) {
-        ServerUtils.get().runTaskAsync(() -> {
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-            Map<String, String> replaceMap = new HashMap<>();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        Map<String, String> replaceMap = new HashMap<>();
 
-            replaceMap.put("{name}", BossAPI.getSkillName(skill));
-            replaceMap.put("{selected}", customSkillElement.getCustom().getType());
-            panelBuilder.addReplaceData(replaceMap);
+        replaceMap.put("{name}", BossAPI.getSkillName(skill));
+        replaceMap.put("{selected}", customSkillElement.getCustom().getType());
+        panelBuilder.addReplaceData(replaceMap);
 
-            Panel panel = panelBuilder.getPanel()
-                    .setParentPanelHandler(this.bossPanelManager.getCustomSkillEditorPanel(), skill);
+        Panel panel = panelBuilder.getPanel()
+                .setParentPanelHandler(this.bossPanelManager.getCustomSkillEditorPanel(), skill);
 
-            fillPanel(panel, skill, customSkillElement);
+        ServerUtils.get().runTaskAsync(() -> fillPanel(panel, skill, customSkillElement));
 
-            panel.openFor(player);
-        });
+        panel.openFor(player);
     }
 
     @Override

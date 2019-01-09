@@ -56,13 +56,11 @@ public abstract class DropTableNewRewardEditorPanel<SubVariable> extends SubVari
 
     @Override
     public void openFor(Player player, DropTable dropTable, SubVariable subVariable) {
-        ServerUtils.get().runTaskAsync(() -> {
-            Panel panel = getPanelBuilder().getPanel()
-                    .setParentPanelHandler(getParentPanelHandler(), dropTable, subVariable);
+        Panel panel = getPanelBuilder().getPanel()
+                .setParentPanelHandler(getParentPanelHandler(), dropTable, subVariable);
 
-            fillPanel(panel, dropTable, subVariable);
-            panel.openFor(player);
-        });
+        ServerUtils.get().runTaskAsync(() -> fillPanel(panel, dropTable, subVariable));
+        panel.openFor(player);
     }
 
     @Override

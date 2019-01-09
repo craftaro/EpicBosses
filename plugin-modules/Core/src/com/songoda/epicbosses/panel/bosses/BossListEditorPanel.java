@@ -89,22 +89,22 @@ public abstract class BossListEditorPanel extends VariablePanelHandler<BossEntit
 
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
+        Map<String, String> replaceMap = new HashMap<>();
+
+        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+
+        panelBuilder.addReplaceData(replaceMap);
+
+        int nextNumber = bossEntity.getEntityStats().size() + 1;
+        Panel panel = panelBuilder.getPanel()
+                .setDestroyWhenDone(true)
+                .setCancelClick(true)
+                .setCancelLowerClick(true)
+                .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
+
         ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-
-            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-
-            panelBuilder.addReplaceData(replaceMap);
-
-            int nextNumber = bossEntity.getEntityStats().size() + 1;
-            Panel panel = panelBuilder.getPanel()
-                    .setDestroyWhenDone(true)
-                    .setCancelClick(true)
-                    .setCancelLowerClick(true)
-                    .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
-
             fillPanel(panel, bossEntity);
 
             panel.getPanelBuilderCounter().getSlotsWith("CreateEntity").forEach(slot -> panel.setOnClick(slot, event -> {
@@ -119,9 +119,9 @@ public abstract class BossListEditorPanel extends VariablePanelHandler<BossEntit
 
                 openFor((Player) event.getWhoClicked(), bossEntity);
             }));
-
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 
     @Override

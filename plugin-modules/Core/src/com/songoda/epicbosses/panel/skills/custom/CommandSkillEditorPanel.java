@@ -66,8 +66,10 @@ public class CommandSkillEditorPanel extends VariablePanelHandler<Skill> {
             Panel panel = panelBuilder.getPanel()
                     .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
 
-            counter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, getAddNewAction(skill)));
-            fillPanel(panel, skill);
+            ServerUtils.get().runTaskAsync(() -> {
+                counter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, getAddNewAction(skill)));
+                fillPanel(panel, skill);
+            });
 
             panel.openFor(player);
         });

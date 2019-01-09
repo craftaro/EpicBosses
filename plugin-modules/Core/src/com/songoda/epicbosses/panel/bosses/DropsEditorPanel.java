@@ -70,33 +70,33 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
+        Map<String, String> replaceMap = new HashMap<>();
+
+        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+        replaceMap.put("{dropTable}", bossEntity.getDrops().getDropTable());
+
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+
+        panelBuilder.addReplaceData(replaceMap);
+
+        Panel panel = panelBuilder.getPanel()
+                .setDestroyWhenDone(true)
+                .setCancelClick(true)
+                .setCancelLowerClick(true);
+        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+        String dropTableName = bossEntity.getDrops().getDropTable();
+        DropTable dropTable = this.dropTableFileManager.getDropTable(dropTableName);
+
         ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-
-            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-            replaceMap.put("{dropTable}", bossEntity.getDrops().getDropTable());
-
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-
-            panelBuilder.addReplaceData(replaceMap);
-
-            Panel panel = panelBuilder.getPanel()
-                    .setDestroyWhenDone(true)
-                    .setCancelClick(true)
-                    .setCancelLowerClick(true);
-            PanelBuilderCounter counter = panel.getPanelBuilderCounter();
-            String dropTableName = bossEntity.getDrops().getDropTable();
-            DropTable dropTable = this.dropTableFileManager.getDropTable(dropTableName);
-
             fillPanel(panel, bossEntity);
             counter.getSlotsWith("Selected").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getMainDropTableEditMenu().openFor((Player) event.getWhoClicked(), dropTable)));
             counter.getSlotsWith("CreateDropTable").forEach(slot -> panel.setOnClick(slot, event -> {
                 player.closeInventory();
                 Message.Boss_New_CreateArgumentsDropTable.msg(event.getWhoClicked());
             }));
-
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 
     private void loadPage(Panel panel, int requestedPage, Map<String, DropTable> dropTableMap, List<String> entryList, BossEntity bossEntity) {

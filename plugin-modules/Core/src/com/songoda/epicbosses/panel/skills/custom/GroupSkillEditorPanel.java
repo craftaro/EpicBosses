@@ -61,20 +61,18 @@ public class GroupSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     @Override
     public void openFor(Player player, Skill skill) {
-        ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        Map<String, String> replaceMap = new HashMap<>();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-            replaceMap.put("{name}", BossAPI.getSkillName(skill));
-            panelBuilder.addReplaceData(replaceMap);
+        replaceMap.put("{name}", BossAPI.getSkillName(skill));
+        panelBuilder.addReplaceData(replaceMap);
 
-            Panel panel = panelBuilder.getPanel()
-                    .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
+        Panel panel = panelBuilder.getPanel()
+                .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
 
-            fillPanel(panel, skill);
+        ServerUtils.get().runTaskAsync(() -> fillPanel(panel, skill));
 
-            panel.openFor(player);
-        });
+        panel.openFor(player);
     }
 
     @Override

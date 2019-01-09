@@ -8,6 +8,7 @@ import com.songoda.epicbosses.droptable.elements.DropTableElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
@@ -59,9 +60,11 @@ public class DropDropTableMainEditorPanel extends SubVariablePanelHandler<DropTa
         Panel panel = panelBuilder.getPanel()
                 .setParentPanelHandler(this.bossPanelManager.getMainDropTableEditMenu(), dropTable);
 
-        panelBuilderCounter.getSlotsWith("Rewards").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getDropDropRewardListPanel().openFor((Player) event.getWhoClicked(), dropTable, dropTableElement)));
-        panelBuilderCounter.getSlotsWith("RandomDrops").forEach(slot -> panel.setOnClick(slot, getRandomDropsAction(dropTable, dropTableElement)));
-        panelBuilderCounter.getSlotsWith("MaxDrops").forEach(slot -> panel.setOnClick(slot, getMaxDropsAction(dropTable, dropTableElement)));
+        ServerUtils.get().runTaskAsync(() -> {
+            panelBuilderCounter.getSlotsWith("Rewards").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getDropDropRewardListPanel().openFor((Player) event.getWhoClicked(), dropTable, dropTableElement)));
+            panelBuilderCounter.getSlotsWith("RandomDrops").forEach(slot -> panel.setOnClick(slot, getRandomDropsAction(dropTable, dropTableElement)));
+            panelBuilderCounter.getSlotsWith("MaxDrops").forEach(slot -> panel.setOnClick(slot, getMaxDropsAction(dropTable, dropTableElement)));
+        });
 
         panel.openFor(player);
     }
