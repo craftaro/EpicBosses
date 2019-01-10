@@ -41,35 +41,33 @@ public class SpawnTextEditorPanel extends VariablePanelHandler<BossEntity> {
 
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
+        Map<String, String> replaceMap = new HashMap<>();
+        Integer radius = bossEntity.getMessages().getOnSpawn().getRadius();
+        String message = bossEntity.getMessages().getOnDeath().getMessage();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+
+        if(radius == null) radius = 0;
+        if(message == null) message = "N/A";
+
+        replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
+        replaceMap.put("{radius}", NumberUtils.get().formatDouble(radius));
+        replaceMap.put("{selected}", message);
+        panelBuilder.addReplaceData(replaceMap);
+
+        Panel panel = panelBuilder.getPanel()
+                .setDestroyWhenDone(true)
+                .setCancelClick(true)
+                .setCancelLowerClick(true)
+                .setParentPanelHandler(this.bossPanelManager.getMainTextEditMenu(), bossEntity);
+        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+
         ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-            Integer radius = bossEntity.getMessages().getOnSpawn().getRadius();
-            String message = bossEntity.getMessages().getOnDeath().getMessage();
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+            counter.getSlotsWith("Select").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnSpawnTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
+            counter.getSlotsWith("Radius").forEach(slot -> panel.setOnClick(slot, getRadiusAction(bossEntity)));
 
-            if(radius == null) radius = 0;
-            if(message == null) message = "N/A";
-
-            replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-            replaceMap.put("{radius}", NumberUtils.get().formatDouble(radius));
-            replaceMap.put("{selected}", message);
-            panelBuilder.addReplaceData(replaceMap);
-
-            Panel panel = panelBuilder.getPanel()
-                    .setDestroyWhenDone(true)
-                    .setCancelClick(true)
-                    .setCancelLowerClick(true)
-                    .setParentPanelHandler(this.bossPanelManager.getMainTextEditMenu(), bossEntity);
-            PanelBuilderCounter counter = panel.getPanelBuilderCounter();
-
-            ServerUtils.get().runTaskAsync(() -> {
-                counter.getSlotsWith("Select").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getOnSpawnTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
-                counter.getSlotsWith("Radius").forEach(slot -> panel.setOnClick(slot, getRadiusAction(bossEntity)));
-
-            });
-
-            panel.openFor(player);
         });
+
+        panel.openFor(player);
     }
 
     @Override

@@ -9,6 +9,7 @@ import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.ObjectUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
+import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
@@ -18,6 +19,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -95,7 +97,9 @@ public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
                     this.bossEntityManager.killAllHolders(bossEntity);
                 }
             } else {
-                Message.Boss_Edit_NotCompleteEnough.msg(player);
+                List<String> incompleteThings = bossEntity.getIncompleteSectionsToEnable();
+
+                Message.Boss_Edit_NotCompleteEnough.msg(player, StringUtils.get().appendList(incompleteThings));
             }
         };
     }

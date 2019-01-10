@@ -13,7 +13,7 @@ import org.bukkit.command.CommandSender;
  * @since 18-Jul-18
  */
 @Name("boss")
-@Alias({"bosses", "b", "bs"})
+@Alias({"bosses", "b", "bs", "eb", "epicbosses"})
 @Description("Used to handle all CustomBosses related commands.")
 
 public class BossCmd extends SubCommandService<CommandSender> {

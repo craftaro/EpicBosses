@@ -63,7 +63,7 @@ public enum Message {
     Boss_Edit_ItemStackHolderNull("&c&l(!) &cThe itemstack name that is provided for the spawn item doesn't exist or wasn't found."),
     Boss_Edit_CannotSpawn("&c&l(!) &cYou cannot spawn this boss while editing is enabled. If you think this is a mistake please contact an administrator to disable the editing of the boss."),
     Boss_Edit_Toggled("&b&lEpicBosses &8» &7You have toggled the editing mode for &f{0}&7 to &f{1}&7."),
-    Boss_Edit_NotCompleteEnough("&c&l(!) &cThe boss is not set up enough to be enabled. Please make sure it has: &fA Spawn Item, Entity Type, Health and Position&c before you try and enable the boss."),
+    Boss_Edit_NotCompleteEnough("&c&l(!) &cThe boss is not set up enough to be enabled. Please make sure it has the following things: &f{0}&c Once these things are set try toggling again."),
     Boss_Edit_DoesntExist("&c&l(!) &cThe specified boss does not exist. Please try again with the proper name. If you cannot figure it out please check the bosses.json file to find the one you're looking for."),
 
     Boss_GiveEgg_NoPermission("&c&l(!) &cYou do not have access to this command."),
@@ -82,7 +82,6 @@ public enum Message {
             "&b/boss info [name] &8» &7Shows information on the specified boss.\n" +
             "&b/boss nearby (radius) &8» &7Shows the nearby bosses.\n" +
             "&b/boss reload &8» &7Reloads the boss plugin.\n" +
-            "&b/boss killall (world) &8» &7Kills all bosses/minions.\n" +
             "&7\n" +
             "&7Use /boss help 2 to view the next page.\n" +
             "&8&m----*-----------------------------------*----"),
@@ -91,16 +90,16 @@ public enum Message {
             "&b/boss spawn [name] (location) &8» &7Spawns a boss at your" +
             " location or the specified location.\n" +
             "&7&o(Separate location with commas, an example is: world,0,100,0)\n" +
-            "&b/boss time [section] &8» &7Shows the time left till next auto spawn.\n" +
             "&b/boss droptable &8» &7Shows all current drop tables.\n" +
             "&b/boss items &8» &7Shows all current custom items.\n" +
-            "&b/boss skills &8» &7Shows all current set skills.\n" +
+                    "&b/boss skills &8» &7Shows all current set skills.\n" +
+            "&b/boss killall (world) &8» &7Kills all bosses/minions.\n" +
             "&7\n" +
             "&7Use /boss help 3 to view the next page.\n" +
             "&8&m----*-----------------------------------*----"),
     Boss_Help_Page3(
             "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 3/4) &3&l]&8&m--------*----\n" +
-            "&b/boss debug &8» &7Used to toggle the debug aspect of the plugin.\n" +
+            "&b/boss time [section] &8» &7Shows the time left till next auto spawn.\n" +
             "&b/boss giveegg [name] [player] (amount) &8» &7Used to be given a " +
             "spawn item of the boss.\n" +
             "&b/boss list &8» &7Shows all the list of current boss entities.\n" +
@@ -116,7 +115,7 @@ public enum Message {
             "&b/boss new message [name] [messages] &8» &7Used to create a new message section.\n" +
             "&7&o(To add a new line use &7||&7&o in-between the messages.)\n" +
             "&7/boss new autospawn [name] &8» &7Used to create a new auto spawn section.\n" +
-            "&7\n" +
+            "&b/boss debug &8» &7Used to toggle the debug aspect of the plugin.\n" +
             "&7\n" +
             "&7\n" +
             "&7Use /boss help [page] to view the next page.\n" +

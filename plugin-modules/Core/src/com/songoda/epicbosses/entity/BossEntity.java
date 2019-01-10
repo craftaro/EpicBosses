@@ -7,6 +7,7 @@ import lombok.Setter;
 import com.songoda.epicbosses.entity.elements.*;
 import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,6 +49,34 @@ public class BossEntity {
         } else {
             return getTargeting();
         }
+    }
+
+    public List<String> getIncompleteSectionsToEnable() {
+        List<String> incompleteList = new ArrayList<>();
+
+        if(this.entityStats == null) incompleteList.add("EntityStats");
+        else {
+            EntityStatsElement entityStatsElement = this.entityStats.get(0);
+
+            if(entityStatsElement == null) incompleteList.add("EntityStatsElement");
+            else {
+                MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
+
+                if(mainStatsElement == null) incompleteList.add("MainStatsElement");
+                else {
+                    Integer position = mainStatsElement.getPosition();
+                    String entityType = mainStatsElement.getEntityType();
+                    Double health = mainStatsElement.getHealth();
+
+                    if(position == null) incompleteList.add("Entity Position");
+                    if(health == null) incompleteList.add("Entity Health");
+                    if(entityType == null || entityType.isEmpty()) incompleteList.add("Entity Type");
+                    if(getSpawnItem() == null || getSpawnItem().isEmpty()) incompleteList.add("Spawn Item");
+                }
+            }
+        }
+
+        return incompleteList;
     }
 
     public boolean isCompleteEnoughToSpawn() {
