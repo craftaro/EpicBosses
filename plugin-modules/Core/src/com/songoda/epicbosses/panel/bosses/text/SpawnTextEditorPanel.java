@@ -77,6 +77,11 @@ public class SpawnTextEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ClickAction getRadiusAction(BossEntity bossEntity) {
         return event -> {
+            if(!bossEntity.isEditing()) {
+                Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
+                return;
+            }
+
             ClickType clickType = event.getClick();
             int radiusToModifyBy = 0;
 

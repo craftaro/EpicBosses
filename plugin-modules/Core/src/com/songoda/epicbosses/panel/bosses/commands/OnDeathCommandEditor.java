@@ -5,6 +5,7 @@ import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.CommandsFileManager;
+import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
@@ -120,6 +121,11 @@ public class OnDeathCommandEditor extends VariablePanelHandler<BossEntity> {
                 itemStack.setItemMeta(itemMeta);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
+                    if(!bossEntity.isEditing()) {
+                        Message.Boss_Edit_CannotBeModified.msg(e.getWhoClicked());
+                        return;
+                    }
+
                     bossEntity.getCommands().setOnDeath(name);
                     this.plugin.getBossesFileManager().save();
                     loadPage(panel, page, currentCommands, entryList, bossEntity);

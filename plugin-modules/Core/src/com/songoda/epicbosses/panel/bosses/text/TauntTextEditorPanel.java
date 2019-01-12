@@ -85,6 +85,11 @@ public class TauntTextEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ClickAction getRadiusAction(BossEntity bossEntity) {
         return event -> {
+            if(!bossEntity.isEditing()) {
+                Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
+                return;
+            }
+
             ClickType clickType = event.getClick();
             int radiusToModifyBy = 0;
 
@@ -118,6 +123,11 @@ public class TauntTextEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ClickAction getDelayAction(BossEntity bossEntity) {
         return event -> {
+            if(!bossEntity.isEditing()) {
+                Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
+                return;
+            }
+
             ClickType clickType = event.getClick();
             int delayToModifyBy = 0;
 

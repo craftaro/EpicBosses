@@ -6,6 +6,7 @@ import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
+import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.ObjectUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
@@ -73,6 +74,11 @@ public class SpawnItemEditorPanel extends VariablePanelHandler<BossEntity> {
         ServerUtils.get().runTaskAsync(() -> {
             panelBuilderCounter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAddItemsMenu().openFor(player)));
             panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, event -> {
+                if(!bossEntity.isEditing()) {
+                    Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
+                    return;
+                }
+
                 bossEntity.setSpawnItem("");
                 this.bossesFileManager.save();
 
@@ -114,6 +120,11 @@ public class SpawnItemEditorPanel extends VariablePanelHandler<BossEntity> {
                 }
 
                 panel.setItem(realisticSlot, itemStack, e -> {
+                    if(!bossEntity.isEditing()) {
+                        Message.Boss_Edit_CannotBeModified.msg(e.getWhoClicked());
+                        return;
+                    }
+
                     bossEntity.setSpawnItem(name);
                     this.bossesFileManager.save();
 

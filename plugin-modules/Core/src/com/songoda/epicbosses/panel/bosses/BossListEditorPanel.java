@@ -9,6 +9,7 @@ import com.songoda.epicbosses.entity.elements.HandsElement;
 import com.songoda.epicbosses.entity.elements.MainStatsElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
+import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
@@ -75,6 +76,11 @@ public abstract class BossListEditorPanel extends VariablePanelHandler<BossEntit
                 if (click == ClickType.LEFT || click == ClickType.SHIFT_LEFT) {
                     getAction(bossEntity, entityStatsElement).onClick(event);
                 } else {
+                    if(!bossEntity.isEditing()) {
+                        Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
+                        return;
+                    }
+
                     if (entityStatsElement.getMainStats().getPosition() > 1) {
                         bossEntity.getEntityStats().remove(entityStatsElement);
                         this.bossesFileManager.save();
@@ -108,6 +114,11 @@ public abstract class BossListEditorPanel extends VariablePanelHandler<BossEntit
             fillPanel(panel, bossEntity);
 
             panel.getPanelBuilderCounter().getSlotsWith("CreateEntity").forEach(slot -> panel.setOnClick(slot, event -> {
+                if(!bossEntity.isEditing()) {
+                    Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
+                    return;
+                }
+
                 MainStatsElement mainStatsElement = new MainStatsElement(nextNumber, "", 50.0, "");
                 EquipmentElement equipmentElement = new EquipmentElement("", "", "", "");
                 HandsElement handsElement = new HandsElement("", "");

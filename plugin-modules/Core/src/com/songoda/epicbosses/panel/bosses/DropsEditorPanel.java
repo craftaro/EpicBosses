@@ -132,7 +132,7 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
 
                 panel.setItem(realisticSlot, itemStack, e -> {
                     if(!bossEntity.isEditing()) {
-                        Message.General_CannotBecauseLive.msg(e.getWhoClicked());
+                        Message.Boss_Edit_CannotBeModified.msg(e.getWhoClicked());
                         return;
                     }
 

@@ -87,6 +87,11 @@ public class StatisticMainEditorPanel extends SubVariablePanelHandler<BossEntity
 
     private ClickAction getDisplayNameAction(BossEntity bossEntity, EntityStatsElement entityStatsElement) {
         return event -> {
+            if(!bossEntity.isEditing()) {
+                Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
+                return;
+            }
+
             Player humanEntity = (Player) event.getWhoClicked();
             BossDisplayNameHandler bossDisplayNameHandler = new BossDisplayNameHandler(humanEntity, bossEntity, entityStatsElement, this.bossesFileManager, this);
 
@@ -98,6 +103,11 @@ public class StatisticMainEditorPanel extends SubVariablePanelHandler<BossEntity
 
     private ClickAction getHealthAction(BossEntity bossEntity, EntityStatsElement entityStatsElement) {
         return event -> {
+            if(!bossEntity.isEditing()) {
+                Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
+                return;
+            }
+
             ClickType clickType = event.getClick();
             double healthToModifyBy = 0.0;
 

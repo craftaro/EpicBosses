@@ -5,6 +5,7 @@ import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
+import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
@@ -81,6 +82,11 @@ public class DropsMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ClickAction getNaturalDropsAction(BossEntity bossEntity, Boolean current) {
         return event -> {
+            if(!bossEntity.isEditing()) {
+                Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
+                return;
+            }
+
             bossEntity.getDrops().setNaturalDrops(!current);
             this.bossesFileManager.save();
 
@@ -90,6 +96,11 @@ public class DropsMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ClickAction getNaturalExpAction(BossEntity bossEntity, Boolean current) {
         return event -> {
+            if(!bossEntity.isEditing()) {
+                Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
+                return;
+            }
+
             bossEntity.getDrops().setDropExp(!current);
             this.bossesFileManager.save();
 

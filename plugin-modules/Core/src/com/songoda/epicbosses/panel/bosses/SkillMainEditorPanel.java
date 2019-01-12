@@ -74,6 +74,11 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ClickAction getOverallChanceAction(BossEntity bossEntity) {
         return event -> {
+            if(!bossEntity.isEditing()) {
+                Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
+                return;
+            }
+
             ClickType clickType = event.getClick();
             double chanceToModifyBy = 0.0;
 

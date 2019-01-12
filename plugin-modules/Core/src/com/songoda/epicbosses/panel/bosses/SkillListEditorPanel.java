@@ -6,6 +6,7 @@ import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.SkillsFileManager;
 import com.songoda.epicbosses.skills.Skill;
+import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
@@ -110,6 +111,11 @@ public class SkillListEditorPanel extends VariablePanelHandler<BossEntity> {
                 ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Boss.Skills.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
+                    if(!bossEntity.isEditing()) {
+                        Message.Boss_Edit_CannotBeModified.msg(e.getWhoClicked());
+                        return;
+                    }
+
                     List<String> currentSkillList = bossEntity.getSkills().getSkills();
 
                     if(currentSkillList.contains(name)) {

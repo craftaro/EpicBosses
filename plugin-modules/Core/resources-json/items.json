@@ -31,6 +31,10 @@
     "type": "STICK",
     "name": "&c&lDefault Custom Skill Type Item"
   },
+  "DefaultSelectedTargetingItem": {
+    "type": "EMERALD_BLOCK",
+    "name": "&c&lDefault Selected Targeting System Item"
+  },
   "DefaultSelectedCustomSkillTypeItem": {
     "type": "BLAZE_ROD",
     "name": "&c&lDefault Selected Custom Skill Type Item"

@@ -760,7 +760,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     private void loadTargetingEditMenu() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("TargetingPanel"));
 
-        this.targetingEditMenu = new TargetingEditorPanel(this, panelBuilder, this.customBosses.getBossesFileManager());
+        this.targetingEditMenu = new TargetingEditorPanel(this, panelBuilder, this.customBosses);
     }
 
     private void reloadTargetingEditMenu() {

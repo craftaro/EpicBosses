@@ -86,6 +86,11 @@ public class DeathTextEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ClickAction getRadiusAction(BossEntity bossEntity) {
         return event -> {
+            if(!bossEntity.isEditing()) {
+                Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
+                return;
+            }
+
             ClickType clickType = event.getClick();
             int radiusToModifyBy = 0;
 
@@ -119,6 +124,11 @@ public class DeathTextEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ClickAction getOnlyShowAction(BossEntity bossEntity) {
         return event -> {
+            if(!bossEntity.isEditing()) {
+                Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
+                return;
+            }
+
             ClickType clickType = event.getClick();
             int amountToModifyBy = 0;
 

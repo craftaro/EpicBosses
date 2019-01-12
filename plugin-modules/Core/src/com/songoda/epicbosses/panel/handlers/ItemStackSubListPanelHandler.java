@@ -7,6 +7,7 @@ import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
+import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
@@ -90,6 +91,11 @@ public abstract class ItemStackSubListPanelHandler extends SubVariablePanelHandl
         ServerUtils.get().runTaskAsync(() -> {
             panelBuilderCounter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAddItemsMenu().openFor(player)));
             panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, event -> {
+                if(!bossEntity.isEditing()) {
+                    Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
+                    return;
+                }
+
                 getUpdateAction(entityStatsElement, "");
                 this.bossesFileManager.save();
 
@@ -131,6 +137,11 @@ public abstract class ItemStackSubListPanelHandler extends SubVariablePanelHandl
                 }
 
                 panel.setItem(realisticSlot, itemStack, e -> {
+                    if(!bossEntity.isEditing()) {
+                        Message.Boss_Edit_CannotBeModified.msg(e.getWhoClicked());
+                        return;
+                    }
+
                     getUpdateAction(entityStatsElement, name);
                     this.bossesFileManager.save();
 
