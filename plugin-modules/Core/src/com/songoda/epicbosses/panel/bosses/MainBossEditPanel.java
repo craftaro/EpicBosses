@@ -6,10 +6,7 @@ import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
-import com.songoda.epicbosses.utils.Message;
-import com.songoda.epicbosses.utils.ObjectUtils;
-import com.songoda.epicbosses.utils.ServerUtils;
-import com.songoda.epicbosses.utils.StringUtils;
+import com.songoda.epicbosses.utils.*;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
@@ -52,10 +49,11 @@ public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
     @Override
     public void openFor(Player player, BossEntity bossEntity) {
         Map<String, String> replaceMap = new HashMap<>();
+        String spawnItem = ObjectUtils.getValue(bossEntity.getSpawnItem(), "N/A");
 
         replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
         replaceMap.put("{mode}", bossEntity.getEditingValue());
-        replaceMap.put("{spawnItem}", ObjectUtils.getValue(bossEntity.getSpawnItem(), "N/A"));
+        replaceMap.put("{spawnItem}", spawnItem);
 
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 

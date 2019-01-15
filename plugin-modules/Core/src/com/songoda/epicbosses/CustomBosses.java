@@ -1,6 +1,7 @@
 package com.songoda.epicbosses;
 
 import com.songoda.epicbosses.container.MinionEntityContainer;
+import com.songoda.epicbosses.utils.*;
 import com.songoda.epicbosses.utils.dependencies.HolographicDisplayHelper;
 import com.songoda.epicbosses.utils.dependencies.VaultHelper;
 import lombok.Getter;
@@ -12,14 +13,12 @@ import com.songoda.epicbosses.file.EditorFileHandler;
 import com.songoda.epicbosses.file.LangFileHandler;
 import com.songoda.epicbosses.managers.*;
 import com.songoda.epicbosses.managers.files.*;
-import com.songoda.epicbosses.utils.Debug;
-import com.songoda.epicbosses.utils.IReloadable;
-import com.songoda.epicbosses.utils.Message;
-import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.file.YmlFileHandler;
 import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -72,12 +71,26 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
 
     @Override
     public void onDisable() {
+        ConsoleCommandSender console = Bukkit.getConsoleSender();
+
+        console.sendMessage(StringUtils.get().translateColor("&a============================="));
+        console.sendMessage(StringUtils.get().translateColor("&7EpicBosses " + getDescription().getVersion() + " by &5Songoda <3&7!"));
+        console.sendMessage(StringUtils.get().translateColor("&7Action: &aDisabling&7..."));
+        console.sendMessage(StringUtils.get().translateColor("&a============================="));
+
         this.autoSpawnManager.stopIntervalSystems();
         this.bossEntityManager.killAllHolders((World) null);
     }
 
     @Override
     public void onEnable() {
+        ConsoleCommandSender console = Bukkit.getConsoleSender();
+
+        console.sendMessage(StringUtils.get().translateColor("&a============================="));
+        console.sendMessage(StringUtils.get().translateColor("&7EpicBosses " + getDescription().getVersion() + " by &5Songoda <3&7!"));
+        console.sendMessage(StringUtils.get().translateColor("&7Action: &aEnabling&7..."));
+        console.sendMessage(StringUtils.get().translateColor("&a============================="));
+
         Debug.setPlugin(this);
 
         instance = this;

@@ -11,6 +11,8 @@ import org.bukkit.entity.Player;
  */
 public enum Debug {
 
+    PLAIN("{0}"),
+
     NULL_CHECK("An object was found as null when it should not be null."),
 
     MAX_HEALTH("You cannot set the max health higher than {0}. You can adjust your max health in the spigot.yml file and restart your server to increase this."),
@@ -96,6 +98,10 @@ public enum Debug {
 
             player.sendMessage(finalMsg);
         });
+    }
+
+    public static void debugMessage(String message) {
+        PLAIN.debug(message);
     }
 
     public static void setPlugin(CustomBosses plugin) {

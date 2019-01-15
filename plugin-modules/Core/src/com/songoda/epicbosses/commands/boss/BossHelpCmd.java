@@ -1,8 +1,10 @@
 package com.songoda.epicbosses.commands.boss;
 
+import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.Permission;
+import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.command.SubCommand;
 import org.bukkit.command.CommandSender;
 
@@ -47,6 +49,7 @@ public class BossHelpCmd extends SubCommand {
             return;
         }
 
+        sender.sendMessage(StringUtils.get().translateColor("EpicBosses &7Version " + CustomBosses.get().getDescription().getVersion() + " Created with <3 by &5&l&oSongoda"));
         Message.Boss_Help_NoPermission.msg(sender);
     }
 }
