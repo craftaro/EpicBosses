@@ -358,6 +358,42 @@ MainEditorPanel:
       - '&7Click here to edit the taunts, sayings,'
       - '&7etc. for this boss.'
       Button: Text
+BossShopEditorPanel:
+  name: '&b&l{name} Editor'
+  slots: 9
+  Settings:
+    backButton: true
+  Buttons:
+    backButton: 5
+  Items:
+    '3':
+      type: GUNPOWDER
+      name: '&3&lBuyable'
+      lore:
+      - '&bCurrently: &f{buyable}'
+      - '&7'
+      - '&7If this is set to true then this'
+      - '&7boss spawn egg will be spawnable from'
+      - '&7the /boss shop while boss editing is'
+      - '&7disabled.'
+      Button: Buyable
+    '5':
+      type: REDSTONE
+      name: '&c&lGo Back'
+      lore:
+      - '&7Click here to go back to the'
+      - '&7main boss editor panel.'
+    '7':
+      type: GOLD_INGOT
+      name: '&3&lPrice'
+      lore:
+      - '&bCurrently: &a$&f{price}'
+      - '&7'
+      - '&7This is the price that the boss will'
+      - '&7be sold for in the /boss shop menu'
+      - '&7'
+      - '&7Click here to adjust the price.'
+      Button: Price
 SpawnItemEditorPanel:
   name: '&b&l{name} Editor'
   slots: 54

@@ -349,10 +349,22 @@ public class ItemStackUtils {
         ItemMeta itemMeta2 = itemStack2.getItemMeta();
 
         if(itemMeta1 == null || itemMeta2 == null) return false;
-        if(itemMeta1.hasDisplayName() != itemMeta2.hasDisplayName()) return false;
-        if(!itemMeta1.getDisplayName().equals(itemMeta2.getDisplayName())) return false;
-        if(itemMeta1.hasLore() != itemMeta2.hasLore()) return false;
-        if(!itemMeta1.getLore().equals(itemMeta2.getLore())) return false;
+
+        if(itemMeta1.hasDisplayName() == itemMeta2.hasDisplayName()) {
+            if(itemMeta1.hasDisplayName()) {
+                if(!itemMeta1.getDisplayName().equals(itemMeta2.getDisplayName())) return false;
+            }
+        } else {
+            return false;
+        }
+
+        if(itemMeta1.hasLore() == itemMeta2.hasLore()) {
+            if(itemMeta1.hasLore()) {
+                if(!itemMeta1.getLore().equals(itemMeta2.getLore())) return false;
+            }
+        } else {
+            return false;
+        }
 
         return true;
     }

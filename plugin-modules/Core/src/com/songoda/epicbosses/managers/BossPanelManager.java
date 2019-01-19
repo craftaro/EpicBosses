@@ -102,7 +102,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> statisticMainEditMenu, entityTypeEditMenu;
     @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu, skillsBossEditMenu, skillListBossEditMenu, commandsMainEditMenu, onSpawnCommandEditMenu,
             onDeathCommandEditMenu, mainDropsEditMenu, mainTextEditMenu, mainTauntEditMenu, onSpawnTextEditMenu, onSpawnSubTextEditMenu, onDeathTextEditMenu, onDeathSubTextEditMenu, onDeathPositionTextEditMenu,
-            onTauntTextEditMenu, spawnItemEditMenu;
+            onTauntTextEditMenu, spawnItemEditMenu, bossShopEditMenu;
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu, statisticListEditMenu;
 
     @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu, skillTypeEditMenu, potionSkillEditorPanel, commandSkillEditorPanel, groupSkillEditorPanel, customSkillEditorPanel;
@@ -813,10 +813,12 @@ public class BossPanelManager implements ILoadable, IReloadable {
 
     private void loadShopMenu() {
         this.shopPanel = new ShopPanel(this, new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("ShopListPanel")), this.customBosses);
+        this.bossShopEditMenu = new BossShopEditorPanel(this, new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("BossShopEditorPanel")), this.customBosses);
     }
 
     private void reloadShopMenu() {
         this.shopPanel.initializePanel(new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("ShopListPanel")));
+        this.bossShopEditMenu.initializePanel(new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("BossShopEditorPanel")));
     }
 
     //---------------------------------------------
