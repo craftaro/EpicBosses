@@ -44,6 +44,7 @@ public abstract class DropTableRewardMainEditorPanel<SubVariable> extends SubSub
 
         replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
         replaceMap.put("{itemStack}", s);
+        replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
         panelBuilder.addReplaceData(replaceMap);
 
         PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();

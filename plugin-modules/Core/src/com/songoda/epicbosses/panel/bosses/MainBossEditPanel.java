@@ -89,7 +89,6 @@ public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
                 bossEntity.setEditing(!bossEntity.isEditing());
                 this.bossesFileManager.save();
                 Message.Boss_Edit_Toggled.msg(player, BossAPI.getBossEntityName(bossEntity), bossEntity.getEditingValue());
-                player.closeInventory();
 
                 if(bossEntity.isEditing()) {
                     this.bossEntityManager.killAllHolders(bossEntity);

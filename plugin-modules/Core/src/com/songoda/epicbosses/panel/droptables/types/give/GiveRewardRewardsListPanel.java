@@ -98,7 +98,7 @@ public class GiveRewardRewardsListPanel extends SubSubVariablePanelHandler<DropT
                 GiveTableSubElement giveTableSubElement = rewards.get(rewardSectionPosition);
                 ItemStack itemStack = this.itemsFileManager.getItemStackConverter().from(this.itemsFileManager.getItemStackHolder("DefaultDropTableRewardsListItem"));
 
-                int position = NumberUtils.get().getInteger(key);
+                int position = NumberUtils.get().getInteger(rewardSectionPosition);
                 Integer itemDrops = giveTableSubElement.getItems().size();
                 Integer commandDrops = giveTableSubElement.getCommands().size();
                 Double requiredPercentage = ObjectUtils.getValue(giveTableSubElement.getRequiredPercentage(), 0.0);

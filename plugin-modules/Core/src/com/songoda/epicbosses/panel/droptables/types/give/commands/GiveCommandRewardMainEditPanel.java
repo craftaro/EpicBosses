@@ -40,27 +40,26 @@ public class GiveCommandRewardMainEditPanel extends SubSubVariablePanelHandler<D
 
     @Override
     public void openFor(Player player, DropTable dropTable, GiveRewardEditHandler giveRewardEditHandler, String s) {
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+        Map<String, Double> rewardMap = giveRewardEditHandler.getGiveTableSubElement().getCommands();
+        Map<String, String> replaceMap = new HashMap<>();
+        double chance = ObjectUtils.getValue(rewardMap.get(s), 50.0);
+
+        replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
+        replaceMap.put("{itemStack}", s);
+        replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
+        panelBuilder.addReplaceData(replaceMap);
+
+        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
+        Panel panel = panelBuilder.getPanel()
+                .setParentPanelHandler(this.bossPanelManager.getGiveCommandRewardListPanel(), dropTable, giveRewardEditHandler);
+
         ServerUtils.get().runTaskAsync(() -> {
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-            Map<String, Double> rewardMap = giveRewardEditHandler.getGiveTableSubElement().getCommands();
-            Map<String, String> replaceMap = new HashMap<>();
-            double chance = ObjectUtils.getValue(rewardMap.get(s), 50.0);
-
-            replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
-            replaceMap.put("{itemStack}", s);
-            panelBuilder.addReplaceData(replaceMap);
-
-            PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
-            Panel panel = panelBuilder.getPanel()
-                    .setParentPanelHandler(this.bossPanelManager.getGiveCommandRewardListPanel(), dropTable, giveRewardEditHandler);
-
-            ServerUtils.get().runTaskAsync(() -> {
-                panelBuilderCounter.getSlotsWith("Chance").forEach(slot -> panel.setOnClick(slot, getChanceAction(dropTable, giveRewardEditHandler, s)));
-                panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, getRemoveAction(dropTable, giveRewardEditHandler, s)));
-            });
-
-            panel.openFor(player);
+            panelBuilderCounter.getSlotsWith("Chance").forEach(slot -> panel.setOnClick(slot, getChanceAction(dropTable, giveRewardEditHandler, s)));
+            panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, getRemoveAction(dropTable, giveRewardEditHandler, s)));
         });
+
+        panel.openFor(player);
     }
 
     @Override

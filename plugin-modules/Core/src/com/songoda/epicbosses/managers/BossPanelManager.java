@@ -316,11 +316,11 @@ public class BossPanelManager implements ILoadable, IReloadable {
         this.giveRewardMainEditMenu = new GiveRewardMainEditPanel(this, panelBuilder12, this.customBosses);
 
         this.giveDropNewRewardEditPanel = new GiveDropNewRewardPanel(this, panelBuilder4, this.customBosses);
-        this.giveDropRewardListPanel = new GiveDropRewardListPanel(this, panelBuilder5, this.customBosses);
-        this.giveDropRewardMainEditPanel = new GiveDropRewardMainEditPanel(this, panelBuilder3, this.customBosses);
+        this.giveDropRewardListPanel = new GiveDropRewardListPanel(this, panelBuilder3, this.customBosses);
+        this.giveDropRewardMainEditPanel = new GiveDropRewardMainEditPanel(this, panelBuilder5, this.customBosses);
         this.giveCommandNewRewardPanel = new GiveCommandNewRewardPanel(this, panelBuilder4, this.customBosses);
-        this.giveCommandRewardListPanel = new GiveCommandRewardListPanel(this, panelBuilder5, this.customBosses);
-        this.giveCommandRewardMainEditMenu = new GiveCommandRewardMainEditPanel(this, panelBuilder3, this.customBosses);
+        this.giveCommandRewardListPanel = new GiveCommandRewardListPanel(this, panelBuilder3, this.customBosses);
+        this.giveCommandRewardMainEditMenu = new GiveCommandRewardMainEditPanel(this, panelBuilder5, this.customBosses);
     }
 
     private void reloadDropTableEditMenus() {
@@ -848,7 +848,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     }
 
     private void reloadAutoSpawnsMenu() {
-        this.autoSpawns.initializePanel(getListMenu("AutoSpawns"));
+        this.autoSpawns.initializePanel(getListMenu("AutoSpawns.Main"));
     }
 
     //---------------------------------------------
@@ -890,7 +890,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     }
 
     private void reloadDropTable() {
-        this.dropTables.initializePanel(getListMenu("DropTable"));
+        this.dropTables.initializePanel(getListMenu("DropTable.Main"));
     }
 
     //---------------------------------------------

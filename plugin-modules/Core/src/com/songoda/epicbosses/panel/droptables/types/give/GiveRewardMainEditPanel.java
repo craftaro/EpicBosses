@@ -53,7 +53,7 @@ public class GiveRewardMainEditPanel extends SubVariablePanelHandler<DropTable, 
         Boolean randomCommands = ObjectUtils.getValue(giveTableSubElement.getRandomCommands(), false);
 
         replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
-        replaceMap.put("{position}", giveRewardEditHandler.getDamagePosition());
+        replaceMap.put("{position}", giveRewardEditHandler.getDropSection());
         replaceMap.put("{randomDrops}", ""+randomDrops);
         replaceMap.put("{maxDrops}", NumberUtils.get().formatDouble(maxDrops));
         replaceMap.put("{drops}", NumberUtils.get().formatDouble(itemDrops));
@@ -74,7 +74,7 @@ public class GiveRewardMainEditPanel extends SubVariablePanelHandler<DropTable, 
             counter.getSlotsWith("RequiredPercentage").forEach(slot -> panel.setOnClick(slot, getRequiredPercentageAction(dropTable, giveRewardEditHandler)));
             counter.getSlotsWith("CommandDrops").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getGiveCommandRewardListPanel().openFor((Player) event.getWhoClicked(), dropTable, giveRewardEditHandler)));
             counter.getSlotsWith("MaxCommands").forEach(slot -> panel.setOnClick(slot, getMaxCommandsAction(dropTable, giveRewardEditHandler)));
-            counter.getSlotsWith("RandomDrops").forEach(slot -> panel.setOnClick(slot, getRandomCommandsAction(dropTable, giveRewardEditHandler)));
+            counter.getSlotsWith("RandomCommands").forEach(slot -> panel.setOnClick(slot, getRandomCommandsAction(dropTable, giveRewardEditHandler)));
         });
 
         panel.openFor(player);
