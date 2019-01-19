@@ -1,25 +1,20 @@
 package com.songoda.epicbosses.panel.skills.custom.potions;
 
 import com.songoda.epicbosses.CustomBosses;
-import com.songoda.epicbosses.entity.BossEntity;
-import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.skills.Skill;
-import com.songoda.epicbosses.skills.types.PotionSkillElement;
 import com.songoda.epicbosses.utils.*;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
+import com.songoda.epicbosses.utils.potion.PotionEffectConverter;
 import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
 import org.bukkit.Material;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.potion.PotionType;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,6 +29,7 @@ import java.util.stream.Collectors;
  */
 public class PotionEffectTypeEditorPanel extends SubVariablePanelHandler<Skill, PotionEffectHolder> {
 
+    private PotionEffectConverter potionEffectConverter = new PotionEffectConverter();
     private CustomBosses plugin;
 
     public PotionEffectTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
@@ -81,11 +77,8 @@ public class PotionEffectTypeEditorPanel extends SubVariablePanelHandler<Skill, 
                 PotionEffectType potionEffectType = potionEffectTypes.get(slot);
                 ItemStack itemStack = new ItemStack(Material.POTION);
                 PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
-                PotionType potionType = PotionType.getByEffect(potionEffectType);
 
-                if(potionType == null) potionType = PotionType.WATER;
-
-                potionMeta.setBasePotionData(new PotionData(potionType));
+                potionMeta.addCustomEffect(this.potionEffectConverter.from(potionEffectHolder), true);
                 itemStack.setItemMeta(potionMeta);
 
                 Map<String, String> replaceMap = new HashMap<>();

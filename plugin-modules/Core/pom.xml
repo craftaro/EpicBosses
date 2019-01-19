@@ -46,7 +46,7 @@
     </dependencies>
 
     <build>
-        <finalName>${parent.artifactId}-${plugin.version} (1.13.x)</finalName>
+        <finalName>${parent.artifactId}-${plugin.version} (Legacy)</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
