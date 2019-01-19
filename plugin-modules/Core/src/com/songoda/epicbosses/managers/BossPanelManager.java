@@ -102,7 +102,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> statisticMainEditMenu, entityTypeEditMenu;
     @Getter private IVariablePanelHandler<BossEntity> mainBossEditMenu, dropsEditMenu, targetingEditMenu, skillsBossEditMenu, skillListBossEditMenu, commandsMainEditMenu, onSpawnCommandEditMenu,
             onDeathCommandEditMenu, mainDropsEditMenu, mainTextEditMenu, mainTauntEditMenu, onSpawnTextEditMenu, onSpawnSubTextEditMenu, onDeathTextEditMenu, onDeathSubTextEditMenu, onDeathPositionTextEditMenu,
-            onTauntTextEditMenu, spawnItemEditMenu, bossShopEditMenu;
+            onTauntTextEditMenu, spawnItemEditMenu, bossShopEditMenu, bossSkillMasterMessageTextEditMenu;
     @Getter private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu, statisticListEditMenu;
 
     @Getter private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu, skillTypeEditMenu, potionSkillEditorPanel, commandSkillEditorPanel, groupSkillEditorPanel, customSkillEditorPanel;
@@ -461,6 +461,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("TauntEditorPanel"));
 
         this.mainTextEditMenu = new TextMainEditorPanel(this, panelBuilder);
+        this.bossSkillMasterMessageTextEditMenu = new SkillMasterMessageTextEditorPanel(this, getListMenu("Boss.Text"), this.customBosses);
         this.onSpawnSubTextEditMenu = new SpawnTextEditorPanel(this, panelBuilder1, this.customBosses);
         this.onDeathSubTextEditMenu = new DeathTextEditorPanel(this, panelBuilder2, this.customBosses);
         this.mainTauntEditMenu = new TauntTextEditorPanel(this, panelBuilder3, this.customBosses);
@@ -566,6 +567,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
         PanelBuilder panelBuilder3 = new PanelBuilder(editor.getConfigurationSection("TauntEditorPanel"));
 
         this.mainTextEditMenu.initializePanel(panelBuilder);
+        this.bossSkillMasterMessageTextEditMenu.initializePanel(getListMenu("Boss.Text"));
         this.onSpawnSubTextEditMenu.initializePanel(panelBuilder1);
         this.onDeathSubTextEditMenu.initializePanel(panelBuilder2);
         this.mainTauntEditMenu.initializePanel(panelBuilder3);

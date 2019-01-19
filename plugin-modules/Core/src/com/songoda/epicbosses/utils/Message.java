@@ -67,6 +67,7 @@ public enum Message {
     Boss_Edit_NotCompleteEnough("&c&l(!) &cThe boss is not set up enough to be enabled. Please make sure it has the following things: &f{0}&c Once these things are set try toggling again."),
     Boss_Edit_DoesntExist("&c&l(!) &cThe specified boss does not exist. Please try again with the proper name. If you cannot figure it out please check the bosses.json file to find the one you're looking for."),
     Boss_Edit_Price("&b&lEpicBosses &8» &7Please input the new price of the &f{0}&7 Boss Entity. Please do not add commas and only use numbers. To cancel this input in to chat &f- &7."),
+    Boss_Edit_PriceSet("&b&lEpicBosses &8» &7You have set the price of &f{0}&7 to &a$&f{1}&7."),
 
     Boss_GiveEgg_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_GiveEgg_InvalidArgs("&c&l(!) &cYou must use &n/boss giveegg [name] [player] (amount)&c to give an egg."),

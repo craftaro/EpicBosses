@@ -61,7 +61,7 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
         ServerUtils.get().runTaskAsync(() -> {
             counter.getSlotsWith("OverallChance").forEach(slot -> panel.setOnClick(slot, getOverallChanceAction(bossEntity)));
             counter.getSlotsWith("SkillList").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getSkillListBossEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
-            counter.getSlotsWith("Message").forEach(slot -> panel.setOnClick(slot, getMessageAction()));
+            counter.getSlotsWith("Message").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getBossSkillMasterMessageTextEditMenu().openFor((Player) event.getWhoClicked(), bossEntity)));
         });
 
         panel.openFor(player);
@@ -112,10 +112,5 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
             Message.Boss_Skills_SetChance.msg(event.getWhoClicked(), modifyValue, NumberUtils.get().formatDouble(newChance));
             openFor((Player) event.getWhoClicked(), bossEntity);
         };
-    }
-
-    //TODO
-    private ClickAction getMessageAction() {
-        return event -> {};
     }
 }

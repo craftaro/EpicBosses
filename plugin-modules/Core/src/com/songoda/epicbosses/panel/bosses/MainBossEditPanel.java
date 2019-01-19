@@ -94,6 +94,8 @@ public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
                 if(bossEntity.isEditing()) {
                     this.bossEntityManager.killAllHolders(bossEntity);
                 }
+
+                openFor(player, bossEntity);
             } else {
                 List<String> incompleteThings = bossEntity.getIncompleteSectionsToEnable();
 

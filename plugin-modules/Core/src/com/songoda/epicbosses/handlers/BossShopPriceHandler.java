@@ -66,9 +66,11 @@ public class BossShopPriceHandler implements IHandler {
                 event.setCancelled(true);
 
                 if(NumberUtils.get().isDouble(input)) {
-                    getBossEntity().setPrice(NumberUtils.get().getDouble(input));
+                    double amount = NumberUtils.get().getDouble(input);
+                    getBossEntity().setPrice(amount);
                     getBossesFileManager().save();
                     setHandled(true);
+                    Message.Boss_Edit_PriceSet.msg(getPlayer(), BossAPI.getBossEntityName(getBossEntity()), NumberUtils.get().formatDouble(amount));
 
                     finish();
                 } else {
