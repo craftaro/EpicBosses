@@ -50,7 +50,7 @@ public class Minions extends CustomSkillHandler {
         List<ICustomSettingAction> clickActions = new ArrayList<>();
 
         clickActions.add(BossSkillManager.createCustomSkillAction("Amount Editor", getAmountCurrent(customSkillElement), new ItemStack(Material.REDSTONE), getAmountAction(skill, customSkillElement)));
-        clickActions.add(BossSkillManager.createCustomSkillAction("Minion to Spawn Editor", getMinionToSpawnCurrent(customSkillElement), new ItemStack(Material.CREEPER_SPAWN_EGG), getMinionToSpawnAction(skill, customSkillElement)));
+        clickActions.add(BossSkillManager.createCustomSkillAction("Minion to Spawn Editor", getMinionToSpawnCurrent(customSkillElement), new ItemStack(Material.MONSTER_EGG), getMinionToSpawnAction(skill, customSkillElement)));
 
         return clickActions;
     }

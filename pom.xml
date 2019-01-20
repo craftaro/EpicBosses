@@ -40,14 +40,14 @@
         </dependency>
         <dependency>
             <groupId>com.sk89q</groupId>
-            <artifactId>FAWE</artifactId>
-            <version>7.0.0</version>
+            <artifactId>worldedit</artifactId>
+            <version>6.0.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.sk89q</groupId>
             <artifactId>worldguard</artifactId>
-            <version>7.0.0</version>
+            <version>6.0.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

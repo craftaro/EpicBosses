@@ -1,6 +1,6 @@
 {
   "DefaultAutoSpawnListItem": {
-    "type": "GRASS_BLOCK",
+    "type": "GRASS",
     "name": "&c&lDefault AutoSpawn List Item"
   },
   "DefaultDropTableRewardItem": {
@@ -12,7 +12,7 @@
     "name": "&c&lDefault DropTable Rewards List Item"
   },
   "DefaultMinionMenuSpawnItem": {
-    "type": "ZOMBIE_SPAWN_EGG",
+    "type": "MONSTER_EGG",
     "name": "&c&lDefault Minion Menu Spawn Item"
   },
   "DefaultTextMenuItem": {
@@ -24,7 +24,7 @@
     "name": "&c&lDefault Boss Menu Item"
   },
   "DefaultDropTableMenuItem": {
-    "type": "OAK_PRESSURE_PLATE",
+    "type": "WOOD_PLATE",
     "name": "&c&lDefault Drop Table Menu Item"
   },
   "DefaultCustomSkillTypeItem": {
@@ -40,7 +40,7 @@
     "name": "&c&lDefault Selected Custom Skill Type Item"
   },
   "DefaultSelectedDropTableItem": {
-    "type": "LIGHT_WEIGHTED_PRESSURE_PLATE",
+    "type": "GOLD_PLATE",
     "name": "&c&lSelected Default Drop Table Menu Item"
   },
   "DefaultSkillMenuItem": {
@@ -48,11 +48,12 @@
     "name": "&c&lDefault Skill Menu Item"
   },
   "DefaultBossListEditorMenuItem": {
-    "type": "ZOMBIE_SPAWN_EGG",
+    "type": "MONSTER_EGG",
     "name": "&c&lDefault Boss List Editor Menu Item"
   },
   "SKSpawnItem": {
-    "type": "SKELETON_SPAWN_EGG",
+    "type": "MONSTER_EGG",
+    "durability": 51,
     "name": "&6&lSkeleton King Boss Spawn Egg",
     "lore": [
       "&7Right click a block to spawn",

@@ -1,14 +1,11 @@
 package com.songoda.epicbosses.utils.dependencies;
 
-import com.sk89q.worldedit.bukkit.BukkitAdapter;
-import com.sk89q.worldedit.world.World;
-import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.WGBukkit;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
-import com.sk89q.worldguard.protection.flags.Flags;
+import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
-import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import com.sk89q.worldguard.protection.regions.RegionQuery;
 import com.songoda.epicbosses.utils.IWorldGuardHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -23,18 +20,16 @@ import java.util.List;
  */
 public class WorldGuardHelper implements IWorldGuardHelper {
 
-    private WorldGuard worldGuard;
+    private WorldGuardPlugin worldGuard;
 
     @Override
     public boolean isPvpAllowed(Location loc) {
         if(Bukkit.getServer().getPluginManager().getPlugin("WorldGuard") != null) {
             if(worldGuard == null) {
-                this.worldGuard = WorldGuard.getInstance();
+                this.worldGuard = WGBukkit.getPlugin();
             }
-
-            RegionQuery regionQuery = this.worldGuard.getPlatform().getRegionContainer().createQuery();
-            ApplicableRegionSet applicableRegionSet = regionQuery.getApplicableRegions(BukkitAdapter.adapt(loc));
-            StateFlag.State state = applicableRegionSet.queryState(null, Flags.PVP);
+            ApplicableRegionSet applicableRegionSet = this.worldGuard.getRegionManager(loc.getWorld()).getApplicableRegions(loc);
+            StateFlag.State state = applicableRegionSet.queryState(null, DefaultFlag.PVP);
 
             return state != StateFlag.State.DENY;
         }
@@ -46,12 +41,11 @@ public class WorldGuardHelper implements IWorldGuardHelper {
     public boolean isBreakAllowed(Location loc) {
         if(Bukkit.getServer().getPluginManager().getPlugin("WorldGuard") != null) {
             if(worldGuard == null) {
-                this.worldGuard = WorldGuard.getInstance();
+                this.worldGuard = WGBukkit.getPlugin();
             }
 
-            RegionQuery regionQuery = this.worldGuard.getPlatform().getRegionContainer().createQuery();
-            ApplicableRegionSet applicableRegionSet = regionQuery.getApplicableRegions(BukkitAdapter.adapt(loc));
-            StateFlag.State state = applicableRegionSet.queryState(null, Flags.BLOCK_BREAK);
+            ApplicableRegionSet applicableRegionSet = this.worldGuard.getRegionManager(loc.getWorld()).getApplicableRegions(loc);
+            StateFlag.State state = applicableRegionSet.queryState(null, DefaultFlag.BLOCK_BREAK);
 
             return state != StateFlag.State.DENY;
         }
@@ -63,12 +57,11 @@ public class WorldGuardHelper implements IWorldGuardHelper {
     public boolean isExplosionsAllowed(Location loc) {
         if(Bukkit.getServer().getPluginManager().getPlugin("WorldGuard") != null) {
             if(worldGuard == null) {
-                this.worldGuard = WorldGuard.getInstance();
+                this.worldGuard = WGBukkit.getPlugin();
             }
 
-            RegionQuery regionQuery = this.worldGuard.getPlatform().getRegionContainer().createQuery();
-            ApplicableRegionSet applicableRegionSet = regionQuery.getApplicableRegions(BukkitAdapter.adapt(loc));
-            StateFlag.State state = applicableRegionSet.queryState(null, Flags.OTHER_EXPLOSION);
+            ApplicableRegionSet applicableRegionSet = this.worldGuard.getRegionManager(loc.getWorld()).getApplicableRegions(loc);
+            StateFlag.State state = applicableRegionSet.queryState(null, DefaultFlag.OTHER_EXPLOSION);
 
             return state != StateFlag.State.DENY;
         }
@@ -79,18 +72,13 @@ public class WorldGuardHelper implements IWorldGuardHelper {
     @Override
     public List<String> getRegionNames(Location loc) {
         if(Bukkit.getServer().getPluginManager().getPlugin("WorldGuard") != null) {
-            if (worldGuard == null) {
-                this.worldGuard = WorldGuard.getInstance();
+            if(worldGuard == null) {
+                this.worldGuard = WGBukkit.getPlugin();
             }
 
             List<String> regions = new ArrayList<>();
             List<String> parentNames = new ArrayList<>();
-            World world = BukkitAdapter.adapt(loc.getWorld());
-            RegionManager regionManager = this.worldGuard.getPlatform().getRegionContainer().get(world);
-
-            if (regionManager == null) return null;
-
-            ApplicableRegionSet set = regionManager.getApplicableRegions(BukkitAdapter.asVector(loc));
+            ApplicableRegionSet set = this.worldGuard.getRegionManager(loc.getWorld()).getApplicableRegions(loc);
 
             for (ProtectedRegion region : set) {
                 String id = region.getId();
@@ -119,12 +107,11 @@ public class WorldGuardHelper implements IWorldGuardHelper {
     public boolean isMobSpawningAllowed(Location loc) {
         if(Bukkit.getServer().getPluginManager().getPlugin("WorldGuard") != null) {
             if(worldGuard == null) {
-                this.worldGuard = WorldGuard.getInstance();
+                this.worldGuard = WGBukkit.getPlugin();
             }
 
-            RegionQuery regionQuery = this.worldGuard.getPlatform().getRegionContainer().createQuery();
-            ApplicableRegionSet applicableRegionSet = regionQuery.getApplicableRegions(BukkitAdapter.adapt(loc));
-            StateFlag.State state = applicableRegionSet.queryState(null, Flags.MOB_SPAWNING);
+            ApplicableRegionSet applicableRegionSet = this.worldGuard.getRegionManager(loc.getWorld()).getApplicableRegions(loc);
+            StateFlag.State state = applicableRegionSet.queryState(null, DefaultFlag.MOB_SPAWNING);
 
             return state != StateFlag.State.DENY;
         }

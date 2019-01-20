@@ -52,7 +52,7 @@
         "multiplier": 0.0,
         "otherSkillData": {
           "flatType": "IRON_BLOCK",
-          "wallType": "IRON_BARS",
+          "wallType": "IRON_FENCE",
           "insideType": "WATER"
         }
       }

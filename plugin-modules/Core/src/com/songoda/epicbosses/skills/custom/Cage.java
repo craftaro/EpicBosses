@@ -68,7 +68,7 @@ public class Cage extends CustomSkillHandler {
     @Override
     public List<ICustomSettingAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
         List<ICustomSettingAction> clickActions = new ArrayList<>();
-        ItemStack clickStack = new ItemStack(Material.STONE_PRESSURE_PLATE);
+        ItemStack clickStack = new ItemStack(Material.STONE_PLATE);
         ClickAction flatAction = (event -> this.flatTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
         ClickAction wallAction = (event -> this.wallTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
         ClickAction insideAction = (event -> this.insideTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
@@ -124,7 +124,7 @@ public class Cage extends CustomSkillHandler {
 
                 if(oldState != null) {
                     location.getBlock().setType(oldState.getType());
-                    location.getBlock().setBlockData(oldState.getBlockData());
+                    location.getBlock().setData(oldState.getData().getData());
                 }
 
                 getCageLocationDataMap().remove(location);
