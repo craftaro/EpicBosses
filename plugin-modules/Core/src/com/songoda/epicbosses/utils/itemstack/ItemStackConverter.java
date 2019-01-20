@@ -106,9 +106,11 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
     public ItemStack from(ItemStackHolder itemStackHolder, Map<String, String> replaceMap) {
         ItemStack itemStack = new ItemStack(Material.AIR);
 
+        if(itemStackHolder == null) return itemStack;
         if(itemStackHolder.getType() == null) return itemStack;
 
-        Material material = this.materialConverter.from(itemStackHolder.getType());
+        String type = itemStackHolder.getType();
+        Material material = this.materialConverter.from(type);
 
         if(material == null) return itemStack;
 
@@ -119,6 +121,10 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
         String name = itemStackHolder.getName(), skullOwner = itemStackHolder.getSkullOwner();
         List<String> lore = itemStackHolder.getLore(), enchants = itemStackHolder.getEnchants();
         Boolean isGlowing = itemStackHolder.getIsGlowing();
+
+        if(type.contains(":")) {
+            durability = Short.valueOf(type.split(":")[1]);
+        }
 
         if(durability != null) itemStack.setDurability(durability);
         if(enchants != null) itemStack.addUnsafeEnchantments(this.enchantConverter.from(enchants));

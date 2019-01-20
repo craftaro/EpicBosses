@@ -6,9 +6,12 @@
         "1": {
           "1": {
             "items": {
-              "SKEco500": 30.0,
-              "SKEco2500": 50.0,
-              "SKEco5000": 10.0
+              "SKMainHand": 15.0,
+              "SKOffHand": 15.0,
+              "SKHelmet": 15.0,
+              "SKLeggings": 30.0,
+              "SKChestplate": 30.0,
+              "SKBoots": 30.0
             },
             "commands": {
               "SKEco500": 30.0,

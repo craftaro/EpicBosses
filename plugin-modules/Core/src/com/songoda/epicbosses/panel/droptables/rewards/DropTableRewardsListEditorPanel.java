@@ -96,6 +96,8 @@ public abstract class DropTableRewardsListEditorPanel<SubVariable> extends SubVa
 
                 ItemStack itemStack = this.itemsFileManager.getItemStackConverter().from(this.itemsFileManager.getItemStackHolder(name));
 
+                if(itemStack == null || itemStack.getType() == Material.AIR) return;
+
                 ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.DropTable.RewardList.name"), replaceMap);
                 ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.DropTable.RewardList.lore"), replaceMap);
 

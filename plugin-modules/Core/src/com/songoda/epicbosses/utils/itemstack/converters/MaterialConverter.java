@@ -24,6 +24,10 @@ public class MaterialConverter implements IConverter<String, Material> {
             input = split[0];
         }
 
+        if(NumberUtils.get().isInt(input)) {
+            return Material.getMaterial(NumberUtils.get().getInteger(input));
+        }
+
         return Material.matchMaterial(input);
     }
 }

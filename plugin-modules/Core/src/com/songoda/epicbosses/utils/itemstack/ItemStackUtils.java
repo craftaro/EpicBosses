@@ -62,15 +62,6 @@ public class ItemStackUtils {
 
         if(compoundData == null || compoundData.isEmpty()) return cloneStack;
 
-//        TODO
-//        ItemStack craftStack = NbtFactory.getCraftItemStack(cloneStack);
-//        NbtFactory.NbtCompound compound = NbtFactory.fromItemTag(craftStack);
-//
-//        for(String s : compoundData.keySet()) {
-//            compound.put(s, compoundData.get(s));
-//        }
-//
-//        return craftStack;
         return cloneStack;
     }
 
@@ -87,17 +78,26 @@ public class ItemStackUtils {
         String owner = configurationSection.getString("owner");
         Map<Enchantment, Integer> map = new HashMap<>();
         List<String> newLore = new ArrayList<>();
-        Material mat = getType(type);
-        short meta = 0;
         boolean addGlow = false;
+        short meta = 0;
+        Material mat;
 
-        if(type instanceof String) {
-            String sType = (String) type;
+        if(NumberUtils.get().isInt(type)) {
+            mat = Material.getMaterial(NumberUtils.get().getInteger(type));
+        } else {
+            if(type.contains(":")) {
+                String[] split = type.split(":");
+                String typeSplit = split[0];
 
-            if(sType.contains(":")) {
-                String[] split = sType.split(":");
+                if(NumberUtils.get().isInt(typeSplit)) {
+                    mat = Material.getMaterial(NumberUtils.get().getInteger(typeSplit));
+                } else {
+                    mat = Material.getMaterial(typeSplit);
+                }
 
                 meta = Short.valueOf(split[1]);
+            } else {
+                mat = Material.getMaterial(type);
             }
         }
 

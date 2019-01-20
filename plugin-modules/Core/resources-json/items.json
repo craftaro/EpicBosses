@@ -61,15 +61,15 @@
     ]
   },
   "SKHelmet": {
-    "type": "GOLDEN_HELMET",
+    "type": "GOLD_HELMET",
     "enchants": [ "protection:4", "unbreaking:3" ]
   },
   "SKChestplate": {
-    "type": "GOLDEN_CHESTPLATE",
+    "type": "GOLD_CHESTPLATE",
     "enchants": [ "protection:4", "unbreaking:3" ]
   },
   "SKLeggings": {
-    "type": "GOLDEN_LEGGINGS",
+    "type": "GOLD_LEGGINGS",
     "enchants": [ "protection:4", "unbreaking:3" ]
   },
   "SKBoots": {
@@ -81,7 +81,7 @@
     "enchants": [ "sharpness:4", "unbreaking:3" ]
   },
   "SKOffHand": {
-    "type": "SHIELD"
+    "type": "STICK"
   },
   "SKCustomDrop1": {
     "type": "STONE",

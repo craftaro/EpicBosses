@@ -1,11 +1,3 @@
-00:30 -> Add HolographicDisplay/PlaceholderAPI support for custom placeholders on AutoSpawnInterval times
-01:00 -> Add a new branch for the plugin and add support for Legacy version
-
------------
-1:30 hrs
-
-
-
 ------------------------------------- TO DO AFTER RELEASE ---------------------------------------------------
 02:00   -> Randomly in the wilderness, bosses will spawn with x chance within coords as a player is loading chunks
 00:45   -> Randomly from a spawner, bosses will spawn with x chance within coords when a spawner is spawning mobs of the same type
