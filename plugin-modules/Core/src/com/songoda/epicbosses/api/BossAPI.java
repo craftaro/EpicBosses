@@ -381,7 +381,7 @@ public class BossAPI {
         MessagesElement messagesElement = new MessagesElement(new OnSpawnMessageElement("", -1), new OnDeathMessageElement("", "", -1, 5), new TauntElement(60, 100, new ArrayList<>()));
         CommandsElement commandsElement = new CommandsElement("", "");
 
-        BossEntity bossEntity = new BossEntity(true, null, false, 100.0, entityStatsElements, skillsElement, dropsElement, messagesElement, commandsElement);
+        BossEntity bossEntity = new BossEntity(true, null, "RandomNearby", false, 100.0, entityStatsElements, skillsElement, dropsElement, messagesElement, commandsElement);
         boolean result = PLUGIN.getBossEntityContainer().saveData(name, bossEntity);
 
         if (!result) {

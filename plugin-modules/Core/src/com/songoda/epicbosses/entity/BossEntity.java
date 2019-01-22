@@ -27,9 +27,10 @@ public class BossEntity {
     @Expose @Getter private final SkillsElement skills;
     @Expose @Getter private final DropsElement drops;
 
-    public BossEntity(boolean editing, String spawnItem, boolean buyable, Double price, List<EntityStatsElement> entityStats, SkillsElement skills, DropsElement drops, MessagesElement messages, CommandsElement commands) {
+    public BossEntity(boolean editing, String spawnItem, String targeting, boolean buyable, Double price, List<EntityStatsElement> entityStats, SkillsElement skills, DropsElement drops, MessagesElement messages, CommandsElement commands) {
         this.editing = editing;
         this.entityStats = entityStats;
+        this.targeting = targeting;
         this.spawnItem = spawnItem;
         this.skills = skills;
         this.drops = drops;
