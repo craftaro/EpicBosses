@@ -43,7 +43,7 @@ public class SpawnTextEditorPanel extends VariablePanelHandler<BossEntity> {
     public void openFor(Player player, BossEntity bossEntity) {
         Map<String, String> replaceMap = new HashMap<>();
         Integer radius = bossEntity.getMessages().getOnSpawn().getRadius();
-        String message = bossEntity.getMessages().getOnDeath().getMessage();
+        String message = bossEntity.getMessages().getOnSpawn().getMessage();
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
         if(radius == null) radius = 0;
