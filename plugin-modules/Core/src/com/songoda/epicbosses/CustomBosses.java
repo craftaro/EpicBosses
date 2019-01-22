@@ -67,7 +67,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     @Getter private HolographicDisplayHelper holographicDisplayHelper;
     @Getter private VaultHelper vaultHelper;
 
-    @Getter private boolean debug = false;
+    @Getter private boolean debug = true;
 
     @Override
     public void onDisable() {
@@ -76,10 +76,11 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         console.sendMessage(StringUtils.get().translateColor("&a============================="));
         console.sendMessage(StringUtils.get().translateColor("&7EpicBosses " + getDescription().getVersion() + " by &5Songoda <3&7!"));
         console.sendMessage(StringUtils.get().translateColor("&7Action: &aDisabling&7..."));
-        console.sendMessage(StringUtils.get().translateColor("&a============================="));
 
         this.autoSpawnManager.stopIntervalSystems();
         this.bossEntityManager.killAllHolders((World) null);
+
+        console.sendMessage(StringUtils.get().translateColor("&a============================="));
     }
 
     @Override
@@ -89,7 +90,6 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         console.sendMessage(StringUtils.get().translateColor("&a============================="));
         console.sendMessage(StringUtils.get().translateColor("&7EpicBosses " + getDescription().getVersion() + " by &5Songoda <3&7!"));
         console.sendMessage(StringUtils.get().translateColor("&7Action: &aEnabling&7..."));
-        console.sendMessage(StringUtils.get().translateColor("&a============================="));
 
         Debug.setPlugin(this);
 
@@ -102,6 +102,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
 
         if(!this.vaultHelper.isConnected()) {
             Debug.FAILED_TO_CONNECT_TO_VAULT.debug();
+            Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
 
@@ -160,6 +161,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.autoSpawnManager.startIntervalSystems();
 
         ServerUtils.get().logDebug("Loaded all fields and managers, saved messages and plugin is initialized and ready to go. (took " + (System.currentTimeMillis() - beginMs) + "ms).");
+        console.sendMessage(StringUtils.get().translateColor("&a============================="));
     }
 
     @Override
