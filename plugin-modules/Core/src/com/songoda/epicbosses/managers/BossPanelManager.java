@@ -202,20 +202,26 @@ public class BossPanelManager implements ILoadable, IReloadable {
         int timesUsed = 0;
 
         for(BossEntity bossEntity : values) {
-            if(bossEntity.getSpawnItem().equalsIgnoreCase(name)) timesUsed += 1;
+            if(bossEntity != null) {
+                if (bossEntity.getSpawnItem() != null) {
+                    if (bossEntity.getSpawnItem().equalsIgnoreCase(name)) timesUsed += 1;
+                }
 
-            List<EntityStatsElement> entityStatsElements = bossEntity.getEntityStats();
+                if (bossEntity.getEntityStats() != null) {
+                    List<EntityStatsElement> entityStatsElements = bossEntity.getEntityStats();
 
-            for(EntityStatsElement entityStatsElement : entityStatsElements) {
-                EquipmentElement equipmentElement = entityStatsElement.getEquipment();
-                HandsElement handsElement = entityStatsElement.getHands();
+                    for (EntityStatsElement entityStatsElement : entityStatsElements) {
+                        EquipmentElement equipmentElement = entityStatsElement.getEquipment();
+                        HandsElement handsElement = entityStatsElement.getHands();
 
-                if(handsElement.getMainHand().equalsIgnoreCase(name)) timesUsed += 1;
-                if(handsElement.getOffHand().equalsIgnoreCase(name)) timesUsed += 1;
-                if(equipmentElement.getHelmet().equalsIgnoreCase(name)) timesUsed += 1;
-                if(equipmentElement.getChestplate().equalsIgnoreCase(name)) timesUsed += 1;
-                if(equipmentElement.getLeggings().equalsIgnoreCase(name)) timesUsed += 1;
-                if(equipmentElement.getBoots().equalsIgnoreCase(name)) timesUsed += 1;
+                        if (handsElement.getMainHand().equalsIgnoreCase(name)) timesUsed += 1;
+                        if (handsElement.getOffHand().equalsIgnoreCase(name)) timesUsed += 1;
+                        if (equipmentElement.getHelmet().equalsIgnoreCase(name)) timesUsed += 1;
+                        if (equipmentElement.getChestplate().equalsIgnoreCase(name)) timesUsed += 1;
+                        if (equipmentElement.getLeggings().equalsIgnoreCase(name)) timesUsed += 1;
+                        if (equipmentElement.getBoots().equalsIgnoreCase(name)) timesUsed += 1;
+                    }
+                }
             }
         }
 
