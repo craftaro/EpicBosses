@@ -25,9 +25,7 @@ public class EnchantConverter implements IConverter<List<String>, Map<Enchantmen
             Enchantment enchantment = entry.getKey();
             EnchantFinder enchantFinder = EnchantFinder.getByEnchant(enchantment);
 
-            if(enchantFinder == null) {
-                throw new EnumConstantNotPresentException(EnchantFinder.class, "EnchantFinder couldn't find a value for " + enchantment.getName() + ". Please report this to @AMinecraftDev so he can fix it.");
-            }
+            if(enchantFinder == null) continue;
 
             enchants.add(enchantFinder.getFancyName() + ":" + level);
         }

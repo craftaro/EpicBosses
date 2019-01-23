@@ -36,12 +36,7 @@ public class AddItemsPanel extends PanelHandler {
 
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
-        PanelBuilderCounter panelBuilderCounter = panelBuilder.getPanelBuilderCounter();
 
-        panelBuilderCounter
-                .addSlotCounter("Cancel", getCancelAction())
-                .addSlotCounter("Accept", getAcceptAction())
-                .addSlotCounter("SelectedSlot", getSelectedSlotAction(panelBuilderCounter));
     }
 
     @Override
@@ -56,7 +51,13 @@ public class AddItemsPanel extends PanelHandler {
                 .setCancelClick(true)
                 .setCancelLowerClick(false);
 
-        ServerUtils.get().runTaskAsync(() ->
+        PanelBuilderCounter counter = panel.getPanelBuilderCounter();
+
+        ServerUtils.get().runTaskAsync(() -> {
+            counter.getSlotsWith("Accept").forEach(slot -> panel.setOnClick(slot, getAcceptAction(panel)));
+            counter.getSlotsWith("Cancel").forEach(slot -> panel.setOnClick(slot, getCancelAction(panel)));
+            counter.getSlotsWith("SelectedSlot").forEach(slot -> panel.setOnClick(slot, getSelectedSlotAction(counter, panel)));
+
             panel.setOnClick(event -> {
                 Player playerWhoClicked = (Player) event.getWhoClicked();
                 UUID uuid = playerWhoClicked.getUniqueId();
@@ -75,14 +76,18 @@ public class AddItemsPanel extends PanelHandler {
                     panel.getPanelBuilderCounter().getSlotsWith("SelectedSlot").forEach(s -> event.getInventory().setItem(s, itemStack.clone()));
                     event.getClickedInventory().setItem(slot, new ItemStack(Material.AIR));
                 }
-            })
-        );
+            });
+        });
 
         panel.openFor(player);
     }
 
-    private ClickAction getSelectedSlotAction(PanelBuilderCounter panelBuilderCounter) {
+    private ClickAction getSelectedSlotAction(PanelBuilderCounter panelBuilderCounter, Panel panel) {
         return event -> {
+            int rawSlot = event.getRawSlot();
+
+            if(panel.isLowerClick(rawSlot)) return;
+
             Player player = (Player) event.getWhoClicked();
             UUID uuid = player.getUniqueId();
 
@@ -95,8 +100,12 @@ public class AddItemsPanel extends PanelHandler {
         };
     }
 
-    private ClickAction getAcceptAction() {
+    private ClickAction getAcceptAction(Panel panel) {
         return event -> {
+            int rawSlot = event.getRawSlot();
+
+            if(panel.isLowerClick(rawSlot)) return;
+
             Player player = (Player) event.getWhoClicked();
             UUID uuid = player.getUniqueId();
 
@@ -110,8 +119,12 @@ public class AddItemsPanel extends PanelHandler {
         };
     }
 
-    private ClickAction getCancelAction() {
+    private ClickAction getCancelAction(Panel panel) {
         return event -> {
+            int rawSlot = event.getRawSlot();
+
+            if(panel.isLowerClick(rawSlot)) return;
+
             Player player = (Player) event.getWhoClicked();
             UUID uuid = player.getUniqueId();
 

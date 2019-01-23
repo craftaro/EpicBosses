@@ -312,7 +312,7 @@ public class Panel implements Listener, ICloneable<Panel> {
     }
 
     public boolean isLowerClick(int rawSlot) {
-        return rawSlot > inventory.getSize();
+        return rawSlot >= inventory.getSize();
     }
 
     /**

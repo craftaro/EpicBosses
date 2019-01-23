@@ -70,8 +70,12 @@ public enum EnchantFinder {
     }
 
     public static EnchantFinder getByEnchant(Enchantment enchantment) {
+        if(enchantment == null) return null;
+
         for(EnchantFinder enchantFinder : values()) {
             Enchantment enchantFinderEnchant = enchantFinder.getEnchantment();
+
+            if(enchantFinderEnchant == null) continue;
 
             if(enchantFinderEnchant.equals(enchantment)) return enchantFinder;
         }
