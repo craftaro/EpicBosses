@@ -10,6 +10,7 @@ import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.EquipmentElement;
 import com.songoda.epicbosses.entity.elements.HandsElement;
+import com.songoda.epicbosses.panel.additems.CustomItemsAddItemsParentPanelHandler;
 import com.songoda.epicbosses.panel.autospawns.*;
 import com.songoda.epicbosses.panel.bosses.*;
 import com.songoda.epicbosses.panel.bosses.commands.OnDeathCommandEditor;
@@ -76,7 +77,6 @@ import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.panel.base.IPanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.Collection;
@@ -95,7 +95,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
             BOOTS_EDITOR_PATH = "BootsEditorPanel", MAIN_HAND_EDITOR_PATH = "MainHandEditorPanel", OFF_HAND_EDITOR_PATH = "OffHandEditorPanel";
 
     @Getter private IPanelHandler mainMenu, customItems, bosses, autoSpawns, dropTables, customSkills, shopPanel;
-    @Getter private IPanelHandler addItemsMenu;
+    @Getter private IPanelHandler customItemAddItemsMenu;
 
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> equipmentEditMenu, helmetEditorMenu, chestplateEditorMenu, leggingsEditorMenu, bootsEditorMenu;
     @Getter private ISubVariablePanelHandler<BossEntity, EntityStatsElement> weaponEditMenu, offHandEditorMenu, mainHandEditorMenu;
@@ -133,6 +133,7 @@ public class BossPanelManager implements ILoadable, IReloadable {
     @Getter private IVariablePanelHandler<AutoSpawn> mainAutoSpawnEditPanel, autoSpawnEntitiesEditPanel, autoSpawnSpecialSettingsEditorPanel, autoSpawnTypeEditorPanel, autoSpawnCustomSettingsEditorPanel,
             autoSpawnMessageEditorPanel;
 
+    @Getter private PanelBuilder addItemsBuilder;
     private final CustomBosses customBosses;
 
     public BossPanelManager(CustomBosses customBosses) {
@@ -804,13 +805,15 @@ public class BossPanelManager implements ILoadable, IReloadable {
     private void loadAddItemsMenu() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("AddItemsMenu"));
 
-        this.addItemsMenu = new AddItemsPanel(this, panelBuilder, this.customBosses);
+        this.addItemsBuilder = panelBuilder.cloneBuilder();
+        this.customItemAddItemsMenu = new AddItemsPanel(this, panelBuilder.cloneBuilder(), this.customBosses, new CustomItemsAddItemsParentPanelHandler(this));
     }
 
     private void reloadAddItemsMenu() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("AddItemsMenu"));
 
-        this.addItemsMenu.initializePanel(panelBuilder);
+        this.addItemsBuilder = this.addItemsBuilder.cloneBuilder();
+        this.customItemAddItemsMenu.initializePanel(panelBuilder.cloneBuilder());
     }
 
     //---------------------------------------------

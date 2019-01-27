@@ -48,7 +48,7 @@ public class CustomItemsPanel extends MainListPanelHandler {
         }));
 
         loadPage(panel, 0, currentItemStacks, entryList);
-        panel.getPanelBuilderCounter().getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAddItemsMenu().openFor((Player) event.getWhoClicked())));
+        panel.getPanelBuilderCounter().getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getCustomItemAddItemsMenu().openFor((Player) event.getWhoClicked())));
     }
 
     private void loadPage(Panel panel, int requestedPage, Map<String, ItemStackHolder> currentItemStacks, List<String> entryList) {

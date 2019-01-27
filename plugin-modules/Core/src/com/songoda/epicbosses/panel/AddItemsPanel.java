@@ -3,6 +3,7 @@ package com.songoda.epicbosses.panel;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
+import com.songoda.epicbosses.panel.additems.interfaces.IParentPanelHandler;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
@@ -26,12 +27,14 @@ import java.util.UUID;
 public class AddItemsPanel extends PanelHandler {
 
     private Map<UUID, ItemStack> storedItemStacks = new HashMap<>();
+    private IParentPanelHandler parentPanelHandler;
     private ItemsFileManager itemsFileManager;
 
-    public AddItemsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public AddItemsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin, IParentPanelHandler parentPanelHandler) {
         super(bossPanelManager, panelBuilder);
 
         this.itemsFileManager = plugin.getItemStackManager();
+        this.parentPanelHandler = parentPanelHandler;
     }
 
     @Override
@@ -82,6 +85,10 @@ public class AddItemsPanel extends PanelHandler {
         panel.openFor(player);
     }
 
+    private void openParentPanel(Player player) {
+        this.parentPanelHandler.openParentPanel(player);
+    }
+
     private ClickAction getSelectedSlotAction(PanelBuilderCounter panelBuilderCounter, Panel panel) {
         return event -> {
             int rawSlot = event.getRawSlot();
@@ -115,7 +122,8 @@ public class AddItemsPanel extends PanelHandler {
                 this.storedItemStacks.remove(uuid);
             }
 
-            this.bossPanelManager.getCustomItems().openFor(player);
+            openParentPanel(player);
+//            this.bossPanelManager.getCustomItems().openFor(player);
         };
     }
 
@@ -133,7 +141,8 @@ public class AddItemsPanel extends PanelHandler {
                 this.storedItemStacks.remove(uuid);
             }
 
-            this.bossPanelManager.getCustomItems().openFor(player);
+            openParentPanel(player);
+//            this.bossPanelManager.getCustomItems().openFor(player);
         };
     }
 }

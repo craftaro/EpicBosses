@@ -69,7 +69,7 @@ public class MainMenuPanel extends PanelHandler {
             if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
                 this.bossPanelManager.getCustomItems().openFor(player);
             } else if(event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
-                this.bossPanelManager.getAddItemsMenu().openFor(player);
+                this.bossPanelManager.getCustomItemAddItemsMenu().openFor(player);
             }
         };
     }

@@ -6,7 +6,7 @@ import com.songoda.epicbosses.utils.IASkyblockHelper;
 import com.songoda.epicbosses.utils.IFactionHelper;
 import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.IWorldGuardHelper;
-import com.songoda.epicbosses.utils.askyblock.ASkyblockHelper;
+import com.songoda.epicbosses.utils.dependencies.ASkyblockHelper;
 import utils.factions.FactionsM;
 import utils.factions.FactionsOne;
 import utils.factions.FactionsUUID;
@@ -61,6 +61,7 @@ public class BossHookManager implements IReloadable {
 
         setupFactions();
         setupWorldGuard();
+        setupAskyblock();
     }
 
     private void setupAskyblock() {

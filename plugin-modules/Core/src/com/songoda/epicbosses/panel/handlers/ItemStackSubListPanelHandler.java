@@ -7,6 +7,9 @@ import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
+import com.songoda.epicbosses.panel.AddItemsPanel;
+import com.songoda.epicbosses.panel.additems.ItemStackSubListParentPanelHandler;
+import com.songoda.epicbosses.panel.additems.interfaces.IParentPanelHandler;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
@@ -89,7 +92,7 @@ public abstract class ItemStackSubListPanelHandler extends SubVariablePanelHandl
         PanelBuilderCounter panelBuilderCounter = panel.getPanelBuilderCounter();
 
         ServerUtils.get().runTaskAsync(() -> {
-            panelBuilderCounter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAddItemsMenu().openFor(player)));
+            panelBuilderCounter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, event -> openAddItemsPanel(player, bossEntity, entityStatsElement)));
             panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, event -> {
                 if(!bossEntity.isEditing()) {
                     Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
@@ -111,6 +114,13 @@ public abstract class ItemStackSubListPanelHandler extends SubVariablePanelHandl
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
 
+    }
+
+    private void openAddItemsPanel(Player player, BossEntity bossEntity, EntityStatsElement entityStatsElement) {
+        IParentPanelHandler parentPanelHandler = new ItemStackSubListParentPanelHandler(bossEntity, entityStatsElement, getParentHolder());
+        AddItemsPanel addItemsPanel = new AddItemsPanel(this.bossPanelManager, this.bossPanelManager.getAddItemsBuilder().cloneBuilder(), this.plugin, parentPanelHandler);
+
+        addItemsPanel.openFor(player);
     }
 
     private void loadPage(Panel panel, int requestedPage, Map<String, ItemStackHolder> filteredMap, List<String> entryList, BossEntity bossEntity, EntityStatsElement entityStatsElement) {

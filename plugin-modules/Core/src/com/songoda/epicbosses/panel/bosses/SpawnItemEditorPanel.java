@@ -6,6 +6,9 @@ import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
+import com.songoda.epicbosses.panel.AddItemsPanel;
+import com.songoda.epicbosses.panel.additems.interfaces.IParentPanelHandler;
+import com.songoda.epicbosses.panel.additems.SpawnItemAddItemsParentPanelHandler;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.ObjectUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
@@ -72,7 +75,7 @@ public class SpawnItemEditorPanel extends VariablePanelHandler<BossEntity> {
                 .setParentPanelHandler(this.bossPanelManager.getMainBossEditMenu(), bossEntity);
 
         ServerUtils.get().runTaskAsync(() -> {
-            panelBuilderCounter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getAddItemsMenu().openFor(player)));
+            panelBuilderCounter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, event -> openAddItemsPanel(player, bossEntity)));
             panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, event -> {
                 if(!bossEntity.isEditing()) {
                     Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
@@ -94,6 +97,13 @@ public class SpawnItemEditorPanel extends VariablePanelHandler<BossEntity> {
     @Override
     public void initializePanel(PanelBuilder panelBuilder) {
 
+    }
+
+    private void openAddItemsPanel(Player player, BossEntity bossEntity) {
+        IParentPanelHandler parentPanelHandler = new SpawnItemAddItemsParentPanelHandler(this.bossPanelManager, bossEntity);
+        AddItemsPanel addItemsPanel = new AddItemsPanel(this.bossPanelManager, this.bossPanelManager.getAddItemsBuilder().cloneBuilder(), this.plugin, parentPanelHandler);
+
+        addItemsPanel.openFor(player);
     }
 
     private void loadPage(Panel panel, int requestedPage, Map<String, ItemStackHolder> filteredMap, List<String> entryList, BossEntity bossEntity) {

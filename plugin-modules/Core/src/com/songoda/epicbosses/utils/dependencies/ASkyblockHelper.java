@@ -1,4 +1,4 @@
-package com.songoda.epicbosses.utils.askyblock;
+package com.songoda.epicbosses.utils.dependencies;
 
 import com.wasteofplastic.askyblock.ASkyBlock;
 import com.wasteofplastic.askyblock.Island;
