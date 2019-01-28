@@ -73,8 +73,6 @@ public class BossSpawnListener implements Listener {
             }
         }
 
-        ServerUtils.get().logDebug("Found bossEntity: " + bossEntity);
-
         if(bossEntity == null) return;
 
         if(bossEntity.isEditing()) {
