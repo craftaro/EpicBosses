@@ -99,17 +99,9 @@ public class MainAutoSpawnEditorPanel extends VariablePanelHandler<AutoSpawn> {
             player.closeInventory();
 
             if(autoSpawn.isEditing()) {
-                this.autoSpawnManager.stopInterval(autoSpawn);
+                this.autoSpawnManager.removeActiveAutoSpawnHolder(autoSpawn);
             } else {
-                ActiveAutoSpawnHolder autoSpawnHolder = this.autoSpawnManager.getActiveAutoSpawnHolder(autoSpawn);
-
-                if(autoSpawnHolder != null) {
-                    if(autoSpawnHolder.getSpawnType() == SpawnType.INTERVAL) {
-                        ActiveIntervalAutoSpawnHolder intervalAutoSpawnHolder = (ActiveIntervalAutoSpawnHolder) autoSpawnHolder;
-
-                        intervalAutoSpawnHolder.restartInterval();
-                    }
-                }
+                this.autoSpawnManager.addAndCreateActiveAutoSpawnHolder(autoSpawn);
             }
         };
     }

@@ -37,16 +37,12 @@ public class AutoSpawn {
         return null;
     }
 
-    public boolean isLocked() {
-        return this.editing;
-    }
-
     public boolean isCompleteEnoughToSpawn() {
         if(this.type == null) return false;
 
-        List<String> entities = this.entities;
+        List<String> entities = getEntities();
 
-        if(this.entities == null || this.entities.isEmpty()) return false;
+        if(entities == null || entities.isEmpty()) return false;
 
         return true;
     }

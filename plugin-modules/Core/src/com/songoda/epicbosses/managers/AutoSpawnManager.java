@@ -34,19 +34,17 @@ public class AutoSpawnManager {
     public void startIntervalSystems() {
         Map<String, AutoSpawn> autoSpawnMap = this.autoSpawnFileManager.getAutoSpawnMap();
 
-        autoSpawnMap.forEach((name, autoSpawn) -> {
-            String autoSpawnType = autoSpawn.getType();
-            SpawnType spawnType = SpawnType.getCurrent(autoSpawnType);
+        if(!this.activeAutoSpawnHolders.isEmpty()) {
+            stopIntervalSystems();
+        }
 
-            if(spawnType == SpawnType.INTERVAL) {
-                ActiveIntervalAutoSpawnHolder autoSpawnHolder = new ActiveIntervalAutoSpawnHolder(spawnType, autoSpawn);
+        autoSpawnMap.forEach(this::addAndCreateActiveAutoSpawnHolder);
+    }
 
-                if(!autoSpawn.isLocked()) {
-                    autoSpawnHolder.restartInterval();
-                }
-                this.activeAutoSpawnHolders.put(name, autoSpawnHolder);
-            }
-        });
+    public void stopIntervalSystems() {
+        Map<String, ActiveAutoSpawnHolder> autoSpawnHolderMap = new HashMap<>(this.activeAutoSpawnHolders);
+
+        autoSpawnHolderMap.forEach((name, autoSpawnHolder) -> removeActiveAutoSpawnHolder(name));
     }
 
     public List<String> getIntervalAutoSpawns() {
@@ -72,33 +70,23 @@ public class AutoSpawnManager {
         return false;
     }
 
-    public ActiveAutoSpawnHolder getAutoSpawnHolder(String name) {
-        if(!exists(name)) return null;
-
-        List<String> keyList = new ArrayList<>(this.activeAutoSpawnHolders.keySet());
-
-        for (String s : keyList) {
-            if(s.equalsIgnoreCase(name)) return this.activeAutoSpawnHolders.get(s);
-        }
-
-        return null;
-    }
-
-    public void addActiveAutoSpawnHolder(String name, ActiveAutoSpawnHolder autoSpawnHolder) {
-        if(this.activeAutoSpawnHolders.containsKey(name)) return;
-
-        this.activeAutoSpawnHolders.put(name, autoSpawnHolder);
-    }
-
-    public ActiveAutoSpawnHolder getActiveAutoSpawnHolder(AutoSpawn autoSpawn) {
-        return getActiveAutoSpawnHolder(BossAPI.getAutoSpawnName(autoSpawn));
-    }
-
     public ActiveAutoSpawnHolder getActiveAutoSpawnHolder(String name) {
         return this.activeAutoSpawnHolders.getOrDefault(name, null);
     }
 
-    public void removeActiveAutoSpawnHolder(String name) {
+    public void addAndCreateActiveAutoSpawnHolder(AutoSpawn autoSpawn) {
+        String name = BossAPI.getAutoSpawnName(autoSpawn);
+
+        addAndCreateActiveAutoSpawnHolder(name, autoSpawn);
+    }
+
+    public void removeActiveAutoSpawnHolder(AutoSpawn autoSpawn) {
+        String name = BossAPI.getAutoSpawnName(autoSpawn);
+
+        removeActiveAutoSpawnHolder(name);
+    }
+
+    private void removeActiveAutoSpawnHolder(String name) {
         ActiveAutoSpawnHolder autoSpawnHolder = this.activeAutoSpawnHolders.getOrDefault(name, null);
 
         if(autoSpawnHolder != null) {
@@ -107,32 +95,27 @@ public class AutoSpawnManager {
         }
     }
 
-    public void stopIntervalSystems() {
-        Map<String, ActiveAutoSpawnHolder> autoSpawnHolderMap = new HashMap<>(this.activeAutoSpawnHolders);
-
-        autoSpawnHolderMap.forEach((name, autoSpawnHolder) -> removeActiveAutoSpawnHolder(name));
-    }
-
-    public void stopInterval(AutoSpawn autoSpawn) {
-        String name = BossAPI.getAutoSpawnName(autoSpawn);
-
-        stopInterval(name);
-    }
-
-
-    public void stopInterval(String name) {
-        ActiveAutoSpawnHolder autoSpawnHolder = this.activeAutoSpawnHolders.getOrDefault(name, null);
-
-        stopInterval(autoSpawnHolder);
-    }
-
-    public void stopInterval(ActiveAutoSpawnHolder autoSpawnHolder) {
-        if(autoSpawnHolder != null) {
-            if(autoSpawnHolder.getSpawnType() == SpawnType.INTERVAL) {
+    private void stopInterval(ActiveAutoSpawnHolder autoSpawnHolder) {
+        if (autoSpawnHolder != null) {
+            if (autoSpawnHolder.getSpawnType() == SpawnType.INTERVAL) {
                 ActiveIntervalAutoSpawnHolder intervalAutoSpawnHolder = (ActiveIntervalAutoSpawnHolder) autoSpawnHolder;
 
                 intervalAutoSpawnHolder.stopInterval();
             }
+        }
+    }
+
+    private void addAndCreateActiveAutoSpawnHolder(String name, AutoSpawn autoSpawn) {
+        String autoSpawnType = autoSpawn.getType();
+        SpawnType spawnType = SpawnType.getCurrent(autoSpawnType);
+
+        if(spawnType == SpawnType.INTERVAL) {
+            ActiveIntervalAutoSpawnHolder autoSpawnHolder = new ActiveIntervalAutoSpawnHolder(spawnType, autoSpawn);
+
+            if(autoSpawn.isEditing()) return;
+
+            autoSpawnHolder.restartInterval();
+            this.activeAutoSpawnHolders.put(name, autoSpawnHolder);
         }
     }
 

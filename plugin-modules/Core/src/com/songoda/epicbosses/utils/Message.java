@@ -210,7 +210,8 @@ public enum Message {
 
     Boss_Time_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Time_InvalidArgs("&c&l(!) &cYou must use &n/boss time [section]&c to check the time left on a boss spawn."),
-    Boss_Time_DoesntExist("&c&l(!) &cThe specified interval spawn system doesn't exist. Please use one of the following active system names: &f{0}&c."),
+    Boss_Time_DoesntExist("&c&l(!) &cThe specified interval spawn system doesn't exist or editing has been toggled on so the section isn't ticking at the moment. Please use one of the following active system names: &f{0}&c."),
+    Boss_Time_CurrentlyActive("&b&lEpicBosses &8» &7There is currently a boss spawned from this section so the countdown will not begin for the next to spawn until the last boss is killed."),
     Boss_Time_GetRemainingTime("&b&lEpicBosses &8» &7There is currently &f{0}&7 remaining on the &f{1}&7 interval spawn system.");
 
     private static FileConfiguration LANG;

@@ -53,10 +53,19 @@ public class BossTimeCmd extends SubCommand {
         ActiveAutoSpawnHolder activeAutoSpawnHolder = this.autoSpawnManager.getActiveAutoSpawnHolder(section);
         ActiveIntervalAutoSpawnHolder activeIntervalAutoSpawnHolder = (ActiveIntervalAutoSpawnHolder) activeAutoSpawnHolder;
         long remainingMs = activeIntervalAutoSpawnHolder.getRemainingMs();
+
+        if(remainingMs == 0 && activeIntervalAutoSpawnHolder.isSpawnAfterLastBossIsKilled()) {
+            Message.Boss_Time_CurrentlyActive.msg(sender);
+            return;
+        }
+
         String s = Message.General_TimeLayout.toString();
-        int remainingHours = (int) TimeUnit.MILLISECONDS.to(TimeUnit.HOURS, remainingMs);
-        int remainingMins = (int) TimeUnit.MILLISECONDS.to(TimeUnit.MINUTES, remainingMs);
-        int remainingSecs = (int) TimeUnit.MILLISECONDS.to(TimeUnit.SECONDS, remainingMs);
+        TimeUnit unit = TimeUnit.MILLISECONDS;
+        int remainingHours = (int) unit.to(TimeUnit.HOURS, remainingMs);
+        remainingMs -= TimeUnit.HOURS.to(unit, remainingHours);
+        int remainingMins = (int) unit.to(TimeUnit.MINUTES, remainingMs);
+        remainingMs -= TimeUnit.MINUTES.to(unit, remainingMins);
+        int remainingSecs = (int) unit.to(TimeUnit.SECONDS, remainingMs);
 
         s = s.replace("{hours}", NumberUtils.get().formatDouble(remainingHours));
         s = s.replace("{mins}", NumberUtils.get().formatDouble(remainingMins));

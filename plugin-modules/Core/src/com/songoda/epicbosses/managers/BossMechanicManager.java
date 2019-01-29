@@ -62,7 +62,7 @@ public class BossMechanicManager implements IMechanicManager<BossEntity, ActiveB
 
                 ServerUtils.get().logDebug("Applying " + mechanic.getClass().getSimpleName());
 
-                if(!didMechanicApplicationFail(mechanic, bossEntity, activeBossHolder)) {
+                if(didMechanicApplicationFail(mechanic, bossEntity, activeBossHolder)) {
                     Debug.FAILED_TO_APPLY_MECHANIC.debug(mechanic.getClass().getSimpleName());
                 }
             }

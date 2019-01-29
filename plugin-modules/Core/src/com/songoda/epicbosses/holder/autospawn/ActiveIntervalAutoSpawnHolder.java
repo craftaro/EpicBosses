@@ -39,7 +39,7 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
 
     @Override
     public boolean canSpawn() {
-        if(getAutoSpawn().isLocked()) return false;
+        if(getAutoSpawn().isEditing()) return false;
         if(!getAutoSpawn().getType().equalsIgnoreCase("INTERVAL")) return false;
 
         int currentActiveAmount = getCurrentActiveBossHolders();
@@ -47,19 +47,22 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
 
         Location location = this.intervalSpawnElement.getSpawnLocation();
         boolean spawnIfChunkNotLoaded = ObjectUtils.getValue(getAutoSpawn().getAutoSpawnSettings().getSpawnWhenChunkIsntLoaded(), false);
-        boolean spawnAfterLastBossIsKilled = ObjectUtils.getValue(this.intervalSpawnElement.getSpawnAfterLastBossIsKilled(), false);
 
         if(location == null) return false;
         if(!spawnIfChunkNotLoaded && !location.getChunk().isLoaded()) return false;
-        if(spawnAfterLastBossIsKilled && !getActiveBossHolders().isEmpty()) return false;
+        if(isSpawnAfterLastBossIsKilled() && !getActiveBossHolders().isEmpty()) return false;
 
         return currentActiveAmount < maxAmount;
+    }
+
+    public boolean isSpawnAfterLastBossIsKilled() {
+        return ObjectUtils.getValue(this.intervalSpawnElement.getSpawnAfterLastBossIsKilled(), false);
     }
 
     public void restartInterval() {
         stopInterval();
 
-        if(getAutoSpawn().isLocked()) return;
+        if(getAutoSpawn().isEditing()) return;
 
         Integer delay = this.intervalSpawnElement.getSpawnRate();
 
@@ -68,28 +71,28 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
             return;
         }
 
-        long delayMs = (long) TimeUnit.SECONDS.to(TimeUnit.MILLISECONDS, delay);
-        boolean spawnAfterLastBossIsKilled = ObjectUtils.getValue(this.intervalSpawnElement.getSpawnAfterLastBossIsKilled(), false);
+        int delaySec = (int) TimeUnit.MINUTES.to(TimeUnit.SECONDS, delay);
 
-        updateNextCompleteTime(delayMs);
+        this.intervalTask = ServerUtils.get().runTimer(delaySec*20, delaySec*20, () -> {
+            boolean canSpawn = canSpawn();
 
-        this.intervalTask = ServerUtils.get().runTimer(delayMs, delayMs, () -> {
-            if(!canSpawn()) return;
+            if(!canSpawn) return;
 
-            if(this.intervalSpawnElement.attemptSpawn(this) && spawnAfterLastBossIsKilled) {
-                stopInterval();
+            this.intervalSpawnElement.attemptSpawn(this);
+
+            if(isSpawnAfterLastBossIsKilled()) {
+                cancelCurrentInterval();
                 return;
             }
 
-            updateNextCompleteTime(delayMs);
+            updateNextCompleteTime();
         });
+
+        updateNextCompleteTime();
     }
 
     public void stopInterval() {
-        if(this.intervalTask != null) ServerUtils.get().cancelTask(this.intervalTask);
-
-        this.nextCompletedTime = 0;
-
+        cancelCurrentInterval();
         getActiveBossHolders().forEach(ActiveBossHolder::killAll);
         getActiveBossHolders().clear();
     }
@@ -112,12 +115,28 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
 
                 if(spawnAfterLastBossIsKilled) {
                     restartInterval();
+                    updateNextCompleteTime();
                 }
             }
         };
     }
 
-    private void updateNextCompleteTime(long delayMs) {
+    private void cancelCurrentInterval() {
+        if(this.intervalTask != null) ServerUtils.get().cancelTask(this.intervalTask);
+
+        this.nextCompletedTime = 0;
+    }
+
+    private void updateNextCompleteTime() {
+        Integer delay = this.intervalSpawnElement.getSpawnRate();
+
+        if(delay == null) {
+            Debug.AUTOSPAWN_INTERVALNOTREAL.debug("null", BossAPI.getAutoSpawnName(getAutoSpawn()));
+            return;
+        }
+
+        long delayMs = (long) TimeUnit.MINUTES.to(TimeUnit.MILLISECONDS, delay);
+
         this.nextCompletedTime = System.currentTimeMillis() + delayMs;
     }
 }
