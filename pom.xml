@@ -19,7 +19,7 @@
     </modules>
 
     <properties>
-        <plugin.version>1.0.4</plugin.version>
+        <plugin.version>1.0.5</plugin.version>
         <plugin.name>EpicBosses</plugin.name>
         <plugin.main>com.songoda.epicbosses.CustomBosses</plugin.main>
         <plugin.author>AMinecraftDev</plugin.author>
@@ -27,15 +27,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.spigotmc</groupId>
+            <groupId>com.spigotmc</groupId>
             <artifactId>spigot</artifactId>
             <version>1.12.2</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>net.milkbowl</groupId>
-            <artifactId>vault</artifactId>
-            <version>LATEST</version>
+            <groupId>net.milkbowl.vault</groupId>
+            <artifactId>Vault</artifactId>
+            <version>1.6.6</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -80,10 +80,6 @@
         <repository>
             <id>filoghost-repo</id>
             <url>https://ci.filoghost.me/plugin/repository/everything/</url>
-        </repository>
-        <repository>
-            <id>private</id>
-            <url>http://repo.songoda.com/repository/private/</url>
         </repository>
         <repository>
             <id>vault-repo</id>

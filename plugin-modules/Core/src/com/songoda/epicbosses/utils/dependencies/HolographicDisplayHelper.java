@@ -24,7 +24,7 @@ public class HolographicDisplayHelper implements IHelper {
         CustomBosses plugin = CustomBosses.get();
         Hologram hologram = HologramsAPI.createHologram(plugin, livingEntity.getEyeLocation());
 
-        hologram.insertTextLine(1, line);
+        hologram.appendTextLine(line);
 
         new BukkitRunnable() {
             @Override

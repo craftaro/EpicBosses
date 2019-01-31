@@ -4,14 +4,9 @@ package com.songoda.epicbosses.utils.time;
  * @author AMinecraftDev
  * @version 1.0.0
  * @since 23-May-17
- */
-/**
+ *
  * Makes it easy to convert
  * time
- *
- * @author Debugged
- * @version 1.0.0
- * @since 3-1-2017
  */
 public enum TimeUnit {
 

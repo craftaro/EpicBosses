@@ -22,6 +22,8 @@ public class PotionEffectTypeConverter implements IConverter<String, PotionEffec
 
     @Override
     public PotionEffectType from(String s) {
+        if(s == null) return null;
+
         PotionEffectFinder potionEffectFinder = PotionEffectFinder.getByName(s);
 
         if(potionEffectFinder == null) return null;

@@ -27,7 +27,7 @@ import java.util.List;
  * boss new skill [name] [type] [mode]
  * boss new command [name] [commands]
  * boss new message [name] [message]
- * boss new autospawn [name] [type]
+ * boss new autospawn [name]
  */
 public class BossNewCmd extends SubCommand {
 
@@ -61,7 +61,7 @@ public class BossNewCmd extends SubCommand {
         //--------------------
         // A U T O   S P A W N
         //--------------------
-        if(args.length == 4 && args[1].equalsIgnoreCase("autospawn")) {
+        if(args.length == 3 && args[1].equalsIgnoreCase("autospawn")) {
             String nameInput = args[2];
 
             if(this.autoSpawnFileManager.getAutoSpawn(nameInput) != null) {

@@ -2,7 +2,6 @@ package com.songoda.epicbosses.listeners.pre;
 
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
-import com.songoda.epicbosses.container.BossEntityContainer;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.events.BossSpawnEvent;
 import com.songoda.epicbosses.events.PreBossSpawnEvent;
@@ -15,7 +14,6 @@ import com.songoda.epicbosses.managers.BossTauntManager;
 import com.songoda.epicbosses.utils.*;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.version.VersionHandler;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -38,7 +36,6 @@ import java.util.Map;
 public class BossSpawnListener implements Listener {
 
     private BossLocationManager bossLocationManager;
-    private BossTargetManager bossTargetManager;
     private BossEntityManager bossEntityManager;
     private BossTauntManager bossTauntManager;
     private VersionHandler versionHandler;
@@ -47,7 +44,6 @@ public class BossSpawnListener implements Listener {
         this.versionHandler = customBosses.getVersionHandler();
         this.bossTauntManager = customBosses.getBossTauntManager();
         this.bossEntityManager = customBosses.getBossEntityManager();
-        this.bossTargetManager = customBosses.getBossTargetManager();
         this.bossLocationManager = customBosses.getBossLocationManager();
     }
 

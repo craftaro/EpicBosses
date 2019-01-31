@@ -41,7 +41,7 @@ public class PotionEffectConverter implements IConverter<PotionEffectHolder, Pot
         if(duration < 1) duration = (Integer.MAX_VALUE / 20);
 
         if(potionEffectTypeConverted == null) return null;
-        if(potionEffectType != null) return new PotionEffect(potionEffectTypeConverted, level-1, (duration*20));
+        if(potionEffectType != null) return new PotionEffect(potionEffectTypeConverted, duration*20, level-1);
 
         return null;
     }

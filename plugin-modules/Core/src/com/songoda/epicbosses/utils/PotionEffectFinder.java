@@ -1,6 +1,7 @@
 package com.songoda.epicbosses.utils;
 
 import lombok.Getter;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public enum PotionEffectFinder {
     Resistance("Resistance", PotionEffectType.DAMAGE_RESISTANCE, "damage_resistance", "res", "damageresistance"),
     Haste("Haste", PotionEffectType.FAST_DIGGING, "fast_digging", "haste"),
     Fire_Resistance("FireResistance", PotionEffectType.FIRE_RESISTANCE, "fire_resistance", "fire_resist", "fire_res", "fireresist", "fireres"),
-    Glowing("Glowing", PotionEffectType.GLOWING),
+    Glowing("Glowing", PotionEffectType.getByName("GLOWING")),
     Harm("Harm", PotionEffectType.HARM, "damage"),
     Heal("Heal", PotionEffectType.HEAL),
     HealthBoost("HealthBoost", PotionEffectType.HEALTH_BOOST, "healthboost", "health_boost"),
@@ -28,8 +29,8 @@ public enum PotionEffectFinder {
     Strength("Strength", PotionEffectType.INCREASE_DAMAGE, "increase_damage", "increasedamage"),
     Invisibility("Invisibility", PotionEffectType.INVISIBILITY),
     Jump("Jump", PotionEffectType.JUMP),
-    Levitation("Levitation", PotionEffectType.LEVITATION),
-    Luck("Luck", PotionEffectType.LUCK),
+    Levitation("Levitation", PotionEffectType.getByName("LEVITATION")),
+    Luck("Luck", PotionEffectType.getByName("LUCK")),
     NightVision("NightVision", PotionEffectType.NIGHT_VISION, "seeinthedarkness", "nv", "night_vision"),
     Posion("Posion", PotionEffectType.POISON, "witched"),
     Regen("regen", PotionEffectType.REGENERATION, "regeneration"),
@@ -37,7 +38,7 @@ public enum PotionEffectFinder {
     Slow("Slow", PotionEffectType.SLOW, "tank"),
     MiningFatigue("MiningFatigue", PotionEffectType.SLOW_DIGGING, "slow_digging"),
     Speed("Speed", PotionEffectType.SPEED, "fast", "fastboots"),
-    Unluck("Unlucky", PotionEffectType.UNLUCK, "unluck", "notlucky"),
+    Unluck("Unlucky", PotionEffectType.getByName("UNLUCK"), "unluck", "notlucky"),
     WaterBreathing("WaterBreathing", PotionEffectType.WATER_BREATHING, "breathunderwater", "water_breathing", "fish"),
     Weakness("Weakness", PotionEffectType.WEAKNESS),
     Wither("Wither", PotionEffectType.WITHER, "blackhearts");
@@ -68,7 +69,10 @@ public enum PotionEffectFinder {
 
     public static PotionEffectFinder getByEffect(PotionEffectType potionEffectType) {
         for(PotionEffectFinder potionEffectFinder : values()) {
-            if(potionEffectType.equals(potionEffectFinder.getPotionEffectType())) return potionEffectFinder;
+            PotionEffectType effectType = potionEffectFinder.getPotionEffectType();
+
+            if(effectType == null) continue;
+            if(potionEffectType.equals(effectType)) return potionEffectFinder;
         }
 
         return null;
