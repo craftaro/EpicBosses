@@ -451,6 +451,7 @@ public class BossAPI {
         IntervalSpawnElement intervalSpawnElement = new IntervalSpawnElement("world,0,100,0", "{boss_" + name + "}", 30, false);
         AutoSpawn autoSpawn = new AutoSpawn(true, new ArrayList<>(), new AutoSpawnSettings(1, 1, false, false));
 
+        autoSpawn.setType("INTERVAL");
         autoSpawn.setCustomData(BossAPI.convertObjectToJsonObject(intervalSpawnElement));
         PLUGIN.getAutoSpawnFileManager().saveAutoSpawn(name, autoSpawn);
 
