@@ -5,10 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * @author Charles Cullen
@@ -56,19 +53,30 @@ public class StringUtils {
         if(input == null) return null;
 
         String[] split = input.split(",");
+        StringBuilder stringBuilder = new StringBuilder();
 
-        if(split.length != 4) return null;
-
-        String worldInput = split[0];
-        String xInput = split[1];
-        String yInput = split[2];
-        String zInput = split[3];
-        World world = Bukkit.getWorld(worldInput);
-
-        if(NumberUtils.get().isInt(xInput) && NumberUtils.get().isInt(yInput) && NumberUtils.get().isInt(zInput)) {
-            return new Location(world, Integer.valueOf(xInput), Integer.valueOf(yInput), Integer.valueOf(zInput));
+        for(String s : split) {
+            stringBuilder.append("|").append(s).append(",");
         }
 
+        ServerUtils.get().logDebug(stringBuilder.toString());
+
+        try {
+            String worldInput = split[0].trim();
+            String xInput = split[1].trim();
+            String yInput = split[2].trim();
+            String zInput = split[3].trim();
+            World world = Bukkit.getWorld(worldInput);
+
+            if(NumberUtils.get().isInt(xInput) && NumberUtils.get().isInt(yInput) && NumberUtils.get().isInt(zInput)) {
+                return new Location(world, Integer.valueOf(xInput), Integer.valueOf(yInput), Integer.valueOf(zInput));
+            }
+        } catch (Exception ex) {
+            ServerUtils.get().logDebug("Exception caught in location making, returning null");
+            return null;
+        }
+
+        ServerUtils.get().logDebug("X, Y or Z is not number, returning null");
         return null;
     }
 

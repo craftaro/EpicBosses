@@ -114,6 +114,8 @@ public class BossEntityManager {
             }
         }
 
+        CustomBosses.get().getAutoSpawnManager().clearAutoSpawns();
+
         return amountOfBosses;
     }
 

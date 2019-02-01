@@ -131,7 +131,7 @@ public class BossSpawnListener implements Listener {
         if(commands != null) {
             commands.forEach(serverUtils::sendConsoleCommand);
         }
-        if(messages != null) {
+        if(messages != null && !activeBossHolder.isCustomSpawnMessage()) {
             if(activeBossHolder.getName() != null) messages.replaceAll(s -> s.replace("{boss}", activeBossHolder.getName()));
             messages.replaceAll(s -> s.replace("{location}", StringUtils.get().translateLocation(location)));
 

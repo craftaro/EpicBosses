@@ -32,4 +32,8 @@ public class ActiveAutoSpawnHolder {
         return true;
     }
 
+    public void clear() {
+        this.activeBossHolders.clear();
+    }
+
 }

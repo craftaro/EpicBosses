@@ -47,6 +47,10 @@ public class AutoSpawnManager {
         autoSpawnHolderMap.forEach((name, autoSpawnHolder) -> removeActiveAutoSpawnHolder(name));
     }
 
+    public void clearAutoSpawns() {
+        this.activeAutoSpawnHolders.values().forEach(ActiveAutoSpawnHolder::clear);
+    }
+
     public List<String> getIntervalAutoSpawns() {
         Map<String, ActiveAutoSpawnHolder> autoSpawnHolderMap = new HashMap<>(this.activeAutoSpawnHolders);
         List<String> intervalAutoSpawns = new ArrayList<>();

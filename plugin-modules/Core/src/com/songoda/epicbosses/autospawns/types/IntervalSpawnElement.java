@@ -12,10 +12,7 @@ import com.songoda.epicbosses.holder.autospawn.ActiveIntervalAutoSpawnHolder;
 import com.songoda.epicbosses.listeners.IBossDeathHandler;
 import com.songoda.epicbosses.managers.AutoSpawnManager;
 import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
-import com.songoda.epicbosses.utils.MessageUtils;
-import com.songoda.epicbosses.utils.NumberUtils;
-import com.songoda.epicbosses.utils.ObjectUtils;
-import com.songoda.epicbosses.utils.StringUtils;
+import com.songoda.epicbosses.utils.*;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import lombok.Getter;
@@ -74,7 +71,10 @@ public class IntervalSpawnElement implements IAutoSpawnCustomSettingsHandler {
         List<String> bosses = autoSpawn.getEntities();
         Location location = getSpawnLocation();
 
-        if(bosses == null || bosses.isEmpty()) return false;
+        if(bosses == null || bosses.isEmpty()) {
+            ServerUtils.get().logDebug("BOSSES IS EMPTY!");
+            return false;
+        }
 
         if(shuffleList) Collections.shuffle(bosses);
 

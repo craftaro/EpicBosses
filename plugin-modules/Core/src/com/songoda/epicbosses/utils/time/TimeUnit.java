@@ -17,6 +17,7 @@ public enum TimeUnit {
     HOURS(3600),
     MINUTES(60),
     SECONDS(1),
+    TICK(0.05),
     MILLISECONDS(0.001);
 
     private double seconds;

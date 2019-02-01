@@ -13,6 +13,7 @@ import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.ObjectUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.time.TimeUnit;
+import com.songoda.epicbosses.utils.time.TimeUtil;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
@@ -39,8 +40,14 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
 
     @Override
     public boolean canSpawn() {
-        if(getAutoSpawn().isEditing()) return false;
-        if(!getAutoSpawn().getType().equalsIgnoreCase("INTERVAL")) return false;
+        if(getAutoSpawn().isEditing()) {
+            ServerUtils.get().logDebug("AutoSpawn failed to spawn due to editing enabled.");
+            return false;
+        }
+        if(!getAutoSpawn().getType().equalsIgnoreCase("INTERVAL")) {
+            ServerUtils.get().logDebug("AutoSpawn failed to spawn due to interval type not set.");
+            return false;
+        }
 
         int currentActiveAmount = getCurrentActiveBossHolders();
         int maxAmount = getAutoSpawn().getAutoSpawnSettings().getMaxAliveAtOnce();
@@ -48,11 +55,26 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
         Location location = this.intervalSpawnElement.getSpawnLocation();
         boolean spawnIfChunkNotLoaded = ObjectUtils.getValue(getAutoSpawn().getAutoSpawnSettings().getSpawnWhenChunkIsntLoaded(), false);
 
-        if(location == null) return false;
-        if(!spawnIfChunkNotLoaded && !location.getChunk().isLoaded()) return false;
-        if(isSpawnAfterLastBossIsKilled() && !getActiveBossHolders().isEmpty()) return false;
+        if(location == null) {
+            ServerUtils.get().logDebug("AutoSpawn failed to spawn due to location is null.");
+            return false;
+        }
+        if(!spawnIfChunkNotLoaded && !location.getChunk().isLoaded()) {
+            ServerUtils.get().logDebug("AutoSpawn failed to spawn due to spawnIfChunkNotLoaded was false and chunk wasn't loaded.");
+            return false;
+        }
+        if(isSpawnAfterLastBossIsKilled() && !getActiveBossHolders().isEmpty()) {
+            ServerUtils.get().logDebug("AutoSpawn failed due to spawnAfterLastBossKilled is true and activeBossHolders is not empty.");
+            return false;
+        }
 
-        return currentActiveAmount < maxAmount;
+        boolean returnStatement = currentActiveAmount < maxAmount;
+
+        if(!returnStatement) {
+            ServerUtils.get().logDebug("AutoSpawn failed to spawn due to currentActiveAmount is greater then maxAmount of bosses.");
+        }
+
+        return returnStatement;
     }
 
     public boolean isSpawnAfterLastBossIsKilled() {
@@ -71,24 +93,36 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
             return;
         }
 
-        int delaySec = (int) TimeUnit.MINUTES.to(TimeUnit.SECONDS, delay);
+        int seconds = 10;
 
-        this.intervalTask = ServerUtils.get().runTimer(delaySec*20, delaySec*20, () -> {
-            boolean canSpawn = canSpawn();
+        ServerUtils.get().runLater((int) TimeUnit.SECONDS.to(TimeUnit.TICK, seconds), () -> {
+            long delayTick = (long) TimeUnit.MINUTES.to(TimeUnit.TICK, delay);
 
-            if(!canSpawn) return;
+            this.intervalTask = ServerUtils.get().runTimer(delayTick, delayTick, () -> {
+                boolean canSpawn = canSpawn();
 
-            this.intervalSpawnElement.attemptSpawn(this);
+                if(!canSpawn) {
+                    ServerUtils.get().logDebug("--- Failed to AutoSpawn. ---");
+                    updateNextCompleteTime();
+                    return;
+                }
 
-            if(isSpawnAfterLastBossIsKilled()) {
-                cancelCurrentInterval();
-                return;
-            }
+                ServerUtils.get().logDebug("AutoSpawn Spawn Attempt: " + this.intervalSpawnElement.attemptSpawn(this));
+
+                if(isSpawnAfterLastBossIsKilled()) {
+                    cancelCurrentInterval();
+                    return;
+                }
+
+                updateNextCompleteTime();
+            });
+
+            ServerUtils.get().logDebug("Task delay: " + TimeUtil.getFormattedTime(TimeUnit.MINUTES, delay));
 
             updateNextCompleteTime();
-        });
 
-        updateNextCompleteTime();
+            ServerUtils.get().logDebug("Static Delay: " + TimeUtil.getFormattedTime(TimeUnit.MILLISECONDS, (int) getRemainingMs()));
+        });
     }
 
     public void stopInterval() {
