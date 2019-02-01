@@ -53,13 +53,6 @@ public class StringUtils {
         if(input == null) return null;
 
         String[] split = input.split(",");
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for(String s : split) {
-            stringBuilder.append("|").append(s).append(",");
-        }
-
-        ServerUtils.get().logDebug(stringBuilder.toString());
 
         try {
             String worldInput = split[0].trim();
