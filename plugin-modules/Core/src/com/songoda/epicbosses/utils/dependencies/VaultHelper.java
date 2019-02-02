@@ -13,7 +13,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
  */
 public class VaultHelper implements IHelper {
 
-    @Getter private Economy economy;
+    private Economy economy;
 
     @Override
     public boolean isConnected() {

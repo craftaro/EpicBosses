@@ -76,9 +76,9 @@ public class BossDropTableManager {
                 return;
             }
 
-            int position = NumberUtils.get().getInteger(positionString);
+            int position = NumberUtils.get().getInteger(positionString) - 1;
 
-            if(positions.size() < position) return;
+            if(position >= positions.size()) return;
 
             UUID uuid = positions.get(position);
             Player player = Bukkit.getPlayer(uuid);
@@ -105,7 +105,7 @@ public class BossDropTableManager {
                 totalCommands.addAll(getCommands(randomCommands, maxCommands, subElement.getCommands()));
             });
 
-            totalCommands.replaceAll(s -> s.replace("%player%", player.getName()));
+            totalCommands.replaceAll(s -> s = s.replace("%player%", player.getName()));
             totalCommands.forEach(serverUtils::sendConsoleCommand);
 
             totalRewards.forEach(itemStack -> {
