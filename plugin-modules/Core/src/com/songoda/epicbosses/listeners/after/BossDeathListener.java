@@ -7,7 +7,6 @@ import com.songoda.epicbosses.events.BossDeathEvent;
 import com.songoda.epicbosses.events.PreBossDeathEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.holder.DeadBossHolder;
-import com.songoda.epicbosses.listeners.IBossDeathHandler;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.MessageUtils;
@@ -140,10 +139,12 @@ public class BossDeathListener implements Listener {
             }
         });
 
+        boolean autoSpawn = !activeBossHolder.getPostBossDeathHandlers().isEmpty();
+
         activeBossHolder.getPostBossDeathHandlers().forEach(handler -> handler.onPreDeath(event));
 
         DeadBossHolder deadBossHolder = new DeadBossHolder(bossEntity, location, mapOfDamage, mapOfPercent);
-        BossDeathEvent bossDeathEvent = new BossDeathEvent(activeBossHolder);
+        BossDeathEvent bossDeathEvent = new BossDeathEvent(activeBossHolder, autoSpawn);
         DropTable dropTable = this.bossEntityManager.getDropTable(bossEntity);
 
         if(dropTable == null) {

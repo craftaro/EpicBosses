@@ -1,4 +1,7 @@
 ------------------------------------- TO DO AFTER RELEASE ---------------------------------------------------
+00:30 -> Make Cage destroy time configurable via. custom skill settings
+      -> Fix this (in the drop tables menu): http://pramsing.com/fNJUC
+      -> Inspect Top Damager
 02:00   -> Randomly in the wilderness, bosses will spawn with x chance within coords as a player is loading chunks
 00:45   -> Randomly from a spawner, bosses will spawn with x chance within coords when a spawner is spawning mobs of the same type
 03:00   -> Randomly spawn in a biome bosses will spawn with x chance within each biome as they're loaded in by the players
@@ -6,6 +9,3 @@
 01:00  -> Wilderness - Button to change max coords, boss that autospawn applies to, maxActiveBosses, spawnChance
 01:00  -> Spawner - Button to change max coords, boss that autospawn applies to, maxActiveBosses, spawnChance
 01:00  -> Biome - Button to change max bosses per biome, boss that autospawn applies to, spawnChance
-
------------
-8:45 hrs

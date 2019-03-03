@@ -14,10 +14,12 @@ public class BossSpawnEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
 
-    @Getter private ActiveBossHolder activeBossHolder;
+    @Getter private final ActiveBossHolder activeBossHolder;
+    @Getter private final boolean autoSpawn;
 
-    public BossSpawnEvent(ActiveBossHolder activeBossHolder) {
+    public BossSpawnEvent(ActiveBossHolder activeBossHolder, boolean autoSpawn) {
         this.activeBossHolder = activeBossHolder;
+        this.autoSpawn = autoSpawn;
     }
 
     @Override
