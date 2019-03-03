@@ -34,6 +34,6 @@ public class TopDamagerTargetHandler<T extends IActiveHolder> extends TargetHand
 
         Map<LivingEntity, Double> sortedMap = MapUtils.get().sortByValue(nearbyDamages);
 
-        return sortedMap.keySet().stream().filter(livingEntity1 -> livingEntity1 != null && livingEntity1.isDead()).findFirst().orElse(null);
+        return sortedMap.keySet().stream().filter(livingEntity1 -> livingEntity1 != null && !livingEntity1.isDead()).findFirst().orElse(null);
     }
 }
