@@ -4,7 +4,7 @@ stages:
 variables:
     name: "EpicBosses"
     path: "/builds/$CI_PROJECT_PATH"
-    version: "1.1.8-U1"
+    version: "1.1.8-U3"
 
 build:
   stage: build

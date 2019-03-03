@@ -19,7 +19,7 @@
     </modules>
 
     <properties>
-        <plugin.version>1.1.8-U2</plugin.version>
+        <plugin.version>1.1.8-U3</plugin.version>
         <plugin.name>EpicBosses</plugin.name>
         <plugin.main>com.songoda.epicbosses.CustomBosses</plugin.main>
         <plugin.author>AMinecraftDev</plugin.author>

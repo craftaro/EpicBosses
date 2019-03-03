@@ -2072,10 +2072,10 @@ DropTableMainEditorPanel:
       name: '&e&lType'
       lore:
       - '&bCurrently: &f{type}'
-      - '&7Click this to change the skill type. Keep'
-      - '&7in mind that when you change your skill'
-      - '&7type the previous custom data will be erased'
-      - '&7to make room for the new custom data.'
+      - '&7Click this to change the drop table type. Keep'
+      - '&7in mind that when you change your drop table'
+      - '&7type the previous table data will be erased'
+      - '&7to make room for the new table format.'
       Button: Type
     '6':
       type: DIAMOND
