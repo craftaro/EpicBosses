@@ -2,11 +2,14 @@ package com.songoda.epicbosses.skills.custom;
 
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
+import com.songoda.epicbosses.autospawns.AutoSpawn;
+import com.songoda.epicbosses.autospawns.settings.AutoSpawnSettings;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.panel.skills.custom.custom.MaterialTypeEditorPanel;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
+import com.songoda.epicbosses.skills.elements.SubCustomSkillElement;
 import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.custom.cage.CageLocationData;
@@ -14,18 +17,19 @@ import com.songoda.epicbosses.skills.custom.cage.CagePlayerData;
 import com.songoda.epicbosses.skills.elements.CustomCageSkillElement;
 import com.songoda.epicbosses.skills.interfaces.IOtherSkillDataElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
-import com.songoda.epicbosses.utils.Debug;
-import com.songoda.epicbosses.utils.ObjectUtils;
-import com.songoda.epicbosses.utils.ServerUtils;
+import com.songoda.epicbosses.utils.*;
 import com.songoda.epicbosses.utils.itemstack.converters.MaterialConverter;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
+import com.songoda.epicbosses.utils.time.TimeUnit;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
@@ -62,13 +66,14 @@ public class Cage extends CustomSkillHandler {
 
     @Override
     public IOtherSkillDataElement getOtherSkillData() {
-        return new CustomCageSkillElement("IRON_BLOCK", "IRON_BARS", "AIR");
+        return new CustomCageSkillElement("IRON_BLOCK", "IRON_BARS", "AIR", 5);
     }
 
     @Override
     public List<ICustomSettingAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
         List<ICustomSettingAction> clickActions = new ArrayList<>();
         ItemStack clickStack = new ItemStack(Material.STONE_PLATE);
+        ItemStack duration = new ItemStack(Material.WATCH);
         ClickAction flatAction = (event -> this.flatTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
         ClickAction wallAction = (event -> this.wallTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
         ClickAction insideAction = (event -> this.insideTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
@@ -76,6 +81,7 @@ public class Cage extends CustomSkillHandler {
         clickActions.add(BossSkillManager.createCustomSkillAction("Flat Type Editor", getFlatTypeCurrent(customSkillElement), clickStack.clone(), flatAction));
         clickActions.add(BossSkillManager.createCustomSkillAction("Wall Type Editor", getWallTypeCurrent(customSkillElement), clickStack.clone(), wallAction));
         clickActions.add(BossSkillManager.createCustomSkillAction("Inside Type Editor", getInsideTypeCurrent(customSkillElement), clickStack.clone(), insideAction));
+        clickActions.add(BossSkillManager.createCustomSkillAction("Cage Duration", NumberUtils.get().formatDouble(getCurrentDuration(customSkillElement)), duration.clone(), getDurationAction(skill, customSkillElement)));
 
         return clickActions;
     }
@@ -96,7 +102,7 @@ public class Cage extends CustomSkillHandler {
             livingEntity.teleport(teleportLocation);
 
             ServerUtils.get().runLater(1L, () -> setCageBlocks(cagePlayerData, customSkillElement.getCustom().getCustomCageSkillData(), skill));
-            ServerUtils.get().runLater(100L, () -> {
+            ServerUtils.get().runLater((long) TimeUnit.SECONDS.to(TimeUnit.TICK, getCurrentDuration(customSkillElement)), () -> {
                 restoreCageBlocks(cagePlayerData);
                 getPlayersInCage().remove(uuid);
             });
@@ -170,6 +176,38 @@ public class Cage extends CustomSkillHandler {
         Location currentLocation = livingEntity.getLocation();
 
         return currentLocation.clone().add(0.5, 0, 0.5);
+    }
+
+    private int getCurrentDuration(CustomSkillElement customSkillElement) {
+        CustomCageSkillElement customCageSkillElement = customSkillElement.getCustom().getCustomCageSkillData();
+
+        return ObjectUtils.getValue(customCageSkillElement.getDuration(), 5);
+    }
+
+    private ClickAction getDurationAction(Skill skill, CustomSkillElement customSkillElement) {
+        return event -> {
+            ClickType clickType = event.getClick();
+            int amountToModifyBy;
+
+            if(clickType.name().contains("RIGHT")) {
+                amountToModifyBy = -1;
+            } else {
+                amountToModifyBy = +1;
+            }
+
+            SubCustomSkillElement subCustomSkillElement = customSkillElement.getCustom();
+            CustomCageSkillElement customCageSkillElement = subCustomSkillElement.getCustomCageSkillData();
+            int currentAmount = ObjectUtils.getValue(customCageSkillElement.getDuration(), 5);
+            int newAmount = currentAmount + amountToModifyBy;
+
+            if(newAmount <= 1) newAmount = 1;
+
+            customCageSkillElement.setDuration(newAmount);
+            subCustomSkillElement.setOtherSkillData(BossAPI.convertObjectToJsonObject(customCageSkillElement));
+            customSkillElement.setCustom(subCustomSkillElement);
+            skill.setCustomData(BossAPI.convertObjectToJsonObject(customSkillElement));
+            this.plugin.getSkillsFileManager().save();
+        };
     }
 
     private String getFlatTypeCurrent(CustomSkillElement customSkillElement) {

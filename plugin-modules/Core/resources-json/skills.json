@@ -53,7 +53,8 @@
         "otherSkillData": {
           "flatType": "IRON_BLOCK",
           "wallType": "IRON_FENCE",
-          "insideType": "WATER"
+          "insideType": "WATER",
+          "duration": 5
         }
       }
     }

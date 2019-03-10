@@ -13,11 +13,13 @@ import lombok.Setter;
 public class CustomCageSkillElement implements IOtherSkillDataElement {
 
     @Expose @Getter @Setter private String flatType, wallType, insideType;
+    @Expose @Getter @Setter private int duration;
 
-    public CustomCageSkillElement(String flatType, String wallType, String insideType) {
+    public CustomCageSkillElement(String flatType, String wallType, String insideType, int duration) {
         this.flatType = flatType;
         this.wallType = wallType;
         this.insideType = insideType;
+        this.duration = duration;
     }
 
 }
