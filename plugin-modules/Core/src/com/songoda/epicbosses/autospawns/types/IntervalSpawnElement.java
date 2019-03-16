@@ -7,7 +7,6 @@ import com.songoda.epicbosses.autospawns.IAutoSpawnCustomSettingsHandler;
 import com.songoda.epicbosses.autospawns.handlers.IntervalSpawnHandler;
 import com.songoda.epicbosses.autospawns.settings.AutoSpawnSettings;
 import com.songoda.epicbosses.entity.BossEntity;
-import com.songoda.epicbosses.events.BossSpawnEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.holder.autospawn.ActiveIntervalAutoSpawnHolder;
 import com.songoda.epicbosses.listeners.IBossDeathHandler;
@@ -91,10 +90,6 @@ public class IntervalSpawnElement implements IAutoSpawnCustomSettingsHandler {
 
             activeBossHolder.getPostBossDeathHandlers().add(bossDeathHandler);
             activeAutoSpawnHolder.getActiveBossHolders().add(activeBossHolder);
-
-            BossSpawnEvent bossSpawnEvent = new BossSpawnEvent(activeBossHolder, true);
-
-            ServerUtils.get().callEvent(bossSpawnEvent);
         }
 
         if(customSpawnMessage && spawnMessage != null) {

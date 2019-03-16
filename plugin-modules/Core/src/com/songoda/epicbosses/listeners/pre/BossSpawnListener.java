@@ -141,7 +141,7 @@ public class BossSpawnListener implements Listener {
         activeBossHolder.getTargetHandler().runTargetCycle();
         this.bossTauntManager.handleTauntSystem(activeBossHolder);
 
-        BossSpawnEvent bossSpawnEvent = new BossSpawnEvent(activeBossHolder, false);
+        BossSpawnEvent bossSpawnEvent = new BossSpawnEvent(activeBossHolder);
 
         ServerUtils.get().callEvent(bossSpawnEvent);
     }
