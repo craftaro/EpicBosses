@@ -25,12 +25,13 @@
             <artifactId>FactionsM</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
-        </dependency><dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>FactionsOne</artifactId>
-        <version>${project.version}</version>
-        <scope>compile</scope>
-    </dependency>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>FactionsOne</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>FactionsUUID</artifactId>

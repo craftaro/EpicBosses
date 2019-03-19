@@ -21,8 +21,8 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>net.redstoneore.legacyfactions</groupId>
-            <artifactId>LegacyFactions</artifactId>
+            <groupId>net.redstoneore</groupId>
+            <artifactId>legacyfactions</artifactId>
             <version>1.4.7</version>
             <scope>provided</scope>
         </dependency>
