@@ -140,10 +140,12 @@ public class BossDeathListener implements Listener {
             }
         });
 
+        boolean autoSpawn = !activeBossHolder.getPostBossDeathHandlers().isEmpty();
+
         activeBossHolder.getPostBossDeathHandlers().forEach(handler -> handler.onPreDeath(event));
 
         DeadBossHolder deadBossHolder = new DeadBossHolder(bossEntity, location, mapOfDamage, mapOfPercent);
-        BossDeathEvent bossDeathEvent = new BossDeathEvent(activeBossHolder);
+        BossDeathEvent bossDeathEvent = new BossDeathEvent(activeBossHolder, autoSpawn);
         DropTable dropTable = this.bossEntityManager.getDropTable(bossEntity);
 
         if(dropTable == null) {
