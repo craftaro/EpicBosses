@@ -10,7 +10,9 @@ import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.potion.PotionEffect;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,6 +44,16 @@ public class PotionSkillElement implements ISkillHandler<PotionSkillElement> {
             return;
         }
 
-        nearbyEntities.forEach(livingEntity -> potionElements.forEach(potionElement -> livingEntity.addPotionEffect(this.potionEffectConverter.from(potionElement))));
+        List<PotionEffect> potionEffects = new ArrayList<>();
+        for (PotionEffectHolder potionElement : potionElements) {
+            PotionEffect potionEffect = this.potionEffectConverter.from(potionElement);
+            if (potionEffect != null) {
+                potionEffects.add(potionEffect);
+            } else {
+                Debug.debugMessage("Tried to apply invalid potion effect: " + potionElement.getType());
+            }
+        }
+
+        nearbyEntities.forEach(nearby -> potionEffects.forEach(nearby::addPotionEffect));
     }
 }

@@ -62,7 +62,9 @@ public class BossTauntManager {
 
                 List<String> messages = BossAPI.getStoredMessages(this.queue.poll());
 
-                MessageUtils.get().sendMessage(activeBossHolder.getLocation(), radius, messages);
+                if (messages != null) {
+                    MessageUtils.get().sendMessage(activeBossHolder.getLocation(), radius, messages);
+                }
             }
         }.runTaskTimer(this.plugin, delay*20, delay*20);
     }
