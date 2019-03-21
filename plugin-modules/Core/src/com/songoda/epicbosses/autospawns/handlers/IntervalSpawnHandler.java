@@ -59,7 +59,7 @@ public class IntervalSpawnHandler {
             Player player = (Player) event.getWhoClicked();
             AutoSpawnVariableHandler autoSpawnVariableHandler = new AutoSpawnPlaceholderVariableHandler(player, autoSpawn, intervalSpawnElement, CustomBosses.get().getAutoSpawnFileManager(), variablePanelHandler);
 
-            Message.Boss_AutoSpawn_SetLocation.msg(player);
+            Message.Boss_AutoSpawn_SetPlaceholder.msg(player);
             autoSpawnVariableHandler.handle();
             player.closeInventory();
         };
