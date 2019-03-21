@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.utils;
 
+import com.songoda.epicbosses.CustomBosses;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
@@ -36,7 +37,9 @@ public class ServerUtils {
     }
 
     public void logDebug(String log) {
-        log("&d[EpicBosses] Debug - &7" + log);
+        if (CustomBosses.get().isDebug()) {
+            log("&d[EpicBosses] Debug - &7" + log);
+        }
     }
 
     public BukkitTask runTask(Runnable runnable) {

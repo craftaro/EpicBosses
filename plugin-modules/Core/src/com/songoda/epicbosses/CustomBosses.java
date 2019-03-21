@@ -132,6 +132,8 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         createFiles();
         reloadFiles();
 
+        this.debug = getConfig().getBoolean("Settings.debug", false);
+
         this.itemStackManager.reload();
         this.bossesFileManager.reload();
         this.minionsFileManager.reload();

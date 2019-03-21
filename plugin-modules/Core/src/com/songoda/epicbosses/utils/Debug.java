@@ -87,9 +87,7 @@ public enum Debug {
 
         String finalMsg = message;
 
-        if(PLUGIN.isDebug()) {
-            ServerUtils.get().logDebug(finalMsg);
-        }
+        ServerUtils.get().logDebug(finalMsg);
 
         PLUGIN.getDebugManager().getToggledPlayers().forEach(uuid -> {
             Player player = Bukkit.getPlayer(uuid);
