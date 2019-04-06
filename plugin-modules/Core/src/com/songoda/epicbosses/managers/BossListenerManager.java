@@ -3,6 +3,7 @@ package com.songoda.epicbosses.managers;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.listeners.after.BossDeathListener;
 import com.songoda.epicbosses.listeners.during.BossDamageListener;
+import com.songoda.epicbosses.listeners.during.BossMinionTargetListener;
 import com.songoda.epicbosses.listeners.during.BossSkillListener;
 import com.songoda.epicbosses.listeners.pre.BossSpawnListener;
 import com.songoda.epicbosses.utils.Debug;
@@ -34,6 +35,7 @@ public class BossListenerManager implements ILoadable {
 
         serverUtils.registerListener(new BossSpawnListener(this.plugin));
         serverUtils.registerListener(new BossDamageListener(this.plugin));
+        serverUtils.registerListener(new BossMinionTargetListener(this.plugin));
         serverUtils.registerListener(new BossSkillListener(this.plugin));
         serverUtils.registerListener(new BossDeathListener(this.plugin));
 
