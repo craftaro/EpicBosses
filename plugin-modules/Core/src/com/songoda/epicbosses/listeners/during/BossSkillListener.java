@@ -85,6 +85,10 @@ public class BossSkillListener implements Listener {
             return;
         }
 
+        String customMessage = skill.getCustomMessage();
+        if (customMessage != null)
+            masterMessage = Arrays.asList(skill.getCustomMessage());
+
         List<LivingEntity> targettedEntities = this.bossSkillManager.getTargetedEntities(activeBossHolder, skill, activeBossHolder.getLivingEntity().getLocation(), damagingEntity);
 
         this.bossSkillManager.handleSkill(masterMessage, skill, targettedEntities, activeBossHolder, true, false);
