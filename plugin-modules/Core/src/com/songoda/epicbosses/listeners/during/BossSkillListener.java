@@ -14,6 +14,9 @@ import com.songoda.epicbosses.utils.RandomUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
+import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -44,6 +47,16 @@ public class BossSkillListener implements Listener {
         Entity entityDamaging = event.getDamager();
 
         if(!(entityBeingDamaged instanceof LivingEntity)) return;
+
+        if (entityDamaging instanceof Projectile) {
+            Projectile projectile = (Projectile) entityDamaging;
+            LivingEntity shooter = (LivingEntity) projectile.getShooter();
+
+            if (shooter instanceof Player) {
+                entityDamaging = shooter;
+            }
+        }
+
         if(!(entityDamaging instanceof LivingEntity)) return;
 
         LivingEntity livingEntity = (LivingEntity) entityBeingDamaged;
