@@ -15,8 +15,11 @@ public class SlimeHandler implements ICustomEntityHandler {
 
     @Override
     public LivingEntity getBaseEntity(String entityType, Location spawnLocation) {
-        String[] split = entityType.split(":");
-        int size = Integer.valueOf(split[1]);
+        int size = 4;
+        if (entityType.contains(":")) {
+            String[] split = entityType.split(":");
+            size = Integer.valueOf(split[1]);
+        }
 
         Slime slime = (Slime) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.SLIME);
         slime.setSize(size);
