@@ -1,10 +1,10 @@
 stages:
-- build
+  - build
 
 variables:
-    name: "EpicBosses"
-    path: "/builds/$CI_PROJECT_PATH"
-    version: "1.0.11"
+  name: "EpicBosses"
+  path: "/builds/$CI_PROJECT_PATH"
+  version: "1.0.11"
 
 build:
   stage: build
@@ -17,4 +17,4 @@ build:
   artifacts:
     name: $name-$version
     paths:
-    - "$path/plugin-modules/Core/target/*.jar"
+      - "$path/plugin-modules/Core/target/*.jar"
