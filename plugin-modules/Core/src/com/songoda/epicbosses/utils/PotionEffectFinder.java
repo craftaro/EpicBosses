@@ -32,7 +32,7 @@ public enum PotionEffectFinder {
     Levitation("Levitation", PotionEffectType.getByName("LEVITATION")),
     Luck("Luck", PotionEffectType.getByName("LUCK")),
     NightVision("NightVision", PotionEffectType.NIGHT_VISION, "seeinthedarkness", "nv", "night_vision"),
-    Posion("Posion", PotionEffectType.POISON, "witched"),
+    Poison("Poison", PotionEffectType.POISON, "witched"),
     Regen("regen", PotionEffectType.REGENERATION, "regeneration"),
     Saturation("Saturation", PotionEffectType.SATURATION, "saturated"),
     Slow("Slow", PotionEffectType.SLOW, "tank"),
