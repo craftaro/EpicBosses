@@ -9,11 +9,15 @@ import com.songoda.epicbosses.events.PreBossSpawnItemEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.BossLocationManager;
-import com.songoda.epicbosses.managers.BossTargetManager;
 import com.songoda.epicbosses.managers.BossTauntManager;
-import com.songoda.epicbosses.utils.*;
+import com.songoda.epicbosses.utils.Message;
+import com.songoda.epicbosses.utils.MessageUtils;
+import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
+import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.version.VersionHandler;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -113,24 +117,32 @@ public class BossSpawnListener implements Listener {
         BossEntity bossEntity = activeBossHolder.getBossEntity();
         Location location = activeBossHolder.getLocation();
 
-        if(event instanceof PreBossSpawnItemEvent) {
-            PreBossSpawnItemEvent preBossSpawnItemEvent = (PreBossSpawnItemEvent) event;
-            ItemStack itemStack = preBossSpawnItemEvent.getItemStackUsed().clone();
-            Player player = preBossSpawnItemEvent.getPlayer();
-
-            itemStack.setAmount(1);
-            player.getInventory().removeItem(itemStack);
-            player.updateInventory();
-        }
-
         List<String> commands = this.bossEntityManager.getOnSpawnCommands(bossEntity);
         List<String> messages = this.bossEntityManager.getOnSpawnMessage(bossEntity);
         int messageRadius = this.bossEntityManager.getOnSpawnMessageRadius(bossEntity);
         ServerUtils serverUtils = ServerUtils.get();
 
-        if(commands != null) {
-            commands.forEach(serverUtils::sendConsoleCommand);
+        if(event instanceof PreBossSpawnItemEvent) {
+            PreBossSpawnItemEvent preBossSpawnItemEvent = (PreBossSpawnItemEvent) event;
+            ItemStack itemStack = preBossSpawnItemEvent.getItemStackUsed().clone();
+            Player player = preBossSpawnItemEvent.getPlayer();
+
+            if (player.getGameMode() != GameMode.CREATIVE) {
+                itemStack.setAmount(1);
+                player.getInventory().removeItem(itemStack);
+                player.updateInventory();
+            }
+
+            if (commands != null)
+                commands.replaceAll(s -> s.replaceAll("%player%", player.getName()));
+
+            if (messages != null && !activeBossHolder.isCustomSpawnMessage())
+                messages.replaceAll(s -> s.replace("{name}", player.getName()));
         }
+
+        if (commands != null)
+            commands.forEach(serverUtils::sendConsoleCommand);
+
         if(messages != null && !activeBossHolder.isCustomSpawnMessage()) {
             if(activeBossHolder.getName() != null) messages.replaceAll(s -> s.replace("{boss}", activeBossHolder.getName()));
             messages.replaceAll(s -> s.replace("{location}", StringUtils.get().translateLocation(location)));

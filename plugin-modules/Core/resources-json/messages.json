@@ -8,7 +8,7 @@
   "SKOnSpawn": [
     "&8&m-----*--------------------*-----",
     "&7",
-    "&fA &e{boss} &fhas been spawned at &e{location}&f!",
+    "&fA &e{boss} &fhas been spawned by &e{name} &fat &e{location}&f!",
     "&7",
     "&8&m-----*--------------------*-----"
   ],

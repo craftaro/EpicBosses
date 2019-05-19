@@ -16,6 +16,7 @@ import com.songoda.epicbosses.utils.command.SubCommand;
 import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -208,36 +209,36 @@ public class BossNewCmd extends SubCommand {
         }
 
         Message.Boss_New_InvalidArgs.msg(sender);
-        return;
     }
 
     private List<String> appendList(String[] args) {
-        int length = args.length;
-        List<String> listOfElement = new ArrayList<>();
-        StringBuilder current = new StringBuilder();
+        String[] params = Arrays.copyOfRange(args, 3, args.length);
 
-        for(int i = 4; i < length; i++) {
-            String arg = args[i];
+        List<String> sections = new ArrayList<>();
+        StringBuilder currentSection = new StringBuilder();
 
-            if(arg.contains("||")) {
-                String[] split = arg.split("||");
-
-                current.append(split[0]);
-                listOfElement.add(current.toString());
-
-                if(split.length >= 2) {
-                    current = new StringBuilder(split[1]);
-                } else {
-                    current = new StringBuilder();
-                }
-
+        for (String param : params) {
+            String[] split = param.split("\\|");
+            if (split.length == 1) {
+                currentSection.append(split[0]).append(" ");
                 continue;
             }
 
-            current.append(arg);
+            boolean firstAdded = false;
+            for (String piece : split) {
+                currentSection.append(piece).append(" ");
+
+                if (!firstAdded) {
+                    sections.add(currentSection.toString().trim());
+                    currentSection = new StringBuilder();
+                    firstAdded = true;
+                }
+            }
         }
 
-        listOfElement.add(current.toString());
-        return listOfElement;
+        if (!currentSection.toString().trim().isEmpty())
+            sections.add(currentSection.toString().trim());
+
+        return sections;
     }
 }
