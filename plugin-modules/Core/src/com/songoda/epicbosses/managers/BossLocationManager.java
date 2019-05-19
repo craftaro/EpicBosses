@@ -72,10 +72,9 @@ public class BossLocationManager implements IReloadable {
                 }
             }
 
-                if(blocked) {
-                    ServerUtils.get().logDebug("Unable to spawn boss due to worldguard region being in blocked list");
-                    return false;
-                }
+            if(blocked) {
+                ServerUtils.get().logDebug("Unable to spawn boss due to worldguard region being in blocked list");
+                return false;
             }
         }
 
