@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class BossHookManager implements IReloadable {
 
-    @Getter private boolean askyblockEnabled, factionsEnabled, stackmobEnabled, worldguardEnabld;
+    @Getter private boolean askyblockEnabled, factionsEnabled, stackmobEnabled, worldguardEnabled;
     @Getter private List<String> worldGuardSpawnRegions, worldguardBlockedRegions;
     @Getter private boolean askyblockOwnIsland, factionWarzone;
 
@@ -51,7 +51,7 @@ public class BossHookManager implements IReloadable {
         this.askyblockEnabled = askyblock.getBoolean("enabled", false);
         this.factionsEnabled = factions.getBoolean("enabled", false);
         this.stackmobEnabled = stackMob.getBoolean("enabled", false);
-        this.worldguardEnabld = worldGuard.getBoolean("enabled", true);
+        this.worldguardEnabled = worldGuard.getBoolean("enabled", true);
 
         this.worldGuardSpawnRegions = worldGuard.getStringList("spawnRegions");
         this.worldguardBlockedRegions = worldGuard.getStringList("blockedRegions");
@@ -71,7 +71,7 @@ public class BossHookManager implements IReloadable {
     }
 
     private void setupWorldGuard() {
-        if(!isWorldguardEnabld()) return;
+        if(!isWorldguardEnabled()) return;
 
         this.worldGuardHelper = new WorldGuardHelper();
     }

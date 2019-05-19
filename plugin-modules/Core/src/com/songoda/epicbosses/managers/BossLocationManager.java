@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.managers;
 
+import com.songoda.epicbosses.utils.ServerUtils;
 import lombok.Getter;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.utils.IReloadable;
@@ -43,37 +44,49 @@ public class BossLocationManager implements IReloadable {
                     Location l = new Location(location.getWorld(), x, y, z);
                     Block block = l.getBlock();
 
-                    if(block.getType().isSolid()) return false;
+                    if(block.getType().isSolid()) {
+                        ServerUtils.get().logDebug("Unable to spawn boss due to needing a 5x3x5 area to spawn");
+                        return false;
+                    }
                 }
             }
         }
 
         if(isUseBlockedWorlds()) {
-            if(getBlockedWorlds().contains(location.getWorld().getName())) return false;
+            if(getBlockedWorlds().contains(location.getWorld().getName())) {
+                ServerUtils.get().logDebug("Unable to spawn boss due to world being in blocked worlds list");
+                return false;
+            }
         }
 
-        boolean isInBlockedRegion = false;
-
-        if(this.bossHookManager.isWorldguardEnabld() && this.bossHookManager.getWorldGuardHelper() != null) {
+        if(this.bossHookManager.isWorldguardEnabled() && this.bossHookManager.getWorldGuardHelper() != null) {
             List<String> currentRegions = this.bossHookManager.getWorldGuardHelper().getRegionNames(location);
+            boolean blocked = false;
 
             if(currentRegions != null) {
                 for(String s : this.bossHookManager.getWorldguardBlockedRegions()) {
                     if(currentRegions.contains(s)) {
-                        isInBlockedRegion = true;
+                        blocked = true;
                         break;
                     }
                 }
             }
 
-            if(isInBlockedRegion) return false;
+                if(blocked) {
+                    ServerUtils.get().logDebug("Unable to spawn boss due to worldguard region being in blocked list");
+                    return false;
+                }
+            }
         }
 
         if(this.bossHookManager.isFactionsEnabled() && this.bossHookManager.getFactionHelper() != null) {
-            if(!this.bossHookManager.getFactionHelper().isInWarzone(location)) return false;
+            if(!this.bossHookManager.getFactionHelper().isInWarzone(location)) {
+                ServerUtils.get().logDebug("Unable to spawn boss due to being outside a factions warzone");
+                return false;
+            }
         }
 
-        if(this.bossHookManager.isWorldguardEnabld() && this.bossHookManager.getWorldGuardHelper() != null) {
+        if(this.bossHookManager.isWorldguardEnabled() && this.bossHookManager.getWorldGuardHelper() != null) {
             List<String> currentRegions = this.bossHookManager.getWorldGuardHelper().getRegionNames(location);
             boolean allowed = false;
 
@@ -85,13 +98,19 @@ public class BossLocationManager implements IReloadable {
                     }
                 }
 
-                if(!allowed) return false;
+                if(!allowed) {
+                    ServerUtils.get().logDebug("Unable to spawn boss due to worldguard region not being in the spawnable regions list");
+                    return false;
+                }
             }
         }
 
         if(this.bossHookManager.isAskyblockEnabled() && this.bossHookManager.getASkyblockHelper() != null) {
             if(this.bossHookManager.isAskyblockOwnIsland()) {
-                return this.bossHookManager.getASkyblockHelper().isOnOwnIsland(player);
+                boolean canSpawn = this.bossHookManager.getASkyblockHelper().isOnOwnIsland(player);
+                if (!canSpawn)
+                    ServerUtils.get().logDebug("Unable to spawn boss due to not being on own ASkyblock island");
+                return canSpawn;
             }
         }
 
