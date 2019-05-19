@@ -38,7 +38,7 @@ public class EntityTypeMechanic implements IBossMechanic {
 
             if(position > 1) {
                 int lowerPosition = position - 1;
-                LivingEntity lowerLivingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(lowerPosition, null);
+                LivingEntity lowerLivingEntity = activeBossHolder.getLivingEntity(lowerPosition);
 
                 if(lowerLivingEntity == null) {
                     Debug.FAILED_ATTEMPT_TO_STACK_BOSSES.debug(BossAPI.getBossEntityName(bossEntity));

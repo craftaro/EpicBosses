@@ -31,7 +31,7 @@ public class EquipmentMechanic implements IMinionMechanic {
 
         for(EntityStatsElement entityStatsElement : minionEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
-            LivingEntity livingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(mainStatsElement.getPosition(), null);
+            LivingEntity livingEntity = activeBossHolder.getLivingEntity(mainStatsElement.getPosition());
 
             if(livingEntity == null) return false;
 

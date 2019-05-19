@@ -24,7 +24,7 @@ public class HealthMechanic implements IBossMechanic {
 
         for(EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
-            LivingEntity livingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(mainStatsElement.getPosition(), null);
+            LivingEntity livingEntity = activeBossHolder.getLivingEntity(mainStatsElement.getPosition());
             double maxHealth = mainStatsElement.getHealth();
 
             if(livingEntity == null) return false;

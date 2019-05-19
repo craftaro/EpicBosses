@@ -9,6 +9,7 @@ import com.songoda.epicbosses.panel.droptables.rewards.interfaces.IDropTableRewa
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
+import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
@@ -94,7 +95,13 @@ public abstract class DropTableRewardsListEditorPanel<SubVariable> extends SubVa
                 replaceMap.put("{itemName}", name);
                 replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
 
-                ItemStack itemStack = this.itemsFileManager.getItemStackConverter().from(this.itemsFileManager.getItemStackHolder(name));
+                ItemStackHolder itemStackHolder = this.itemsFileManager.getItemStackHolder(name);
+                if (itemStackHolder == null) {
+                    ServerUtils.get().logDebug("Tried to load null itemstack for droptable rewards list panel: [" + name + ", " + chance + "]");
+                    return;
+                }
+
+                ItemStack itemStack = this.itemsFileManager.getItemStackConverter().from(itemStackHolder);
 
                 if(itemStack == null || itemStack.getType() == Material.AIR) return;
 

@@ -156,7 +156,11 @@ public class BossSkillManager implements ILoadable {
         if(mode.equalsIgnoreCase("ONE")) {
             return Arrays.asList(damager);
         } else if(mode.equalsIgnoreCase("BOSS")) {
-            targetedList.addAll(activeBossHolder.getLivingEntityMap().values());
+            for (UUID uuid : activeBossHolder.getLivingEntityMap().values()) {
+                LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(uuid);
+                if (livingEntity != null)
+                    targetedList.add(livingEntity);
+            }
         } else {
             for(Player player : Bukkit.getOnlinePlayers()) {
                 if(!player.getWorld().equals(center.getWorld())) continue;

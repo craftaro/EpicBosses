@@ -24,7 +24,7 @@ public class NameMechanic implements IMinionMechanic {
 
         for(EntityStatsElement entityStatsElement : minionEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
-            LivingEntity livingEntity = activeMinionHolder.getLivingEntityMap().getOrDefault(mainStatsElement.getPosition(), null);
+            LivingEntity livingEntity = activeMinionHolder.getLivingEntity(mainStatsElement.getPosition());
             String customName = mainStatsElement.getDisplayName();
 
             if(livingEntity == null) return false;

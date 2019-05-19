@@ -4,6 +4,7 @@ import com.songoda.epicbosses.holder.IActiveHolder;
 import com.songoda.epicbosses.managers.BossTargetManager;
 import com.songoda.epicbosses.utils.ServerUtils;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
@@ -12,6 +13,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author Charles Cullen
@@ -37,7 +39,8 @@ public abstract class TargetHandler<Holder extends IActiveHolder> implements ITa
     }
 
     protected LivingEntity getBossEntity() {
-        for(LivingEntity livingEntity : getHolder().getLivingEntityMap().values()) {
+        for(UUID uuid : getHolder().getLivingEntityMap().values()) {
+            LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(uuid);
             if(livingEntity != null && !livingEntity.isDead()) return livingEntity;
         }
 
@@ -73,7 +76,8 @@ public abstract class TargetHandler<Holder extends IActiveHolder> implements ITa
     }
 
     private void updateBoss(LivingEntity newTarget) {
-        getHolder().getLivingEntityMap().values().forEach(livingEntity -> {
+        getHolder().getLivingEntityMap().values().forEach(uuid -> {
+            LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(uuid);
             if(livingEntity != null && !livingEntity.isDead()) {
                 ((Creature) livingEntity).setTarget(newTarget);
             }

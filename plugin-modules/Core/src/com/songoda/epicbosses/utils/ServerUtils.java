@@ -2,10 +2,14 @@ package com.songoda.epicbosses.utils;
 
 import com.songoda.epicbosses.CustomBosses;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
+
+import java.util.UUID;
 
 /**
  * @author Charles Cullen
@@ -82,6 +86,14 @@ public class ServerUtils {
 
     public void sendConsoleCommand(String command) {
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+    }
+
+    public Entity getEntity(UUID uuid) {
+        for (World world : Bukkit.getWorlds())
+            for (Entity entity : world.getEntities())
+                if (entity.getUniqueId().equals(uuid))
+                    return entity;
+        return null;
     }
 
     public static ServerUtils get() {

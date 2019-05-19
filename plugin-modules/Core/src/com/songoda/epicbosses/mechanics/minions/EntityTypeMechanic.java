@@ -35,11 +35,11 @@ public class EntityTypeMechanic implements IMinionMechanic {
             if(livingEntity == null) return false;
             if(!activeMinionHolder.getLivingEntityMap().isEmpty()) activeMinionHolder.killAll();
 
-            activeMinionHolder.getLivingEntityMap().put(position, livingEntity);
+            activeMinionHolder.getLivingEntityMap().put(position, livingEntity.getUniqueId());
 
             if(position > 1) {
                 int lowerPosition = position - 1;
-                LivingEntity lowerLivingEntity = activeMinionHolder.getLivingEntityMap().getOrDefault(lowerPosition, null);
+                LivingEntity lowerLivingEntity = activeMinionHolder.getLivingEntity(lowerPosition);
 
                 if(lowerLivingEntity == null) {
                     Debug.FAILED_ATTEMPT_TO_STACK_BOSSES.debug(BossAPI.getMinionEntityName(minionEntity));

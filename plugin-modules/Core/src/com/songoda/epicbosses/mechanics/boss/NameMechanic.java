@@ -24,7 +24,7 @@ public class NameMechanic implements IBossMechanic {
 
         for(EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
-            LivingEntity livingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(mainStatsElement.getPosition(), null);
+            LivingEntity livingEntity = activeBossHolder.getLivingEntity(mainStatsElement.getPosition());
             String customName = mainStatsElement.getDisplayName();
 
             if(livingEntity == null) return false;

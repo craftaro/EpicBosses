@@ -31,7 +31,7 @@ public class PotionMechanic implements IBossMechanic {
 
         for(EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
-            LivingEntity livingEntity = activeBossHolder.getLivingEntityMap().getOrDefault(mainStatsElement.getPosition(), null);
+            LivingEntity livingEntity = activeBossHolder.getLivingEntity(mainStatsElement.getPosition());
             List<PotionEffectHolder> potionElements = entityStatsElement.getPotions();
 
             if(livingEntity == null) return false;

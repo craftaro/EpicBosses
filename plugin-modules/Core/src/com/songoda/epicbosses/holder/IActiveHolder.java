@@ -18,7 +18,9 @@ public interface IActiveHolder {
 
     String getName();
 
-    Map<Integer, LivingEntity> getLivingEntityMap();
+    Map<Integer, UUID> getLivingEntityMap();
+
+    LivingEntity getLivingEntity(int position);
 
     Map<UUID, Double> getMapOfDamagingUsers();
 

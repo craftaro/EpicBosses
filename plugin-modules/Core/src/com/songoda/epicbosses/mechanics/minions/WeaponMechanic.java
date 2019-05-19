@@ -34,7 +34,7 @@ public class WeaponMechanic implements IMinionMechanic {
 
         for(EntityStatsElement entityStatsElement : minionEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
-            LivingEntity livingEntity = activeMinionHolder.getLivingEntityMap().getOrDefault(mainStatsElement.getPosition(), null);
+            LivingEntity livingEntity = activeMinionHolder.getLivingEntity(mainStatsElement.getPosition());
 
             if(livingEntity == null) return false;
 

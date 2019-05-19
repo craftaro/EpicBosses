@@ -22,7 +22,9 @@ import com.songoda.epicbosses.skills.elements.CustomMinionSkillElement;
 import com.songoda.epicbosses.utils.BossesGson;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.RandomUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Item;
@@ -313,8 +315,8 @@ public class BossEntityManager {
         List<ActiveBossHolder> currentList = getActiveBossHolders();
 
         for(ActiveBossHolder activeBossHolder : currentList) {
-            for(Map.Entry<Integer, LivingEntity> entry : activeBossHolder.getLivingEntityMap().entrySet()) {
-                if(entry.getValue().getUniqueId().equals(livingEntity.getUniqueId())) return activeBossHolder;
+            for(Map.Entry<Integer, UUID> entry : activeBossHolder.getLivingEntityMap().entrySet()) {
+                if(entry.getValue().equals(livingEntity.getUniqueId())) return activeBossHolder;
             }
         }
 
@@ -322,16 +324,20 @@ public class BossEntityManager {
     }
 
     public void removeActiveBossHolder(ActiveBossHolder activeBossHolder) {
-        for(Map.Entry<Integer, LivingEntity> entry : activeBossHolder.getLivingEntityMap().entrySet()) {
-            if(!entry.getValue().isDead()) entry.getValue().remove();
+        for(Map.Entry<Integer, UUID> entry : activeBossHolder.getLivingEntityMap().entrySet()) {
+            LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(entry.getValue());
+            if (livingEntity != null && !livingEntity.isDead())
+                livingEntity.remove();
         }
 
         ACTIVE_BOSS_HOLDERS.remove(activeBossHolder);
     }
 
     public boolean isAllEntitiesDead(ActiveBossHolder activeBossHolder) {
-        for(Map.Entry<Integer, LivingEntity> entry : activeBossHolder.getLivingEntityMap().entrySet()) {
-            if(!entry.getValue().isDead()) return false;
+        for(Map.Entry<Integer, UUID> entry : activeBossHolder.getLivingEntityMap().entrySet()) {
+            LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(entry.getValue());
+            if (livingEntity != null && !livingEntity.isDead())
+                return false;
         }
 
         return true;

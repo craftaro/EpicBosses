@@ -24,7 +24,7 @@ public class HealthMechanic implements IMinionMechanic {
 
         for(EntityStatsElement entityStatsElement : minionEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
-            LivingEntity livingEntity = activeMinionHolder.getLivingEntityMap().getOrDefault(mainStatsElement.getPosition(), null);
+            LivingEntity livingEntity = activeMinionHolder.getLivingEntity(mainStatsElement.getPosition());
             double maxHealth = mainStatsElement.getHealth();
 
             if(livingEntity == null) return false;
