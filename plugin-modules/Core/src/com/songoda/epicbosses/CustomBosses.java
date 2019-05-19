@@ -54,6 +54,7 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
     @Getter private BossHookManager bossHookManager;
 
     @Getter private AutoSpawnManager autoSpawnManager;
+    @Getter private PlaceholderManager placeholderManager;
 
     @Getter private MinionMechanicManager minionMechanicManager;
     @Getter private MinionEntityContainer minionEntityContainer;
@@ -128,6 +129,11 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         this.bossEntityManager = new BossEntityManager(this);
 
         this.autoSpawnManager = new AutoSpawnManager(this);
+
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            this.placeholderManager = new PlaceholderManager(this);
+            this.placeholderManager.register();
+        }
 
         createFiles();
         reloadFiles();

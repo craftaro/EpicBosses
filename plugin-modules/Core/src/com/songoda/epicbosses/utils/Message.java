@@ -30,7 +30,7 @@ public enum Message {
     Boss_AutoSpawn_SpawnRate("&b&lEpicBosses &8» &7You have {0} the spawn rate of the auto spawn to &f{1}&7."),
     Boss_AutoSpawn_InvalidLocation("&c&l(!) &cThe specified location string, &f{0}&c, is invalid. A correct example should be &fworld,10,150,-30&c . If you want to cancel the location update type &f- &cand you will be brought back to the settings menu."),
     Boss_AutoSpawn_SetLocation("&b&lEpicBosses &8» &7Your next input in to chat will be the location for the auto spawn. If you enter &f-&7 it will cancel the updating of the location. Use the format &fworld,10,150,-30&7."),
-    Boss_AutoSpawn_SetPlaceholder("&b&lEpicBosses &8» &7Your next input in to chat will be the placeholder for the auto spawn. If you enter &f-&7 it will cancel the updating of the location."),
+    Boss_AutoSpawn_SetPlaceholder("&b&lEpicBosses &8» &7Your next input in to chat will be the placeholder for the auto spawn. If you enter &f-&7 it will cancel the updating of the placeholder."),
 
     Boss_Create_EntityTypeNotFound("&c&l(!) &cThe specified entity type {0} was not found. If you think this is an error please contact &fAMinecraftDev&c."),
     Boss_Create_InvalidArgs("&c&l(!) &cYou must use &n/boss create [name] [entity] &c to create a boss."),
