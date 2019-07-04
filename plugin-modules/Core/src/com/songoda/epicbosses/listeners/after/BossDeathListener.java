@@ -16,6 +16,7 @@ import com.songoda.epicbosses.utils.ServerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -63,7 +64,7 @@ public class BossDeathListener implements Listener {
 
 
         if(this.bossEntityManager.isAllEntitiesDead(activeBossHolder)) {
-            PreBossDeathEvent preBossDeathEvent = new PreBossDeathEvent(activeBossHolder, location);
+            PreBossDeathEvent preBossDeathEvent = new PreBossDeathEvent(activeBossHolder, location, event.getEntity().getKiller());
 
             activeBossHolder.setDead(true);
             activeBossHolder.killAllMinions();
@@ -86,6 +87,8 @@ public class BossDeathListener implements Listener {
         ServerUtils serverUtils = ServerUtils.get();
 
         if(commands != null) {
+            if (activeBossHolder.getSpawningPlayerName() != null) commands.replaceAll(s -> s.replace("{spawner}", activeBossHolder.getSpawningPlayerName()));
+            if (event.getKiller() != null) commands.replaceAll(s -> s.replace("{killer}", event.getKiller().getName()));
             commands.forEach(serverUtils::sendConsoleCommand);
         }
 
@@ -123,6 +126,8 @@ public class BossDeathListener implements Listener {
                 }
 
                 if(activeBossHolder.getName() != null) messages.replaceAll(s -> s.replace("{boss}", activeBossHolder.getName()));
+                if (activeBossHolder.getSpawningPlayerName() != null) messages.replaceAll(s -> s.replace("{spawner}", activeBossHolder.getSpawningPlayerName()));
+                if (event.getKiller() != null) messages.replaceAll(s -> s.replace("{killer}", event.getKiller().getName()));
 
                 messages.replaceAll(s -> s.replace('&', '§'));
 

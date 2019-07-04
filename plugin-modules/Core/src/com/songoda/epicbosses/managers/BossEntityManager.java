@@ -29,6 +29,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
@@ -269,8 +270,8 @@ public class BossEntityManager {
         return newMap;
     }
 
-    public ActiveBossHolder createActiveBossHolder(BossEntity bossEntity, Location spawnLocation, String name) {
-        ActiveBossHolder activeBossHolder = new ActiveBossHolder(bossEntity, spawnLocation, name);
+    public ActiveBossHolder createActiveBossHolder(BossEntity bossEntity, Location spawnLocation, String name, Player spawningPlayer) {
+        ActiveBossHolder activeBossHolder = new ActiveBossHolder(bossEntity, spawnLocation, name, spawningPlayer);
 
         this.bossMechanicManager.handleMechanicApplication(bossEntity, activeBossHolder);
 

@@ -3,6 +3,7 @@ package com.songoda.epicbosses.events;
 import lombok.Getter;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
@@ -17,10 +18,12 @@ public class PreBossDeathEvent extends Event {
 
     @Getter private ActiveBossHolder activeBossHolder;
     @Getter private Location location;
+    @Getter private Player killer;
 
-    public PreBossDeathEvent(ActiveBossHolder activeBossHolder, Location location) {
+    public PreBossDeathEvent(ActiveBossHolder activeBossHolder, Location location, Player killer) {
         this.activeBossHolder = activeBossHolder;
         this.location = location;
+        this.killer = killer;
     }
 
     @Override

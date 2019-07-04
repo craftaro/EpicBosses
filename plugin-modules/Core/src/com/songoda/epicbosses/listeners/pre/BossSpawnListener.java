@@ -87,7 +87,7 @@ public class BossSpawnListener implements Listener {
             location.add(0,1,0);
         }
 
-        if(!this.bossLocationManager.canSpawnBoss(player, location)) {
+        if(!this.bossLocationManager.canSpawnBoss(player, location.clone())) {
             Message.General_CannotSpawn.msg(player);
             event.setCancelled(true);
             return;

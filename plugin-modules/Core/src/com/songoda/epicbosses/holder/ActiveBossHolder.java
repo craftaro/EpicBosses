@@ -12,6 +12,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
 import java.util.*;
 
@@ -30,14 +31,19 @@ public class ActiveBossHolder implements IActiveHolder {
     @Getter private Map<Integer, UUID> livingEntityMap = new HashMap<>();
     @Getter private List<IBossDeathHandler> postBossDeathHandlers = new ArrayList<>();
     @Getter private Map<UUID, Double> mapOfDamagingUsers = new HashMap<>();
+    @Getter private String spawningPlayerName;
 
     @Getter @Setter private TargetHandler<ActiveBossHolder> targetHandler = null;
     @Getter @Setter private boolean isDead = false, customSpawnMessage = false;
 
-    public ActiveBossHolder(BossEntity bossEntity, Location spawnLocation, String name) {
+    public ActiveBossHolder(BossEntity bossEntity, Location spawnLocation, String name, Player spawningPlayer) {
         this.location = spawnLocation;
         this.bossEntity = bossEntity;
         this.name = name;
+
+        if (spawningPlayer != null) {
+            this.spawningPlayerName = spawningPlayer.getName();
+        }
     }
 
     public void setLivingEntity(int position, LivingEntity livingEntity) {

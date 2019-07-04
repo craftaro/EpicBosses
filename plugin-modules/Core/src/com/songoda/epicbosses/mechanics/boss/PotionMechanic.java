@@ -5,6 +5,7 @@ import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.MainStatsElement;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.mechanics.IBossMechanic;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.potion.PotionEffectConverter;
 import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
 import org.bukkit.entity.LivingEntity;
@@ -39,6 +40,11 @@ public class PotionMechanic implements IBossMechanic {
             if(potionElements != null && !potionElements.isEmpty()) {
                 potionElements.forEach(potionElement -> {
                     PotionEffect potionEffect = this.potionEffectConverter.from(potionElement);
+                    if (potionEffect == null) {
+                        ServerUtils.get().logDebug("Failed to apply potion effect to boss: " +
+                                "[type=" + potionElement.getType() + ",duration=" + potionElement.getDuration() + ",level=" + potionElement.getLevel() + "]");
+                        return;
+                    }
 
                     livingEntity.addPotionEffect(potionEffect);
                 });

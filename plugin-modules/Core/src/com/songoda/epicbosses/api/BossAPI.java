@@ -476,7 +476,7 @@ public class BossAPI {
 
         String name = PLUGIN.getBossEntityContainer().getName(bossEntity);
 
-        ActiveBossHolder activeBossHolder = PLUGIN.getBossEntityManager().createActiveBossHolder(bossEntity, location, name);
+        ActiveBossHolder activeBossHolder = PLUGIN.getBossEntityManager().createActiveBossHolder(bossEntity, location, name, player);
 
         if(activeBossHolder == null) {
             Debug.FAILED_TO_CREATE_ACTIVE_BOSS_HOLDER.debug();

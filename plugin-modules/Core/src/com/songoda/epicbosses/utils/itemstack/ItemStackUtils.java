@@ -1,6 +1,7 @@
 package com.songoda.epicbosses.utils.itemstack;
 
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 //import com.songoda.epicbosses.utils.factory.NbtFactory;
 import com.songoda.epicbosses.utils.itemstack.enchants.GlowEnchant;
@@ -116,6 +117,11 @@ public class ItemStackUtils {
                 if(replacedMap != null) {
                     for(String x : replacedMap.keySet()) {
                         if(!y.contains(x)) continue;
+
+                        if (!replacedMap.containsKey(x)) {
+                            ServerUtils.get().logDebug("Failed to apply replaced lore: [y=" + y + "x=" + x + "]");
+                            continue;
+                        }
 
                         y = y.replace(x, replacedMap.get(x));
                     }
