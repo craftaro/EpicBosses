@@ -32,7 +32,7 @@ public enum Message {
     Boss_AutoSpawn_SetLocation("&b&lEpicBosses &8» &7Your next input in to chat will be the location for the auto spawn. If you enter &f-&7 it will cancel the updating of the location. Use the format &fworld,10,150,-30&7."),
     Boss_AutoSpawn_SetPlaceholder("&b&lEpicBosses &8» &7Your next input in to chat will be the placeholder for the auto spawn. If you enter &f-&7 it will cancel the updating of the placeholder."),
 
-    Boss_Create_EntityTypeNotFound("&c&l(!) &cThe specified entity type {0} was not found. If you think this is an error please contact &fAMinecraftDev&c."),
+    Boss_Create_EntityTypeNotFound("&c&l(!) &cThe specified entity type {0} was not found. If you think this is an error please contact &fASongoda&c."),
     Boss_Create_InvalidArgs("&c&l(!) &cYou must use &n/boss create [name] [entity] &c to create a boss."),
     Boss_Create_NameAlreadyExists("&c&l(!) &cA boss already exists with the name {0}."),
     Boss_Create_NoEntitySpecified("&c&l(!) &cNo entity type was specified. Make sure to add an entity type! Possible entity types are: \n&7{0}"),
