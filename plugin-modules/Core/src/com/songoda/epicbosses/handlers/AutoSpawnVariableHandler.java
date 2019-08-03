@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.handlers;
 
+import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.autospawns.types.IntervalSpawnElement;
@@ -9,6 +10,7 @@ import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -67,7 +69,7 @@ public abstract class AutoSpawnVariableHandler implements IHandler {
                 }
 
                 if(input == null) {
-                    finish();
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(CustomBosses.get(), AutoSpawnVariableHandler.this::finish);
                     return;
                 }
 
@@ -78,7 +80,7 @@ public abstract class AutoSpawnVariableHandler implements IHandler {
                 event.setCancelled(true);
                 setHandled(true);
 
-                finish();
+                Bukkit.getScheduler().scheduleSyncDelayedTask(CustomBosses.get(), AutoSpawnVariableHandler.this::finish);
             }
         };
     }

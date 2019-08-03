@@ -30,6 +30,7 @@ public class PanelBuilder {
 
     @Getter private PanelBuilderCounter panelBuilderCounter;
 
+    private String title;
     private Inventory inventory;
     private int size = 0;
 
@@ -62,6 +63,7 @@ public class PanelBuilder {
     public PanelBuilder cloneBuilder() {
         PanelBuilder panelBuilder = new PanelBuilder(this.configurationSection, this.replaceMap);
 
+        panelBuilder.title = this.title;
         panelBuilder.inventory = this.inventory;
         panelBuilder.size = this.size;
         panelBuilder.defaultSlots.addAll(this.defaultSlots);
@@ -73,7 +75,7 @@ public class PanelBuilder {
     public Panel getPanel() {
         build();
 
-        Panel panel = new Panel(this.inventory, this.panelBuilderSettings, this.panelBuilderCounter);
+        Panel panel = new Panel(this.inventory, this.title, this.panelBuilderSettings, this.panelBuilderCounter);
 
         Map<String, ItemStack> itemStackMap = this.panelBuilderCounter.getItemStacks();
         Map<String, ClickAction> clickActionMap = this.panelBuilderCounter.getClickActions();
@@ -96,6 +98,7 @@ public class PanelBuilder {
         ConfigurationSection itemSection = configurationSection.contains("Items")? configurationSection.getConfigurationSection("Items") : null;
 
         name = replace(name);
+        this.title = name;
         this.inventory = Bukkit.createInventory(null, slots, name);
 
         if(itemSection != null) {

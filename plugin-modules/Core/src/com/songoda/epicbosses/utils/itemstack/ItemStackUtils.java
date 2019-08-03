@@ -3,7 +3,6 @@ package com.songoda.epicbosses.utils.itemstack;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
-//import com.songoda.epicbosses.utils.factory.NbtFactory;
 import com.songoda.epicbosses.utils.itemstack.enchants.GlowEnchant;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import org.bukkit.ChatColor;
@@ -341,9 +340,9 @@ public class ItemStackUtils {
         List<String> enchants = (List<String>) configurationSection.getList("enchants", null);
         String skullOwner = configurationSection.getString("skullOwner", null);
         Short spawnerId = (Short) configurationSection.get("spawnerId", null);
-        Boolean isGlowing = (Boolean) configurationSection.get("isGlowing", null);
+        //Boolean isGlowing = (Boolean) configurationSection.get("isGlowing", null);
 
-        return new ItemStackHolder(amount, type, durability, name, lore, enchants, skullOwner, spawnerId, isGlowing);
+        return new ItemStackHolder(amount, type, durability, name, lore, enchants, skullOwner, spawnerId);
     }
 
     public static boolean isItemStackSame(ItemStack itemStack1, ItemStack itemStack2) {

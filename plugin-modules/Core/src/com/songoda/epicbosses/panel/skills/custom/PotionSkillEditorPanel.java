@@ -11,6 +11,7 @@ import com.songoda.epicbosses.skills.types.PotionSkillElement;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
+import com.songoda.epicbosses.utils.Versions;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
@@ -18,10 +19,12 @@ import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import com.songoda.epicbosses.utils.potion.PotionEffectConverter;
 import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
+import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
@@ -106,6 +109,14 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
 
                 ItemStack itemStack = new ItemStack(Material.POTION);
                 PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
+
+                if (new VersionHandler().getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1)) {
+                    PotionType potionType = PotionType.getByEffect(PotionEffectType.BLINDNESS);
+
+                    if (potionType == null) potionType = PotionType.WATER;
+
+                    potionMeta.setBasePotionData(new PotionData(potionType));
+                }
 
                 potionMeta.addCustomEffect(potionEffect, true);
                 itemStack.setItemMeta(potionMeta);

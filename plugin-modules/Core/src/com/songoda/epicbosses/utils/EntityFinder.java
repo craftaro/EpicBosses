@@ -30,6 +30,7 @@ public enum EntityFinder {
     EVOKER("Evoker", new EvokerHandler(), "evoker"),
     VEX("Vex", new VexHandler(), "vex"),
     VINDICATOR("Vindicator", new VindicatorHandler(), "vindicator"),
+    ILLUSIONER("Illusioner", new IllusionerHandler(), "illusioner"),
     CREEPER("Creeper", EntityType.CREEPER, "creeper"),
     SKELETON("Skeleton", EntityType.SKELETON, "skeleton"),
     SPIDER("Spider", EntityType.SPIDER, "spider"),

@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.handlers;
 
+import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.managers.files.SkillsFileManager;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.utils.IHandler;
@@ -7,6 +8,7 @@ import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -64,7 +66,7 @@ public class SkillDisplayNameHandler implements IHandler {
                 event.setCancelled(true);
                 setHandled(true);
 
-                finish();
+                Bukkit.getScheduler().scheduleSyncDelayedTask(CustomBosses.get(), SkillDisplayNameHandler.this::finish);
             }
         };
     }

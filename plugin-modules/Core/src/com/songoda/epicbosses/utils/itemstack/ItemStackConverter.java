@@ -40,7 +40,6 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
         Short durability = itemStack.getDurability(), spawnerId = null;
         String type, name = null, skullOwner = null;
         List<String> lore = null, enchants = null;
-        Boolean isGlowing = null;
 
         if(durability == 0) {
             durability = null;
@@ -87,14 +86,7 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
             }
         }
 
-//        if(enchants == null) {
-//            ItemStack craftStack = NbtFactory.getCraftItemStack(itemStack);
-//            NbtFactory.NbtCompound compound = NbtFactory.fromItemTag(craftStack);
-//
-//            if(compound.containsKey("ench")) isGlowing = true;
-//        }
-
-        return new ItemStackHolder(amount, type, durability, name, lore, enchants, skullOwner, spawnerId, false);
+        return new ItemStackHolder(amount, type, durability, name, lore, enchants, skullOwner, spawnerId);
     }
 
     @Override
@@ -120,7 +112,6 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
         Short durability = itemStackHolder.getDurability(), spawnerId = itemStackHolder.getSpawnerId();
         String name = itemStackHolder.getName(), skullOwner = itemStackHolder.getSkullOwner();
         List<String> lore = itemStackHolder.getLore(), enchants = itemStackHolder.getEnchants();
-        Boolean isGlowing = itemStackHolder.getIsGlowing();
 
         if(type.contains(":")) {
             durability = Short.valueOf(type.split(":")[1]);
@@ -172,10 +163,6 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
             } else {
                 itemStack.setItemMeta(itemMeta);
             }
-        }
-
-        if(isGlowing != null && isGlowing) {
-            //TODO
         }
 
         if(amount != null && amount > 1) {

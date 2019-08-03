@@ -61,6 +61,7 @@ public class Panel implements Listener, ICloneable<Panel> {
     @Getter private PanelBuilderSettings panelBuilderSettings;
     @Getter private PanelBuilderCounter panelBuilderCounter;
     @Getter private Sound clickSound = null;
+    @Getter private String title;
     @Getter private Inventory inventory;
     @Getter private int viewers = 0;
 
@@ -86,7 +87,8 @@ public class Panel implements Listener, ICloneable<Panel> {
             throw new UnsupportedOperationException("Inventory size must be a multiple of 9 or 5");
         }
 
-        this.inventory = size % 9 == 0 ? Bukkit.createInventory(null, size, StringUtils.get().translateColor(title)) : Bukkit.createInventory(null, InventoryType.HOPPER, StringUtils.get().translateColor(title));
+        this.title = StringUtils.get().translateColor(title);
+        this.inventory = size % 9 == 0 ? Bukkit.createInventory(null, size, this.title) : Bukkit.createInventory(null, InventoryType.HOPPER, StringUtils.get().translateColor(title));
         this.connectedInventories.add(this.inventory);
         PANELS.add(this);
     }
@@ -95,19 +97,24 @@ public class Panel implements Listener, ICloneable<Panel> {
      * Creates a Panel with the specified arguments
      *
      * @param inventory - Panel inventory
+     * @param title - Panel title
      */
-    public Panel(Inventory inventory) {
-        this(inventory, null, null);
+    public Panel(Inventory inventory, String title) {
+        this(inventory, title, null, null);
     }
 
     /**
      * Creates a Panel with the specified arguments
      *
      * @param inventory - Panel inventory
+     * @param title - Panel title
+     * @param panelBuilderSettings - Panel builder settings
+     * @param panelBuilderCounter - Panel builder counter
      */
-    public Panel(Inventory inventory, PanelBuilderSettings panelBuilderSettings, PanelBuilderCounter panelBuilderCounter) {
+    public Panel(Inventory inventory, String title, PanelBuilderSettings panelBuilderSettings, PanelBuilderCounter panelBuilderCounter) {
         Bukkit.getPluginManager().registerEvents(this, PLUGIN);
 
+        this.title = StringUtils.get().translateColor(title);
         this.inventory = inventory;
         this.panelBuilderSettings = panelBuilderSettings;
         this.panelBuilderCounter = panelBuilderCounter;
@@ -477,11 +484,10 @@ public class Panel implements Listener, ICloneable<Panel> {
      * @return Inventory instance of the cloned inventory
      */
     public Inventory cloneInventory() {
-        Inventory thisInventory = getInventory();
-        Inventory newInventory = Bukkit.createInventory(thisInventory.getHolder(), thisInventory.getSize(), thisInventory.getTitle());
+        Inventory newInventory = Bukkit.createInventory(this.inventory.getHolder(), this.inventory.getSize(), this.title);
 
-        for(int i = 0; i < thisInventory.getSize(); i++) {
-            ItemStack itemStack = thisInventory.getItem(i);
+        for(int i = 0; i < this.inventory.getSize(); i++) {
+            ItemStack itemStack = this.inventory.getItem(i);
 
             if(itemStack == null) continue;
 
@@ -495,7 +501,7 @@ public class Panel implements Listener, ICloneable<Panel> {
 
     @Override
     public Panel clone() {
-        Panel panel = new Panel(this.inventory.getTitle(), this.inventory.getSize());
+        Panel panel = new Panel(this.title, this.inventory.getSize());
 
         panel.targettedSlotActions.putAll(this.targettedSlotActions);
         panel.allSlotActions.addAll(this.allSlotActions);

@@ -17,8 +17,10 @@ public enum PotionEffectFinder {
 
     Absorption("Absorption", PotionEffectType.ABSORPTION),
     Blindness("Blind", PotionEffectType.BLINDNESS, "blindness", "cantsee"),
+    ConduitPower("ConduitPower", PotionEffectType.getByName("CONDUIT_POWER"), "conduit", "conduit_power"),
     Confusion("Confusion", PotionEffectType.CONFUSION, "nausea"),
     Resistance("Resistance", PotionEffectType.DAMAGE_RESISTANCE, "damage_resistance", "res", "damageresistance"),
+    DolphinsGrace("DolphinsGrace", PotionEffectType.getByName("DOLPHINS_GRACE"), "grace", "dolphins_grace"),
     Haste("Haste", PotionEffectType.FAST_DIGGING, "fast_digging", "haste"),
     Fire_Resistance("FireResistance", PotionEffectType.FIRE_RESISTANCE, "fire_resistance", "fire_resist", "fire_res", "fireresist", "fireres"),
     Glowing("Glowing", PotionEffectType.getByName("GLOWING")),
@@ -36,6 +38,7 @@ public enum PotionEffectFinder {
     Regen("regen", PotionEffectType.REGENERATION, "regeneration"),
     Saturation("Saturation", PotionEffectType.SATURATION, "saturated"),
     Slow("Slow", PotionEffectType.SLOW, "tank"),
+    SlowFalling("SlowFalling", PotionEffectType.getByName("SLOW_FALLING"), "slow_falling"),
     MiningFatigue("MiningFatigue", PotionEffectType.SLOW_DIGGING, "slow_digging"),
     Speed("Speed", PotionEffectType.SPEED, "fast", "fastboots"),
     Unluck("Unlucky", PotionEffectType.getByName("UNLUCK"), "unluck", "notlucky"),

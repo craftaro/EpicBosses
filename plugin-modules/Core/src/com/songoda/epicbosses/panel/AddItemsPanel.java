@@ -123,7 +123,6 @@ public class AddItemsPanel extends PanelHandler {
             }
 
             openParentPanel(player);
-//            this.bossPanelManager.getCustomItems().openFor(player);
         };
     }
 
@@ -142,7 +141,6 @@ public class AddItemsPanel extends PanelHandler {
             }
 
             openParentPanel(player);
-//            this.bossPanelManager.getCustomItems().openFor(player);
         };
     }
 }

@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.handlers;
 
+import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
@@ -10,6 +11,7 @@ import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -72,7 +74,7 @@ public class BossShopPriceHandler implements IHandler {
                     setHandled(true);
                     Message.Boss_Edit_PriceSet.msg(getPlayer(), BossAPI.getBossEntityName(getBossEntity()), NumberUtils.get().formatDouble(amount));
 
-                    finish();
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(CustomBosses.get(), BossShopPriceHandler.this::finish);
                 } else {
                     Message.Boss_Edit_Price.msg(getPlayer(), BossAPI.getBossEntityName(getBossEntity()));
                 }
