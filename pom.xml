@@ -14,8 +14,11 @@
         <module>api-modules/FactionsOne</module>
         <module>api-modules/FactionsUUID</module>
         <module>api-modules/LegacyFactions</module>
+        <module>api-modules/WorldGuard</module>
+        <module>api-modules/WorldGuard-Legacy</module>
         <module>plugin-modules/Core</module>
         <module>plugin-modules/FactionHelper</module>
+        <module>plugin-modules/WorldGuardHelper</module>
     </modules>
 
     <properties>
@@ -27,27 +30,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
-            <version>1.12.2</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>net.milkbowl</groupId>
             <artifactId>vault</artifactId>
             <version>1.7.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sk89q</groupId>
-            <artifactId>worldedit</artifactId>
-            <version>6.1.9</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sk89q</groupId>
-            <artifactId>worldguard</artifactId>
-            <version>6.2.2</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -151,6 +136,21 @@
                         <artifactItem>
                             <groupId>${project.groupId}</groupId>
                             <artifactId>LegacyFactions</artifactId>
+                            <version>${project.version}</version>
+                        </artifactItem>
+                        <artifactItem>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>WorldGuardHelper</artifactId>
+                            <version>${project.version}</version>
+                        </artifactItem>
+                        <artifactItem>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>WorldGuard</artifactId>
+                            <version>${project.version}</version>
+                        </artifactItem>
+                        <artifactItem>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>WorldGuard-Legacy</artifactId>
                             <version>${project.version}</version>
                         </artifactItem>
                         <artifactItem>

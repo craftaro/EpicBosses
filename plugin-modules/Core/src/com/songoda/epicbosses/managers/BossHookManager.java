@@ -1,5 +1,8 @@
 package com.songoda.epicbosses.managers;
 
+import com.songoda.epicbosses.utils.Versions;
+import com.songoda.epicbosses.utils.dependencies.WorldGuardHelper;
+import com.songoda.epicbosses.utils.version.VersionHandler;
 import lombok.Getter;
 import com.songoda.epicbosses.CustomBosses;
 import com.songoda.epicbosses.utils.IASkyblockHelper;
@@ -11,7 +14,7 @@ import utils.factions.FactionsM;
 import utils.factions.FactionsOne;
 import utils.factions.FactionsUUID;
 import utils.factions.LegacyFactions;
-import com.songoda.epicbosses.utils.dependencies.WorldGuardHelper;
+import com.songoda.epicbosses.utils.dependencies.WorldGuardLegacyHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -73,7 +76,11 @@ public class BossHookManager implements IReloadable {
     private void setupWorldGuard() {
         if(!isWorldguardEnabled()) return;
 
-        this.worldGuardHelper = new WorldGuardHelper();
+        if (new VersionHandler().getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1)) {
+            this.worldGuardHelper = new WorldGuardHelper();
+        } else {
+            this.worldGuardHelper = new WorldGuardLegacyHelper();
+        }
     }
 
     private void setupFactions() {

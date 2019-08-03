@@ -15,6 +15,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.12.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>FactionHelper</artifactId>
             <version>${project.version}</version>
@@ -41,6 +47,24 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>LegacyFactions</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>WorldGuardHelper</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>WorldGuard</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>WorldGuard-Legacy</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>

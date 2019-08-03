@@ -18,7 +18,7 @@ import java.util.List;
  * @version 1.0.0
  * @since 16-Oct-18
  */
-public class WorldGuardHelper implements IWorldGuardHelper {
+public class WorldGuardLegacyHelper implements IWorldGuardHelper {
 
     private WorldGuardPlugin worldGuard;
 
