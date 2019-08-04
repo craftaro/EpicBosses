@@ -92,6 +92,9 @@ public class CustomBosses extends JavaPlugin implements IReloadable {
         console.sendMessage(StringUtils.get().translateColor("&7EpicBosses " + getDescription().getVersion() + " by &5Songoda <3&7!"));
         console.sendMessage(StringUtils.get().translateColor("&7Action: &aEnabling&7..."));
 
+        if (!this.getDataFolder().exists())
+            this.getDataFolder().mkdir();
+
         Debug.setPlugin(this);
 
         instance = this;
