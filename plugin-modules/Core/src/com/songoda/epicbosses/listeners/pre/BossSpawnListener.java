@@ -138,6 +138,9 @@ public class BossSpawnListener implements Listener {
 
             if (messages != null && !activeBossHolder.isCustomSpawnMessage())
                 messages.replaceAll(s -> s.replace("{name}", player.getName()));
+        } else {
+            if (messages != null && !activeBossHolder.isCustomSpawnMessage())
+                messages.replaceAll(s -> s.replace("{name}", "Console"));
         }
 
         if (commands != null)

@@ -68,7 +68,14 @@ public enum EntityFinder {
     POLAR_BEAR("PolarBear", new PolarBearHandler(), "polarbear", "polar_bear", "polar bear", "snowbear", "snow_bear", "snow bear"),
     LLAMA("Llama", new LlamaHandler(), "llama"),
     PARROT("Parrot", new ParrotHandler(), "parrot"),
-    VILLAGER("Villager", new VillagerHandler(), "villager");
+    VILLAGER("Villager", new VillagerHandler(), "villager"),
+    CAT("Cat", new CatHandler(), "cat"),
+    FOX("Fox", new FoxHandler(), "fox"),
+    PANDA("Panda", new PandaHandler(), "panda"),
+    PILLAGER("Pillager", new PillagerHandler(), "pillager"),
+    RAVAGER("Ravager", new RavagerHandler(), "ravager"),
+    TRADER_LLAMA("TraderLlama", new TraderLlamaHandler(), "traderllama", "trader_llama", "trader llama", "llamatrader", "llama_trader", "llama trader"),
+    WANDERING_TRADER("WanderingTrader", new WanderingTraderHandler(), "wanderingtrader", "wandering_trader", "wandering trader", "tradervillager", "trader_villager", "trader villager");
 
     @Getter private ICustomEntityHandler customEntityHandler;
     @Getter private List<String> names = new ArrayList<>();
