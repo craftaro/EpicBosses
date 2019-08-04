@@ -1,14 +1,12 @@
 package com.songoda.epicbosses.managers.files;
 
-import com.songoda.epicbosses.utils.Versions;
-import com.songoda.epicbosses.utils.version.VersionHandler;
-import lombok.Getter;
+import com.songoda.epicbosses.file.ItemStackFileHandler;
 import com.songoda.epicbosses.utils.ILoadable;
 import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.ISavable;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
-import com.songoda.epicbosses.file.ItemStackFileHandler;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
+import lombok.Getter;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -29,7 +27,7 @@ public class ItemsFileManager implements ILoadable, ISavable, IReloadable {
     private ItemStackFileHandler itemStackFileHandler;
 
     public ItemsFileManager(JavaPlugin javaPlugin) {
-        File file = new File(javaPlugin.getDataFolder(), new VersionHandler().getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1) ? "current" : "legacy" + "/items.json");
+        File file = new File(javaPlugin.getDataFolder(), "items.json");
 
         this.itemStackFileHandler = new ItemStackFileHandler(javaPlugin, file, true);
     }

@@ -7,8 +7,6 @@ import com.songoda.epicbosses.file.MinionsFileHandler;
 import com.songoda.epicbosses.utils.ILoadable;
 import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.ISavable;
-import com.songoda.epicbosses.utils.Versions;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 
 import java.io.File;
 import java.util.Map;
@@ -24,7 +22,7 @@ public class MinionsFileManager implements ILoadable, ISavable, IReloadable {
     private MinionsFileHandler minionsFileHandler;
 
     public MinionsFileManager(CustomBosses customBosses) {
-        File file = new File(customBosses.getDataFolder(), new VersionHandler().getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1) ? "current" : "legacy" + "/minions.json");
+        File file = new File(customBosses.getDataFolder(), "minions.json");
 
         this.minionsFileHandler = new MinionsFileHandler(customBosses, true, file);
         this.minionEntityContainer = customBosses.getMinionEntityContainer();

@@ -7,8 +7,6 @@ import com.songoda.epicbosses.file.BossesFileHandler;
 import com.songoda.epicbosses.utils.ILoadable;
 import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.ISavable;
-import com.songoda.epicbosses.utils.Versions;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,7 +25,7 @@ public class BossesFileManager implements ILoadable, ISavable, IReloadable {
     private BossesFileHandler bossesFileHandler;
 
     public BossesFileManager(CustomBosses customBosses) {
-        File file = new File(customBosses.getDataFolder(), new VersionHandler().getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1) ? "current" : "legacy" + "/bosses.json");
+        File file = new File(customBosses.getDataFolder(), "bosses.json");
 
         this.bossesFileHandler = new BossesFileHandler(customBosses, true, file);
         this.bossEntityContainer = customBosses.getBossEntityContainer();

@@ -5,8 +5,6 @@ import com.songoda.epicbosses.file.MessagesFileHandler;
 import com.songoda.epicbosses.utils.ILoadable;
 import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.ISavable;
-import com.songoda.epicbosses.utils.Versions;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 
 import java.io.File;
 import java.util.HashMap;
@@ -24,7 +22,7 @@ public class MessagesFileManager implements ILoadable, ISavable, IReloadable {
     private MessagesFileHandler messagesFileHandler;
 
     public MessagesFileManager(CustomBosses customBosses) {
-        File file = new File(customBosses.getDataFolder(), new VersionHandler().getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1) ? "current" : "legacy" + "/messages.json");
+        File file = new File(customBosses.getDataFolder(), "messages.json");
 
         this.messagesFileHandler = new MessagesFileHandler(customBosses, true, file);
     }

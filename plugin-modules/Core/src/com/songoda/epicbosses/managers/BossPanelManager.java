@@ -805,15 +805,15 @@ public class BossPanelManager implements ILoadable, IReloadable {
     private void loadAddItemsMenu() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("AddItemsMenu"));
 
-        this.addItemsBuilder = this.addItemsBuilder.cloneBuilder();
-        this.customItemAddItemsMenu = new AddItemsPanel(this, panelBuilder, this.customBosses, new CustomItemsAddItemsParentPanelHandler(this));
+        this.addItemsBuilder = panelBuilder.cloneBuilder();
+        this.customItemAddItemsMenu = new AddItemsPanel(this, panelBuilder.cloneBuilder(), this.customBosses, new CustomItemsAddItemsParentPanelHandler(this));
     }
 
     private void reloadAddItemsMenu() {
         PanelBuilder panelBuilder = new PanelBuilder(this.customBosses.getEditor().getConfigurationSection("AddItemsMenu"));
 
-        this.addItemsBuilder = this.addItemsBuilder.cloneBuilder();
-        this.customItemAddItemsMenu.initializePanel(panelBuilder);
+        this.addItemsBuilder = panelBuilder.cloneBuilder();
+        this.customItemAddItemsMenu.initializePanel(panelBuilder.cloneBuilder());
     }
 
     //---------------------------------------------
