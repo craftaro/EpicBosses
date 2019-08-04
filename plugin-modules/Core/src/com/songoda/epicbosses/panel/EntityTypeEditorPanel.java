@@ -35,19 +35,17 @@ public class EntityTypeEditorPanel extends SubVariablePanelHandler<BossEntity, E
 
     @Override
     public void fillPanel(Panel panel, BossEntity bossEntity, EntityStatsElement entityStatsElement) {
-        List<EntityType> list = Arrays.stream(EntityType.values()).filter(EntityType::isSpawnable).collect(Collectors.toList());
-        Map<EntityType, Short> filteredMap = getFilteredMap(list);
-        List<EntityType> filteredList = new ArrayList<>(filteredMap.keySet());
-        int maxPage = panel.getMaxPage(filteredMap);
+        List<EntityType> list = ItemStackUtils.getSpawnableEntityTypes();
+        int maxPage = panel.getMaxPage(ItemStackUtils.getSpawnableEntityTypes());
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
             if(requestedPage < 0 || requestedPage > maxPage) return false;
 
-            loadPage(panel, requestedPage, filteredMap, filteredList, bossEntity, entityStatsElement);
+            loadPage(panel, requestedPage, list, bossEntity, entityStatsElement);
             return true;
         }));
 
-        loadPage(panel, 0, filteredMap, filteredList, bossEntity, entityStatsElement);
+        loadPage(panel, 0, list, bossEntity, entityStatsElement);
     }
 
     @Override
@@ -74,23 +72,15 @@ public class EntityTypeEditorPanel extends SubVariablePanelHandler<BossEntity, E
 
     }
 
-    private Map<EntityType, Short> getFilteredMap(List<EntityType> entityTypes) {
-        Map<EntityType, Short> filteredMap = new HashMap<>();
-
-        entityTypes.forEach(entityType -> filteredMap.put(entityType, entityType.getTypeId()));
-
-        return filteredMap;
-    }
-
-    private void loadPage(Panel panel, int requestedPage, Map<EntityType, Short> filteredMap, List<EntityType> filteredList, BossEntity bossEntity, EntityStatsElement entityStatsElement) {
+    private void loadPage(Panel panel, int requestedPage, List<EntityType> filteredList, BossEntity bossEntity, EntityStatsElement entityStatsElement) {
         String entityTypeValue = entityStatsElement.getMainStats().getEntityType();
 
         ServerUtils.get().runTaskAsync(() -> panel.loadPage(requestedPage, ((slot, realisticSlot) -> {
-            if(slot >= filteredMap.size()) {
+            if(slot >= filteredList.size()) {
                 panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
             } else {
                 EntityType entityType = filteredList.get(slot);
-                ItemStack itemStack = new ItemStack(Material.MONSTER_EGG, filteredMap.get(entityType));
+                ItemStack itemStack = ItemStackUtils.getSpawnEggForEntity(entityType);
                 Map<String, String> replaceMap = new HashMap<>();
                 boolean found = false;
 
@@ -122,7 +112,7 @@ public class EntityTypeEditorPanel extends SubVariablePanelHandler<BossEntity, E
                         entityStatsElement.getMainStats().setEntityType(entityFinder.getFancyName());
                         this.plugin.getBossesFileManager().save();
 
-                        loadPage(panel, requestedPage, filteredMap, filteredList, bossEntity, entityStatsElement);
+                        loadPage(panel, requestedPage, filteredList, bossEntity, entityStatsElement);
                     }
                 });
             }

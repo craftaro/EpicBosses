@@ -12,7 +12,9 @@ import com.songoda.epicbosses.skills.interfaces.IOtherSkillDataElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.Versions;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
+import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -28,6 +30,8 @@ import java.util.List;
  * @since 11-Nov-18
  */
 public class Minions extends CustomSkillHandler {
+
+    private static final VersionHandler versionHandler = new VersionHandler();
 
     private CustomBosses plugin;
 
@@ -50,7 +54,7 @@ public class Minions extends CustomSkillHandler {
         List<ICustomSettingAction> clickActions = new ArrayList<>();
 
         clickActions.add(BossSkillManager.createCustomSkillAction("Amount Editor", getAmountCurrent(customSkillElement), new ItemStack(Material.REDSTONE), getAmountAction(skill, customSkillElement)));
-        clickActions.add(BossSkillManager.createCustomSkillAction("Minion to Spawn Editor", getMinionToSpawnCurrent(customSkillElement), new ItemStack(Material.MONSTER_EGG), getMinionToSpawnAction(skill, customSkillElement)));
+        clickActions.add(BossSkillManager.createCustomSkillAction("Minion to Spawn Editor", getMinionToSpawnCurrent(customSkillElement), new ItemStack(versionHandler.getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1) ? Material.CREEPER_SPAWN_EGG : Material.valueOf("MONSTER_EGG")), getMinionToSpawnAction(skill, customSkillElement)));
 
         return clickActions;
     }

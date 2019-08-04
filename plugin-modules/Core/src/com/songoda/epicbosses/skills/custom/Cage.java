@@ -22,9 +22,11 @@ import com.songoda.epicbosses.utils.itemstack.converters.MaterialConverter;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.time.TimeUnit;
+import com.songoda.epicbosses.utils.version.VersionHandler;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -32,6 +34,8 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
 
 /**
@@ -42,9 +46,12 @@ import java.util.*;
 public class Cage extends CustomSkillHandler {
 
     private static final MaterialConverter MATERIAL_CONVERTER = new MaterialConverter();
+    private static final VersionHandler versionHandler = new VersionHandler();
 
     @Getter private static final Map<Location, CageLocationData> cageLocationDataMap = new HashMap<>();
     @Getter private static final List<UUID> playersInCage = new ArrayList<>();
+
+    private static Method setBlockDataMethod;
 
     private final MaterialTypeEditorPanel flatTypeEditor, wallTypeEditor, insideTypeEditor;
     private BossPanelManager bossPanelManager;
@@ -72,8 +79,8 @@ public class Cage extends CustomSkillHandler {
     @Override
     public List<ICustomSettingAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
         List<ICustomSettingAction> clickActions = new ArrayList<>();
-        ItemStack clickStack = new ItemStack(Material.STONE_PLATE);
-        ItemStack duration = new ItemStack(Material.WATCH);
+        ItemStack clickStack = new ItemStack(versionHandler.getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1) ? Material.STONE_PRESSURE_PLATE : Material.valueOf("STONE_PLATE"));
+        ItemStack duration = new ItemStack(versionHandler.getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1) ? Material.CLOCK : Material.valueOf("WATCH"));
         ClickAction flatAction = (event -> this.flatTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
         ClickAction wallAction = (event -> this.wallTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
         ClickAction insideAction = (event -> this.insideTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
@@ -129,8 +136,24 @@ public class Cage extends CustomSkillHandler {
                 BlockState oldState = cageLocationData.getOldBlockState();
 
                 if(oldState != null) {
-                    location.getBlock().setType(oldState.getType());
-                    location.getBlock().setData(oldState.getData().getData());
+                    if (versionHandler.getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1)) {
+                        location.getBlock().setBlockData(oldState.getBlockData());
+                    } else {
+                        if (setBlockDataMethod == null) {
+                            try {
+                                setBlockDataMethod = Block.class.getMethod("setData", byte.class);
+                            } catch (NoSuchMethodException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        location.getBlock().setType(oldState.getType());
+                        try {
+                            setBlockDataMethod.invoke(location.getBlock(), oldState.getData().getData());
+                        } catch (IllegalAccessException | InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
 
                 getCageLocationDataMap().remove(location);

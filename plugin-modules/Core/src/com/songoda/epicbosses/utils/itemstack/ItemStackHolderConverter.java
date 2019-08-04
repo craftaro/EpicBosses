@@ -27,9 +27,9 @@ public class ItemStackHolderConverter implements IConverter<ItemStackHolder, Con
         List<String> enchants = (List<String>) configurationSection.getList("enchants", null);
         String skullOwner = configurationSection.getString("skullOwner", null);
         Short spawnerId = (Short) configurationSection.get("spawnerId", null);
-        Boolean isGlowing = (Boolean) configurationSection.get("isGlowing", null);
+        //Boolean isGlowing = (Boolean) configurationSection.get("isGlowing", null);
 
-        return new ItemStackHolder(amount, type, durability, name, lore, enchants, skullOwner, spawnerId, isGlowing);
+        return new ItemStackHolder(amount, type, durability, name, lore, enchants, skullOwner, spawnerId);
     }
 
     @Override

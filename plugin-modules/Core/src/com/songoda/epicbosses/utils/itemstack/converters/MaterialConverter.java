@@ -2,6 +2,7 @@ package com.songoda.epicbosses.utils.itemstack.converters;
 
 import com.songoda.epicbosses.utils.IConverter;
 import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.itemstack.MaterialUtils;
 import org.bukkit.Material;
 
 /**
@@ -25,7 +26,7 @@ public class MaterialConverter implements IConverter<String, Material> {
         }
 
         if(NumberUtils.get().isInt(input)) {
-            return Material.getMaterial(NumberUtils.get().getInteger(input));
+            return MaterialUtils.fromId(NumberUtils.get().getInteger(input));
         }
 
         return Material.matchMaterial(input);

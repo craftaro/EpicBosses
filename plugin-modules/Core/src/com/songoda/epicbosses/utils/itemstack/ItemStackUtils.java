@@ -3,12 +3,15 @@ package com.songoda.epicbosses.utils.itemstack;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
+import com.songoda.epicbosses.utils.Versions;
 import com.songoda.epicbosses.utils.itemstack.enchants.GlowEnchant;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
+import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -21,6 +24,47 @@ import java.util.*;
  * Created by charl on 28-Apr-17.
  */
 public class ItemStackUtils {
+
+    private static final VersionHandler versionHandler = new VersionHandler();
+    private static final Map<EntityType, Material> spawnableEntityMaterials;
+    private static final Map<EntityType, Short> spawnableEntityIds;
+
+    static {
+        spawnableEntityMaterials = new HashMap<>();
+        spawnableEntityIds = new HashMap<>();
+
+        boolean isLegacy = versionHandler.getVersion().isLessThanOrEqualTo(Versions.v1_12_R1);
+
+        Arrays.stream(EntityType.values()).filter(EntityType::isSpawnable).forEach(entityType -> {
+            if (isLegacy) {
+                spawnableEntityIds.put(entityType, entityType.getTypeId());
+            } else {
+                String materialName = entityType.name() + "_SPAWN_EGG";
+                Material material = Material.matchMaterial(materialName);
+                if (material != null)
+                    spawnableEntityMaterials.put(entityType, material);
+            }
+        });
+    }
+
+    public static List<EntityType> getSpawnableEntityTypes() {
+        if (versionHandler.getVersion().isLessThanOrEqualTo(Versions.v1_12_R1)) {
+            return new ArrayList<>(spawnableEntityIds.keySet());
+        } else {
+            return new ArrayList<>(spawnableEntityMaterials.keySet());
+        }
+    }
+
+    public static ItemStack getSpawnEggForEntity(EntityType entityType) {
+        if (!entityType.isSpawnable())
+            return new ItemStack(Material.AIR);
+
+        if (versionHandler.getVersion().isLessThanOrEqualTo(Versions.v1_12_R1)) {
+            return new ItemStack(Material.valueOf("MONSTER_EGG"), spawnableEntityIds.get(entityType));
+        } else {
+            return new ItemStack(spawnableEntityMaterials.get(entityType));
+        }
+    }
 
     public static ItemStack createItemStack(ItemStack itemStack, Map<String,String> replaceMap) {
         return createItemStack(itemStack, replaceMap, null);
@@ -83,14 +127,14 @@ public class ItemStackUtils {
         Material mat;
 
         if(NumberUtils.get().isInt(type)) {
-            mat = Material.getMaterial(NumberUtils.get().getInteger(type));
+            mat = MaterialUtils.fromId(NumberUtils.get().getInteger(type));
         } else {
             if(type.contains(":")) {
                 String[] split = type.split(":");
                 String typeSplit = split[0];
 
                 if(NumberUtils.get().isInt(typeSplit)) {
-                    mat = Material.getMaterial(NumberUtils.get().getInteger(typeSplit));
+                    mat = MaterialUtils.fromId(NumberUtils.get().getInteger(typeSplit));
                 } else {
                     mat = Material.getMaterial(typeSplit);
                 }
@@ -179,7 +223,7 @@ public class ItemStackUtils {
             itemStack.setDurability(dura);
         }
 
-        if(configurationSection.contains("owner") && itemStack.getType() == Material.SKULL_ITEM) {
+        if(configurationSection.contains("owner") && itemStack.getType() == MaterialUtils.getSkullMaterial()) {
             SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
 
             skullMeta.setOwner(owner);

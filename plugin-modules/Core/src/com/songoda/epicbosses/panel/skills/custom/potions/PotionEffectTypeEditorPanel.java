@@ -10,11 +10,14 @@ import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.potion.PotionEffectConverter;
 import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
+import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -78,7 +81,16 @@ public class PotionEffectTypeEditorPanel extends SubVariablePanelHandler<Skill, 
                 ItemStack itemStack = new ItemStack(Material.POTION);
                 PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
 
-                potionMeta.addCustomEffect(this.potionEffectConverter.from(potionEffectHolder), true);
+                if (new VersionHandler().getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1)) {
+                    PotionType potionType = PotionType.getByEffect(potionEffectType);
+
+                    if (potionType == null) potionType = PotionType.WATER;
+
+                    potionMeta.setBasePotionData(new PotionData(potionType));
+                } else {
+                    potionMeta.addCustomEffect(this.potionEffectConverter.from(potionEffectHolder), true);
+                }
+
                 itemStack.setItemMeta(potionMeta);
 
                 Map<String, String> replaceMap = new HashMap<>();
