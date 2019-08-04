@@ -1,0 +1,155 @@
+{
+  "SkeletonTableGive": {
+    "dropType": "GIVE",
+    "rewards": {
+      "giveRewards": {
+        "1": {
+          "1": {
+            "items": {
+              "SKEco500": 30.0,
+              "SKEco2500": 50.0,
+              "SKEco5000": 10.0
+            },
+            "commands": {
+              "SKEco500": 30.0,
+              "SKEco2500": 50.0,
+              "SKEco5000": 10.0
+            },
+            "maxDrops": 3,
+            "maxCommands": 1,
+            "randomDrops": true,
+            "randomCommands": true,
+            "requiredPercentage": 80.0
+          },
+          "2": {
+            "items": {
+              "SKCustomDrop1": 50.0
+            },
+            "commands": {},
+            "maxDrops": 1,
+            "maxCommands": 0,
+            "randomDrops": false,
+            "randomCommands": false,
+            "requiredPercentage": 50.0
+          },
+          "3": {
+            "items": {
+              "SKCustomDrop1": 100.0
+            },
+            "commands": {},
+            "maxDrops": 1,
+            "maxCommands": 0,
+            "randomDrops": false,
+            "randomCommands": false,
+            "requiredPercentage": 0.0
+          }
+        },
+        "2": {
+          "1": {
+            "items": {
+              "SKMainHand": 8.0,
+              "SKOffHand": 8.0,
+              "SKHelmet": 8.0,
+              "SKLeggings": 20.0,
+              "SKChestplate": 20.0,
+              "SKBoots": 20.0
+            },
+            "commands": {},
+            "maxDrops": -1,
+            "maxCommands": 0,
+            "randomDrops": false,
+            "randomCommands": false,
+            "requiredPercentage": 0.0
+          }
+        },
+        "3": {
+          "1": {
+            "items": {
+              "SKMainHand": 5.0,
+              "SKOffHand": 5.0,
+              "SKHelmet": 5.0,
+              "SKLeggings": 15.0,
+              "SKChestplate": 15.0,
+              "SKBoots": 15.0
+            },
+            "commands": {},
+            "maxDrops": -1,
+            "maxCommands": 0,
+            "randomDrops": false,
+            "randomCommands": false,
+            "requiredPercentage": 0.0
+          }
+        },
+        "4": {
+          "1": {
+            "items": {
+              "SKMainHand": 3.0,
+              "SKOffHand": 3.0,
+              "SKHelmet": 3.0,
+              "SKLeggings": 10.0,
+              "SKChestplate": 10.0,
+              "SKBoots": 10.0
+            },
+            "commands": {},
+            "maxDrops": -1,
+            "maxCommands": 0,
+            "randomDrops": false,
+            "randomCommands": false,
+            "requiredPercentage": 0.0
+          }
+        },
+        "5": {
+          "1": {
+            "items": {
+              "SKMainHand": 1.0,
+              "SKOffHand": 1.0,
+              "SKHelmet": 1.0,
+              "SKLeggings": 5.0,
+              "SKChestplate": 5.0,
+              "SKBoots": 5.0
+            },
+            "commands": {},
+            "maxDrops": -1,
+            "maxCommands": 0,
+            "randomDrops": false,
+            "randomCommands": false,
+            "requiredPercentage": 0.0
+          }
+        }
+      }
+    }
+  },
+  "SkeletonTableDrop": {
+    "dropType": "DROP",
+    "rewards": {
+      "dropRewards": {
+        "SKSpawnItem": 10.0,
+        "SKHelmet": 45.0,
+        "SKChestplate": 45.0,
+        "SKLeggings": 45.0,
+        "SKBoots": 45.0,
+        "SKMainHand": 30.0,
+        "SKOffHand": 30.0
+      },
+      "randomDrops": true,
+      "dropMaxDrops": 4
+    }
+  },
+  "SkeletonTableSpray": {
+    "dropType": "SPRAY",
+    "rewards": {
+      "sprayRewards": {
+        "SKSpawnItem": 10.0,
+        "SKHelmet": 45.0,
+        "SKChestplate": 45.0,
+        "SKLeggings": 45.0,
+        "SKBoots": 45.0,
+        "SKMainHand": 30.0,
+        "SKOffHand": 30.0
+      },
+      "randomSprayDrops": true,
+      "sprayMaxDistance": 10,
+      "sprayMaxDrops": 5
+    }
+  }
+}

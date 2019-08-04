@@ -1,0 +1,40 @@
+{
+  "MiddleOfTheEarthSpawnMessage": [
+    "&6&lEpicBosses &8» &fA mysterious boss has just been spawned at the middle of the earth in the world &e{world} at the coordinates &e{x}, {y}, {z}&f!"
+  ],
+  "SKMainSkillMessage": [
+    "&6&l{boss} &7has used the &e{skill} &7skill."
+  ],
+  "SKOnSpawn": [
+    "&8&m-----*--------------------*-----",
+    "&7",
+    "&fA &e{boss} &fhas been spawned by &e{name} &fat &e{location}&f!",
+    "&7",
+    "&8&m-----*--------------------*-----"
+  ],
+  "SKOnDeath": [
+    "&8&m-----*--------------------*-----",
+    "&7",
+    "&e{boss}&f has been killed,",
+    "&fbelow are the top damagers:",
+    "&7",
+    "{positions}",
+    "&7",
+    "&8&m-----*--------------------*-----"
+  ],
+  "SKPosition": [
+    "&6&l#{pos} &e{name}&f - &e{percent}% &f(&e{dmg} dmg&f)"
+  ],
+  "SKTaunt1": [
+    "&6&lSkeleton King &f» &7My pocket knife is sharper then that sword! &o*cackle*"
+  ],
+  "SKTaunt2": [
+    "&6&lSkeleton King &f» &7You think you humans can defeat me?! I am the notorious Skeleton King!"
+  ],
+  "BlindMessage": [
+    "&6&lSkeleton King &f» &7I curse you all with blindness!!"
+  ],
+  "GutsMessage": [
+    "&6&lSkeleton King &f» &7Oh no! You rattled up my skeleton and some of my goods fell!"
+  ]
+}

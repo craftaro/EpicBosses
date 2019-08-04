@@ -6,7 +6,8 @@ import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.utils.ILoadable;
 import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.ISavable;
-import lombok.var;
+import com.songoda.epicbosses.utils.Versions;
+import com.songoda.epicbosses.utils.version.VersionHandler;
 
 import java.io.File;
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class SkillsFileManager implements ILoadable, IReloadable, ISavable {
     private SkillsFileHandler skillsFileHandler;
 
     public SkillsFileManager(CustomBosses plugin) {
-        File file = new File(plugin.getDataFolder(), "skills.json");
+        File file = new File(plugin.getDataFolder(), new VersionHandler().getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1) ? "current" : "legacy" + "/skills.json");
 
         this.skillsFileHandler = new SkillsFileHandler(plugin, true, file);
     }

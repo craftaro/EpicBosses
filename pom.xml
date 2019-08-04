@@ -199,15 +199,14 @@
             <resource>
                 <directory>resources-json</directory>
                 <includes>
-                    <include>*.json</include>
+                    <include>**/*.json</include>
                 </includes>
                 <filtering>true</filtering>
             </resource>
             <resource>
                 <directory>resources-yml</directory>
                 <includes>
-                    <include>*.yml</include>
-                    <include>*.csv</include>
+                    <include>**/*.yml</include>
                 </includes>
                 <filtering>true</filtering>
             </resource>

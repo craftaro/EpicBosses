@@ -1,5 +1,7 @@
 package com.songoda.epicbosses.managers.files;
 
+import com.songoda.epicbosses.utils.Versions;
+import com.songoda.epicbosses.utils.version.VersionHandler;
 import lombok.Getter;
 import com.songoda.epicbosses.utils.ILoadable;
 import com.songoda.epicbosses.utils.IReloadable;
@@ -27,7 +29,7 @@ public class ItemsFileManager implements ILoadable, ISavable, IReloadable {
     private ItemStackFileHandler itemStackFileHandler;
 
     public ItemsFileManager(JavaPlugin javaPlugin) {
-        File file = new File(javaPlugin.getDataFolder(), "items.json");
+        File file = new File(javaPlugin.getDataFolder(), new VersionHandler().getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1) ? "current" : "legacy" + "/items.json");
 
         this.itemStackFileHandler = new ItemStackFileHandler(javaPlugin, file, true);
     }

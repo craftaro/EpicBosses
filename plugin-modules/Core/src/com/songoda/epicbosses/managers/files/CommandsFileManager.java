@@ -5,6 +5,8 @@ import com.songoda.epicbosses.file.CommandsFileHandler;
 import com.songoda.epicbosses.utils.ILoadable;
 import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.ISavable;
+import com.songoda.epicbosses.utils.Versions;
+import com.songoda.epicbosses.utils.version.VersionHandler;
 
 import java.io.File;
 import java.util.HashMap;
@@ -22,7 +24,7 @@ public class CommandsFileManager implements ILoadable, ISavable, IReloadable {
     private CommandsFileHandler commandsFileHandler;
 
     public CommandsFileManager(CustomBosses customBosses) {
-        File file = new File(customBosses.getDataFolder(), "commands.json");
+        File file = new File(customBosses.getDataFolder(), new VersionHandler().getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1) ? "current" : "legacy" + "/commands.json");
 
         this.commandsFileHandler = new CommandsFileHandler(customBosses, true, file);
     }

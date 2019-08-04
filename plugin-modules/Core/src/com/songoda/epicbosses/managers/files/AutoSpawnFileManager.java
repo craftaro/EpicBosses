@@ -6,6 +6,8 @@ import com.songoda.epicbosses.file.AutoSpawnFileHandler;
 import com.songoda.epicbosses.utils.ILoadable;
 import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.ISavable;
+import com.songoda.epicbosses.utils.Versions;
+import com.songoda.epicbosses.utils.version.VersionHandler;
 
 import java.io.File;
 import java.util.HashMap;
@@ -22,7 +24,7 @@ public class AutoSpawnFileManager implements ILoadable, ISavable, IReloadable {
     private AutoSpawnFileHandler autoSpawnFileHandler;
 
     public AutoSpawnFileManager(CustomBosses plugin) {
-        File file = new File(plugin.getDataFolder(), "autospawns.json");
+        File file = new File(plugin.getDataFolder(), new VersionHandler().getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1) ? "current" : "legacy" + "/autospawns.json");
 
         this.autoSpawnFileHandler = new AutoSpawnFileHandler(plugin, true, file);
     }

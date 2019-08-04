@@ -1,0 +1,38 @@
+{
+  "SkeletonKingMinion": {
+    "editing": false,
+    "targeting": "RandomNearby",
+    "entityStats": [
+      {
+        "mainStats": {
+          "position": 1,
+          "entityType": "SKELETON",
+          "health": 500,
+          "displayName": "&6&lSkeleton King Boss Minion"
+        },
+        "equipment": {
+          "helmet": "SKHelmet",
+          "chestplate": "SKChestplate",
+          "leggings": "SKLeggings",
+          "boots": "SKBoots"
+        },
+        "hands": {
+          "mainHand": "SKMainHand",
+          "offHand": "SKOffHand"
+        },
+        "potions": [
+          {
+            "type": "resistance",
+            "level": 3,
+            "duration": -1
+          },
+          {
+            "type": "speed",
+            "level": 1,
+            "duration": 500
+          }
+        ]
+      }
+    ]
+  }
+}
