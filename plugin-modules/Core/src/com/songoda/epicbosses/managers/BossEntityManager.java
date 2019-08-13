@@ -183,7 +183,7 @@ public class BossEntityManager {
 
         if(messages == null) {
             Debug.FAILED_TO_LOAD_MESSAGES.debug(id);
-            return null;
+            return Collections.EMPTY_LIST;
         }
 
         return messages;
@@ -203,7 +203,7 @@ public class BossEntityManager {
 
         if(commands == null) {
             Debug.FAILED_TO_LOAD_COMMANDS.debug(id);
-            return null;
+            return Collections.EMPTY_LIST;
         }
 
         return commands;
@@ -215,7 +215,7 @@ public class BossEntityManager {
 
         if(messages == null) {
             Debug.FAILED_TO_LOAD_MESSAGES.debug(id);
-            return null;
+            return Collections.EMPTY_LIST;
         }
 
         return messages;

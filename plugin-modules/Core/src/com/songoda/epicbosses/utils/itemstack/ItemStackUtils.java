@@ -153,15 +153,15 @@ public class ItemStackUtils {
             }
         }
 
-        if(lore != null) {
+        if(lore != null && !lore.isEmpty()) {
             for(String z : lore) {
                 String y = z;
 
                 if(replacedMap != null) {
                     for(String x : replacedMap.keySet()) {
-                        if(!y.contains(x)) continue;
+                        if(x == null || !y.contains(x)) continue;
 
-                        if (!replacedMap.containsKey(x)) {
+                        if (replacedMap.get(x) == null) {
                             ServerUtils.get().logDebug("Failed to apply replaced lore: [y=" + y + "x=" + x + "]");
                             continue;
                         }
@@ -258,7 +258,14 @@ public class ItemStackUtils {
     }
 
     public static void applyDisplayLore(ItemStack itemStack, List<String> lore, Map<String, String> replaceMap) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
+        ItemMeta itemMeta;
+        if (itemStack == null || (itemMeta = itemStack.getItemMeta()) == null)
+            return;
+        if (lore == null || lore.isEmpty()) {
+           itemMeta.setLore(Collections.EMPTY_LIST);
+           itemStack.setItemMeta(itemMeta);
+            return;
+        }
 
         if(replaceMap != null) {
             for(String s : replaceMap.keySet()) {

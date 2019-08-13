@@ -97,7 +97,7 @@ public class OnDeathCommandEditor extends VariablePanelHandler<BossEntity> {
 
                 replaceMap.put("{name}", name);
 
-                if(bossEntity.getCommands().getOnDeath().equalsIgnoreCase(name)) {
+                if(bossEntity.getCommands().getOnDeath() != null && bossEntity.getCommands().getOnDeath().equalsIgnoreCase(name)) {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Commands.selectedName"), replaceMap);
                 } else {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Commands.name"), replaceMap);

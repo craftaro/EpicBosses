@@ -17,6 +17,7 @@ import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.version.VersionHandler;
+import java.util.ArrayList;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -117,8 +118,8 @@ public class BossSpawnListener implements Listener {
         BossEntity bossEntity = activeBossHolder.getBossEntity();
         Location location = activeBossHolder.getLocation();
 
-        List<String> commands = this.bossEntityManager.getOnSpawnCommands(bossEntity);
-        List<String> messages = this.bossEntityManager.getOnSpawnMessage(bossEntity);
+        List<String> commands = new ArrayList(this.bossEntityManager.getOnSpawnCommands(bossEntity));
+        List<String> messages = new ArrayList(this.bossEntityManager.getOnSpawnMessage(bossEntity));
         int messageRadius = this.bossEntityManager.getOnSpawnMessageRadius(bossEntity);
         ServerUtils serverUtils = ServerUtils.get();
 
@@ -133,22 +134,23 @@ public class BossSpawnListener implements Listener {
                 player.updateInventory();
             }
 
-            if (commands != null)
+            if (!commands.isEmpty())
                 commands.replaceAll(s -> s.replaceAll("%player%", player.getName()));
 
-            if (messages != null && !activeBossHolder.isCustomSpawnMessage())
+            if (!messages.isEmpty() && !activeBossHolder.isCustomSpawnMessage())
                 messages.replaceAll(s -> s.replace("{name}", player.getName()));
         } else {
-            if (messages != null && !activeBossHolder.isCustomSpawnMessage())
+            if (!messages.isEmpty() && !activeBossHolder.isCustomSpawnMessage())
                 messages.replaceAll(s -> s.replace("{name}", "Console"));
         }
 
-        if (commands != null)
+        if (!commands.isEmpty())
             commands.forEach(serverUtils::sendConsoleCommand);
 
-        if(messages != null && !activeBossHolder.isCustomSpawnMessage()) {
+        if(!messages.isEmpty() && !activeBossHolder.isCustomSpawnMessage()) {
             if(activeBossHolder.getName() != null) messages.replaceAll(s -> s.replace("{boss}", activeBossHolder.getName()));
-            messages.replaceAll(s -> s.replace("{location}", StringUtils.get().translateLocation(location)));
+            final String locationString = StringUtils.get().translateLocation(location);
+            messages.replaceAll(s -> s.replace("{location}", locationString));
 
             MessageUtils.get().sendMessage(location, NumberUtils.get().getSquared(messageRadius), messages);
         }

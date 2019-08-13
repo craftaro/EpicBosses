@@ -7,7 +7,6 @@ import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.PanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
