@@ -64,7 +64,7 @@ public class BossSpawnListener implements Listener {
         if(block.getType() == Material.AIR) return;
 
         Map<BossEntity, ItemStack> entitiesAndSpawnItems = this.bossEntityManager.getMapOfEntitiesAndSpawnItems();
-        ItemStack itemStack = this.versionHandler.getItemInHand(player).clone();
+        ItemStack itemStack = this.versionHandler.getItemInHand(player);
         BossEntity bossEntity = null;
 
         for(Map.Entry<BossEntity, ItemStack> entry : entitiesAndSpawnItems.entrySet()) {
