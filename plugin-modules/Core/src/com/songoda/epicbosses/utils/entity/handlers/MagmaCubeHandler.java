@@ -19,7 +19,7 @@ public class MagmaCubeHandler implements ICustomEntityHandler {
         int size = 4;
         if (entityType.contains(":")) {
             String[] split = entityType.split(":");
-            size = Integer.valueOf(split[1]);
+            size = Integer.parseInt(split[1]);
         }
 
         MagmaCube magmaCube = (MagmaCube) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.MAGMA_CUBE);
