@@ -60,7 +60,7 @@ public class ItemStackUtils {
             return new ItemStack(Material.AIR);
 
         if (versionHandler.getVersion().isLessThanOrEqualTo(Versions.v1_12_R1)) {
-            return new ItemStack(Material.valueOf("MONSTER_EGG"), spawnableEntityIds.get(entityType));
+            return new ItemStack(Material.valueOf("MONSTER_EGG"), 1, spawnableEntityIds.get(entityType));
         } else {
             return new ItemStack(spawnableEntityMaterials.get(entityType));
         }
@@ -153,15 +153,15 @@ public class ItemStackUtils {
             }
         }
 
-        if(lore != null) {
+        if(lore != null && !lore.isEmpty()) {
             for(String z : lore) {
                 String y = z;
 
                 if(replacedMap != null) {
                     for(String x : replacedMap.keySet()) {
-                        if(!y.contains(x)) continue;
+                        if(x == null || !y.contains(x)) continue;
 
-                        if (!replacedMap.containsKey(x)) {
+                        if (replacedMap.get(x) == null) {
                             ServerUtils.get().logDebug("Failed to apply replaced lore: [y=" + y + "x=" + x + "]");
                             continue;
                         }
@@ -258,7 +258,14 @@ public class ItemStackUtils {
     }
 
     public static void applyDisplayLore(ItemStack itemStack, List<String> lore, Map<String, String> replaceMap) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
+        ItemMeta itemMeta;
+        if (itemStack == null || (itemMeta = itemStack.getItemMeta()) == null)
+            return;
+        if (lore == null || lore.isEmpty()) {
+           itemMeta.setLore(Collections.EMPTY_LIST);
+           itemStack.setItemMeta(itemMeta);
+            return;
+        }
 
         if(replaceMap != null) {
             for(String s : replaceMap.keySet()) {
@@ -392,7 +399,8 @@ public class ItemStackUtils {
     public static boolean isItemStackSame(ItemStack itemStack1, ItemStack itemStack2) {
         if(itemStack1 == null || itemStack2 == null) return false;
         if(itemStack1.getType() != itemStack2.getType()) return false;
-        if(itemStack1.getDurability() != itemStack2.getDurability()) return false;
+        // Durability checks are too tempermental to be reliable for all versions
+        //if(itemStack1.getDurability() != itemStack2.getDurability()) return false;
 
         ItemMeta itemMeta1 = itemStack1.getItemMeta();
         ItemMeta itemMeta2 = itemStack2.getItemMeta();
@@ -400,17 +408,15 @@ public class ItemStackUtils {
         if(itemMeta1 == null || itemMeta2 == null) return false;
 
         if(itemMeta1.hasDisplayName() == itemMeta2.hasDisplayName()) {
-            if(itemMeta1.hasDisplayName()) {
-                if(!itemMeta1.getDisplayName().equals(itemMeta2.getDisplayName())) return false;
-            }
+            if(itemMeta1.hasDisplayName() && !itemMeta1.getDisplayName().equals(itemMeta2.getDisplayName()))
+                return false;
         } else {
             return false;
         }
 
         if(itemMeta1.hasLore() == itemMeta2.hasLore()) {
-            if(itemMeta1.hasLore()) {
-                if(!itemMeta1.getLore().equals(itemMeta2.getLore())) return false;
-            }
+            if(itemMeta1.hasLore() && !itemMeta1.getLore().equals(itemMeta2.getLore()))
+                return false;
         } else {
             return false;
         }

@@ -97,7 +97,7 @@ public class OnSpawnCommandEditor extends VariablePanelHandler<BossEntity> {
 
                 replaceMap.put("{name}", name);
 
-                if(bossEntity.getCommands().getOnSpawn().equalsIgnoreCase(name)) {
+                if(bossEntity.getCommands().getOnSpawn() != null && bossEntity.getCommands().getOnSpawn().equalsIgnoreCase(name)) {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Commands.selectedName"), replaceMap);
                 } else {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Commands.name"), replaceMap);

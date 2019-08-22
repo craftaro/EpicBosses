@@ -78,7 +78,8 @@ public class WorldGuardLegacyHelper implements IWorldGuardHelper {
 
             List<String> regions = new ArrayList<>();
             List<String> parentNames = new ArrayList<>();
-            ApplicableRegionSet set = this.worldGuard.getRegionManager(loc.getWorld()).getApplicableRegions(loc);
+            // this prototype is different from v5 to v6, but they're both Iterable
+            Iterable<ProtectedRegion> set = (Iterable<ProtectedRegion>) this.worldGuard.getRegionManager(loc.getWorld()).getApplicableRegions(loc);
 
             for (ProtectedRegion region : set) {
                 String id = region.getId();
