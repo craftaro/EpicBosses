@@ -1,7 +1,5 @@
 package com.songoda.epicbosses.utils;
 
-import org.bukkit.Material;
-
 import java.util.Random;
 
 /**

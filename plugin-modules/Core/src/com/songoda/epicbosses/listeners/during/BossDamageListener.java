@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.listeners.during;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.events.BossDamageEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossEntityManager;
@@ -20,7 +20,7 @@ public class BossDamageListener implements Listener {
 
     private BossEntityManager bossEntityManager;
 
-    public BossDamageListener(CustomBosses plugin) {
+    public BossDamageListener(EpicBosses plugin) {
         this.bossEntityManager = plugin.getBossEntityManager();
     }
 

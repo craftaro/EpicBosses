@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.bosses;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.entity.BossEntity;
@@ -36,9 +36,9 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
     private DropTableFileManager dropTableFileManager;
     private ItemStackConverter itemStackConverter;
     private BossesFileManager bossesFileManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public DropsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public DropsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.dropTableFileManager = plugin.getDropTableFileManager();
@@ -127,8 +127,8 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
                 replaceMap.put("{name}", name);
                 replaceMap.put("{type}", StringUtils.get().formatString(dropTable.getDropType()));
 
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Drops.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Boss.Drops.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Drops.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.Boss.Drops.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
                     if(!bossEntity.isEditing()) {

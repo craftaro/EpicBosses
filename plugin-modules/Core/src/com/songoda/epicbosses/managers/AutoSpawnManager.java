@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.managers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.autospawns.SpawnType;
@@ -27,7 +27,7 @@ public class AutoSpawnManager {
 
     private AutoSpawnFileManager autoSpawnFileManager;
 
-    public AutoSpawnManager(CustomBosses plugin) {
+    public AutoSpawnManager(EpicBosses plugin) {
         this.autoSpawnFileManager = plugin.getAutoSpawnFileManager();
     }
 

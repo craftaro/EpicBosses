@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.panel.additems.interfaces.IParentPanelHandler;
@@ -30,7 +30,7 @@ public class AddItemsPanel extends PanelHandler {
     private IParentPanelHandler parentPanelHandler;
     private ItemsFileManager itemsFileManager;
 
-    public AddItemsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin, IParentPanelHandler parentPanelHandler) {
+    public AddItemsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin, IParentPanelHandler parentPanelHandler) {
         super(bossPanelManager, panelBuilder);
 
         this.itemsFileManager = plugin.getItemStackManager();

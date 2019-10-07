@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -29,14 +29,14 @@ public class CustomBossesPanel extends MainListPanelHandler {
 
     private BossEntityManager bossEntityManager;
     private BossesFileManager bossesFileManager;
-    private CustomBosses customBosses;
+    private EpicBosses epicBosses;
 
-    public CustomBossesPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses customBosses) {
+    public CustomBossesPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses epicBosses) {
         super(bossPanelManager, panelBuilder);
 
-        this.customBosses = customBosses;
-        this.bossEntityManager = customBosses.getBossEntityManager();
-        this.bossesFileManager = customBosses.getBossesFileManager();
+        this.epicBosses = epicBosses;
+        this.bossEntityManager = epicBosses.getBossEntityManager();
+        this.bossesFileManager = epicBosses.getBossesFileManager();
     }
 
     @Override
@@ -74,8 +74,8 @@ public class CustomBossesPanel extends MainListPanelHandler {
                 replaceMap.put("{name}", name);
                 replaceMap.put("{enabled}", ""+entity.isEditing());
 
-                ItemStackUtils.applyDisplayName(itemStack, this.customBosses.getConfig().getString("Display.Bosses.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(itemStack, this.customBosses.getConfig().getStringList("Display.Bosses.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.epicBosses.getDisplay().getString("Display.Bosses.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.epicBosses.getDisplay().getStringList("Display.Bosses.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
                     if(e.getClick() == ClickType.RIGHT || e.getClick() == ClickType.SHIFT_RIGHT) {

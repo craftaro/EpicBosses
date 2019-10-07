@@ -3,7 +3,6 @@ package com.songoda.epicbosses.utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 import java.util.List;

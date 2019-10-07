@@ -1,8 +1,7 @@
 package com.songoda.epicbosses.panel.handlers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
-import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.MessagesFileManager;
 import com.songoda.epicbosses.utils.ServerUtils;
@@ -33,9 +32,9 @@ public abstract class ListMessageListEditor<T> extends VariablePanelHandler<T> {
 
     private MessagesFileManager messagesFileManager;
     private ItemStackConverter itemStackConverter;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public ListMessageListEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public ListMessageListEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -108,13 +107,13 @@ public abstract class ListMessageListEditor<T> extends VariablePanelHandler<T> {
                 replaceMap.put("{name}", name);
 
                 if(current.contains(name)) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Text.selectedName"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Text.selectedName"), replaceMap);
                 } else {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Text.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Text.name"), replaceMap);
                 }
 
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                List<String> presetLore = this.plugin.getConfig().getStringList("Display.Boss.Text.lore");
+                List<String> presetLore = this.plugin.getDisplay().getStringList("Display.Boss.Text.lore");
                 List<String> newLore = new ArrayList<>();
 
                 for(String s : presetLore) {

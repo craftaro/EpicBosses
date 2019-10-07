@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.managers.files;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.container.MinionEntityContainer;
 import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.file.MinionsFileHandler;
@@ -21,11 +21,11 @@ public class MinionsFileManager implements ILoadable, ISavable, IReloadable {
     private MinionEntityContainer minionEntityContainer;
     private MinionsFileHandler minionsFileHandler;
 
-    public MinionsFileManager(CustomBosses customBosses) {
-        File file = new File(customBosses.getDataFolder(), "minions.json");
+    public MinionsFileManager(EpicBosses epicBosses) {
+        File file = new File(epicBosses.getDataFolder(), "minions.json");
 
-        this.minionsFileHandler = new MinionsFileHandler(customBosses, true, file);
-        this.minionEntityContainer = customBosses.getMinionEntityContainer();
+        this.minionsFileHandler = new MinionsFileHandler(epicBosses, true, file);
+        this.minionEntityContainer = epicBosses.getMinionEntityContainer();
     }
 
     @Override

@@ -2,14 +2,12 @@ package com.songoda.epicbosses.skills.types;
 
 import com.google.gson.annotations.Expose;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
-import com.songoda.epicbosses.skills.interfaces.ISkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.elements.SubCommandSkillElement;
+import com.songoda.epicbosses.skills.interfaces.ISkillHandler;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.RandomUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
@@ -21,7 +19,8 @@ import java.util.List;
  */
 public class CommandSkillElement implements ISkillHandler<CommandSkillElement> {
 
-    @Expose @Getter @Setter private List<SubCommandSkillElement> commands;
+    @Expose
+    private List<SubCommandSkillElement> commands;
 
     public CommandSkillElement(List<SubCommandSkillElement> commandSkillElements) {
         this.commands = commandSkillElements;
@@ -50,5 +49,13 @@ public class CommandSkillElement implements ISkillHandler<CommandSkillElement> {
                     commands.forEach(serverUtils::sendConsoleCommand);
                 })
         );
+    }
+
+    public List<SubCommandSkillElement> getCommands() {
+        return this.commands;
+    }
+
+    public void setCommands(List<SubCommandSkillElement> commands) {
+        this.commands = commands;
     }
 }

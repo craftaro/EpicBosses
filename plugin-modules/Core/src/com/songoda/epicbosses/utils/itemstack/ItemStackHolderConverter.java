@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.utils.itemstack;
 
+import com.songoda.core.compatibility.CompatibleMaterial;
 import com.songoda.epicbosses.utils.IConverter;
 import com.songoda.epicbosses.utils.exceptions.NotImplementedException;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
@@ -20,7 +21,7 @@ public class ItemStackHolderConverter implements IConverter<ItemStackHolder, Con
         if(configurationSection == null) return null;
 
         Integer amount = (Integer) configurationSection.get("amount", null);
-        String type = configurationSection.getString("type", null);
+        String type = CompatibleMaterial.getMaterial(configurationSection.getString("type", null)).getMaterial().name();
         Short durability = (Short) configurationSection.get("durability", null);
         String name = configurationSection.getString("name", null);
         List<String> lore = (List<String>) configurationSection.getList("lore", null);

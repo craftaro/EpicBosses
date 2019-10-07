@@ -1,9 +1,10 @@
 package com.songoda.epicbosses.managers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.commands.boss.*;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.ILoadable;
+import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.command.SubCommandService;
 
 /**
@@ -15,11 +16,11 @@ public class BossCommandManager implements ILoadable {
 
     private SubCommandService<?> commandService;
     private boolean hasBeenLoaded = false;
-    private CustomBosses customBosses;
+    private EpicBosses epicBosses;
 
-    public BossCommandManager(SubCommandService<?> commandService, CustomBosses customBosses) {
+    public BossCommandManager(SubCommandService<?> commandService, EpicBosses epicBosses) {
         this.commandService = commandService;
-        this.customBosses = customBosses;
+        this.epicBosses = epicBosses;
     }
 
     @Override
@@ -29,24 +30,24 @@ public class BossCommandManager implements ILoadable {
             return;
         }
 
-        this.commandService.registerSubCommand(new BossCreateCmd(this.customBosses.getBossEntityContainer()));
-        this.commandService.registerSubCommand(new BossDebugCmd(this.customBosses.getDebugManager()));
-        this.commandService.registerSubCommand(new BossDropTableCmd(this.customBosses.getBossPanelManager()));
-        this.commandService.registerSubCommand(new BossEditCmd(this.customBosses.getBossPanelManager(), this.customBosses.getBossEntityContainer()));
-        this.commandService.registerSubCommand(new BossGiveEggCmd(this.customBosses.getBossesFileManager(), this.customBosses.getBossEntityManager()));
+        this.commandService.registerSubCommand(new BossCreateCmd(this.epicBosses.getBossEntityContainer()));
+        this.commandService.registerSubCommand(new BossDebugCmd(this.epicBosses.getDebugManager()));
+        this.commandService.registerSubCommand(new BossDropTableCmd(this.epicBosses.getBossPanelManager()));
+        this.commandService.registerSubCommand(new BossEditCmd(this.epicBosses.getBossPanelManager(), this.epicBosses.getBossEntityContainer()));
+        this.commandService.registerSubCommand(new BossGiveEggCmd(this.epicBosses.getBossesFileManager(), this.epicBosses.getBossEntityManager()));
         this.commandService.registerSubCommand(new BossHelpCmd());
-        this.commandService.registerSubCommand(new BossInfoCmd(this.customBosses.getBossesFileManager(), this.customBosses.getBossEntityManager()));
-        this.commandService.registerSubCommand(new BossItemsCmd(this.customBosses.getBossPanelManager()));
-        this.commandService.registerSubCommand(new BossKillAllCmd(this.customBosses.getBossEntityManager()));
-        this.commandService.registerSubCommand(new BossListCmd(this.customBosses.getBossPanelManager()));
-        this.commandService.registerSubCommand(new BossMenuCmd(this.customBosses.getBossPanelManager()));
-        this.commandService.registerSubCommand(new BossNearbyCmd(this.customBosses));
-        this.commandService.registerSubCommand(new BossNewCmd(this.customBosses));
-        this.commandService.registerSubCommand(new BossReloadCmd(this.customBosses, this.customBosses.getBossEntityManager()));
-        this.commandService.registerSubCommand(new BossShopCmd(this.customBosses));
-        this.commandService.registerSubCommand(new BossSkillsCmd(this.customBosses.getBossPanelManager()));
-        this.commandService.registerSubCommand(new BossSpawnCmd(this.customBosses.getBossesFileManager()));
-        this.commandService.registerSubCommand(new BossTimeCmd(this.customBosses));
+        this.commandService.registerSubCommand(new BossInfoCmd(this.epicBosses.getBossesFileManager(), this.epicBosses.getBossEntityManager()));
+        this.commandService.registerSubCommand(new BossItemsCmd(this.epicBosses.getBossPanelManager()));
+        this.commandService.registerSubCommand(new BossKillAllCmd(this.epicBosses.getBossEntityManager()));
+        this.commandService.registerSubCommand(new BossListCmd(this.epicBosses.getBossPanelManager()));
+        this.commandService.registerSubCommand(new BossMenuCmd(this.epicBosses.getBossPanelManager()));
+        this.commandService.registerSubCommand(new BossNearbyCmd(this.epicBosses));
+        this.commandService.registerSubCommand(new BossNewCmd(this.epicBosses));
+        this.commandService.registerSubCommand(new BossReloadCmd(this.epicBosses, this.epicBosses.getBossEntityManager()));
+        this.commandService.registerSubCommand(new BossShopCmd(this.epicBosses));
+        this.commandService.registerSubCommand(new BossSkillsCmd(this.epicBosses.getBossPanelManager()));
+        this.commandService.registerSubCommand(new BossSpawnCmd(this.epicBosses.getBossesFileManager()));
+        this.commandService.registerSubCommand(new BossTimeCmd(this.epicBosses));
 
         this.hasBeenLoaded = true;
     }

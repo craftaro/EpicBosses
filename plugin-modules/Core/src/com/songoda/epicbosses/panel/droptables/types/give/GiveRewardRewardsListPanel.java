@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.droptables.types.give;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.droptable.elements.GiveTableElement;
@@ -36,9 +36,9 @@ import java.util.Map;
 public class GiveRewardRewardsListPanel extends SubSubVariablePanelHandler<DropTable, GiveTableElement, String> {
 
     private ItemsFileManager itemsFileManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public GiveRewardRewardsListPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public GiveRewardRewardsListPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -117,8 +117,8 @@ public class GiveRewardRewardsListPanel extends SubSubVariablePanelHandler<DropT
                 replaceMap.put("{maxCommands}", numberUtils.formatDouble(maxCommands));
                 replaceMap.put("{randomCommands}", ""+randomCommands);
 
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.DropTable.GiveRewardsList.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.DropTable.GiveRewardsList.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.DropTable.GiveRewardsList.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.DropTable.GiveRewardsList.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, event -> {
                     ClickType clickType = event.getClick();

@@ -1,11 +1,10 @@
 package com.songoda.epicbosses.panel.droptables.types.give;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.droptable.elements.GiveTableElement;
 import com.songoda.epicbosses.droptable.elements.GiveTableSubElement;
-import com.songoda.epicbosses.droptable.elements.SprayTableElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.panel.droptables.types.give.handlers.GiveRewardEditHandler;
 import com.songoda.epicbosses.utils.Message;
@@ -31,9 +30,9 @@ import java.util.Map;
  */
 public class GiveRewardMainEditPanel extends SubVariablePanelHandler<DropTable, GiveRewardEditHandler> {
 
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public GiveRewardMainEditPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public GiveRewardMainEditPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;

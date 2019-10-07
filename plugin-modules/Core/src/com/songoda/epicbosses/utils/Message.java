@@ -184,7 +184,7 @@ public enum Message {
 
     Boss_Shop_Disabled("&c&l(!) &cThe boss shop is currently disabled."),
     Boss_Shop_NoPermission("&c&l(!) &cYou do not have access to this command."),
-    Boss_Shop_NotEnoughBalance("&c&l(!) &cYou do not have enough money to make this purchase! You need &a$&f{0}&c more."),
+    Boss_Shop_NotEnoughBalance("&c&l(!) &cYou do not have enough money to make this purchase! You need &a$&f{0}&c."),
     Boss_Shop_Purchased("&b&lEpicBosses &8» &7You have purchased &f1x {0}&7."),
 
     Boss_Skills_NoPermission("&c&l(!) &cYou do not have access to this command."),

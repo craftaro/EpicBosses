@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.handlers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
@@ -42,9 +42,9 @@ public abstract class ItemStackSubListPanelHandler extends SubVariablePanelHandl
 
     private BossesFileManager bossesFileManager;
     private ItemsFileManager itemsFileManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public ItemStackSubListPanelHandler(BossPanelManager bossPanelManager, ConfigurationSection configurationSection, CustomBosses plugin) {
+    public ItemStackSubListPanelHandler(BossPanelManager bossPanelManager, ConfigurationSection configurationSection, EpicBosses plugin) {
         super(bossPanelManager, configurationSection);
 
         this.plugin = plugin;
@@ -143,7 +143,7 @@ public abstract class ItemStackSubListPanelHandler extends SubVariablePanelHandl
 
                     replaceMap.put("{name}", ItemStackUtils.getName(itemStack));
 
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Equipment.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Equipment.name"), replaceMap);
                 }
 
                 panel.setItem(realisticSlot, itemStack, e -> {

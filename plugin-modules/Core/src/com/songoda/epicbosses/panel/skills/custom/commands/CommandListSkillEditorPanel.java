@@ -1,7 +1,7 @@
 package com.songoda.epicbosses.panel.skills.custom.commands;
 
 import com.google.gson.JsonObject;
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
@@ -37,9 +37,9 @@ public class CommandListSkillEditorPanel extends SubVariablePanelHandler<Skill, 
     private CommandsFileManager commandsFileManager;
     private ItemStackConverter itemStackConverter;
     private BossSkillManager bossSkillManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public CommandListSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public CommandListSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -101,13 +101,13 @@ public class CommandListSkillEditorPanel extends SubVariablePanelHandler<Skill, 
                 replaceMap.put("{name}", name);
 
                 if(commands.contains(name)) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.CommandList.selectedName"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.CommandList.selectedName"), replaceMap);
                 } else {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.CommandList.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.CommandList.name"), replaceMap);
                 }
 
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                List<String> presetLore = this.plugin.getConfig().getStringList("Display.Skills.CommandList.lore");
+                List<String> presetLore = this.plugin.getDisplay().getStringList("Display.Skills.CommandList.lore");
                 List<String> newLore = new ArrayList<>();
 
                 for(String s : presetLore) {

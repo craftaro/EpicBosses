@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.commands.boss;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.Permission;
 import com.songoda.epicbosses.utils.command.SubCommand;
@@ -14,9 +14,9 @@ import org.bukkit.entity.Player;
  */
 public class BossShopCmd extends SubCommand {
 
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public BossShopCmd(CustomBosses plugin) {
+    public BossShopCmd(EpicBosses plugin) {
         super("shop", "buy", "store");
 
         this.plugin = plugin;

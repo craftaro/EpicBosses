@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.mechanics.boss;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.MainStatsElement;
@@ -16,30 +16,22 @@ import org.bukkit.entity.LivingEntity;
  */
 public class NameMechanic implements IBossMechanic {
 
-    private CustomBosses plugin = CustomBosses.get();
+    private EpicBosses plugin = EpicBosses.getInstance();
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        if(activeBossHolder.getLivingEntityMap().getOrDefault(1, null) == null) return false;
+        if (activeBossHolder.getLivingEntityMap().getOrDefault(1, null) == null) return false;
 
-        for(EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
+        for (EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
             LivingEntity livingEntity = activeBossHolder.getLivingEntity(mainStatsElement.getPosition());
             String customName = mainStatsElement.getDisplayName();
 
-            if(livingEntity == null) return false;
+            if (livingEntity == null || customName == null) continue;
+            String formattedName = StringUtils.get().translateColor(customName);
 
-            if(customName != null) {
-                String formattedName = StringUtils.get().translateColor(customName);
-
-                if(CustomBosses.get().getConfig().getBoolean("Hooks.HolographicDisplays.enabled", false) && this.plugin.getHolographicDisplayHelper().isConnected()) {
-                    this.plugin.getHolographicDisplayHelper().createHologram(livingEntity, formattedName);
-                    livingEntity.setCustomNameVisible(false);
-                } else {
-                    livingEntity.setCustomName(formattedName);
-                    livingEntity.setCustomNameVisible(true);
-                }
-            }
+            livingEntity.setCustomName(formattedName);
+            livingEntity.setCustomNameVisible(true);
         }
 
         return true;

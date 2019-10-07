@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.handlers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
@@ -9,8 +9,6 @@ import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,13 +24,13 @@ import java.util.UUID;
  */
 public class BossShopPriceHandler implements IHandler {
 
-    @Getter private final IVariablePanelHandler<BossEntity> panelHandler;
+    private final IVariablePanelHandler<BossEntity> panelHandler;
 
-    @Getter private final BossesFileManager bossesFileManager;
-    @Getter private final BossEntity bossEntity;
-    @Getter private final Player player;
+    private final BossesFileManager bossesFileManager;
+    private final BossEntity bossEntity;
+    private final Player player;
 
-    @Getter @Setter private boolean handled = false;
+    private boolean handled = false;
     private Listener listener;
 
     public BossShopPriceHandler(Player player, BossEntity bossEntity, BossesFileManager bossesFileManager, IVariablePanelHandler<BossEntity> panelHandler) {
@@ -74,7 +72,7 @@ public class BossShopPriceHandler implements IHandler {
                     setHandled(true);
                     Message.Boss_Edit_PriceSet.msg(getPlayer(), BossAPI.getBossEntityName(getBossEntity()), NumberUtils.get().formatDouble(amount));
 
-                    Bukkit.getScheduler().scheduleSyncDelayedTask(CustomBosses.get(), BossShopPriceHandler.this::finish);
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(EpicBosses.getInstance(), BossShopPriceHandler.this::finish);
                 } else {
                     Message.Boss_Edit_Price.msg(getPlayer(), BossAPI.getBossEntityName(getBossEntity()));
                 }
@@ -85,5 +83,29 @@ public class BossShopPriceHandler implements IHandler {
     private void finish() {
         AsyncPlayerChatEvent.getHandlerList().unregister(this.listener);
         getPanelHandler().openFor(getPlayer(), getBossEntity());
+    }
+
+    public IVariablePanelHandler<BossEntity> getPanelHandler() {
+        return this.panelHandler;
+    }
+
+    public BossesFileManager getBossesFileManager() {
+        return this.bossesFileManager;
+    }
+
+    public BossEntity getBossEntity() {
+        return this.bossEntity;
+    }
+
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    public boolean isHandled() {
+        return this.handled;
+    }
+
+    public void setHandled(boolean handled) {
+        this.handled = handled;
     }
 }

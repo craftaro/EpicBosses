@@ -1,7 +1,7 @@
 package com.songoda.epicbosses.panel.skills.custom;
 
 import com.google.gson.JsonObject;
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
@@ -32,9 +32,9 @@ public class GroupSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     private ItemStackConverter itemStackConverter;
     private ItemsFileManager itemsFileManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public GroupSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public GroupSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -112,12 +112,12 @@ public class GroupSkillEditorPanel extends VariablePanelHandler<Skill> {
                 replaceMap.put("{type}", type);
 
                 if(isCurrent) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.Group.selectedName"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.Group.selectedName"), replaceMap);
                 } else {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.Group.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.Group.name"), replaceMap);
                 }
 
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Skills.Group.lore"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.Skills.Group.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, event -> {
                     if(isCurrent) {

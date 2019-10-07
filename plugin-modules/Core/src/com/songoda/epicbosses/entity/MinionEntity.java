@@ -1,9 +1,7 @@
 package com.songoda.epicbosses.entity;
 
 import com.google.gson.annotations.Expose;
-import com.songoda.epicbosses.entity.elements.*;
-import lombok.Getter;
-import lombok.Setter;
+import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 
 import java.util.List;
 
@@ -14,13 +12,36 @@ import java.util.List;
  */
 public class MinionEntity {
 
-    @Expose @Getter private final List<EntityStatsElement> entityStats;
+    @Expose
+    private final List<EntityStatsElement> entityStats;
 
-    @Expose @Getter @Setter private String targeting;
-    @Expose @Getter @Setter private boolean editing;
+    @Expose
+    private String targeting;
+    @Expose
+    private boolean editing;
 
     public MinionEntity(boolean editing, List<EntityStatsElement> entityStats) {
         this.editing = editing;
         this.entityStats = entityStats;
+    }
+
+    public List<EntityStatsElement> getEntityStats() {
+        return this.entityStats;
+    }
+
+    public String getTargeting() {
+        return this.targeting;
+    }
+
+    public boolean isEditing() {
+        return this.editing;
+    }
+
+    public void setTargeting(String targeting) {
+        this.targeting = targeting;
+    }
+
+    public void setEditing(boolean editing) {
+        this.editing = editing;
     }
 }

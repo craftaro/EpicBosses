@@ -1,7 +1,5 @@
 package com.songoda.epicbosses.skills.custom.cage;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -16,8 +14,8 @@ import java.util.*;
  */
 public class CagePlayerData {
 
-    @Getter private final Map<String, Queue<BlockState>> mapOfCages = new HashMap<>(), mapOfRestoreCages = new HashMap<>();
-    @Getter private final UUID uuid;
+    private final Map<String, Queue<BlockState>> mapOfCages = new HashMap<>(), mapOfRestoreCages = new HashMap<>();
+    private final UUID uuid;
 
     public CagePlayerData(UUID uuid) {
         this.uuid = uuid;
@@ -98,4 +96,15 @@ public class CagePlayerData {
         return blockStateQueue;
     }
 
+    public Map<String, Queue<BlockState>> getMapOfCages() {
+        return this.mapOfCages;
+    }
+
+    public Map<String, Queue<BlockState>> getMapOfRestoreCages() {
+        return this.mapOfRestoreCages;
+    }
+
+    public UUID getUuid() {
+        return this.uuid;
+    }
 }

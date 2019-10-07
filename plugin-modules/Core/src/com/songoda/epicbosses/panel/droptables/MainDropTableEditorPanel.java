@@ -2,9 +2,6 @@ package com.songoda.epicbosses.panel.droptables;
 
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
-import com.songoda.epicbosses.droptable.elements.DropTableElement;
-import com.songoda.epicbosses.droptable.elements.GiveTableElement;
-import com.songoda.epicbosses.droptable.elements.SprayTableElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.ServerUtils;

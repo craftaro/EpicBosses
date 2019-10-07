@@ -1,8 +1,6 @@
 package com.songoda.epicbosses.droptable.elements;
 
 import com.google.gson.annotations.Expose;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Map;
 
@@ -13,9 +11,12 @@ import java.util.Map;
  */
 public class DropTableElement {
 
-    @Expose @Getter @Setter private Map<String, Double> dropRewards;
-    @Expose @Getter @Setter private Boolean randomDrops;
-    @Expose @Getter @Setter private Integer dropMaxDrops;
+    @Expose
+    private Map<String, Double> dropRewards;
+    @Expose
+    private Boolean randomDrops;
+    @Expose
+    private Integer dropMaxDrops;
 
     public DropTableElement(Map<String, Double> dropRewards, Boolean randomDrops, Integer dropMaxDrops) {
         this.dropRewards = dropRewards;
@@ -23,4 +24,27 @@ public class DropTableElement {
         this.dropMaxDrops = dropMaxDrops;
     }
 
+    public Map<String, Double> getDropRewards() {
+        return this.dropRewards;
+    }
+
+    public Boolean getRandomDrops() {
+        return this.randomDrops;
+    }
+
+    public Integer getDropMaxDrops() {
+        return this.dropMaxDrops;
+    }
+
+    public void setDropRewards(Map<String, Double> dropRewards) {
+        this.dropRewards = dropRewards;
+    }
+
+    public void setRandomDrops(Boolean randomDrops) {
+        this.randomDrops = randomDrops;
+    }
+
+    public void setDropMaxDrops(Integer dropMaxDrops) {
+        this.dropMaxDrops = dropMaxDrops;
+    }
 }

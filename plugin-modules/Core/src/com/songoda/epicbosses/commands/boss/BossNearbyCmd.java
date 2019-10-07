@@ -1,7 +1,6 @@
 package com.songoda.epicbosses.commands.boss;
 
-import com.songoda.epicbosses.CustomBosses;
-import com.songoda.epicbosses.file.ConfigFileHandler;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.utils.*;
 import com.songoda.epicbosses.utils.command.SubCommand;
@@ -20,9 +19,9 @@ import java.util.Map;
  */
 public class BossNearbyCmd extends SubCommand {
 
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public BossNearbyCmd(CustomBosses plugin) {
+    public BossNearbyCmd(EpicBosses plugin) {
         super("nearby");
 
         this.plugin = plugin;

@@ -1,9 +1,8 @@
 package com.songoda.epicbosses.managers.files;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.file.MessagesFileHandler;
 import com.songoda.epicbosses.utils.ILoadable;
-import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.ISavable;
 
 import java.io.File;
@@ -16,15 +15,15 @@ import java.util.Map;
  * @version 1.0.0
  * @since 17-Oct-18
  */
-public class MessagesFileManager implements ILoadable, ISavable, IReloadable {
+public class MessagesFileManager implements ILoadable, ISavable {
 
     private Map<String, List<String>> messagesMap = new HashMap<>();
     private MessagesFileHandler messagesFileHandler;
 
-    public MessagesFileManager(CustomBosses customBosses) {
-        File file = new File(customBosses.getDataFolder(), "messages.json");
+    public MessagesFileManager(EpicBosses epicBosses) {
+        File file = new File(epicBosses.getDataFolder(), "messages.json");
 
-        this.messagesFileHandler = new MessagesFileHandler(customBosses, true, file);
+        this.messagesFileHandler = new MessagesFileHandler(epicBosses, true, file);
     }
 
     @Override
@@ -32,7 +31,6 @@ public class MessagesFileManager implements ILoadable, ISavable, IReloadable {
         this.messagesMap = this.messagesFileHandler.loadFile();
     }
 
-    @Override
     public void reload() {
         load();
     }

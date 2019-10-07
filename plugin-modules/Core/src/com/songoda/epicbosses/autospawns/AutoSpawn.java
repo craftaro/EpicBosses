@@ -5,8 +5,6 @@ import com.google.gson.annotations.Expose;
 import com.songoda.epicbosses.autospawns.settings.AutoSpawnSettings;
 import com.songoda.epicbosses.autospawns.types.IntervalSpawnElement;
 import com.songoda.epicbosses.utils.BossesGson;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -17,11 +15,16 @@ import java.util.List;
  */
 public class AutoSpawn {
 
-    @Expose @Getter @Setter private boolean editing;
-    @Expose @Getter @Setter private String type;
-    @Expose @Getter @Setter private List<String> entities;
-    @Expose @Getter @Setter private AutoSpawnSettings autoSpawnSettings;
-    @Expose @Getter @Setter private JsonObject customData;
+    @Expose
+    private boolean editing;
+    @Expose
+    private String type;
+    @Expose
+    private List<String> entities;
+    @Expose
+    private AutoSpawnSettings autoSpawnSettings;
+    @Expose
+    private JsonObject customData;
 
     public AutoSpawn(boolean editing, List<String> entities, AutoSpawnSettings autoSpawnSettings) {
         this.editing = editing;
@@ -47,4 +50,43 @@ public class AutoSpawn {
         return true;
     }
 
+    public boolean isEditing() {
+        return this.editing;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public List<String> getEntities() {
+        return this.entities;
+    }
+
+    public AutoSpawnSettings getAutoSpawnSettings() {
+        return this.autoSpawnSettings;
+    }
+
+    public JsonObject getCustomData() {
+        return this.customData;
+    }
+
+    public void setEditing(boolean editing) {
+        this.editing = editing;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setEntities(List<String> entities) {
+        this.entities = entities;
+    }
+
+    public void setAutoSpawnSettings(AutoSpawnSettings autoSpawnSettings) {
+        this.autoSpawnSettings = autoSpawnSettings;
+    }
+
+    public void setCustomData(JsonObject customData) {
+        this.customData = customData;
+    }
 }

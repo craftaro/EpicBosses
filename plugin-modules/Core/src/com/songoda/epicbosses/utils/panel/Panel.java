@@ -1,24 +1,21 @@
 package com.songoda.epicbosses.utils.panel;
 
-import com.songoda.epicbosses.utils.panel.base.*;
-import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
-import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
-import lombok.Getter;
 import com.songoda.epicbosses.utils.ICloneable;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
+import com.songoda.epicbosses.utils.panel.base.*;
+import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
+import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderSettings;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -39,8 +36,8 @@ public class Panel implements Listener, ICloneable<Panel> {
     //
     //--------------------------------------------------
 
-    @Getter private static final ItemStackConverter ITEM_STACK_CONVERTER = new ItemStackConverter();
-    @Getter private static final List<Panel> PANELS = new ArrayList<>();
+    private static final ItemStackConverter ITEM_STACK_CONVERTER = new ItemStackConverter();
+    private static final List<Panel> PANELS = new ArrayList<>();
 
     private static JavaPlugin PLUGIN;
 
@@ -57,13 +54,13 @@ public class Panel implements Listener, ICloneable<Panel> {
     private final Map<UUID, Integer> currentPageContainer = new HashMap<>();
     private final List<UUID> openedUsers = new ArrayList<>();
 
-    @Getter private boolean cancelClick = true, destroyWhenDone = true, cancelLowerClick = true;
-    @Getter private PanelBuilderSettings panelBuilderSettings;
-    @Getter private PanelBuilderCounter panelBuilderCounter;
-    @Getter private Sound clickSound = null;
-    @Getter private String title;
-    @Getter private Inventory inventory;
-    @Getter private int viewers = 0;
+    private boolean cancelClick = true, destroyWhenDone = true, cancelLowerClick = true;
+    private PanelBuilderSettings panelBuilderSettings;
+    private PanelBuilderCounter panelBuilderCounter;
+    private Sound clickSound = null;
+    private String title;
+    private Inventory inventory;
+    private int viewers = 0;
 
     private PageAction onPageChange = (player, currentPage, requestedPage) -> false;
     private PanelCloseAction panelClose = (p) -> {};
@@ -123,6 +120,14 @@ public class Panel implements Listener, ICloneable<Panel> {
 
         this.connectedInventories.add(this.inventory);
         PANELS.add(this);
+    }
+
+    public static ItemStackConverter getITEM_STACK_CONVERTER() {
+        return Panel.ITEM_STACK_CONVERTER;
+    }
+
+    public static List<Panel> getPANELS() {
+        return Panel.PANELS;
     }
 
     //--------------------------------------------------
@@ -645,5 +650,41 @@ public class Panel implements Listener, ICloneable<Panel> {
 
     public static void setPlugin(JavaPlugin javaPlugin) {
         PLUGIN = javaPlugin;
+    }
+
+    public boolean isCancelClick() {
+        return this.cancelClick;
+    }
+
+    public boolean isDestroyWhenDone() {
+        return this.destroyWhenDone;
+    }
+
+    public boolean isCancelLowerClick() {
+        return this.cancelLowerClick;
+    }
+
+    public PanelBuilderSettings getPanelBuilderSettings() {
+        return this.panelBuilderSettings;
+    }
+
+    public PanelBuilderCounter getPanelBuilderCounter() {
+        return this.panelBuilderCounter;
+    }
+
+    public Sound getClickSound() {
+        return this.clickSound;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public Inventory getInventory() {
+        return this.inventory;
+    }
+
+    public int getViewers() {
+        return this.viewers;
     }
 }

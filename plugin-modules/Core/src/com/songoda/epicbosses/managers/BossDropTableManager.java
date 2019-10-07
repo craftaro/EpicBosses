@@ -1,7 +1,6 @@
 package com.songoda.epicbosses.managers;
 
-import com.songoda.epicbosses.CustomBosses;
-import com.songoda.epicbosses.api.BossAPI;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.droptable.elements.DropTableElement;
 import com.songoda.epicbosses.droptable.elements.GiveTableElement;
 import com.songoda.epicbosses.droptable.elements.GiveTableSubElement;
@@ -10,15 +9,11 @@ import com.songoda.epicbosses.handlers.IGetDropTableListItem;
 import com.songoda.epicbosses.handlers.droptable.GetDropTableCommand;
 import com.songoda.epicbosses.handlers.droptable.GetDropTableItemStack;
 import com.songoda.epicbosses.holder.DeadBossHolder;
-import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.RandomUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
-import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
-import lombok.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -31,12 +26,12 @@ import java.util.*;
  */
 public class BossDropTableManager {
 
-    @Getter private final List<String> validDropTableTypes = Arrays.asList("SPRAY", "DROP", "GIVE");
+    private final List<String> validDropTableTypes = Arrays.asList("SPRAY", "DROP", "GIVE");
 
     private final IGetDropTableListItem<ItemStack> getDropTableItemStack;
     private final IGetDropTableListItem<List<String>> getDropTableCommand;
 
-    public BossDropTableManager(CustomBosses plugin) {
+    public BossDropTableManager(EpicBosses plugin) {
         this.getDropTableItemStack = new GetDropTableItemStack(plugin);
         this.getDropTableCommand = new GetDropTableCommand();
     }
@@ -175,4 +170,7 @@ public class BossDropTableManager {
         return newListToMerge;
     }
 
+    public List<String> getValidDropTableTypes() {
+        return this.validDropTableTypes;
+    }
 }

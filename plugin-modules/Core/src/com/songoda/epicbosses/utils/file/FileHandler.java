@@ -2,17 +2,12 @@ package com.songoda.epicbosses.utils.file;
 
 import com.songoda.epicbosses.utils.Versions;
 import com.songoda.epicbosses.utils.version.VersionHandler;
-import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.regex.Pattern;
 
 /**
  * @author Charles Cullen
@@ -24,7 +19,7 @@ public abstract class FileHandler<T> implements IFileHandler<T> {
     private final JavaPlugin javaPlugin;
     private final boolean saveResource;
 
-    @Getter private final File file;
+    private final File file;
 
     public FileHandler(JavaPlugin javaPlugin, boolean saveResource, File file) {
         this.javaPlugin = javaPlugin;
@@ -52,4 +47,7 @@ public abstract class FileHandler<T> implements IFileHandler<T> {
         }
     }
 
+    public File getFile() {
+        return this.file;
+    }
 }

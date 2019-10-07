@@ -1,8 +1,6 @@
 package com.songoda.epicbosses.entity.elements;
 
 import com.google.gson.annotations.Expose;
-import lombok.Getter;
-import lombok.Setter;
 import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
 
 import java.util.List;
@@ -14,10 +12,14 @@ import java.util.List;
  */
 public class EntityStatsElement {
 
-    @Expose @Getter @Setter private MainStatsElement mainStats;
-    @Expose @Getter @Setter private EquipmentElement equipment;
-    @Expose @Getter @Setter private HandsElement hands;
-    @Expose @Getter @Setter private List<PotionEffectHolder> potions;
+    @Expose
+    private MainStatsElement mainStats;
+    @Expose
+    private EquipmentElement equipment;
+    @Expose
+    private HandsElement hands;
+    @Expose
+    private List<PotionEffectHolder> potions;
 
     public EntityStatsElement(MainStatsElement mainStatsElement, EquipmentElement equipmentElement, HandsElement handsElement, List<PotionEffectHolder> potionEffectHolders) {
         this.mainStats = mainStatsElement;
@@ -26,4 +28,35 @@ public class EntityStatsElement {
         this.potions = potionEffectHolders;
     }
 
+    public MainStatsElement getMainStats() {
+        return this.mainStats;
+    }
+
+    public EquipmentElement getEquipment() {
+        return this.equipment;
+    }
+
+    public HandsElement getHands() {
+        return this.hands;
+    }
+
+    public List<PotionEffectHolder> getPotions() {
+        return this.potions;
+    }
+
+    public void setMainStats(MainStatsElement mainStats) {
+        this.mainStats = mainStats;
+    }
+
+    public void setEquipment(EquipmentElement equipment) {
+        this.equipment = equipment;
+    }
+
+    public void setHands(HandsElement hands) {
+        this.hands = hands;
+    }
+
+    public void setPotions(List<PotionEffectHolder> potions) {
+        this.potions = potions;
+    }
 }

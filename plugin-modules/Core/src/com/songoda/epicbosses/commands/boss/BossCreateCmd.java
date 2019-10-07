@@ -9,7 +9,6 @@ import com.songoda.epicbosses.utils.Permission;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.command.SubCommand;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EntityType;
 
 import java.util.ArrayList;
 import java.util.Arrays;

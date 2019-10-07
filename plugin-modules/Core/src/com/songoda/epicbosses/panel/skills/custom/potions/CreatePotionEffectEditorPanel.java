@@ -1,7 +1,7 @@
 package com.songoda.epicbosses.panel.skills.custom.potions;
 
 import com.google.gson.JsonObject;
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
@@ -35,7 +35,7 @@ public class CreatePotionEffectEditorPanel extends SubVariablePanelHandler<Skill
     private SkillsFileManager skillsFileManager;
     private BossSkillManager bossSkillManager;
 
-    public CreatePotionEffectEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public CreatePotionEffectEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.bossSkillManager = plugin.getBossSkillManager();

@@ -4,8 +4,6 @@ import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.autospawns.SpawnType;
 import com.songoda.epicbosses.autospawns.types.IntervalSpawnElement;
-import com.songoda.epicbosses.events.BossDeathEvent;
-import com.songoda.epicbosses.events.PreBossDeathEvent;
 import com.songoda.epicbosses.holder.ActiveAutoSpawnHolder;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.listeners.IBossDeathHandler;
@@ -14,10 +12,7 @@ import com.songoda.epicbosses.utils.ObjectUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.time.TimeUnit;
 import com.songoda.epicbosses.utils.time.TimeUtil;
-import lombok.Getter;
 import org.bukkit.Location;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitTask;
 
 /**
@@ -27,10 +22,10 @@ import org.bukkit.scheduler.BukkitTask;
  */
 public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
 
-    @Getter private final IntervalSpawnElement intervalSpawnElement;
+    private final IntervalSpawnElement intervalSpawnElement;
 
-    @Getter private BukkitTask intervalTask = null;
-    @Getter private long nextCompletedTime = 0L;
+    private BukkitTask intervalTask = null;
+    private long nextCompletedTime = 0L;
 
     public ActiveIntervalAutoSpawnHolder(SpawnType spawnType, AutoSpawn autoSpawn) {
         super(spawnType, autoSpawn);
@@ -172,5 +167,17 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
         long delayMs = (long) TimeUnit.MINUTES.to(TimeUnit.MILLISECONDS, delay);
 
         this.nextCompletedTime = System.currentTimeMillis() + delayMs;
+    }
+
+    public IntervalSpawnElement getIntervalSpawnElement() {
+        return this.intervalSpawnElement;
+    }
+
+    public BukkitTask getIntervalTask() {
+        return this.intervalTask;
+    }
+
+    public long getNextCompletedTime() {
+        return this.nextCompletedTime;
     }
 }

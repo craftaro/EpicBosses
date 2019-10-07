@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.listeners.during;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.events.PreBossSkillEvent;
@@ -16,13 +16,14 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
-import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Charles Cullen
@@ -35,7 +36,7 @@ public class BossSkillListener implements Listener {
     private SkillsFileManager skillsFileManager;
     private BossSkillManager bossSkillManager;
 
-    public BossSkillListener(CustomBosses plugin) {
+    public BossSkillListener(EpicBosses plugin) {
         this.bossSkillManager = plugin.getBossSkillManager();
         this.bossEntityManager = plugin.getBossEntityManager();
         this.skillsFileManager = plugin.getSkillsFileManager();

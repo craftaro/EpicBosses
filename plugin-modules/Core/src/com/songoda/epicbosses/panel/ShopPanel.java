@@ -1,18 +1,16 @@
 package com.songoda.epicbosses.panel;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.core.hooks.EconomyManager;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
-import com.songoda.epicbosses.panel.handlers.MainListPanelHandler;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
-import com.songoda.epicbosses.utils.dependencies.VaultHelper;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
-import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.PanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
@@ -20,9 +18,10 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -33,14 +32,12 @@ public class ShopPanel extends PanelHandler {
 
     private BossEntityManager bossEntityManager;
     private BossesFileManager bossesFileManager;
-    private VaultHelper vaultHelper;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public ShopPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public ShopPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
-        this.vaultHelper = plugin.getVaultHelper();
         this.bossEntityManager = plugin.getBossEntityManager();
         this.bossesFileManager = plugin.getBossesFileManager();
     }
@@ -89,8 +86,8 @@ public class ShopPanel extends PanelHandler {
                 replaceMap.put("{name}", name);
                 replaceMap.put("{price}", NumberUtils.get().formatDouble(price));
 
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Shop.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Shop.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Shop.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.Shop.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
                     ItemStack spawnItem = this.bossEntityManager.getSpawnItem(bossEntity);
@@ -101,14 +98,13 @@ public class ShopPanel extends PanelHandler {
                         return;
                     }
 
-                    double balance = this.vaultHelper.getEconomy().getBalance(player);
 
-                    if(balance < price) {
-                        Message.Boss_Shop_NotEnoughBalance.msg(player, NumberUtils.get().formatDouble(price - balance));
+                    if(EconomyManager.hasBalance(player, price)) {
+                        Message.Boss_Shop_NotEnoughBalance.msg(player, NumberUtils.get().formatDouble(price));
                         return;
                     }
 
-                    this.vaultHelper.getEconomy().withdrawPlayer(player, price);
+                    EconomyManager.withdrawBalance(player, price);
                     player.getInventory().addItem(spawnItem);
                     Message.Boss_Shop_Purchased.msg(player, spawnItem.getItemMeta().getDisplayName());
                 });

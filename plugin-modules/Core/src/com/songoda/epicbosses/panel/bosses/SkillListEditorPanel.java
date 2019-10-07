@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.bosses;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -34,9 +34,9 @@ public class SkillListEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ItemStackConverter itemStackConverter;
     private SkillsFileManager skillsFileManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public SkillListEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public SkillListEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.itemStackConverter = new ItemStackConverter();
@@ -103,12 +103,12 @@ public class SkillListEditorPanel extends VariablePanelHandler<BossEntity> {
                 replaceMap.put("{radius}", NumberUtils.get().formatDouble(skill.getRadius()));
 
                 if(bossEntity.getSkills().getSkills().contains(name)) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Skills.selectedName"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Skills.selectedName"), replaceMap);
                 } else {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Skills.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Skills.name"), replaceMap);
                 }
 
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Boss.Skills.lore"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.Boss.Skills.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
                     if(!bossEntity.isEditing()) {

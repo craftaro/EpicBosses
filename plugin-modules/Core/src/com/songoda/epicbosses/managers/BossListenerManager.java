@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.managers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.listeners.after.BossDeathListener;
 import com.songoda.epicbosses.listeners.during.BossDamageListener;
 import com.songoda.epicbosses.listeners.during.BossMinionTargetListener;
@@ -18,9 +18,9 @@ import com.songoda.epicbosses.utils.ServerUtils;
 public class BossListenerManager implements ILoadable {
 
     private boolean hasBeenLoaded = false;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public BossListenerManager(CustomBosses plugin) {
+    public BossListenerManager(EpicBosses plugin) {
         this.plugin = plugin;
     }
 

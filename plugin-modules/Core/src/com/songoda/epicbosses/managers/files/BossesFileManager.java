@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.managers.files;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.container.BossEntityContainer;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.file.BossesFileHandler;
@@ -24,11 +24,11 @@ public class BossesFileManager implements ILoadable, ISavable, IReloadable {
     private BossEntityContainer bossEntityContainer;
     private BossesFileHandler bossesFileHandler;
 
-    public BossesFileManager(CustomBosses customBosses) {
-        File file = new File(customBosses.getDataFolder(), "bosses.json");
+    public BossesFileManager(EpicBosses epicBosses) {
+        File file = new File(epicBosses.getDataFolder(), "bosses.json");
 
-        this.bossesFileHandler = new BossesFileHandler(customBosses, true, file);
-        this.bossEntityContainer = customBosses.getBossEntityContainer();
+        this.bossesFileHandler = new BossesFileHandler(epicBosses, true, file);
+        this.bossEntityContainer = epicBosses.getBossEntityContainer();
     }
 
     @Override

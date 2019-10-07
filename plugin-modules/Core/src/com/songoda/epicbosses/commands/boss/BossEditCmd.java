@@ -1,6 +1,5 @@
 package com.songoda.epicbosses.commands.boss;
 
-import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.container.BossEntityContainer;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;

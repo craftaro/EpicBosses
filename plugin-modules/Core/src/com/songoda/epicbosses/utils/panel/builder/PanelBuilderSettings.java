@@ -1,6 +1,5 @@
 package com.songoda.epicbosses.utils.panel.builder;
 
-import lombok.Getter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackHolderConverter;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import org.bukkit.configuration.ConfigurationSection;
@@ -12,9 +11,9 @@ import org.bukkit.configuration.ConfigurationSection;
  */
 public class PanelBuilderSettings {
 
-    @Getter private boolean emptySpaceFiller, backButton, exitButton;
-    @Getter private int fillTo, backButtonSlot, exitButtonSlot;
-    @Getter private ItemStackHolder emptySpaceFillerItem;
+    private boolean emptySpaceFiller, backButton, exitButton;
+    private int fillTo, backButtonSlot, exitButtonSlot;
+    private ItemStackHolder emptySpaceFillerItem;
 
     public PanelBuilderSettings(ConfigurationSection configurationSection) {
         ItemStackHolderConverter itemStackHolderConverter = new ItemStackHolderConverter();
@@ -30,4 +29,31 @@ public class PanelBuilderSettings {
         this.emptySpaceFillerItem = itemStackHolderConverter.to(configurationSection.getConfigurationSection("EmptySpaceFiller"));
     }
 
+    public boolean isEmptySpaceFiller() {
+        return this.emptySpaceFiller;
+    }
+
+    public boolean isBackButton() {
+        return this.backButton;
+    }
+
+    public boolean isExitButton() {
+        return this.exitButton;
+    }
+
+    public int getFillTo() {
+        return this.fillTo;
+    }
+
+    public int getBackButtonSlot() {
+        return this.backButtonSlot;
+    }
+
+    public int getExitButtonSlot() {
+        return this.exitButtonSlot;
+    }
+
+    public ItemStackHolder getEmptySpaceFillerItem() {
+        return this.emptySpaceFillerItem;
+    }
 }

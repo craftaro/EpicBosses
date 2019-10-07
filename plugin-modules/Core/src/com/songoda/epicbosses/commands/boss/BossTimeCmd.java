@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.commands.boss;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.holder.ActiveAutoSpawnHolder;
 import com.songoda.epicbosses.holder.autospawn.ActiveIntervalAutoSpawnHolder;
 import com.songoda.epicbosses.managers.AutoSpawnManager;
@@ -23,7 +23,7 @@ public class BossTimeCmd extends SubCommand {
 
     private AutoSpawnManager autoSpawnManager;
 
-    public BossTimeCmd(CustomBosses plugin) {
+    public BossTimeCmd(EpicBosses plugin) {
         super("time");
 
         this.autoSpawnManager = plugin.getAutoSpawnManager();

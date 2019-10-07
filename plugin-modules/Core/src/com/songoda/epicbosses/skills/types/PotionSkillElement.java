@@ -2,13 +2,11 @@ package com.songoda.epicbosses.skills.types;
 
 import com.google.gson.annotations.Expose;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
-import com.songoda.epicbosses.skills.interfaces.ISkillHandler;
 import com.songoda.epicbosses.skills.Skill;
+import com.songoda.epicbosses.skills.interfaces.ISkillHandler;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.potion.PotionEffectConverter;
 import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 
@@ -22,7 +20,8 @@ import java.util.List;
  */
 public class PotionSkillElement implements ISkillHandler<PotionSkillElement> {
 
-    @Expose @Getter @Setter private List<PotionEffectHolder> potions;
+    @Expose
+    private List<PotionEffectHolder> potions;
 
     private PotionEffectConverter potionEffectConverter;
 
@@ -55,5 +54,13 @@ public class PotionSkillElement implements ISkillHandler<PotionSkillElement> {
         }
 
         nearbyEntities.forEach(nearby -> potionEffects.forEach(nearby::addPotionEffect));
+    }
+
+    public List<PotionEffectHolder> getPotions() {
+        return this.potions;
+    }
+
+    public void setPotions(List<PotionEffectHolder> potions) {
+        this.potions = potions;
     }
 }

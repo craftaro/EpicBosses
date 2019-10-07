@@ -1,7 +1,7 @@
 package com.songoda.epicbosses.panel.skills.custom.custom;
 
 import com.google.gson.JsonObject;
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -11,7 +11,6 @@ import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.elements.CustomMinionSkillElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.ServerUtils;
-import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
@@ -37,9 +36,9 @@ public class MinionSelectEditorPanel extends SubVariablePanelHandler<Skill, Cust
     private MinionsFileManager minionsFileManager;
     private ItemStackConverter itemStackConverter;
     private ItemsFileManager itemsFileManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public MinionSelectEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public MinionSelectEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -97,12 +96,12 @@ public class MinionSelectEditorPanel extends SubVariablePanelHandler<Skill, Cust
                 replaceMap.put("{targeting}", minionEntity.getTargeting());
 
                 if(current.equalsIgnoreCase(name)) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.MinionList.selectedName"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.MinionList.selectedName"), replaceMap);
                 } else {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.MinionList.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.MinionList.name"), replaceMap);
                 }
 
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Skills.MinionList.lore"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.Skills.MinionList.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, event -> {
                     customMinionSkillElement.setMinionToSpawn(name);

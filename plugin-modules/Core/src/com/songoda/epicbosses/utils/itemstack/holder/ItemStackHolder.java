@@ -1,7 +1,6 @@
 package com.songoda.epicbosses.utils.itemstack.holder;
 
 import com.google.gson.annotations.Expose;
-import lombok.Getter;
 
 import java.util.List;
 
@@ -12,14 +11,22 @@ import java.util.List;
  */
 public class ItemStackHolder {
 
-    @Expose @Getter private Integer amount;
-    @Expose @Getter private String type;
-    @Expose @Getter private Short durability;
-    @Expose @Getter private String name;
-    @Expose @Getter private List<String> lore;
-    @Expose @Getter private List<String> enchants;
-    @Expose @Getter private String skullOwner;
-    @Expose @Getter private Short spawnerId;
+    @Expose
+    private Integer amount;
+    @Expose
+    private String type;
+    @Expose
+    private Short durability;
+    @Expose
+    private String name;
+    @Expose
+    private List<String> lore;
+    @Expose
+    private List<String> enchants;
+    @Expose
+    private String skullOwner;
+    @Expose
+    private Short spawnerId;
 
     public ItemStackHolder(Integer amount, String type, Short durability, String name, List<String> lore, List<String> enchants, String skullOwner, Short spawnerId) {
         this.amount = amount;
@@ -32,4 +39,35 @@ public class ItemStackHolder {
         this.spawnerId = spawnerId;
     }
 
+    public Integer getAmount() {
+        return this.amount;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public Short getDurability() {
+        return this.durability;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public List<String> getLore() {
+        return this.lore;
+    }
+
+    public List<String> getEnchants() {
+        return this.enchants;
+    }
+
+    public String getSkullOwner() {
+        return this.skullOwner;
+    }
+
+    public Short getSpawnerId() {
+        return this.spawnerId;
+    }
 }

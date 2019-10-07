@@ -5,8 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.songoda.epicbosses.utils.file.FileHandler;
-import com.songoda.epicbosses.utils.file.FileUtils;
-import com.songoda.epicbosses.utils.file.IFileHandler;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import org.bukkit.plugin.java.JavaPlugin;
 

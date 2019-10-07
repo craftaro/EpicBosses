@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.autospawns;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.autospawns.settings.AutoSpawnSettings;
@@ -31,7 +31,7 @@ public class AutoSpawnSpecialSettingsEditorPanel extends VariablePanelHandler<Au
 
     private AutoSpawnFileManager autoSpawnFileManager;
 
-    public AutoSpawnSpecialSettingsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public AutoSpawnSpecialSettingsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.autoSpawnFileManager = plugin.getAutoSpawnFileManager();

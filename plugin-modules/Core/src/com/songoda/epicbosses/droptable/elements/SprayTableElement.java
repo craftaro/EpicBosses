@@ -1,8 +1,6 @@
 package com.songoda.epicbosses.droptable.elements;
 
 import com.google.gson.annotations.Expose;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Map;
 
@@ -13,9 +11,12 @@ import java.util.Map;
  */
 public class SprayTableElement {
 
-    @Expose @Getter @Setter private Map<String, Double> sprayRewards;
-    @Expose @Getter @Setter private Boolean randomSprayDrops;
-    @Expose @Getter @Setter private Integer sprayMaxDistance, sprayMaxDrops;
+    @Expose
+    private Map<String, Double> sprayRewards;
+    @Expose
+    private Boolean randomSprayDrops;
+    @Expose
+    private Integer sprayMaxDistance, sprayMaxDrops;
 
     public SprayTableElement(Map<String, Double> sprayRewards, Boolean randomSprayDrops, Integer sprayMaxDistance, Integer sprayMaxDrops) {
         this.sprayRewards = sprayRewards;
@@ -24,4 +25,35 @@ public class SprayTableElement {
         this.sprayMaxDrops = sprayMaxDrops;
     }
 
+    public Map<String, Double> getSprayRewards() {
+        return this.sprayRewards;
+    }
+
+    public Boolean getRandomSprayDrops() {
+        return this.randomSprayDrops;
+    }
+
+    public Integer getSprayMaxDistance() {
+        return this.sprayMaxDistance;
+    }
+
+    public Integer getSprayMaxDrops() {
+        return this.sprayMaxDrops;
+    }
+
+    public void setSprayRewards(Map<String, Double> sprayRewards) {
+        this.sprayRewards = sprayRewards;
+    }
+
+    public void setRandomSprayDrops(Boolean randomSprayDrops) {
+        this.randomSprayDrops = randomSprayDrops;
+    }
+
+    public void setSprayMaxDistance(Integer sprayMaxDistance) {
+        this.sprayMaxDistance = sprayMaxDistance;
+    }
+
+    public void setSprayMaxDrops(Integer sprayMaxDrops) {
+        this.sprayMaxDrops = sprayMaxDrops;
+    }
 }

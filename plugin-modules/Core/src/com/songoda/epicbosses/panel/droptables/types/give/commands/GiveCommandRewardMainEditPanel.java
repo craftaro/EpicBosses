@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.droptables.types.give.commands;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.droptable.elements.GiveTableElement;
@@ -32,7 +32,7 @@ public class GiveCommandRewardMainEditPanel extends SubSubVariablePanelHandler<D
 
     private DropTableFileManager dropTableFileManager;
 
-    public GiveCommandRewardMainEditPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public GiveCommandRewardMainEditPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.dropTableFileManager = plugin.getDropTableFileManager();

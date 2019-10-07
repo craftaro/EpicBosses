@@ -2,7 +2,6 @@ package com.songoda.epicbosses.utils.file;
 
 import com.songoda.epicbosses.utils.Versions;
 import com.songoda.epicbosses.utils.version.VersionHandler;
-import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,7 +20,7 @@ public class YmlFileHandler implements IFileHandler<FileConfiguration> {
     private final JavaPlugin javaPlugin;
     private final boolean saveResource;
 
-    @Getter private final File file;
+    private final File file;
 
     public YmlFileHandler(JavaPlugin javaPlugin, boolean saveResource, File file) {
         this.javaPlugin = javaPlugin;
@@ -34,15 +33,9 @@ public class YmlFileHandler implements IFileHandler<FileConfiguration> {
         if(!this.file.exists()) {
             if(this.saveResource) {
                 String name = this.file.getName();
-                String folder = new VersionHandler().getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1) ? "/current/" : "/legacy/";
-                String path = folder + name;
 
-                try (InputStream resourceStream = this.getClass().getResourceAsStream(path)) {
-                    Files.copy(resourceStream, new File(this.javaPlugin.getDataFolder(), name).toPath());
-                    return;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                System.out.println(name);
+                javaPlugin.saveResource(name, false);
             }
 
             FileUtils.get().createFile(this.file);
@@ -59,4 +52,7 @@ public class YmlFileHandler implements IFileHandler<FileConfiguration> {
         FileUtils.get().saveFile(this.file, config);
     }
 
+    public File getFile() {
+        return this.file;
+    }
 }

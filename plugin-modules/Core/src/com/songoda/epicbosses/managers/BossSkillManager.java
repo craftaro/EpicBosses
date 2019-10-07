@@ -1,20 +1,19 @@
 package com.songoda.epicbosses.managers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.events.BossSkillEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
-import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
-import com.songoda.epicbosses.skills.interfaces.ISkillHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.custom.*;
+import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
+import com.songoda.epicbosses.skills.interfaces.ISkillHandler;
 import com.songoda.epicbosses.skills.types.CommandSkillElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.skills.types.GroupSkillElement;
 import com.songoda.epicbosses.skills.types.PotionSkillElement;
 import com.songoda.epicbosses.utils.*;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
@@ -32,10 +31,10 @@ public class BossSkillManager implements ILoadable {
 
     private static final Set<CustomSkillHandler> SKILLS = new HashSet<>();
 
-    @Getter private final List<String> validSkillTypes = Arrays.asList("Potion", "Group", "Custom", "Command");
-    private CustomBosses plugin;
+    private final List<String> validSkillTypes = Arrays.asList("Potion", "Group", "Custom", "Command");
+    private EpicBosses plugin;
 
-    public BossSkillManager(CustomBosses plugin) {
+    public BossSkillManager(EpicBosses plugin) {
         this.plugin = plugin;
     }
 
@@ -204,6 +203,10 @@ public class BossSkillManager implements ILoadable {
 
     public static ICustomSettingAction createCustomSkillAction(String name, String current, ItemStack displayStack, ClickAction clickAction) {
         return new CustomSkillActionCreator(name, current, displayStack, clickAction);
+    }
+
+    public List<String> getValidSkillTypes() {
+        return this.validSkillTypes;
     }
 
     private static class CustomSkillActionCreator implements ICustomSettingAction {

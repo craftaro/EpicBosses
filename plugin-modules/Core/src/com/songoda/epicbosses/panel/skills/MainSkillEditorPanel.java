@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.skills;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.handlers.SkillDisplayNameHandler;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -18,7 +18,8 @@ import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -29,7 +30,7 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     private SkillsFileManager skillsFileManager;
 
-    public MainSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public MainSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.skillsFileManager = plugin.getSkillsFileManager();

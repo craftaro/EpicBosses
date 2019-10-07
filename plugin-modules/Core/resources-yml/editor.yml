@@ -18,11 +18,11 @@ MainMenu:
   Settings:
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: STAINED_GLASS_PANE
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Items:
     '2':
-      type: '383:54'
+      type: ZOMBIE_SPAWN_EGG
       name: '&b&lCustom Bosses'
       lore:
       - '&3Left Click »'
@@ -46,7 +46,7 @@ MainMenu:
       - '&7an item in your inventory.'
       Button: CustomItems
     '8':
-      type: '347:0'
+      type: CLOCK
       name: '&b&lAuto Spawns'
       lore:
       - '&3Left Click »'
@@ -58,7 +58,7 @@ MainMenu:
       - '&7scratch.'
       Button: AutoSpawns
     '12':
-      type: WOOD_PLATE
+      type: OAK_PRESSURE_PLATE
       name: '&b&lDrop Tables'
       lore:
       - '&3Left Click »'
@@ -91,13 +91,13 @@ ShopListPanel:
     backButton: 50
   Items:
     '46':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '47':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '48':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -107,7 +107,7 @@ ShopListPanel:
       - '&7page.'
       PreviousPage: true
     '50':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '51':
       type: ARROW
@@ -117,13 +117,13 @@ ShopListPanel:
       - '&7page.'
       NextPage: true
     '52':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '53':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '54':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
 ListPanel:
   name: '{panelName}'
@@ -135,13 +135,13 @@ ListPanel:
     backButton: 50
   Items:
     '46':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '47':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '48':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -163,13 +163,13 @@ ListPanel:
       - '&7page.'
       NextPage: true
     '52':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '53':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '54':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
 CustomItemsMenu:
   name: '&b&lEpicBosses &3&lCustom Items'
@@ -194,10 +194,10 @@ CustomItemsMenu:
       - '&3Right Click &8» '
       - '&7Remove section from list if not bound.'
     '47':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '48':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -222,13 +222,13 @@ CustomItemsMenu:
       - '&7page of custom drops.'
       NextPage: true
     '52':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '53':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '54':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
 AddItemsMenu:
   name: '&b&lAdd Item Menu'
@@ -237,7 +237,7 @@ AddItemsMenu:
     emptySpaceFiller: true
   EmptySpaceFiller:
     name: '&7'
-    type: '160:3'
+    type: LIGHT_BLUE_STAINED_GLASS_PANE
   Items:
     '11':
       type: REDSTONE
@@ -251,7 +251,7 @@ AddItemsMenu:
       type: AIR
       Button: SelectedSlot
     '17':
-      type: '351:10'
+      type: LIME_DYE
       name: '&a&lAccept'
       lore:
       - '&7Click here to accept the transaction'
@@ -264,7 +264,7 @@ MainEditorPanel:
   Settings:
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Items:
     '12':
@@ -303,7 +303,7 @@ MainEditorPanel:
       - '&7no one will be able to spawn it, nor'
       - '&7will it spawn naturally.'
     '24':
-      type: '377:0'
+      type: BLAZE_POWDER
       name: '&c&lSkill Manager'
       lore:
       - '&7Click here to manage the assigned'
@@ -321,7 +321,7 @@ MainEditorPanel:
       - '&7in the plugin.'
       Button: SpawnItem
     '32':
-      type: '351:4'
+      type: LAPIS_LAZULI
       name: '&a&lStatistics Manager'
       lore:
       - '&7Click here to edit the statistics of the'
@@ -367,7 +367,7 @@ BossShopEditorPanel:
     backButton: 5
   Items:
     '3':
-      type: '289:0'
+      type: GUNPOWDER
       name: '&3&lBuyable'
       lore:
       - '&bCurrently: &f{buyable}'
@@ -411,10 +411,10 @@ SpawnItemEditorPanel:
       - '&7equipped spawn item.'
       Button: Remove
     '47':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '48':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -439,10 +439,10 @@ SpawnItemEditorPanel:
       - '&7page of spawn item.'
       NextPage: true
     '52':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '53':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '54':
       type: PAPER
@@ -456,7 +456,7 @@ DropsMainEditorPanel:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 9
@@ -468,7 +468,7 @@ DropsMainEditorPanel:
       - '&7Here you can configure the drop systems'
       - '&7the boss has when he dies.'
     '4':
-      type: '289:0'
+      type: GUNPOWDER
       name: '&e&lNatural Drops'
       lore:
       - '&bCurrently: &f{naturalDrops}'
@@ -520,10 +520,10 @@ DropsEditorPanel:
       - '&7   editing screen of the drop table.'
       Button: Selected
     '47':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '48':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -548,10 +548,10 @@ DropsEditorPanel:
       - '&7page of drop tables.'
       NextPage: true
     '52':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '53':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '54':
       type: BOOK
@@ -577,16 +577,16 @@ BossListEditorPanel:
     backButton: 54
   Items:
     '46':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '47':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '48':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '49':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '50':
       type: DIAMOND_BLOCK
@@ -596,13 +596,13 @@ BossListEditorPanel:
       - '&7within this boss.'
       Button: CreateEntity
     '51':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '52':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '53':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '54':
       type: PAPER
@@ -616,7 +616,7 @@ EquipmentEditorPanel:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 8
@@ -689,10 +689,10 @@ HelmetEditorPanel:
       - '&7currently equipped helmet.'
       Button: Remove
     '47':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '48':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -717,10 +717,10 @@ HelmetEditorPanel:
       - '&7page of helmets.'
       NextPage: true
     '52':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '53':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '54':
       type: PAPER
@@ -744,10 +744,10 @@ ChestplateEditorPanel:
       - '&7currently equipped chestplate.'
       Button: Remove
     '47':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '48':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -772,10 +772,10 @@ ChestplateEditorPanel:
       - '&7page of chestplates.'
       NextPage: true
     '52':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '53':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '54':
       type: PAPER
@@ -799,10 +799,10 @@ LeggingsEditorPanel:
       - '&7currently equipped {type}.'
       Button: Remove
     '47':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '48':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -827,10 +827,10 @@ LeggingsEditorPanel:
       - '&7page of leggings.'
       NextPage: true
     '52':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '53':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '54':
       type: PAPER
@@ -854,10 +854,10 @@ BootsEditorPanel:
       - '&7currently equipped {type}.'
       Button: Remove
     '47':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '48':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -882,10 +882,10 @@ BootsEditorPanel:
       - '&7page of boots.'
       NextPage: true
     '52':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '53':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '54':
       type: PAPER
@@ -899,7 +899,7 @@ TargetingPanel:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 27
@@ -956,7 +956,7 @@ TargetingPanel:
       - '&7'
       - '&7The default boss target range is'
       - '&f50 blocks&7. However this can be'
-      - '&7adjusted in the config.yml.'
+      - '&7adjusted in the display.yml.'
     '27':
       type: PAPER
       name: '&e&lGo Back'
@@ -969,7 +969,7 @@ WeaponEditorPanel:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 9
@@ -992,7 +992,7 @@ WeaponEditorPanel:
       - '&7main hand for the &f{name}&7.'
       Button: MainHand
     '6':
-      type: STICK
+      type: SHIELD
       name: '&c&lOff Hand'
       lore:
       - '&7Click here to modify the'
@@ -1020,10 +1020,10 @@ MainHandEditorPanel:
       - '&7currently equipped main hand.'
       Button: Remove
     '47':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '48':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -1048,10 +1048,10 @@ MainHandEditorPanel:
       - '&7page of weapons.'
       NextPage: true
     '52':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '53':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '54':
       type: PAPER
@@ -1075,10 +1075,10 @@ OffHandEditorPanel:
       - '&7currently equipped off hand.'
       Button: Remove
     '47':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '48':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -1103,10 +1103,10 @@ OffHandEditorPanel:
       - '&7page of weapons.'
       NextPage: true
     '52':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '53':
-      type: '160:0'
+      type: WHITE_STAINED_GLASS_PANE
       name: '&7'
     '54':
       type: PAPER
@@ -1120,7 +1120,7 @@ SkillMainEditorPanel:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 9
@@ -1135,7 +1135,7 @@ SkillMainEditorPanel:
       - '&7skill message and the list of skills'
       - '&7that is assigned to this boss.'
     '4':
-      type: '348:0'
+      type: GLOWSTONE_DUST
       name: '&e&lOverall Chance'
       lore:
       - '&7The current overall chance for'
@@ -1179,7 +1179,7 @@ StatisticsMainEditorPanel:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 9
@@ -1206,7 +1206,7 @@ StatisticsMainEditorPanel:
       - '&7display name in chat.'
       Button: DisplayName
     '5':
-      type: '383:55'
+      type: SLIME_SPAWN_EGG
       name: '&e&lChange the Entity Type'
       lore:
       - '&7This will open a GUI and you can select'
@@ -1237,7 +1237,7 @@ CommandsEditorPanel:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 9
@@ -1249,7 +1249,7 @@ CommandsEditorPanel:
       - '&7Here you can configure which command set'
       - '&7the boss has for specific events.'
     '4':
-      type: LONG_GRASS
+      type: TALL_GRASS
       name: '&e&lOn Spawn'
       lore:
       - '&7Here you can change the command for'
@@ -1278,7 +1278,7 @@ TextEditorMainPanel:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 9
@@ -1290,7 +1290,7 @@ TextEditorMainPanel:
       - '&7Here you can configure which command set'
       - '&7the boss has for specific events.'
     '4':
-      type: LONG_GRASS
+      type: TALL_GRASS
       name: '&e&lOn Spawn'
       lore:
       - '&7Here you can change the settings for'
@@ -1322,13 +1322,13 @@ DeathTextEditorPanel:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 5
   Items:
     '2':
-      type: LONG_GRASS
+      type: TALL_GRASS
       name: '&e&lMain Message'
       lore:
       - '&7Here you can change the main message that is'
@@ -1337,7 +1337,7 @@ DeathTextEditorPanel:
       - '&bCurrent: &f{mainMessage}'
       Button: MainMessage
     '3':
-      type: '397:3'
+      type: PLAYER_HEAD
       name: '&e&lPosition Message'
       lore:
       - '&7Here you can change the position message that is'
@@ -1391,13 +1391,13 @@ SpawnTextEditorPanel:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 5
   Items:
     '2':
-      type: LONG_GRASS
+      type: TALL_GRASS
       name: '&e&lSelect Message'
       lore:
       - '&7Here you can change the message that is'
@@ -1432,7 +1432,7 @@ TauntEditorPanel:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 9
@@ -1464,7 +1464,7 @@ TauntEditorPanel:
       - '&f{taunts}'
       Button: Taunts
     '7':
-      type: '347:0'
+      type: CLOCK
       name: '&e&lDelay'
       lore:
       - '&7Here you can change the delay between each'
@@ -1491,7 +1491,7 @@ SkillEditorPanel:
   Settings:
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Items:
     '2':
@@ -1556,7 +1556,7 @@ SkillEditorPanel:
       - '&7sure it stands out and is unique, or not.'
       Button: DisplayName
     '14':
-      type: '289:0'
+      type: GUNPOWDER
       name: '&e&lType'
       lore:
       - '&bCurrently: &f{type}'
@@ -1572,7 +1572,7 @@ SkillTypeEditorPanel:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 5
@@ -1610,7 +1610,7 @@ SkillTypeEditorPanel:
       lore:
       - '&7Click here to go back.'
     '7':
-      type: '373:16453'
+      type: SPLASH_POTION
       name: '&e&lPotion Skill Type'
       lore:
       - '&7If you want to apply potions to'
@@ -1622,7 +1622,7 @@ SkillTypeEditorPanel:
       - '&7custom skill data.'
       Button: Potion
     '8':
-      type: '397:4'
+      type: CREEPER_HEAD
       name: '&e&lGroup Skill Type'
       lore:
       - '&7If you want to have multiple skills under'
@@ -1659,10 +1659,10 @@ PotionSkillEditorPanel:
       - '&7want to add a new potion effect click'
       - '&7on the green emerald block.'
     '47':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '48':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -1686,10 +1686,10 @@ PotionSkillEditorPanel:
       - '&7page of custom potion effects.'
       NextPage: true
     '52':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '53':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '54':
       type: PAPER
@@ -1702,7 +1702,7 @@ CreatePotionEffectEditorPanel:
   Settings:
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Items:
     '1':
@@ -1725,7 +1725,7 @@ CreatePotionEffectEditorPanel:
       - '&bRight Click &8» &f-1'
       Button: Level
     '5':
-      type: '289:0'
+      type: GUNPOWDER
       name: '&e&lPotion Effect Type'
       lore:
       - '&bCurrently: &f{effect}'
@@ -1734,7 +1734,7 @@ CreatePotionEffectEditorPanel:
       - '&7effect type.'
       Button: Effect
     '6':
-      type: '347:0'
+      type: CLOCK
       name: '&e&lDuration'
       lore:
       - '&bCurrently: &f{duration}s'
@@ -1749,7 +1749,7 @@ CreatePotionEffectEditorPanel:
       - '&bShift Right-Click &8» &f-10'
       Button: Duration
     '9':
-      type: '351:10'
+      type: LIME_DYE
       name: '&b&lConfirm'
       lore:
       - '&7Click here to confirm the creation'
@@ -1781,10 +1781,10 @@ CommandSkillEditorPanel:
       - '&7emerald block at the bottom middle of the'
       - '&7GUI.'
     '47':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '48':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -1808,10 +1808,10 @@ CommandSkillEditorPanel:
       - '&7page of command sections.'
       NextPage: true
     '52':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '53':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '54':
       type: PAPER
@@ -1825,7 +1825,7 @@ ModifyCommandEditorPanel:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 5
@@ -1843,7 +1843,7 @@ ModifyCommandEditorPanel:
       lore:
       - '&7Click here to go back.'
     '7':
-      type: '289:0'
+      type: GUNPOWDER
       name: '&e&lChance'
       lore:
       - '&bCurrently: &f{chance}%'
@@ -1864,7 +1864,7 @@ CustomSkillEditorPanel:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 9
@@ -1941,10 +1941,10 @@ CustomSkillTypeEditorPanel:
       - '&7in to the plugin or you can suggest them'
       - '&7to be added in to the plugin.'
     '47':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '48':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -1972,10 +1972,10 @@ CustomSkillTypeEditorPanel:
       - '&7page of custom skill types.'
       NextPage: true
     '52':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '53':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '54':
       type: REDSTONE
@@ -2003,10 +2003,10 @@ SpecialSettingsEditorPanel:
       - '&7is no special settings related to the'
       - '&7skill.'
     '47':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '48':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -2034,10 +2034,10 @@ SpecialSettingsEditorPanel:
       - '&7page of special settings.'
       NextPage: true
     '52':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '53':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '54':
       type: REDSTONE
@@ -2055,7 +2055,7 @@ DropTableMainEditorPanel:
   Buttons:
     backButton: 9
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Items:
     '1':
@@ -2068,7 +2068,7 @@ DropTableMainEditorPanel:
       - '&7something changes then it will also'
       - '&7change for any live bosses.'
     '4':
-      type: '289:0'
+      type: GUNPOWDER
       name: '&e&lType'
       lore:
       - '&bCurrently: &f{type}'
@@ -2098,13 +2098,13 @@ DropTableTypeEditorPanel:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 9
   Items:
     '3':
-      type: '373:16453'
+      type: SPLASH_POTION
       name: '&e&lSpray Drop Table Type'
       lore:
       - '&7If you set this to the drop table type'
@@ -2154,7 +2154,7 @@ SprayDropTableMainEditMenu:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 5
@@ -2169,7 +2169,7 @@ SprayDropTableMainEditMenu:
       - '&7bottom of the rewards menu.'
       Button: Rewards
     '3':
-      type: '289:0'
+      type: GUNPOWDER
       name: '&e&lRandom Drops'
       lore:
       - '&bCurrently: &f{randomDrops}'
@@ -2225,7 +2225,7 @@ DropDropTableMainEditMenu:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 9
@@ -2240,7 +2240,7 @@ DropDropTableMainEditMenu:
       - '&7bottom of the rewards menu.'
       Button: Rewards
     '4':
-      type: '289:0'
+      type: GUNPOWDER
       name: '&e&lRandom Drops'
       lore:
       - '&bCurrently: &f{randomDrops}'
@@ -2296,10 +2296,10 @@ GiveRewardPositionListMenu:
       - '&7To remove a position simply shift-right'
       - '&7click the position you want to remove.'
     '47':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '48':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -2326,10 +2326,10 @@ GiveRewardPositionListMenu:
       - '&7page of damage positions.'
       NextPage: true
     '52':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '53':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '54':
       type: REDSTONE
@@ -2358,10 +2358,10 @@ GiveRewardRewardsListMenu:
       - '&7To remove a drop section simply shift-right'
       - '&7click the section you want to remove.'
     '47':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '48':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -2388,10 +2388,10 @@ GiveRewardRewardsListMenu:
       - '&7page of drop sections.'
       NextPage: true
     '52':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '53':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '54':
       type: REDSTONE
@@ -2406,7 +2406,7 @@ GiveRewardMainEditMenu:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 23
@@ -2415,7 +2415,7 @@ GiveRewardMainEditMenu:
       type: DIAMOND
       name: '&b&lPosition: &f{position}'
     '11':
-      type: '289:0'
+      type: GUNPOWDER
       name: '&e&lRandom Drops'
       lore:
       - '&bCurrently: &f{randomDrops}'
@@ -2453,7 +2453,7 @@ GiveRewardMainEditMenu:
       - '&7There is currently &f{drops}&7 drops set up.'
       Button: ItemDrops
     '14':
-      type: '348:0'
+      type: GLOWSTONE_DUST
       name: '&e&lRequired Percentage'
       lore:
       - '&bCurrently: &f{requiredPercentage}%'
@@ -2495,7 +2495,7 @@ GiveRewardMainEditMenu:
       - '&bShift Right-Click &8» &f-10'
       Button: MaxCommands
     '17':
-      type: '289:0'
+      type: GUNPOWDER
       name: '&e&lRandom Commands'
       lore:
       - '&bCurrently: &f{randomCommands}'
@@ -2537,10 +2537,10 @@ DropTableRewardsListEditMenu:
       - '&7emerald block in the bottom middle of'
       - '&7the menu in between the page buttons.'
     '47':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '48':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -2565,10 +2565,10 @@ DropTableRewardsListEditMenu:
       - '&7page of rewards.'
       NextPage: true
     '52':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '53':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '54':
       type: REDSTONE
@@ -2606,10 +2606,10 @@ DropTableNewRewardEditMenu:
       - '&7another new section of the same'
       - '&7item.'
     '47':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '48':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -2619,7 +2619,7 @@ DropTableNewRewardEditMenu:
       - '&7page of itemstacks.'
       PreviousPage: true
     '50':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '51':
       type: ARROW
@@ -2629,10 +2629,10 @@ DropTableNewRewardEditMenu:
       - '&7page of itemstacks.'
       NextPage: true
     '52':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '53':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '54':
       type: REDSTONE
@@ -2647,13 +2647,13 @@ DropTableRewardMainEditMenu:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 9
   Items:
     '3':
-      type: '289:0'
+      type: GUNPOWDER
       name: '&e&lSelected ItemStack'
       lore:
       - '&bCurrently: &f{itemStack}'
@@ -2693,7 +2693,7 @@ MainAutoSpawnEditMenu:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 9
@@ -2706,7 +2706,7 @@ MainAutoSpawnEditMenu:
       - '&7related to this auto spawn section.'
       Button: SpecialSettings
     '3':
-      type: '289:0'
+      type: GUNPOWDER
       name: '&e&lType'
       lore:
       - '&bCurrently: &f{type}'
@@ -2753,13 +2753,13 @@ AutoSpawnEntitiesEditMenu:
     backButton: 50
   Items:
     '46':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '47':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '48':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -2781,13 +2781,13 @@ AutoSpawnEntitiesEditMenu:
       - '&7page.'
       NextPage: true
     '52':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '53':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '54':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
 AutoSpawnCustomSettingsEditMenu:
   name: '&b&l{name} AutoSpawn'
@@ -2799,13 +2799,13 @@ AutoSpawnCustomSettingsEditMenu:
     backButton: 50
   Items:
     '46':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '47':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '48':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '49':
       type: ARROW
@@ -2827,13 +2827,13 @@ AutoSpawnCustomSettingsEditMenu:
       - '&7page.'
       NextPage: true
     '52':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '53':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
     '54':
-      type: THIN_GLASS
+      type: GLASS_PANE
       name: '&7'
 AutoSpawnSpecialSettingsEditMenu:
   name: '&b&l{name} AutoSpawn'
@@ -2842,7 +2842,7 @@ AutoSpawnSpecialSettingsEditMenu:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 5
@@ -2857,7 +2857,7 @@ AutoSpawnSpecialSettingsEditMenu:
       - '&7shuffled before being called.'
       Button: ShuffleEntities
     '2':
-      type: '289:0'
+      type: GUNPOWDER
       name: '&e&lMax Alive Entities At Once'
       lore:
       - '&bCurrently: &f{maxAliveEntities}'
@@ -2872,7 +2872,7 @@ AutoSpawnSpecialSettingsEditMenu:
       - '&bRight Click &8» &f-1'
       Button: MaxAliveEntities
     '3':
-      type: '385:0'
+      type: FIREWORK_STAR
       name: '&e&lAmount of Bosses Per Spawn'
       lore:
       - '&bCurrently: &f{amountPerSpawn}'
@@ -2933,13 +2933,13 @@ AutoSpawnTypeEditMenu:
     backButton: true
     emptySpaceFiller: true
   EmptySpaceFiller:
-    type: '160:0'
+    type: WHITE_STAINED_GLASS_PANE
     name: '&7'
   Buttons:
     backButton: 9
   Items:
     '2':
-      type: '347:0'
+      type: CLOCK
       name: '&e&lInterval Spawn System'
       lore:
       - '&7Select this spawn system if you want to make'
@@ -2947,7 +2947,7 @@ AutoSpawnTypeEditMenu:
       - '&7specific location.'
       Button: IntervalSystem
     '3':
-      type: GRASS
+      type: GRASS_BLOCK
       name: '&e&lWilderness Spawn System'
       lore:
       - '&7Select this spawn system if you want to make'
@@ -2968,7 +2968,7 @@ AutoSpawnTypeEditMenu:
       - '&c&lComing soon...'
       Button: BiomeSystem
     '5':
-      type: MOB_SPAWNER
+      type: SPAWNER
       name: '&e&lMob Spawner Spawn System'
       lore:
       - '&7Select this spawn system if you want to make'

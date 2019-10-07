@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.autospawns.settings.AutoSpawnSettings;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -16,7 +16,10 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -27,9 +30,9 @@ public class AutoSpawnsPanel extends MainListPanelHandler {
 
     private AutoSpawnFileManager autoSpawnFileManager;
     private ItemsFileManager itemsFileManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public AutoSpawnsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public AutoSpawnsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.autoSpawnFileManager = plugin.getAutoSpawnFileManager();
@@ -88,8 +91,8 @@ public class AutoSpawnsPanel extends MainListPanelHandler {
                 replaceMap.put("{shuffleEntities}", shuffleEntities);
                 replaceMap.put("{customSpawnMessage}", spawnMessage);
 
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.AutoSpawns.Main.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.AutoSpawns.Main.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.AutoSpawns.Main.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.AutoSpawns.Main.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack.clone(), e -> this.bossPanelManager.getMainAutoSpawnEditPanel().openFor((Player) e.getWhoClicked(), autoSpawn));
             }

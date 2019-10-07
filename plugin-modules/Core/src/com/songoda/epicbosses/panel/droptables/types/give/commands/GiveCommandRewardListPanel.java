@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.droptables.types.give.commands;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -31,9 +31,9 @@ import java.util.Map;
 public class GiveCommandRewardListPanel extends SubVariablePanelHandler<DropTable, GiveRewardEditHandler> {
 
     private ItemsFileManager itemsFileManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public GiveCommandRewardListPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public GiveCommandRewardListPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -98,8 +98,8 @@ public class GiveCommandRewardListPanel extends SubVariablePanelHandler<DropTabl
                 ItemStackHolder itemStackHolder = BossAPI.getStoredItemStack("DefaultTextMenuItem");
                 ItemStack itemStack = this.itemsFileManager.getItemStackConverter().from(itemStackHolder);
 
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.DropTable.CommandRewardList.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.DropTable.CommandRewardList.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.DropTable.CommandRewardList.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.DropTable.CommandRewardList.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, event -> this.bossPanelManager.getGiveCommandRewardMainEditMenu().openFor((Player) event.getWhoClicked(), dropTable, giveRewardEditHandler, name));
             }

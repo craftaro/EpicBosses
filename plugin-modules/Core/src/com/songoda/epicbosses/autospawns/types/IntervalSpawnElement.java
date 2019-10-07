@@ -16,8 +16,6 @@ import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.utils.*;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -31,9 +29,12 @@ import java.util.*;
  */
 public class IntervalSpawnElement implements IAutoSpawnCustomSettingsHandler {
 
-    @Expose @Getter @Setter private Boolean spawnAfterLastBossIsKilled;
-    @Expose @Getter @Setter private String location, placeholder;
-    @Expose @Getter @Setter private Integer spawnRate;
+    @Expose
+    private Boolean spawnAfterLastBossIsKilled;
+    @Expose
+    private String location, placeholder;
+    @Expose
+    private Integer spawnRate;
 
     public IntervalSpawnElement(String location, String placeholder, Integer spawnRate, boolean spawnAfterLastBossIsKilled) {
         this.location = location;
@@ -116,5 +117,37 @@ public class IntervalSpawnElement implements IAutoSpawnCustomSettingsHandler {
 
     public Location getSpawnLocation() {
         return StringUtils.get().fromStringToLocation(this.location);
+    }
+
+    public Boolean getSpawnAfterLastBossIsKilled() {
+        return this.spawnAfterLastBossIsKilled;
+    }
+
+    public String getLocation() {
+        return this.location;
+    }
+
+    public String getPlaceholder() {
+        return this.placeholder;
+    }
+
+    public Integer getSpawnRate() {
+        return this.spawnRate;
+    }
+
+    public void setSpawnAfterLastBossIsKilled(Boolean spawnAfterLastBossIsKilled) {
+        this.spawnAfterLastBossIsKilled = spawnAfterLastBossIsKilled;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setPlaceholder(String placeholder) {
+        this.placeholder = placeholder;
+    }
+
+    public void setSpawnRate(Integer spawnRate) {
+        this.spawnRate = spawnRate;
     }
 }

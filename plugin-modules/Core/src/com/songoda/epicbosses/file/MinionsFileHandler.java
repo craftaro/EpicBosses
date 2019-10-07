@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.utils.file.FileHandler;
 import org.bukkit.plugin.java.JavaPlugin;

@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.managers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.holder.ActiveMinionHolder;
 import com.songoda.epicbosses.managers.interfaces.IMechanicManager;
@@ -20,10 +20,10 @@ import java.util.Queue;
 public class MinionMechanicManager implements IMechanicManager<MinionEntity, ActiveMinionHolder, IMinionMechanic> {
 
     private Queue<IMinionMechanic> mechanics;
-    private final CustomBosses customBosses;
+    private final EpicBosses epicBosses;
 
-    public MinionMechanicManager(CustomBosses customBosses) {
-        this.customBosses = customBosses;
+    public MinionMechanicManager(EpicBosses epicBosses) {
+        this.epicBosses = epicBosses;
     }
 
     @Override
@@ -33,8 +33,8 @@ public class MinionMechanicManager implements IMechanicManager<MinionEntity, Act
         registerMechanic(new EntityTypeMechanic());
         registerMechanic(new NameMechanic());
         registerMechanic(new HealthMechanic());
-        registerMechanic(new EquipmentMechanic(this.customBosses.getItemStackManager()));
-        registerMechanic(new WeaponMechanic(this.customBosses.getItemStackManager()));
+        registerMechanic(new EquipmentMechanic(this.epicBosses.getItemStackManager()));
+        registerMechanic(new WeaponMechanic(this.epicBosses.getItemStackManager()));
         registerMechanic(new PotionMechanic());
         registerMechanic(new SettingsMechanic());
     }

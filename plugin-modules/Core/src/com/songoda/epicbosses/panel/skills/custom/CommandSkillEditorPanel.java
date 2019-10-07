@@ -1,7 +1,7 @@
 package com.songoda.epicbosses.panel.skills.custom;
 
 import com.google.gson.JsonObject;
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.skills.Skill;
@@ -29,9 +29,9 @@ import java.util.*;
  */
 public class CommandSkillEditorPanel extends VariablePanelHandler<Skill> {
 
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public CommandSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public CommandSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -117,8 +117,8 @@ public class CommandSkillEditorPanel extends VariablePanelHandler<Skill> {
 
                 ItemStack itemStack = new ItemStack(Material.BOOK);
 
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Skills.Commands.lore"), replaceMap);
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.Commands.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.Skills.Commands.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.Commands.name"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, event -> this.bossPanelManager.getModifyCommandEditMenu().openFor((Player) event.getWhoClicked(), skill, subCommandSkillElement));
             }

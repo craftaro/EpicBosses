@@ -1,8 +1,6 @@
 package com.songoda.epicbosses.utils.potion.holder;
 
 import com.google.gson.annotations.Expose;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @author Charles Cullen
@@ -11,8 +9,10 @@ import lombok.Setter;
  */
 public class PotionEffectHolder {
 
-    @Expose @Getter @Setter private String type;
-    @Expose @Getter @Setter private Integer level, duration;
+    @Expose
+    private String type;
+    @Expose
+    private Integer level, duration;
 
     public PotionEffectHolder(String type, Integer level, Integer duration) {
         this.type = type;
@@ -20,4 +20,27 @@ public class PotionEffectHolder {
         this.duration = duration;
     }
 
+    public String getType() {
+        return this.type;
+    }
+
+    public Integer getLevel() {
+        return this.level;
+    }
+
+    public Integer getDuration() {
+        return this.duration;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
 }

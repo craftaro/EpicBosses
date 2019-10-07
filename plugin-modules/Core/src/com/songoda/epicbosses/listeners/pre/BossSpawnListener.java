@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.listeners.pre;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.events.BossSpawnEvent;
@@ -10,14 +10,9 @@ import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.BossLocationManager;
 import com.songoda.epicbosses.managers.BossTauntManager;
-import com.songoda.epicbosses.utils.Message;
-import com.songoda.epicbosses.utils.MessageUtils;
-import com.songoda.epicbosses.utils.NumberUtils;
-import com.songoda.epicbosses.utils.ServerUtils;
-import com.songoda.epicbosses.utils.StringUtils;
+import com.songoda.epicbosses.utils.*;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.version.VersionHandler;
-import java.util.ArrayList;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -30,6 +25,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -45,11 +41,11 @@ public class BossSpawnListener implements Listener {
     private BossTauntManager bossTauntManager;
     private VersionHandler versionHandler;
 
-    public BossSpawnListener(CustomBosses customBosses) {
-        this.versionHandler = customBosses.getVersionHandler();
-        this.bossTauntManager = customBosses.getBossTauntManager();
-        this.bossEntityManager = customBosses.getBossEntityManager();
-        this.bossLocationManager = customBosses.getBossLocationManager();
+    public BossSpawnListener(EpicBosses epicBosses) {
+        this.versionHandler = epicBosses.getVersionHandler();
+        this.bossTauntManager = epicBosses.getBossTauntManager();
+        this.bossEntityManager = epicBosses.getBossEntityManager();
+        this.bossLocationManager = epicBosses.getBossLocationManager();
     }
 
     @EventHandler

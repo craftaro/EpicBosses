@@ -1,6 +1,5 @@
 package com.songoda.epicbosses.utils.panel.builder;
 
-import lombok.Getter;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
@@ -23,12 +22,12 @@ import java.util.Set;
  */
 public class PanelBuilder {
 
-    @Getter private final Map<String, String> replaceMap = new HashMap<>();
+    private final Map<String, String> replaceMap = new HashMap<>();
     private final Set<Integer> defaultSlots = new HashSet<>();
     private final ConfigurationSection configurationSection;
     private final PanelBuilderSettings panelBuilderSettings;
 
-    @Getter private PanelBuilderCounter panelBuilderCounter;
+    private PanelBuilderCounter panelBuilderCounter;
 
     private String title;
     private Inventory inventory;
@@ -156,5 +155,13 @@ public class PanelBuilder {
         }
 
         return input;
+    }
+
+    public Map<String, String> getReplaceMap() {
+        return this.replaceMap;
+    }
+
+    public PanelBuilderCounter getPanelBuilderCounter() {
+        return this.panelBuilderCounter;
     }
 }

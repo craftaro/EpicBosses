@@ -3,8 +3,6 @@ package com.songoda.epicbosses.targeting;
 import com.songoda.epicbosses.holder.IActiveHolder;
 import com.songoda.epicbosses.managers.BossTargetManager;
 import com.songoda.epicbosses.utils.ServerUtils;
-import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
@@ -22,8 +20,8 @@ import java.util.UUID;
  */
 public abstract class TargetHandler<Holder extends IActiveHolder> implements ITarget {
 
-    @Getter protected final BossTargetManager bossTargetManager;
-    @Getter protected final Holder holder;
+    protected final BossTargetManager bossTargetManager;
+    protected final Holder holder;
 
     public TargetHandler(Holder holder, BossTargetManager bossTargetManager) {
         this.holder = holder;
@@ -84,4 +82,11 @@ public abstract class TargetHandler<Holder extends IActiveHolder> implements ITa
         });
     }
 
+    public BossTargetManager getBossTargetManager() {
+        return this.bossTargetManager;
+    }
+
+    public Holder getHolder() {
+        return this.holder;
+    }
 }

@@ -6,8 +6,6 @@ import com.songoda.epicbosses.droptable.elements.DropTableElement;
 import com.songoda.epicbosses.droptable.elements.GiveTableElement;
 import com.songoda.epicbosses.droptable.elements.SprayTableElement;
 import com.songoda.epicbosses.utils.BossesGson;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @author Charles Cullen
@@ -16,8 +14,10 @@ import lombok.Setter;
  */
 public class DropTable {
 
-    @Expose @Getter @Setter private String dropType;
-    @Expose @Getter @Setter private JsonObject rewards;
+    @Expose
+    private String dropType;
+    @Expose
+    private JsonObject rewards;
 
     public DropTable(String dropType, JsonObject rewards) {
         this.dropType = dropType;
@@ -48,4 +48,19 @@ public class DropTable {
         return null;
     }
 
+    public String getDropType() {
+        return this.dropType;
+    }
+
+    public JsonObject getRewards() {
+        return this.rewards;
+    }
+
+    public void setDropType(String dropType) {
+        this.dropType = dropType;
+    }
+
+    public void setRewards(JsonObject rewards) {
+        this.rewards = rewards;
+    }
 }

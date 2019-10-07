@@ -1,7 +1,7 @@
 package com.songoda.epicbosses.panel.skills.custom.custom;
 
 import com.google.gson.JsonObject;
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
@@ -32,9 +32,9 @@ public class CustomSkillTypeEditorPanel extends SubVariablePanelHandler<Skill, C
 
     private ItemStackConverter itemStackConverter;
     private BossSkillManager bossSkillManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public CustomSkillTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public CustomSkillTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -100,14 +100,14 @@ public class CustomSkillTypeEditorPanel extends SubVariablePanelHandler<Skill, C
                 if(name.equalsIgnoreCase(current)) {
                     itemStack = this.itemStackConverter.from(this.plugin.getItemStackManager().getItemStackHolder("DefaultSelectedCustomSkillTypeItem"));
 
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.CustomType.selectedName"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.CustomType.selectedName"), replaceMap);
                 } else {
                     itemStack = this.itemStackConverter.from(this.plugin.getItemStackManager().getItemStackHolder("DefaultCustomSkillTypeItem"));
 
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.CustomType.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.CustomType.name"), replaceMap);
                 }
 
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Skills.CustomType.lore"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.Skills.CustomType.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, event -> {
                     IOtherSkillDataElement otherSkillDataElement = customSkillHandler.getOtherSkillData();

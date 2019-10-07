@@ -1,13 +1,12 @@
 package com.songoda.epicbosses.listeners.after;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.events.BossDeathEvent;
 import com.songoda.epicbosses.events.PreBossDeathEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.holder.DeadBossHolder;
-import com.songoda.epicbosses.listeners.IBossDeathHandler;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.MessageUtils;
@@ -16,13 +15,15 @@ import com.songoda.epicbosses.utils.ServerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author Charles Cullen
@@ -33,7 +34,7 @@ public class BossDeathListener implements Listener {
 
     private BossEntityManager bossEntityManager;
 
-    public BossDeathListener(CustomBosses plugin) {
+    public BossDeathListener(EpicBosses plugin) {
         this.bossEntityManager = plugin.getBossEntityManager();
     }
 

@@ -2,7 +2,7 @@ package com.songoda.epicbosses.api;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.autospawns.settings.AutoSpawnSettings;
 import com.songoda.epicbosses.autospawns.types.IntervalSpawnElement;
@@ -16,13 +16,11 @@ import com.songoda.epicbosses.entity.elements.*;
 import com.songoda.epicbosses.events.PreBossSpawnEvent;
 import com.songoda.epicbosses.events.PreBossSpawnItemEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
-import com.songoda.epicbosses.holder.ActiveMinionHolder;
 import com.songoda.epicbosses.managers.files.CommandsFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.managers.files.MessagesFileManager;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
 import com.songoda.epicbosses.skills.Skill;
-import com.songoda.epicbosses.skills.custom.Minions;
 import com.songoda.epicbosses.skills.elements.CustomMinionSkillElement;
 import com.songoda.epicbosses.skills.elements.SubCustomSkillElement;
 import com.songoda.epicbosses.skills.types.CommandSkillElement;
@@ -51,7 +49,7 @@ import java.util.Map;
  */
 public class BossAPI {
 
-    private static CustomBosses PLUGIN;
+    private static EpicBosses PLUGIN;
 
     /**
      * Used to update the variable to the
@@ -64,7 +62,7 @@ public class BossAPI {
      *
      * @param plugin - the plugin instance.
      */
-    public BossAPI(CustomBosses plugin) {
+    public BossAPI(EpicBosses plugin) {
         if(PLUGIN != null) {
             Debug.ATTEMPTED_TO_UPDATE_PLUGIN.debug();
             return;

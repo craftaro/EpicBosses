@@ -1,13 +1,12 @@
 package com.songoda.epicbosses.panel;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.SkillsFileManager;
 import com.songoda.epicbosses.panel.handlers.MainListPanelHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.utils.NumberUtils;
-import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
@@ -31,9 +30,9 @@ public class CustomSkillsPanel extends MainListPanelHandler {
 
     private ItemStackConverter itemStackConverter;
     private SkillsFileManager skillsFileManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public CustomSkillsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public CustomSkillsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -84,8 +83,8 @@ public class CustomSkillsPanel extends MainListPanelHandler {
                 replaceMap.put("{customMessage}", customMessage);
                 replaceMap.put("{radius}", NumberUtils.get().formatDouble(radius));
 
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.Main.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Skills.Main.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.Main.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.Skills.Main.lore"), replaceMap);
 
 
                 panel.setItem(realisticSlot, itemStack, e -> this.bossPanelManager.getMainSkillEditMenu().openFor((Player) e.getWhoClicked(), skill));

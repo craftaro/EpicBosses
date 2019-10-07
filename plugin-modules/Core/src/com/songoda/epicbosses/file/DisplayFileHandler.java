@@ -10,9 +10,9 @@ import java.io.File;
  * @version 1.0.0
  * @since 11-Oct-18
  */
-public class ConfigFileHandler extends YmlFileHandler {
+public class DisplayFileHandler extends YmlFileHandler {
 
-    public ConfigFileHandler(JavaPlugin javaPlugin) {
-        super(javaPlugin, true, new File(javaPlugin.getDataFolder(), "config.yml"));
+    public DisplayFileHandler(JavaPlugin javaPlugin) {
+        super(javaPlugin, true, new File(javaPlugin.getDataFolder(), "display.yml"));
     }
 }

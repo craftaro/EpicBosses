@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.utils;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -64,7 +64,7 @@ public enum Debug {
 
     AUTOSPAWN_INTERVALNOTREAL("The specified interval of {0} is not a valid integer for the auto spawn interval table {1}.");
 
-    private static CustomBosses PLUGIN;
+    private static EpicBosses PLUGIN;
 
     private String message;
 
@@ -102,7 +102,7 @@ public enum Debug {
         PLAIN.debug(message);
     }
 
-    public static void setPlugin(CustomBosses plugin) {
+    public static void setPlugin(EpicBosses plugin) {
         PLUGIN = plugin;
     }
 

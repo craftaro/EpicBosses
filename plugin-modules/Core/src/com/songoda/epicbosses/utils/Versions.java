@@ -1,7 +1,5 @@
 package com.songoda.epicbosses.utils;
 
-import lombok.Getter;
-
 /**
  * @author Charles Cullen
  * @version 1.0.0
@@ -23,7 +21,7 @@ public enum Versions {
     v1_13_R2(12, "1.13.2"),
     v1_14_R1(13, "1.14");
 
-    @Getter private String displayVersion, bukkitVersion;
+    private String displayVersion, bukkitVersion;
     private int weight;
 
     Versions(int weight, String displayVersion) {
@@ -58,4 +56,11 @@ public enum Versions {
         return null;
     }
 
+    public String getDisplayVersion() {
+        return this.displayVersion;
+    }
+
+    public String getBukkitVersion() {
+        return this.bukkitVersion;
+    }
 }

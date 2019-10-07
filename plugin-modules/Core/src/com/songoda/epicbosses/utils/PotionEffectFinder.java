@@ -1,7 +1,5 @@
 package com.songoda.epicbosses.utils;
 
-import lombok.Getter;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
@@ -46,9 +44,9 @@ public enum PotionEffectFinder {
     Weakness("Weakness", PotionEffectType.WEAKNESS),
     Wither("Wither", PotionEffectType.WITHER, "blackhearts");
 
-    @Getter private List<String> names = new ArrayList<>();
-    @Getter private PotionEffectType potionEffectType;
-    @Getter private String fancyName;
+    private List<String> names = new ArrayList<>();
+    private PotionEffectType potionEffectType;
+    private String fancyName;
 
     PotionEffectFinder(String fancyName, PotionEffectType potionEffectType, String... names) {
         this.fancyName = fancyName;
@@ -79,5 +77,17 @@ public enum PotionEffectFinder {
         }
 
         return null;
+    }
+
+    public List<String> getNames() {
+        return this.names;
+    }
+
+    public PotionEffectType getPotionEffectType() {
+        return this.potionEffectType;
+    }
+
+    public String getFancyName() {
+        return this.fancyName;
     }
 }

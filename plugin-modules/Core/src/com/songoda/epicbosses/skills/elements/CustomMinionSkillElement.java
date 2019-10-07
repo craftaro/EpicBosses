@@ -2,10 +2,6 @@ package com.songoda.epicbosses.skills.elements;
 
 import com.google.gson.annotations.Expose;
 import com.songoda.epicbosses.skills.interfaces.IOtherSkillDataElement;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.util.List;
 
 /**
  * @author Charles Cullen
@@ -14,12 +10,29 @@ import java.util.List;
  */
 public class CustomMinionSkillElement implements IOtherSkillDataElement {
 
-    @Expose @Getter @Setter private String minionToSpawn;
-    @Expose @Getter @Setter private Integer amount;
+    @Expose
+    private String minionToSpawn;
+    @Expose
+    private Integer amount;
 
     public CustomMinionSkillElement(Integer amount, String minionToSpawn) {
         this.amount = amount;
         this.minionToSpawn = minionToSpawn;
     }
 
+    public String getMinionToSpawn() {
+        return this.minionToSpawn;
+    }
+
+    public Integer getAmount() {
+        return this.amount;
+    }
+
+    public void setMinionToSpawn(String minionToSpawn) {
+        this.minionToSpawn = minionToSpawn;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
 }

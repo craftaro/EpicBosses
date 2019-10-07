@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.bosses.commands;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -33,9 +33,9 @@ public class OnDeathCommandEditor extends VariablePanelHandler<BossEntity> {
 
     private CommandsFileManager commandsFileManager;
     private ItemStackConverter itemStackConverter;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public OnDeathCommandEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public OnDeathCommandEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -98,13 +98,13 @@ public class OnDeathCommandEditor extends VariablePanelHandler<BossEntity> {
                 replaceMap.put("{name}", name);
 
                 if(bossEntity.getCommands().getOnDeath() != null && bossEntity.getCommands().getOnDeath().equalsIgnoreCase(name)) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Commands.selectedName"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Commands.selectedName"), replaceMap);
                 } else {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Commands.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Commands.name"), replaceMap);
                 }
 
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                List<String> presetLore = this.plugin.getConfig().getStringList("Display.Boss.Commands.lore");
+                List<String> presetLore = this.plugin.getDisplay().getStringList("Display.Boss.Commands.lore");
                 List<String> newLore = new ArrayList<>();
 
                 for(String s : presetLore) {

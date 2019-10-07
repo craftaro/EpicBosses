@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.autospawns;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -29,9 +29,9 @@ import java.util.Map;
  */
 public class AutoSpawnCustomSettingsEditorPanel extends VariablePanelHandler<AutoSpawn> {
 
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public AutoSpawnCustomSettingsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public AutoSpawnCustomSettingsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -97,10 +97,10 @@ public class AutoSpawnCustomSettingsEditorPanel extends VariablePanelHandler<Aut
 
                 if(displayStack == null || displayStack.getType() == Material.AIR) return;
 
-                ItemStackUtils.applyDisplayName(displayStack, this.plugin.getConfig().getString("Display.AutoSpawns.CustomSettings.name"), replaceMap);
+                ItemStackUtils.applyDisplayName(displayStack, this.plugin.getDisplay().getString("Display.AutoSpawns.CustomSettings.name"), replaceMap);
 
                 ItemMeta itemMeta = displayStack.getItemMeta();
-                List<String> lore = this.plugin.getConfig().getStringList("Display.AutoSpawns.CustomSettings.lore");
+                List<String> lore = this.plugin.getDisplay().getStringList("Display.AutoSpawns.CustomSettings.lore");
                 List<String> newLore = new ArrayList<>();
 
                 for(String s : lore) {

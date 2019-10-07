@@ -10,7 +10,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Charles Cullen

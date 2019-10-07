@@ -1,6 +1,5 @@
 package com.songoda.epicbosses.utils;
 
-import lombok.Getter;
 import org.bukkit.enchantments.Enchantment;
 
 import java.util.ArrayList;
@@ -45,9 +44,9 @@ public enum EnchantFinder {
     mending("Mending", Enchantment.getByName("MENDING"), "mending"),
     curse_of_vanishing("Curse of Vanishing", Enchantment.getByName("VANISHING_CURSE"), "vanishing", "vanishing curse", "vanishing_curse", "curseofvanishing", "vanishingcurse", "curse of vanishing", "curse_of_vanishing");
 
-    @Getter private List<String> names = new ArrayList<>();
-    @Getter private Enchantment enchantment;
-    @Getter private String fancyName;
+    private List<String> names = new ArrayList<>();
+    private Enchantment enchantment;
+    private String fancyName;
 
     EnchantFinder(String fancyName, Enchantment enchantment, String... names) {
         this.fancyName = fancyName;
@@ -81,5 +80,17 @@ public enum EnchantFinder {
         }
 
         return null;
+    }
+
+    public List<String> getNames() {
+        return this.names;
+    }
+
+    public Enchantment getEnchantment() {
+        return this.enchantment;
+    }
+
+    public String getFancyName() {
+        return this.fancyName;
     }
 }

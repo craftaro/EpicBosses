@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.utils;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -42,7 +42,7 @@ public class ServerUtils {
     }
 
     public void logDebug(String log) {
-        if (CustomBosses.get().isDebug()) {
+        if (EpicBosses.getInstance().isDebug()) {
             log("&d[EpicBosses] Debug - &7" + log);
         }
     }

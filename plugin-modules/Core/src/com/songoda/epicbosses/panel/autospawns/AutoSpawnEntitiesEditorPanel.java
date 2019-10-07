@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.autospawns;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.entity.BossEntity;
@@ -35,9 +35,9 @@ public class AutoSpawnEntitiesEditorPanel extends VariablePanelHandler<AutoSpawn
     private AutoSpawnFileManager autoSpawnFileManager;
     private BossesFileManager bossesFileManager;
     private ItemsFileManager itemsFileManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public AutoSpawnEntitiesEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public AutoSpawnEntitiesEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -101,12 +101,12 @@ public class AutoSpawnEntitiesEditorPanel extends VariablePanelHandler<AutoSpawn
                 replaceMap.put("{dropTable}", bossEntity.getDrops().getDropTable());
 
                 if(current.contains(name)) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.AutoSpawns.Entities.selectedName"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.AutoSpawns.Entities.selectedName"), replaceMap);
                 } else {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.AutoSpawns.Entities.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.AutoSpawns.Entities.name"), replaceMap);
                 }
 
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.AutoSpawns.Entities.lore"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.AutoSpawns.Entities.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, event -> {
                     if(!autoSpawn.isEditing()) {

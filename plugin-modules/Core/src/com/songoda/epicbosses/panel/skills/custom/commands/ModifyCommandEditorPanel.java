@@ -1,7 +1,7 @@
 package com.songoda.epicbosses.panel.skills.custom.commands;
 
 import com.google.gson.JsonObject;
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
@@ -36,7 +36,7 @@ public class ModifyCommandEditorPanel extends SubVariablePanelHandler<Skill, Sub
     private SkillsFileManager skillsFileManager;
     private BossSkillManager bossSkillManager;
 
-    public ModifyCommandEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public ModifyCommandEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.bossSkillManager = plugin.getBossSkillManager();

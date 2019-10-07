@@ -1,9 +1,12 @@
 package com.songoda.epicbosses.panel.skills.custom.potions;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.skills.Skill;
-import com.songoda.epicbosses.utils.*;
+import com.songoda.epicbosses.utils.PotionEffectFinder;
+import com.songoda.epicbosses.utils.ServerUtils;
+import com.songoda.epicbosses.utils.StringUtils;
+import com.songoda.epicbosses.utils.Versions;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
@@ -33,9 +36,9 @@ import java.util.stream.Collectors;
 public class PotionEffectTypeEditorPanel extends SubVariablePanelHandler<Skill, PotionEffectHolder> {
 
     private PotionEffectConverter potionEffectConverter = new PotionEffectConverter();
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public PotionEffectTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public PotionEffectTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -102,13 +105,13 @@ public class PotionEffectTypeEditorPanel extends SubVariablePanelHandler<Skill, 
                     PotionEffectFinder potionEffectFinder = PotionEffectFinder.getByName(type);
 
                     if (potionEffectFinder != null) {
-                        ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.CreatePotion.selectedName"), replaceMap);
+                        ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.CreatePotion.selectedName"), replaceMap);
                         found = true;
                     }
                 }
 
                 if(!found) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.CreatePotion.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.CreatePotion.name"), replaceMap);
                 }
 
                 panel.setItem(realisticSlot, itemStack, e -> {

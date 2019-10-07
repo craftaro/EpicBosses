@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.droptables.types.give.commands;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.droptable.elements.GiveTableElement;
@@ -38,9 +38,9 @@ public class GiveCommandNewRewardPanel extends SubVariablePanelHandler<DropTable
     private DropTableFileManager dropTableFileManager;
     private CommandsFileManager commandsFileManager;
     private ItemStackConverter itemStackConverter;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public GiveCommandNewRewardPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public GiveCommandNewRewardPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.commandsFileManager = plugin.getBossCommandFileManager();
@@ -94,10 +94,10 @@ public class GiveCommandNewRewardPanel extends SubVariablePanelHandler<DropTable
 
                 replaceMap.put("{name}", name);
 
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Commands.name"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Commands.name"), replaceMap);
 
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                List<String> presetLore = this.plugin.getConfig().getStringList("Display.Boss.Commands.lore");
+                List<String> presetLore = this.plugin.getDisplay().getStringList("Display.Boss.Commands.lore");
                 List<String> newLore = new ArrayList<>();
 
                 for(String s : presetLore) {

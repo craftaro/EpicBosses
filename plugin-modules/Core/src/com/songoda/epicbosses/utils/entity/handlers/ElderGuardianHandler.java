@@ -4,7 +4,8 @@ import com.songoda.epicbosses.utils.Versions;
 import com.songoda.epicbosses.utils.entity.ICustomEntityHandler;
 import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.Location;
-import org.bukkit.entity.*;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 
 /**
  * @author Charles Cullen

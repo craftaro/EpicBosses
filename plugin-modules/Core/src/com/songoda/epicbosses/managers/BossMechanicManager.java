@@ -1,13 +1,12 @@
 package com.songoda.epicbosses.managers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.interfaces.IMechanicManager;
 import com.songoda.epicbosses.mechanics.IBossMechanic;
 import com.songoda.epicbosses.mechanics.boss.*;
 import com.songoda.epicbosses.utils.Debug;
-import com.songoda.epicbosses.utils.IMechanic;
 import com.songoda.epicbosses.utils.ServerUtils;
 
 import java.util.LinkedList;
@@ -21,10 +20,10 @@ import java.util.Queue;
 public class BossMechanicManager implements IMechanicManager<BossEntity, ActiveBossHolder, IBossMechanic> {
 
     private Queue<IBossMechanic> mechanics;
-    private final CustomBosses customBosses;
+    private final EpicBosses epicBosses;
 
-    public BossMechanicManager(CustomBosses customBosses) {
-        this.customBosses = customBosses;
+    public BossMechanicManager(EpicBosses epicBosses) {
+        this.epicBosses = epicBosses;
     }
 
     @Override
@@ -34,8 +33,8 @@ public class BossMechanicManager implements IMechanicManager<BossEntity, ActiveB
         registerMechanic(new EntityTypeMechanic());
         registerMechanic(new NameMechanic());
         registerMechanic(new HealthMechanic());
-        registerMechanic(new EquipmentMechanic(this.customBosses.getItemStackManager()));
-        registerMechanic(new WeaponMechanic(this.customBosses.getItemStackManager()));
+        registerMechanic(new EquipmentMechanic(this.epicBosses.getItemStackManager()));
+        registerMechanic(new WeaponMechanic(this.epicBosses.getItemStackManager()));
         registerMechanic(new PotionMechanic());
         registerMechanic(new SettingsMechanic());
     }

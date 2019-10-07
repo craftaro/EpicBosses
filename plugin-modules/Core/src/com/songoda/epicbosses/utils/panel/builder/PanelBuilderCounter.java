@@ -1,6 +1,5 @@
 package com.songoda.epicbosses.utils.panel.builder;
 
-import lombok.Getter;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import org.bukkit.inventory.ItemStack;
 
@@ -16,12 +15,12 @@ import java.util.Set;
  */
 public class PanelBuilderCounter {
 
-    @Getter private final Map<String, Map<Integer, Object>> specialValuesCounter = new HashMap<>();
-    @Getter private final Map<String, Set<Integer>> slotsWithCounter = new HashMap<>();
-    @Getter private final Map<String, ClickAction> clickActions = new HashMap<>();
-    @Getter private final Map<Integer, String> buttonCounters = new HashMap<>();
-    @Getter private final Map<String, ItemStack> itemStacks = new HashMap<>();
-    @Getter private final Map<Integer, Integer> pageData = new HashMap<>();
+    private final Map<String, Map<Integer, Object>> specialValuesCounter = new HashMap<>();
+    private final Map<String, Set<Integer>> slotsWithCounter = new HashMap<>();
+    private final Map<String, ClickAction> clickActions = new HashMap<>();
+    private final Map<Integer, String> buttonCounters = new HashMap<>();
+    private final Map<String, ItemStack> itemStacks = new HashMap<>();
+    private final Map<Integer, Integer> pageData = new HashMap<>();
 
     public boolean isButtonAtSlot(int slot) {
         for (Set<Integer> integers : this.slotsWithCounter.values()) {
@@ -102,4 +101,27 @@ public class PanelBuilderCounter {
         return clone;
     }
 
+    public Map<String, Map<Integer, Object>> getSpecialValuesCounter() {
+        return this.specialValuesCounter;
+    }
+
+    public Map<String, Set<Integer>> getSlotsWithCounter() {
+        return this.slotsWithCounter;
+    }
+
+    public Map<String, ClickAction> getClickActions() {
+        return this.clickActions;
+    }
+
+    public Map<Integer, String> getButtonCounters() {
+        return this.buttonCounters;
+    }
+
+    public Map<String, ItemStack> getItemStacks() {
+        return this.itemStacks;
+    }
+
+    public Map<Integer, Integer> getPageData() {
+        return this.pageData;
+    }
 }

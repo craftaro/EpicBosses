@@ -1,6 +1,5 @@
 package com.songoda.epicbosses.events;
 
-import lombok.Getter;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -14,8 +13,8 @@ public class BossDeathEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
 
-    @Getter private final ActiveBossHolder activeBossHolder;
-    @Getter private final boolean autoSpawn;
+    private final ActiveBossHolder activeBossHolder;
+    private final boolean autoSpawn;
 
     public BossDeathEvent(ActiveBossHolder activeBossHolder, boolean autoSpawn) {
         this.activeBossHolder = activeBossHolder;
@@ -29,5 +28,13 @@ public class BossDeathEvent extends Event {
 
     public static HandlerList getHandlerList() {
         return handlers;
+    }
+
+    public ActiveBossHolder getActiveBossHolder() {
+        return this.activeBossHolder;
+    }
+
+    public boolean isAutoSpawn() {
+        return this.autoSpawn;
     }
 }

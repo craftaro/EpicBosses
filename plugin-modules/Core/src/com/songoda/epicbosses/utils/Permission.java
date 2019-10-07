@@ -1,6 +1,5 @@
 package com.songoda.epicbosses.utils;
 
-import lombok.Getter;
 import org.bukkit.command.CommandSender;
 
 /**
@@ -21,7 +20,7 @@ public enum Permission {
     shop("boss.shop"),
     time("boss.time");
 
-    @Getter private String permission;
+    private String permission;
 
     Permission(String permission) {
         this.permission = permission;
@@ -31,4 +30,7 @@ public enum Permission {
         return commandSender.hasPermission(getPermission());
     }
 
+    public String getPermission() {
+        return this.permission;
+    }
 }

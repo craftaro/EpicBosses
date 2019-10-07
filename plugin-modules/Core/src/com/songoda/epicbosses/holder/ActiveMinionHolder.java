@@ -3,9 +3,6 @@ package com.songoda.epicbosses.holder;
 import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.targeting.TargetHandler;
 import com.songoda.epicbosses.utils.ServerUtils;
-import lombok.Getter;
-import lombok.Setter;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 
@@ -20,13 +17,13 @@ import java.util.UUID;
  */
 public class ActiveMinionHolder implements IActiveHolder {
 
-    @Getter @Setter private TargetHandler<ActiveMinionHolder> targetHandler = null;
+    private TargetHandler<ActiveMinionHolder> targetHandler = null;
 
-    @Getter private Map<Integer, UUID> livingEntityMap = new HashMap<>();
-    @Getter private ActiveBossHolder activeBossHolder;
-    @Getter private final MinionEntity minionEntity;
-    @Getter private final Location location;
-    @Getter private final String name;
+    private Map<Integer, UUID> livingEntityMap = new HashMap<>();
+    private ActiveBossHolder activeBossHolder;
+    private final MinionEntity minionEntity;
+    private final Location location;
+    private final String name;
 
     public ActiveMinionHolder(ActiveBossHolder activeBossHolder, MinionEntity minionEntity, Location spawnLocation, String name) {
         this.activeBossHolder = activeBossHolder;
@@ -87,4 +84,31 @@ public class ActiveMinionHolder implements IActiveHolder {
         return this.activeBossHolder.hasAttacked(uuid);
     }
 
+    public TargetHandler<ActiveMinionHolder> getTargetHandler() {
+        return this.targetHandler;
+    }
+
+    public Map<Integer, UUID> getLivingEntityMap() {
+        return this.livingEntityMap;
+    }
+
+    public ActiveBossHolder getActiveBossHolder() {
+        return this.activeBossHolder;
+    }
+
+    public MinionEntity getMinionEntity() {
+        return this.minionEntity;
+    }
+
+    public Location getLocation() {
+        return this.location;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setTargetHandler(TargetHandler<ActiveMinionHolder> targetHandler) {
+        this.targetHandler = targetHandler;
+    }
 }

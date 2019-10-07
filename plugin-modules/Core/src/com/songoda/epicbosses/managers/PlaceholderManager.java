@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.managers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.holder.ActiveAutoSpawnHolder;
 import com.songoda.epicbosses.holder.autospawn.ActiveIntervalAutoSpawnHolder;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
@@ -10,7 +10,7 @@ public class PlaceholderManager extends PlaceholderExpansion {
 
     private AutoSpawnManager autoSpawnManager;
 
-    public PlaceholderManager(CustomBosses plugin) {
+    public PlaceholderManager(EpicBosses plugin) {
         this.autoSpawnManager = plugin.getAutoSpawnManager();
     }
 
@@ -62,7 +62,7 @@ public class PlaceholderManager extends PlaceholderExpansion {
 
     @Override
     public String getVersion() {
-        return CustomBosses.get().getDescription().getVersion();
+        return EpicBosses.getInstance().getDescription().getVersion();
     }
 
     @Override

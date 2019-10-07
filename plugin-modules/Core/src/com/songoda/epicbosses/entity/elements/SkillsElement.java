@@ -1,8 +1,6 @@
 package com.songoda.epicbosses.entity.elements;
 
 import com.google.gson.annotations.Expose;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -13,9 +11,12 @@ import java.util.List;
  */
 public class SkillsElement {
 
-    @Expose @Getter @Setter private Double overallChance;
-    @Expose @Getter @Setter private String masterMessage;
-    @Expose @Getter @Setter private List<String> skills;
+    @Expose
+    private Double overallChance;
+    @Expose
+    private String masterMessage;
+    @Expose
+    private List<String> skills;
 
     public SkillsElement(Double overallChance, String masterMessage, List<String> skills) {
         this.overallChance = overallChance;
@@ -23,4 +24,27 @@ public class SkillsElement {
         this.skills = skills;
     }
 
+    public Double getOverallChance() {
+        return this.overallChance;
+    }
+
+    public String getMasterMessage() {
+        return this.masterMessage;
+    }
+
+    public List<String> getSkills() {
+        return this.skills;
+    }
+
+    public void setOverallChance(Double overallChance) {
+        this.overallChance = overallChance;
+    }
+
+    public void setMasterMessage(String masterMessage) {
+        this.masterMessage = masterMessage;
+    }
+
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
+    }
 }

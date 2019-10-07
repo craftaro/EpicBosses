@@ -1,8 +1,6 @@
 package com.songoda.epicbosses.entity.elements;
 
 import com.google.gson.annotations.Expose;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @author Charles Cullen
@@ -11,12 +9,29 @@ import lombok.Setter;
  */
 public class OnSpawnMessageElement {
 
-    @Expose @Getter @Setter private String message;
-    @Expose @Getter @Setter private Integer radius;
+    @Expose
+    private String message;
+    @Expose
+    private Integer radius;
 
     public OnSpawnMessageElement(String message, Integer radius) {
         this.message = message;
         this.radius = radius;
     }
 
+    public String getMessage() {
+        return this.message;
+    }
+
+    public Integer getRadius() {
+        return this.radius;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setRadius(Integer radius) {
+        this.radius = radius;
+    }
 }

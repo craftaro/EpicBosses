@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.managers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.TauntElement;
@@ -20,9 +20,9 @@ import java.util.Queue;
  */
 public class BossTauntManager {
 
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public BossTauntManager(CustomBosses plugin) {
+    public BossTauntManager(EpicBosses plugin) {
         this.plugin = plugin;
     }
 

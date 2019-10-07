@@ -1,8 +1,6 @@
 package com.songoda.epicbosses.droptable.elements;
 
 import com.google.gson.annotations.Expose;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Map;
 
@@ -13,10 +11,14 @@ import java.util.Map;
  */
 public class GiveTableSubElement {
 
-    @Expose @Getter @Setter private Map<String, Double> items, commands;
-    @Expose @Getter @Setter private Integer maxDrops, maxCommands;
-    @Expose @Getter @Setter private Boolean randomDrops, randomCommands;
-    @Expose @Getter @Setter private Double requiredPercentage;
+    @Expose
+    private Map<String, Double> items, commands;
+    @Expose
+    private Integer maxDrops, maxCommands;
+    @Expose
+    private Boolean randomDrops, randomCommands;
+    @Expose
+    private Double requiredPercentage;
 
     public GiveTableSubElement(Map<String, Double> items, Map<String, Double> commands, Integer maxDrops, Integer maxCommands, Boolean randomDrops, Boolean randomCommands, Double requiredPercentage) {
         this.items = items;
@@ -28,4 +30,59 @@ public class GiveTableSubElement {
         this.requiredPercentage = requiredPercentage;
     }
 
+    public Map<String, Double> getItems() {
+        return this.items;
+    }
+
+    public Map<String, Double> getCommands() {
+        return this.commands;
+    }
+
+    public Integer getMaxDrops() {
+        return this.maxDrops;
+    }
+
+    public Integer getMaxCommands() {
+        return this.maxCommands;
+    }
+
+    public Boolean getRandomDrops() {
+        return this.randomDrops;
+    }
+
+    public Boolean getRandomCommands() {
+        return this.randomCommands;
+    }
+
+    public Double getRequiredPercentage() {
+        return this.requiredPercentage;
+    }
+
+    public void setItems(Map<String, Double> items) {
+        this.items = items;
+    }
+
+    public void setCommands(Map<String, Double> commands) {
+        this.commands = commands;
+    }
+
+    public void setMaxDrops(Integer maxDrops) {
+        this.maxDrops = maxDrops;
+    }
+
+    public void setMaxCommands(Integer maxCommands) {
+        this.maxCommands = maxCommands;
+    }
+
+    public void setRandomDrops(Boolean randomDrops) {
+        this.randomDrops = randomDrops;
+    }
+
+    public void setRandomCommands(Boolean randomCommands) {
+        this.randomCommands = randomCommands;
+    }
+
+    public void setRequiredPercentage(Double requiredPercentage) {
+        this.requiredPercentage = requiredPercentage;
+    }
 }

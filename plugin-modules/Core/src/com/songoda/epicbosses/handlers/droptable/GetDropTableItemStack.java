@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.handlers.droptable;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.handlers.IGetDropTableListItem;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
@@ -17,7 +17,7 @@ public class GetDropTableItemStack implements IGetDropTableListItem<ItemStack> {
 
     private ItemsFileManager itemsFileManager;
 
-    public GetDropTableItemStack(CustomBosses plugin) {
+    public GetDropTableItemStack(EpicBosses plugin) {
         this.itemsFileManager = plugin.getItemStackManager();
     }
 

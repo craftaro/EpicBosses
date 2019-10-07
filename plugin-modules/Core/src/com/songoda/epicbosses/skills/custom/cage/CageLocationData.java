@@ -1,7 +1,5 @@
 package com.songoda.epicbosses.skills.custom.cage;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.block.BlockState;
 
@@ -12,10 +10,10 @@ import org.bukkit.block.BlockState;
  */
 public class CageLocationData {
 
-    @Getter @Setter private BlockState oldBlockState;
-    @Getter @Setter private int amountOfCages = 0;
+    private BlockState oldBlockState;
+    private int amountOfCages = 0;
 
-    @Getter private final Location location;
+    private final Location location;
 
     public CageLocationData(Location location, int amountOfCages) {
         this(location);
@@ -27,4 +25,23 @@ public class CageLocationData {
         this.location = location;
     }
 
+    public BlockState getOldBlockState() {
+        return this.oldBlockState;
+    }
+
+    public int getAmountOfCages() {
+        return this.amountOfCages;
+    }
+
+    public Location getLocation() {
+        return this.location;
+    }
+
+    public void setOldBlockState(BlockState oldBlockState) {
+        this.oldBlockState = oldBlockState;
+    }
+
+    public void setAmountOfCages(int amountOfCages) {
+        this.amountOfCages = amountOfCages;
+    }
 }

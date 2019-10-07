@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.skills.custom.custom;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
@@ -9,7 +9,6 @@ import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
-import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import org.bukkit.Material;
@@ -25,9 +24,9 @@ import java.util.*;
  */
 public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Skill, CustomSkillElement> {
 
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public MaterialTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public MaterialTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -91,9 +90,9 @@ public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Sk
                 replaceMap.put("{type}", StringUtils.get().formatString(name));
 
                 if(current.equalsIgnoreCase(name)) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.Material.selectedName"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.Material.selectedName"), replaceMap);
                 } else {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.Material.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.Material.name"), replaceMap);
                 }
 
                 panel.setItem(realisticSlot, itemStack, event -> {

@@ -1,9 +1,8 @@
 package com.songoda.epicbosses.commands.boss;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
-import com.songoda.epicbosses.autospawns.SpawnType;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.managers.BossDropTableManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
@@ -40,7 +39,7 @@ public class BossNewCmd extends SubCommand {
     private SkillsFileManager skillsFileManager;
     private BossSkillManager bossSkillManager;
 
-    public BossNewCmd(CustomBosses plugin) {
+    public BossNewCmd(EpicBosses plugin) {
         super("new");
 
         this.bossSkillManager = plugin.getBossSkillManager();

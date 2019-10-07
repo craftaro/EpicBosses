@@ -1,8 +1,6 @@
 package com.songoda.epicbosses.entity.elements;
 
 import com.google.gson.annotations.Expose;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -13,8 +11,10 @@ import java.util.List;
  */
 public class TauntElement {
 
-    @Expose @Getter @Setter private Integer delay, radius;
-    @Expose @Getter @Setter private List<String> taunts;
+    @Expose
+    private Integer delay, radius;
+    @Expose
+    private List<String> taunts;
 
     public TauntElement(Integer delay, Integer radius, List<String> taunts) {
         this.delay = delay;
@@ -22,4 +22,27 @@ public class TauntElement {
         this.taunts = taunts;
     }
 
+    public Integer getDelay() {
+        return this.delay;
+    }
+
+    public Integer getRadius() {
+        return this.radius;
+    }
+
+    public List<String> getTaunts() {
+        return this.taunts;
+    }
+
+    public void setDelay(Integer delay) {
+        this.delay = delay;
+    }
+
+    public void setRadius(Integer radius) {
+        this.radius = radius;
+    }
+
+    public void setTaunts(List<String> taunts) {
+        this.taunts = taunts;
+    }
 }

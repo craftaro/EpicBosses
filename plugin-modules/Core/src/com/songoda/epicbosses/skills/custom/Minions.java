@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.skills.custom;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossSkillManager;
@@ -33,9 +33,9 @@ public class Minions extends CustomSkillHandler {
 
     private static final VersionHandler versionHandler = new VersionHandler();
 
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public Minions(CustomBosses plugin) {
+    public Minions(EpicBosses plugin) {
         this.plugin = plugin;
     }
 

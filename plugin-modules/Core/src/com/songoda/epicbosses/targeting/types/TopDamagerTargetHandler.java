@@ -6,7 +6,10 @@ import com.songoda.epicbosses.targeting.TargetHandler;
 import com.songoda.epicbosses.utils.MapUtils;
 import org.bukkit.entity.LivingEntity;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author Charles Cullen

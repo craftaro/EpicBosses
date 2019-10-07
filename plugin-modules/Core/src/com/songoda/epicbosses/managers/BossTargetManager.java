@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.managers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
@@ -11,7 +11,6 @@ import com.songoda.epicbosses.targeting.types.ClosestTargetHandler;
 import com.songoda.epicbosses.targeting.types.NotDamagedNearbyTargetHandler;
 import com.songoda.epicbosses.targeting.types.RandomNearbyTargetHandler;
 import com.songoda.epicbosses.targeting.types.TopDamagerTargetHandler;
-import lombok.Getter;
 
 /**
  * @author Charles Cullen
@@ -20,9 +19,9 @@ import lombok.Getter;
  */
 public class BossTargetManager {
 
-    @Getter private final CustomBosses plugin;
+    private final EpicBosses plugin;
 
-    public BossTargetManager(CustomBosses plugin) {
+    public BossTargetManager(EpicBosses plugin) {
         this.plugin = plugin;
     }
 
@@ -82,4 +81,7 @@ public class BossTargetManager {
         return new TopDamagerTargetHandler<>(holder, this);
     }
 
+    public EpicBosses getPlugin() {
+        return this.plugin;
+    }
 }

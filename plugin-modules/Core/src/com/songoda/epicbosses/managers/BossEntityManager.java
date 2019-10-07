@@ -1,7 +1,7 @@
 package com.songoda.epicbosses.managers;
 
 import com.google.gson.Gson;
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.droptable.elements.DropTableElement;
@@ -17,14 +17,12 @@ import com.songoda.epicbosses.managers.files.DropTableFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.managers.files.MinionsFileManager;
 import com.songoda.epicbosses.skills.Skill;
-import com.songoda.epicbosses.skills.custom.Minions;
 import com.songoda.epicbosses.skills.elements.CustomMinionSkillElement;
 import com.songoda.epicbosses.utils.BossesGson;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.RandomUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Item;
@@ -55,15 +53,15 @@ public class BossEntityManager {
     private BossesFileManager bossesFileManager;
     private BossTargetManager bossTargetManager;
 
-    public BossEntityManager(CustomBosses customBosses) {
-        this.minionMechanicManager = customBosses.getMinionMechanicManager();
-        this.dropTableFileManager = customBosses.getDropTableFileManager();
-        this.bossDropTableManager = customBosses.getBossDropTableManager();
-        this.bossMechanicManager = customBosses.getBossMechanicManager();
-        this.minionsFileManager = customBosses.getMinionsFileManager();
-        this.bossItemFileManager = customBosses.getItemStackManager();
-        this.bossesFileManager = customBosses.getBossesFileManager();
-        this.bossTargetManager = customBosses.getBossTargetManager();
+    public BossEntityManager(EpicBosses epicBosses) {
+        this.minionMechanicManager = epicBosses.getMinionMechanicManager();
+        this.dropTableFileManager = epicBosses.getDropTableFileManager();
+        this.bossDropTableManager = epicBosses.getBossDropTableManager();
+        this.bossMechanicManager = epicBosses.getBossMechanicManager();
+        this.minionsFileManager = epicBosses.getMinionsFileManager();
+        this.bossItemFileManager = epicBosses.getItemStackManager();
+        this.bossesFileManager = epicBosses.getBossesFileManager();
+        this.bossTargetManager = epicBosses.getBossTargetManager();
     }
 
     public double getRadius(ActiveBossHolder activeBossHolder, Location centerLocation) {
@@ -117,7 +115,7 @@ public class BossEntityManager {
             }
         }
 
-        CustomBosses.get().getAutoSpawnManager().clearAutoSpawns();
+        EpicBosses.getInstance().getAutoSpawnManager().clearAutoSpawns();
 
         return amountOfBosses;
     }

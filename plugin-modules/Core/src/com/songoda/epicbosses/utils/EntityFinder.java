@@ -1,6 +1,5 @@
 package com.songoda.epicbosses.utils;
 
-import lombok.Getter;
 import com.songoda.epicbosses.utils.entity.ICustomEntityHandler;
 import com.songoda.epicbosses.utils.entity.handlers.*;
 import org.bukkit.Location;
@@ -82,10 +81,10 @@ public enum EntityFinder {
     TRADER_LLAMA("TraderLlama", new TraderLlamaHandler(), "traderllama", "trader_llama", "trader llama", "llamatrader", "llama_trader", "llama trader"),
     WANDERING_TRADER("WanderingTrader", new WanderingTraderHandler(), "wanderingtrader", "wandering_trader", "wandering trader", "tradervillager", "trader_villager", "trader villager");
 
-    @Getter private ICustomEntityHandler customEntityHandler;
-    @Getter private List<String> names = new ArrayList<>();
-    @Getter private EntityType entityType;
-    @Getter private String fancyName;
+    private ICustomEntityHandler customEntityHandler;
+    private List<String> names = new ArrayList<>();
+    private EntityType entityType;
+    private String fancyName;
 
     EntityFinder(String fancyName, ICustomEntityHandler customEntityHandler, String... names) {
         this.fancyName = fancyName;
@@ -139,4 +138,19 @@ public enum EntityFinder {
         return null;
     }
 
+    public ICustomEntityHandler getCustomEntityHandler() {
+        return this.customEntityHandler;
+    }
+
+    public List<String> getNames() {
+        return this.names;
+    }
+
+    public EntityType getEntityType() {
+        return this.entityType;
+    }
+
+    public String getFancyName() {
+        return this.fancyName;
+    }
 }

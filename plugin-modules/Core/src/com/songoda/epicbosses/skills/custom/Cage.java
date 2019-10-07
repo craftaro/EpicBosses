@@ -1,20 +1,18 @@
 package com.songoda.epicbosses.skills.custom;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
-import com.songoda.epicbosses.autospawns.AutoSpawn;
-import com.songoda.epicbosses.autospawns.settings.AutoSpawnSettings;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.panel.skills.custom.custom.MaterialTypeEditorPanel;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
-import com.songoda.epicbosses.skills.elements.SubCustomSkillElement;
-import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.custom.cage.CageLocationData;
 import com.songoda.epicbosses.skills.custom.cage.CagePlayerData;
 import com.songoda.epicbosses.skills.elements.CustomCageSkillElement;
+import com.songoda.epicbosses.skills.elements.SubCustomSkillElement;
+import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.skills.interfaces.IOtherSkillDataElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.*;
@@ -23,7 +21,6 @@ import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.time.TimeUnit;
 import com.songoda.epicbosses.utils.version.VersionHandler;
-import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -31,7 +28,6 @@ import org.bukkit.block.BlockState;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.InvocationTargetException;
@@ -48,22 +44,30 @@ public class Cage extends CustomSkillHandler {
     private static final MaterialConverter MATERIAL_CONVERTER = new MaterialConverter();
     private static final VersionHandler versionHandler = new VersionHandler();
 
-    @Getter private static final Map<Location, CageLocationData> cageLocationDataMap = new HashMap<>();
-    @Getter private static final List<UUID> playersInCage = new ArrayList<>();
+    private static final Map<Location, CageLocationData> cageLocationDataMap = new HashMap<>();
+    private static final List<UUID> playersInCage = new ArrayList<>();
 
     private static Method setBlockDataMethod;
 
     private final MaterialTypeEditorPanel flatTypeEditor, wallTypeEditor, insideTypeEditor;
     private BossPanelManager bossPanelManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public Cage(CustomBosses plugin) {
+    public Cage(EpicBosses plugin) {
         this.plugin = plugin;
         this.bossPanelManager = plugin.getBossPanelManager();
 
         this.flatTypeEditor = getFlatTypeEditor();
         this.wallTypeEditor = getWallTypeEditor();
         this.insideTypeEditor = getInsideTypeEditor();
+    }
+
+    public static Map<Location, CageLocationData> getCageLocationDataMap() {
+        return Cage.cageLocationDataMap;
+    }
+
+    public static List<UUID> getPlayersInCage() {
+        return Cage.playersInCage;
     }
 
     @Override

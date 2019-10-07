@@ -2,8 +2,6 @@ package com.songoda.epicbosses.skills.elements;
 
 import com.google.gson.annotations.Expose;
 import com.songoda.epicbosses.skills.interfaces.IOtherSkillDataElement;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @author Charles Cullen
@@ -12,8 +10,10 @@ import lombok.Setter;
  */
 public class CustomCageSkillElement implements IOtherSkillDataElement {
 
-    @Expose @Getter @Setter private String flatType, wallType, insideType;
-    @Expose @Getter @Setter private int duration;
+    @Expose
+    private String flatType, wallType, insideType;
+    @Expose
+    private int duration;
 
     public CustomCageSkillElement(String flatType, String wallType, String insideType, int duration) {
         this.flatType = flatType;
@@ -22,4 +22,35 @@ public class CustomCageSkillElement implements IOtherSkillDataElement {
         this.duration = duration;
     }
 
+    public String getFlatType() {
+        return this.flatType;
+    }
+
+    public String getWallType() {
+        return this.wallType;
+    }
+
+    public String getInsideType() {
+        return this.insideType;
+    }
+
+    public int getDuration() {
+        return this.duration;
+    }
+
+    public void setFlatType(String flatType) {
+        this.flatType = flatType;
+    }
+
+    public void setWallType(String wallType) {
+        this.wallType = wallType;
+    }
+
+    public void setInsideType(String insideType) {
+        this.insideType = insideType;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 }

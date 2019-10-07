@@ -1,10 +1,9 @@
 package com.songoda.epicbosses.panel;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.panel.handlers.MainListPanelHandler;
-import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
 import com.songoda.epicbosses.utils.panel.Panel;
@@ -28,7 +27,7 @@ public class CustomItemsPanel extends MainListPanelHandler {
 
     private ItemsFileManager itemsFileManager;
 
-    public CustomItemsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public CustomItemsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.itemsFileManager = plugin.getItemStackManager();

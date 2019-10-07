@@ -1,14 +1,14 @@
 package com.songoda.epicbosses.panel.bosses;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.panel.AddItemsPanel;
-import com.songoda.epicbosses.panel.additems.interfaces.IParentPanelHandler;
 import com.songoda.epicbosses.panel.additems.SpawnItemAddItemsParentPanelHandler;
+import com.songoda.epicbosses.panel.additems.interfaces.IParentPanelHandler;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.ObjectUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
@@ -36,9 +36,9 @@ public class SpawnItemEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private BossesFileManager bossesFileManager;
     private ItemsFileManager itemsFileManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public SpawnItemEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public SpawnItemEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.bossesFileManager = plugin.getBossesFileManager();
@@ -126,7 +126,7 @@ public class SpawnItemEditorPanel extends VariablePanelHandler<BossEntity> {
 
                     replaceMap.put("{name}", ItemStackUtils.getName(itemStack));
 
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Equipment.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Equipment.name"), replaceMap);
                 }
 
                 panel.setItem(realisticSlot, itemStack, e -> {

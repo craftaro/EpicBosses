@@ -1,12 +1,12 @@
 package com.songoda.epicbosses.panel.skills.custom.custom;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
-import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.skills.Skill;
+import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.ServerUtils;
@@ -31,9 +31,9 @@ import java.util.Map;
 public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, CustomSkillElement> {
 
     private BossSkillManager bossSkillManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public SpecialSettingsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public SpecialSettingsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -107,8 +107,8 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
 
                 if(displayStack == null || displayStack.getType() == Material.AIR) return;
 
-                ItemStackUtils.applyDisplayName(displayStack, this.plugin.getConfig().getString("Display.Skills.CustomSetting.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(displayStack, this.plugin.getConfig().getStringList("Display.Skills.CustomSetting.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(displayStack, this.plugin.getDisplay().getString("Display.Skills.CustomSetting.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(displayStack, this.plugin.getDisplay().getStringList("Display.Skills.CustomSetting.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, displayStack, clickAction);
             }

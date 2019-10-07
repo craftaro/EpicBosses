@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.bosses.equipment;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -20,7 +20,7 @@ import java.util.Map;
  */
 public class ChestplateEditorPanel extends ItemStackSubListPanelHandler {
 
-    public ChestplateEditorPanel(BossPanelManager bossPanelManager, ConfigurationSection configurationSection, CustomBosses plugin) {
+    public ChestplateEditorPanel(BossPanelManager bossPanelManager, ConfigurationSection configurationSection, EpicBosses plugin) {
         super(bossPanelManager, configurationSection, plugin);
     }
 

@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.commands.boss;
 
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.Message;

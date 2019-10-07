@@ -1,16 +1,13 @@
 package com.songoda.epicbosses.listeners.during;
 
-import com.songoda.epicbosses.CustomBosses;
-import com.songoda.epicbosses.events.BossDamageEvent;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.holder.ActiveMinionHolder;
 import com.songoda.epicbosses.managers.BossEntityManager;
-import com.songoda.epicbosses.utils.ServerUtils;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 
 /**
@@ -22,7 +19,7 @@ public class BossMinionTargetListener implements Listener {
 
     private BossEntityManager bossEntityManager;
 
-    public BossMinionTargetListener(CustomBosses plugin) {
+    public BossMinionTargetListener(EpicBosses plugin) {
         this.bossEntityManager = plugin.getBossEntityManager();
     }
 

@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.skills.custom;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
 import com.songoda.epicbosses.skills.Skill;
@@ -52,8 +52,8 @@ public class Disarm extends CustomSkillHandler {
                     if(livingEntity instanceof HumanEntity) {
                         HumanEntity humanEntity = (HumanEntity) livingEntity;
 
-                        itemStack = CustomBosses.get().getVersionHandler().getItemInHand(humanEntity);
-                        CustomBosses.get().getVersionHandler().setItemInHand(humanEntity, replacementItemStack);
+                        itemStack = EpicBosses.getInstance().getVersionHandler().getItemInHand(humanEntity);
+                        EpicBosses.getInstance().getVersionHandler().setItemInHand(humanEntity, replacementItemStack);
                         break;
                     }
                 case 1:

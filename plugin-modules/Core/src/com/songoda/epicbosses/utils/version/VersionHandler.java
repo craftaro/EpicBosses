@@ -1,11 +1,8 @@
 package com.songoda.epicbosses.utils.version;
 
-import lombok.Getter;
 import com.songoda.epicbosses.utils.Versions;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -15,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
  */
 public class VersionHandler {
 
-    @Getter private Versions version;
+    private Versions version;
 
     public VersionHandler() {
         String v = Bukkit.getServer().getClass().getPackage().getName();
@@ -45,4 +42,7 @@ public class VersionHandler {
         }
     }
 
+    public Versions getVersion() {
+        return this.version;
+    }
 }

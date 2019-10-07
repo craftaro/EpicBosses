@@ -1,11 +1,7 @@
 package com.songoda.epicbosses.entity;
 
 import com.google.gson.annotations.Expose;
-import com.songoda.epicbosses.utils.StringUtils;
-import lombok.Getter;
-import lombok.Setter;
 import com.songoda.epicbosses.entity.elements.*;
-import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +13,23 @@ import java.util.List;
  */
 public class BossEntity {
 
-    @Expose @Getter @Setter private String spawnItem, targeting;
-    @Expose @Getter @Setter private boolean editing, buyable;
-    @Expose @Getter @Setter private Double price;
+    @Expose
+    private String spawnItem, targeting;
+    @Expose
+    private boolean editing, buyable;
+    @Expose
+    private Double price;
 
-    @Expose @Getter private final List<EntityStatsElement> entityStats;
-    @Expose @Getter private final MessagesElement messages;
-    @Expose @Getter private final CommandsElement commands;
-    @Expose @Getter private final SkillsElement skills;
-    @Expose @Getter private final DropsElement drops;
+    @Expose
+    private final List<EntityStatsElement> entityStats;
+    @Expose
+    private final MessagesElement messages;
+    @Expose
+    private final CommandsElement commands;
+    @Expose
+    private final SkillsElement skills;
+    @Expose
+    private final DropsElement drops;
 
     public BossEntity(boolean editing, String spawnItem, String targeting, boolean buyable, Double price, List<EntityStatsElement> entityStats, SkillsElement skills, DropsElement drops, MessagesElement messages, CommandsElement commands) {
         this.editing = editing;
@@ -100,5 +104,65 @@ public class BossEntity {
 
     public boolean canBeBought() {
         return !isEditing() && isBuyable() && (getPrice() != null) && isCompleteEnoughToSpawn();
+    }
+
+    public String getSpawnItem() {
+        return this.spawnItem;
+    }
+
+    public String getTargeting() {
+        return this.targeting;
+    }
+
+    public boolean isEditing() {
+        return this.editing;
+    }
+
+    public boolean isBuyable() {
+        return this.buyable;
+    }
+
+    public Double getPrice() {
+        return this.price;
+    }
+
+    public List<EntityStatsElement> getEntityStats() {
+        return this.entityStats;
+    }
+
+    public MessagesElement getMessages() {
+        return this.messages;
+    }
+
+    public CommandsElement getCommands() {
+        return this.commands;
+    }
+
+    public SkillsElement getSkills() {
+        return this.skills;
+    }
+
+    public DropsElement getDrops() {
+        return this.drops;
+    }
+
+    public void setSpawnItem(String spawnItem) {
+        this.spawnItem = spawnItem;
+    }
+
+    public void setTargeting(String targeting) {
+        this.targeting = targeting;
+    }
+
+    public void setEditing(boolean editing) {
+        this.editing = editing;
+    }
+
+    public void setBuyable(boolean buyable) {
+        this.buyable = buyable;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

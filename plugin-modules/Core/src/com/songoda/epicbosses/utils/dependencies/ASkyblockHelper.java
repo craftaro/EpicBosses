@@ -1,8 +1,8 @@
 package com.songoda.epicbosses.utils.dependencies;
 
+import com.songoda.epicbosses.utils.IASkyblockHelper;
 import com.wasteofplastic.askyblock.ASkyBlock;
 import com.wasteofplastic.askyblock.Island;
-import com.songoda.epicbosses.utils.IASkyblockHelper;
 import org.bukkit.entity.Player;
 
 /**
