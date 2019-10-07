@@ -34,52 +34,52 @@ public class GiveTableSubElement {
         return this.items;
     }
 
-    public Map<String, Double> getCommands() {
-        return this.commands;
-    }
-
-    public Integer getMaxDrops() {
-        return this.maxDrops;
-    }
-
-    public Integer getMaxCommands() {
-        return this.maxCommands;
-    }
-
-    public Boolean getRandomDrops() {
-        return this.randomDrops;
-    }
-
-    public Boolean getRandomCommands() {
-        return this.randomCommands;
-    }
-
-    public Double getRequiredPercentage() {
-        return this.requiredPercentage;
-    }
-
     public void setItems(Map<String, Double> items) {
         this.items = items;
+    }
+
+    public Map<String, Double> getCommands() {
+        return this.commands;
     }
 
     public void setCommands(Map<String, Double> commands) {
         this.commands = commands;
     }
 
+    public Integer getMaxDrops() {
+        return this.maxDrops;
+    }
+
     public void setMaxDrops(Integer maxDrops) {
         this.maxDrops = maxDrops;
+    }
+
+    public Integer getMaxCommands() {
+        return this.maxCommands;
     }
 
     public void setMaxCommands(Integer maxCommands) {
         this.maxCommands = maxCommands;
     }
 
+    public Boolean getRandomDrops() {
+        return this.randomDrops;
+    }
+
     public void setRandomDrops(Boolean randomDrops) {
         this.randomDrops = randomDrops;
     }
 
+    public Boolean getRandomCommands() {
+        return this.randomCommands;
+    }
+
     public void setRandomCommands(Boolean randomCommands) {
         this.randomCommands = randomCommands;
+    }
+
+    public Double getRequiredPercentage() {
+        return this.requiredPercentage;
     }
 
     public void setRequiredPercentage(Double requiredPercentage) {

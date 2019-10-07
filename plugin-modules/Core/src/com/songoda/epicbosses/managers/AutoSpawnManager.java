@@ -31,10 +31,14 @@ public class AutoSpawnManager {
         this.autoSpawnFileManager = plugin.getAutoSpawnFileManager();
     }
 
+    public static ICustomSettingAction createAutoSpawnAction(String name, String current, List<String> extraInformation, ItemStack displayStack, ClickAction clickAction) {
+        return new CustomAutoSpawnActionCreator(name, current, extraInformation, displayStack, clickAction);
+    }
+
     public void startIntervalSystems() {
         Map<String, AutoSpawn> autoSpawnMap = this.autoSpawnFileManager.getAutoSpawnMap();
 
-        if(!this.activeAutoSpawnHolders.isEmpty()) {
+        if (!this.activeAutoSpawnHolders.isEmpty()) {
             stopIntervalSystems();
         }
 
@@ -56,7 +60,7 @@ public class AutoSpawnManager {
         List<String> intervalAutoSpawns = new ArrayList<>();
 
         autoSpawnHolderMap.forEach((name, autoSpawnHolder) -> {
-            if(autoSpawnHolder.getSpawnType() == SpawnType.INTERVAL) {
+            if (autoSpawnHolder.getSpawnType() == SpawnType.INTERVAL) {
                 intervalAutoSpawns.add(name);
             }
         });
@@ -68,7 +72,7 @@ public class AutoSpawnManager {
         List<String> keyList = new ArrayList<>(this.activeAutoSpawnHolders.keySet());
 
         for (String s : keyList) {
-            if(s.equalsIgnoreCase(name)) return true;
+            if (s.equalsIgnoreCase(name)) return true;
         }
 
         return false;
@@ -93,7 +97,7 @@ public class AutoSpawnManager {
     private void removeActiveAutoSpawnHolder(String name) {
         ActiveAutoSpawnHolder autoSpawnHolder = this.activeAutoSpawnHolders.getOrDefault(name, null);
 
-        if(autoSpawnHolder != null) {
+        if (autoSpawnHolder != null) {
             stopInterval(autoSpawnHolder);
             this.activeAutoSpawnHolders.remove(name);
         }
@@ -113,18 +117,14 @@ public class AutoSpawnManager {
         String autoSpawnType = autoSpawn.getType();
         SpawnType spawnType = SpawnType.getCurrent(autoSpawnType);
 
-        if(spawnType == SpawnType.INTERVAL) {
+        if (spawnType == SpawnType.INTERVAL) {
             ActiveIntervalAutoSpawnHolder autoSpawnHolder = new ActiveIntervalAutoSpawnHolder(spawnType, autoSpawn);
 
-            if(autoSpawn.isEditing()) return;
+            if (autoSpawn.isEditing()) return;
 
             autoSpawnHolder.restartInterval();
             this.activeAutoSpawnHolders.put(name, autoSpawnHolder);
         }
-    }
-
-    public static ICustomSettingAction createAutoSpawnAction(String name, String current, List<String> extraInformation, ItemStack displayStack, ClickAction clickAction) {
-        return new CustomAutoSpawnActionCreator(name, current, extraInformation, displayStack, clickAction);
     }
 
     private static class CustomAutoSpawnActionCreator implements ICustomSettingAction {

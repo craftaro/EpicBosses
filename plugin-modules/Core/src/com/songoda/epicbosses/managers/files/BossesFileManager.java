@@ -48,7 +48,7 @@ public class BossesFileManager implements ILoadable, ISavable, IReloadable {
     }
 
     public void saveBossEntity(String name, BossEntity bossEntity) {
-        if(this.bossEntityContainer.exists(name)) return;
+        if (this.bossEntityContainer.exists(name)) return;
 
         this.bossEntityContainer.saveData(name, bossEntity);
     }

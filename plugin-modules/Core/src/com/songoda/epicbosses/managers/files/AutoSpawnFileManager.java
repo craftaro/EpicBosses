@@ -43,7 +43,7 @@ public class AutoSpawnFileManager implements ILoadable, ISavable, IReloadable {
     }
 
     public void saveAutoSpawn(String name, AutoSpawn autoSpawn) {
-        if(this.autoSpawnMap.containsKey(name)) return;
+        if (this.autoSpawnMap.containsKey(name)) return;
 
         this.autoSpawnMap.put(name, autoSpawn);
         save();

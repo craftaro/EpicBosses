@@ -49,7 +49,7 @@ public class MessagesFileManager implements ILoadable, ISavable {
     }
 
     public boolean addNewMessage(String id, List<String> message) {
-        if(this.messagesMap.containsKey(id)) return false;
+        if (this.messagesMap.containsKey(id)) return false;
 
         messagesMap.put(id, message);
         return true;

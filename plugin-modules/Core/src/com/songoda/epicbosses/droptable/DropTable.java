@@ -25,7 +25,7 @@ public class DropTable {
     }
 
     public GiveTableElement getGiveTableData() {
-        if(getDropType().equalsIgnoreCase("GIVE")) {
+        if (getDropType().equalsIgnoreCase("GIVE")) {
             return BossesGson.get().fromJson(this.rewards, GiveTableElement.class);
         }
 
@@ -33,7 +33,7 @@ public class DropTable {
     }
 
     public SprayTableElement getSprayTableData() {
-        if(getDropType().equalsIgnoreCase("SPRAY")) {
+        if (getDropType().equalsIgnoreCase("SPRAY")) {
             return BossesGson.get().fromJson(this.rewards, SprayTableElement.class);
         }
 
@@ -41,7 +41,7 @@ public class DropTable {
     }
 
     public DropTableElement getDropTableData() {
-        if(getDropType().equalsIgnoreCase("DROP")) {
+        if (getDropType().equalsIgnoreCase("DROP")) {
             return BossesGson.get().fromJson(this.rewards, DropTableElement.class);
         }
 
@@ -52,12 +52,12 @@ public class DropTable {
         return this.dropType;
     }
 
-    public JsonObject getRewards() {
-        return this.rewards;
-    }
-
     public void setDropType(String dropType) {
         this.dropType = dropType;
+    }
+
+    public JsonObject getRewards() {
+        return this.rewards;
     }
 
     public void setRewards(JsonObject rewards) {

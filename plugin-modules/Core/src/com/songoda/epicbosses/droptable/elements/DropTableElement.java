@@ -28,20 +28,20 @@ public class DropTableElement {
         return this.dropRewards;
     }
 
-    public Boolean getRandomDrops() {
-        return this.randomDrops;
-    }
-
-    public Integer getDropMaxDrops() {
-        return this.dropMaxDrops;
-    }
-
     public void setDropRewards(Map<String, Double> dropRewards) {
         this.dropRewards = dropRewards;
     }
 
+    public Boolean getRandomDrops() {
+        return this.randomDrops;
+    }
+
     public void setRandomDrops(Boolean randomDrops) {
         this.randomDrops = randomDrops;
+    }
+
+    public Integer getDropMaxDrops() {
+        return this.dropMaxDrops;
     }
 
     public void setDropMaxDrops(Integer dropMaxDrops) {

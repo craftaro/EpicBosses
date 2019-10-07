@@ -27,44 +27,44 @@ public class AutoSpawnSettings {
         return this.maxAliveAtOnce;
     }
 
-    public Integer getAmountPerSpawn() {
-        return this.amountPerSpawn;
-    }
-
-    public Boolean getSpawnWhenChunkIsntLoaded() {
-        return this.spawnWhenChunkIsntLoaded;
-    }
-
-    public Boolean getOverrideDefaultSpawnMessage() {
-        return this.overrideDefaultSpawnMessage;
-    }
-
-    public Boolean getShuffleEntitiesList() {
-        return this.shuffleEntitiesList;
-    }
-
-    public String getSpawnMessage() {
-        return this.spawnMessage;
-    }
-
     public void setMaxAliveAtOnce(Integer maxAliveAtOnce) {
         this.maxAliveAtOnce = maxAliveAtOnce;
+    }
+
+    public Integer getAmountPerSpawn() {
+        return this.amountPerSpawn;
     }
 
     public void setAmountPerSpawn(Integer amountPerSpawn) {
         this.amountPerSpawn = amountPerSpawn;
     }
 
+    public Boolean getSpawnWhenChunkIsntLoaded() {
+        return this.spawnWhenChunkIsntLoaded;
+    }
+
     public void setSpawnWhenChunkIsntLoaded(Boolean spawnWhenChunkIsntLoaded) {
         this.spawnWhenChunkIsntLoaded = spawnWhenChunkIsntLoaded;
+    }
+
+    public Boolean getOverrideDefaultSpawnMessage() {
+        return this.overrideDefaultSpawnMessage;
     }
 
     public void setOverrideDefaultSpawnMessage(Boolean overrideDefaultSpawnMessage) {
         this.overrideDefaultSpawnMessage = overrideDefaultSpawnMessage;
     }
 
+    public Boolean getShuffleEntitiesList() {
+        return this.shuffleEntitiesList;
+    }
+
     public void setShuffleEntitiesList(Boolean shuffleEntitiesList) {
         this.shuffleEntitiesList = shuffleEntitiesList;
+    }
+
+    public String getSpawnMessage() {
+        return this.spawnMessage;
     }
 
     public void setSpawnMessage(String spawnMessage) {

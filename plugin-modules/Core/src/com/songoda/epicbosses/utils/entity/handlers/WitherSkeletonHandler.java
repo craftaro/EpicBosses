@@ -2,7 +2,6 @@ package com.songoda.epicbosses.utils.entity.handlers;
 
 import com.songoda.core.compatibility.ServerVersion;
 import com.songoda.epicbosses.utils.entity.ICustomEntityHandler;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -14,8 +13,6 @@ import org.bukkit.entity.Skeleton;
  * @since 01-Jun-18
  */
 public class WitherSkeletonHandler implements ICustomEntityHandler {
-
-    private VersionHandler versionHandler = new VersionHandler();
 
     @Override
     public LivingEntity getBaseEntity(String entityType, Location spawnLocation) {

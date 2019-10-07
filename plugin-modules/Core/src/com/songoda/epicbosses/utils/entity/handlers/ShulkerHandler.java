@@ -2,7 +2,6 @@ package com.songoda.epicbosses.utils.entity.handlers;
 
 import com.songoda.core.compatibility.ServerVersion;
 import com.songoda.epicbosses.utils.entity.ICustomEntityHandler;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -13,8 +12,6 @@ import org.bukkit.entity.LivingEntity;
  * @since 01-Jul-18
  */
 public class ShulkerHandler implements ICustomEntityHandler {
-
-    private VersionHandler versionHandler = new VersionHandler();
 
     @Override
     public LivingEntity getBaseEntity(String entityType, Location spawnLocation) {

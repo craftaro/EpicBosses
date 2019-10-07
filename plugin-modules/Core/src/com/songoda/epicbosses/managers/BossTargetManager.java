@@ -34,11 +34,11 @@ public class BossTargetManager {
         String targeting = bossEntity.getTargeting();
         TargetHandler<ActiveBossHolder> targetHandler;
 
-        if(targeting.equalsIgnoreCase("RandomNearby")) {
-           targetHandler = getRandomNearbyTargetHandler(activeBossHolder);
-        } else if(targeting.equalsIgnoreCase("TopDamager")) {
+        if (targeting.equalsIgnoreCase("RandomNearby")) {
+            targetHandler = getRandomNearbyTargetHandler(activeBossHolder);
+        } else if (targeting.equalsIgnoreCase("TopDamager")) {
             targetHandler = getTopDamagerTargetHandler(activeBossHolder);
-        } else if(targeting.equalsIgnoreCase("NotDamagedNearby")) {
+        } else if (targeting.equalsIgnoreCase("NotDamagedNearby")) {
             targetHandler = getNotDamagedNearbyTargetHandler(activeBossHolder);
         } else {
             targetHandler = getClosestTargetHandler(activeBossHolder);
@@ -52,11 +52,11 @@ public class BossTargetManager {
         String targeting = minionEntity.getTargeting();
         TargetHandler<ActiveMinionHolder> targetHandler;
 
-        if(targeting.equalsIgnoreCase("RandomNearby")) {
+        if (targeting.equalsIgnoreCase("RandomNearby")) {
             targetHandler = getRandomNearbyTargetHandler(activeMinionHolder);
-        } else if(targeting.equalsIgnoreCase("TopDamager")) {
+        } else if (targeting.equalsIgnoreCase("TopDamager")) {
             targetHandler = getTopDamagerTargetHandler(activeMinionHolder);
-        } else if(targeting.equalsIgnoreCase("NotDamagedNearby")) {
+        } else if (targeting.equalsIgnoreCase("NotDamagedNearby")) {
             targetHandler = getNotDamagedNearbyTargetHandler(activeMinionHolder);
         } else {
             targetHandler = getClosestTargetHandler(activeMinionHolder);

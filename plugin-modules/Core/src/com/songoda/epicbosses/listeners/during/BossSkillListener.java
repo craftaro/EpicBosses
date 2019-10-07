@@ -47,7 +47,7 @@ public class BossSkillListener implements Listener {
         Entity entityBeingDamaged = event.getEntity();
         Entity entityDamaging = event.getDamager();
 
-        if(!(entityBeingDamaged instanceof LivingEntity)) return;
+        if (!(entityBeingDamaged instanceof LivingEntity)) return;
 
         if (entityDamaging instanceof Projectile) {
             Projectile projectile = (Projectile) entityDamaging;
@@ -58,18 +58,18 @@ public class BossSkillListener implements Listener {
             }
         }
 
-        if(!(entityDamaging instanceof LivingEntity)) return;
+        if (!(entityDamaging instanceof LivingEntity)) return;
 
         LivingEntity livingEntity = (LivingEntity) entityBeingDamaged;
         ActiveBossHolder activeBossHolder = this.bossEntityManager.getActiveBossHolder(livingEntity);
 
-        if(activeBossHolder == null) return;
+        if (activeBossHolder == null) return;
 
         BossEntity bossEntity = activeBossHolder.getBossEntity();
 
-        if(bossEntity.getSkills() == null || bossEntity.getSkills().getOverallChance() == null) return;
+        if (bossEntity.getSkills() == null || bossEntity.getSkills().getOverallChance() == null) return;
 
-        if(RandomUtils.get().canPreformAction(bossEntity.getSkills().getOverallChance())) {
+        if (RandomUtils.get().canPreformAction(bossEntity.getSkills().getOverallChance())) {
             PreBossSkillEvent preBossSkillEvent = new PreBossSkillEvent(activeBossHolder, livingEntity, (LivingEntity) entityDamaging);
 
             ServerUtils.get().callEvent(preBossSkillEvent);
@@ -84,7 +84,7 @@ public class BossSkillListener implements Listener {
         List<String> skills = bossEntity.getSkills().getSkills();
         List<String> masterMessage = BossAPI.getStoredMessages(bossEntity.getSkills().getMasterMessage());
 
-        if(skills.isEmpty()) {
+        if (skills.isEmpty()) {
             Debug.SKILL_EMPTY_SKILLS.debug(BossAPI.getBossEntityName(bossEntity));
             return;
         }
@@ -94,7 +94,7 @@ public class BossSkillListener implements Listener {
         String skillInput = skills.get(0);
         Skill skill = this.skillsFileManager.getSkill(skillInput);
 
-        if(skill == null) {
+        if (skill == null) {
             Debug.SKILL_NOT_FOUND.debug();
             return;
         }

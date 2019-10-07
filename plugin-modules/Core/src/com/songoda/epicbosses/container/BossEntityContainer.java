@@ -23,8 +23,8 @@ public class BossEntityContainer implements IContainer<Map<String, BossEntity>, 
     }
 
     public String getName(BossEntity bossEntity) {
-        for(Map.Entry<String, BossEntity> entry : getData().entrySet()) {
-            if(entry.getValue().equals(bossEntity)) return entry.getKey();
+        for (Map.Entry<String, BossEntity> entry : getData().entrySet()) {
+            if (entry.getValue().equals(bossEntity)) return entry.getKey();
         }
 
         return null;
@@ -36,8 +36,8 @@ public class BossEntityContainer implements IContainer<Map<String, BossEntity>, 
         int completed = 0;
         int failed = 0;
 
-        for(Map.Entry<String, BossEntity> entry : stringBossEntityMap.entrySet()) {
-            if(getData().containsKey(entry.getKey())) {
+        for (Map.Entry<String, BossEntity> entry : stringBossEntityMap.entrySet()) {
+            if (getData().containsKey(entry.getKey())) {
                 failed += 1;
                 stringBuilder.append(entry.getKey()).append("; ");
                 continue;
@@ -48,7 +48,7 @@ public class BossEntityContainer implements IContainer<Map<String, BossEntity>, 
         }
 
 
-        if(failed > 0) {
+        if (failed > 0) {
             Debug.BOSS_CONTAINER_SAVE.debug(completed, failed, stringBuilder.toString());
         }
 

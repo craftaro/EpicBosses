@@ -61,23 +61,38 @@
   },
   "SKHelmet": {
     "type": "GOLDEN_HELMET",
-    "enchants": [ "protection:4", "unbreaking:3" ]
+    "enchants": [
+      "protection:4",
+      "unbreaking:3"
+    ]
   },
   "SKChestplate": {
     "type": "GOLDEN_CHESTPLATE",
-    "enchants": [ "protection:4", "unbreaking:3" ]
+    "enchants": [
+      "protection:4",
+      "unbreaking:3"
+    ]
   },
   "SKLeggings": {
     "type": "GOLDEN_LEGGINGS",
-    "enchants": [ "protection:4", "unbreaking:3" ]
+    "enchants": [
+      "protection:4",
+      "unbreaking:3"
+    ]
   },
   "SKBoots": {
     "type": "DIAMOND_BOOTS",
-    "enchants": [ "protection:4", "unbreaking:3" ]
+    "enchants": [
+      "protection:4",
+      "unbreaking:3"
+    ]
   },
   "SKMainHand": {
     "type": "DIAMOND_SWORD",
-    "enchants": [ "sharpness:4", "unbreaking:3" ]
+    "enchants": [
+      "sharpness:4",
+      "unbreaking:3"
+    ]
   },
   "SKOffHand": {
     "type": "SHIELD"

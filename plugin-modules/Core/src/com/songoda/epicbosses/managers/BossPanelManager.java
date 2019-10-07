@@ -95,10 +95,9 @@ public class BossPanelManager implements ILoadable {
 
     private static final String HELMET_EDITOR_PATH = "HelmetEditorPanel", CHESTPLATE_EDITOR_PATH = "ChestplateEditorPanel", LEGGINGS_EDITOR_PATH = "LeggingsEditorPanel",
             BOOTS_EDITOR_PATH = "BootsEditorPanel", MAIN_HAND_EDITOR_PATH = "MainHandEditorPanel", OFF_HAND_EDITOR_PATH = "OffHandEditorPanel";
-
+    private final EpicBosses epicBosses;
     private IPanelHandler mainMenu, customItems, bosses, autoSpawns, dropTables, customSkills, shopPanel;
     private IPanelHandler customItemAddItemsMenu;
-
     private ISubVariablePanelHandler<BossEntity, EntityStatsElement> equipmentEditMenu, helmetEditorMenu, chestplateEditorMenu, leggingsEditorMenu, bootsEditorMenu;
     private ISubVariablePanelHandler<BossEntity, EntityStatsElement> weaponEditMenu, offHandEditorMenu, mainHandEditorMenu;
     private ISubVariablePanelHandler<BossEntity, EntityStatsElement> statisticMainEditMenu, entityTypeEditMenu;
@@ -106,19 +105,15 @@ public class BossPanelManager implements ILoadable {
             onDeathCommandEditMenu, mainDropsEditMenu, mainTextEditMenu, mainTauntEditMenu, onSpawnTextEditMenu, onSpawnSubTextEditMenu, onDeathTextEditMenu, onDeathSubTextEditMenu, onDeathPositionTextEditMenu,
             onTauntTextEditMenu, spawnItemEditMenu, bossShopEditMenu, bossSkillMasterMessageTextEditMenu;
     private BossListEditorPanel equipmentListEditMenu, weaponListEditMenu, statisticListEditMenu;
-
     private IVariablePanelHandler<Skill> mainSkillEditMenu, customMessageEditMenu, skillTypeEditMenu, potionSkillEditorPanel, commandSkillEditorPanel, groupSkillEditorPanel, customSkillEditorPanel;
     private ISubVariablePanelHandler<Skill, PotionEffectHolder> createPotionEffectMenu, potionEffectTypeEditMenu;
     private ISubVariablePanelHandler<Skill, SubCommandSkillElement> modifyCommandEditMenu, commandListSkillEditMenu;
     private ISubVariablePanelHandler<Skill, CustomSkillElement> customSkillTypeEditorMenu, specialSettingsEditorMenu, minionSelectEditorMenu;
-
     private IVariablePanelHandler<DropTable> mainDropTableEditMenu, dropTableTypeEditMenu;
-
     private ISubVariablePanelHandler<DropTable, SprayTableElement> sprayDropTableMainEditMenu;
     private DropTableRewardMainEditorPanel<SprayTableElement> sprayDropRewardMainEditPanel;
     private DropTableNewRewardEditorPanel<SprayTableElement> sprayDropNewRewardEditPanel;
     private DropTableRewardsListEditorPanel<SprayTableElement> sprayDropRewardListPanel;
-
     private ISubVariablePanelHandler<DropTable, GiveRewardEditHandler> giveRewardMainEditMenu, giveCommandRewardListPanel, giveCommandNewRewardPanel;
     private ISubSubVariablePanelHandler<DropTable, GiveRewardEditHandler, String> giveCommandRewardMainEditMenu;
     private ISubSubVariablePanelHandler<DropTable, GiveTableElement, String> giveRewardRewardsListMenu;
@@ -126,17 +121,13 @@ public class BossPanelManager implements ILoadable {
     private DropTableRewardMainEditorPanel<GiveRewardEditHandler> giveDropRewardMainEditPanel;
     private DropTableNewRewardEditorPanel<GiveRewardEditHandler> giveDropNewRewardEditPanel;
     private DropTableRewardsListEditorPanel<GiveRewardEditHandler> giveDropRewardListPanel;
-
     private ISubVariablePanelHandler<DropTable, DropTableElement> dropDropTableMainEditMenu;
     private DropTableRewardMainEditorPanel<DropTableElement> dropDropRewardMainEditPanel;
     private DropTableNewRewardEditorPanel<DropTableElement> dropDropNewRewardEditPanel;
     private DropTableRewardsListEditorPanel<DropTableElement> dropDropRewardListPanel;
-
     private IVariablePanelHandler<AutoSpawn> mainAutoSpawnEditPanel, autoSpawnEntitiesEditPanel, autoSpawnSpecialSettingsEditorPanel, autoSpawnTypeEditorPanel, autoSpawnCustomSettingsEditorPanel,
             autoSpawnMessageEditorPanel;
-
     private PanelBuilder addItemsBuilder;
-    private final EpicBosses epicBosses;
 
     public BossPanelManager(EpicBosses epicBosses) {
         this.epicBosses = epicBosses;
@@ -203,8 +194,8 @@ public class BossPanelManager implements ILoadable {
         Collection<BossEntity> values = this.epicBosses.getBossEntityContainer().getData().values();
         int timesUsed = 0;
 
-        for(BossEntity bossEntity : values) {
-            if(bossEntity != null) {
+        for (BossEntity bossEntity : values) {
+            if (bossEntity != null) {
                 if (bossEntity.getSpawnItem() != null) {
                     if (bossEntity.getSpawnItem().equalsIgnoreCase(name)) timesUsed += 1;
                 }
@@ -546,7 +537,7 @@ public class BossPanelManager implements ILoadable {
             public void updateMessage(BossEntity bossEntity, String modifiedValue) {
                 List<String> current = getCurrent(bossEntity);
 
-                if(current.contains(modifiedValue)) {
+                if (current.contains(modifiedValue)) {
                     current.remove(modifiedValue);
                 } else {
                     current.add(modifiedValue);

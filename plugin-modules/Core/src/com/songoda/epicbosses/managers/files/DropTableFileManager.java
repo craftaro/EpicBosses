@@ -43,7 +43,7 @@ public class DropTableFileManager implements ILoadable, ISavable, IReloadable {
     }
 
     public void saveDropTable(String name, DropTable dropTable) {
-        if(this.dropTableMap.containsKey(name)) return;
+        if (this.dropTableMap.containsKey(name)) return;
 
         this.dropTableMap.put(name, dropTable);
         save();

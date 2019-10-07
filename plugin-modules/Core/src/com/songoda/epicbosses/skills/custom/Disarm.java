@@ -52,8 +52,8 @@ public class Disarm extends CustomSkillHandler {
                     if (livingEntity instanceof HumanEntity) {
                         HumanEntity humanEntity = (HumanEntity) livingEntity;
 
-                        itemStack = EpicBosses.getInstance().getVersionHandler().getItemInHand(humanEntity);
-                        EpicBosses.getInstance().getVersionHandler().setItemInHand(humanEntity, replacementItemStack);
+                        itemStack = humanEntity.getItemInHand();
+                        humanEntity.setItemInHand(replacementItemStack);
                         break;
                     }
                 case 1:

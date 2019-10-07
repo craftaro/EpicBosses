@@ -25,61 +25,61 @@ MainMenu:
       type: ZOMBIE_SPAWN_EGG
       name: '&b&lCustom Bosses'
       lore:
-      - '&3Left Click »'
-      - '&7Edit any of the already created'
-      - '&7custom bosses.'
-      - '&7'
-      - '&3Right Click »'
-      - '&7Create a new custom boss from'
-      - '&7scratch.'
+        - '&3Left Click »'
+        - '&7Edit any of the already created'
+        - '&7custom bosses.'
+        - '&7'
+        - '&3Right Click »'
+        - '&7Create a new custom boss from'
+        - '&7scratch.'
       Button: CustomBosses
     '5':
       type: DIAMOND
       name: '&b&lCustom Items'
       lore:
-      - '&3Left Click »'
-      - '&7Edit any of the already created'
-      - '&7custom items.'
-      - '&7'
-      - '&3Right Click »'
-      - '&7Create a new custom item from'
-      - '&7an item in your inventory.'
+        - '&3Left Click »'
+        - '&7Edit any of the already created'
+        - '&7custom items.'
+        - '&7'
+        - '&3Right Click »'
+        - '&7Create a new custom item from'
+        - '&7an item in your inventory.'
       Button: CustomItems
     '8':
       type: CLOCK
       name: '&b&lAuto Spawns'
       lore:
-      - '&3Left Click »'
-      - '&7Edit any of the already created'
-      - '&7auto spawns.'
-      - '&7'
-      - '&3Right Click »'
-      - '&7Create a new auto spawn from'
-      - '&7scratch.'
+        - '&3Left Click »'
+        - '&7Edit any of the already created'
+        - '&7auto spawns.'
+        - '&7'
+        - '&3Right Click »'
+        - '&7Create a new auto spawn from'
+        - '&7scratch.'
       Button: AutoSpawns
     '12':
       type: OAK_PRESSURE_PLATE
       name: '&b&lDrop Tables'
       lore:
-      - '&3Left Click »'
-      - '&7Edit any of the already created'
-      - '&7drop tables.'
-      - '&7'
-      - '&3Right Click »'
-      - '&7Create a new drop table from'
-      - '&7scratch.'
+        - '&3Left Click »'
+        - '&7Edit any of the already created'
+        - '&7drop tables.'
+        - '&7'
+        - '&3Right Click »'
+        - '&7Create a new drop table from'
+        - '&7scratch.'
       Button: DropTables
     '16':
       type: BLAZE_POWDER
       name: '&b&lCustom Skills'
       lore:
-      - '&3Left Click »'
-      - '&7Edit any of the already created'
-      - '&7custom skills.'
-      - '&7'
-      - '&3Right Click »'
-      - '&7Create a new custom skill from'
-      - '&7scratch.'
+        - '&3Left Click »'
+        - '&7Edit any of the already created'
+        - '&7custom skills.'
+        - '&7'
+        - '&3Right Click »'
+        - '&7Create a new custom skill from'
+        - '&7scratch.'
       Button: CustomSkills
 ShopListPanel:
   name: '&b&lEpicBosses &3&lShop'
@@ -103,8 +103,8 @@ ShopListPanel:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page.'
+        - '&7Click here to go to the previous'
+        - '&7page.'
       PreviousPage: true
     '50':
       type: GLASS_PANE
@@ -113,8 +113,8 @@ ShopListPanel:
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page.'
+        - '&7Click here to go to the next'
+        - '&7page.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -147,20 +147,20 @@ ListPanel:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page.'
+        - '&7Click here to go to the previous'
+        - '&7page.'
       PreviousPage: true
     '50':
       type: REDSTONE
       name: '&cClick here to go back'
       lore:
-      - '&7Click this button to go back.'
+        - '&7Click this button to go back.'
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page.'
+        - '&7Click here to go to the next'
+        - '&7page.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -181,18 +181,18 @@ CustomItemsMenu:
       type: BOOK
       name: '&c&lCustom Items Guide'
       lore:
-      - '&7In this menu you can view all the'
-      - '&7custom items for the plugin, as well'
-      - '&7as manipulate them to your liking.'
-      - '&7'
-      - '&3Left Click &8»'
-      - '&7Obtain ItemStack in your inventory.'
-      - '&7'
-      - '&3Middle Click &8» '
-      - '&7Clone ItemStack section to a new section.'
-      - '&7'
-      - '&3Right Click &8» '
-      - '&7Remove section from list if not bound.'
+        - '&7In this menu you can view all the'
+        - '&7custom items for the plugin, as well'
+        - '&7as manipulate them to your liking.'
+        - '&7'
+        - '&3Left Click &8»'
+        - '&7Obtain ItemStack in your inventory.'
+        - '&7'
+        - '&3Middle Click &8» '
+        - '&7Clone ItemStack section to a new section.'
+        - '&7'
+        - '&3Right Click &8» '
+        - '&7Remove section from list if not bound.'
     '47':
       type: GLASS_PANE
       name: '&7'
@@ -203,23 +203,23 @@ CustomItemsMenu:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of custom drops.'
+        - '&7Click here to go to the previous'
+        - '&7page of custom drops.'
       PreviousPage: true
     '50':
       type: DIAMOND_BLOCK
       name: '&a&lAdd New Item'
       lore:
-      - '&7Click here to add a new'
-      - '&7item which you have in your'
-      - '&7inventory.'
+        - '&7Click here to add a new'
+        - '&7item which you have in your'
+        - '&7inventory.'
       Button: AddNew
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of custom drops.'
+        - '&7Click here to go to the next'
+        - '&7page of custom drops.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -243,9 +243,9 @@ AddItemsMenu:
       type: REDSTONE
       name: '&c&lCancel'
       lore:
-      - '&7Click here to cancel the transaction'
-      - '&7of adding the item to the EpicBosses'
-      - '&7database.'
+        - '&7Click here to cancel the transaction'
+        - '&7of adding the item to the EpicBosses'
+        - '&7database.'
       Button: Cancel
     '14':
       type: AIR
@@ -254,9 +254,9 @@ AddItemsMenu:
       type: LIME_DYE
       name: '&a&lAccept'
       lore:
-      - '&7Click here to accept the transaction'
-      - '&7of adding the item to the EpicBosses'
-      - '&7database.'
+        - '&7Click here to accept the transaction'
+        - '&7of adding the item to the EpicBosses'
+        - '&7database.'
       Button: Accept
 MainEditorPanel:
   name: '&b&l{name} Editor'
@@ -271,92 +271,92 @@ MainEditorPanel:
       type: DIAMOND
       name: '&a&lDrops Manager'
       lore:
-      - '&7Click here to manage the drop table'
-      - '&7that is attached to this boss.'
+        - '&7Click here to manage the drop table'
+        - '&7that is attached to this boss.'
       Button: Drops
     '14':
       type: DIAMOND_HELMET
       name: '&c&lEquipment Manager'
       lore:
-      - '&7Click here to manage the equipment'
-      - '&7that the boss has equipped.'
+        - '&7Click here to manage the equipment'
+        - '&7that the boss has equipped.'
       Button: Equipment
     '16':
       type: BONE
       name: '&a&lTargeting Manager'
       lore:
-      - '&7Click here to edit how the boss handles'
-      - '&7targeting of players and mobs.'
+        - '&7Click here to edit how the boss handles'
+        - '&7targeting of players and mobs.'
       Button: Targeting
     '22':
       type: BOW
       name: '&c&lWeapon Manager'
       lore:
-      - '&7Click here to manage the weapon(s)'
-      - '&7that the boss has equipped.'
+        - '&7Click here to manage the weapon(s)'
+        - '&7that the boss has equipped.'
       Button: Weapon
     '23':
       type: BARRIER
       name: '&c&l!&4&l!&c&l! &4&lWARNING &c&l!&4&l!&c&l!'
       lore:
-      - '&7While editing is enabled for this boss'
-      - '&7no one will be able to spawn it, nor'
-      - '&7will it spawn naturally.'
+        - '&7While editing is enabled for this boss'
+        - '&7no one will be able to spawn it, nor'
+        - '&7will it spawn naturally.'
     '24':
       type: BLAZE_POWDER
       name: '&c&lSkill Manager'
       lore:
-      - '&7Click here to manage the assigned'
-      - '&7skill(s) the boss has and their occurrence'
-      - '&7chances.'
+        - '&7Click here to manage the assigned'
+        - '&7skill(s) the boss has and their occurrence'
+        - '&7chances.'
       Button: Skill
     '30':
       type: STICK
       name: '&a&lSpawn Item Manager'
       lore:
-      - '&bCurrently: &f{spawnItem}'
-      - '&7'
-      - '&7Click here to select a spawn item for this'
-      - '&7boss section from all the current items saved'
-      - '&7in the plugin.'
+        - '&bCurrently: &f{spawnItem}'
+        - '&7'
+        - '&7Click here to select a spawn item for this'
+        - '&7boss section from all the current items saved'
+        - '&7in the plugin.'
       Button: SpawnItem
     '32':
       type: LAPIS_LAZULI
       name: '&a&lStatistics Manager'
       lore:
-      - '&7Click here to edit the statistics of the'
-      - '&7boss, including things like: health,'
-      - '&7potion effects, commands on spawn, etc.'
+        - '&7Click here to edit the statistics of the'
+        - '&7boss, including things like: health,'
+        - '&7potion effects, commands on spawn, etc.'
       Button: Stats
     '34':
       type: GOLD_BLOCK
       name: '&a&lShop Manager'
       lore:
-      - '&7Click here to modify the shop settings for'
-      - '&7this boss.'
+        - '&7Click here to modify the shop settings for'
+        - '&7this boss.'
       Button: Shop
     '39':
       type: BOOK
       name: '&a&lCommand Manager'
       lore:
-      - '&7Click here to manage the commands that are'
-      - '&7called when the boss spawns, dies, etc.'
+        - '&7Click here to manage the commands that are'
+        - '&7called when the boss spawns, dies, etc.'
       Button: Command
     '41':
       type: LEVER
       name: '&a&lToggle Boss Editing'
       lore:
-      - '&7Click here to edit how to toggle the boss'
-      - '&7editing mode.'
-      - '&7'
-      - '&bCurrently: &f{mode}'
+        - '&7Click here to edit how to toggle the boss'
+        - '&7editing mode.'
+        - '&7'
+        - '&bCurrently: &f{mode}'
       Button: Editing
     '43':
       type: BOOK
       name: '&a&lText Manager'
       lore:
-      - '&7Click here to edit the taunts, sayings,'
-      - '&7etc. for this boss.'
+        - '&7Click here to edit the taunts, sayings,'
+        - '&7etc. for this boss.'
       Button: Text
 BossShopEditorPanel:
   name: '&b&l{name} Editor'
@@ -370,29 +370,29 @@ BossShopEditorPanel:
       type: GUNPOWDER
       name: '&3&lBuyable'
       lore:
-      - '&bCurrently: &f{buyable}'
-      - '&7'
-      - '&7If this is set to true then this'
-      - '&7boss spawn egg will be spawnable from'
-      - '&7the /boss shop while boss editing is'
-      - '&7disabled.'
+        - '&bCurrently: &f{buyable}'
+        - '&7'
+        - '&7If this is set to true then this'
+        - '&7boss spawn egg will be spawnable from'
+        - '&7the /boss shop while boss editing is'
+        - '&7disabled.'
       Button: Buyable
     '5':
       type: REDSTONE
       name: '&c&lGo Back'
       lore:
-      - '&7Click here to go back to the'
-      - '&7main boss editor panel.'
+        - '&7Click here to go back to the'
+        - '&7main boss editor panel.'
     '7':
       type: GOLD_INGOT
       name: '&3&lPrice'
       lore:
-      - '&bCurrently: &a$&f{price}'
-      - '&7'
-      - '&7This is the price that the boss will'
-      - '&7be sold for in the /boss shop menu'
-      - '&7'
-      - '&7Click here to adjust the price.'
+        - '&bCurrently: &a$&f{price}'
+        - '&7'
+        - '&7This is the price that the boss will'
+        - '&7be sold for in the /boss shop menu'
+        - '&7'
+        - '&7Click here to adjust the price.'
       Button: Price
 SpawnItemEditorPanel:
   name: '&b&l{name} Editor'
@@ -407,8 +407,8 @@ SpawnItemEditorPanel:
       type: DIAMOND
       name: '&c&lRemove'
       lore:
-      - '&7click here to remove the currently'
-      - '&7equipped spawn item.'
+        - '&7click here to remove the currently'
+        - '&7equipped spawn item.'
       Button: Remove
     '47':
       type: WHITE_STAINED_GLASS_PANE
@@ -420,23 +420,23 @@ SpawnItemEditorPanel:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of spawn item.'
+        - '&7Click here to go to the previous'
+        - '&7page of spawn item.'
       PreviousPage: true
     '50':
       type: DIAMOND_BLOCK
       name: '&a&lAdd New Spawn Item'
       lore:
-      - '&7Click here to add a new spawn'
-      - '&7item which you have in your'
-      - '&7inventory.'
+        - '&7Click here to add a new spawn'
+        - '&7item which you have in your'
+        - '&7inventory.'
       Button: AddNew
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of spawn item.'
+        - '&7Click here to go to the next'
+        - '&7page of spawn item.'
       NextPage: true
     '52':
       type: WHITE_STAINED_GLASS_PANE
@@ -448,7 +448,7 @@ SpawnItemEditorPanel:
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 DropsMainEditorPanel:
   name: '&b&l{name} Editor'
   slots: 9
@@ -465,39 +465,39 @@ DropsMainEditorPanel:
       type: BOOK
       name: '&c&lDrops Guide'
       lore:
-      - '&7Here you can configure the drop systems'
-      - '&7the boss has when he dies.'
+        - '&7Here you can configure the drop systems'
+        - '&7the boss has when he dies.'
     '4':
       type: GUNPOWDER
       name: '&e&lNatural Drops'
       lore:
-      - '&bCurrently: &f{naturalDrops}'
-      - '&7'
-      - '&7Click to toggle the natural drops'
-      - '&7for this boss.'
+        - '&bCurrently: &f{naturalDrops}'
+        - '&7'
+        - '&7Click to toggle the natural drops'
+        - '&7for this boss.'
       Button: NaturalDrops
     '5':
       type: BOOK
       name: '&e&lDrop Table'
       lore:
-      - '&bCurrently: &f{dropTable}'
-      - '&7Click here to change the drop table'
-      - '&7assigned to this boss.'
+        - '&bCurrently: &f{dropTable}'
+        - '&7Click here to change the drop table'
+        - '&7assigned to this boss.'
       Button: DropTable
     '6':
       type: REDSTONE
       name: '&e&lNatural EXP'
       lore:
-      - '&bCurrently: &f{naturalExp}'
-      - '&7'
-      - '&7Click to toggle the natural drop'
-      - '&7of exp for this boss.'
+        - '&bCurrently: &f{naturalExp}'
+        - '&7'
+        - '&7Click to toggle the natural drop'
+        - '&7of exp for this boss.'
       Button: NaturalEXP
     '9':
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 DropsEditorPanel:
   name: '&b&l{name} Editor'
   slots: 54
@@ -508,16 +508,16 @@ DropsEditorPanel:
       type: DIAMOND
       name: '&b&lSelected Drop Table'
       lore:
-      - '&7The current selected drop'
-      - '&7table is: &b{dropTable}&7.'
-      - '&7'
-      - '&b&lHints'
-      - '&b&l* &7If this shows N/A it means'
-      - '&7   there was an issue loading the'
-      - '&7   previous table, or it doesn''t'
-      - '&7   have one selected.'
-      - '&b&l* &7Click here to go straight to the'
-      - '&7   editing screen of the drop table.'
+        - '&7The current selected drop'
+        - '&7table is: &b{dropTable}&7.'
+        - '&7'
+        - '&b&lHints'
+        - '&b&l* &7If this shows N/A it means'
+        - '&7   there was an issue loading the'
+        - '&7   previous table, or it doesn''t'
+        - '&7   have one selected.'
+        - '&b&l* &7Click here to go straight to the'
+        - '&7   editing screen of the drop table.'
       Button: Selected
     '47':
       type: WHITE_STAINED_GLASS_PANE
@@ -529,23 +529,23 @@ DropsEditorPanel:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of drop tables.'
+        - '&7Click here to go to the previous'
+        - '&7page of drop tables.'
       PreviousPage: true
     '50':
       type: DIAMOND_BLOCK
       name: '&a&lCreate a new Drop Table'
       lore:
-      - '&7Click here to create a new drop'
-      - '&7table. It will automatically be'
-      - '&7assigned to this boss when created.'
+        - '&7Click here to create a new drop'
+        - '&7table. It will automatically be'
+        - '&7assigned to this boss when created.'
       Button: CreateDropTable
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of drop tables.'
+        - '&7Click here to go to the next'
+        - '&7page of drop tables.'
       NextPage: true
     '52':
       type: WHITE_STAINED_GLASS_PANE
@@ -557,16 +557,16 @@ DropsEditorPanel:
       type: BOOK
       name: '&c&lDrops Guide'
       lore:
-      - '&7When selecting the drop table for this custom boss'
-      - '&7you can either choose from one of the above listed'
-      - '&7pre-configured drop tables or you can make a'
-      - '&7new one for this boss.'
-      - '&7'
-      - '&c&lHints'
-      - '&c&l* &7The currently selected drop table will be shown'
-      - '&7   with an emerald which states so.'
-      - '&c&l* &7Every drop table from every boss will be listed'
-      - '&7   here as an available drop table.'
+        - '&7When selecting the drop table for this custom boss'
+        - '&7you can either choose from one of the above listed'
+        - '&7pre-configured drop tables or you can make a'
+        - '&7new one for this boss.'
+        - '&7'
+        - '&c&lHints'
+        - '&c&l* &7The currently selected drop table will be shown'
+        - '&7   with an emerald which states so.'
+        - '&c&l* &7Every drop table from every boss will be listed'
+        - '&7   here as an available drop table.'
 BossListEditorPanel:
   name: '&b&l{name} Editor'
   slots: 54
@@ -592,8 +592,8 @@ BossListEditorPanel:
       type: DIAMOND_BLOCK
       name: '&a&lCreate a new Entity'
       lore:
-      - '&7Click here to create a new entity'
-      - '&7within this boss.'
+        - '&7Click here to create a new entity'
+        - '&7within this boss.'
       Button: CreateEntity
     '51':
       type: WHITE_STAINED_GLASS_PANE
@@ -608,7 +608,7 @@ BossListEditorPanel:
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 EquipmentEditorPanel:
   name: '&b&l{name} Editor'
   slots: 9
@@ -625,53 +625,53 @@ EquipmentEditorPanel:
       type: DIAMOND_HELMET
       name: '&c&lHelmet'
       lore:
-      - '&7Click here to change the'
-      - '&7helmet for the &f{name}'
-      - '&7or add one from your'
-      - '&7inventory.'
+        - '&7Click here to change the'
+        - '&7helmet for the &f{name}'
+        - '&7or add one from your'
+        - '&7inventory.'
       Button: Helmet
     '3':
       type: DIAMOND_CHESTPLATE
       name: '&c&lChestplate'
       lore:
-      - '&7Click here to change the'
-      - '&7chestplate for the &f{name}'
-      - '&7or add one from your'
-      - '&7inventory.'
+        - '&7Click here to change the'
+        - '&7chestplate for the &f{name}'
+        - '&7or add one from your'
+        - '&7inventory.'
       Button: Chestplate
     '4':
       type: DIAMOND_LEGGINGS
       name: '&c&lLeggings'
       lore:
-      - '&7Click here to change the'
-      - '&7leggings for the &f{name}'
-      - '&7or add one from your'
-      - '&7inventory.'
+        - '&7Click here to change the'
+        - '&7leggings for the &f{name}'
+        - '&7or add one from your'
+        - '&7inventory.'
       Button: Leggings
     '5':
       type: DIAMOND_BOOTS
       name: '&c&lBoots'
       lore:
-      - '&7Click here to change the'
-      - '&7boots for the &f{name}'
-      - '&7or add one from your'
-      - '&7inventory.'
+        - '&7Click here to change the'
+        - '&7boots for the &f{name}'
+        - '&7or add one from your'
+        - '&7inventory.'
       Button: Boots
     '8':
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
     '9':
       type: BOOK
       name: '&c&lEquipment Guide'
       lore:
-      - '&7here you can choose what equipment'
-      - '&7this boss has. To choose simply click'
-      - '&7the desired piece, then click one of'
-      - '&7the preset pieces or click the diamond'
-      - '&7block to add a new piece from your'
-      - '&7inventory.'
+        - '&7here you can choose what equipment'
+        - '&7this boss has. To choose simply click'
+        - '&7the desired piece, then click one of'
+        - '&7the preset pieces or click the diamond'
+        - '&7block to add a new piece from your'
+        - '&7inventory.'
 HelmetEditorPanel:
   name: '&b&l{name} Editor'
   slots: 54
@@ -685,8 +685,8 @@ HelmetEditorPanel:
       type: DIAMOND
       name: '&c&lRemove'
       lore:
-      - '&7click here to remove the'
-      - '&7currently equipped helmet.'
+        - '&7click here to remove the'
+        - '&7currently equipped helmet.'
       Button: Remove
     '47':
       type: WHITE_STAINED_GLASS_PANE
@@ -698,23 +698,23 @@ HelmetEditorPanel:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of helmets.'
+        - '&7Click here to go to the previous'
+        - '&7page of helmets.'
       PreviousPage: true
     '50':
       type: DIAMOND_BLOCK
       name: '&a&lAdd New Helmet'
       lore:
-      - '&7Click here to add a new'
-      - '&7helmet which you have in your'
-      - '&7inventory.'
+        - '&7Click here to add a new'
+        - '&7helmet which you have in your'
+        - '&7inventory.'
       Button: AddNew
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of helmets.'
+        - '&7Click here to go to the next'
+        - '&7page of helmets.'
       NextPage: true
     '52':
       type: WHITE_STAINED_GLASS_PANE
@@ -726,7 +726,7 @@ HelmetEditorPanel:
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 ChestplateEditorPanel:
   name: '&b&l{name} Editor'
   slots: 54
@@ -740,8 +740,8 @@ ChestplateEditorPanel:
       type: DIAMOND
       name: '&c&lRemove'
       lore:
-      - '&7click here to remove the'
-      - '&7currently equipped chestplate.'
+        - '&7click here to remove the'
+        - '&7currently equipped chestplate.'
       Button: Remove
     '47':
       type: WHITE_STAINED_GLASS_PANE
@@ -753,23 +753,23 @@ ChestplateEditorPanel:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of chestplates.'
+        - '&7Click here to go to the previous'
+        - '&7page of chestplates.'
       PreviousPage: true
     '50':
       type: DIAMOND_BLOCK
       name: '&a&lAdd New Chestplate'
       lore:
-      - '&7Click here to add a new'
-      - '&7chestplate which you have in your'
-      - '&7inventory.'
+        - '&7Click here to add a new'
+        - '&7chestplate which you have in your'
+        - '&7inventory.'
       Button: AddNew
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of chestplates.'
+        - '&7Click here to go to the next'
+        - '&7page of chestplates.'
       NextPage: true
     '52':
       type: WHITE_STAINED_GLASS_PANE
@@ -781,7 +781,7 @@ ChestplateEditorPanel:
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 LeggingsEditorPanel:
   name: '&b&l{name} Editor'
   slots: 54
@@ -795,8 +795,8 @@ LeggingsEditorPanel:
       type: DIAMOND
       name: '&c&lRemove'
       lore:
-      - '&7click here to remove the'
-      - '&7currently equipped {type}.'
+        - '&7click here to remove the'
+        - '&7currently equipped {type}.'
       Button: Remove
     '47':
       type: WHITE_STAINED_GLASS_PANE
@@ -808,23 +808,23 @@ LeggingsEditorPanel:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of leggings.'
+        - '&7Click here to go to the previous'
+        - '&7page of leggings.'
       PreviousPage: true
     '50':
       type: DIAMOND_BLOCK
       name: '&a&lAdd New Leggings'
       lore:
-      - '&7Click here to add a new'
-      - '&7leggings which you have in your'
-      - '&7inventory.'
+        - '&7Click here to add a new'
+        - '&7leggings which you have in your'
+        - '&7inventory.'
       Button: AddNew
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of leggings.'
+        - '&7Click here to go to the next'
+        - '&7page of leggings.'
       NextPage: true
     '52':
       type: WHITE_STAINED_GLASS_PANE
@@ -836,7 +836,7 @@ LeggingsEditorPanel:
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 BootsEditorPanel:
   name: '&b&l{name} Editor'
   slots: 54
@@ -850,8 +850,8 @@ BootsEditorPanel:
       type: DIAMOND
       name: '&c&lRemove'
       lore:
-      - '&7click here to remove the'
-      - '&7currently equipped {type}.'
+        - '&7click here to remove the'
+        - '&7currently equipped {type}.'
       Button: Remove
     '47':
       type: WHITE_STAINED_GLASS_PANE
@@ -863,23 +863,23 @@ BootsEditorPanel:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of boots.'
+        - '&7Click here to go to the previous'
+        - '&7page of boots.'
       PreviousPage: true
     '50':
       type: DIAMOND_BLOCK
       name: '&a&lAdd New Boots'
       lore:
-      - '&7Click here to add a new'
-      - '&7boots which you have in your'
-      - '&7inventory.'
+        - '&7Click here to add a new'
+        - '&7boots which you have in your'
+        - '&7inventory.'
       Button: AddNew
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of boots.'
+        - '&7Click here to go to the next'
+        - '&7page of boots.'
       NextPage: true
     '52':
       type: WHITE_STAINED_GLASS_PANE
@@ -891,7 +891,7 @@ BootsEditorPanel:
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 TargetingPanel:
   name: '&b&l{name} Editor'
   slots: 27
@@ -908,60 +908,60 @@ TargetingPanel:
       type: REDSTONE_BLOCK
       name: '&e&lNot Damaged Nearby'
       lore:
-      - '&7This target system will target'
-      - '&7anyone who is nearby and hasn''t'
-      - '&7attacked the boss. If there is'
-      - '&7no one nearby who hasn''t attacked'
-      - '&7the boss then it will choose a random'
-      - '&7entity/player.'
+        - '&7This target system will target'
+        - '&7anyone who is nearby and hasn''t'
+        - '&7attacked the boss. If there is'
+        - '&7no one nearby who hasn''t attacked'
+        - '&7the boss then it will choose a random'
+        - '&7entity/player.'
       TargetingSystem: NotDamagedNearby
     '13':
       type: REDSTONE_BLOCK
       name: '&e&lClosest'
       lore:
-      - '&7This target system will'
-      - '&7target the closest player'
-      - '&7to the boss.'
+        - '&7This target system will'
+        - '&7target the closest player'
+        - '&7to the boss.'
       TargetingSystem: Closest
     '14':
       type: REDSTONE_BLOCK
       name: '&e&lRandom Nearby'
       lore:
-      - '&7This target system will'
-      - '&7target a random target who is'
-      - '&7within reach of the boss.'
+        - '&7This target system will'
+        - '&7target a random target who is'
+        - '&7within reach of the boss.'
       TargetingSystem: RandomNearby
     '15':
       type: REDSTONE_BLOCK
       name: '&e&lTop Damager'
       lore:
-      - '&7This target system will'
-      - '&7target the player who has'
-      - '&7the most damage that is'
-      - '&7nearby.'
+        - '&7This target system will'
+        - '&7target the player who has'
+        - '&7the most damage that is'
+        - '&7nearby.'
       TargetingSystem: TopDamager
     '19':
       type: ARROW
       name: '&b&lSelected'
       lore:
-      - '&7You have currently got &f{selected}'
-      - '&7as your targeting system.'
+        - '&7You have currently got &f{selected}'
+        - '&7as your targeting system.'
     '23':
       type: BOOK
       name: '&c&lTargeting Guide'
       lore:
-      - '&7Here you can choose how'
-      - '&7the boss handles targeting'
-      - '&7of players.'
-      - '&7'
-      - '&7The default boss target range is'
-      - '&f50 blocks&7. However this can be'
-      - '&7adjusted in the display.yml.'
+        - '&7Here you can choose how'
+        - '&7the boss handles targeting'
+        - '&7of players.'
+        - '&7'
+        - '&7The default boss target range is'
+        - '&f50 blocks&7. However this can be'
+        - '&7adjusted in the display.yml.'
     '27':
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 WeaponEditorPanel:
   name: '&b&l{name} Editor'
   slots: 9
@@ -978,31 +978,31 @@ WeaponEditorPanel:
       type: BOOK
       name: '&c&lWeapons Guide'
       lore:
-      - '&7here you can choose what weapons'
-      - '&7this boss has. To choose simply click'
-      - '&7the desired hand, then click one of'
-      - '&7the preset weapons or click the diamond'
-      - '&7block to add a new weapon from your'
-      - '&7inventory.'
+        - '&7here you can choose what weapons'
+        - '&7this boss has. To choose simply click'
+        - '&7the desired hand, then click one of'
+        - '&7the preset weapons or click the diamond'
+        - '&7block to add a new weapon from your'
+        - '&7inventory.'
     '4':
       type: DIAMOND_SWORD
       name: '&c&lMain Hand'
       lore:
-      - '&7Click here to modify the'
-      - '&7main hand for the &f{name}&7.'
+        - '&7Click here to modify the'
+        - '&7main hand for the &f{name}&7.'
       Button: MainHand
     '6':
       type: SHIELD
       name: '&c&lOff Hand'
       lore:
-      - '&7Click here to modify the'
-      - '&7off hand for the &f{name}&7.'
+        - '&7Click here to modify the'
+        - '&7off hand for the &f{name}&7.'
       Button: OffHand
     '9':
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 MainHandEditorPanel:
   name: '&b&l{name} Editor'
   slots: 54
@@ -1016,8 +1016,8 @@ MainHandEditorPanel:
       type: DIAMOND
       name: '&c&lRemove'
       lore:
-      - '&7click here to remove the'
-      - '&7currently equipped main hand.'
+        - '&7click here to remove the'
+        - '&7currently equipped main hand.'
       Button: Remove
     '47':
       type: WHITE_STAINED_GLASS_PANE
@@ -1029,23 +1029,23 @@ MainHandEditorPanel:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of weapons.'
+        - '&7Click here to go to the previous'
+        - '&7page of weapons.'
       PreviousPage: true
     '50':
       type: DIAMOND_BLOCK
       name: '&a&lAdd New Weapon'
       lore:
-      - '&7Click here to add a new'
-      - '&7weapon which you have in your'
-      - '&7inventory.'
+        - '&7Click here to add a new'
+        - '&7weapon which you have in your'
+        - '&7inventory.'
       Button: AddNew
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of weapons.'
+        - '&7Click here to go to the next'
+        - '&7page of weapons.'
       NextPage: true
     '52':
       type: WHITE_STAINED_GLASS_PANE
@@ -1057,7 +1057,7 @@ MainHandEditorPanel:
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 OffHandEditorPanel:
   name: '&b&l{name} Editor'
   slots: 54
@@ -1071,8 +1071,8 @@ OffHandEditorPanel:
       type: DIAMOND
       name: '&c&lRemove'
       lore:
-      - '&7click here to remove the'
-      - '&7currently equipped off hand.'
+        - '&7click here to remove the'
+        - '&7currently equipped off hand.'
       Button: Remove
     '47':
       type: WHITE_STAINED_GLASS_PANE
@@ -1084,23 +1084,23 @@ OffHandEditorPanel:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of weapons.'
+        - '&7Click here to go to the previous'
+        - '&7page of weapons.'
       PreviousPage: true
     '50':
       type: DIAMOND_BLOCK
       name: '&a&lAdd New Weapon'
       lore:
-      - '&7Click here to add a new'
-      - '&7weapon which you have in your'
-      - '&7inventory.'
+        - '&7Click here to add a new'
+        - '&7weapon which you have in your'
+        - '&7inventory.'
       Button: AddNew
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of weapons.'
+        - '&7Click here to go to the next'
+        - '&7page of weapons.'
       NextPage: true
     '52':
       type: WHITE_STAINED_GLASS_PANE
@@ -1112,7 +1112,7 @@ OffHandEditorPanel:
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 SkillMainEditorPanel:
   name: '&b&l{name} Editor'
   slots: 9
@@ -1129,49 +1129,49 @@ SkillMainEditorPanel:
       type: BOOK
       name: '&c&lSkill Guide'
       lore:
-      - '&7Here you can configure the way the'
-      - '&7skill system handles for this boss.'
-      - '&7You can configure the overall chance,'
-      - '&7skill message and the list of skills'
-      - '&7that is assigned to this boss.'
+        - '&7Here you can configure the way the'
+        - '&7skill system handles for this boss.'
+        - '&7You can configure the overall chance,'
+        - '&7skill message and the list of skills'
+        - '&7that is assigned to this boss.'
     '4':
       type: GLOWSTONE_DUST
       name: '&e&lOverall Chance'
       lore:
-      - '&7The current overall chance for'
-      - '&7skills to be procced each hit is'
-      - '&f{chance}%&7.'
-      - '&7'
-      - '&bLeft Click &8» &f+1.0'
-      - '&bShift Left-Click &8» &f+0.1'
-      - '&7'
-      - '&bRight Click &8» &f-1.0'
-      - '&bShift Right-Click &8» &f-0.1'
+        - '&7The current overall chance for'
+        - '&7skills to be procced each hit is'
+        - '&f{chance}%&7.'
+        - '&7'
+        - '&bLeft Click &8» &f+1.0'
+        - '&bShift Left-Click &8» &f+0.1'
+        - '&7'
+        - '&bRight Click &8» &f-1.0'
+        - '&bShift Right-Click &8» &f-0.1'
       Button: OverallChance
     '5':
       type: BOOK
       name: '&e&lSkills List'
       lore:
-      - '&7Click here to select which skills'
-      - '&7are currently selected for this boss.'
+        - '&7Click here to select which skills'
+        - '&7are currently selected for this boss.'
       Button: SkillList
     '6':
       type: PAPER
       name: '&e&lMaster Message'
       lore:
-      - '&7Click here to modify the'
-      - '&7master message for when a'
-      - '&7skill is proced. If the'
-      - '&7specific skill has got a'
-      - '&7customMessage dedicated'
-      - '&7to it, this message will'
-      - '&7be ignored.'
+        - '&7Click here to modify the'
+        - '&7master message for when a'
+        - '&7skill is proced. If the'
+        - '&7specific skill has got a'
+        - '&7customMessage dedicated'
+        - '&7to it, this message will'
+        - '&7be ignored.'
       Button: Message
     '9':
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 StatisticsMainEditorPanel:
   name: '&b&l{name} Editor'
   slots: 9
@@ -1188,48 +1188,48 @@ StatisticsMainEditorPanel:
       type: BOOK
       name: '&c&lStatistics Guide'
       lore:
-      - '&7Here you can configure the way the'
-      - '&7skill system handles for this boss.'
-      - '&7You can configure the overall chance,'
-      - '&7skill message and the list of skills'
-      - '&7that is assigned to this boss.'
+        - '&7Here you can configure the way the'
+        - '&7skill system handles for this boss.'
+        - '&7You can configure the overall chance,'
+        - '&7skill message and the list of skills'
+        - '&7that is assigned to this boss.'
     '4':
       type: NAME_TAG
       name: '&e&lChange the Display Name'
       lore:
-      - '&7Here you can change the display name'
-      - '&7of the entity. It is currently:'
-      - '&f{displayName}'
-      - '&7'
-      - '&7When u click this it will close the'
-      - '&7GUI and suggest you to enter the new'
-      - '&7display name in chat.'
+        - '&7Here you can change the display name'
+        - '&7of the entity. It is currently:'
+        - '&f{displayName}'
+        - '&7'
+        - '&7When u click this it will close the'
+        - '&7GUI and suggest you to enter the new'
+        - '&7display name in chat.'
       Button: DisplayName
     '5':
       type: SLIME_SPAWN_EGG
       name: '&e&lChange the Entity Type'
       lore:
-      - '&7This will open a GUI and you can select'
-      - '&7your new entity type.'
+        - '&7This will open a GUI and you can select'
+        - '&7your new entity type.'
       Button: EntityType
     '6':
       type: REDSTONE
       name: '&e&lChange the Health'
       lore:
-      - '&7The current health for this entity'
-      - '&7is &c{health}'
-      - '&7'
-      - '&bLeft Click &8» &f+1.0'
-      - '&bShift Left-Click &8» &f+0.1'
-      - '&7'
-      - '&bRight Click &8» &f-1.0'
-      - '&bShift Right-Click &8» &f-0.1'
+        - '&7The current health for this entity'
+        - '&7is &c{health}'
+        - '&7'
+        - '&bLeft Click &8» &f+1.0'
+        - '&bShift Left-Click &8» &f+0.1'
+        - '&7'
+        - '&bRight Click &8» &f-1.0'
+        - '&bShift Right-Click &8» &f-0.1'
       Button: Health
     '9':
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 CommandsEditorPanel:
   name: '&b&l{name} Editor'
   slots: 9
@@ -1246,31 +1246,31 @@ CommandsEditorPanel:
       type: BOOK
       name: '&c&lCommands Guide'
       lore:
-      - '&7Here you can configure which command set'
-      - '&7the boss has for specific events.'
+        - '&7Here you can configure which command set'
+        - '&7the boss has for specific events.'
     '4':
       type: TALL_GRASS
       name: '&e&lOn Spawn'
       lore:
-      - '&7Here you can change the command for'
-      - '&7the spawn of the boss.'
-      - '&7'
-      - '&fCurrently Selected: &7{onSpawn}'
+        - '&7Here you can change the command for'
+        - '&7the spawn of the boss.'
+        - '&7'
+        - '&fCurrently Selected: &7{onSpawn}'
       Button: OnSpawn
     '6':
       type: REDSTONE
       name: '&e&lOn Death'
       lore:
-      - '&7Here you can change the command'
-      - '&7the death of the boss.'
-      - '&7'
-      - '&fCurrently Selected: &7{onDeath}'
+        - '&7Here you can change the command'
+        - '&7the death of the boss.'
+        - '&7'
+        - '&fCurrently Selected: &7{onDeath}'
       Button: OnDeath
     '9':
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 TextEditorMainPanel:
   name: '&b&l{name} Editor'
   slots: 9
@@ -1287,34 +1287,34 @@ TextEditorMainPanel:
       type: BOOK
       name: '&c&lText Guide'
       lore:
-      - '&7Here you can configure which command set'
-      - '&7the boss has for specific events.'
+        - '&7Here you can configure which command set'
+        - '&7the boss has for specific events.'
     '4':
       type: TALL_GRASS
       name: '&e&lOn Spawn'
       lore:
-      - '&7Here you can change the settings for'
-      - '&7the spawn messages of the boss.'
+        - '&7Here you can change the settings for'
+        - '&7the spawn messages of the boss.'
       Button: OnSpawn
     '5':
       type: REDSTONE_TORCH
       name: '&e&lTaunts'
       lore:
-      - '&7Here you can adjust the settings for'
-      - '&7the taunts of the boss.'
+        - '&7Here you can adjust the settings for'
+        - '&7the taunts of the boss.'
       Button: Taunts
     '6':
       type: REDSTONE
       name: '&e&lOn Death'
       lore:
-      - '&7Here you can change the settings for'
-      - '&7the death messages of the boss.'
+        - '&7Here you can change the settings for'
+        - '&7the death messages of the boss.'
       Button: OnDeath
     '9':
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 DeathTextEditorPanel:
   name: '&b&l{name} Editor'
   slots: 9
@@ -1331,58 +1331,58 @@ DeathTextEditorPanel:
       type: TALL_GRASS
       name: '&e&lMain Message'
       lore:
-      - '&7Here you can change the main message that is'
-      - '&7currently selected.'
-      - '&7'
-      - '&bCurrent: &f{mainMessage}'
+        - '&7Here you can change the main message that is'
+        - '&7currently selected.'
+        - '&7'
+        - '&bCurrent: &f{mainMessage}'
       Button: MainMessage
     '3':
       type: PLAYER_HEAD
       name: '&e&lPosition Message'
       lore:
-      - '&7Here you can change the position message that is'
-      - '&7currently selected.'
-      - '&7'
-      - '&bCurrent: &f{positionMessage}'
-      - '&7'
-      - '&7The position message is a message that is'
-      - '&7injected in to the main message to display'
-      - '&7the positions, damage and percentage of damage'
-      - '&7that the selected amount of people did to'
-      - '&7the boss.'
+        - '&7Here you can change the position message that is'
+        - '&7currently selected.'
+        - '&7'
+        - '&bCurrent: &f{positionMessage}'
+        - '&7'
+        - '&7The position message is a message that is'
+        - '&7injected in to the main message to display'
+        - '&7the positions, damage and percentage of damage'
+        - '&7that the selected amount of people did to'
+        - '&7the boss.'
       Button: PositionMessage
     '5':
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
     '7':
       type: REDSTONE_BLOCK
       name: '&e&lOnly Show'
       lore:
-      - '&7Here you can change the amount of damaging'
-      - '&7users it will display on the main message'
-      - '&7with the position message injection.'
-      - '&7Currently it will show the top &f{onlyShow}'
-      - '&7players on the death message.'
-      - '&7'
-      - '&bLeft Click &8» &f+1'
-      - '&bRight Click &8» &f-1'
+        - '&7Here you can change the amount of damaging'
+        - '&7users it will display on the main message'
+        - '&7with the position message injection.'
+        - '&7Currently it will show the top &f{onlyShow}'
+        - '&7players on the death message.'
+        - '&7'
+        - '&bLeft Click &8» &f+1'
+        - '&bRight Click &8» &f-1'
       Button: OnlyShow
     '8':
       type: REDSTONE
       name: '&e&lRadius'
       lore:
-      - '&7Here you can change the radius for'
-      - '&7this message. It is currently: &f{radius}'
-      - '&7blocks. Set it to &f-1&7 if you want it'
-      - '&7to be a server-wide broadcast.'
-      - '&7'
-      - '&bLeft Click &8» &f+1'
-      - '&bShift Left-Click &8» &f+10'
-      - '&7'
-      - '&bRight Click &8» &f-1'
-      - '&bShift Right-Click &8» &f-10'
+        - '&7Here you can change the radius for'
+        - '&7this message. It is currently: &f{radius}'
+        - '&7blocks. Set it to &f-1&7 if you want it'
+        - '&7to be a server-wide broadcast.'
+        - '&7'
+        - '&bLeft Click &8» &f+1'
+        - '&bShift Left-Click &8» &f+10'
+        - '&7'
+        - '&bRight Click &8» &f-1'
+        - '&bShift Right-Click &8» &f-10'
       Button: Radius
 SpawnTextEditorPanel:
   name: '&b&l{name} Editor'
@@ -1400,30 +1400,30 @@ SpawnTextEditorPanel:
       type: TALL_GRASS
       name: '&e&lSelect Message'
       lore:
-      - '&7Here you can change the message that is'
-      - '&7currently selected.'
-      - '&7'
-      - '&bCurrent: &f{selected}'
+        - '&7Here you can change the message that is'
+        - '&7currently selected.'
+        - '&7'
+        - '&bCurrent: &f{selected}'
       Button: Select
     '5':
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
     '8':
       type: REDSTONE
       name: '&e&lRadius'
       lore:
-      - '&7Here you can change the radius for'
-      - '&7this message. It is currently: &f{radius}'
-      - '&7blocks. Set it to &f-1&7 if you want it'
-      - '&7to be a server-wide broadcast.'
-      - '&7'
-      - '&bLeft Click &8» &f+1'
-      - '&bShift Left-Click &8» &f+10'
-      - '&7'
-      - '&bRight Click &8» &f-1'
-      - '&bShift Right-Click &8» &f-10'
+        - '&7Here you can change the radius for'
+        - '&7this message. It is currently: &f{radius}'
+        - '&7blocks. Set it to &f-1&7 if you want it'
+        - '&7to be a server-wide broadcast.'
+        - '&7'
+        - '&bLeft Click &8» &f+1'
+        - '&bShift Left-Click &8» &f+10'
+        - '&7'
+        - '&bRight Click &8» &f-1'
+        - '&bShift Right-Click &8» &f-10'
       Button: Radius
 TauntEditorPanel:
   name: '&b&l{name} Editor'
@@ -1441,50 +1441,50 @@ TauntEditorPanel:
       type: REDSTONE
       name: '&e&lRadius'
       lore:
-      - '&7Here you can change the radius that players'
-      - '&7will see the taunts in. It is currently: &f{radius}'
-      - '&7blocks. Set it to &f-1&7 if you want it'
-      - '&7to be a server-wide broadcast.'
-      - '&7'
-      - '&bLeft Click &8» &f+1'
-      - '&bShift Left-Click &8» &f+10'
-      - '&7'
-      - '&bRight Click &8» &f-1'
-      - '&bShift Right-Click &8» &f-10'
+        - '&7Here you can change the radius that players'
+        - '&7will see the taunts in. It is currently: &f{radius}'
+        - '&7blocks. Set it to &f-1&7 if you want it'
+        - '&7to be a server-wide broadcast.'
+        - '&7'
+        - '&bLeft Click &8» &f+1'
+        - '&bShift Left-Click &8» &f+10'
+        - '&7'
+        - '&bRight Click &8» &f-1'
+        - '&bShift Right-Click &8» &f-10'
       Button: Radius
     '5':
       type: BOOK
       name: '&e&lTaunts'
       lore:
-      - '&7Here you can select the taunts that the boss'
-      - '&7will say while he is active. If this list is'
-      - '&7empty he won''t say anything.'
-      - '&7'
-      - '&bCurrently Selected:'
-      - '&f{taunts}'
+        - '&7Here you can select the taunts that the boss'
+        - '&7will say while he is active. If this list is'
+        - '&7empty he won''t say anything.'
+        - '&7'
+        - '&bCurrently Selected:'
+        - '&f{taunts}'
       Button: Taunts
     '7':
       type: CLOCK
       name: '&e&lDelay'
       lore:
-      - '&7Here you can change the delay between each'
-      - '&7taunt that the boss says. The delay is'
-      - '&7currently set to &f{delay}s&7. This time is in'
-      - '&7seconds. Once the boss has gone through the'
-      - '&7list of taunts he will start again at the'
-      - '&7beginning until he''s dead.'
-      - '&7'
-      - '&bLeft Click &8» &f+1'
-      - '&bShift Left-Click &8» &f+10'
-      - '&7'
-      - '&bRight Click &8» &f-1'
-      - '&bShift Right-Click &8» &f-10'
+        - '&7Here you can change the delay between each'
+        - '&7taunt that the boss says. The delay is'
+        - '&7currently set to &f{delay}s&7. This time is in'
+        - '&7seconds. Once the boss has gone through the'
+        - '&7list of taunts he will start again at the'
+        - '&7beginning until he''s dead.'
+        - '&7'
+        - '&bLeft Click &8» &f+1'
+        - '&bShift Left-Click &8» &f+10'
+        - '&7'
+        - '&bRight Click &8» &f-1'
+        - '&bShift Right-Click &8» &f-10'
       Button: Delay
     '9':
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 SkillEditorPanel:
   name: '&b&l{name} Skill Editor'
   slots: 18
@@ -1498,72 +1498,72 @@ SkillEditorPanel:
       type: BOOK
       name: '&e&lCustom Message'
       lore:
-      - '&7Click here to change the custom message'
-      - '&7assigned to the skill. This will override'
-      - '&7the master message assigned to the boss when'
-      - '&7this skill is called.'
-      - '&7'
-      - '&bCurrently: &f{customMessage}'
-      - '&7'
-      - '&7To remove this message simply right click'
-      - '&7and it will then remove this and go back'
-      - '&7to using the master message assigned to the'
-      - '&7boss.'
+        - '&7Click here to change the custom message'
+        - '&7assigned to the skill. This will override'
+        - '&7the master message assigned to the boss when'
+        - '&7this skill is called.'
+        - '&7'
+        - '&bCurrently: &f{customMessage}'
+        - '&7'
+        - '&7To remove this message simply right click'
+        - '&7and it will then remove this and go back'
+        - '&7to using the master message assigned to the'
+        - '&7boss.'
       Button: CustomMessage
     '3':
       type: REDSTONE
       name: '&e&lRadius'
       lore:
-      - '&7Here you can change the radius that the skill'
-      - '&7will see be called to within. It is currently'
-      - '&7set to &f{radius} blocks.'
-      - '&7'
-      - '&bLeft Click &8» &f+1'
-      - '&bShift Left-Click &8» &f+10'
-      - '&7'
-      - '&bRight Click &8» &f-1'
-      - '&bShift Right-Click &8» &f-10'
+        - '&7Here you can change the radius that the skill'
+        - '&7will see be called to within. It is currently'
+        - '&7set to &f{radius} blocks.'
+        - '&7'
+        - '&bLeft Click &8» &f+1'
+        - '&bShift Left-Click &8» &f+10'
+        - '&7'
+        - '&bRight Click &8» &f-1'
+        - '&bShift Right-Click &8» &f-10'
       Button: Radius
     '5':
       type: DIAMOND
       name: '&e&lCustom Data'
       lore:
-      - '&7Click here to edit the custom data related'
-      - '&7to this skill. If it is a Potion skill you'
-      - '&7can modify the potions, etc. etc.'
+        - '&7Click here to edit the custom data related'
+        - '&7to this skill. If it is a Potion skill you'
+        - '&7can modify the potions, etc. etc.'
       Button: CustomData
     '7':
       type: TORCH
       name: '&e&lMode'
       lore:
-      - '&bCurrently: &f{mode}'
-      - '&7'
-      - '&7Click here to change the mode of the custom'
-      - '&7skill. It will cycle between all different'
-      - '&7types so when you find the right mode you can'
-      - '&7leave it and it will automatically save to'
-      - '&7that mode.'
+        - '&bCurrently: &f{mode}'
+        - '&7'
+        - '&7Click here to change the mode of the custom'
+        - '&7skill. It will cycle between all different'
+        - '&7types so when you find the right mode you can'
+        - '&7leave it and it will automatically save to'
+        - '&7that mode.'
       Button: Mode
     '8':
       type: PAPER
       name: '&e&lDisplay Name'
       lore:
-      - '&bCurrently: &f{displayName}'
-      - '&7'
-      - '&7This is the skill display name. It is used'
-      - '&7in many things, from the in-game display of'
-      - '&7the skill, to the debug messages. So make'
-      - '&7sure it stands out and is unique, or not.'
+        - '&bCurrently: &f{displayName}'
+        - '&7'
+        - '&7This is the skill display name. It is used'
+        - '&7in many things, from the in-game display of'
+        - '&7the skill, to the debug messages. So make'
+        - '&7sure it stands out and is unique, or not.'
       Button: DisplayName
     '14':
       type: GUNPOWDER
       name: '&e&lType'
       lore:
-      - '&bCurrently: &f{type}'
-      - '&7Click this to change the skill type. Keep'
-      - '&7in mind that when you change your skill'
-      - '&7type the previous custom data will be erased'
-      - '&7to make room for the new custom data.'
+        - '&bCurrently: &f{type}'
+        - '&7Click this to change the skill type. Keep'
+        - '&7in mind that when you change your skill'
+        - '&7type the previous custom data will be erased'
+        - '&7to make room for the new custom data.'
       Button: Type
 SkillTypeEditorPanel:
   name: '&b&l{name} Skill Editor'
@@ -1581,62 +1581,62 @@ SkillTypeEditorPanel:
       type: BOOK
       name: '&e&lCommand Skill Type'
       lore:
-      - '&7If you set this to the skill type'
-      - '&7then you will be able to set commands'
-      - '&7to be applied to the targeted players'
-      - '&7when this skill is called.'
-      - '&7'
-      - '&c&lWARNING'
-      - '&7This will remove any previous'
-      - '&7custom skill data.'
+        - '&7If you set this to the skill type'
+        - '&7then you will be able to set commands'
+        - '&7to be applied to the targeted players'
+        - '&7when this skill is called.'
+        - '&7'
+        - '&c&lWARNING'
+        - '&7This will remove any previous'
+        - '&7custom skill data.'
       Button: Command
     '3':
       type: EMERALD
       name: '&e&lCustom Skill Type'
       lore:
-      - '&7If you want to use a custom skill for'
-      - '&7this skill, select this skill type then'
-      - '&7in your custom data configuration you'
-      - '&7can select which custom skill it is'
-      - '&7assigned to.'
-      - '&7'
-      - '&c&lWARNING'
-      - '&7This will remove any previous'
-      - '&7custom skill data.'
+        - '&7If you want to use a custom skill for'
+        - '&7this skill, select this skill type then'
+        - '&7in your custom data configuration you'
+        - '&7can select which custom skill it is'
+        - '&7assigned to.'
+        - '&7'
+        - '&c&lWARNING'
+        - '&7This will remove any previous'
+        - '&7custom skill data.'
       Button: Custom
     '5':
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
     '7':
       type: SPLASH_POTION
       name: '&e&lPotion Skill Type'
       lore:
-      - '&7If you want to apply potions to'
-      - '&7the targeted players when this skill is'
-      - '&7called you can use this skill type.'
-      - '&7'
-      - '&c&lWARNING'
-      - '&7This will remove any previous'
-      - '&7custom skill data.'
+        - '&7If you want to apply potions to'
+        - '&7the targeted players when this skill is'
+        - '&7called you can use this skill type.'
+        - '&7'
+        - '&c&lWARNING'
+        - '&7This will remove any previous'
+        - '&7custom skill data.'
       Button: Potion
     '8':
       type: CREEPER_HEAD
       name: '&e&lGroup Skill Type'
       lore:
-      - '&7If you want to have multiple skills under'
-      - '&7one skill select this skill type and you'
-      - '&7can connect it to some of the already existing'
-      - '&7skills so you can have more then one go off'
-      - '&7from one skill calling. Only this displayName'
-      - '&7and customMessage will be used, the connected'
-      - '&7skill displayName and customMessage will be'
-      - '&7ignored.'
-      - '&7'
-      - '&c&lWARNING'
-      - '&7This will remove any previous'
-      - '&7custom skill data.'
+        - '&7If you want to have multiple skills under'
+        - '&7one skill select this skill type and you'
+        - '&7can connect it to some of the already existing'
+        - '&7skills so you can have more then one go off'
+        - '&7from one skill calling. Only this displayName'
+        - '&7and customMessage will be used, the connected'
+        - '&7skill displayName and customMessage will be'
+        - '&7ignored.'
+        - '&7'
+        - '&c&lWARNING'
+        - '&7This will remove any previous'
+        - '&7custom skill data.'
       Button: Group
 PotionSkillEditorPanel:
   name: '&b&l{name} Skill Editor'
@@ -1651,13 +1651,13 @@ PotionSkillEditorPanel:
       type: BOOK
       name: '&e&lPotion Guide'
       lore:
-      - '&7Here you can adjust the potion effects'
-      - '&7that are applied when the skill is'
-      - '&7called. If you want to remove a potion'
-      - '&7effect simply click on the potion and'
-      - '&7it will removed from the skill. If you'
-      - '&7want to add a new potion effect click'
-      - '&7on the green emerald block.'
+        - '&7Here you can adjust the potion effects'
+        - '&7that are applied when the skill is'
+        - '&7called. If you want to remove a potion'
+        - '&7effect simply click on the potion and'
+        - '&7it will removed from the skill. If you'
+        - '&7want to add a new potion effect click'
+        - '&7on the green emerald block.'
     '47':
       type: GLASS_PANE
       name: '&7'
@@ -1668,22 +1668,22 @@ PotionSkillEditorPanel:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of custom potion effects.'
+        - '&7Click here to go to the previous'
+        - '&7page of custom potion effects.'
       PreviousPage: true
     '50':
       type: EMERALD_BLOCK
       name: '&e&lCreate a new Potion Effect'
       lore:
-      - '&7Click here to create a new potion'
-      - '&7effect.'
+        - '&7Click here to create a new potion'
+        - '&7effect.'
       Button: PotionEffect
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of custom potion effects.'
+        - '&7Click here to go to the next'
+        - '&7page of custom potion effects.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -1695,7 +1695,7 @@ PotionSkillEditorPanel:
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 CreatePotionEffectEditorPanel:
   name: '&b&lCreate Potion Effect'
   slots: 9
@@ -1709,55 +1709,55 @@ CreatePotionEffectEditorPanel:
       type: GRAY_DYE
       name: '&c&lCancel Potion Effect'
       lore:
-      - '&7Click here to cancel the creation'
-      - '&7of this potion effect.'
+        - '&7Click here to cancel the creation'
+        - '&7of this potion effect.'
       Button: Cancel
     '4':
       type: EMERALD
       name: '&e&lLevel'
       lore:
-      - '&bCurrently: &f{level}'
-      - '&7'
-      - '&7Click here to change the level'
-      - '&7of the potion effect.'
-      - '&7'
-      - '&bLeft Click &8» &f+1'
-      - '&bRight Click &8» &f-1'
+        - '&bCurrently: &f{level}'
+        - '&7'
+        - '&7Click here to change the level'
+        - '&7of the potion effect.'
+        - '&7'
+        - '&bLeft Click &8» &f+1'
+        - '&bRight Click &8» &f-1'
       Button: Level
     '5':
       type: GUNPOWDER
       name: '&e&lPotion Effect Type'
       lore:
-      - '&bCurrently: &f{effect}'
-      - '&7'
-      - '&7Click here to change the potion'
-      - '&7effect type.'
+        - '&bCurrently: &f{effect}'
+        - '&7'
+        - '&7Click here to change the potion'
+        - '&7effect type.'
       Button: Effect
     '6':
       type: CLOCK
       name: '&e&lDuration'
       lore:
-      - '&bCurrently: &f{duration}s'
-      - '&7'
-      - '&7Click here to change the duration'
-      - '&7of the potion effect.'
-      - '&7'
-      - '&bLeft Click &8» &f+1'
-      - '&bShift Left-Click &8» &f+10'
-      - '&7'
-      - '&bRight Click &8» &f-1'
-      - '&bShift Right-Click &8» &f-10'
+        - '&bCurrently: &f{duration}s'
+        - '&7'
+        - '&7Click here to change the duration'
+        - '&7of the potion effect.'
+        - '&7'
+        - '&bLeft Click &8» &f+1'
+        - '&bShift Left-Click &8» &f+10'
+        - '&7'
+        - '&bRight Click &8» &f-1'
+        - '&bShift Right-Click &8» &f-10'
       Button: Duration
     '9':
       type: LIME_DYE
       name: '&b&lConfirm'
       lore:
-      - '&7Click here to confirm the creation'
-      - '&7of the potion effect with data:'
-      - '&7'
-      - '&bDuration: &f{duration}s'
-      - '&bEffect: &f{effect}'
-      - '&bLevel: &f{level}'
+        - '&7Click here to confirm the creation'
+        - '&7of the potion effect with data:'
+        - '&7'
+        - '&bDuration: &f{duration}s'
+        - '&bEffect: &f{effect}'
+        - '&bLevel: &f{level}'
       Button: Confirm
 CommandSkillEditorPanel:
   name: '&b&l{name} Skill Editor'
@@ -1772,14 +1772,14 @@ CommandSkillEditorPanel:
       type: BOOK
       name: '&e&lCommand Guide'
       lore:
-      - '&7Here you can adjust the commands that'
-      - '&7are applied when the skill is called.'
-      - '&7If you want to remove a command section'
-      - '&7simply just shift left click the section'
-      - '&7and it will be deleted.'
-      - '&7To create a new section click the green'
-      - '&7emerald block at the bottom middle of the'
-      - '&7GUI.'
+        - '&7Here you can adjust the commands that'
+        - '&7are applied when the skill is called.'
+        - '&7If you want to remove a command section'
+        - '&7simply just shift left click the section'
+        - '&7and it will be deleted.'
+        - '&7To create a new section click the green'
+        - '&7emerald block at the bottom middle of the'
+        - '&7GUI.'
     '47':
       type: GLASS_PANE
       name: '&7'
@@ -1790,22 +1790,22 @@ CommandSkillEditorPanel:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of command sections.'
+        - '&7Click here to go to the previous'
+        - '&7page of command sections.'
       PreviousPage: true
     '50':
       type: EMERALD_BLOCK
       name: '&e&lAdd a new Command Section'
       lore:
-      - '&7Click here to add a new command section'
-      - '&7to the list.'
+        - '&7Click here to add a new command section'
+        - '&7to the list.'
       Button: AddNew
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of command sections.'
+        - '&7Click here to go to the next'
+        - '&7page of command sections.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -1817,7 +1817,7 @@ CommandSkillEditorPanel:
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 ModifyCommandEditorPanel:
   name: '&b&lCommand Editor'
   slots: 9
@@ -1834,28 +1834,28 @@ ModifyCommandEditorPanel:
       type: BOOK
       name: '&e&lCommands'
       lore:
-      - '&fCurrently selected commands:'
-      - '&7{commands}'
+        - '&fCurrently selected commands:'
+        - '&7{commands}'
       Button: Commands
     '5':
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
     '7':
       type: GUNPOWDER
       name: '&e&lChance'
       lore:
-      - '&bCurrently: &f{chance}%'
-      - '&7'
-      - '&7Click here to modify the chance'
-      - '&7value for this boss.'
-      - '&7'
-      - '&bLeft Click &8» &f+1.0%'
-      - '&bShift Left-Click &8» &f+0.1%'
-      - '&7'
-      - '&bRight Click &8» &f-1.0%'
-      - '&bShift Right-Click &8» &f-0.1%'
+        - '&bCurrently: &f{chance}%'
+        - '&7'
+        - '&7Click here to modify the chance'
+        - '&7value for this boss.'
+        - '&7'
+        - '&bLeft Click &8» &f+1.0%'
+        - '&bShift Left-Click &8» &f+0.1%'
+        - '&7'
+        - '&bRight Click &8» &f-1.0%'
+        - '&bShift Right-Click &8» &f-0.1%'
       Button: Chance
 CustomSkillEditorPanel:
   name: '&b&l{name} Skill Editor'
@@ -1873,49 +1873,49 @@ CustomSkillEditorPanel:
       type: BOOK
       name: '&e&lCustom Skill Type'
       lore:
-      - '&bCurrently: &f{type}'
-      - '&7'
-      - '&7Click here to choose from one'
-      - '&7of the connected and set up'
-      - '&7custom skill types. This will'
-      - '&7also display any of the external'
-      - '&7custom skill types that are properly'
-      - '&7connected to the plugin.'
+        - '&bCurrently: &f{type}'
+        - '&7'
+        - '&7Click here to choose from one'
+        - '&7of the connected and set up'
+        - '&7custom skill types. This will'
+        - '&7also display any of the external'
+        - '&7custom skill types that are properly'
+        - '&7connected to the plugin.'
       Button: Type
     '5':
       type: DIAMOND
       name: '&e&lSpecial Settings'
       lore:
-      - '&7Click here to edit any special settings that'
-      - '&7are also included in this custom skill. If'
-      - '&7there is none then this button will not open'
-      - '&7another GUI.'
+        - '&7Click here to edit any special settings that'
+        - '&7are also included in this custom skill. If'
+        - '&7there is none then this button will not open'
+        - '&7another GUI.'
       Button: SpecialSettings
     '6':
       type: REDSTONE
       name: '&e&lMultiplier'
       lore:
-      - '&bCurrently: &f{multiplier}'
-      - '&7'
-      - '&7Click here to adjust the multiplier'
-      - '&7for the custom skill. Some skills will'
-      - '&7use this option, but some won''t. This'
-      - '&7custom skill &f{usesMultiplier}&7 use'
-      - '&7multiplier option.'
-      - '&7'
-      - '&bLeft Click &8» &f+1.0'
-      - '&bShift Left-Click &8» &f+0.1'
-      - '&7'
-      - '&bMiddle Click &8» &7Removes multiplier'
-      - '&7'
-      - '&bRight Click &8» &f-1.0'
-      - '&bShift Right-Click &8» &f-0.1'
+        - '&bCurrently: &f{multiplier}'
+        - '&7'
+        - '&7Click here to adjust the multiplier'
+        - '&7for the custom skill. Some skills will'
+        - '&7use this option, but some won''t. This'
+        - '&7custom skill &f{usesMultiplier}&7 use'
+        - '&7multiplier option.'
+        - '&7'
+        - '&bLeft Click &8» &f+1.0'
+        - '&bShift Left-Click &8» &f+0.1'
+        - '&7'
+        - '&bMiddle Click &8» &7Removes multiplier'
+        - '&7'
+        - '&bRight Click &8» &f-1.0'
+        - '&bShift Right-Click &8» &f-0.1'
       Button: Multiplier
     '9':
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 CustomSkillTypeEditorPanel:
   name: '&b&l{name} Skill Editor'
   slots: 54
@@ -1929,17 +1929,17 @@ CustomSkillTypeEditorPanel:
       type: BOOK
       name: '&c&lSkill Type Guide'
       lore:
-      - '&7When selecting the custom skill type'
-      - '&7it is easiest to know what it is if'
-      - '&7you keep it related to the name of the'
-      - '&7skill. All you need to change the type'
-      - '&7is click on a new type from within this'
-      - '&7menu.'
-      - '&7'
-      - '&7To import new custom skill types you'
-      - '&7can get them custom made and injected'
-      - '&7in to the plugin or you can suggest them'
-      - '&7to be added in to the plugin.'
+        - '&7When selecting the custom skill type'
+        - '&7it is easiest to know what it is if'
+        - '&7you keep it related to the name of the'
+        - '&7skill. All you need to change the type'
+        - '&7is click on a new type from within this'
+        - '&7menu.'
+        - '&7'
+        - '&7To import new custom skill types you'
+        - '&7can get them custom made and injected'
+        - '&7in to the plugin or you can suggest them'
+        - '&7to be added in to the plugin.'
     '47':
       type: GLASS_PANE
       name: '&7'
@@ -1950,26 +1950,26 @@ CustomSkillTypeEditorPanel:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of custom skill types.'
+        - '&7Click here to go to the previous'
+        - '&7page of custom skill types.'
       PreviousPage: true
     '50':
       type: EMERALD_BLOCK
       name: '&b&lSelected Custom Skill Type'
       lore:
-      - '&bCurrently: &f{selected}'
-      - '&7'
-      - '&7This is the currently assigned'
-      - '&7custom skill type to the skill.'
-      - '&7If you would like to change this'
-      - '&7simply click another one in this'
-      - '&7menu.'
+        - '&bCurrently: &f{selected}'
+        - '&7'
+        - '&7This is the currently assigned'
+        - '&7custom skill type to the skill.'
+        - '&7If you would like to change this'
+        - '&7simply click another one in this'
+        - '&7menu.'
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of custom skill types.'
+        - '&7Click here to go to the next'
+        - '&7page of custom skill types.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -1981,9 +1981,9 @@ CustomSkillTypeEditorPanel:
       type: REDSTONE
       name: '&cClick here to go back'
       lore:
-      - '&7Click this button to go back to'
-      - '&7the skill editor panel to configure'
-      - '&7the general skill options.'
+        - '&7Click this button to go back to'
+        - '&7the skill editor panel to configure'
+        - '&7the general skill options.'
 SpecialSettingsEditorPanel:
   name: '&b&l{name} Special Settings'
   slots: 54
@@ -1997,11 +1997,11 @@ SpecialSettingsEditorPanel:
       type: BOOK
       name: '&c&lSpecial Settings Guide'
       lore:
-      - '&7Here any special settings that have'
-      - '&7been assigned to a skill type will'
-      - '&7show up. If this GUI is empty then there'
-      - '&7is no special settings related to the'
-      - '&7skill.'
+        - '&7Here any special settings that have'
+        - '&7been assigned to a skill type will'
+        - '&7show up. If this GUI is empty then there'
+        - '&7is no special settings related to the'
+        - '&7skill.'
     '47':
       type: GLASS_PANE
       name: '&7'
@@ -2012,26 +2012,26 @@ SpecialSettingsEditorPanel:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of special settings.'
+        - '&7Click here to go to the previous'
+        - '&7page of special settings.'
       PreviousPage: true
     '50':
       type: EMERALD_BLOCK
       name: '&b&lSelected Custom Skill Type'
       lore:
-      - '&bCurrently: &f{selected}'
-      - '&7'
-      - '&7This is the currently assigned'
-      - '&7custom skill type to the skill.'
-      - '&7If you would like to change this'
-      - '&7simply click another one in the'
-      - '&7skill type menu.'
+        - '&bCurrently: &f{selected}'
+        - '&7'
+        - '&7This is the currently assigned'
+        - '&7custom skill type to the skill.'
+        - '&7If you would like to change this'
+        - '&7simply click another one in the'
+        - '&7skill type menu.'
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of special settings.'
+        - '&7Click here to go to the next'
+        - '&7page of special settings.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -2043,9 +2043,9 @@ SpecialSettingsEditorPanel:
       type: REDSTONE
       name: '&cClick here to go back'
       lore:
-      - '&7Click this button to go back to'
-      - '&7the skill editor panel to configure'
-      - '&7the general skill options.'
+        - '&7Click this button to go back to'
+        - '&7the skill editor panel to configure'
+        - '&7the general skill options.'
 DropTableMainEditorPanel:
   name: '&b&l{name} Editor'
   slots: 9
@@ -2062,35 +2062,35 @@ DropTableMainEditorPanel:
       type: BOOK
       name: '&c&lDrop Table Guide'
       lore:
-      - '&7Here you are able to configure'
-      - '&7each aspect of the drop table to'
-      - '&7your liking. Remember that the moment'
-      - '&7something changes then it will also'
-      - '&7change for any live bosses.'
+        - '&7Here you are able to configure'
+        - '&7each aspect of the drop table to'
+        - '&7your liking. Remember that the moment'
+        - '&7something changes then it will also'
+        - '&7change for any live bosses.'
     '4':
       type: GUNPOWDER
       name: '&e&lType'
       lore:
-      - '&bCurrently: &f{type}'
-      - '&7Click this to change the drop table type. Keep'
-      - '&7in mind that when you change your drop table'
-      - '&7type the previous table data will be erased'
-      - '&7to make room for the new table format.'
+        - '&bCurrently: &f{type}'
+        - '&7Click this to change the drop table type. Keep'
+        - '&7in mind that when you change your drop table'
+        - '&7type the previous table data will be erased'
+        - '&7to make room for the new table format.'
       Button: Type
     '6':
       type: DIAMOND
       name: '&e&lRewards'
       lore:
-      - '&7Click here to edit the rewards related to'
-      - '&7this drop table. The menu that appears will'
-      - '&7be relevant to the drop table type.'
+        - '&7Click here to edit the rewards related to'
+        - '&7this drop table. The menu that appears will'
+        - '&7be relevant to the drop table type.'
       Button: Rewards
     '9':
       type: REDSTONE
       name: '&cClick here to go back'
       lore:
-      - '&7Click this button to go back to'
-      - '&7the drop table list page.'
+        - '&7Click this button to go back to'
+        - '&7the drop table list page.'
 DropTableTypeEditorPanel:
   name: '&b&l{name} Editor'
   slots: 9
@@ -2107,46 +2107,46 @@ DropTableTypeEditorPanel:
       type: SPLASH_POTION
       name: '&e&lSpray Drop Table Type'
       lore:
-      - '&7If you set this to the drop table type'
-      - '&7then you will be able to set rewards that'
-      - '&7will be sprayed out from the bosses'
-      - '&7location in to random locations around him.'
-      - '&7'
-      - '&c&lWARNING'
-      - '&7This will remove any previous'
-      - '&7custom reward data.'
+        - '&7If you set this to the drop table type'
+        - '&7then you will be able to set rewards that'
+        - '&7will be sprayed out from the bosses'
+        - '&7location in to random locations around him.'
+        - '&7'
+        - '&c&lWARNING'
+        - '&7This will remove any previous'
+        - '&7custom reward data.'
       Button: Spray
     '5':
       type: HOPPER
       name: '&e&lDrop Drop Table Type'
       lore:
-      - '&7If you set this to the drop table type'
-      - '&7then you will be able to set rewards that'
-      - '&7will be drop on the bosses death location'
-      - '&7for players to loot.'
-      - '&7'
-      - '&c&lWARNING'
-      - '&7This will remove any previous'
-      - '&7custom reward data.'
+        - '&7If you set this to the drop table type'
+        - '&7then you will be able to set rewards that'
+        - '&7will be drop on the bosses death location'
+        - '&7for players to loot.'
+        - '&7'
+        - '&c&lWARNING'
+        - '&7This will remove any previous'
+        - '&7custom reward data.'
       Button: Drop
     '7':
       type: EMERALD
       name: '&e&lGive Drop Table Type'
       lore:
-      - '&7If you set this to the drop table type'
-      - '&7then you will be able to set rewards that'
-      - '&7will be given to the specified damaging'
-      - '&7positions on the boss damage map.'
-      - '&7'
-      - '&c&lWARNING'
-      - '&7This will remove any previous'
-      - '&7custom reward data.'
+        - '&7If you set this to the drop table type'
+        - '&7then you will be able to set rewards that'
+        - '&7will be given to the specified damaging'
+        - '&7positions on the boss damage map.'
+        - '&7'
+        - '&c&lWARNING'
+        - '&7This will remove any previous'
+        - '&7custom reward data.'
       Button: Give
     '9':
       type: PAPER
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 SprayDropTableMainEditMenu:
   name: '&b&l{name} Editor'
   slots: 9
@@ -2163,60 +2163,60 @@ SprayDropTableMainEditMenu:
       type: DIAMOND
       name: '&e&lRewards'
       lore:
-      - '&7Click here to modify the rewards and their'
-      - '&7assigned drop chances. You can add more by'
-      - '&7clicking the emerald block at the middle'
-      - '&7bottom of the rewards menu.'
+        - '&7Click here to modify the rewards and their'
+        - '&7assigned drop chances. You can add more by'
+        - '&7clicking the emerald block at the middle'
+        - '&7bottom of the rewards menu.'
       Button: Rewards
     '3':
       type: GUNPOWDER
       name: '&e&lRandom Drops'
       lore:
-      - '&bCurrently: &f{randomDrops}'
-      - '&7Click here to toggle the random drop mode.'
-      - '&7If this is set to &ftrue&7 then when the'
-      - '&7drop table is called it will shuffle the'
-      - '&7list contents so it''s not in the same order.'
-      - '&7If this is set to &ffalse&7 then when the'
-      - '&7drop table is called it will go from top to'
-      - '&7bottom through the list.'
+        - '&bCurrently: &f{randomDrops}'
+        - '&7Click here to toggle the random drop mode.'
+        - '&7If this is set to &ftrue&7 then when the'
+        - '&7drop table is called it will shuffle the'
+        - '&7list contents so it''s not in the same order.'
+        - '&7If this is set to &ffalse&7 then when the'
+        - '&7drop table is called it will go from top to'
+        - '&7bottom through the list.'
       Button: RandomDrops
     '5':
       type: REDSTONE
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
     '7':
       type: PAPER
       name: '&e&lMax Distance'
       lore:
-      - '&bCurrently: &f{maxDistance}'
-      - '&7Click here to modify the maximum distance'
-      - '&7an item can be thrown from the bosses death'
-      - '&7location when the drop table is called.'
-      - '&7'
-      - '&bLeft Click &8» &f+1'
-      - '&bShift Left-Click &8» &f+10'
-      - '&7'
-      - '&bRight Click &8» &f-1'
-      - '&bShift Right-Click &8» &f-10'
+        - '&bCurrently: &f{maxDistance}'
+        - '&7Click here to modify the maximum distance'
+        - '&7an item can be thrown from the bosses death'
+        - '&7location when the drop table is called.'
+        - '&7'
+        - '&bLeft Click &8» &f+1'
+        - '&bShift Left-Click &8» &f+10'
+        - '&7'
+        - '&bRight Click &8» &f-1'
+        - '&bShift Right-Click &8» &f-10'
       Button: MaxDistance
     '8':
       type: EMERALD
       name: '&e&lMax Drops'
       lore:
-      - '&bCurrently: &f{maxDrops}'
-      - '&7Click here to modify the maximum amount of'
-      - '&7drops this drop table can have. Keep in mind'
-      - '&7that when getting drops the drop table will'
-      - '&7only cycle through the list once. Not until'
-      - '&7this amount of drops has been met.'
-      - '&7'
-      - '&bLeft Click &8» &f+1'
-      - '&bShift Left-Click &8» &f+10'
-      - '&7'
-      - '&bRight Click &8» &f-1'
-      - '&bShift Right-Click &8» &f-10'
+        - '&bCurrently: &f{maxDrops}'
+        - '&7Click here to modify the maximum amount of'
+        - '&7drops this drop table can have. Keep in mind'
+        - '&7that when getting drops the drop table will'
+        - '&7only cycle through the list once. Not until'
+        - '&7this amount of drops has been met.'
+        - '&7'
+        - '&bLeft Click &8» &f+1'
+        - '&bShift Left-Click &8» &f+10'
+        - '&7'
+        - '&bRight Click &8» &f-1'
+        - '&bShift Right-Click &8» &f-10'
       Button: MaxDrops
 DropDropTableMainEditMenu:
   name: '&b&l{name} Editor'
@@ -2234,46 +2234,46 @@ DropDropTableMainEditMenu:
       type: DIAMOND
       name: '&e&lRewards'
       lore:
-      - '&7Click here to modify the rewards and their'
-      - '&7assigned drop chances. You can add more by'
-      - '&7clicking the emerald block at the middle'
-      - '&7bottom of the rewards menu.'
+        - '&7Click here to modify the rewards and their'
+        - '&7assigned drop chances. You can add more by'
+        - '&7clicking the emerald block at the middle'
+        - '&7bottom of the rewards menu.'
       Button: Rewards
     '4':
       type: GUNPOWDER
       name: '&e&lRandom Drops'
       lore:
-      - '&bCurrently: &f{randomDrops}'
-      - '&7Click here to toggle the random drop mode.'
-      - '&7If this is set to &ftrue&7 then when the'
-      - '&7drop table is called it will shuffle the'
-      - '&7list contents so it''s not in the same order.'
-      - '&7If this is set to &ffalse&7 then when the'
-      - '&7drop table is called it will go from top to'
-      - '&7bottom through the list.'
+        - '&bCurrently: &f{randomDrops}'
+        - '&7Click here to toggle the random drop mode.'
+        - '&7If this is set to &ftrue&7 then when the'
+        - '&7drop table is called it will shuffle the'
+        - '&7list contents so it''s not in the same order.'
+        - '&7If this is set to &ffalse&7 then when the'
+        - '&7drop table is called it will go from top to'
+        - '&7bottom through the list.'
       Button: RandomDrops
     '5':
       type: EMERALD
       name: '&e&lMax Drops'
       lore:
-      - '&bCurrently: &f{maxDrops}'
-      - '&7Click here to modify the maximum amount of'
-      - '&7drops this drop table can have. Keep in mind'
-      - '&7that when getting drops the drop table will'
-      - '&7only cycle through the list once. Not until'
-      - '&7this amount of drops has been met.'
-      - '&7'
-      - '&bLeft Click &8» &f+1'
-      - '&bShift Left-Click &8» &f+10'
-      - '&7'
-      - '&bRight Click &8» &f-1'
-      - '&bShift Right-Click &8» &f-10'
+        - '&bCurrently: &f{maxDrops}'
+        - '&7Click here to modify the maximum amount of'
+        - '&7drops this drop table can have. Keep in mind'
+        - '&7that when getting drops the drop table will'
+        - '&7only cycle through the list once. Not until'
+        - '&7this amount of drops has been met.'
+        - '&7'
+        - '&bLeft Click &8» &f+1'
+        - '&bShift Left-Click &8» &f+10'
+        - '&7'
+        - '&bRight Click &8» &f-1'
+        - '&bShift Right-Click &8» &f-10'
       Button: MaxDrops
     '9':
       type: REDSTONE
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 GiveRewardPositionListMenu:
   name: '&b&l{name} DropTable'
   slots: 54
@@ -2287,14 +2287,14 @@ GiveRewardPositionListMenu:
       type: BOOK
       name: '&c&lGive Position Reward Guide'
       lore:
-      - '&7In this list it displays the position'
-      - '&7sections for the selected drop table.'
-      - '&7If you want to add a new position section'
-      - '&7then simply click the EmeraldBlock and'
-      - '&7the next available position will be'
-      - '&7created.'
-      - '&7To remove a position simply shift-right'
-      - '&7click the position you want to remove.'
+        - '&7In this list it displays the position'
+        - '&7sections for the selected drop table.'
+        - '&7If you want to add a new position section'
+        - '&7then simply click the EmeraldBlock and'
+        - '&7the next available position will be'
+        - '&7created.'
+        - '&7To remove a position simply shift-right'
+        - '&7click the position you want to remove.'
     '47':
       type: GLASS_PANE
       name: '&7'
@@ -2305,25 +2305,25 @@ GiveRewardPositionListMenu:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of damage positions.'
+        - '&7Click here to go to the previous'
+        - '&7page of damage positions.'
       PreviousPage: true
     '50':
       type: EMERALD_BLOCK
       name: '&e&lAdd new Position'
       lore:
-      - '&7Click here to add a new position'
-      - '&7to the drop table. This will find'
-      - '&7the next available position and'
-      - '&7create a new reward section for'
-      - '&7that position.'
+        - '&7Click here to add a new position'
+        - '&7to the drop table. This will find'
+        - '&7the next available position and'
+        - '&7create a new reward section for'
+        - '&7that position.'
       Button: NewPosition
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of damage positions.'
+        - '&7Click here to go to the next'
+        - '&7page of damage positions.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -2335,8 +2335,8 @@ GiveRewardPositionListMenu:
       type: REDSTONE
       name: '&cClick here to go back'
       lore:
-      - '&7Click this button to go back to'
-      - '&7the drop table main edit menu.'
+        - '&7Click this button to go back to'
+        - '&7the drop table main edit menu.'
 GiveRewardRewardsListMenu:
   name: '&b&l{name} DropTable'
   slots: 54
@@ -2350,13 +2350,13 @@ GiveRewardRewardsListMenu:
       type: BOOK
       name: '&c&lGive Reward Rewards Guide'
       lore:
-      - '&7In this list it displays the drop sections'
-      - '&7assigned to the drop position of &f{position}&7.'
-      - '&7To edit the drops simply click on the drop'
-      - '&7section you wish to edit and then you can'
-      - '&7modify the data there.'
-      - '&7To remove a drop section simply shift-right'
-      - '&7click the section you want to remove.'
+        - '&7In this list it displays the drop sections'
+        - '&7assigned to the drop position of &f{position}&7.'
+        - '&7To edit the drops simply click on the drop'
+        - '&7section you wish to edit and then you can'
+        - '&7modify the data there.'
+        - '&7To remove a drop section simply shift-right'
+        - '&7click the section you want to remove.'
     '47':
       type: GLASS_PANE
       name: '&7'
@@ -2367,25 +2367,25 @@ GiveRewardRewardsListMenu:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of drop sections.'
+        - '&7Click here to go to the previous'
+        - '&7page of drop sections.'
       PreviousPage: true
     '50':
       type: EMERALD_BLOCK
       name: '&e&lAdd new Drop Section'
       lore:
-      - '&7Click here to add a new drop section'
-      - '&7to the drop table. This will find'
-      - '&7the next available drop section and'
-      - '&7create a new drop section for'
-      - '&7that position.'
+        - '&7Click here to add a new drop section'
+        - '&7to the drop table. This will find'
+        - '&7the next available drop section and'
+        - '&7create a new drop section for'
+        - '&7that position.'
       Button: NewRewardSection
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of drop sections.'
+        - '&7Click here to go to the next'
+        - '&7page of drop sections.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -2397,8 +2397,8 @@ GiveRewardRewardsListMenu:
       type: REDSTONE
       name: '&cClick here to go back'
       lore:
-      - '&7Click this button to go back to'
-      - '&7the reward position list menu.'
+        - '&7Click this button to go back to'
+        - '&7the reward position list menu.'
 GiveRewardMainEditMenu:
   name: '&b&l{name} DropTable'
   slots: 27
@@ -2418,101 +2418,101 @@ GiveRewardMainEditMenu:
       type: GUNPOWDER
       name: '&e&lRandom Drops'
       lore:
-      - '&bCurrently: &f{randomDrops}'
-      - '&7Click here to toggle the random drop mode.'
-      - '&7If this is set to &ftrue&7 then when the'
-      - '&7drop table is called it will shuffle the'
-      - '&7list contents so it''s not in the same order.'
-      - '&7If this is set to &ffalse&7 then when the'
-      - '&7drop table is called it will go from top to'
-      - '&7bottom through the list.'
+        - '&bCurrently: &f{randomDrops}'
+        - '&7Click here to toggle the random drop mode.'
+        - '&7If this is set to &ftrue&7 then when the'
+        - '&7drop table is called it will shuffle the'
+        - '&7list contents so it''s not in the same order.'
+        - '&7If this is set to &ffalse&7 then when the'
+        - '&7drop table is called it will go from top to'
+        - '&7bottom through the list.'
       Button: RandomDrops
     '12':
       type: EMERALD
       name: '&e&lMax Drops'
       lore:
-      - '&bCurrently: &f{maxDrops}'
-      - '&7Click here to modify the maximum amount of'
-      - '&7drops this drop section can have. Keep in mind'
-      - '&7that when getting drops the drop section will'
-      - '&7only cycle through the list once. Not until'
-      - '&7this amount of drops has been met.'
-      - '&7'
-      - '&bLeft Click &8» &f+1'
-      - '&bShift Left-Click &8» &f+10'
-      - '&7'
-      - '&bRight Click &8» &f-1'
-      - '&bShift Right-Click &8» &f-10'
+        - '&bCurrently: &f{maxDrops}'
+        - '&7Click here to modify the maximum amount of'
+        - '&7drops this drop section can have. Keep in mind'
+        - '&7that when getting drops the drop section will'
+        - '&7only cycle through the list once. Not until'
+        - '&7this amount of drops has been met.'
+        - '&7'
+        - '&bLeft Click &8» &f+1'
+        - '&bShift Left-Click &8» &f+10'
+        - '&7'
+        - '&bRight Click &8» &f-1'
+        - '&bShift Right-Click &8» &f-10'
       Button: MaxDrops
     '13':
       type: CHEST
       name: '&e&lItem Drops'
       lore:
-      - '&7Click here to modify the custom item drops'
-      - '&7and their drop chance for this drop section.'
-      - '&7There is currently &f{drops}&7 drops set up.'
+        - '&7Click here to modify the custom item drops'
+        - '&7and their drop chance for this drop section.'
+        - '&7There is currently &f{drops}&7 drops set up.'
       Button: ItemDrops
     '14':
       type: GLOWSTONE_DUST
       name: '&e&lRequired Percentage'
       lore:
-      - '&bCurrently: &f{requiredPercentage}%'
-      - '&7Click here to modify the required percentage to'
-      - '&7receive this drop section. If the percentage is'
-      - '&75% then you need to do 5% damage to the boss to'
-      - '&7get the rewards in this drop section.'
-      - '&7'
-      - '&bLeft Click &8» &f+1%'
-      - '&bShift Left-Click &8» &f+10%'
-      - '&7'
-      - '&bRight Click &8» &f-1%'
-      - '&bShift Right-Click &8» &f-10%'
+        - '&bCurrently: &f{requiredPercentage}%'
+        - '&7Click here to modify the required percentage to'
+        - '&7receive this drop section. If the percentage is'
+        - '&75% then you need to do 5% damage to the boss to'
+        - '&7get the rewards in this drop section.'
+        - '&7'
+        - '&bLeft Click &8» &f+1%'
+        - '&bShift Left-Click &8» &f+10%'
+        - '&7'
+        - '&bRight Click &8» &f-1%'
+        - '&bShift Right-Click &8» &f-10%'
       Button: RequiredPercentage
     '15':
       type: CHEST
       name: '&e&lCommand Drops'
       lore:
-      - '&7Click here to modify the custom command drops'
-      - '&7and their drop chance for this drop section.'
-      - '&7There is currently &f{commands}&7 commands'
-      - '&7set up.'
+        - '&7Click here to modify the custom command drops'
+        - '&7and their drop chance for this drop section.'
+        - '&7There is currently &f{commands}&7 commands'
+        - '&7set up.'
       Button: CommandDrops
     '16':
       type: EMERALD
       name: '&e&lMax Commands'
       lore:
-      - '&bCurrently: &f{maxCommands}'
-      - '&7Click here to modify the maximum amount of'
-      - '&7commands this drop section can have. Keep in mind'
-      - '&7that when getting drops the drop section will'
-      - '&7only cycle through the list once. Not until'
-      - '&7this amount of commands has been met.'
-      - '&7'
-      - '&bLeft Click &8» &f+1'
-      - '&bShift Left-Click &8» &f+10'
-      - '&7'
-      - '&bRight Click &8» &f-1'
-      - '&bShift Right-Click &8» &f-10'
+        - '&bCurrently: &f{maxCommands}'
+        - '&7Click here to modify the maximum amount of'
+        - '&7commands this drop section can have. Keep in mind'
+        - '&7that when getting drops the drop section will'
+        - '&7only cycle through the list once. Not until'
+        - '&7this amount of commands has been met.'
+        - '&7'
+        - '&bLeft Click &8» &f+1'
+        - '&bShift Left-Click &8» &f+10'
+        - '&7'
+        - '&bRight Click &8» &f-1'
+        - '&bShift Right-Click &8» &f-10'
       Button: MaxCommands
     '17':
       type: GUNPOWDER
       name: '&e&lRandom Commands'
       lore:
-      - '&bCurrently: &f{randomCommands}'
-      - '&7Click here to toggle the random command mode.'
-      - '&7If this is set to &ftrue&7 then when the'
-      - '&7commands are called it will shuffle the'
-      - '&7list contents so it''s not in the same order.'
-      - '&7If this is set to &ffalse&7 then when the'
-      - '&7commands are called it will go from top to'
-      - '&7bottom through the list.'
+        - '&bCurrently: &f{randomCommands}'
+        - '&7Click here to toggle the random command mode.'
+        - '&7If this is set to &ftrue&7 then when the'
+        - '&7commands are called it will shuffle the'
+        - '&7list contents so it''s not in the same order.'
+        - '&7If this is set to &ffalse&7 then when the'
+        - '&7commands are called it will go from top to'
+        - '&7bottom through the list.'
       Button: RandomDrops
     '23':
       type: REDSTONE
       name: '&cClick here to go back'
       lore:
-      - '&7Click this button to go back to'
-      - '&7the reward drop section list menu.'
+        - '&7Click this button to go back to'
+        - '&7the reward drop section list menu.'
 DropTableRewardsListEditMenu:
   name: '&b&l{name} DropTable'
   slots: 54
@@ -2526,16 +2526,16 @@ DropTableRewardsListEditMenu:
       type: BOOK
       name: '&c&lDrop Rewards Guide'
       lore:
-      - '&7Here you can adjust the rewards for'
-      - '&7the skill with the drop layout. To'
-      - '&7adjust the chance of a section or to'
-      - '&7remove a section, then all you have'
-      - '&7to do is click on the section you''d'
-      - '&7like to modify and then click the'
-      - '&7corresponding button.'
-      - '&7To add a new section click on the'
-      - '&7emerald block in the bottom middle of'
-      - '&7the menu in between the page buttons.'
+        - '&7Here you can adjust the rewards for'
+        - '&7the skill with the drop layout. To'
+        - '&7adjust the chance of a section or to'
+        - '&7remove a section, then all you have'
+        - '&7to do is click on the section you''d'
+        - '&7like to modify and then click the'
+        - '&7corresponding button.'
+        - '&7To add a new section click on the'
+        - '&7emerald block in the bottom middle of'
+        - '&7the menu in between the page buttons.'
     '47':
       type: GLASS_PANE
       name: '&7'
@@ -2546,23 +2546,23 @@ DropTableRewardsListEditMenu:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of rewards.'
+        - '&7Click here to go to the previous'
+        - '&7page of rewards.'
       PreviousPage: true
     '50':
       type: EMERALD_BLOCK
       name: '&b&lAdd a New Reward Section'
       lore:
-      - '&7Click here if you would like to add'
-      - '&7a new reward section to this drop'
-      - '&7table.'
+        - '&7Click here if you would like to add'
+        - '&7a new reward section to this drop'
+        - '&7table.'
       Button: NewReward
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of rewards.'
+        - '&7Click here to go to the next'
+        - '&7page of rewards.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -2574,8 +2574,8 @@ DropTableRewardsListEditMenu:
       type: REDSTONE
       name: '&cClick here to go back'
       lore:
-      - '&7Click this button to go back to'
-      - '&7the drop table main edit menu.'
+        - '&7Click this button to go back to'
+        - '&7the drop table main edit menu.'
 DropTableNewRewardEditMenu:
   name: '&b&lNew Reward for DropTable'
   slots: 54
@@ -2589,22 +2589,22 @@ DropTableNewRewardEditMenu:
       type: BOOK
       name: '&c&lNew Drop Reward Guide'
       lore:
-      - '&7Once you click an item within this'
-      - '&7menu it will create a new reward'
-      - '&7section with that selected item'
-      - '&7to the drop table you were working'
-      - '&7on. From there you can adjust the'
-      - '&7chance for it to be sprayed.'
-      - '&7'
-      - '&c&lWARNING'
-      - '&7At this moment you cannot have'
-      - '&7two sections for the same item,'
-      - '&7an easy way to bypass this is to'
-      - '&7add a new Item with the same'
-      - '&7itemstack, therefore giving it'
-      - '&7a new name, and allowing for'
-      - '&7another new section of the same'
-      - '&7item.'
+        - '&7Once you click an item within this'
+        - '&7menu it will create a new reward'
+        - '&7section with that selected item'
+        - '&7to the drop table you were working'
+        - '&7on. From there you can adjust the'
+        - '&7chance for it to be sprayed.'
+        - '&7'
+        - '&c&lWARNING'
+        - '&7At this moment you cannot have'
+        - '&7two sections for the same item,'
+        - '&7an easy way to bypass this is to'
+        - '&7add a new Item with the same'
+        - '&7itemstack, therefore giving it'
+        - '&7a new name, and allowing for'
+        - '&7another new section of the same'
+        - '&7item.'
     '47':
       type: GLASS_PANE
       name: '&7'
@@ -2615,8 +2615,8 @@ DropTableNewRewardEditMenu:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page of itemstacks.'
+        - '&7Click here to go to the previous'
+        - '&7page of itemstacks.'
       PreviousPage: true
     '50':
       type: GLASS_PANE
@@ -2625,8 +2625,8 @@ DropTableNewRewardEditMenu:
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page of itemstacks.'
+        - '&7Click here to go to the next'
+        - '&7page of itemstacks.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -2638,8 +2638,8 @@ DropTableNewRewardEditMenu:
       type: REDSTONE
       name: '&cClick here to go back'
       lore:
-      - '&7Click this button to go back to'
-      - '&7the drop table reward list menu.'
+        - '&7Click this button to go back to'
+        - '&7the drop table reward list menu.'
 DropTableRewardMainEditMenu:
   name: '&b&l{name} DropTable'
   slots: 9
@@ -2656,36 +2656,36 @@ DropTableRewardMainEditMenu:
       type: GUNPOWDER
       name: '&e&lSelected ItemStack'
       lore:
-      - '&bCurrently: &f{itemStack}'
-      - '&7This is the selected itemStack for this'
-      - '&7reward section.'
+        - '&bCurrently: &f{itemStack}'
+        - '&7This is the selected itemStack for this'
+        - '&7reward section.'
     '4':
       type: EMERALD
       name: '&e&lChance'
       lore:
-      - '&bCurrently: &f{chance}'
-      - '&7Click here to modify the chance of this'
-      - '&7reward '
-      - '&7'
-      - '&bLeft Click &8» &f+1%'
-      - '&bShift Left-Click &8» &f+0.1%'
-      - '&7'
-      - '&bRight Click &8» &f-1%'
-      - '&bShift Right-Click &8» &f-0.1%'
+        - '&bCurrently: &f{chance}'
+        - '&7Click here to modify the chance of this'
+        - '&7reward '
+        - '&7'
+        - '&bLeft Click &8» &f+1%'
+        - '&bShift Left-Click &8» &f+0.1%'
+        - '&7'
+        - '&bRight Click &8» &f-1%'
+        - '&bShift Right-Click &8» &f-0.1%'
       Button: Chance
     '5':
       type: BARRIER
       name: '&e&lClick here to remove'
       lore:
-      - '&7Click here to remove this rewards section.'
-      - '&7You can always re-create this section if'
-      - '&7was a mistake.'
+        - '&7Click here to remove this rewards section.'
+        - '&7You can always re-create this section if'
+        - '&7was a mistake.'
       Button: Remove
     '9':
       type: REDSTONE
       name: '&e&lGo Back'
       lore:
-      - '&7Click here to go back.'
+        - '&7Click here to go back.'
 MainAutoSpawnEditMenu:
   name: '&b&l{name} AutoSpawn'
   slots: 9
@@ -2702,46 +2702,46 @@ MainAutoSpawnEditMenu:
       type: DIAMOND
       name: '&e&lSpecial Settings'
       lore:
-      - '&7Click here to edit the finer settings'
-      - '&7related to this auto spawn section.'
+        - '&7Click here to edit the finer settings'
+        - '&7related to this auto spawn section.'
       Button: SpecialSettings
     '3':
       type: GUNPOWDER
       name: '&e&lType'
       lore:
-      - '&bCurrently: &f{type}'
-      - '&7This is the current auto spawn'
-      - '&7section type. Click here to open'
-      - '&7a menu to select the type.'
+        - '&bCurrently: &f{type}'
+        - '&7This is the current auto spawn'
+        - '&7section type. Click here to open'
+        - '&7a menu to select the type.'
       Button: Type
     '5':
       type: LEVER
       name: '&e&lToggle Editing'
       lore:
-      - '&7Click here to toggle the auto spawn'
-      - '&7editing mode.'
-      - '&7This will disable the auto spawn until'
-      - '&7it is enabled again.'
-      - '&7'
-      - '&bCurrently Disabled for Editing: &f{editing}'
+        - '&7Click here to toggle the auto spawn'
+        - '&7editing mode.'
+        - '&7This will disable the auto spawn until'
+        - '&7it is enabled again.'
+        - '&7'
+        - '&bCurrently Disabled for Editing: &f{editing}'
       Button: Editing
     '7':
       type: PAPER
       name: '&e&lEntities'
       lore:
-      - '&7Click here to edit the assigned boss'
-      - '&7entities to this auto spawn section.'
-      - '&7'
-      - '&bCurrently:'
-      - '&f{entities}'
+        - '&7Click here to edit the assigned boss'
+        - '&7entities to this auto spawn section.'
+        - '&7'
+        - '&bCurrently:'
+        - '&f{entities}'
       Button: Entities
     '8':
       type: EMERALD
       name: '&e&lCustom Settings'
       lore:
-      - '&7Click here to edit any custom settings that'
-      - '&7are also included in this auto spawn type. If'
-      - '&7there is none then the GUI up next will be empty.'
+        - '&7Click here to edit any custom settings that'
+        - '&7are also included in this auto spawn type. If'
+        - '&7there is none then the GUI up next will be empty.'
       Button: CustomSettings
 AutoSpawnEntitiesEditMenu:
   name: '&b&l{name} AutoSpawn'
@@ -2765,20 +2765,20 @@ AutoSpawnEntitiesEditMenu:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page.'
+        - '&7Click here to go to the previous'
+        - '&7page.'
       PreviousPage: true
     '50':
       type: REDSTONE
       name: '&cClick here to go back'
       lore:
-      - '&7Click this button to go back.'
+        - '&7Click this button to go back.'
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page.'
+        - '&7Click here to go to the next'
+        - '&7page.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -2811,20 +2811,20 @@ AutoSpawnCustomSettingsEditMenu:
       type: ARROW
       name: '&e&l&m<-&e&l Previous Page'
       lore:
-      - '&7Click here to go to the previous'
-      - '&7page.'
+        - '&7Click here to go to the previous'
+        - '&7page.'
       PreviousPage: true
     '50':
       type: REDSTONE
       name: '&cClick here to go back'
       lore:
-      - '&7Click this button to go back.'
+        - '&7Click this button to go back.'
     '51':
       type: ARROW
       name: '&e&lNext Page &e&l&m->'
       lore:
-      - '&7Click here to go to the next'
-      - '&7page.'
+        - '&7Click here to go to the next'
+        - '&7page.'
       NextPage: true
     '52':
       type: GLASS_PANE
@@ -2851,80 +2851,80 @@ AutoSpawnSpecialSettingsEditMenu:
       type: DIAMOND
       name: '&e&lShuffle Entities'
       lore:
-      - '&bCurrently: &f{shuffleEntities}'
-      - '&7'
-      - '&7Click here to toggle the entities being'
-      - '&7shuffled before being called.'
+        - '&bCurrently: &f{shuffleEntities}'
+        - '&7'
+        - '&7Click here to toggle the entities being'
+        - '&7shuffled before being called.'
       Button: ShuffleEntities
     '2':
       type: GUNPOWDER
       name: '&e&lMax Alive Entities At Once'
       lore:
-      - '&bCurrently: &f{maxAliveEntities}'
-      - '&7'
-      - '&7This is the max alive entities from this'
-      - '&7auto spawn section at once. If more then'
-      - '&7this amount of entities is spawned at once'
-      - '&7then you will have to kill all entities'
-      - '&7before another can spawn.'
-      - '&7'
-      - '&bLeft Click &8» &f+1'
-      - '&bRight Click &8» &f-1'
+        - '&bCurrently: &f{maxAliveEntities}'
+        - '&7'
+        - '&7This is the max alive entities from this'
+        - '&7auto spawn section at once. If more then'
+        - '&7this amount of entities is spawned at once'
+        - '&7then you will have to kill all entities'
+        - '&7before another can spawn.'
+        - '&7'
+        - '&bLeft Click &8» &f+1'
+        - '&bRight Click &8» &f-1'
       Button: MaxAliveEntities
     '3':
       type: FIREWORK_STAR
       name: '&e&lAmount of Bosses Per Spawn'
       lore:
-      - '&bCurrently: &f{amountPerSpawn}'
-      - '&7'
-      - '&7This is the amount of bosses to be spawned'
-      - '&7at one interval. This can be higher then the'
-      - '&7max alive entities at once but you will need'
-      - '&7to kill the amount of bosses till it the currently'
-      - '&7active amount is less then the max amount so'
-      - '&7it can spawn again.'
-      - '&7'
-      - '&bLeft Click &8» &f+1'
-      - '&bRight Click &8» &f-1'
+        - '&bCurrently: &f{amountPerSpawn}'
+        - '&7'
+        - '&7This is the amount of bosses to be spawned'
+        - '&7at one interval. This can be higher then the'
+        - '&7max alive entities at once but you will need'
+        - '&7to kill the amount of bosses till it the currently'
+        - '&7active amount is less then the max amount so'
+        - '&7it can spawn again.'
+        - '&7'
+        - '&bLeft Click &8» &f+1'
+        - '&bRight Click &8» &f-1'
       Button: AmountPerSpawn
     '5':
       type: REDSTONE
       name: '&cClick here to go back'
       lore:
-      - '&7Click this button to go back.'
+        - '&7Click this button to go back.'
     '7':
       type: PAPER
       name: '&e&lSpawn When Chunk Isn''t Loaded'
       lore:
-      - '&bCurrently: &f{chunkIsntLoaded}'
-      - '&7'
-      - '&7This will determine if the boss can spawn'
-      - '&7even when the chunk is unloaded. This will'
-      - '&7load the chunk and keep it loaded while the'
-      - '&7boss is alive if this is set to true.'
+        - '&bCurrently: &f{chunkIsntLoaded}'
+        - '&7'
+        - '&7This will determine if the boss can spawn'
+        - '&7even when the chunk is unloaded. This will'
+        - '&7load the chunk and keep it loaded while the'
+        - '&7boss is alive if this is set to true.'
       Button: ChunkIsntLoaded
     '8':
       type: EMERALD
       name: '&e&lOverride Default Spawn Message'
       lore:
-      - '&bCurrently: &f{overrideDefaultMessage}'
-      - '&7'
-      - '&7Click here to toggle the overriding of the'
-      - '&7default spawn messages. If this is set to'
-      - '&7true it won''t use the default boss spawn'
-      - '&7messages and it will use the one assigned'
-      - '&7to this auto spawn section.'
+        - '&bCurrently: &f{overrideDefaultMessage}'
+        - '&7'
+        - '&7Click here to toggle the overriding of the'
+        - '&7default spawn messages. If this is set to'
+        - '&7true it won''t use the default boss spawn'
+        - '&7messages and it will use the one assigned'
+        - '&7to this auto spawn section.'
       Button: OverrideSpawnMessage
     '9':
       type: CHEST
       name: '&e&lSpawn Message'
       lore:
-      - '&bCurrently: &f{spawnMessage}'
-      - '&7'
-      - '&7Click here to change which spawn message'
-      - '&7is used for the auto spawn section. If the'
-      - '&7overriding of the default message is true'
-      - '&7only then will this message be used.'
+        - '&bCurrently: &f{spawnMessage}'
+        - '&7'
+        - '&7Click here to change which spawn message'
+        - '&7is used for the auto spawn section. If the'
+        - '&7overriding of the default message is true'
+        - '&7only then will this message be used.'
       Button: SpawnMessage
 AutoSpawnTypeEditMenu:
   name: '&b&l{name} AutoSpawn'
@@ -2942,43 +2942,43 @@ AutoSpawnTypeEditMenu:
       type: CLOCK
       name: '&e&lInterval Spawn System'
       lore:
-      - '&7Select this spawn system if you want to make'
-      - '&7the bosses spawn at a certain interval at a'
-      - '&7specific location.'
+        - '&7Select this spawn system if you want to make'
+        - '&7the bosses spawn at a certain interval at a'
+        - '&7specific location.'
       Button: IntervalSystem
     '3':
       type: GRASS_BLOCK
       name: '&e&lWilderness Spawn System'
       lore:
-      - '&7Select this spawn system if you want to make'
-      - '&7the boss(es) spawn randomly in the wilderness'
-      - '&7as players load the chunks.'
-      - '&7'
-      - '&c&lComing soon...'
+        - '&7Select this spawn system if you want to make'
+        - '&7the boss(es) spawn randomly in the wilderness'
+        - '&7as players load the chunks.'
+        - '&7'
+        - '&c&lComing soon...'
       Button: WildernessSystem
     '4':
       type: MAGMA_CREAM
       name: '&e&lBiome Spawn System'
       lore:
-      - '&7Select this spawn system if you want to make'
-      - '&7the boss(es) spawn randomly in specific biomes'
-      - '&7as players load and unload the chunks which are'
-      - '&7the selected biome.'
-      - '&7'
-      - '&c&lComing soon...'
+        - '&7Select this spawn system if you want to make'
+        - '&7the boss(es) spawn randomly in specific biomes'
+        - '&7as players load and unload the chunks which are'
+        - '&7the selected biome.'
+        - '&7'
+        - '&c&lComing soon...'
       Button: BiomeSystem
     '5':
       type: SPAWNER
       name: '&e&lMob Spawner Spawn System'
       lore:
-      - '&7Select this spawn system if you want to make'
-      - '&7the boss(es) spawn randomly within the selected'
-      - '&7spawner types.'
-      - '&7'
-      - '&c&lComing soon...'
+        - '&7Select this spawn system if you want to make'
+        - '&7the boss(es) spawn randomly within the selected'
+        - '&7spawner types.'
+        - '&7'
+        - '&c&lComing soon...'
       Button: SpawnerSystem
     '9':
       type: REDSTONE
       name: '&cClick here to go back'
       lore:
-      - '&7Click this button to go back.'
+        - '&7Click this button to go back.'

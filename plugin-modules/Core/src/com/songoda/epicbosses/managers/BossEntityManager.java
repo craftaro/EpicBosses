@@ -65,11 +65,11 @@ public class BossEntityManager {
     }
 
     public double getRadius(ActiveBossHolder activeBossHolder, Location centerLocation) {
-        if(activeBossHolder.isDead()) return Double.MAX_VALUE;
+        if (activeBossHolder.isDead()) return Double.MAX_VALUE;
 
         LivingEntity livingEntity = activeBossHolder.getLivingEntity();
 
-        if(livingEntity == null) return Double.MAX_VALUE;
+        if (livingEntity == null) return Double.MAX_VALUE;
 
         Location location = livingEntity.getLocation();
 
@@ -82,7 +82,7 @@ public class BossEntityManager {
         getActiveBossHolders().forEach(activeBossHolder -> {
             double distance = getRadius(activeBossHolder, centerLocation);
 
-            if(distance > radius) return;
+            if (distance > radius) return;
 
             distanceMap.put(activeBossHolder, distance);
         });
@@ -93,8 +93,8 @@ public class BossEntityManager {
     public int getCurrentlyActive(BossEntity bossEntity) {
         int amountOfBosses = 0;
 
-        for(ActiveBossHolder activeBossHolder : getActiveBossHolders()) {
-            if(activeBossHolder.getBossEntity().equals(bossEntity)) {
+        for (ActiveBossHolder activeBossHolder : getActiveBossHolders()) {
+            if (activeBossHolder.getBossEntity().equals(bossEntity)) {
                 amountOfBosses++;
             }
         }
@@ -105,8 +105,8 @@ public class BossEntityManager {
     public int killAllHolders(World world) {
         int amountOfBosses = 0;
 
-        for(ActiveBossHolder activeBossHolder : getActiveBossHolders()) {
-            if(activeBossHolder.killAllSubBosses(world)) {
+        for (ActiveBossHolder activeBossHolder : getActiveBossHolders()) {
+            if (activeBossHolder.killAllSubBosses(world)) {
                 activeBossHolder.killAllMinions(world);
                 activeBossHolder.setDead(true);
                 amountOfBosses++;
@@ -121,8 +121,8 @@ public class BossEntityManager {
     }
 
     public void killAllHolders(BossEntity bossEntity) {
-        for(ActiveBossHolder activeBossHolder : getActiveBossHolders()) {
-            if(activeBossHolder.getBossEntity().equals(bossEntity)) {
+        for (ActiveBossHolder activeBossHolder : getActiveBossHolders()) {
+            if (activeBossHolder.getBossEntity().equals(bossEntity)) {
                 activeBossHolder.killAll();
                 activeBossHolder.killAllMinions();
                 activeBossHolder.setDead(true);
@@ -133,19 +133,19 @@ public class BossEntityManager {
     }
 
     public ItemStack getDisplaySpawnItem(BossEntity bossEntity) {
-        if(bossEntity == null) return null;
+        if (bossEntity == null) return null;
 
-        String spawnItemName = bossEntity.getSpawnItem() == null? DEFAULT_BOSS_MENU_ITEM : bossEntity.getSpawnItem();
+        String spawnItemName = bossEntity.getSpawnItem() == null ? DEFAULT_BOSS_MENU_ITEM : bossEntity.getSpawnItem();
         ItemStackHolder itemStackHolder = BossAPI.getStoredItemStack(spawnItemName);
 
-        if(itemStackHolder == null) {
+        if (itemStackHolder == null) {
             Debug.FAILED_TO_LOAD_CUSTOM_ITEM.debug(spawnItemName);
             return null;
         }
 
         ItemStack itemStack = this.bossItemFileManager.getItemStackConverter().from(itemStackHolder);
 
-        if(itemStack == null) {
+        if (itemStack == null) {
             Debug.FAILED_TO_LOAD_CUSTOM_ITEM.debug(spawnItemName);
             return null;
         }
@@ -154,20 +154,20 @@ public class BossEntityManager {
     }
 
     public ItemStack getSpawnItem(BossEntity bossEntity) {
-        if(bossEntity == null) return null;
-        if(bossEntity.getSpawnItem() == null) return null;
+        if (bossEntity == null) return null;
+        if (bossEntity.getSpawnItem() == null) return null;
 
         String spawnItemName = bossEntity.getSpawnItem();
         ItemStackHolder itemStackHolder = BossAPI.getStoredItemStack(spawnItemName);
 
-        if(itemStackHolder == null) {
+        if (itemStackHolder == null) {
             Debug.FAILED_TO_LOAD_CUSTOM_ITEM.debug(spawnItemName);
             return null;
         }
 
         ItemStack itemStack = this.bossItemFileManager.getItemStackConverter().from(itemStackHolder);
 
-        if(itemStack == null) {
+        if (itemStack == null) {
             Debug.FAILED_TO_LOAD_CUSTOM_ITEM.debug(spawnItemName);
             return null;
         }
@@ -179,7 +179,7 @@ public class BossEntityManager {
         String id = bossEntity.getMessages().getOnSpawn().getMessage();
         List<String> messages = BossAPI.getStoredMessages(id);
 
-        if(messages == null) {
+        if (messages == null) {
             Debug.FAILED_TO_LOAD_MESSAGES.debug(id);
             return Collections.EMPTY_LIST;
         }
@@ -190,7 +190,7 @@ public class BossEntityManager {
     public int getOnSpawnMessageRadius(BossEntity bossEntity) {
         Integer radius = bossEntity.getMessages().getOnSpawn().getRadius();
 
-        if(radius == null) radius = -1;
+        if (radius == null) radius = -1;
 
         return radius;
     }
@@ -199,7 +199,7 @@ public class BossEntityManager {
         String id = bossEntity.getCommands().getOnSpawn();
         List<String> commands = BossAPI.getStoredCommands(id);
 
-        if(commands == null) {
+        if (commands == null) {
             Debug.FAILED_TO_LOAD_COMMANDS.debug(id);
             return Collections.EMPTY_LIST;
         }
@@ -211,7 +211,7 @@ public class BossEntityManager {
         String id = bossEntity.getMessages().getOnDeath().getMessage();
         List<String> messages = BossAPI.getStoredMessages(id);
 
-        if(messages == null) {
+        if (messages == null) {
             Debug.FAILED_TO_LOAD_MESSAGES.debug(id);
             return Collections.EMPTY_LIST;
         }
@@ -222,7 +222,7 @@ public class BossEntityManager {
     public int getOnDeathMessageRadius(BossEntity bossEntity) {
         Integer radius = bossEntity.getMessages().getOnDeath().getRadius();
 
-        if(radius == null) radius = -1;
+        if (radius == null) radius = -1;
 
         return radius;
     }
@@ -230,7 +230,7 @@ public class BossEntityManager {
     public int getOnDeathShowAmount(BossEntity bossEntity) {
         Integer onlyShow = bossEntity.getMessages().getOnDeath().getOnlyShow();
 
-        if(onlyShow == null) onlyShow = 3;
+        if (onlyShow == null) onlyShow = 3;
 
         return onlyShow;
     }
@@ -239,7 +239,7 @@ public class BossEntityManager {
         String id = bossEntity.getMessages().getOnDeath().getPositionMessage();
         List<String> messages = BossAPI.getStoredMessages(id);
 
-        if(messages == null) {
+        if (messages == null) {
             Debug.FAILED_TO_LOAD_MESSAGES.debug(id);
             return null;
         }
@@ -251,7 +251,7 @@ public class BossEntityManager {
         String id = bossEntity.getCommands().getOnDeath();
         List<String> commands = BossAPI.getStoredCommands(id);
 
-        if(commands == null) {
+        if (commands == null) {
             Debug.FAILED_TO_LOAD_COMMANDS.debug(id);
             return null;
         }
@@ -281,24 +281,24 @@ public class BossEntityManager {
         String minionToSpawn = minionSkillElement.getMinionToSpawn();
         Integer amount = minionSkillElement.getAmount();
 
-        if(minionToSpawn == null || minionToSpawn.isEmpty()) {
+        if (minionToSpawn == null || minionToSpawn.isEmpty()) {
             Debug.FAILED_TO_SPAWN_MINIONS_FROM_SKILL.debug(skill.getDisplayName());
             return;
         }
 
-        if(amount == null) amount = 1;
+        if (amount == null) amount = 1;
 
         MinionEntity minionEntity = this.minionsFileManager.getMinionEntity(minionToSpawn);
         Location location = activeBossHolder.getLivingEntity().getLocation();
 
-        if(minionEntity == null) {
+        if (minionEntity == null) {
             Debug.FAILED_TO_FIND_MINION.debug(skill.getDisplayName(), minionToSpawn);
             return;
         }
 
         activeBossHolder.killAllMinions();
 
-        for(int i = 1; i <= amount; i++) {
+        for (int i = 1; i <= amount; i++) {
             ActiveMinionHolder activeMinionHolder = new ActiveMinionHolder(activeBossHolder, minionEntity, location, minionToSpawn);
 
             this.minionMechanicManager.handleMechanicApplication(minionEntity, activeMinionHolder);
@@ -313,9 +313,9 @@ public class BossEntityManager {
     public ActiveBossHolder getActiveBossHolder(LivingEntity livingEntity) {
         List<ActiveBossHolder> currentList = getActiveBossHolders();
 
-        for(ActiveBossHolder activeBossHolder : currentList) {
-            for(Map.Entry<Integer, UUID> entry : activeBossHolder.getLivingEntityMap().entrySet()) {
-                if(entry.getValue().equals(livingEntity.getUniqueId())) return activeBossHolder;
+        for (ActiveBossHolder activeBossHolder : currentList) {
+            for (Map.Entry<Integer, UUID> entry : activeBossHolder.getLivingEntityMap().entrySet()) {
+                if (entry.getValue().equals(livingEntity.getUniqueId())) return activeBossHolder;
             }
         }
 
@@ -323,7 +323,7 @@ public class BossEntityManager {
     }
 
     public void removeActiveBossHolder(ActiveBossHolder activeBossHolder) {
-        for(Map.Entry<Integer, UUID> entry : activeBossHolder.getLivingEntityMap().entrySet()) {
+        for (Map.Entry<Integer, UUID> entry : activeBossHolder.getLivingEntityMap().entrySet()) {
             LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(entry.getValue());
             if (livingEntity != null && !livingEntity.isDead())
                 livingEntity.remove();
@@ -333,7 +333,7 @@ public class BossEntityManager {
     }
 
     public boolean isAllEntitiesDead(ActiveBossHolder activeBossHolder) {
-        for(Map.Entry<Integer, UUID> entry : activeBossHolder.getLivingEntityMap().entrySet()) {
+        for (Map.Entry<Integer, UUID> entry : activeBossHolder.getLivingEntityMap().entrySet()) {
             LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(entry.getValue());
             if (livingEntity != null && !livingEntity.isDead())
                 return false;
@@ -356,14 +356,14 @@ public class BossEntityManager {
         Map<UUID, Double> percentageMap = new HashMap<>();
         double totalDamage = 0.0;
 
-        for(Double damage : damagingUsers.values()) {
-            if(damage != null) totalDamage += damage;
+        for (Double damage : damagingUsers.values()) {
+            if (damage != null) totalDamage += damage;
         }
 
         double onePercent = totalDamage / 100;
 
         damagingUsers.forEach((uuid, damage) -> {
-            if(uuid == null || damage == null) return;
+            if (uuid == null || damage == null) return;
 
             double playerPercent = damage / onePercent;
 
@@ -382,23 +382,23 @@ public class BossEntityManager {
         BossEntity bossEntity = deadBossHolder.getBossEntity();
         String tableName = bossEntity.getDrops().getDropTable();
 
-        if(dropType == null) {
+        if (dropType == null) {
             Debug.FAILED_TO_FIND_DROP_TABLE_TYPE.debug(tableName);
             return;
         }
 
         Gson gson = BossesGson.get();
 
-        if(dropType.equalsIgnoreCase("SPRAY")) {
+        if (dropType.equalsIgnoreCase("SPRAY")) {
             SprayTableElement sprayTableElement = dropTable.getSprayTableData();
             List<ItemStack> itemStacks = this.bossDropTableManager.getSprayItems(sprayTableElement);
 
             sprayDrops(sprayTableElement, itemStacks, deadBossHolder);
-        } else if(dropType.equalsIgnoreCase("GIVE")) {
+        } else if (dropType.equalsIgnoreCase("GIVE")) {
             GiveTableElement giveTableElement = dropTable.getGiveTableData();
 
             this.bossDropTableManager.handleGiveTable(giveTableElement, deadBossHolder);
-        } else if(dropType.equalsIgnoreCase("DROP")) {
+        } else if (dropType.equalsIgnoreCase("DROP")) {
             DropTableElement dropTableElement = dropTable.getDropTableData();
             List<ItemStack> itemStacks = this.bossDropTableManager.getDropItems(dropTableElement);
 
@@ -411,7 +411,7 @@ public class BossEntityManager {
     private void sprayDrops(SprayTableElement sprayTableElement, List<ItemStack> rewards, DeadBossHolder deadBossHolder) {
         Integer maximumDistance = sprayTableElement.getSprayMaxDistance();
 
-        if(maximumDistance == null) maximumDistance = 10;
+        if (maximumDistance == null) maximumDistance = 10;
 
         Location deathLocation = deadBossHolder.getLocation();
         Integer finalMaximumDistance = maximumDistance;
@@ -423,8 +423,8 @@ public class BossEntityManager {
             int z = RandomUtils.get().getRandomNumber(finalMaximumDistance + 1);
             int currentZ = destinationLocation.getBlockZ();
 
-            if(RandomUtils.get().preformRandomAction()) x = -x;
-            if(RandomUtils.get().preformRandomAction()) z = -z;
+            if (RandomUtils.get().preformRandomAction()) x = -x;
+            if (RandomUtils.get().preformRandomAction()) z = -z;
 
             destinationLocation.setX(currentX + x);
             destinationLocation.setZ(currentZ + z);

@@ -18,18 +18,18 @@ public class HealthMechanic implements IBossMechanic {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        if(activeBossHolder.getLivingEntityMap().getOrDefault(1, null) == null) return false;
+        if (activeBossHolder.getLivingEntityMap().getOrDefault(1, null) == null) return false;
 
         double maxHealthSetting = (double) SpigotYmlReader.get().getObject("settings.attribute.maxHealth.max");
 
-        for(EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
+        for (EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
             LivingEntity livingEntity = activeBossHolder.getLivingEntity(mainStatsElement.getPosition());
             double maxHealth = mainStatsElement.getHealth();
 
-            if(livingEntity == null) return false;
+            if (livingEntity == null) return false;
 
-            if(maxHealth > maxHealthSetting) {
+            if (maxHealth > maxHealthSetting) {
                 Debug.MAX_HEALTH.debug(maxHealthSetting);
                 return false;
             }

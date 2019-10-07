@@ -19,8 +19,8 @@ import java.util.Queue;
  */
 public class MinionMechanicManager implements IMechanicManager<MinionEntity, ActiveMinionHolder, IMinionMechanic> {
 
-    private Queue<IMinionMechanic> mechanics;
     private final EpicBosses epicBosses;
+    private Queue<IMinionMechanic> mechanics;
 
     public MinionMechanicManager(EpicBosses epicBosses) {
         this.epicBosses = epicBosses;
@@ -46,22 +46,22 @@ public class MinionMechanicManager implements IMechanicManager<MinionEntity, Act
 
     @Override
     public void handleMechanicApplication(MinionEntity minionEntity, ActiveMinionHolder activeMinionHolder) {
-        if(minionEntity != null && activeMinionHolder != null) {
-            if(minionEntity.isEditing()) {
+        if (minionEntity != null && activeMinionHolder != null) {
+            if (minionEntity.isEditing()) {
                 Debug.ATTEMPTED_TO_SPAWN_WHILE_DISABLED.debug();
                 return;
             }
 
             Queue<IMinionMechanic> queue = new LinkedList<>(this.mechanics);
 
-            while(!queue.isEmpty()) {
+            while (!queue.isEmpty()) {
                 IMinionMechanic mechanic = queue.poll();
 
-                if(mechanic == null) continue;
+                if (mechanic == null) continue;
 
                 ServerUtils.get().logDebug("Applying " + mechanic.getClass().getSimpleName());
 
-                if(didMechanicApplicationFail(mechanic, minionEntity, activeMinionHolder)) {
+                if (didMechanicApplicationFail(mechanic, minionEntity, activeMinionHolder)) {
                     Debug.FAILED_TO_APPLY_MECHANIC.debug(mechanic.getClass().getSimpleName());
                 }
             }
@@ -69,9 +69,9 @@ public class MinionMechanicManager implements IMechanicManager<MinionEntity, Act
     }
 
     private boolean didMechanicApplicationFail(IMinionMechanic mechanic, MinionEntity minionEntity, ActiveMinionHolder activeBossHolder) {
-        if(mechanic == null) return true;
+        if (mechanic == null) return true;
 
-        if(!mechanic.applyMechanic(minionEntity, activeBossHolder)) {
+        if (!mechanic.applyMechanic(minionEntity, activeBossHolder)) {
             Debug.MECHANIC_APPLICATION_FAILED.debug(mechanic.getClass().getSimpleName());
             return true;
         }

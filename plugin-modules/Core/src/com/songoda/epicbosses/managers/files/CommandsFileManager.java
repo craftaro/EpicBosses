@@ -51,7 +51,7 @@ public class CommandsFileManager implements ILoadable, ISavable, IReloadable {
     }
 
     public boolean addNewCommand(String id, List<String> commands) {
-        if(this.commandsMap.containsKey(id)) return false;
+        if (this.commandsMap.containsKey(id)) return false;
 
         commandsMap.put(id, commands);
         return true;

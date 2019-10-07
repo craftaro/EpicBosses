@@ -57,21 +57,21 @@ public abstract class AutoSpawnVariableHandler implements IHandler {
                 Player player = event.getPlayer();
                 UUID uuid = player.getUniqueId();
 
-                if(!uuid.equals(getPlayer().getUniqueId())) return;
-                if(isHandled()) return;
+                if (!uuid.equals(getPlayer().getUniqueId())) return;
+                if (isHandled()) return;
 
                 String input = event.getMessage();
 
-                if(input.equalsIgnoreCase("-")) {
+                if (input.equalsIgnoreCase("-")) {
                     input = null;
                 }
 
-                if(input == null) {
+                if (input == null) {
                     Bukkit.getScheduler().scheduleSyncDelayedTask(EpicBosses.getInstance(), AutoSpawnVariableHandler.this::finish);
                     return;
                 }
 
-                if(!confirmValue(input, getIntervalSpawnElement())) return;
+                if (!confirmValue(input, getIntervalSpawnElement())) return;
 
                 getAutoSpawn().setCustomData(BossAPI.convertObjectToJsonObject(getIntervalSpawnElement()));
                 getAutoSpawnFileManager().save();

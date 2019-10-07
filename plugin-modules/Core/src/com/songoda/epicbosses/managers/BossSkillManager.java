@@ -38,6 +38,10 @@ public class BossSkillManager implements ILoadable {
         this.plugin = plugin;
     }
 
+    public static ICustomSettingAction createCustomSkillAction(String name, String current, ItemStack displayStack, ClickAction clickAction) {
+        return new CustomSkillActionCreator(name, current, displayStack, clickAction);
+    }
+
     @Override
     public void load() {
         registerCustomSkill(new Cage(this.plugin));
@@ -53,7 +57,7 @@ public class BossSkillManager implements ILoadable {
     }
 
     public void handleSkill(List<String> masterMessage, Skill skill, List<LivingEntity> targetedEntities, ActiveBossHolder activeBossHolder, boolean message, boolean subSkill) {
-        if(skill == null) {
+        if (skill == null) {
             Debug.SKILL_NOT_FOUND.debug();
             return;
         }
@@ -62,24 +66,24 @@ public class BossSkillManager implements ILoadable {
         String bossDisplayName = activeBossHolder.getName();
         String skillDisplayName = skill.getDisplayName();
 
-        if(skill.getType().equalsIgnoreCase("POTION")) {
+        if (skill.getType().equalsIgnoreCase("POTION")) {
             PotionSkillElement potionSkillElement = getPotionSkillElement(skill);
 
             potionSkillElement.castSkill(skill, potionSkillElement, activeBossHolder, targetedEntities);
             skillHandler = potionSkillElement;
-        } else if(skill.getType().equalsIgnoreCase("COMMAND")) {
+        } else if (skill.getType().equalsIgnoreCase("COMMAND")) {
             CommandSkillElement commandSkillElement = getCommandSkillElement(skill);
 
             commandSkillElement.castSkill(skill, commandSkillElement, activeBossHolder, targetedEntities);
             skillHandler = commandSkillElement;
-        } else if(skill.getType().equalsIgnoreCase("GROUP")) {
-            if(subSkill) return;
+        } else if (skill.getType().equalsIgnoreCase("GROUP")) {
+            if (subSkill) return;
 
             GroupSkillElement groupSkillElement = getGroupSkillElement(skill);
 
             groupSkillElement.castSkill(skill, groupSkillElement, activeBossHolder, targetedEntities);
             skillHandler = groupSkillElement;
-        } else if(skill.getType().equalsIgnoreCase("CUSTOM")) {
+        } else if (skill.getType().equalsIgnoreCase("CUSTOM")) {
             CustomSkillElement customSkillElement = getCustomSkillElement(skill);
 
             skillHandler = handleCustomSkillCasting(skill, customSkillElement, activeBossHolder, targetedEntities);
@@ -87,7 +91,7 @@ public class BossSkillManager implements ILoadable {
             return;
         }
 
-        if(message && masterMessage != null) {
+        if (message && masterMessage != null) {
             masterMessage.replaceAll(s -> s.replace("{boss}", bossDisplayName).replace("{skill}", skillDisplayName));
             targetedEntities.forEach(livingEntity -> MessageUtils.get().sendMessage(livingEntity, masterMessage));
         }
@@ -97,7 +101,7 @@ public class BossSkillManager implements ILoadable {
     }
 
     public PotionSkillElement getPotionSkillElement(Skill skill) {
-        if(skill.getType().equalsIgnoreCase("POTION")) {
+        if (skill.getType().equalsIgnoreCase("POTION")) {
             return BossesGson.get().fromJson(skill.getCustomData(), PotionSkillElement.class);
         }
 
@@ -105,7 +109,7 @@ public class BossSkillManager implements ILoadable {
     }
 
     public CommandSkillElement getCommandSkillElement(Skill skill) {
-        if(skill.getType().equalsIgnoreCase("COMMAND")) {
+        if (skill.getType().equalsIgnoreCase("COMMAND")) {
             return BossesGson.get().fromJson(skill.getCustomData(), CommandSkillElement.class);
         }
 
@@ -113,7 +117,7 @@ public class BossSkillManager implements ILoadable {
     }
 
     public GroupSkillElement getGroupSkillElement(Skill skill) {
-        if(skill.getType().equalsIgnoreCase("GROUP")) {
+        if (skill.getType().equalsIgnoreCase("GROUP")) {
             return BossesGson.get().fromJson(skill.getCustomData(), GroupSkillElement.class);
         }
 
@@ -121,7 +125,7 @@ public class BossSkillManager implements ILoadable {
     }
 
     public CustomSkillElement getCustomSkillElement(Skill skill) {
-        if(skill.getType().equalsIgnoreCase("CUSTOM")) {
+        if (skill.getType().equalsIgnoreCase("CUSTOM")) {
             return BossesGson.get().fromJson(skill.getCustomData(), CustomSkillElement.class);
         }
 
@@ -133,16 +137,16 @@ public class BossSkillManager implements ILoadable {
     }
 
     public boolean registerCustomSkill(CustomSkillHandler customSkillHandler) {
-        if(SKILLS.contains(customSkillHandler)) return false;
-        if(customSkillHandler == null) return false;
+        if (SKILLS.contains(customSkillHandler)) return false;
+        if (customSkillHandler == null) return false;
 
         SKILLS.add(customSkillHandler);
         return true;
     }
 
     public void removeCustomSkill(CustomSkillHandler customSkillHandler) {
-        if(!SKILLS.contains(customSkillHandler)) return;
-        if(customSkillHandler == null) return;
+        if (!SKILLS.contains(customSkillHandler)) return;
+        if (customSkillHandler == null) return;
 
         SKILLS.remove(customSkillHandler);
     }
@@ -152,23 +156,23 @@ public class BossSkillManager implements ILoadable {
         List<LivingEntity> targetedList = new ArrayList<>();
         String mode = skill.getMode();
 
-        if(mode.equalsIgnoreCase("ONE")) {
+        if (mode.equalsIgnoreCase("ONE")) {
             return Arrays.asList(damager);
-        } else if(mode.equalsIgnoreCase("BOSS")) {
+        } else if (mode.equalsIgnoreCase("BOSS")) {
             for (UUID uuid : activeBossHolder.getLivingEntityMap().values()) {
                 LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(uuid);
                 if (livingEntity != null)
                     targetedList.add(livingEntity);
             }
         } else {
-            for(Player player : Bukkit.getOnlinePlayers()) {
-                if(!player.getWorld().equals(center.getWorld())) continue;
-                if(center.distanceSquared(player.getLocation()) > radiusSqr) continue;
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (!player.getWorld().equals(center.getWorld())) continue;
+                if (center.distanceSquared(player.getLocation()) > radiusSqr) continue;
 
-                if(mode.equalsIgnoreCase("ALL")) {
+                if (mode.equalsIgnoreCase("ALL")) {
                     targetedList.add(player);
-                } else if(mode.equalsIgnoreCase("RANDOM")) {
-                    if(RandomUtils.get().preformRandomAction()) {
+                } else if (mode.equalsIgnoreCase("RANDOM")) {
+                    if (RandomUtils.get().preformRandomAction()) {
                         targetedList.add(player);
                     }
                 }
@@ -182,7 +186,7 @@ public class BossSkillManager implements ILoadable {
         String type = customSkillElement.getCustom().getType();
         CustomSkillHandler customSkillHandler = getCustomSkillHandler(type);
 
-        if(customSkillHandler == null) {
+        if (customSkillHandler == null) {
             Debug.FAILED_TO_OBTAIN_THE_SKILL_HANDLER.debug(type);
             return null;
         }
@@ -192,17 +196,13 @@ public class BossSkillManager implements ILoadable {
     }
 
     private CustomSkillHandler getCustomSkillHandler(String name) {
-        for(CustomSkillHandler customSkillHandler : new HashSet<>(SKILLS)) {
+        for (CustomSkillHandler customSkillHandler : new HashSet<>(SKILLS)) {
             String skillName = customSkillHandler.getSkillName();
 
-            if(skillName.equalsIgnoreCase(name)) return customSkillHandler;
+            if (skillName.equalsIgnoreCase(name)) return customSkillHandler;
         }
 
         return null;
-    }
-
-    public static ICustomSettingAction createCustomSkillAction(String name, String current, ItemStack displayStack, ClickAction clickAction) {
-        return new CustomSkillActionCreator(name, current, displayStack, clickAction);
     }
 
     public List<String> getValidSkillTypes() {

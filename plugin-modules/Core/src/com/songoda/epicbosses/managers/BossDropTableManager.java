@@ -41,8 +41,8 @@ public class BossDropTableManager {
         Integer maxDrops = sprayTableElement.getSprayMaxDrops();
         Boolean randomDrops = sprayTableElement.getRandomSprayDrops();
 
-        if(maxDrops == null) maxDrops = -1;
-        if(randomDrops == null) randomDrops = false;
+        if (maxDrops == null) maxDrops = -1;
+        if (randomDrops == null) randomDrops = false;
 
         return getCustomRewards(randomDrops, maxDrops, rewards);
     }
@@ -52,8 +52,8 @@ public class BossDropTableManager {
         Integer maxDrops = dropTableElement.getDropMaxDrops();
         Boolean randomDrops = dropTableElement.getRandomDrops();
 
-        if(maxDrops == null) maxDrops = -1;
-        if(randomDrops == null) randomDrops = false;
+        if (maxDrops == null) maxDrops = -1;
+        if (randomDrops == null) randomDrops = false;
 
         return getCustomRewards(randomDrops, maxDrops, rewards);
     }
@@ -66,14 +66,14 @@ public class BossDropTableManager {
         ServerUtils serverUtils = ServerUtils.get();
 
         rewards.forEach((positionString, lootMap) -> {
-            if(!NumberUtils.get().isInt(positionString)) {
+            if (!NumberUtils.get().isInt(positionString)) {
                 Debug.DROP_TABLE_FAILED_INVALID_NUMBER.debug(positionString);
                 return;
             }
 
             int position = NumberUtils.get().getInteger(positionString) - 1;
 
-            if(position >= positions.size()) return;
+            if (position >= positions.size()) return;
 
             UUID uuid = positions.get(position);
             Player player = Bukkit.getPlayer(uuid);
@@ -81,20 +81,20 @@ public class BossDropTableManager {
             List<ItemStack> totalRewards = new ArrayList<>();
             List<String> totalCommands = new ArrayList<>();
 
-            if(player == null) return;
+            if (player == null) return;
 
             lootMap.forEach((key, subElement) -> {
                 Double requiredPercentage = subElement.getRequiredPercentage();
                 Integer maxDrops = subElement.getMaxDrops(), maxCommands = subElement.getMaxCommands();
                 Boolean randomDrops = subElement.getRandomDrops(), randomCommands = subElement.getRandomCommands();
 
-                if(requiredPercentage == null) requiredPercentage = 0.0D;
-                if(maxDrops == null) maxDrops = -1;
-                if(maxCommands == null) maxCommands = -1;
-                if(randomDrops == null) randomDrops = false;
-                if(randomCommands == null) randomCommands = false;
+                if (requiredPercentage == null) requiredPercentage = 0.0D;
+                if (maxDrops == null) maxDrops = -1;
+                if (maxCommands == null) maxCommands = -1;
+                if (randomDrops == null) randomDrops = false;
+                if (randomCommands == null) randomCommands = false;
 
-                if(requiredPercentage > percentage) return;
+                if (requiredPercentage > percentage) return;
 
                 totalRewards.addAll(getCustomRewards(randomDrops, maxDrops, subElement.getItems()));
                 totalCommands.addAll(getCommands(randomCommands, maxCommands, subElement.getCommands()));
@@ -104,7 +104,7 @@ public class BossDropTableManager {
             totalCommands.forEach(serverUtils::sendConsoleCommand);
 
             totalRewards.forEach(itemStack -> {
-                if(player.getInventory().firstEmpty() == -1) {
+                if (player.getInventory().firstEmpty() == -1) {
                     player.getWorld().dropItemNaturally(player.getLocation(), itemStack);
                 } else {
                     player.getInventory().addItem(itemStack);
@@ -117,21 +117,21 @@ public class BossDropTableManager {
     private List<ItemStack> getCustomRewards(boolean random, int max, Map<String, Double> chanceMap) {
         List<ItemStack> newListToMerge = new ArrayList<>();
 
-        if(chanceMap == null) return newListToMerge;
+        if (chanceMap == null) return newListToMerge;
 
         List<String> keyList = new ArrayList<>(chanceMap.keySet());
 
-        if(random) Collections.shuffle(keyList);
+        if (random) Collections.shuffle(keyList);
 
-        for(String itemName : keyList) {
+        for (String itemName : keyList) {
             Double chance = chanceMap.get(itemName);
 
-            if(!RandomUtils.get().canPreformAction(chance)) continue;
-            if((max > 0) && (newListToMerge.size() >= max)) break;
+            if (!RandomUtils.get().canPreformAction(chance)) continue;
+            if ((max > 0) && (newListToMerge.size() >= max)) break;
 
             ItemStack itemStack = this.getDropTableItemStack.getListItem(itemName);
 
-            if(itemStack == null) {
+            if (itemStack == null) {
                 Debug.DROP_TABLE_FAILED_TO_GET_ITEM.debug();
                 continue;
             }
@@ -145,21 +145,21 @@ public class BossDropTableManager {
     private List<String> getCommands(boolean random, int max, Map<String, Double> chanceMap) {
         List<String> newListToMerge = new ArrayList<>();
 
-        if(chanceMap == null) return newListToMerge;
+        if (chanceMap == null) return newListToMerge;
 
         List<String> keyList = new ArrayList<>(chanceMap.keySet());
 
-        if(random) Collections.shuffle(keyList);
+        if (random) Collections.shuffle(keyList);
 
-        for(String itemName : keyList) {
+        for (String itemName : keyList) {
             Double chance = chanceMap.get(itemName);
 
-            if(!RandomUtils.get().canPreformAction(chance)) continue;
-            if((max > 0) && (newListToMerge.size() >= max)) break;
+            if (!RandomUtils.get().canPreformAction(chance)) continue;
+            if ((max > 0) && (newListToMerge.size() >= max)) break;
 
             List<String> commands = this.getDropTableCommand.getListItem(itemName);
 
-            if(commands == null) {
+            if (commands == null) {
                 Debug.DROP_TABLE_FAILED_TO_GET_ITEM.debug();
                 continue;
             }

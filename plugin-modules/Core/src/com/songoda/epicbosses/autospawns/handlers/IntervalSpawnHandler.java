@@ -78,11 +78,11 @@ public class IntervalSpawnHandler {
             ClickType clickType = event.getClick();
             int amountToModifyBy;
 
-            if(clickType == ClickType.SHIFT_LEFT) {
+            if (clickType == ClickType.SHIFT_LEFT) {
                 amountToModifyBy = 10;
-            } else if(clickType == ClickType.RIGHT) {
+            } else if (clickType == ClickType.RIGHT) {
                 amountToModifyBy = -1;
-            } else if(clickType == ClickType.SHIFT_RIGHT) {
+            } else if (clickType == ClickType.SHIFT_RIGHT) {
                 amountToModifyBy = -10;
             } else {
                 amountToModifyBy = 1;
@@ -92,7 +92,7 @@ public class IntervalSpawnHandler {
             String modifyValue;
             int newAmount;
 
-            if(amountToModifyBy > 0) {
+            if (amountToModifyBy > 0) {
                 modifyValue = "increased";
                 newAmount = currentAmount + amountToModifyBy;
             } else {
@@ -100,7 +100,7 @@ public class IntervalSpawnHandler {
                 newAmount = currentAmount + amountToModifyBy;
             }
 
-            if(newAmount <= 0) {
+            if (newAmount <= 0) {
                 newAmount = 0;
             }
 

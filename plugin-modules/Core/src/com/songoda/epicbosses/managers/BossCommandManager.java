@@ -4,7 +4,6 @@ import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.commands.boss.*;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.ILoadable;
-import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.command.SubCommandService;
 
 /**
@@ -25,7 +24,7 @@ public class BossCommandManager implements ILoadable {
 
     @Override
     public void load() {
-        if(this.hasBeenLoaded) {
+        if (this.hasBeenLoaded) {
             Debug.FAILED_TO_LOAD_BOSSCOMMANDMANAGER.debug();
             return;
         }

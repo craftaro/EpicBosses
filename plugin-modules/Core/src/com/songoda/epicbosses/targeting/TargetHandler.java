@@ -32,14 +32,14 @@ public abstract class TargetHandler<Holder extends IActiveHolder> implements ITa
         ServerUtils.get().runLaterAsync(10L, () -> {
             updateTarget();
 
-            if(!getHolder().isDead()) runTargetCycle();
+            if (!getHolder().isDead()) runTargetCycle();
         });
     }
 
     protected LivingEntity getBossEntity() {
-        for(UUID uuid : getHolder().getLivingEntityMap().values()) {
+        for (UUID uuid : getHolder().getLivingEntityMap().values()) {
             LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(uuid);
-            if(livingEntity != null && !livingEntity.isDead()) return livingEntity;
+            if (livingEntity != null && !livingEntity.isDead()) return livingEntity;
         }
 
         return null;
@@ -49,22 +49,22 @@ public abstract class TargetHandler<Holder extends IActiveHolder> implements ITa
         LivingEntity boss = getBossEntity();
         double radius = this.bossTargetManager.getTargetRadius();
 
-        if(boss == null) return;
+        if (boss == null) return;
 
         List<LivingEntity> nearbyEntities = new ArrayList<>();
         List<Entity> nearbyBossEntities = boss.getNearbyEntities(radius, radius, radius);
 
-        if(nearbyBossEntities == null) return;
+        if (nearbyBossEntities == null) return;
 
-        for(Entity entity : nearbyBossEntities) {
-            if(!(entity instanceof Player)) continue;
+        for (Entity entity : nearbyBossEntities) {
+            if (!(entity instanceof Player)) continue;
 
             LivingEntity livingEntity = (LivingEntity) entity;
 
-            if(livingEntity instanceof Player) {
+            if (livingEntity instanceof Player) {
                 Player player = (Player) livingEntity;
 
-                if(player.getGameMode() == GameMode.SPECTATOR || player.getGameMode() == GameMode.CREATIVE) continue;
+                if (player.getGameMode() == GameMode.SPECTATOR || player.getGameMode() == GameMode.CREATIVE) continue;
             }
 
             nearbyEntities.add(livingEntity);
@@ -76,7 +76,7 @@ public abstract class TargetHandler<Holder extends IActiveHolder> implements ITa
     private void updateBoss(LivingEntity newTarget) {
         getHolder().getLivingEntityMap().values().forEach(uuid -> {
             LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(uuid);
-            if(livingEntity != null && !livingEntity.isDead()) {
+            if (livingEntity != null && !livingEntity.isDead()) {
                 ((Creature) livingEntity).setTarget(newTarget);
             }
         });

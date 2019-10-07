@@ -18,11 +18,10 @@ import java.util.List;
  */
 public class BossLocationManager implements IReloadable {
 
-    private boolean useBlockedWorlds;
-    private List<String> blockedWorlds;
-
     private final BossHookManager bossHookManager;
     private final EpicBosses plugin;
+    private boolean useBlockedWorlds;
+    private List<String> blockedWorlds;
 
     public BossLocationManager(EpicBosses epicBosses) {
         this.bossHookManager = epicBosses.getBossHookManager();

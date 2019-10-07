@@ -25,7 +25,6 @@ import com.songoda.epicbosses.utils.itemstack.converters.MaterialConverter;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
 import com.songoda.epicbosses.utils.time.TimeUnit;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -47,7 +46,6 @@ import java.util.*;
 public class Cage extends CustomSkillHandler {
 
     private static final MaterialConverter MATERIAL_CONVERTER = new MaterialConverter();
-    private static final VersionHandler versionHandler = new VersionHandler();
 
     private static final Map<Location, CageLocationData> cageLocationDataMap = new HashMap<>();
     private static final List<UUID> playersInCage = new ArrayList<>();

@@ -33,7 +33,7 @@ public class AutoSpawn {
     }
 
     public IntervalSpawnElement getIntervalSpawnData() {
-        if(getType().equalsIgnoreCase("INTERVAL")) {
+        if (getType().equalsIgnoreCase("INTERVAL")) {
             return BossesGson.get().fromJson(this.customData, IntervalSpawnElement.class);
         }
 
@@ -41,11 +41,11 @@ public class AutoSpawn {
     }
 
     public boolean isCompleteEnoughToSpawn() {
-        if(this.type == null) return false;
+        if (this.type == null) return false;
 
         List<String> entities = getEntities();
 
-        if(entities == null || entities.isEmpty()) return false;
+        if (entities == null || entities.isEmpty()) return false;
 
         return true;
     }
@@ -54,36 +54,36 @@ public class AutoSpawn {
         return this.editing;
     }
 
-    public String getType() {
-        return this.type;
-    }
-
-    public List<String> getEntities() {
-        return this.entities;
-    }
-
-    public AutoSpawnSettings getAutoSpawnSettings() {
-        return this.autoSpawnSettings;
-    }
-
-    public JsonObject getCustomData() {
-        return this.customData;
-    }
-
     public void setEditing(boolean editing) {
         this.editing = editing;
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     public void setType(String type) {
         this.type = type;
     }
 
+    public List<String> getEntities() {
+        return this.entities;
+    }
+
     public void setEntities(List<String> entities) {
         this.entities = entities;
     }
 
+    public AutoSpawnSettings getAutoSpawnSettings() {
+        return this.autoSpawnSettings;
+    }
+
     public void setAutoSpawnSettings(AutoSpawnSettings autoSpawnSettings) {
         this.autoSpawnSettings = autoSpawnSettings;
+    }
+
+    public JsonObject getCustomData() {
+        return this.customData;
     }
 
     public void setCustomData(JsonObject customData) {

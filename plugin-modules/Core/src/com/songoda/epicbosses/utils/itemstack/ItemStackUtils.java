@@ -7,7 +7,6 @@ import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.enchants.GlowEnchant;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -26,7 +25,6 @@ import java.util.*;
  */
 public class ItemStackUtils {
 
-    private static final VersionHandler versionHandler = new VersionHandler();
     private static final Map<EntityType, Material> spawnableEntityMaterials;
     private static final Map<EntityType, Short> spawnableEntityIds;
 

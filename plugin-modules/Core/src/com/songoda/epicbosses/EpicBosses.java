@@ -21,7 +21,6 @@ import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.file.YmlFileHandler;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -66,13 +65,16 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
     private MinionMechanicManager minionMechanicManager;
     private MinionEntityContainer minionEntityContainer;
 
-    private VersionHandler versionHandler = new VersionHandler();
     private DebugManager debugManager = new DebugManager();
 
     private YmlFileHandler langFileHandler, editorFileHandler, displayFileHandler;
     private FileConfiguration lang, editor, display;
 
     private boolean debug = true;
+
+    public static EpicBosses getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public void onPluginLoad() {
@@ -241,10 +243,6 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
         Message.setFile(lang);
     }
 
-    public static EpicBosses getInstance() {
-        return INSTANCE;
-    }
-
     public MessagesFileManager getBossMessagesFileManager() {
         return this.bossMessagesFileManager;
     }
@@ -339,10 +337,6 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
 
     public MinionEntityContainer getMinionEntityContainer() {
         return this.minionEntityContainer;
-    }
-
-    public VersionHandler getVersionHandler() {
-        return this.versionHandler;
     }
 
     public DebugManager getDebugManager() {

@@ -54,12 +54,12 @@ public class BossDisplayNameHandler implements IHandler {
                 Player player = event.getPlayer();
                 UUID uuid = player.getUniqueId();
 
-                if(!uuid.equals(getPlayer().getUniqueId())) return;
-                if(isHandled()) return;
+                if (!uuid.equals(getPlayer().getUniqueId())) return;
+                if (isHandled()) return;
 
                 String input = event.getMessage();
 
-                if(input.equalsIgnoreCase("-")) {
+                if (input.equalsIgnoreCase("-")) {
                     input = null;
                 }
 

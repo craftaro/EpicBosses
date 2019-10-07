@@ -13,8 +13,6 @@ import utils.factions.FactionsOne;
 import utils.factions.FactionsUUID;
 import utils.factions.LegacyFactions;
 
-import java.util.List;
-
 /**
  * @author Charles Cullen
  * @version 1.0.0
@@ -22,13 +20,11 @@ import java.util.List;
  */
 public class BossHookManager {
 
+    private final EpicBosses plugin;
     private boolean askyblockEnabled, factionsEnabled;
     private boolean askyblockOwnIsland, factionWarzone;
-
     private IASkyblockHelper aSkyblockHelper;
     private IFactionHelper factionHelper;
-
-    private final EpicBosses plugin;
 
     public BossHookManager(EpicBosses epicBosses) {
         this.plugin = epicBosses;

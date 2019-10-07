@@ -26,7 +26,7 @@ public class BossListenerManager implements ILoadable {
 
     @Override
     public void load() {
-        if(this.hasBeenLoaded) {
+        if (this.hasBeenLoaded) {
             Debug.FAILED_TO_LOAD_BOSSLISTENERMANAGER.debug();
             return;
         }

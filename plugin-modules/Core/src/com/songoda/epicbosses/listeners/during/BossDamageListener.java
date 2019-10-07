@@ -29,37 +29,37 @@ public class BossDamageListener implements Listener {
         Entity entityBeingDamaged = event.getEntity();
         Entity entityDamaging = event.getDamager();
 
-        if(!(entityBeingDamaged instanceof LivingEntity)) return;
+        if (!(entityBeingDamaged instanceof LivingEntity)) return;
 
         LivingEntity livingEntity = (LivingEntity) entityBeingDamaged;
         ActiveBossHolder activeBossHolder = this.bossEntityManager.getActiveBossHolder(livingEntity);
         double damage = event.getDamage();
         Player player = null;
 
-        if(activeBossHolder == null) return;
+        if (activeBossHolder == null) return;
 
-        if(entityDamaging instanceof Player) {
+        if (entityDamaging instanceof Player) {
             player = (Player) entityDamaging;
-        } else if(entityDamaging instanceof Projectile) {
+        } else if (entityDamaging instanceof Projectile) {
             Projectile projectile = (Projectile) entityDamaging;
             LivingEntity shooter = (LivingEntity) projectile.getShooter();
 
-            if(projectile instanceof ThrownPotion) {
+            if (projectile instanceof ThrownPotion) {
                 event.setCancelled(true);
                 return;
             }
-            if(!(shooter instanceof Player)) return;
+            if (!(shooter instanceof Player)) return;
 
             player = (Player) shooter;
         }
 
-        if(player == null) return;
+        if (player == null) return;
 
         double currentDamage = activeBossHolder.getMapOfDamagingUsers().getOrDefault(player.getUniqueId(), 0.0);
         BossDamageEvent bossDamageEvent = new BossDamageEvent(activeBossHolder, livingEntity, livingEntity.getEyeLocation(), damage);
 
         ServerUtils.get().callEvent(bossDamageEvent);
-        activeBossHolder.getMapOfDamagingUsers().put(player.getUniqueId(), currentDamage+damage);
+        activeBossHolder.getMapOfDamagingUsers().put(player.getUniqueId(), currentDamage + damage);
     }
 
 }

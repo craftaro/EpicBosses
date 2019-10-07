@@ -30,7 +30,7 @@ public class TopDamagerTargetHandler<T extends IActiveHolder> extends TargetHand
         nearbyEntities.forEach(livingEntity -> {
             UUID uuid = livingEntity.getUniqueId();
 
-            if(mapOfDamages.containsKey(uuid)) {
+            if (mapOfDamages.containsKey(uuid)) {
                 nearbyDamages.put(livingEntity, mapOfDamages.get(uuid));
             }
         });

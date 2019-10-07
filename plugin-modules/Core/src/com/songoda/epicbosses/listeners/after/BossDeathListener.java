@@ -45,26 +45,26 @@ public class BossDeathListener implements Listener {
         ActiveBossHolder activeBossHolder = this.bossEntityManager.getActiveBossHolder(livingEntity);
         Location location = livingEntity.getLocation();
 
-        if(activeBossHolder == null) return;
+        if (activeBossHolder == null) return;
 
         EntityDamageEvent.DamageCause damageCause = entityDamageEvent.getCause();
         Boolean naturalDrops = activeBossHolder.getBossEntity().getDrops().getNaturalDrops();
         Boolean dropExp = activeBossHolder.getBossEntity().getDrops().getDropExp();
 
-        if(naturalDrops == null) naturalDrops = false;
-        if(dropExp == null) dropExp = true;
+        if (naturalDrops == null) naturalDrops = false;
+        if (dropExp == null) dropExp = true;
 
-        if(!naturalDrops) event.getDrops().clear();
-        if(!dropExp) event.setDroppedExp(0);
+        if (!naturalDrops) event.getDrops().clear();
+        if (!dropExp) event.setDroppedExp(0);
 
-        if(damageCause == EntityDamageEvent.DamageCause.VOID || damageCause == EntityDamageEvent.DamageCause.LAVA
+        if (damageCause == EntityDamageEvent.DamageCause.VOID || damageCause == EntityDamageEvent.DamageCause.LAVA
                 || activeBossHolder.getMapOfDamagingUsers().isEmpty()) {
             this.bossEntityManager.removeActiveBossHolder(activeBossHolder);
             return;
         }
 
 
-        if(this.bossEntityManager.isAllEntitiesDead(activeBossHolder)) {
+        if (this.bossEntityManager.isAllEntitiesDead(activeBossHolder)) {
             PreBossDeathEvent preBossDeathEvent = new PreBossDeathEvent(activeBossHolder, location, event.getEntity().getKiller());
 
             activeBossHolder.setDead(true);
@@ -87,8 +87,9 @@ public class BossDeathListener implements Listener {
         int onlyShow = this.bossEntityManager.getOnDeathShowAmount(bossEntity);
         ServerUtils serverUtils = ServerUtils.get();
 
-        if(commands != null) {
-            if (activeBossHolder.getSpawningPlayerName() != null) commands.replaceAll(s -> s.replace("{spawner}", activeBossHolder.getSpawningPlayerName()));
+        if (commands != null) {
+            if (activeBossHolder.getSpawningPlayerName() != null)
+                commands.replaceAll(s -> s.replace("{spawner}", activeBossHolder.getSpawningPlayerName()));
             if (event.getKiller() != null) commands.replaceAll(s -> s.replace("{killer}", event.getKiller().getName()));
             commands.forEach(serverUtils::sendConsoleCommand);
         }
@@ -96,19 +97,19 @@ public class BossDeathListener implements Listener {
         ServerUtils.get().runTaskAsync(() -> {
             List<String> positionsMessage = this.bossEntityManager.getOnDeathPositionMessage(bossEntity);
 
-            if(messages != null) {
-                if(positionsMessage != null) {
+            if (messages != null) {
+                if (positionsMessage != null) {
                     List<String> finalPositionsMessage = new ArrayList<>();
                     int current = 1;
 
-                    for(Map.Entry<UUID, Double> entry : mapOfDamage.entrySet()) {
-                        if(current > onlyShow) break;
+                    for (Map.Entry<UUID, Double> entry : mapOfDamage.entrySet()) {
+                        if (current > onlyShow) break;
 
                         List<String> clonedPositionsMessage = new ArrayList<>(positionsMessage);
                         Double percentage = mapOfPercent.getOrDefault(entry.getKey(), null);
                         int position = current;
 
-                        if(percentage == null) percentage = -1.0D;
+                        if (percentage == null) percentage = -1.0D;
 
                         double finalPercentage = percentage;
 
@@ -126,16 +127,19 @@ public class BossDeathListener implements Listener {
                     positionsMessage = finalPositionsMessage;
                 }
 
-                if(activeBossHolder.getName() != null) messages.replaceAll(s -> s.replace("{boss}", activeBossHolder.getName()));
-                if (activeBossHolder.getSpawningPlayerName() != null) messages.replaceAll(s -> s.replace("{spawner}", activeBossHolder.getSpawningPlayerName()));
-                if (event.getKiller() != null) messages.replaceAll(s -> s.replace("{killer}", event.getKiller().getName()));
+                if (activeBossHolder.getName() != null)
+                    messages.replaceAll(s -> s.replace("{boss}", activeBossHolder.getName()));
+                if (activeBossHolder.getSpawningPlayerName() != null)
+                    messages.replaceAll(s -> s.replace("{spawner}", activeBossHolder.getSpawningPlayerName()));
+                if (event.getKiller() != null)
+                    messages.replaceAll(s -> s.replace("{killer}", event.getKiller().getName()));
 
                 messages.replaceAll(s -> s.replace('&', '§'));
 
                 List<String> finalMessage = new ArrayList<>();
 
-                for(String s : messages) {
-                    if(s.contains("{positions}") && positionsMessage != null) {
+                for (String s : messages) {
+                    if (s.contains("{positions}") && positionsMessage != null) {
                         finalMessage.addAll(positionsMessage);
                     } else {
                         finalMessage.add(s);
@@ -154,7 +158,7 @@ public class BossDeathListener implements Listener {
         BossDeathEvent bossDeathEvent = new BossDeathEvent(activeBossHolder, autoSpawn);
         DropTable dropTable = this.bossEntityManager.getDropTable(bossEntity);
 
-        if(dropTable == null) {
+        if (dropTable == null) {
             Debug.FAILED_TO_FIND_DROP_TABLE.debug(activeBossHolder.getName(), bossEntity.getDrops().getDropTable());
             return;
         }

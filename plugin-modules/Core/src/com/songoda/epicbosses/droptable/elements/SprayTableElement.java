@@ -29,28 +29,28 @@ public class SprayTableElement {
         return this.sprayRewards;
     }
 
-    public Boolean getRandomSprayDrops() {
-        return this.randomSprayDrops;
-    }
-
-    public Integer getSprayMaxDistance() {
-        return this.sprayMaxDistance;
-    }
-
-    public Integer getSprayMaxDrops() {
-        return this.sprayMaxDrops;
-    }
-
     public void setSprayRewards(Map<String, Double> sprayRewards) {
         this.sprayRewards = sprayRewards;
+    }
+
+    public Boolean getRandomSprayDrops() {
+        return this.randomSprayDrops;
     }
 
     public void setRandomSprayDrops(Boolean randomSprayDrops) {
         this.randomSprayDrops = randomSprayDrops;
     }
 
+    public Integer getSprayMaxDistance() {
+        return this.sprayMaxDistance;
+    }
+
     public void setSprayMaxDistance(Integer sprayMaxDistance) {
         this.sprayMaxDistance = sprayMaxDistance;
+    }
+
+    public Integer getSprayMaxDrops() {
+        return this.sprayMaxDrops;
     }
 
     public void setSprayMaxDrops(Integer sprayMaxDrops) {
