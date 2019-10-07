@@ -18,7 +18,7 @@ public class ShulkerHandler implements ICustomEntityHandler {
 
     @Override
     public LivingEntity getBaseEntity(String entityType, Location spawnLocation) {
-        if(ServerVersion.isServerVersionBelow(ServerVersion.V1_9)) {
+        if (ServerVersion.isServerVersionBelow(ServerVersion.V1_9)) {
             throw new NullPointerException("This feature is only implemented in version 1.9 and above of Minecraft.");
         }
 

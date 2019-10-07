@@ -24,11 +24,11 @@ public class PanelBuilderCounter {
 
     public boolean isButtonAtSlot(int slot) {
         for (Set<Integer> integers : this.slotsWithCounter.values()) {
-            if(integers.contains(slot)) return true;
+            if (integers.contains(slot)) return true;
         }
 
-        for(Map<Integer, Object> map : this.specialValuesCounter.values()) {
-            if(map.containsKey(slot)) return true;
+        for (Map<Integer, Object> map : this.specialValuesCounter.values()) {
+            if (map.containsKey(slot)) return true;
         }
 
         return false;

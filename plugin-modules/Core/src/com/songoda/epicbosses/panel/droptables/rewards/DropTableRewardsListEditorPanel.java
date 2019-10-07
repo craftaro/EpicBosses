@@ -47,7 +47,7 @@ public abstract class DropTableRewardsListEditorPanel<SubVariable> extends SubVa
         int maxPage = panel.getMaxPage(keyList);
 
         panel.setOnPageChange((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, dropTable, subVariable, rewardMap, keyList);
             return true;
@@ -83,14 +83,15 @@ public abstract class DropTableRewardsListEditorPanel<SubVariable> extends SubVa
 
     private void loadPage(Panel panel, int page, DropTable dropTable, SubVariable subVariable, Map<String, Double> rewardMap, List<String> keyList) {
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= keyList.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= keyList.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = keyList.get(slot);
                 Double chance = rewardMap.get(name);
                 Map<String, String> replaceMap = new HashMap<>();
 
-                if(chance == null) chance = 100.0;
+                if (chance == null) chance = 100.0;
 
                 replaceMap.put("{itemName}", name);
                 replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
@@ -103,7 +104,7 @@ public abstract class DropTableRewardsListEditorPanel<SubVariable> extends SubVa
 
                 ItemStack itemStack = this.itemsFileManager.getItemStackConverter().from(itemStackHolder);
 
-                if(itemStack == null || itemStack.getType() == Material.AIR) return;
+                if (itemStack == null || itemStack.getType() == Material.AIR) return;
 
                 ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.DropTable.RewardList.name"), replaceMap);
                 ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.DropTable.RewardList.lore"), replaceMap);

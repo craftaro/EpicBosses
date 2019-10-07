@@ -13,7 +13,7 @@ public class FoxHandler implements ICustomEntityHandler {
 
     @Override
     public LivingEntity getBaseEntity(String entityType, Location spawnLocation) {
-        if(ServerVersion.isServerVersionBelow(ServerVersion.V1_14))
+        if (ServerVersion.isServerVersionBelow(ServerVersion.V1_14))
             throw new NullPointerException("This feature is only implemented in version 1.14 and above of Minecraft.");
 
         return (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.FOX);

@@ -23,12 +23,12 @@ public class PreBossSkillEvent extends Event {
         this.damagingEntity = damagingEntity;
     }
 
-    @Override
-    public HandlerList getHandlers() {
+    public static HandlerList getHandlerList() {
         return handlers;
     }
 
-    public static HandlerList getHandlerList() {
+    @Override
+    public HandlerList getHandlers() {
         return handlers;
     }
 

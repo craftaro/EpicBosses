@@ -35,11 +35,11 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
 
     @Override
     public boolean canSpawn() {
-        if(getAutoSpawn().isEditing()) {
+        if (getAutoSpawn().isEditing()) {
             ServerUtils.get().logDebug("AutoSpawn failed to spawn due to editing enabled.");
             return false;
         }
-        if(!getAutoSpawn().getType().equalsIgnoreCase("INTERVAL")) {
+        if (!getAutoSpawn().getType().equalsIgnoreCase("INTERVAL")) {
             ServerUtils.get().logDebug("AutoSpawn failed to spawn due to interval type not set.");
             return false;
         }
@@ -50,22 +50,22 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
         Location location = this.intervalSpawnElement.getSpawnLocation();
         boolean spawnIfChunkNotLoaded = ObjectUtils.getValue(getAutoSpawn().getAutoSpawnSettings().getSpawnWhenChunkIsntLoaded(), false);
 
-        if(location == null) {
+        if (location == null) {
             ServerUtils.get().logDebug("AutoSpawn failed to spawn due to location is null.");
             return false;
         }
-        if(!spawnIfChunkNotLoaded && !location.getChunk().isLoaded()) {
+        if (!spawnIfChunkNotLoaded && !location.getChunk().isLoaded()) {
             ServerUtils.get().logDebug("AutoSpawn failed to spawn due to spawnIfChunkNotLoaded was false and chunk wasn't loaded.");
             return false;
         }
-        if(isSpawnAfterLastBossIsKilled() && !getActiveBossHolders().isEmpty()) {
+        if (isSpawnAfterLastBossIsKilled() && !getActiveBossHolders().isEmpty()) {
             ServerUtils.get().logDebug("AutoSpawn failed due to spawnAfterLastBossKilled is true and activeBossHolders is not empty.");
             return false;
         }
 
         boolean returnStatement = currentActiveAmount < maxAmount;
 
-        if(!returnStatement) {
+        if (!returnStatement) {
             ServerUtils.get().logDebug("AutoSpawn failed to spawn due to currentActiveAmount is greater then maxAmount of bosses.");
         }
 
@@ -79,11 +79,11 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
     public void restartInterval() {
         stopInterval();
 
-        if(getAutoSpawn().isEditing()) return;
+        if (getAutoSpawn().isEditing()) return;
 
         Integer delay = this.intervalSpawnElement.getSpawnRate();
 
-        if(delay == null) {
+        if (delay == null) {
             Debug.AUTOSPAWN_INTERVALNOTREAL.debug("null", BossAPI.getAutoSpawnName(getAutoSpawn()));
             return;
         }
@@ -96,7 +96,7 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
             this.intervalTask = ServerUtils.get().runTimer(delayTick, delayTick, () -> {
                 boolean canSpawn = canSpawn();
 
-                if(!canSpawn) {
+                if (!canSpawn) {
                     ServerUtils.get().logDebug("--- Failed to AutoSpawn. ---");
                     updateNextCompleteTime();
                     return;
@@ -104,7 +104,7 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
 
                 ServerUtils.get().logDebug("AutoSpawn Spawn Attempt: " + this.intervalSpawnElement.attemptSpawn(this));
 
-                if(isSpawnAfterLastBossIsKilled()) {
+                if (isSpawnAfterLastBossIsKilled()) {
                     cancelCurrentInterval();
                     return;
                 }
@@ -129,7 +129,7 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
     public long getRemainingMs() {
         long currentMs = System.currentTimeMillis();
 
-        if(currentMs > this.nextCompletedTime) return 0;
+        if (currentMs > this.nextCompletedTime) return 0;
 
         return this.nextCompletedTime - currentMs;
     }
@@ -139,10 +139,10 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
             boolean spawnAfterLastBossIsKilled = ObjectUtils.getValue(this.intervalSpawnElement.getSpawnAfterLastBossIsKilled(), false);
             ActiveBossHolder activeBossHolder = event.getActiveBossHolder();
 
-            if(getActiveBossHolders().contains(activeBossHolder)) {
+            if (getActiveBossHolders().contains(activeBossHolder)) {
                 getActiveBossHolders().remove(activeBossHolder);
 
-                if(spawnAfterLastBossIsKilled) {
+                if (spawnAfterLastBossIsKilled) {
                     restartInterval();
                     updateNextCompleteTime();
                 }
@@ -151,7 +151,7 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
     }
 
     private void cancelCurrentInterval() {
-        if(this.intervalTask != null) ServerUtils.get().cancelTask(this.intervalTask);
+        if (this.intervalTask != null) ServerUtils.get().cancelTask(this.intervalTask);
 
         this.nextCompletedTime = 0;
     }
@@ -159,7 +159,7 @@ public class ActiveIntervalAutoSpawnHolder extends ActiveAutoSpawnHolder {
     private void updateNextCompleteTime() {
         Integer delay = this.intervalSpawnElement.getSpawnRate();
 
-        if(delay == null) {
+        if (delay == null) {
             Debug.AUTOSPAWN_INTERVALNOTREAL.debug("null", BossAPI.getAutoSpawnName(getAutoSpawn()));
             return;
         }

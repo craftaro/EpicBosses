@@ -58,7 +58,7 @@ public class CreatePotionEffectEditorPanel extends SubVariablePanelHandler<Skill
         String effect = potionEffectHolder.getType();
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        if(effect == null || effect.isEmpty()) effect = "N/A";
+        if (effect == null || effect.isEmpty()) effect = "N/A";
 
         replaceMap.put("{duration}", NumberUtils.get().formatDouble(potionEffectHolder.getDuration()));
         replaceMap.put("{level}", NumberUtils.get().formatDouble(potionEffectHolder.getLevel()));
@@ -89,20 +89,20 @@ public class CreatePotionEffectEditorPanel extends SubVariablePanelHandler<Skill
             ClickType clickType = event.getClick();
             int amountToModifyBy;
 
-            if(clickType == ClickType.RIGHT) {
+            if (clickType == ClickType.RIGHT) {
                 amountToModifyBy = -1;
-            } else if(clickType == ClickType.SHIFT_RIGHT) {
+            } else if (clickType == ClickType.SHIFT_RIGHT) {
                 amountToModifyBy = -10;
-            } else if(clickType == ClickType.SHIFT_LEFT) {
+            } else if (clickType == ClickType.SHIFT_LEFT) {
                 amountToModifyBy = 10;
-            }else {
+            } else {
                 amountToModifyBy = 1;
             }
 
             int currentAmount = potionEffectHolder.getDuration();
             int totalAmount = amountToModifyBy + currentAmount;
 
-            if(totalAmount < 0) {
+            if (totalAmount < 0) {
                 totalAmount = -1;
             }
 
@@ -116,7 +116,7 @@ public class CreatePotionEffectEditorPanel extends SubVariablePanelHandler<Skill
             ClickType clickType = event.getClick();
             int amountToModifyBy;
 
-            if(clickType.name().contains("RIGHT")) {
+            if (clickType.name().contains("RIGHT")) {
                 amountToModifyBy = -1;
             } else {
                 amountToModifyBy = 1;
@@ -125,11 +125,11 @@ public class CreatePotionEffectEditorPanel extends SubVariablePanelHandler<Skill
             int currentAmount = potionEffectHolder.getLevel();
             int totalAmount = amountToModifyBy + currentAmount;
 
-            if(totalAmount <= 0) {
+            if (totalAmount <= 0) {
                 totalAmount = 1;
             }
 
-            if(totalAmount > 255) {
+            if (totalAmount > 255) {
                 totalAmount = 255;
             }
 
@@ -144,11 +144,11 @@ public class CreatePotionEffectEditorPanel extends SubVariablePanelHandler<Skill
             Integer level = potionEffectHolder.getLevel();
             String type = potionEffectHolder.getType();
 
-            if(duration != null && level != null && type != null && !type.isEmpty()) {
+            if (duration != null && level != null && type != null && !type.isEmpty()) {
                 PotionSkillElement potionSkillElement = this.bossSkillManager.getPotionSkillElement(skill);
                 PotionEffectFinder potionEffectFinder = PotionEffectFinder.getByName(type);
 
-                if(potionEffectFinder != null) {
+                if (potionEffectFinder != null) {
                     List<PotionEffectHolder> currentList = potionSkillElement.getPotions();
 
                     currentList.add(potionEffectHolder);

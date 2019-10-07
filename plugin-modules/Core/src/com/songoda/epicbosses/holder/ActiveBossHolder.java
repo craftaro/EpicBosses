@@ -134,20 +134,20 @@ public class ActiveBossHolder implements IActiveHolder {
         return this.targetHandler;
     }
 
-    public boolean isDead() {
-        return this.isDead;
-    }
-
-    public boolean isCustomSpawnMessage() {
-        return this.customSpawnMessage;
-    }
-
     public void setTargetHandler(TargetHandler<ActiveBossHolder> targetHandler) {
         this.targetHandler = targetHandler;
     }
 
+    public boolean isDead() {
+        return this.isDead;
+    }
+
     public void setDead(boolean isDead) {
         this.isDead = isDead;
+    }
+
+    public boolean isCustomSpawnMessage() {
+        return this.customSpawnMessage;
     }
 
     public void setCustomSpawnMessage(boolean customSpawnMessage) {

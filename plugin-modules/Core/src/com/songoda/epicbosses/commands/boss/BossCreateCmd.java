@@ -31,7 +31,7 @@ public class BossCreateCmd extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(!Permission.create.hasPermission(sender)) {
+        if (!Permission.create.hasPermission(sender)) {
             Message.Boss_Create_NoPermission.msg(sender);
             return;
         }
@@ -47,21 +47,21 @@ public class BossCreateCmd extends SubCommand {
                 String name = args[1];
                 String entityTypeInput = args[2];
 
-                if(this.bossEntityContainer.exists(name)) {
+                if (this.bossEntityContainer.exists(name)) {
                     Message.Boss_Create_NameAlreadyExists.msg(sender, name);
                     return;
                 }
 
                 EntityFinder entityFinder = EntityFinder.get(entityTypeInput);
 
-                if(entityFinder == null) {
+                if (entityFinder == null) {
                     Message.Boss_Create_EntityTypeNotFound.msg(sender, entityTypeInput);
                     return;
                 }
 
                 BossEntity bossEntity = BossAPI.createBaseBossEntity(name, entityTypeInput);
 
-                if(bossEntity == null) {
+                if (bossEntity == null) {
                     Message.Boss_Create_SomethingWentWrong.msg(sender);
                     return;
                 }

@@ -26,28 +26,28 @@ public class CustomCageSkillElement implements IOtherSkillDataElement {
         return this.flatType;
     }
 
-    public String getWallType() {
-        return this.wallType;
-    }
-
-    public String getInsideType() {
-        return this.insideType;
-    }
-
-    public int getDuration() {
-        return this.duration;
-    }
-
     public void setFlatType(String flatType) {
         this.flatType = flatType;
+    }
+
+    public String getWallType() {
+        return this.wallType;
     }
 
     public void setWallType(String wallType) {
         this.wallType = wallType;
     }
 
+    public String getInsideType() {
+        return this.insideType;
+    }
+
     public void setInsideType(String insideType) {
         this.insideType = insideType;
+    }
+
+    public int getDuration() {
+        return this.duration;
     }
 
     public void setDuration(int duration) {

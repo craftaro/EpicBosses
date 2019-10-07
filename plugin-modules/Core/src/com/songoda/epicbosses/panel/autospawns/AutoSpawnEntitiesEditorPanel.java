@@ -53,7 +53,7 @@ public class AutoSpawnEntitiesEditorPanel extends VariablePanelHandler<AutoSpawn
         int maxPage = panel.getMaxPage(entryList);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, currentEntities, entryList, autoSpawn);
             return true;
@@ -86,8 +86,9 @@ public class AutoSpawnEntitiesEditorPanel extends VariablePanelHandler<AutoSpawn
         List<String> current = ObjectUtils.getValue(autoSpawn.getEntities(), new ArrayList<>());
 
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= entryList.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e->{});
+            if (slot >= entryList.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = entryList.get(slot);
                 BossEntity bossEntity = currentEntities.get(name);
@@ -96,11 +97,11 @@ public class AutoSpawnEntitiesEditorPanel extends VariablePanelHandler<AutoSpawn
                 Map<String, String> replaceMap = new HashMap<>();
 
                 replaceMap.put("{name}", name);
-                replaceMap.put("{editing}", ""+bossEntity.isEditing());
+                replaceMap.put("{editing}", "" + bossEntity.isEditing());
                 replaceMap.put("{targeting}", bossEntity.getTargeting());
                 replaceMap.put("{dropTable}", bossEntity.getDrops().getDropTable());
 
-                if(current.contains(name)) {
+                if (current.contains(name)) {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.AutoSpawns.Entities.selectedName"), replaceMap);
                 } else {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.AutoSpawns.Entities.name"), replaceMap);
@@ -109,12 +110,12 @@ public class AutoSpawnEntitiesEditorPanel extends VariablePanelHandler<AutoSpawn
                 ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.AutoSpawns.Entities.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, event -> {
-                    if(!autoSpawn.isEditing()) {
+                    if (!autoSpawn.isEditing()) {
                         Message.Boss_AutoSpawn_MustToggleEditing.msg(event.getWhoClicked());
                         return;
                     }
 
-                    if(current.contains(name)) {
+                    if (current.contains(name)) {
                         current.remove(name);
                     } else {
                         current.add(name);

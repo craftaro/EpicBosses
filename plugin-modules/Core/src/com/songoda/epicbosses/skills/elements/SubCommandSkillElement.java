@@ -33,12 +33,12 @@ public class SubCommandSkillElement {
         return this.chance;
     }
 
-    public List<String> getCommands() {
-        return this.commands;
-    }
-
     public void setChance(Double chance) {
         this.chance = chance;
+    }
+
+    public List<String> getCommands() {
+        return this.commands;
     }
 
     public void setCommands(List<String> commands) {

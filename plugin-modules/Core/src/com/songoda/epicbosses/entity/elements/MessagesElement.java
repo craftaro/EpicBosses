@@ -26,20 +26,20 @@ public class MessagesElement {
         return this.onSpawn;
     }
 
-    public OnDeathMessageElement getOnDeath() {
-        return this.onDeath;
-    }
-
-    public TauntElement getTaunts() {
-        return this.taunts;
-    }
-
     public void setOnSpawn(OnSpawnMessageElement onSpawn) {
         this.onSpawn = onSpawn;
     }
 
+    public OnDeathMessageElement getOnDeath() {
+        return this.onDeath;
+    }
+
     public void setOnDeath(OnDeathMessageElement onDeath) {
         this.onDeath = onDeath;
+    }
+
+    public TauntElement getTaunts() {
+        return this.taunts;
     }
 
     public void setTaunts(TauntElement taunts) {

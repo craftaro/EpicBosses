@@ -17,7 +17,7 @@ public class GetDropTableCommand implements IGetDropTableListItem<List<String>> 
     public List<String> getListItem(String id) {
         List<String> commands = BossAPI.getStoredCommands(id);
 
-        if(commands == null) {
+        if (commands == null) {
             Debug.FAILED_TO_LOAD_COMMANDS.debug(id);
         }
 

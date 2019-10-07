@@ -47,7 +47,7 @@ public class CustomSkillsPanel extends MainListPanelHandler {
         int maxPage = panel.getMaxPage(entryList);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, currentSkills, entryList);
             return true;
@@ -58,8 +58,9 @@ public class CustomSkillsPanel extends MainListPanelHandler {
 
     private void loadPage(Panel panel, int requestedPage, Map<String, Skill> currentSkills, List<String> entryList) {
         panel.loadPage(requestedPage, (slot, realisticSlot) -> {
-            if(slot >= currentSkills.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= currentSkills.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = entryList.get(slot);
                 Skill skill = currentSkills.get(name);
@@ -72,10 +73,10 @@ public class CustomSkillsPanel extends MainListPanelHandler {
                 Double radius = skill.getRadius();
                 String type = skill.getType();
 
-                if(customMessage == null || customMessage.equals("")) customMessage = "N/A";
-                if(radius == null) radius = 100.0;
-                if(displayName == null || displayName.equals("")) displayName = "N/A";
-                if(type == null || type.equals("")) type = "N/A";
+                if (customMessage == null || customMessage.equals("")) customMessage = "N/A";
+                if (radius == null) radius = 100.0;
+                if (displayName == null || displayName.equals("")) displayName = "N/A";
+                if (type == null || type.equals("")) type = "N/A";
 
                 replaceMap.put("{name}", name);
                 replaceMap.put("{type}", type);

@@ -22,7 +22,7 @@ import java.util.List;
  * @author Charles Cullen
  * @version 1.0.0
  * @since 19-Nov-18
- *
+ * <p>
  * boss new droptable [name] [type]
  * boss new skill [name] [type] [mode]
  * boss new command [name] [commands]
@@ -53,7 +53,7 @@ public class BossNewCmd extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(!Permission.admin.hasPermission(sender)) {
+        if (!Permission.admin.hasPermission(sender)) {
             Message.Boss_New_NoPermission.msg(sender);
             return;
         }
@@ -61,17 +61,17 @@ public class BossNewCmd extends SubCommand {
         //--------------------
         // A U T O   S P A W N
         //--------------------
-        if(args.length == 3 && args[1].equalsIgnoreCase("autospawn")) {
+        if (args.length == 3 && args[1].equalsIgnoreCase("autospawn")) {
             String nameInput = args[2];
 
-            if(this.autoSpawnFileManager.getAutoSpawn(nameInput) != null) {
+            if (this.autoSpawnFileManager.getAutoSpawn(nameInput) != null) {
                 Message.Boss_New_AlreadyExists.msg(sender, "AutoSpawn");
                 return;
             }
 
             AutoSpawn autoSpawn = BossAPI.createBaseAutoSpawn(nameInput);
 
-            if(autoSpawn == null) {
+            if (autoSpawn == null) {
                 Message.Boss_New_SomethingWentWrong.msg(sender, "AutoSpawn");
             } else {
                 Message.Boss_New_AutoSpawn.msg(sender, nameInput);
@@ -84,10 +84,10 @@ public class BossNewCmd extends SubCommand {
         //-------------------
         // C O M M A N D
         //-------------------
-        if(args.length >= 4 && args[1].equalsIgnoreCase("command")) {
+        if (args.length >= 4 && args[1].equalsIgnoreCase("command")) {
             String nameInput = args[2];
 
-            if(this.commandsFileManager.getCommands(nameInput) != null) {
+            if (this.commandsFileManager.getCommands(nameInput) != null) {
                 Message.Boss_New_AlreadyExists.msg(sender, "Command");
                 return;
             }
@@ -104,10 +104,10 @@ public class BossNewCmd extends SubCommand {
         //-------------------
         // M E S S A G E
         //-------------------
-        if(args.length >= 4 && args[1].equalsIgnoreCase("message")) {
+        if (args.length >= 4 && args[1].equalsIgnoreCase("message")) {
             String nameInput = args[2];
 
-            if(this.commandsFileManager.getCommands(nameInput) != null) {
+            if (this.commandsFileManager.getCommands(nameInput) != null) {
                 Message.Boss_New_AlreadyExists.msg(sender, "Message");
                 return;
             }
@@ -124,31 +124,31 @@ public class BossNewCmd extends SubCommand {
         //----------------------
         // D R O P   T A B L E
         //----------------------
-        if(args.length == 4 && args[1].equalsIgnoreCase("droptable")) {
+        if (args.length == 4 && args[1].equalsIgnoreCase("droptable")) {
             String nameInput = args[2];
             String typeInput = args[3];
             boolean validType = false;
 
-            if(this.dropTableFileManager.getDropTable(nameInput) != null) {
+            if (this.dropTableFileManager.getDropTable(nameInput) != null) {
                 Message.Boss_New_AlreadyExists.msg(sender, "DropTable");
                 return;
             }
 
-            for(String s : this.bossDropTableManager.getValidDropTableTypes()) {
-                if(s.equalsIgnoreCase(typeInput)) {
+            for (String s : this.bossDropTableManager.getValidDropTableTypes()) {
+                if (s.equalsIgnoreCase(typeInput)) {
                     validType = true;
                     break;
                 }
             }
 
-            if(!validType) {
+            if (!validType) {
                 Message.Boss_New_InvalidDropTableType.msg(sender);
                 return;
             }
 
             DropTable dropTable = BossAPI.createBaseDropTable(nameInput, typeInput);
 
-            if(dropTable == null) {
+            if (dropTable == null) {
                 Message.Boss_New_SomethingWentWrong.msg(sender, "DropTable");
             } else {
                 Message.Boss_New_DropTable.msg(sender, nameInput, typeInput);
@@ -160,45 +160,45 @@ public class BossNewCmd extends SubCommand {
         //-------------------
         // S K I L L
         //-------------------
-        if(args.length == 5 && args[1].equalsIgnoreCase("skill")) {
+        if (args.length == 5 && args[1].equalsIgnoreCase("skill")) {
             String nameInput = args[2];
             String typeInput = args[3];
             String modeInput = args[4];
             boolean validType = false, validMode = false;
             List<SkillMode> skillModes = SkillMode.getSkillModes();
 
-            if(this.skillsFileManager.getSkill(nameInput) != null) {
+            if (this.skillsFileManager.getSkill(nameInput) != null) {
                 Message.Boss_New_AlreadyExists.msg(sender, "Skill");
                 return;
             }
 
-            for(String s : this.bossSkillManager.getValidSkillTypes()) {
-                if(s.equalsIgnoreCase(typeInput)) {
+            for (String s : this.bossSkillManager.getValidSkillTypes()) {
+                if (s.equalsIgnoreCase(typeInput)) {
                     validType = true;
                     break;
                 }
             }
 
-            for(SkillMode skillMode : skillModes) {
-                if(skillMode.name().equalsIgnoreCase(modeInput)) {
+            for (SkillMode skillMode : skillModes) {
+                if (skillMode.name().equalsIgnoreCase(modeInput)) {
                     validMode = true;
                     break;
                 }
             }
 
-            if(!validType) {
+            if (!validType) {
                 Message.Boss_New_InvalidSkillType.msg(sender);
                 return;
             }
 
-            if(!validMode) {
+            if (!validMode) {
                 Message.Boss_New_InvalidSkillMode.msg(sender);
                 return;
             }
 
             Skill skill = BossAPI.createBaseSkill(nameInput, typeInput, modeInput);
 
-            if(skill == null) {
+            if (skill == null) {
                 Message.Boss_New_SomethingWentWrong.msg(sender, "Skill");
             } else {
                 Message.Boss_New_Skill.msg(sender, nameInput, typeInput);

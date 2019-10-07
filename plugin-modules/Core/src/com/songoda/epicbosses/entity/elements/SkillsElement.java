@@ -28,20 +28,20 @@ public class SkillsElement {
         return this.overallChance;
     }
 
-    public String getMasterMessage() {
-        return this.masterMessage;
-    }
-
-    public List<String> getSkills() {
-        return this.skills;
-    }
-
     public void setOverallChance(Double overallChance) {
         this.overallChance = overallChance;
     }
 
+    public String getMasterMessage() {
+        return this.masterMessage;
+    }
+
     public void setMasterMessage(String masterMessage) {
         this.masterMessage = masterMessage;
+    }
+
+    public List<String> getSkills() {
+        return this.skills;
     }
 
     public void setSkills(List<String> skills) {

@@ -25,14 +25,14 @@ public class GetDropTableItemStack implements IGetDropTableListItem<ItemStack> {
     public ItemStack getListItem(String id) {
         ItemStackHolder itemStackHolder = BossAPI.getStoredItemStack(id);
 
-        if(itemStackHolder == null) {
+        if (itemStackHolder == null) {
             Debug.FAILED_TO_LOAD_CUSTOM_ITEM.debug(id);
             return null;
         }
 
         ItemStack itemStack = this.itemsFileManager.getItemStackConverter().from(itemStackHolder);
 
-        if(itemStack == null) {
+        if (itemStack == null) {
             Debug.FAILED_TO_LOAD_CUSTOM_ITEM.debug(id);
             return null;
         }

@@ -33,13 +33,13 @@ public abstract class CommandService<T extends CommandSender> extends BukkitComm
         this.description = cmd.getAnnotation(Description.class).value();
         this.aliases = new String[]{};
 
-        if(cmd.isAnnotationPresent(Alias.class))
+        if (cmd.isAnnotationPresent(Alias.class))
             this.aliases = cmd.getAnnotation(Alias.class).value();
 
-        if(cmd.isAnnotationPresent(Permission.class))
+        if (cmd.isAnnotationPresent(Permission.class))
             this.permission = cmd.getAnnotation(Permission.class).value();
 
-        if(cmd.isAnnotationPresent(NoPermission.class))
+        if (cmd.isAnnotationPresent(NoPermission.class))
             this.noPermissionMsg = cmd.getAnnotation(NoPermission.class).value();
 
         getGenericClass();
@@ -48,10 +48,10 @@ public abstract class CommandService<T extends CommandSender> extends BukkitComm
 
     @Override
     public final boolean execute(CommandSender commandSender, String s, String[] args) {
-        if(this.permission != null && !testPermission(commandSender)) return false;
+        if (this.permission != null && !testPermission(commandSender)) return false;
 
 
-        if(!parameterClass.isInstance(commandSender)) {
+        if (!parameterClass.isInstance(commandSender)) {
             commandSender.sendMessage(StringUtils.get().translateColor("&4You cannot use that command."));
             return false;
         }
@@ -90,21 +90,20 @@ public abstract class CommandService<T extends CommandSender> extends BukkitComm
             setFields();
 
             _commandMap.register(command, this);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void setFields() {
-        if(this.aliases != null) setAliases(Arrays.asList(this.aliases));
-        if(this.description != null) setDescription(this.description);
-        if(this.permission != null) setPermission(this.permission);
-        if(this.noPermissionMsg != null) setPermissionMessage(this.noPermissionMsg);
+        if (this.aliases != null) setAliases(Arrays.asList(this.aliases));
+        if (this.description != null) setDescription(this.description);
+        if (this.permission != null) setPermission(this.permission);
+        if (this.noPermissionMsg != null) setPermissionMessage(this.noPermissionMsg);
     }
 
     private void getGenericClass() {
-        if(this.parameterClass == null) {
+        if (this.parameterClass == null) {
             Type superClass = getClass().getGenericSuperclass();
             Type tType = ((ParameterizedType) superClass).getActualTypeArguments()[0];
             String className = tType.toString().split(" ")[1];

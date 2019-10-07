@@ -49,7 +49,7 @@ public class Disarm extends CustomSkillHandler {
 
             switch (itemSlot) {
                 case 0:
-                    if(livingEntity instanceof HumanEntity) {
+                    if (livingEntity instanceof HumanEntity) {
                         HumanEntity humanEntity = (HumanEntity) livingEntity;
 
                         itemStack = EpicBosses.getInstance().getVersionHandler().getItemInHand(humanEntity);
@@ -75,7 +75,7 @@ public class Disarm extends CustomSkillHandler {
                     break;
             }
 
-            if(itemStack == null || itemStack.getType() == Material.AIR) return;
+            if (itemStack == null || itemStack.getType() == Material.AIR) return;
 
             livingEntity.getWorld().dropItemNaturally(livingEntity.getLocation(), itemStack);
             Message.General_Disarmed.msg(livingEntity);

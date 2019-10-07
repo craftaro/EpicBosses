@@ -57,11 +57,11 @@ public enum EnchantFinder {
     }
 
     public static EnchantFinder getByName(String name) {
-        for(EnchantFinder enchantFinder : values()) {
+        for (EnchantFinder enchantFinder : values()) {
             List<String> names = enchantFinder.getNames();
 
-            for(String s : names) {
-                if(s.equalsIgnoreCase(name)) return enchantFinder;
+            for (String s : names) {
+                if (s.equalsIgnoreCase(name)) return enchantFinder;
             }
         }
 
@@ -69,14 +69,14 @@ public enum EnchantFinder {
     }
 
     public static EnchantFinder getByEnchant(Enchantment enchantment) {
-        if(enchantment == null) return null;
+        if (enchantment == null) return null;
 
-        for(EnchantFinder enchantFinder : values()) {
+        for (EnchantFinder enchantFinder : values()) {
             Enchantment enchantFinderEnchant = enchantFinder.getEnchantment();
 
-            if(enchantFinderEnchant == null) continue;
+            if (enchantFinderEnchant == null) continue;
 
-            if(enchantFinderEnchant.equals(enchantment)) return enchantFinder;
+            if (enchantFinderEnchant.equals(enchantment)) return enchantFinder;
         }
 
         return null;

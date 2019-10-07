@@ -79,59 +79,59 @@ public enum Message {
     Boss_Help_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Help_Page1(
             "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 1/4) &3&l]&8&m--------*----\n" +
-            "&b/boss help (page) &8» &7Displays boss commands.\n" +
-            "&b/boss create [name] [entity] &8» &7Start the creation of a boss.\n" +
-            "&b/boss edit (name) &8» &7Edit the specified boss.\n" +
-            "&b/boss info [name] &8» &7Shows information on the specified boss.\n" +
-            "&b/boss nearby (radius) &8» &7Shows the nearby bosses.\n" +
-            "&b/boss reload &8» &7Reloads the boss plugin.\n" +
-            "&7\n" +
-            "&7Use /boss help 2 to view the next page.\n" +
-            "&8&m----*-----------------------------------*----"),
+                    "&b/boss help (page) &8» &7Displays boss commands.\n" +
+                    "&b/boss create [name] [entity] &8» &7Start the creation of a boss.\n" +
+                    "&b/boss edit (name) &8» &7Edit the specified boss.\n" +
+                    "&b/boss info [name] &8» &7Shows information on the specified boss.\n" +
+                    "&b/boss nearby (radius) &8» &7Shows the nearby bosses.\n" +
+                    "&b/boss reload &8» &7Reloads the boss plugin.\n" +
+                    "&7\n" +
+                    "&7Use /boss help 2 to view the next page.\n" +
+                    "&8&m----*-----------------------------------*----"),
     Boss_Help_Page2(
             "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 2/4) &3&l]&8&m--------*----\n" +
-            "&b/boss spawn [name] (location) &8» &7Spawns a boss at your" +
-            " location or the specified location.\n" +
-            "&7&o(Separate location with commas, an example is: world,0,100,0)\n" +
-            "&b/boss droptable &8» &7Shows all current drop tables.\n" +
-            "&b/boss items &8» &7Shows all current custom items.\n" +
+                    "&b/boss spawn [name] (location) &8» &7Spawns a boss at your" +
+                    " location or the specified location.\n" +
+                    "&7&o(Separate location with commas, an example is: world,0,100,0)\n" +
+                    "&b/boss droptable &8» &7Shows all current drop tables.\n" +
+                    "&b/boss items &8» &7Shows all current custom items.\n" +
                     "&b/boss skills &8» &7Shows all current set skills.\n" +
-            "&b/boss killall (world) &8» &7Kills all bosses/minions.\n" +
-            "&7\n" +
-            "&7Use /boss help 3 to view the next page.\n" +
-            "&8&m----*-----------------------------------*----"),
+                    "&b/boss killall (world) &8» &7Kills all bosses/minions.\n" +
+                    "&7\n" +
+                    "&7Use /boss help 3 to view the next page.\n" +
+                    "&8&m----*-----------------------------------*----"),
     Boss_Help_Page3(
             "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 3/4) &3&l]&8&m--------*----\n" +
-            "&b/boss time [section] &8» &7Shows the time left till next auto spawn.\n" +
-            "&b/boss giveegg [name] [player] (amount) &8» &7Used to be given a " +
-            "spawn item of the boss.\n" +
-            "&b/boss list &8» &7Shows all the list of current boss entities.\n" +
-            "&b/boss new skill [name] [type] [mode] &8» &7Create a new skill section.\n" +
-            "&b/boss new droptable [name] [type] &8» &7Create a new drop table section.\n" +
-            "&7\n" +
-            "&7Use /boss help 4 to view the next page.\n" +
-            "&8&m----*-----------------------------------*----"),
+                    "&b/boss time [section] &8» &7Shows the time left till next auto spawn.\n" +
+                    "&b/boss giveegg [name] [player] (amount) &8» &7Used to be given a " +
+                    "spawn item of the boss.\n" +
+                    "&b/boss list &8» &7Shows all the list of current boss entities.\n" +
+                    "&b/boss new skill [name] [type] [mode] &8» &7Create a new skill section.\n" +
+                    "&b/boss new droptable [name] [type] &8» &7Create a new drop table section.\n" +
+                    "&7\n" +
+                    "&7Use /boss help 4 to view the next page.\n" +
+                    "&8&m----*-----------------------------------*----"),
     Boss_Help_Page4(
             "&8&m----*--------&3&l[ &b&lBoss Help &7(Page 4/4) &3&l]&8&m--------*----\n" +
-            "&b/boss new command [name] [commands] &8» &7Used to create a new command section.\n" +
-            "&7&o(To add a new line use &7||&7&o in-between the messages.)\n" +
-            "&b/boss new message [name] [messages] &8» &7Used to create a new message section.\n" +
-            "&7&o(To add a new line use &7||&7&o in-between the messages.)\n" +
-            "&7/boss new autospawn [name] &8» &7Used to create a new auto spawn section.\n" +
-            "&b/boss debug &8» &7Used to toggle the debug aspect of the plugin.\n" +
-            "&7\n" +
-            "&7\n" +
-            "&7Use /boss help [page] to view the next page.\n" +
-            "&8&m----*-----------------------------------*----"),
+                    "&b/boss new command [name] [commands] &8» &7Used to create a new command section.\n" +
+                    "&7&o(To add a new line use &7||&7&o in-between the messages.)\n" +
+                    "&b/boss new message [name] [messages] &8» &7Used to create a new message section.\n" +
+                    "&7&o(To add a new line use &7||&7&o in-between the messages.)\n" +
+                    "&7/boss new autospawn [name] &8» &7Used to create a new auto spawn section.\n" +
+                    "&b/boss debug &8» &7Used to toggle the debug aspect of the plugin.\n" +
+                    "&7\n" +
+                    "&7\n" +
+                    "&7Use /boss help [page] to view the next page.\n" +
+                    "&8&m----*-----------------------------------*----"),
 
     Boss_Info_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Info_InvalidArgs("&c&l(!) &cYou must use &n/boss info [name]&c to view info on a boss."),
     Boss_Info_CouldntFindBoss("&c&l(!) &cThe specified boss was not able to be retrieved, please try again."),
     Boss_Info_Display(
             "&8&m----*--------&3&l[ &b&l{0} Info &3&l]&8&m--------*----\n" +
-            "&bEditing: &f{1}\n" +
-            "&bCurrently Active: &f{2}\n" +
-            "&bComplete enough to spawn: &f{3}"),
+                    "&bEditing: &f{1}\n" +
+                    "&bCurrently Active: &f{2}\n" +
+                    "&bComplete enough to spawn: &f{3}"),
 
     Boss_Items_NoPermission("&c&l(!) &cYou do not have access to this command."),
     Boss_Items_CannotBeRemoved("&c&l(!) &cThe selected item cannot be removed because it is still used in {0} different positions on the bosses."),
@@ -247,10 +247,10 @@ public enum Message {
     public void msg(CommandSender p, Object... order) {
         String s = toString(order);
 
-        if(s.contains("\n")) {
+        if (s.contains("\n")) {
             String[] split = s.split("\n");
 
-            for(String inner : split) {
+            for (String inner : split) {
                 sendMessage(p, inner, order);
             }
         } else {
@@ -261,16 +261,16 @@ public enum Message {
     public void broadcast(Object... order) {
         String s = toString();
 
-        if(s.contains("\n")) {
+        if (s.contains("\n")) {
             String[] split = s.split("\n");
 
-            for(String inner : split) {
-                for(Player player : Bukkit.getOnlinePlayers()) {
+            for (String inner : split) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
                     sendMessage(player, inner, order);
                 }
             }
         } else {
-            for(Player player : Bukkit.getOnlinePlayers()) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
                 sendMessage(player, s, order);
             }
         }
@@ -279,38 +279,31 @@ public enum Message {
     private String getFinalized(String string, Object... order) {
         int current = 0;
 
-        for(Object object : order) {
+        for (Object object : order) {
             String placeholder = "{" + current + "}";
 
-            if(string.contains(placeholder)) {
-                if(object instanceof CommandSender) {
+            if (string.contains(placeholder)) {
+                if (object instanceof CommandSender) {
                     string = string.replace(placeholder, ((CommandSender) object).getName());
-                }
-                else if(object instanceof OfflinePlayer) {
+                } else if (object instanceof OfflinePlayer) {
                     string = string.replace(placeholder, ((OfflinePlayer) object).getName());
-                }
-                else if(object instanceof Location) {
+                } else if (object instanceof Location) {
                     Location location = (Location) object;
                     String repl = location.getWorld().getName() + ", " + location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ();
 
                     string = string.replace(placeholder, repl);
-                }
-                else if(object instanceof String) {
+                } else if (object instanceof String) {
                     string = string.replace(placeholder, StringUtils.get().translateColor((String) object));
-                }
-                else if(object instanceof Long) {
-                    string = string.replace(placeholder, ""+object);
-                }
-                else if(object instanceof Double) {
-                    string = string.replace(placeholder, ""+object);
-                }
-                else if(object instanceof Integer) {
-                    string = string.replace(placeholder, ""+object);
-                }
-                else if(object instanceof ItemStack) {
+                } else if (object instanceof Long) {
+                    string = string.replace(placeholder, "" + object);
+                } else if (object instanceof Double) {
+                    string = string.replace(placeholder, "" + object);
+                } else if (object instanceof Integer) {
+                    string = string.replace(placeholder, "" + object);
+                } else if (object instanceof ItemStack) {
                     string = string.replace(placeholder, getItemStackName((ItemStack) object));
-                } else if(object instanceof Boolean) {
-                    string = string.replace(placeholder, ""+object);
+                } else if (object instanceof Boolean) {
+                    string = string.replace(placeholder, "" + object);
                 }
             }
 
@@ -327,7 +320,7 @@ public enum Message {
     private String getItemStackName(ItemStack itemStack) {
         String name = itemStack.getType().toString().replace("_", " ");
 
-        if(itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName()) {
+        if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName()) {
             return itemStack.getItemMeta().getDisplayName();
         }
 

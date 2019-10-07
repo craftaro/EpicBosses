@@ -17,13 +17,12 @@ import java.util.UUID;
  */
 public class ActiveMinionHolder implements IActiveHolder {
 
-    private TargetHandler<ActiveMinionHolder> targetHandler = null;
-
-    private Map<Integer, UUID> livingEntityMap = new HashMap<>();
-    private ActiveBossHolder activeBossHolder;
     private final MinionEntity minionEntity;
     private final Location location;
     private final String name;
+    private TargetHandler<ActiveMinionHolder> targetHandler = null;
+    private Map<Integer, UUID> livingEntityMap = new HashMap<>();
+    private ActiveBossHolder activeBossHolder;
 
     public ActiveMinionHolder(ActiveBossHolder activeBossHolder, MinionEntity minionEntity, Location spawnLocation, String name) {
         this.activeBossHolder = activeBossHolder;
@@ -39,7 +38,7 @@ public class ActiveMinionHolder implements IActiveHolder {
 
     @Override
     public void setLivingEntity(int position, LivingEntity livingEntity) {
-        if(this.livingEntityMap.containsKey(position)) {
+        if (this.livingEntityMap.containsKey(position)) {
             LivingEntity target = (LivingEntity) ServerUtils.get().getEntity(this.livingEntityMap.get(position));
             if (target != null)
                 target.remove();
@@ -69,11 +68,11 @@ public class ActiveMinionHolder implements IActiveHolder {
 
     @Override
     public boolean isDead() {
-        if(this.livingEntityMap.isEmpty()) return true;
+        if (this.livingEntityMap.isEmpty()) return true;
 
-        for(UUID uuid : this.livingEntityMap.values()) {
+        for (UUID uuid : this.livingEntityMap.values()) {
             LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(uuid);
-            if(livingEntity == null || livingEntity.isDead()) return true;
+            if (livingEntity == null || livingEntity.isDead()) return true;
         }
 
         return false;
@@ -86,6 +85,10 @@ public class ActiveMinionHolder implements IActiveHolder {
 
     public TargetHandler<ActiveMinionHolder> getTargetHandler() {
         return this.targetHandler;
+    }
+
+    public void setTargetHandler(TargetHandler<ActiveMinionHolder> targetHandler) {
+        this.targetHandler = targetHandler;
     }
 
     public Map<Integer, UUID> getLivingEntityMap() {
@@ -106,9 +109,5 @@ public class ActiveMinionHolder implements IActiveHolder {
 
     public String getName() {
         return this.name;
-    }
-
-    public void setTargetHandler(TargetHandler<ActiveMinionHolder> targetHandler) {
-        this.targetHandler = targetHandler;
     }
 }

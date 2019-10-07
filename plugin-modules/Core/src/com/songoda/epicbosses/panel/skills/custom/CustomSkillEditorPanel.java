@@ -47,7 +47,7 @@ public class CustomSkillEditorPanel extends VariablePanelHandler<Skill> {
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
         CustomSkillElement customSkillElement = this.bossSkillManager.getCustomSkillElement(skill);
         Double multiplier = customSkillElement.getCustom().getMultiplier();
-        String multiplierValue = multiplier == null? "N/A" : NumberUtils.get().formatDouble(multiplier);
+        String multiplierValue = multiplier == null ? "N/A" : NumberUtils.get().formatDouble(multiplier);
 
         replaceMap.put("{name}", BossAPI.getSkillName(skill));
         replaceMap.put("{type}", customSkillElement.getCustom().getType());
@@ -82,13 +82,13 @@ public class CustomSkillEditorPanel extends VariablePanelHandler<Skill> {
             ClickType clickType = event.getClick();
             Double amountToModifyBy;
 
-            if(clickType == ClickType.SHIFT_LEFT) {
+            if (clickType == ClickType.SHIFT_LEFT) {
                 amountToModifyBy = 0.1;
-            } else if(clickType == ClickType.RIGHT) {
+            } else if (clickType == ClickType.RIGHT) {
                 amountToModifyBy = -1.0;
-            } else if(clickType == ClickType.SHIFT_RIGHT) {
+            } else if (clickType == ClickType.SHIFT_RIGHT) {
                 amountToModifyBy = -0.1;
-            } else if(clickType == ClickType.MIDDLE) {
+            } else if (clickType == ClickType.MIDDLE) {
                 amountToModifyBy = null;
             } else {
                 amountToModifyBy = 1.0;
@@ -98,12 +98,12 @@ public class CustomSkillEditorPanel extends VariablePanelHandler<Skill> {
             String modifyValue;
             Double newAmount;
 
-            if(currentAmount == null) currentAmount = 0.0;
+            if (currentAmount == null) currentAmount = 0.0;
 
-            if(amountToModifyBy == null) {
+            if (amountToModifyBy == null) {
                 modifyValue = "removed";
                 newAmount = null;
-            } else if(amountToModifyBy > 0.0) {
+            } else if (amountToModifyBy > 0.0) {
                 modifyValue = "increased";
                 newAmount = currentAmount + amountToModifyBy;
             } else {
@@ -111,8 +111,8 @@ public class CustomSkillEditorPanel extends VariablePanelHandler<Skill> {
                 newAmount = currentAmount + amountToModifyBy;
             }
 
-            if(newAmount != null) {
-                if(newAmount <= 0.0) {
+            if (newAmount != null) {
+                if (newAmount <= 0.0) {
                     newAmount = null;
                     modifyValue = "removed";
                 }
@@ -124,7 +124,7 @@ public class CustomSkillEditorPanel extends VariablePanelHandler<Skill> {
 
             skill.setCustomData(jsonObject);
             this.skillsFileManager.save();
-            Message.Boss_Skills_SetMultiplier.msg(event.getWhoClicked(), modifyValue, NumberUtils.get().formatDouble((newAmount == null? 0.0 : newAmount)));
+            Message.Boss_Skills_SetMultiplier.msg(event.getWhoClicked(), modifyValue, NumberUtils.get().formatDouble((newAmount == null ? 0.0 : newAmount)));
 
             openFor((Player) event.getWhoClicked(), skill);
         };

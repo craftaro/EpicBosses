@@ -57,11 +57,11 @@ public enum PotionEffectFinder {
     }
 
     public static PotionEffectFinder getByName(String name) {
-        for(PotionEffectFinder potionEffectFinder : values()) {
+        for (PotionEffectFinder potionEffectFinder : values()) {
             List<String> names = potionEffectFinder.getNames();
 
-            for(String s : names) {
-                if(s.equalsIgnoreCase(name)) return potionEffectFinder;
+            for (String s : names) {
+                if (s.equalsIgnoreCase(name)) return potionEffectFinder;
             }
         }
 
@@ -69,11 +69,11 @@ public enum PotionEffectFinder {
     }
 
     public static PotionEffectFinder getByEffect(PotionEffectType potionEffectType) {
-        for(PotionEffectFinder potionEffectFinder : values()) {
+        for (PotionEffectFinder potionEffectFinder : values()) {
             PotionEffectType effectType = potionEffectFinder.getPotionEffectType();
 
-            if(effectType == null) continue;
-            if(potionEffectType.equals(effectType)) return potionEffectFinder;
+            if (effectType == null) continue;
+            if (potionEffectType.equals(effectType)) return potionEffectFinder;
         }
 
         return null;

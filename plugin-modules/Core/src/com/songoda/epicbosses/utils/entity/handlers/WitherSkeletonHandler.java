@@ -19,7 +19,7 @@ public class WitherSkeletonHandler implements ICustomEntityHandler {
 
     @Override
     public LivingEntity getBaseEntity(String entityType, Location spawnLocation) {
-        if(ServerVersion.isServerVersionAtLeast(ServerVersion.V1_11)) {
+        if (ServerVersion.isServerVersionAtLeast(ServerVersion.V1_11)) {
             return (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.WITHER_SKELETON);
         }
 

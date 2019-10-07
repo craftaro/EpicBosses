@@ -45,13 +45,13 @@ public class DropsMainEditorPanel extends VariablePanelHandler<BossEntity> {
         String dropTable = bossEntity.getDrops().getDropTable();
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        if(naturalDrops == null) naturalDrops = true;
-        if(naturalExp == null) naturalExp = true;
-        if(dropTable == null) dropTable = "N/A";
+        if (naturalDrops == null) naturalDrops = true;
+        if (naturalExp == null) naturalExp = true;
+        if (dropTable == null) dropTable = "N/A";
 
         replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-        replaceMap.put("{naturalDrops}", ""+naturalDrops);
-        replaceMap.put("{naturalExp}", ""+naturalExp);
+        replaceMap.put("{naturalDrops}", "" + naturalDrops);
+        replaceMap.put("{naturalExp}", "" + naturalExp);
         replaceMap.put("{dropTable}", dropTable);
         panelBuilder.addReplaceData(replaceMap);
 
@@ -81,7 +81,7 @@ public class DropsMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ClickAction getNaturalDropsAction(BossEntity bossEntity, Boolean current) {
         return event -> {
-            if(!bossEntity.isEditing()) {
+            if (!bossEntity.isEditing()) {
                 Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                 return;
             }
@@ -95,7 +95,7 @@ public class DropsMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ClickAction getNaturalExpAction(BossEntity bossEntity, Boolean current) {
         return event -> {
-            if(!bossEntity.isEditing()) {
+            if (!bossEntity.isEditing()) {
                 Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                 return;
             }

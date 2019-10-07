@@ -56,7 +56,7 @@ public class CommandListSkillEditorPanel extends SubVariablePanelHandler<Skill, 
         int maxPage = panel.getMaxPage(entryList);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, commands, currentCommands, entryList, skill, subCommandSkillElement);
             return true;
@@ -88,8 +88,9 @@ public class CommandListSkillEditorPanel extends SubVariablePanelHandler<Skill, 
 
     private void loadPage(Panel panel, int page, List<String> commands, Map<String, List<String>> allCommands, List<String> entryList, Skill skill, SubCommandSkillElement subCommandSkillElement) {
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= allCommands.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= allCommands.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = entryList.get(slot);
                 List<String> boundCommands = allCommands.get(name);
@@ -100,7 +101,7 @@ public class CommandListSkillEditorPanel extends SubVariablePanelHandler<Skill, 
 
                 replaceMap.put("{name}", name);
 
-                if(commands.contains(name)) {
+                if (commands.contains(name)) {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.CommandList.selectedName"), replaceMap);
                 } else {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.CommandList.name"), replaceMap);
@@ -110,9 +111,9 @@ public class CommandListSkillEditorPanel extends SubVariablePanelHandler<Skill, 
                 List<String> presetLore = this.plugin.getDisplay().getStringList("Display.Skills.CommandList.lore");
                 List<String> newLore = new ArrayList<>();
 
-                for(String s : presetLore) {
-                    if(s.contains("{commands}")) {
-                        for(String command : boundCommands) {
+                for (String s : presetLore) {
+                    if (s.contains("{commands}")) {
+                        for (String command : boundCommands) {
                             List<String> split = StringUtils.get().splitString(command, 45);
 
                             split.forEach(string -> newLore.add(StringUtils.get().translateColor("&7") + string));
@@ -127,7 +128,7 @@ public class CommandListSkillEditorPanel extends SubVariablePanelHandler<Skill, 
                 itemStack.setItemMeta(itemMeta);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
-                    if(commands.contains(name)) {
+                    if (commands.contains(name)) {
                         commands.remove(name);
                     } else {
                         commands.add(name);
@@ -140,8 +141,8 @@ public class CommandListSkillEditorPanel extends SubVariablePanelHandler<Skill, 
                         List<SubCommandSkillElement> subCommandSkillElements = commandSkillElement.getCommands();
                         List<SubCommandSkillElement> newElements = new ArrayList<>();
 
-                        for(SubCommandSkillElement subElement : subCommandSkillElements) {
-                            if(subElement.getName().equals(subCommandSkillElement.getName())) {
+                        for (SubCommandSkillElement subElement : subCommandSkillElements) {
+                            if (subElement.getName().equals(subCommandSkillElement.getName())) {
                                 newElements.add(subCommandSkillElement);
                             } else {
                                 newElements.add(subElement);

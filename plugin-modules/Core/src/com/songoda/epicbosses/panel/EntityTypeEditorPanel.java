@@ -43,7 +43,7 @@ public class EntityTypeEditorPanel extends SubVariablePanelHandler<BossEntity, E
         int maxPage = panel.getMaxPage(ItemStackUtils.getSpawnableEntityTypes());
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, list, bossEntity, entityStatsElement);
             return true;
@@ -80,8 +80,9 @@ public class EntityTypeEditorPanel extends SubVariablePanelHandler<BossEntity, E
         String entityTypeValue = entityStatsElement.getMainStats().getEntityType();
 
         ServerUtils.get().runTaskAsync(() -> panel.loadPage(requestedPage, ((slot, realisticSlot) -> {
-            if(slot >= filteredList.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= filteredList.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 EntityType entityType = filteredList.get(slot);
                 ItemStack itemStack = ItemStackUtils.getSpawnEggForEntity(entityType);
@@ -90,7 +91,7 @@ public class EntityTypeEditorPanel extends SubVariablePanelHandler<BossEntity, E
 
                 replaceMap.put("{name}", StringUtils.get().formatString(entityType.name()));
 
-                if(entityTypeValue != null) {
+                if (entityTypeValue != null) {
                     EntityFinder entityFinder = EntityFinder.get(entityTypeValue);
 
                     if (entityFinder != null) {
@@ -104,14 +105,14 @@ public class EntityTypeEditorPanel extends SubVariablePanelHandler<BossEntity, E
                     }
                 }
 
-                if(!found) {
+                if (!found) {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.EntityType.name"), replaceMap);
                 }
 
                 panel.setItem(realisticSlot, itemStack, e -> {
                     EntityFinder entityFinder = EntityFinder.get(entityType.name());
 
-                    if(entityFinder != null) {
+                    if (entityFinder != null) {
                         Message.Boss_Statistics_SetEntityFinder.msg(e.getWhoClicked(), entityFinder.getFancyName());
                         entityStatsElement.getMainStats().setEntityType(entityFinder.getFancyName());
                         this.plugin.getBossesFileManager().save();

@@ -19,12 +19,12 @@ public class PreBossSpawnEvent extends Event {
         this.activeBossHolder = activeBossHolder;
     }
 
-    @Override
-    public HandlerList getHandlers() {
+    public static HandlerList getHandlerList() {
         return handlers;
     }
 
-    public static HandlerList getHandlerList() {
+    @Override
+    public HandlerList getHandlers() {
         return handlers;
     }
 

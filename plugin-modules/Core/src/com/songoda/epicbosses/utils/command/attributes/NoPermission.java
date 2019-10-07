@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  * @since 08-Jun-17
  */
 @Documented
-@Target({ ElementType.TYPE })
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NoPermission {
 

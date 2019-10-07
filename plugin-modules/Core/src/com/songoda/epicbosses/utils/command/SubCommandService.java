@@ -25,8 +25,8 @@ public abstract class SubCommandService<T extends CommandSender> extends Command
 
     @Override
     public boolean handleSubCommand(CommandSender commandSender, String[] args) {
-        for(SubCommand subCommand : this.subCommands) {
-            if(subCommand.isSubCommand(args[0])) {
+        for (SubCommand subCommand : this.subCommands) {
+            if (subCommand.isSubCommand(args[0])) {
                 subCommand.execute(commandSender, args);
                 return true;
             }

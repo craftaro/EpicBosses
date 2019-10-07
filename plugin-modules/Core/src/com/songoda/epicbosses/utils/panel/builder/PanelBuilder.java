@@ -42,7 +42,7 @@ public class PanelBuilder {
         this.panelBuilderCounter = new PanelBuilderCounter();
         this.configurationSection = configurationSection;
 
-        if(replaceMap != null) this.replaceMap.putAll(replaceMap);
+        if (replaceMap != null) this.replaceMap.putAll(replaceMap);
     }
 
     public PanelBuilder setSize(int size) {
@@ -51,7 +51,7 @@ public class PanelBuilder {
     }
 
     public PanelBuilder addReplaceData(Map<String, String> replaceMap) {
-        if(replaceMap != null) this.replaceMap.putAll(replaceMap);
+        if (replaceMap != null) this.replaceMap.putAll(replaceMap);
         return this;
     }
 
@@ -80,10 +80,10 @@ public class PanelBuilder {
         Map<String, ClickAction> clickActionMap = this.panelBuilderCounter.getClickActions();
 
         this.panelBuilderCounter.getSlotsWithCounter().forEach((identifier, slotsWith) -> {
-            if(itemStackMap.containsKey(identifier)) {
+            if (itemStackMap.containsKey(identifier)) {
                 slotsWith.forEach(slot -> panel.setItem(slot, itemStackMap.get(identifier)));
             }
-            if(clickActionMap.containsKey(identifier)) {
+            if (clickActionMap.containsKey(identifier)) {
                 slotsWith.forEach(slot -> panel.setOnClick(slot, clickActionMap.get(identifier)));
             }
         });
@@ -92,26 +92,28 @@ public class PanelBuilder {
     }
 
     private void build() {
-        String name = configurationSection.contains("name")? StringUtils.get().translateColor(configurationSection.getString("name")) : "?!? naming convention error ?!?";
-        int slots = this.size != 0? this.size : configurationSection.contains("slots")? configurationSection.getInt("slots") : 9;
-        ConfigurationSection itemSection = configurationSection.contains("Items")? configurationSection.getConfigurationSection("Items") : null;
+        String name = configurationSection.contains("name") ? StringUtils.get().translateColor(configurationSection.getString("name")) : "?!? naming convention error ?!?";
+        int slots = this.size != 0 ? this.size : configurationSection.contains("slots") ? configurationSection.getInt("slots") : 9;
+        ConfigurationSection itemSection = configurationSection.contains("Items") ? configurationSection.getConfigurationSection("Items") : null;
 
         name = replace(name);
         this.title = name;
         this.inventory = Bukkit.createInventory(null, slots, name);
 
-        if(itemSection != null) {
+        if (itemSection != null) {
             Map<String, Set<Integer>> slotsWith = this.panelBuilderCounter.getSlotsWithCounter();
             Map<String, Map<Integer, Object>> specialSlotsWith = this.panelBuilderCounter.getSpecialValuesCounter();
 
-            for(String s : itemSection.getKeys(false)) {
-                int slot = NumberUtils.get().isInt(s)? Integer.valueOf(s) - 1 : 0;
+            for (String s : itemSection.getKeys(false)) {
+                int slot = NumberUtils.get().isInt(s) ? Integer.valueOf(s) - 1 : 0;
                 ConfigurationSection innerSection = itemSection.getConfigurationSection(s);
 
-                if(innerSection.contains("NextPage") && innerSection.getBoolean("NextPage")) this.panelBuilderCounter.addPageData(slot, 1);
-                if(innerSection.contains("PreviousPage") && innerSection.getBoolean("PreviousPage")) this.panelBuilderCounter.addPageData(slot, -1);
+                if (innerSection.contains("NextPage") && innerSection.getBoolean("NextPage"))
+                    this.panelBuilderCounter.addPageData(slot, 1);
+                if (innerSection.contains("PreviousPage") && innerSection.getBoolean("PreviousPage"))
+                    this.panelBuilderCounter.addPageData(slot, -1);
 
-                if(innerSection.contains("Button")) {
+                if (innerSection.contains("Button")) {
                     String identifier = innerSection.getString("Button");
                     Set<Integer> current = slotsWith.getOrDefault(identifier, new HashSet<>());
 
@@ -119,8 +121,8 @@ public class PanelBuilder {
                     this.panelBuilderCounter.getSlotsWithCounter().put(identifier, current);
                 }
 
-                for(String identifier : specialSlotsWith.keySet()) {
-                    if(innerSection.contains(identifier)) {
+                for (String identifier : specialSlotsWith.keySet()) {
+                    if (innerSection.contains(identifier)) {
                         Map<Integer, Object> current = specialSlotsWith.get(identifier);
 
                         current.put(slot, innerSection.get(identifier));
@@ -128,12 +130,12 @@ public class PanelBuilder {
                     }
                 }
 
-                if(slot > inventory.getSize() - 1) continue;
+                if (slot > inventory.getSize() - 1) continue;
 
                 this.defaultSlots.add(slot);
 
-                if(innerSection.contains("Item")) innerSection = innerSection.getConfigurationSection("Item");
-                if(!innerSection.contains("type")) continue;
+                if (innerSection.contains("Item")) innerSection = innerSection.getConfigurationSection("Item");
+                if (!innerSection.contains("type")) continue;
 
                 this.inventory.setItem(slot, ItemStackUtils.createItemStack(innerSection, 1, replaceMap));
             }
@@ -141,8 +143,8 @@ public class PanelBuilder {
     }
 
     private String replace(String input) {
-        for(Map.Entry<String, String> entry : replaceMap.entrySet()) {
-            if(input.contains(entry.getKey())) {
+        for (Map.Entry<String, String> entry : replaceMap.entrySet()) {
+            if (input.contains(entry.getKey())) {
                 input = input.replace(entry.getKey(), entry.getValue());
             }
         }
@@ -150,7 +152,7 @@ public class PanelBuilder {
         String nameKey = "{name}";
 
         //Apply replace twice, to go over any missed replaced values, or new values that had been set in the replacement
-        if(replaceMap.containsKey(nameKey) && input.contains(nameKey)) {
+        if (replaceMap.containsKey(nameKey) && input.contains(nameKey)) {
             input = input.replace(nameKey, replaceMap.get(nameKey));
         }
 

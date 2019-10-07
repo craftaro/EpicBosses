@@ -24,20 +24,20 @@ public class PotionEffectHolder {
         return this.type;
     }
 
-    public Integer getLevel() {
-        return this.level;
-    }
-
-    public Integer getDuration() {
-        return this.duration;
-    }
-
     public void setType(String type) {
         this.type = type;
     }
 
+    public Integer getLevel() {
+        return this.level;
+    }
+
     public void setLevel(Integer level) {
         this.level = level;
+    }
+
+    public Integer getDuration() {
+        return this.duration;
     }
 
     public void setDuration(Integer duration) {

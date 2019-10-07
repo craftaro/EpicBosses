@@ -19,7 +19,6 @@ import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import com.songoda.epicbosses.utils.potion.PotionEffectConverter;
 import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -61,7 +60,7 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
         int maxPage = panel.getMaxPage(potionEffectHolders);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, potionEffectHolders, potionSkillElement, skill);
             return true;
@@ -101,8 +100,9 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     private void loadPage(Panel panel, int page, List<PotionEffectHolder> potionEffectHolders, PotionSkillElement potionSkillElement, Skill skill) {
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= potionEffectHolders.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= potionEffectHolders.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 PotionEffectHolder potionEffectHolder = potionEffectHolders.get(slot);
                 PotionEffect potionEffect = this.potionEffectConverter.from(potionEffectHolder);

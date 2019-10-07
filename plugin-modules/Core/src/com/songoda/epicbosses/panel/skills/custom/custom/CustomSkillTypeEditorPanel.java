@@ -65,7 +65,7 @@ public class CustomSkillTypeEditorPanel extends SubVariablePanelHandler<Skill, C
         int maxPage = panel.getMaxPage(customSkillHandlers);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, skill, customSkillElement, customSkillHandlers);
             return true;
@@ -83,21 +83,22 @@ public class CustomSkillTypeEditorPanel extends SubVariablePanelHandler<Skill, C
         String current = customSkillElement.getCustom().getType();
 
         panel.loadPage(page, ((slot, realisticSlot) -> {
-            if(slot >= customSkillHandlers.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= customSkillHandlers.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 CustomSkillHandler customSkillHandler = customSkillHandlers.get(slot);
                 String name = customSkillHandler.getSkillName();
                 Map<String, String> replaceMap = new HashMap<>();
-                String hasCustomData = customSkillHandler.getOtherSkillData() == null? "false" : "true";
+                String hasCustomData = customSkillHandler.getOtherSkillData() == null ? "false" : "true";
 
                 replaceMap.put("{name}", name);
-                replaceMap.put("{multiplier}", ""+customSkillHandler.doesUseMultiplier());
+                replaceMap.put("{multiplier}", "" + customSkillHandler.doesUseMultiplier());
                 replaceMap.put("{customData}", hasCustomData);
 
                 ItemStack itemStack;
 
-                if(name.equalsIgnoreCase(current)) {
+                if (name.equalsIgnoreCase(current)) {
                     itemStack = this.itemStackConverter.from(this.plugin.getItemStackManager().getItemStackHolder("DefaultSelectedCustomSkillTypeItem"));
 
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.CustomType.selectedName"), replaceMap);
@@ -111,7 +112,7 @@ public class CustomSkillTypeEditorPanel extends SubVariablePanelHandler<Skill, C
 
                 panel.setItem(realisticSlot, itemStack, event -> {
                     IOtherSkillDataElement otherSkillDataElement = customSkillHandler.getOtherSkillData();
-                    JsonObject otherData = otherSkillDataElement == null? null : BossAPI.convertObjectToJsonObject(otherSkillDataElement);
+                    JsonObject otherData = otherSkillDataElement == null ? null : BossAPI.convertObjectToJsonObject(otherSkillDataElement);
 
                     customSkillElement.getCustom().setType(name);
                     customSkillElement.getCustom().setOtherSkillData(otherData);

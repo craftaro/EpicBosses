@@ -16,7 +16,7 @@ public class KillerBunnyHandler implements ICustomEntityHandler {
 
     @Override
     public LivingEntity getBaseEntity(String entityType, Location spawnLocation) {
-        if(ServerVersion.isServerVersionBelow(ServerVersion.V1_8))
+        if (ServerVersion.isServerVersionBelow(ServerVersion.V1_8))
             throw new NullPointerException("This feature is only implemented in version 1.8 and above of Minecraft.");
 
         Rabbit rabbit = (Rabbit) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.RABBIT);

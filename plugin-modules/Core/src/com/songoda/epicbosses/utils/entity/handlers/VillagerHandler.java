@@ -18,7 +18,7 @@ public class VillagerHandler implements ICustomEntityHandler {
         Villager villager = (Villager) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.VILLAGER);
         String[] split = entityType.split(":");
 
-        if(split.length == 2) {
+        if (split.length == 2) {
             String type = split[1];
             Villager.Profession profession;
 

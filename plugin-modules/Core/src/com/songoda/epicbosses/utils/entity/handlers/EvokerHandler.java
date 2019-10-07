@@ -15,7 +15,7 @@ public class EvokerHandler implements ICustomEntityHandler {
 
     @Override
     public LivingEntity getBaseEntity(String entityType, Location spawnLocation) {
-        if(ServerVersion.isServerVersionBelow(ServerVersion.V1_11)) {
+        if (ServerVersion.isServerVersionBelow(ServerVersion.V1_11)) {
             throw new NullPointerException("This feature is only implemented in version 1.11 and above of Minecraft.");
         }
 

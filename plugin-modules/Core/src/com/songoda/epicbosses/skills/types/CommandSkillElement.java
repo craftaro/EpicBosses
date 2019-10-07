@@ -31,7 +31,7 @@ public class CommandSkillElement implements ISkillHandler<CommandSkillElement> {
         List<SubCommandSkillElement> commandSkillElements = getCommands();
         ServerUtils serverUtils = ServerUtils.get();
 
-        if(commandSkillElements.isEmpty()) {
+        if (commandSkillElements.isEmpty()) {
             Debug.SKILL_COMMANDS_ARE_EMPTY.debug();
             return;
         }
@@ -41,9 +41,9 @@ public class CommandSkillElement implements ISkillHandler<CommandSkillElement> {
                     Double chance = commandSkillEle.getChance();
                     List<String> commands = commandSkillEle.getCommands();
 
-                    if(commands == null || commands.isEmpty()) return;
-                    if(chance == null) chance = 100.0;
-                    if(!RandomUtils.get().canPreformAction(chance)) return;
+                    if (commands == null || commands.isEmpty()) return;
+                    if (chance == null) chance = 100.0;
+                    if (!RandomUtils.get().canPreformAction(chance)) return;
 
                     commands.replaceAll(s -> s.replace("%player%", livingEntity.getName()));
                     commands.forEach(serverUtils::sendConsoleCommand);

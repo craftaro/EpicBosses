@@ -46,7 +46,7 @@ public class MainAutoSpawnEditorPanel extends VariablePanelHandler<AutoSpawn> {
     public void openFor(Player player, AutoSpawn autoSpawn) {
         Map<String, String> replaceMap = new HashMap<>();
         String type = ObjectUtils.getValue(autoSpawn.getType(), "INTERVAL");
-        String editing = ""+ObjectUtils.getValue(autoSpawn.isEditing(), false);
+        String editing = "" + ObjectUtils.getValue(autoSpawn.isEditing(), false);
         String entities = StringUtils.get().appendList(autoSpawn.getEntities());
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
@@ -80,10 +80,10 @@ public class MainAutoSpawnEditorPanel extends VariablePanelHandler<AutoSpawn> {
             Player player = (Player) event.getWhoClicked();
             boolean editing = autoSpawn.isEditing();
 
-            if(!editing) {
+            if (!editing) {
                 autoSpawn.setEditing(true);
             } else {
-                if(!autoSpawn.isCompleteEnoughToSpawn()) {
+                if (!autoSpawn.isCompleteEnoughToSpawn()) {
                     Message.Boss_AutoSpawn_NotCompleteEnough.msg(player);
                     return;
                 }
@@ -95,7 +95,7 @@ public class MainAutoSpawnEditorPanel extends VariablePanelHandler<AutoSpawn> {
             this.autoSpawnFileManager.save();
             player.closeInventory();
 
-            if(autoSpawn.isEditing()) {
+            if (autoSpawn.isEditing()) {
                 this.autoSpawnManager.removeActiveAutoSpawnHolder(autoSpawn);
             } else {
                 this.autoSpawnManager.addAndCreateActiveAutoSpawnHolder(autoSpawn);

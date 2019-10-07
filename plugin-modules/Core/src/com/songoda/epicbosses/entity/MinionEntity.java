@@ -33,12 +33,12 @@ public class MinionEntity {
         return this.targeting;
     }
 
-    public boolean isEditing() {
-        return this.editing;
-    }
-
     public void setTargeting(String targeting) {
         this.targeting = targeting;
+    }
+
+    public boolean isEditing() {
+        return this.editing;
     }
 
     public void setEditing(boolean editing) {

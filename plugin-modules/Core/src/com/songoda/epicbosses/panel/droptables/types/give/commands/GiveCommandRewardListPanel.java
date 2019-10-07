@@ -47,7 +47,7 @@ public class GiveCommandRewardListPanel extends SubVariablePanelHandler<DropTabl
         int maxPage = panel.getMaxPage(keyList);
 
         panel.setOnPageChange((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, dropTable, giveRewardEditHandler, rewardMap, keyList);
             return true;
@@ -68,7 +68,7 @@ public class GiveCommandRewardListPanel extends SubVariablePanelHandler<DropTabl
         Panel panel = panelBuilder.getPanel()
                 .setParentPanelHandler(this.bossPanelManager.getGiveRewardMainEditMenu(), dropTable, giveRewardEditHandler);
 
-        ServerUtils.get().runTaskAsync(() ->{
+        ServerUtils.get().runTaskAsync(() -> {
             panelBuilderCounter.getSlotsWith("NewReward").forEach(slot -> panel.setOnClick(slot, event -> this.bossPanelManager.getGiveCommandNewRewardPanel().openFor((Player) event.getWhoClicked(), dropTable, giveRewardEditHandler)));
             fillPanel(panel, dropTable, giveRewardEditHandler);
         });
@@ -83,14 +83,15 @@ public class GiveCommandRewardListPanel extends SubVariablePanelHandler<DropTabl
 
     private void loadPage(Panel panel, int page, DropTable dropTable, GiveRewardEditHandler giveRewardEditHandler, Map<String, Double> rewardMap, List<String> keyList) {
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= keyList.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= keyList.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = keyList.get(slot);
                 Double chance = rewardMap.get(name);
                 Map<String, String> replaceMap = new HashMap<>();
 
-                if(chance == null) chance = 100.0;
+                if (chance == null) chance = 100.0;
 
                 replaceMap.put("{commandName}", name);
                 replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));

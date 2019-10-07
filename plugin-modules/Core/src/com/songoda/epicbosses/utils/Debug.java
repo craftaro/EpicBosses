@@ -72,12 +72,20 @@ public enum Debug {
         this.message = message;
     }
 
+    public static void debugMessage(String message) {
+        PLAIN.debug(message);
+    }
+
+    public static void setPlugin(EpicBosses plugin) {
+        PLUGIN = plugin;
+    }
+
     public void debug(Object... objects) {
         int current = 0;
         String message = this.message;
 
-        for(Object object : objects) {
-            if(object == null) continue;
+        for (Object object : objects) {
+            if (object == null) continue;
 
             String placeholder = "{" + current + "}";
 
@@ -92,18 +100,10 @@ public enum Debug {
         PLUGIN.getDebugManager().getToggledPlayers().forEach(uuid -> {
             Player player = Bukkit.getPlayer(uuid);
 
-            if(player == null) return;
+            if (player == null) return;
 
             player.sendMessage(finalMsg);
         });
-    }
-
-    public static void debugMessage(String message) {
-        PLAIN.debug(message);
-    }
-
-    public static void setPlugin(EpicBosses plugin) {
-        PLUGIN = plugin;
     }
 
 }

@@ -32,28 +32,28 @@ public class EntityStatsElement {
         return this.mainStats;
     }
 
-    public EquipmentElement getEquipment() {
-        return this.equipment;
-    }
-
-    public HandsElement getHands() {
-        return this.hands;
-    }
-
-    public List<PotionEffectHolder> getPotions() {
-        return this.potions;
-    }
-
     public void setMainStats(MainStatsElement mainStats) {
         this.mainStats = mainStats;
+    }
+
+    public EquipmentElement getEquipment() {
+        return this.equipment;
     }
 
     public void setEquipment(EquipmentElement equipment) {
         this.equipment = equipment;
     }
 
+    public HandsElement getHands() {
+        return this.hands;
+    }
+
     public void setHands(HandsElement hands) {
         this.hands = hands;
+    }
+
+    public List<PotionEffectHolder> getPotions() {
+        return this.potions;
     }
 
     public void setPotions(List<PotionEffectHolder> potions) {

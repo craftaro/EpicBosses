@@ -54,18 +54,18 @@ public class BossShopPriceHandler implements IHandler {
                 Player player = event.getPlayer();
                 UUID uuid = player.getUniqueId();
 
-                if(!uuid.equals(getPlayer().getUniqueId())) return;
-                if(isHandled()) return;
+                if (!uuid.equals(getPlayer().getUniqueId())) return;
+                if (isHandled()) return;
 
                 String input = event.getMessage();
 
-                if(input.equalsIgnoreCase("-")) {
+                if (input.equalsIgnoreCase("-")) {
                     input = null;
                 }
 
                 event.setCancelled(true);
 
-                if(NumberUtils.get().isDouble(input)) {
+                if (NumberUtils.get().isDouble(input)) {
                     double amount = NumberUtils.get().getDouble(input);
                     getBossEntity().setPrice(amount);
                     getBossesFileManager().save();

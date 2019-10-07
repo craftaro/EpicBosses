@@ -29,6 +29,10 @@ public class ServerUtils {
         serverUtils = this;
     }
 
+    public static ServerUtils get() {
+        return serverUtils;
+    }
+
     public void log(String log) {
         Bukkit.getConsoleSender().sendMessage(StringUtils.get().translateColor(log));
     }
@@ -72,7 +76,7 @@ public class ServerUtils {
     }
 
     public void cancelTask(BukkitTask bukkitTask) {
-        if(bukkitTask == null) return;
+        if (bukkitTask == null) return;
 
         bukkitTask.cancel();
     }
@@ -95,9 +99,5 @@ public class ServerUtils {
                 if (entity.getUniqueId().equals(uuid))
                     return entity;
         return null;
-    }
-
-    public static ServerUtils get() {
-        return serverUtils;
     }
 }

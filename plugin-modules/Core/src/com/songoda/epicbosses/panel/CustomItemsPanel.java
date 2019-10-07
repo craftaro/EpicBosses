@@ -40,7 +40,7 @@ public class CustomItemsPanel extends MainListPanelHandler {
         int maxPage = panel.getMaxPage(entryList);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, currentItemStacks, entryList);
             return true;
@@ -52,8 +52,9 @@ public class CustomItemsPanel extends MainListPanelHandler {
 
     private void loadPage(Panel panel, int requestedPage, Map<String, ItemStackHolder> currentItemStacks, List<String> entryList) {
         panel.loadPage(requestedPage, (slot, realisticSlot) -> {
-            if(slot >= currentItemStacks.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= currentItemStacks.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = entryList.get(slot);
                 ItemStackHolder itemStackHolder = currentItemStacks.get(name);
@@ -62,12 +63,12 @@ public class CustomItemsPanel extends MainListPanelHandler {
                 panel.setItem(realisticSlot, itemStack.clone(), e -> {
                     ClickType clickType = e.getClick();
 
-                    if(clickType == ClickType.RIGHT || clickType == ClickType.SHIFT_RIGHT) {
+                    if (clickType == ClickType.RIGHT || clickType == ClickType.SHIFT_RIGHT) {
                         int timesUsed = this.bossPanelManager.isItemStackUsed(name);
 
-                        if(timesUsed > 0) {
+                        if (timesUsed > 0) {
                             Message.Boss_Items_CannotBeRemoved.msg(e.getWhoClicked(), timesUsed);
-                        } else if(name.contains("Default")) {
+                        } else if (name.contains("Default")) {
                             Message.Boss_Items_DefaultCannotBeRemoved.msg(e.getWhoClicked(), timesUsed);
                         } else {
                             this.itemsFileManager.removeItemStack(name);
@@ -77,9 +78,9 @@ public class CustomItemsPanel extends MainListPanelHandler {
                             loadPage(panel, requestedPage, currentItemStacks, entryList);
                             Message.Boss_Items_Removed.msg(e.getWhoClicked());
                         }
-                    } else if(clickType == ClickType.LEFT || clickType == ClickType.SHIFT_LEFT) {
+                    } else if (clickType == ClickType.LEFT || clickType == ClickType.SHIFT_LEFT) {
                         e.getWhoClicked().getInventory().addItem(itemStack.clone());
-                    } else if(clickType == ClickType.MIDDLE) {
+                    } else if (clickType == ClickType.MIDDLE) {
                         String newName = UUID.randomUUID().toString();
                         ItemStack newItemStack = itemStack.clone();
 

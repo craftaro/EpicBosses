@@ -36,7 +36,7 @@ public class GroupSkillElement implements ISkillHandler<GroupSkillElement> {
         currentGroupedSkills.forEach(string -> {
             Skill innerSkill = skillsFileManager.getSkill(string);
 
-            if(innerSkill == null) {
+            if (innerSkill == null) {
                 Debug.SKILL_NOT_FOUND.debug();
                 return;
             }

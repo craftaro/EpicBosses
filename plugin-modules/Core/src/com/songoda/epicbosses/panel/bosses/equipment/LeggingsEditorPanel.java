@@ -31,7 +31,7 @@ public class LeggingsEditorPanel extends ItemStackSubListPanelHandler {
         originalMap.forEach((string, holder) -> {
             ItemStack itemStack = this.itemStackConverter.from(holder);
 
-            if(itemStack.getType().name().contains("LEGGINGS")) {
+            if (itemStack.getType().name().contains("LEGGINGS")) {
                 newMap.put(string, holder);
             }
         });

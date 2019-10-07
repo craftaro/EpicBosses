@@ -25,28 +25,28 @@ public class OnDeathMessageElement {
         return this.message;
     }
 
-    public String getPositionMessage() {
-        return this.positionMessage;
-    }
-
-    public Integer getRadius() {
-        return this.radius;
-    }
-
-    public Integer getOnlyShow() {
-        return this.onlyShow;
-    }
-
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getPositionMessage() {
+        return this.positionMessage;
     }
 
     public void setPositionMessage(String positionMessage) {
         this.positionMessage = positionMessage;
     }
 
+    public Integer getRadius() {
+        return this.radius;
+    }
+
     public void setRadius(Integer radius) {
         this.radius = radius;
+    }
+
+    public Integer getOnlyShow() {
+        return this.onlyShow;
     }
 
     public void setOnlyShow(Integer onlyShow) {

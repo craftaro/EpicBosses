@@ -1,6 +1,5 @@
 package com.songoda.epicbosses.commands.boss;
 
-import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.Message;
@@ -28,7 +27,7 @@ public class BossReloadCmd extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(!Permission.reload.hasPermission(sender)) {
+        if (!Permission.reload.hasPermission(sender)) {
             Message.Boss_Reload_NoPermission.msg(sender);
             return;
         }

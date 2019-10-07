@@ -10,10 +10,9 @@ import org.bukkit.block.BlockState;
  */
 public class CageLocationData {
 
+    private final Location location;
     private BlockState oldBlockState;
     private int amountOfCages = 0;
-
-    private final Location location;
 
     public CageLocationData(Location location, int amountOfCages) {
         this(location);
@@ -29,19 +28,19 @@ public class CageLocationData {
         return this.oldBlockState;
     }
 
-    public int getAmountOfCages() {
-        return this.amountOfCages;
-    }
-
-    public Location getLocation() {
-        return this.location;
-    }
-
     public void setOldBlockState(BlockState oldBlockState) {
         this.oldBlockState = oldBlockState;
     }
 
+    public int getAmountOfCages() {
+        return this.amountOfCages;
+    }
+
     public void setAmountOfCages(int amountOfCages) {
         this.amountOfCages = amountOfCages;
+    }
+
+    public Location getLocation() {
+        return this.location;
     }
 }

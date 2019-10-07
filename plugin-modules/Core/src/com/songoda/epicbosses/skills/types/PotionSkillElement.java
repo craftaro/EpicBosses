@@ -34,11 +34,11 @@ public class PotionSkillElement implements ISkillHandler<PotionSkillElement> {
     public void castSkill(Skill skill, PotionSkillElement customSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
         List<PotionEffectHolder> potionElements = getPotions();
 
-        if(this.potionEffectConverter == null) this.potionEffectConverter = new PotionEffectConverter();
+        if (this.potionEffectConverter == null) this.potionEffectConverter = new PotionEffectConverter();
 
-        if(nearbyEntities == null || nearbyEntities.isEmpty()) return;
-        if(potionElements == null) return;
-        if(potionElements.isEmpty()) {
+        if (nearbyEntities == null || nearbyEntities.isEmpty()) return;
+        if (potionElements == null) return;
+        if (potionElements.isEmpty()) {
             Debug.SKILL_POTIONS_ARE_EMPTY.debug();
             return;
         }

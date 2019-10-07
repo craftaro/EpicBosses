@@ -75,7 +75,7 @@ public abstract class BossListEditorPanel extends VariablePanelHandler<BossEntit
                 if (click == ClickType.LEFT || click == ClickType.SHIFT_LEFT) {
                     getAction(bossEntity, entityStatsElement).onClick(event);
                 } else {
-                    if(!bossEntity.isEditing()) {
+                    if (!bossEntity.isEditing()) {
                         Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                         return;
                     }
@@ -113,7 +113,7 @@ public abstract class BossListEditorPanel extends VariablePanelHandler<BossEntit
             fillPanel(panel, bossEntity);
 
             panel.getPanelBuilderCounter().getSlotsWith("CreateEntity").forEach(slot -> panel.setOnClick(slot, event -> {
-                if(!bossEntity.isEditing()) {
+                if (!bossEntity.isEditing()) {
                     Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                     return;
                 }

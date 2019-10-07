@@ -50,10 +50,10 @@ public class DeathTextEditorPanel extends VariablePanelHandler<BossEntity> {
         String positionMessage = onDeathMessageElement.getPositionMessage();
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        if(radius == null) radius = 0;
-        if(onlyShow == null) onlyShow = 3;
-        if(mainMessage == null) mainMessage = "N/A";
-        if(positionMessage == null) positionMessage = "N/A";
+        if (radius == null) radius = 0;
+        if (onlyShow == null) onlyShow = 3;
+        if (mainMessage == null) mainMessage = "N/A";
+        if (positionMessage == null) positionMessage = "N/A";
 
         replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
         replaceMap.put("{radius}", NumberUtils.get().formatDouble(radius));
@@ -86,7 +86,7 @@ public class DeathTextEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ClickAction getRadiusAction(BossEntity bossEntity) {
         return event -> {
-            if(!bossEntity.isEditing()) {
+            if (!bossEntity.isEditing()) {
                 Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                 return;
             }
@@ -94,24 +94,24 @@ public class DeathTextEditorPanel extends VariablePanelHandler<BossEntity> {
             ClickType clickType = event.getClick();
             int radiusToModifyBy = 0;
 
-            if(clickType == ClickType.LEFT) {
+            if (clickType == ClickType.LEFT) {
                 radiusToModifyBy = 1;
-            } else if(clickType == ClickType.SHIFT_LEFT) {
+            } else if (clickType == ClickType.SHIFT_LEFT) {
                 radiusToModifyBy = 10;
-            } else if(clickType == ClickType.RIGHT) {
+            } else if (clickType == ClickType.RIGHT) {
                 radiusToModifyBy = -1;
-            } else if(clickType == ClickType.SHIFT_RIGHT) {
+            } else if (clickType == ClickType.SHIFT_RIGHT) {
                 radiusToModifyBy = -10;
             }
 
-            String modifyValue = radiusToModifyBy > 0? "increased" : "decreased";
+            String modifyValue = radiusToModifyBy > 0 ? "increased" : "decreased";
             Integer currentRadius = bossEntity.getMessages().getOnDeath().getRadius();
 
-            if(currentRadius == null) currentRadius = 0;
+            if (currentRadius == null) currentRadius = 0;
 
             int newRadius = currentRadius + radiusToModifyBy;
 
-            if(newRadius < -1) {
+            if (newRadius < -1) {
                 newRadius = -1;
             }
 
@@ -124,7 +124,7 @@ public class DeathTextEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ClickAction getOnlyShowAction(BossEntity bossEntity) {
         return event -> {
-            if(!bossEntity.isEditing()) {
+            if (!bossEntity.isEditing()) {
                 Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                 return;
             }
@@ -132,20 +132,20 @@ public class DeathTextEditorPanel extends VariablePanelHandler<BossEntity> {
             ClickType clickType = event.getClick();
             int amountToModifyBy = 0;
 
-            if(clickType.name().contains("LEFT")) {
+            if (clickType.name().contains("LEFT")) {
                 amountToModifyBy = 1;
-            } else if(clickType.name().contains("RIGHT")) {
+            } else if (clickType.name().contains("RIGHT")) {
                 amountToModifyBy = -1;
             }
 
-            String modifyValue = amountToModifyBy > 0? "increased" : "decreased";
+            String modifyValue = amountToModifyBy > 0 ? "increased" : "decreased";
             Integer currentAmount = bossEntity.getMessages().getOnDeath().getOnlyShow();
 
-            if(currentAmount == null) currentAmount = 3;
+            if (currentAmount == null) currentAmount = 3;
 
             int newAmount = currentAmount + amountToModifyBy;
 
-            if(newAmount < -1) {
+            if (newAmount < -1) {
                 newAmount = -1;
             }
 

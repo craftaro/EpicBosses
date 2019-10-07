@@ -44,7 +44,7 @@ public class ItemStackFileHandler extends FileHandler<Map<String, ItemStackHolde
 
             fileReader.close();
 
-            if(jsonObject != null) {
+            if (jsonObject != null) {
                 jsonObject.entrySet().forEach(entry -> {
                     String id = entry.getKey();
                     ItemStackHolder itemStackHolder = GSON.fromJson(entry.getValue(), ItemStackHolder.class);
@@ -63,7 +63,8 @@ public class ItemStackFileHandler extends FileHandler<Map<String, ItemStackHolde
     public void saveFile(Map<String, ItemStackHolder> map) {
         try {
             FileWriter fileWriter = new FileWriter(getFile());
-            Type type = new TypeToken<Map<String, ItemStackHolder>>(){}.getType();
+            Type type = new TypeToken<Map<String, ItemStackHolder>>() {
+            }.getType();
 
             fileWriter.write(GSON.toJson(new HashMap<>(map), type));
             fileWriter.flush();

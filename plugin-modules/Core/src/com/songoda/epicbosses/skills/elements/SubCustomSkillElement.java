@@ -25,7 +25,7 @@ public class SubCustomSkillElement {
     }
 
     public CustomCageSkillElement getCustomCageSkillData() {
-        if(getType().equalsIgnoreCase("CAGE")) {
+        if (getType().equalsIgnoreCase("CAGE")) {
             return BossesGson.get().fromJson(this.otherSkillData, CustomCageSkillElement.class);
         }
 
@@ -33,7 +33,7 @@ public class SubCustomSkillElement {
     }
 
     public CustomMinionSkillElement getCustomMinionSkillData() {
-        if(getType().equalsIgnoreCase("MINIONS")) {
+        if (getType().equalsIgnoreCase("MINIONS")) {
             return BossesGson.get().fromJson(this.otherSkillData, CustomMinionSkillElement.class);
         }
 
@@ -44,12 +44,12 @@ public class SubCustomSkillElement {
         return this.type;
     }
 
-    public Double getMultiplier() {
-        return this.multiplier;
-    }
-
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Double getMultiplier() {
+        return this.multiplier;
     }
 
     public void setMultiplier(Double multiplier) {

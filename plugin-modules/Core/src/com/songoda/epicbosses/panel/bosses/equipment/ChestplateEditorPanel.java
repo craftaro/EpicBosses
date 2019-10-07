@@ -31,7 +31,7 @@ public class ChestplateEditorPanel extends ItemStackSubListPanelHandler {
         originalMap.forEach((string, holder) -> {
             ItemStack itemStack = this.itemStackConverter.from(holder);
 
-            if(itemStack.getType().name().contains("CHESTPLATE")) {
+            if (itemStack.getType().name().contains("CHESTPLATE")) {
                 newMap.put(string, holder);
             }
         });

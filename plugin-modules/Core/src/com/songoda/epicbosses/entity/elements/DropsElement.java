@@ -24,20 +24,20 @@ public class DropsElement {
         return this.naturalDrops;
     }
 
-    public Boolean getDropExp() {
-        return this.dropExp;
-    }
-
-    public String getDropTable() {
-        return this.dropTable;
-    }
-
     public void setNaturalDrops(Boolean naturalDrops) {
         this.naturalDrops = naturalDrops;
     }
 
+    public Boolean getDropExp() {
+        return this.dropExp;
+    }
+
     public void setDropExp(Boolean dropExp) {
         this.dropExp = dropExp;
+    }
+
+    public String getDropTable() {
+        return this.dropTable;
     }
 
     public void setDropTable(String dropTable) {

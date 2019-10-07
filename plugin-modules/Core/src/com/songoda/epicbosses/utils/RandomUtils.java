@@ -13,6 +13,10 @@ public class RandomUtils {
 
     private Random random = new Random();
 
+    public static RandomUtils get() {
+        return INSTANCE;
+    }
+
     public boolean preformRandomAction() {
         int rand = getRandomNumber(2);
 
@@ -39,10 +43,6 @@ public class RandomUtils {
         double randomChance = getRandomDecimalNumber();
 
         return (randomChance <= chanceOfSuccess);
-    }
-
-    public static RandomUtils get() {
-        return INSTANCE;
     }
 
 }

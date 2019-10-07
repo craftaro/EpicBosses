@@ -16,7 +16,7 @@ public class ASkyblockHelper implements IASkyblockHelper {
     public boolean isOnOwnIsland(Player player) {
         Island island = ASkyBlock.getPlugin().getGrid().getProtectedIslandAt(player.getLocation());
 
-        if(island == null) return false;
+        if (island == null) return false;
 
         return island.getMembers().contains(player.getUniqueId());
     }

@@ -47,7 +47,7 @@ public class DropTablePanel extends MainListPanelHandler {
         int maxPage = panel.getMaxPage(entryList);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, dropTableMap, entryList);
             return true;
@@ -58,15 +58,16 @@ public class DropTablePanel extends MainListPanelHandler {
 
     private void loadPage(Panel panel, int requestedPage, Map<String, DropTable> dropTableMap, List<String> entryList) {
         panel.loadPage(requestedPage, (slot, realisticSlot) -> {
-            if(slot >= dropTableMap.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= dropTableMap.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = entryList.get(slot);
                 DropTable dropTable = dropTableMap.get(name);
                 ItemStackHolder itemStackHolder = BossAPI.getStoredItemStack("DefaultDropTableMenuItem");
                 ItemStack itemStack = this.itemStackConverter.from(itemStackHolder);
 
-                if(itemStack == null) {
+                if (itemStack == null) {
                     itemStack = new ItemStack(Material.BARRIER);
                 }
 

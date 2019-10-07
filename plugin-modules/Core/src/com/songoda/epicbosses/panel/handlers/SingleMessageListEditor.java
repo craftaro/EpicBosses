@@ -57,7 +57,7 @@ public abstract class SingleMessageListEditor<T> extends VariablePanelHandler<T>
         int maxPage = panel.getMaxPage(entryList);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, currentTexts, entryList, object);
             return true;
@@ -93,8 +93,9 @@ public abstract class SingleMessageListEditor<T> extends VariablePanelHandler<T>
         String current = getCurrent(object);
 
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= entryList.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= entryList.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = entryList.get(slot);
                 List<String> messages = currentMessages.get(name);
@@ -105,7 +106,7 @@ public abstract class SingleMessageListEditor<T> extends VariablePanelHandler<T>
 
                 replaceMap.put("{name}", name);
 
-                if(current != null && current.equalsIgnoreCase(name)) {
+                if (current != null && current.equalsIgnoreCase(name)) {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Text.selectedName"), replaceMap);
                 } else {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Text.name"), replaceMap);
@@ -115,9 +116,9 @@ public abstract class SingleMessageListEditor<T> extends VariablePanelHandler<T>
                 List<String> presetLore = this.plugin.getDisplay().getStringList("Display.Boss.Text.lore");
                 List<String> newLore = new ArrayList<>();
 
-                for(String s : presetLore) {
-                    if(s.contains("{message}")) {
-                        for(String message : messages) {
+                for (String s : presetLore) {
+                    if (s.contains("{message}")) {
+                        for (String message : messages) {
                             List<String> split = StringUtils.get().splitString(message, 45);
 
                             split.forEach(string -> newLore.add(StringUtils.get().translateColor("&7") + string));

@@ -21,12 +21,12 @@ public class CommandsElement {
         return this.onSpawn;
     }
 
-    public String getOnDeath() {
-        return this.onDeath;
-    }
-
     public void setOnSpawn(String onSpawn) {
         this.onSpawn = onSpawn;
+    }
+
+    public String getOnDeath() {
+        return this.onDeath;
     }
 
     public void setOnDeath(String onDeath) {

@@ -62,19 +62,19 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
         String currentSkillName = customSkillElement.getCustom().getType();
         CustomSkillHandler customSkillHandler = this.bossSkillManager.getSkills().stream().filter(cSH -> cSH.getSkillName().equalsIgnoreCase(currentSkillName)).findFirst().orElse(null);
 
-        if(customSkillHandler == null) {
+        if (customSkillHandler == null) {
             Debug.FAILED_TO_FIND_ASSIGNED_CUSTOMSKILLHANDLER.debug(currentSkillName);
             return;
         }
 
         List<ICustomSettingAction> customButtons = customSkillHandler.getOtherSkillDataActions(skill, customSkillElement);
 
-        if(customButtons == null || customButtons.isEmpty()) return;
+        if (customButtons == null || customButtons.isEmpty()) return;
 
         int maxPage = panel.getMaxPage(customButtons);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, customButtons);
             return true;
@@ -91,8 +91,9 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
 
     private void loadPage(Panel panel, int page, List<ICustomSettingAction> clickActions) {
         panel.loadPage(page, ((slot, realisticSlot) -> {
-            if(slot >= clickActions.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= clickActions.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 ICustomSettingAction customSkillAction = clickActions.get(slot);
                 ClickAction clickAction = customSkillAction.getAction();
@@ -105,7 +106,7 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
                 replaceMap.put("{setting}", name);
                 replaceMap.put("{currently}", currently);
 
-                if(displayStack == null || displayStack.getType() == Material.AIR) return;
+                if (displayStack == null || displayStack.getType() == Material.AIR) return;
 
                 ItemStackUtils.applyDisplayName(displayStack, this.plugin.getDisplay().getString("Display.Skills.CustomSetting.name"), replaceMap);
                 ItemStackUtils.applyDisplayLore(displayStack, this.plugin.getDisplay().getStringList("Display.Skills.CustomSetting.lore"), replaceMap);

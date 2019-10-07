@@ -19,6 +19,10 @@ public class StringUtils {
 
     private static StringUtils INSTANCE = new StringUtils();
 
+    public static StringUtils get() {
+        return INSTANCE;
+    }
+
     public List<String> splitString(String input, int splitSize) {
         List<String> messages = new ArrayList<>();
         int index = 0;
@@ -47,13 +51,13 @@ public class StringUtils {
 
         return Message.General_LocationFormat.toString()
                 .replace("{world}", world)
-                .replace("{x}", ""+x)
-                .replace("{y}", ""+y)
-                .replace("{z}", ""+z);
+                .replace("{x}", "" + x)
+                .replace("{y}", "" + y)
+                .replace("{z}", "" + z);
     }
 
     public Location fromStringToLocation(String input) {
-        if(input == null) return null;
+        if (input == null) return null;
 
         String[] split = input.split(",");
 
@@ -64,7 +68,7 @@ public class StringUtils {
             String zInput = split[3].trim();
             World world = Bukkit.getWorld(worldInput);
 
-            if(NumberUtils.get().isInt(xInput) && NumberUtils.get().isInt(yInput) && NumberUtils.get().isInt(zInput)) {
+            if (NumberUtils.get().isInt(xInput) && NumberUtils.get().isInt(yInput) && NumberUtils.get().isInt(zInput)) {
                 return new Location(world, Integer.valueOf(xInput), Integer.valueOf(yInput), Integer.valueOf(zInput));
             }
         } catch (Exception ex) {
@@ -80,14 +84,14 @@ public class StringUtils {
         Queue<T> queue = new LinkedList<>(list);
         StringBuilder stringBuilder = new StringBuilder();
 
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             T object = queue.poll();
 
-            if(object == null) continue;
+            if (object == null) continue;
 
             stringBuilder.append(object.toString());
 
-            if(queue.isEmpty()) {
+            if (queue.isEmpty()) {
                 stringBuilder.append(".");
             } else {
                 stringBuilder.append(", ");
@@ -98,25 +102,25 @@ public class StringUtils {
     }
 
     public String formatString(String string) {
-        if(string == null) return "null";
+        if (string == null) return "null";
 
         string = string.toLowerCase();
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        if(string.contains(" ")) {
-            for(String z : string.split(" ")) {
+        if (string.contains(" ")) {
+            for (String z : string.split(" ")) {
                 stringBuilder.append(Character.toUpperCase(z.charAt(0))).append(z.substring(1).toLowerCase());
             }
-        } else if(string.contains("_")) {
+        } else if (string.contains("_")) {
             String[] split = string.split("_");
 
-            for(int i = 0; i < split.length; i++) {
+            for (int i = 0; i < split.length; i++) {
                 String z = split[i];
 
                 stringBuilder.append(Character.toUpperCase(z.charAt(0))).append(z.substring(1).toLowerCase());
 
-                if(i != (split.length - 1)) {
+                if (i != (split.length - 1)) {
                     stringBuilder.append(" ");
                 }
             }
@@ -125,10 +129,6 @@ public class StringUtils {
         }
 
         return stringBuilder.toString();
-    }
-
-    public static StringUtils get() {
-        return INSTANCE;
     }
 
 }

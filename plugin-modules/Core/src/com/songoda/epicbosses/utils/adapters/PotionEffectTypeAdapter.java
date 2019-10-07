@@ -18,7 +18,7 @@ public class PotionEffectTypeAdapter implements BaseAdapter<PotionEffectType> {
         String effectType = jsonElement.getAsString();
         PotionEffectType potionEffectType = PotionEffectType.getByName(effectType.toUpperCase());
 
-        if(potionEffectType == null) return null;
+        if (potionEffectType == null) return null;
 
         return potionEffectType;
     }

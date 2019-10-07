@@ -14,13 +14,6 @@ import java.util.List;
 public class BossEntity {
 
     @Expose
-    private String spawnItem, targeting;
-    @Expose
-    private boolean editing, buyable;
-    @Expose
-    private Double price;
-
-    @Expose
     private final List<EntityStatsElement> entityStats;
     @Expose
     private final MessagesElement messages;
@@ -30,6 +23,12 @@ public class BossEntity {
     private final SkillsElement skills;
     @Expose
     private final DropsElement drops;
+    @Expose
+    private String spawnItem, targeting;
+    @Expose
+    private boolean editing, buyable;
+    @Expose
+    private Double price;
 
     public BossEntity(boolean editing, String spawnItem, String targeting, boolean buyable, Double price, List<EntityStatsElement> entityStats, SkillsElement skills, DropsElement drops, MessagesElement messages, CommandsElement commands) {
         this.editing = editing;
@@ -45,11 +44,11 @@ public class BossEntity {
     }
 
     public String getEditingValue() {
-        return this.editing? "Enabled" : "Disabled";
+        return this.editing ? "Enabled" : "Disabled";
     }
 
     public String getTargetingValue() {
-        if(getTargeting() == null || getTargeting().isEmpty() || getTargeting().equalsIgnoreCase("")) {
+        if (getTargeting() == null || getTargeting().isEmpty() || getTargeting().equalsIgnoreCase("")) {
             return "N/A";
         } else {
             return getTargeting();
@@ -59,24 +58,24 @@ public class BossEntity {
     public List<String> getIncompleteSectionsToEnable() {
         List<String> incompleteList = new ArrayList<>();
 
-        if(this.entityStats == null) incompleteList.add("EntityStats");
+        if (this.entityStats == null) incompleteList.add("EntityStats");
         else {
             EntityStatsElement entityStatsElement = this.entityStats.get(0);
 
-            if(entityStatsElement == null) incompleteList.add("EntityStatsElement");
+            if (entityStatsElement == null) incompleteList.add("EntityStatsElement");
             else {
                 MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
 
-                if(mainStatsElement == null) incompleteList.add("MainStatsElement");
+                if (mainStatsElement == null) incompleteList.add("MainStatsElement");
                 else {
                     Integer position = mainStatsElement.getPosition();
                     String entityType = mainStatsElement.getEntityType();
                     Double health = mainStatsElement.getHealth();
 
-                    if(position == null) incompleteList.add("Entity Position");
-                    if(health == null) incompleteList.add("Entity Health");
-                    if(entityType == null || entityType.isEmpty()) incompleteList.add("Entity Type");
-                    if(getSpawnItem() == null || getSpawnItem().isEmpty()) incompleteList.add("Spawn Item");
+                    if (position == null) incompleteList.add("Entity Position");
+                    if (health == null) incompleteList.add("Entity Health");
+                    if (entityType == null || entityType.isEmpty()) incompleteList.add("Entity Type");
+                    if (getSpawnItem() == null || getSpawnItem().isEmpty()) incompleteList.add("Spawn Item");
                 }
             }
         }
@@ -85,15 +84,15 @@ public class BossEntity {
     }
 
     public boolean isCompleteEnoughToSpawn() {
-        if(this.entityStats == null) return false;
+        if (this.entityStats == null) return false;
 
         EntityStatsElement entityStatsElement = this.entityStats.get(0);
 
-        if(entityStatsElement == null) return false;
+        if (entityStatsElement == null) return false;
 
         MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
 
-        if(mainStatsElement == null) return false;
+        if (mainStatsElement == null) return false;
 
         Integer position = mainStatsElement.getPosition();
         String entityType = mainStatsElement.getEntityType();
@@ -110,20 +109,40 @@ public class BossEntity {
         return this.spawnItem;
     }
 
+    public void setSpawnItem(String spawnItem) {
+        this.spawnItem = spawnItem;
+    }
+
     public String getTargeting() {
         return this.targeting;
+    }
+
+    public void setTargeting(String targeting) {
+        this.targeting = targeting;
     }
 
     public boolean isEditing() {
         return this.editing;
     }
 
+    public void setEditing(boolean editing) {
+        this.editing = editing;
+    }
+
     public boolean isBuyable() {
         return this.buyable;
     }
 
+    public void setBuyable(boolean buyable) {
+        this.buyable = buyable;
+    }
+
     public Double getPrice() {
         return this.price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public List<EntityStatsElement> getEntityStats() {
@@ -144,25 +163,5 @@ public class BossEntity {
 
     public DropsElement getDrops() {
         return this.drops;
-    }
-
-    public void setSpawnItem(String spawnItem) {
-        this.spawnItem = spawnItem;
-    }
-
-    public void setTargeting(String targeting) {
-        this.targeting = targeting;
-    }
-
-    public void setEditing(boolean editing) {
-        this.editing = editing;
-    }
-
-    public void setBuyable(boolean buyable) {
-        this.buyable = buyable;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 }

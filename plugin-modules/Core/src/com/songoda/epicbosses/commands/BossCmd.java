@@ -24,12 +24,12 @@ public class BossCmd extends SubCommandService<CommandSender> {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(args.length == 0) {
+        if (args.length == 0) {
             Bukkit.dispatchCommand(sender, "boss help");
             return;
         }
 
-        if(handleSubCommand(sender, args)) return;
+        if (handleSubCommand(sender, args)) return;
 
         Bukkit.dispatchCommand(sender, "boss help");
     }

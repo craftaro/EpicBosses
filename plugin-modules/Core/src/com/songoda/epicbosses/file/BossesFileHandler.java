@@ -44,7 +44,7 @@ public class BossesFileHandler extends FileHandler<Map<String, BossEntity>> {
 
             fileReader.close();
 
-            if(jsonObject != null) {
+            if (jsonObject != null) {
                 jsonObject.entrySet().forEach(entry -> {
                     String id = entry.getKey();
                     BossEntity bossEntity = GSON.fromJson(entry.getValue(), BossEntity.class);
@@ -63,7 +63,8 @@ public class BossesFileHandler extends FileHandler<Map<String, BossEntity>> {
     public void saveFile(Map<String, BossEntity> map) {
         try {
             FileWriter fileWriter = new FileWriter(getFile());
-            Type type = new TypeToken<Map<String, BossEntity>>(){}.getType();
+            Type type = new TypeToken<Map<String, BossEntity>>() {
+            }.getType();
 
             fileWriter.write(GSON.toJson(new HashMap<>(map), type));
             fileWriter.flush();

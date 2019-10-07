@@ -51,7 +51,7 @@ public class GiveRewardPositionListPanel extends SubVariablePanelHandler<DropTab
         int maxPage = panel.getMaxPage(keys);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, dropTable, giveTableElement, keys, rewardSections);
             return true;
@@ -87,8 +87,9 @@ public class GiveRewardPositionListPanel extends SubVariablePanelHandler<DropTab
 
     private void loadPage(Panel panel, int page, DropTable dropTable, GiveTableElement giveTableElement, List<String> keys, Map<String, Map<String, GiveTableSubElement>> rewards) {
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= keys.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e->{});
+            if (slot >= keys.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String position = keys.get(slot);
                 Map<String, GiveTableSubElement> innerRewards = rewards.get(position);
@@ -105,7 +106,7 @@ public class GiveRewardPositionListPanel extends SubVariablePanelHandler<DropTab
                 panel.setItem(realisticSlot, itemStack, event -> {
                     ClickType clickType = event.getClick();
 
-                    if(clickType == ClickType.SHIFT_RIGHT) {
+                    if (clickType == ClickType.SHIFT_RIGHT) {
                         rewards.remove(position);
                         giveTableElement.setGiveRewards(rewards);
                         saveDropTable((Player) event.getWhoClicked(), dropTable, giveTableElement, BossAPI.convertObjectToJsonObject(giveTableElement));
@@ -122,9 +123,9 @@ public class GiveRewardPositionListPanel extends SubVariablePanelHandler<DropTab
             Map<String, Map<String, GiveTableSubElement>> rewards = giveTableElement.getGiveRewards();
             List<String> keys = new ArrayList<>(giveTableElement.getGiveRewards().keySet());
             int nextAvailable = NumberUtils.get().getNextAvailablePosition(keys);
-            String nextKey = ""+nextAvailable;
+            String nextKey = "" + nextAvailable;
 
-            if(rewards.containsKey(nextKey)) {
+            if (rewards.containsKey(nextKey)) {
                 Debug.FAILED_TO_CREATE_NEWPOSITION.debug(nextKey, BossAPI.getDropTableName(dropTable));
                 return;
             }

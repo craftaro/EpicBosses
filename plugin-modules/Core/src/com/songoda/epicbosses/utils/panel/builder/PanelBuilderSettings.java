@@ -21,11 +21,11 @@ public class PanelBuilderSettings {
         ConfigurationSection buttonsSection = configurationSection.getConfigurationSection("Buttons");
 
         this.emptySpaceFiller = settingsSection != null && settingsSection.getBoolean("emptySpaceFiller", false);
-        this.backButton = settingsSection != null &&  settingsSection.getBoolean("backButton", false);
-        this.exitButton = settingsSection != null &&  settingsSection.getBoolean("exitButton", false);
-        this.fillTo = settingsSection == null? 0 : settingsSection.getInt("fillTo", 0);
-        this.backButtonSlot = buttonsSection == null? -1 : buttonsSection.getInt("backButton", -1);
-        this.exitButtonSlot = buttonsSection == null? -1 : buttonsSection.getInt("exitButton", -1);
+        this.backButton = settingsSection != null && settingsSection.getBoolean("backButton", false);
+        this.exitButton = settingsSection != null && settingsSection.getBoolean("exitButton", false);
+        this.fillTo = settingsSection == null ? 0 : settingsSection.getInt("fillTo", 0);
+        this.backButtonSlot = buttonsSection == null ? -1 : buttonsSection.getInt("backButton", -1);
+        this.exitButtonSlot = buttonsSection == null ? -1 : buttonsSection.getInt("exitButton", -1);
         this.emptySpaceFillerItem = itemStackHolderConverter.to(configurationSection.getConfigurationSection("EmptySpaceFiller"));
     }
 

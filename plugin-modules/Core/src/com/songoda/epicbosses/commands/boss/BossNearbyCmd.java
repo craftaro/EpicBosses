@@ -29,12 +29,12 @@ public class BossNearbyCmd extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(!Permission.nearby.hasPermission(sender)) {
+        if (!Permission.nearby.hasPermission(sender)) {
             Message.Boss_Nearby_NoPermission.msg(sender);
             return;
         }
 
-        if(!(sender instanceof Player)) {
+        if (!(sender instanceof Player)) {
             Message.General_MustBePlayer.msg(sender);
             return;
         }
@@ -45,12 +45,12 @@ public class BossNearbyCmd extends SubCommand {
         double maxRadius = this.plugin.getConfig().getDouble("Limits.maxNearbyRadius", 500.0);
         String nearbyFormat = this.plugin.getConfig().getString("Settings.nearbyFormat", "{name} ({distance}m)");
 
-        if(args.length == 2) {
+        if (args.length == 2) {
             Integer newNumber = NumberUtils.get().getInteger(args[1]);
 
-            if(newNumber != null) radius = newNumber;
+            if (newNumber != null) radius = newNumber;
 
-            if(radius > maxRadius) {
+            if (radius > maxRadius) {
                 Message.Boss_Nearby_MaxRadius.msg(player, maxRadius);
                 return;
             }
@@ -59,7 +59,7 @@ public class BossNearbyCmd extends SubCommand {
         Map<ActiveBossHolder, Double> nearbyBosses = this.plugin.getBossEntityManager().getActiveBossHoldersWithinRadius(radius, location);
         Map<ActiveBossHolder, Double> sortedMap = MapUtils.get().sortByValue(nearbyBosses);
 
-        if(sortedMap.isEmpty()) {
+        if (sortedMap.isEmpty()) {
             Message.Boss_Nearby_NoneNearby.msg(player);
             return;
         }

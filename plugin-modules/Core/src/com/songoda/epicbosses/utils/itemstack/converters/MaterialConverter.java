@@ -19,13 +19,13 @@ public class MaterialConverter implements IConverter<String, Material> {
 
     @Override
     public Material from(String input) {
-        if(input.contains(":")) {
+        if (input.contains(":")) {
             String[] split = input.split(":");
 
             input = split[0];
         }
 
-        if(NumberUtils.get().isInt(input)) {
+        if (NumberUtils.get().isInt(input)) {
             return MaterialUtils.fromId(NumberUtils.get().getInteger(input));
         }
 

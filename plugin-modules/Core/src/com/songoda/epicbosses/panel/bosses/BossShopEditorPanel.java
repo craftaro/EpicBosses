@@ -46,7 +46,7 @@ public class BossShopEditorPanel extends VariablePanelHandler<BossEntity> {
         PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
 
         replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-        replaceMap.put("{buyable}", bossEntity.isBuyable()+"");
+        replaceMap.put("{buyable}", bossEntity.isBuyable() + "");
         replaceMap.put("{price}", NumberUtils.get().formatDouble(ObjectUtils.getValue(bossEntity.getPrice(), 0.0)));
         panelBuilder.addReplaceData(replaceMap);
 
@@ -55,7 +55,7 @@ public class BossShopEditorPanel extends VariablePanelHandler<BossEntity> {
 
         counter.getSlotsWith("Buyable").forEach(slot -> panel.setOnClick(slot, getBuyableAction(bossEntity)));
         counter.getSlotsWith("Price").forEach(slot -> panel.setOnClick(slot, event -> {
-            if(!bossEntity.isEditing()) {
+            if (!bossEntity.isEditing()) {
                 Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                 return;
             }
@@ -78,7 +78,7 @@ public class BossShopEditorPanel extends VariablePanelHandler<BossEntity> {
 
     public ClickAction getBuyableAction(BossEntity bossEntity) {
         return event -> {
-            if(!bossEntity.isEditing()) {
+            if (!bossEntity.isEditing()) {
                 Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                 return;
             }

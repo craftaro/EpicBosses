@@ -29,44 +29,44 @@ public class Skill {
         return this.mode;
     }
 
-    public String getType() {
-        return this.type;
-    }
-
-    public String getDisplayName() {
-        return this.displayName;
-    }
-
-    public String getCustomMessage() {
-        return this.customMessage;
-    }
-
-    public Double getRadius() {
-        return this.radius;
-    }
-
-    public JsonObject getCustomData() {
-        return this.customData;
-    }
-
     public void setMode(String mode) {
         this.mode = mode;
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     public void setType(String type) {
         this.type = type;
     }
 
+    public String getDisplayName() {
+        return this.displayName;
+    }
+
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    public String getCustomMessage() {
+        return this.customMessage;
     }
 
     public void setCustomMessage(String customMessage) {
         this.customMessage = customMessage;
     }
 
+    public Double getRadius() {
+        return this.radius;
+    }
+
     public void setRadius(Double radius) {
         this.radius = radius;
+    }
+
+    public JsonObject getCustomData() {
+        return this.customData;
     }
 
     public void setCustomData(JsonObject customData) {

@@ -21,12 +21,12 @@ public class HandsElement {
         return this.mainHand;
     }
 
-    public String getOffHand() {
-        return this.offHand;
-    }
-
     public void setMainHand(String mainHand) {
         this.mainHand = mainHand;
+    }
+
+    public String getOffHand() {
+        return this.offHand;
     }
 
     public void setOffHand(String offHand) {

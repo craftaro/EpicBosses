@@ -31,22 +31,22 @@ public class BossGiveEggCmd extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(!Permission.give.hasPermission(sender)) {
+        if (!Permission.give.hasPermission(sender)) {
             Message.Boss_GiveEgg_NoPermission.msg(sender);
             return;
         }
 
-        if(args.length < 3) {
+        if (args.length < 3) {
             Message.Boss_GiveEgg_InvalidArgs.msg(sender);
             return;
         }
 
         int amount = 1;
 
-        if(args.length == 4) {
+        if (args.length == 4) {
             String amountInput = args[3];
 
-            if(NumberUtils.get().isInt(amountInput)) {
+            if (NumberUtils.get().isInt(amountInput)) {
                 amount = Integer.valueOf(amountInput);
             } else {
                 Message.General_NotNumber.msg(sender);
@@ -57,7 +57,7 @@ public class BossGiveEggCmd extends SubCommand {
         String playerInput = args[2];
         Player player = Bukkit.getPlayer(playerInput);
 
-        if(player == null) {
+        if (player == null) {
             Message.General_NotOnline.msg(sender, playerInput);
             return;
         }
@@ -65,14 +65,14 @@ public class BossGiveEggCmd extends SubCommand {
         String bossInput = args[1];
         BossEntity bossEntity = this.bossesFileManager.getBossEntity(bossInput);
 
-        if(bossEntity == null) {
+        if (bossEntity == null) {
             Message.Boss_GiveEgg_InvalidBoss.msg(sender);
             return;
         }
 
         ItemStack spawnItem = this.bossEntityManager.getSpawnItem(bossEntity);
 
-        if(spawnItem == null) {
+        if (spawnItem == null) {
             Message.Boss_GiveEgg_NotSet.msg(sender);
             return;
         }

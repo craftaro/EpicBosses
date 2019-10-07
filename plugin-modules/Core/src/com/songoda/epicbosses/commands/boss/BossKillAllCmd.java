@@ -25,19 +25,19 @@ public class BossKillAllCmd extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(!Permission.admin.hasPermission(sender)) {
+        if (!Permission.admin.hasPermission(sender)) {
             Message.Boss_KillAll_NoPermission.msg(sender);
             return;
         }
 
         World world = null;
 
-        if(args.length == 2) {
+        if (args.length == 2) {
             String worldArgs = args[1];
 
             world = Bukkit.getWorld(worldArgs);
 
-            if(world == null) {
+            if (world == null) {
                 Message.Boss_KillAll_WorldNotFound.msg(sender);
                 return;
             }
@@ -45,7 +45,7 @@ public class BossKillAllCmd extends SubCommand {
 
         int amount = this.bossEntityManager.killAllHolders(world);
 
-        if(args.length == 2) Message.Boss_KillAll_KilledWorld.msg(sender, amount, world.getName());
+        if (args.length == 2) Message.Boss_KillAll_KilledWorld.msg(sender, amount, world.getName());
         else Message.Boss_KillAll_KilledAll.msg(sender, amount);
     }
 }

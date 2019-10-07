@@ -25,13 +25,13 @@ public class SpigotYmlReader implements IYmlReader {
         this.spigotConfig = FileUtils.get().loadFile(spigotFile);
     }
 
+    public static SpigotYmlReader get() {
+        return instance;
+    }
+
     @Override
     public Object getObject(String path) {
         return this.spigotConfig.get(path);
-    }
-
-    public static SpigotYmlReader get() {
-        return instance;
     }
 
 }

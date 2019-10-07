@@ -6,7 +6,7 @@ import java.lang.annotation.*;
  * Created by charl on 03-May-17.
  */
 @Documented
-@Target({ ElementType.TYPE })
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Description {
 

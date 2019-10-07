@@ -50,7 +50,7 @@ public class ShopPanel extends PanelHandler {
         int maxPage = panel.getMaxPage(filteredMap);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, entryList, filteredMap);
             return true;
@@ -69,15 +69,16 @@ public class ShopPanel extends PanelHandler {
 
     private void loadPage(Panel panel, int page, List<String> entryList, Map<String, BossEntity> filteredMap) {
         panel.loadPage(page, ((slot, realisticSlot) -> {
-            if(slot >= filteredMap.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= filteredMap.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = entryList.get(slot);
                 BossEntity bossEntity = filteredMap.get(name);
                 ItemStack itemStack = this.bossEntityManager.getDisplaySpawnItem(bossEntity);
                 double price = bossEntity.getPrice();
 
-                if(itemStack == null) {
+                if (itemStack == null) {
                     itemStack = new ItemStack(Material.BARRIER);
                 }
 
@@ -93,13 +94,13 @@ public class ShopPanel extends PanelHandler {
                     ItemStack spawnItem = this.bossEntityManager.getSpawnItem(bossEntity);
                     Player player = (Player) e.getWhoClicked();
 
-                    if(spawnItem == null) {
+                    if (spawnItem == null) {
                         Debug.FAILED_TO_GIVE_SPAWN_EGG.debug(e.getWhoClicked().getName(), name);
                         return;
                     }
 
 
-                    if(EconomyManager.hasBalance(player, price)) {
+                    if (EconomyManager.hasBalance(player, price)) {
                         Message.Boss_Shop_NotEnoughBalance.msg(player, NumberUtils.get().formatDouble(price));
                         return;
                     }
@@ -116,7 +117,7 @@ public class ShopPanel extends PanelHandler {
         Map<String, BossEntity> newMap = new HashMap<>();
 
         originalMap.forEach((s, bossEntity) -> {
-            if(bossEntity.canBeBought()) {
+            if (bossEntity.canBeBought()) {
                 newMap.put(s, bossEntity);
             }
         });

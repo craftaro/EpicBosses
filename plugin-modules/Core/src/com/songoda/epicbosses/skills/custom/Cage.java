@@ -17,7 +17,10 @@ import com.songoda.epicbosses.skills.elements.SubCustomSkillElement;
 import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.skills.interfaces.IOtherSkillDataElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
-import com.songoda.epicbosses.utils.*;
+import com.songoda.epicbosses.utils.Debug;
+import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ObjectUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.converters.MaterialConverter;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
@@ -104,7 +107,7 @@ public class Cage extends CustomSkillHandler {
         nearbyEntities.forEach(livingEntity -> {
             UUID uuid = livingEntity.getUniqueId();
 
-            if(getPlayersInCage().contains(uuid)) return;
+            if (getPlayersInCage().contains(uuid)) return;
 
             getPlayersInCage().add(uuid);
 
@@ -132,16 +135,16 @@ public class Cage extends CustomSkillHandler {
 
     private void restoreBlocks(Queue<BlockState> queue) {
         queue.forEach(blockState -> {
-            if(blockState == null) return;
+            if (blockState == null) return;
 
             Location location = blockState.getLocation();
             CageLocationData cageLocationData = getCageLocationDataMap().getOrDefault(location, new CageLocationData(location, 1));
             int amountOfCages = cageLocationData.getAmountOfCages();
 
-            if(amountOfCages == 1) {
+            if (amountOfCages == 1) {
                 BlockState oldState = cageLocationData.getOldBlockState();
 
-                if(oldState != null) {
+                if (oldState != null) {
                     if (ServerVersion.isServerVersionAtLeast(ServerVersion.V1_13)) {
                         location.getBlock().setBlockData(oldState.getBlockData());
                     } else {
@@ -164,7 +167,7 @@ public class Cage extends CustomSkillHandler {
 
                 getCageLocationDataMap().remove(location);
             } else {
-                cageLocationData.setAmountOfCages(amountOfCages-1);
+                cageLocationData.setAmountOfCages(amountOfCages - 1);
                 getCageLocationDataMap().put(location, cageLocationData);
             }
         });
@@ -181,22 +184,23 @@ public class Cage extends CustomSkillHandler {
     private void setBlocks(Queue<BlockState> queue, String materialType, Skill skill) {
         Material material = MATERIAL_CONVERTER.from(materialType);
 
-        if(material == null) {
+        if (material == null) {
             Debug.SKILL_CAGE_INVALID_MATERIAL.debug(materialType, skill.getDisplayName());
             return;
         }
 
         queue.forEach(blockState -> {
-            if(blockState == null) return;
+            if (blockState == null) return;
 
             Location location = blockState.getLocation();
             CageLocationData cageLocationData = getCageLocationDataMap().getOrDefault(location, new CageLocationData(location, 0));
             int currentAmount = cageLocationData.getAmountOfCages();
 
-            if(currentAmount == 0 || cageLocationData.getOldBlockState() == null) cageLocationData.setOldBlockState(blockState);
+            if (currentAmount == 0 || cageLocationData.getOldBlockState() == null)
+                cageLocationData.setOldBlockState(blockState);
 
             blockState.getBlock().setType(material);
-            cageLocationData.setAmountOfCages(currentAmount+1);
+            cageLocationData.setAmountOfCages(currentAmount + 1);
             getCageLocationDataMap().put(location, cageLocationData);
         });
     }
@@ -218,7 +222,7 @@ public class Cage extends CustomSkillHandler {
             ClickType clickType = event.getClick();
             int amountToModifyBy;
 
-            if(clickType.name().contains("RIGHT")) {
+            if (clickType.name().contains("RIGHT")) {
                 amountToModifyBy = -1;
             } else {
                 amountToModifyBy = +1;
@@ -229,7 +233,7 @@ public class Cage extends CustomSkillHandler {
             int currentAmount = ObjectUtils.getValue(customCageSkillElement.getDuration(), 5);
             int newAmount = currentAmount + amountToModifyBy;
 
-            if(newAmount <= 1) newAmount = 1;
+            if (newAmount <= 1) newAmount = 1;
 
             customCageSkillElement.setDuration(newAmount);
             subCustomSkillElement.setOtherSkillData(BossAPI.convertObjectToJsonObject(customCageSkillElement));

@@ -23,12 +23,12 @@ public class OnSpawnMessageElement {
         return this.message;
     }
 
-    public Integer getRadius() {
-        return this.radius;
-    }
-
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Integer getRadius() {
+        return this.radius;
     }
 
     public void setRadius(Integer radius) {

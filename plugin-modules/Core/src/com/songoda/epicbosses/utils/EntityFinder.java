@@ -106,13 +106,23 @@ public enum EntityFinder {
         this.customEntityHandler = null;
     }
 
+    public static EntityFinder get(String name) {
+        for (EntityFinder entityFinder : values()) {
+            for (String s : entityFinder.getNames()) {
+                if (name.equalsIgnoreCase(s)) return entityFinder;
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public String toString() {
         return this.fancyName;
     }
 
     public LivingEntity spawnNewLivingEntity(String input, Location location) {
-        if(this.customEntityHandler != null) {
+        if (this.customEntityHandler != null) {
             LivingEntity livingEntity;
 
             try {
@@ -126,16 +136,6 @@ public enum EntityFinder {
         } else {
             return (LivingEntity) location.getWorld().spawnEntity(location, getEntityType());
         }
-    }
-
-    public static EntityFinder get(String name) {
-        for(EntityFinder entityFinder : values()) {
-            for (String s : entityFinder.getNames()) {
-                if(name.equalsIgnoreCase(s)) return entityFinder;
-            }
-        }
-
-        return null;
     }
 
     public ICustomEntityHandler getCustomEntityHandler() {

@@ -44,7 +44,7 @@ public class AutoSpawnFileHandler extends FileHandler<Map<String, AutoSpawn>> {
 
             fileReader.close();
 
-            if(jsonObject != null) {
+            if (jsonObject != null) {
                 jsonObject.entrySet().forEach(entry -> {
                     String id = entry.getKey();
                     AutoSpawn autoSpawn = GSON.fromJson(entry.getValue(), AutoSpawn.class);
@@ -63,7 +63,8 @@ public class AutoSpawnFileHandler extends FileHandler<Map<String, AutoSpawn>> {
     public void saveFile(Map<String, AutoSpawn> map) {
         try {
             FileWriter fileWriter = new FileWriter(getFile());
-            Type type = new TypeToken<Map<String, AutoSpawn>>(){}.getType();
+            Type type = new TypeToken<Map<String, AutoSpawn>>() {
+            }.getType();
 
             fileWriter.write(GSON.toJson(new HashMap<>(map), type));
             fileWriter.flush();

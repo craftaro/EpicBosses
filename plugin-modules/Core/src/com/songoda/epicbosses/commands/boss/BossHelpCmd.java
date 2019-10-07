@@ -21,13 +21,13 @@ public class BossHelpCmd extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(Permission.admin.hasPermission(sender) || Permission.help.hasPermission(sender)) {
+        if (Permission.admin.hasPermission(sender) || Permission.help.hasPermission(sender)) {
             int pageNumber = 0;
 
-            if(args.length > 1) {
+            if (args.length > 1) {
                 Integer newNumber = NumberUtils.get().getInteger(args[1]);
 
-                if(newNumber != null) pageNumber = newNumber;
+                if (newNumber != null) pageNumber = newNumber;
             }
 
             switch (pageNumber) {

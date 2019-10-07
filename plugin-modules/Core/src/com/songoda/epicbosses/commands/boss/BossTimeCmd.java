@@ -31,12 +31,12 @@ public class BossTimeCmd extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(!Permission.time.hasPermission(sender)) {
+        if (!Permission.time.hasPermission(sender)) {
             Message.Boss_Time_NoPermission.msg(sender);
             return;
         }
 
-        if(args.length != 2) {
+        if (args.length != 2) {
             Message.Boss_Time_InvalidArgs.msg(sender);
             return;
         }
@@ -45,7 +45,7 @@ public class BossTimeCmd extends SubCommand {
         boolean exists = this.autoSpawnManager.exists(section);
         List<String> currentActive = this.autoSpawnManager.getIntervalAutoSpawns();
 
-        if(!exists) {
+        if (!exists) {
             Message.Boss_Time_DoesntExist.msg(sender, StringUtils.get().appendList(currentActive));
             return;
         }
@@ -54,7 +54,7 @@ public class BossTimeCmd extends SubCommand {
         ActiveIntervalAutoSpawnHolder activeIntervalAutoSpawnHolder = (ActiveIntervalAutoSpawnHolder) activeAutoSpawnHolder;
         long remainingMs = activeIntervalAutoSpawnHolder.getRemainingMs();
 
-        if(remainingMs == 0 && activeIntervalAutoSpawnHolder.isSpawnAfterLastBossIsKilled()) {
+        if (remainingMs == 0 && activeIntervalAutoSpawnHolder.isSpawnAfterLastBossIsKilled()) {
             Message.Boss_Time_CurrentlyActive.msg(sender);
             return;
         }

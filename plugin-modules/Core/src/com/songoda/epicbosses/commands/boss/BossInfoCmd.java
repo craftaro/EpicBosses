@@ -27,12 +27,12 @@ public class BossInfoCmd extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(!Permission.admin.hasPermission(sender)) {
+        if (!Permission.admin.hasPermission(sender)) {
             Message.Boss_Info_NoPermission.msg(sender);
             return;
         }
 
-        if(args.length != 2) {
+        if (args.length != 2) {
             Message.Boss_Info_InvalidArgs.msg(sender);
             return;
         }
@@ -40,7 +40,7 @@ public class BossInfoCmd extends SubCommand {
         String input = args[1];
         BossEntity bossEntity = this.bossesFileManager.getBossEntity(input);
 
-        if(bossEntity == null) {
+        if (bossEntity == null) {
             Message.Boss_Info_CouldntFindBoss.msg(sender);
             return;
         }

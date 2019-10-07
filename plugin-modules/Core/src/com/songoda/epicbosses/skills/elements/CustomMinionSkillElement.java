@@ -24,12 +24,12 @@ public class CustomMinionSkillElement implements IOtherSkillDataElement {
         return this.minionToSpawn;
     }
 
-    public Integer getAmount() {
-        return this.amount;
-    }
-
     public void setMinionToSpawn(String minionToSpawn) {
         this.minionToSpawn = minionToSpawn;
+    }
+
+    public Integer getAmount() {
+        return this.amount;
     }
 
     public void setAmount(Integer amount) {

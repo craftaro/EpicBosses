@@ -49,8 +49,8 @@ public class StatisticMainEditorPanel extends SubVariablePanelHandler<BossEntity
         Double health = entityStatsElement.getMainStats().getHealth();
         PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
 
-        if(health == null) health = 0.0;
-        if(displayName == null) displayName = "N/A";
+        if (health == null) health = 0.0;
+        if (displayName == null) displayName = "N/A";
 
         replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
         replaceMap.put("{health}", NumberUtils.get().formatDouble(health));
@@ -85,7 +85,7 @@ public class StatisticMainEditorPanel extends SubVariablePanelHandler<BossEntity
 
     private ClickAction getDisplayNameAction(BossEntity bossEntity, EntityStatsElement entityStatsElement) {
         return event -> {
-            if(!bossEntity.isEditing()) {
+            if (!bossEntity.isEditing()) {
                 Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                 return;
             }
@@ -101,7 +101,7 @@ public class StatisticMainEditorPanel extends SubVariablePanelHandler<BossEntity
 
     private ClickAction getHealthAction(BossEntity bossEntity, EntityStatsElement entityStatsElement) {
         return event -> {
-            if(!bossEntity.isEditing()) {
+            if (!bossEntity.isEditing()) {
                 Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                 return;
             }
@@ -109,24 +109,24 @@ public class StatisticMainEditorPanel extends SubVariablePanelHandler<BossEntity
             ClickType clickType = event.getClick();
             double healthToModifyBy = 0.0;
 
-            if(clickType == ClickType.LEFT) {
+            if (clickType == ClickType.LEFT) {
                 healthToModifyBy = 1.0;
-            } else if(clickType == ClickType.SHIFT_LEFT) {
+            } else if (clickType == ClickType.SHIFT_LEFT) {
                 healthToModifyBy = 0.1;
-            } else if(clickType == ClickType.RIGHT) {
+            } else if (clickType == ClickType.RIGHT) {
                 healthToModifyBy = -1.0;
-            } else if(clickType == ClickType.SHIFT_RIGHT) {
+            } else if (clickType == ClickType.SHIFT_RIGHT) {
                 healthToModifyBy = -0.1;
             }
 
-            String modifyValue = healthToModifyBy > 0.0? "increased" : "decreased";
+            String modifyValue = healthToModifyBy > 0.0 ? "increased" : "decreased";
             Double currentChance = entityStatsElement.getMainStats().getHealth();
 
-            if(currentChance == null) currentChance = 0.0;
+            if (currentChance == null) currentChance = 0.0;
 
             double newHealth = currentChance + healthToModifyBy;
 
-            if(newHealth < 0.0) {
+            if (newHealth < 0.0) {
                 newHealth = 1.0;
             }
 

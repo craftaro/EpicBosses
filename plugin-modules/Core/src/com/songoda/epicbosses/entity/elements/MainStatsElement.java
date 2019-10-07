@@ -29,28 +29,28 @@ public class MainStatsElement {
         return this.position;
     }
 
-    public String getEntityType() {
-        return this.entityType;
-    }
-
-    public Double getHealth() {
-        return this.health;
-    }
-
-    public String getDisplayName() {
-        return this.displayName;
-    }
-
     public void setPosition(Integer position) {
         this.position = position;
+    }
+
+    public String getEntityType() {
+        return this.entityType;
     }
 
     public void setEntityType(String entityType) {
         this.entityType = entityType;
     }
 
+    public Double getHealth() {
+        return this.health;
+    }
+
     public void setHealth(Double health) {
         this.health = health;
+    }
+
+    public String getDisplayName() {
+        return this.displayName;
     }
 
     public void setDisplayName(String displayName) {

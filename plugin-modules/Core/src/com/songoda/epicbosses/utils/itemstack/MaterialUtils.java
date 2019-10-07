@@ -1,6 +1,5 @@
 package com.songoda.epicbosses.utils.itemstack;
 
-import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.Material;
 
 import java.util.HashMap;
@@ -16,7 +15,8 @@ public class MaterialUtils {
         for (Material material : Material.values()) {
             try {
                 materialIdMap.put(material.getId(), material);
-            } catch (Exception ignored) { }
+            } catch (Exception ignored) {
+            }
         }
     }
 

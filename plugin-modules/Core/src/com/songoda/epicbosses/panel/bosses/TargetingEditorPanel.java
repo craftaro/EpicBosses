@@ -58,8 +58,8 @@ public class TargetingEditorPanel extends VariablePanelHandler<BossEntity> {
             ItemStack currentStack = panel.getInventory().getItem(slot);
             ItemStack newItemStack = getItemStack(current, (String) returnValue, currentStack);
 
-            panel.setItem(slot, newItemStack , event -> {
-                if(!bossEntity.isEditing()) {
+            panel.setItem(slot, newItemStack, event -> {
+                if (!bossEntity.isEditing()) {
                     Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                     return;
                 }
@@ -84,7 +84,7 @@ public class TargetingEditorPanel extends VariablePanelHandler<BossEntity> {
         ItemStack itemStack = this.itemsFileManager.getItemStackConverter().from(this.itemsFileManager.getItemStackHolder("DefaultSelectedTargetingItem"));
         ItemStack cloneStack = currentItemStack.clone();
 
-        if(thisType.equalsIgnoreCase(current)) {
+        if (thisType.equalsIgnoreCase(current)) {
             cloneStack.setType(itemStack.getType());
         }
 

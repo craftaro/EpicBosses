@@ -88,12 +88,12 @@ public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
         return event -> {
             Player player = (Player) event.getWhoClicked();
 
-            if(bossEntity.isCompleteEnoughToSpawn()) {
+            if (bossEntity.isCompleteEnoughToSpawn()) {
                 bossEntity.setEditing(!bossEntity.isEditing());
                 this.bossesFileManager.save();
                 Message.Boss_Edit_Toggled.msg(player, BossAPI.getBossEntityName(bossEntity), bossEntity.getEditingValue());
 
-                if(bossEntity.isEditing()) {
+                if (bossEntity.isEditing()) {
                     this.bossEntityManager.killAllHolders(bossEntity);
                 }
 

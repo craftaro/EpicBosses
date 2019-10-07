@@ -67,7 +67,7 @@ public class AutoSpawnTypeEditorPanel extends VariablePanelHandler<AutoSpawn> {
 
     private ClickAction getIntervalSystem(AutoSpawn autoSpawn) {
         return event -> {
-            if(!autoSpawn.isEditing()) {
+            if (!autoSpawn.isEditing()) {
                 Message.Boss_AutoSpawn_MustToggleEditing.msg(event.getWhoClicked());
                 return;
             }

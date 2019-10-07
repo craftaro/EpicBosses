@@ -55,8 +55,8 @@ public class ModifyCommandEditorPanel extends SubVariablePanelHandler<Skill, Sub
         Double chance = subCommandSkillElement.getChance();
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        if(commands == null) commands = new ArrayList<>();
-        if(chance == null) chance = 100.0;
+        if (commands == null) commands = new ArrayList<>();
+        if (chance == null) chance = 100.0;
 
         replaceMap.put("{commands}", StringUtils.get().appendList(commands));
         replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
@@ -84,28 +84,28 @@ public class ModifyCommandEditorPanel extends SubVariablePanelHandler<Skill, Sub
             ClickType clickType = event.getClick();
             double amountToModify;
 
-            if(clickType == ClickType.SHIFT_LEFT) {
+            if (clickType == ClickType.SHIFT_LEFT) {
                 amountToModify = 0.1;
-            } else if(clickType == ClickType.RIGHT) {
+            } else if (clickType == ClickType.RIGHT) {
                 amountToModify = -1.0;
-            } else if(clickType == ClickType.SHIFT_RIGHT) {
+            } else if (clickType == ClickType.SHIFT_RIGHT) {
                 amountToModify = -0.1;
             } else {
                 amountToModify = 1.0;
             }
 
-            String modifyValue = amountToModify > 0.0? "increased" : "decreased";
+            String modifyValue = amountToModify > 0.0 ? "increased" : "decreased";
             Double currentValue = subCommandSkillElement.getChance();
 
-            if(currentValue == null) currentValue = 100.0;
+            if (currentValue == null) currentValue = 100.0;
 
             double newValue = currentValue + amountToModify;
 
-            if(newValue < 0.0) {
+            if (newValue < 0.0) {
                 newValue = 0.0;
             }
 
-            if(newValue > 100.0) {
+            if (newValue > 100.0) {
                 newValue = 100.0;
             }
 
@@ -115,8 +115,8 @@ public class ModifyCommandEditorPanel extends SubVariablePanelHandler<Skill, Sub
             List<SubCommandSkillElement> subCommandSkillElements = commandSkillElement.getCommands();
             List<SubCommandSkillElement> newElements = new ArrayList<>();
 
-            for(SubCommandSkillElement subElement : subCommandSkillElements) {
-                if(subElement.getName().equals(subCommandSkillElement.getName())) {
+            for (SubCommandSkillElement subElement : subCommandSkillElements) {
+                if (subElement.getName().equals(subCommandSkillElement.getName())) {
                     newElements.add(subCommandSkillElement);
                 } else {
                     newElements.add(subElement);

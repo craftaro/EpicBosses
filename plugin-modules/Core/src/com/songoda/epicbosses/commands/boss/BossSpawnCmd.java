@@ -28,29 +28,29 @@ public class BossSpawnCmd extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(!Permission.admin.hasPermission(sender)) {
+        if (!Permission.admin.hasPermission(sender)) {
             Message.Boss_Spawn_NoPermission.msg(sender);
             return;
         }
 
-        if(args.length < 2) {
+        if (args.length < 2) {
             Message.Boss_Spawn_InvalidArgs.msg(sender);
             return;
         }
 
         Location spawnLocation;
 
-        if(args.length == 3) {
+        if (args.length == 3) {
             Location input = StringUtils.get().fromStringToLocation(args[2]);
 
-            if(input == null) {
+            if (input == null) {
                 Message.Boss_Spawn_InvalidLocation.msg(sender);
                 return;
             }
 
             spawnLocation = input;
         } else {
-            if(!(sender instanceof Player)) {
+            if (!(sender instanceof Player)) {
                 Message.Boss_Spawn_MustBePlayer.msg(sender);
                 return;
             }
@@ -61,7 +61,7 @@ public class BossSpawnCmd extends SubCommand {
         String bossInput = args[1];
         BossEntity bossEntity = this.bossesFileManager.getBossEntity(bossInput);
 
-        if(bossEntity == null) {
+        if (bossEntity == null) {
             Message.Boss_Spawn_InvalidBoss.msg(sender);
             return;
         }

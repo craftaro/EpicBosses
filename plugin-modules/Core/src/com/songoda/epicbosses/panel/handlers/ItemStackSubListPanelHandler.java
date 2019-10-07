@@ -65,7 +65,7 @@ public abstract class ItemStackSubListPanelHandler extends SubVariablePanelHandl
         int maxPage = panel.getMaxPage(entryList);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, filteredMap, entryList, bossEntity, entityStatsElement);
             return true;
@@ -94,7 +94,7 @@ public abstract class ItemStackSubListPanelHandler extends SubVariablePanelHandl
         ServerUtils.get().runTaskAsync(() -> {
             panelBuilderCounter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, event -> openAddItemsPanel(player, bossEntity, entityStatsElement)));
             panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, event -> {
-                if(!bossEntity.isEditing()) {
+                if (!bossEntity.isEditing()) {
                     Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                     return;
                 }
@@ -127,18 +127,19 @@ public abstract class ItemStackSubListPanelHandler extends SubVariablePanelHandl
         String current = getCurrent(entityStatsElement);
 
         panel.loadPage(requestedPage, (slot, realisticSlot) -> {
-            if(slot >= filteredMap.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= filteredMap.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = entryList.get(slot);
                 ItemStackHolder itemStackHolder = filteredMap.get(name);
                 ItemStack itemStack = this.itemStackConverter.from(itemStackHolder);
 
-                if(itemStack == null) {
+                if (itemStack == null) {
                     itemStack = new ItemStack(Material.BARRIER);
                 }
 
-                if(name.equalsIgnoreCase(current)) {
+                if (name.equalsIgnoreCase(current)) {
                     Map<String, String> replaceMap = new HashMap<>();
 
                     replaceMap.put("{name}", ItemStackUtils.getName(itemStack));
@@ -147,7 +148,7 @@ public abstract class ItemStackSubListPanelHandler extends SubVariablePanelHandl
                 }
 
                 panel.setItem(realisticSlot, itemStack, e -> {
-                    if(!bossEntity.isEditing()) {
+                    if (!bossEntity.isEditing()) {
                         Message.Boss_Edit_CannotBeModified.msg(e.getWhoClicked());
                         return;
                     }

@@ -45,7 +45,7 @@ public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Sk
         int maxPage = panel.getMaxPage(filteredList);
 
         panel.setOnPageChange((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, filteredList, skill, customSkillElement);
             return true;
@@ -72,24 +72,25 @@ public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Sk
         String current = getCurrentSetting(customSkillElement);
 
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= filteredList.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e->{});
+            if (slot >= filteredList.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 Material material = filteredList.get(slot);
                 ItemStack itemStack;
 
-                if(material == Material.AIR) itemStack = new ItemStack(Material.GLASS);
+                if (material == Material.AIR) itemStack = new ItemStack(Material.GLASS);
                 else itemStack = new ItemStack(material);
 
                 Map<String, String> replaceMap = new HashMap<>();
 
-                if(itemStack.getType() == Material.AIR) return;
+                if (itemStack.getType() == Material.AIR) return;
 
                 String name = material.name();
 
                 replaceMap.put("{type}", StringUtils.get().formatString(name));
 
-                if(current.equalsIgnoreCase(name)) {
+                if (current.equalsIgnoreCase(name)) {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.Material.selectedName"), replaceMap);
                 } else {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.Material.name"), replaceMap);
@@ -107,7 +108,7 @@ public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Sk
         List<Material> materials = new ArrayList<>();
 
         masterList.forEach(material -> {
-            if((material.isBlock() && material.isSolid() && material.isItem()) || (material == Material.AIR)) {
+            if ((material.isBlock() && material.isSolid() && material.isItem()) || (material == Material.AIR)) {
                 materials.add(material);
             }
         });

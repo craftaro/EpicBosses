@@ -23,28 +23,28 @@ public class EquipmentElement {
         return this.helmet;
     }
 
-    public String getChestplate() {
-        return this.chestplate;
-    }
-
-    public String getLeggings() {
-        return this.leggings;
-    }
-
-    public String getBoots() {
-        return this.boots;
-    }
-
     public void setHelmet(String helmet) {
         this.helmet = helmet;
+    }
+
+    public String getChestplate() {
+        return this.chestplate;
     }
 
     public void setChestplate(String chestplate) {
         this.chestplate = chestplate;
     }
 
+    public String getLeggings() {
+        return this.leggings;
+    }
+
     public void setLeggings(String leggings) {
         this.leggings = leggings;
+    }
+
+    public String getBoots() {
+        return this.boots;
     }
 
     public void setBoots(String boots) {

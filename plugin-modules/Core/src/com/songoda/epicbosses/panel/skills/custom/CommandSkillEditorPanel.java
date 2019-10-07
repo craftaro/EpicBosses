@@ -44,7 +44,7 @@ public class CommandSkillEditorPanel extends VariablePanelHandler<Skill> {
         int maxPage = panel.getMaxPage(subCommandSkillElements);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, subCommandSkillElements, skill);
             return true;
@@ -101,16 +101,17 @@ public class CommandSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     private void loadPage(Panel panel, int page, List<SubCommandSkillElement> subCommandSkillElements, Skill skill) {
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= subCommandSkillElements.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= subCommandSkillElements.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 SubCommandSkillElement subCommandSkillElement = subCommandSkillElements.get(slot);
                 Map<String, String> replaceMap = new HashMap<>();
                 Double chance = subCommandSkillElement.getChance();
                 List<String> commands = subCommandSkillElement.getCommands();
 
-                if(chance == null) chance = 100.0;
-                if(commands == null) commands = new ArrayList<>();
+                if (chance == null) chance = 100.0;
+                if (commands == null) commands = new ArrayList<>();
 
                 replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
                 replaceMap.put("{commands}", StringUtils.get().appendList(commands));

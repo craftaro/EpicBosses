@@ -24,12 +24,12 @@ public class BossSkillsCmd extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(!Permission.admin.hasPermission(sender)) {
+        if (!Permission.admin.hasPermission(sender)) {
             Message.Boss_Skills_NoPermission.msg(sender);
             return;
         }
 
-        if(!(sender instanceof Player)) {
+        if (!(sender instanceof Player)) {
             Message.General_MustBePlayer.msg(sender);
             return;
         }

@@ -77,7 +77,7 @@ public class GiveRewardRewardsListPanel extends SubSubVariablePanelHandler<DropT
         int maxPage = panel.getMaxPage(keys);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, dropTable, giveTableElement, key, keys, rewardSections);
             return true;
@@ -91,8 +91,9 @@ public class GiveRewardRewardsListPanel extends SubSubVariablePanelHandler<DropT
         NumberUtils numberUtils = NumberUtils.get();
 
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= keys.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e->{});
+            if (slot >= keys.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String rewardSectionPosition = keys.get(slot);
                 GiveTableSubElement giveTableSubElement = rewards.get(rewardSectionPosition);
@@ -112,10 +113,10 @@ public class GiveRewardRewardsListPanel extends SubSubVariablePanelHandler<DropT
                 replaceMap.put("{percentage}", numberUtils.formatDouble(requiredPercentage));
                 replaceMap.put("{items}", numberUtils.formatDouble(itemDrops));
                 replaceMap.put("{maxDrops}", numberUtils.formatDouble(maxDrops));
-                replaceMap.put("{randomDrops}", ""+randomDrops);
+                replaceMap.put("{randomDrops}", "" + randomDrops);
                 replaceMap.put("{commands}", numberUtils.formatDouble(commandDrops));
                 replaceMap.put("{maxCommands}", numberUtils.formatDouble(maxCommands));
-                replaceMap.put("{randomCommands}", ""+randomCommands);
+                replaceMap.put("{randomCommands}", "" + randomCommands);
 
                 ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.DropTable.GiveRewardsList.name"), replaceMap);
                 ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.DropTable.GiveRewardsList.lore"), replaceMap);
@@ -123,7 +124,7 @@ public class GiveRewardRewardsListPanel extends SubSubVariablePanelHandler<DropT
                 panel.setItem(realisticSlot, itemStack, event -> {
                     ClickType clickType = event.getClick();
 
-                    if(clickType == ClickType.SHIFT_RIGHT) {
+                    if (clickType == ClickType.SHIFT_RIGHT) {
                         rewards.remove(rewardSectionPosition);
                         rewardSections.put(key, rewards);
                         giveTableElement.setGiveRewards(rewardSections);
@@ -144,9 +145,9 @@ public class GiveRewardRewardsListPanel extends SubSubVariablePanelHandler<DropT
             Map<String, GiveTableSubElement> rewards = rewardSections.get(key);
             List<String> keys = new ArrayList<>(rewards.keySet());
             int nextAvailable = NumberUtils.get().getNextAvailablePosition(keys);
-            String nextKey = ""+nextAvailable;
+            String nextKey = "" + nextAvailable;
 
-            if(rewards.containsKey(nextKey)) {
+            if (rewards.containsKey(nextKey)) {
                 Debug.FAILED_TO_CREATE_NEWPOSITION.debug(nextKey, BossAPI.getDropTableName(dropTable));
                 return;
             }

@@ -28,19 +28,19 @@ public class BossEditCmd extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(!Permission.admin.hasPermission(sender)) {
+        if (!Permission.admin.hasPermission(sender)) {
             Message.Boss_Edit_NoPermission.msg(sender);
             return;
         }
 
-        if(!(sender instanceof Player)) {
+        if (!(sender instanceof Player)) {
             Message.General_MustBePlayer.msg(sender);
             return;
         }
 
         Player player = (Player) sender;
 
-        switch(args.length) {
+        switch (args.length) {
             default:
             case 1:
                 this.bossPanelManager.getBosses().openFor(player);
@@ -48,7 +48,7 @@ public class BossEditCmd extends SubCommand {
             case 2:
                 String input = args[1];
 
-                if(!this.bossEntityContainer.exists(input)) {
+                if (!this.bossEntityContainer.exists(input)) {
                     Message.Boss_Edit_DoesntExist.msg(sender);
                     return;
                 }

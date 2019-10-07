@@ -24,17 +24,17 @@ public class BossShopCmd extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(!Permission.shop.hasPermission(sender)) {
+        if (!Permission.shop.hasPermission(sender)) {
             Message.Boss_Shop_NoPermission.msg(sender);
             return;
         }
 
-        if(!(sender instanceof Player)) {
+        if (!(sender instanceof Player)) {
             Message.General_MustBePlayer.msg(sender);
             return;
         }
 
-        if(!this.plugin.getConfig().getBoolean("Toggles.bossShop", true)) {
+        if (!this.plugin.getConfig().getBoolean("Toggles.bossShop", true)) {
             Message.Boss_Shop_Disabled.msg(sender);
             return;
         }

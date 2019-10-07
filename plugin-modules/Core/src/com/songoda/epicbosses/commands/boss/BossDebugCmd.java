@@ -24,12 +24,12 @@ public class BossDebugCmd extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(!Permission.debug.hasPermission(sender)) {
+        if (!Permission.debug.hasPermission(sender)) {
             Message.Boss_Debug_NoPermission.msg(sender);
             return;
         }
 
-        if(!(sender instanceof Player)) {
+        if (!(sender instanceof Player)) {
             Message.General_MustBePlayer.msg(sender);
             return;
         }
@@ -37,7 +37,7 @@ public class BossDebugCmd extends SubCommand {
         Player player = (Player) sender;
         String toggled;
 
-        if(this.debugManager.isToggled(player.getUniqueId())) {
+        if (this.debugManager.isToggled(player.getUniqueId())) {
             this.debugManager.togglePlayerOff(player.getUniqueId());
             toggled = "Off";
         } else {

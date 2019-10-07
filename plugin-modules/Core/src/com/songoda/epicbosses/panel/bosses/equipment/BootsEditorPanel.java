@@ -31,7 +31,7 @@ public class BootsEditorPanel extends ItemStackSubListPanelHandler {
         originalMap.forEach((string, holder) -> {
             ItemStack itemStack = this.itemStackConverter.from(holder);
 
-            if(itemStack.getType().name().contains("BOOTS")) {
+            if (itemStack.getType().name().contains("BOOTS")) {
                 newMap.put(string, holder);
             }
         });

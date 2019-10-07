@@ -18,7 +18,7 @@ public class ItemStackHolderConverter implements IConverter<ItemStackHolder, Con
 
     @Override
     public ItemStackHolder to(ConfigurationSection configurationSection) {
-        if(configurationSection == null) return null;
+        if (configurationSection == null) return null;
 
         Integer amount = (Integer) configurationSection.get("amount", null);
         String type = CompatibleMaterial.getMaterial(configurationSection.getString("type", null)).getMaterial().name();

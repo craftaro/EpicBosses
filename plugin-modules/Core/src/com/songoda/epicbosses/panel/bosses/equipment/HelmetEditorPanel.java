@@ -31,7 +31,7 @@ public class HelmetEditorPanel extends ItemStackSubListPanelHandler {
         originalMap.forEach((string, holder) -> {
             ItemStack itemStack = this.itemStackConverter.from(holder);
 
-            if(itemStack.getType().name().contains("HELMET") || itemStack.getType().isBlock()) {
+            if (itemStack.getType().name().contains("HELMET") || itemStack.getType().isBlock()) {
                 newMap.put(string, holder);
             }
         });

@@ -53,13 +53,13 @@ public class GiveRewardMainEditPanel extends SubVariablePanelHandler<DropTable, 
 
         replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
         replaceMap.put("{position}", giveRewardEditHandler.getDropSection());
-        replaceMap.put("{randomDrops}", ""+randomDrops);
+        replaceMap.put("{randomDrops}", "" + randomDrops);
         replaceMap.put("{maxDrops}", NumberUtils.get().formatDouble(maxDrops));
         replaceMap.put("{drops}", NumberUtils.get().formatDouble(itemDrops));
         replaceMap.put("{requiredPercentage}", NumberUtils.get().formatDouble(requiredPercentage));
         replaceMap.put("{commands}", NumberUtils.get().formatDouble(commandDrops));
         replaceMap.put("{maxCommands}", NumberUtils.get().formatDouble(maxCommands));
-        replaceMap.put("{randomCommands}", ""+randomCommands);
+        replaceMap.put("{randomCommands}", "" + randomCommands);
         panelBuilder.addReplaceData(replaceMap);
 
         PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
@@ -95,26 +95,26 @@ public class GiveRewardMainEditPanel extends SubVariablePanelHandler<DropTable, 
             ClickType clickType = event.getClick();
             double amountToModifyBy;
 
-            if(clickType == ClickType.SHIFT_LEFT) {
+            if (clickType == ClickType.SHIFT_LEFT) {
                 amountToModifyBy = 10;
-            } else if(clickType == ClickType.RIGHT) {
+            } else if (clickType == ClickType.RIGHT) {
                 amountToModifyBy = -1;
-            } else if(clickType == ClickType.SHIFT_RIGHT) {
+            } else if (clickType == ClickType.SHIFT_RIGHT) {
                 amountToModifyBy = -10;
             } else {
                 amountToModifyBy = 1;
             }
 
-            String modifyValue = amountToModifyBy > 0? "increased" : "decreased";
+            String modifyValue = amountToModifyBy > 0 ? "increased" : "decreased";
             double currentAmount = ObjectUtils.getValue(giveTableSubElement.getRequiredPercentage(), 0.0);
 
             double newAmount = currentAmount + amountToModifyBy;
 
-            if(newAmount < 0) {
+            if (newAmount < 0) {
                 newAmount = 0;
             }
 
-            if(newAmount > 100) {
+            if (newAmount > 100) {
                 newAmount = 100;
             }
 
@@ -131,22 +131,22 @@ public class GiveRewardMainEditPanel extends SubVariablePanelHandler<DropTable, 
             ClickType clickType = event.getClick();
             int amountToModifyBy;
 
-            if(clickType == ClickType.SHIFT_LEFT) {
+            if (clickType == ClickType.SHIFT_LEFT) {
                 amountToModifyBy = 10;
-            } else if(clickType == ClickType.RIGHT) {
+            } else if (clickType == ClickType.RIGHT) {
                 amountToModifyBy = -1;
-            } else if(clickType == ClickType.SHIFT_RIGHT) {
+            } else if (clickType == ClickType.SHIFT_RIGHT) {
                 amountToModifyBy = -10;
             } else {
                 amountToModifyBy = 1;
             }
 
-            String modifyValue = amountToModifyBy > 0? "increased" : "decreased";
+            String modifyValue = amountToModifyBy > 0 ? "increased" : "decreased";
             int currentAmount = ObjectUtils.getValue(giveTableSubElement.getMaxCommands(), 3);
 
             int newAmount = currentAmount + amountToModifyBy;
 
-            if(newAmount < -1) {
+            if (newAmount < -1) {
                 newAmount = -1;
             }
 
@@ -163,22 +163,22 @@ public class GiveRewardMainEditPanel extends SubVariablePanelHandler<DropTable, 
             ClickType clickType = event.getClick();
             int amountToModifyBy;
 
-            if(clickType == ClickType.SHIFT_LEFT) {
+            if (clickType == ClickType.SHIFT_LEFT) {
                 amountToModifyBy = 10;
-            } else if(clickType == ClickType.RIGHT) {
+            } else if (clickType == ClickType.RIGHT) {
                 amountToModifyBy = -1;
-            } else if(clickType == ClickType.SHIFT_RIGHT) {
+            } else if (clickType == ClickType.SHIFT_RIGHT) {
                 amountToModifyBy = -10;
             } else {
                 amountToModifyBy = 1;
             }
 
-            String modifyValue = amountToModifyBy > 0? "increased" : "decreased";
+            String modifyValue = amountToModifyBy > 0 ? "increased" : "decreased";
             int currentAmount = ObjectUtils.getValue(giveTableSubElement.getMaxDrops(), 3);
 
             int newAmount = currentAmount + amountToModifyBy;
 
-            if(newAmount < -1) {
+            if (newAmount < -1) {
                 newAmount = -1;
             }
 

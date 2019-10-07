@@ -54,7 +54,7 @@ public class MinionSelectEditorPanel extends SubVariablePanelHandler<Skill, Cust
         int maxPage = panel.getMaxPage(entryList);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, currentEntities, entryList, skill, customSkillElement);
             return true;
@@ -82,8 +82,9 @@ public class MinionSelectEditorPanel extends SubVariablePanelHandler<Skill, Cust
         String current = customMinionSkillElement.getMinionToSpawn();
 
         panel.loadPage(page, ((slot, realisticSlot) -> {
-            if(slot >= entryList.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e->{});
+            if (slot >= entryList.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = entryList.get(slot);
                 MinionEntity minionEntity = currentEntities.get(name);
@@ -92,10 +93,10 @@ public class MinionSelectEditorPanel extends SubVariablePanelHandler<Skill, Cust
                 Map<String, String> replaceMap = new HashMap<>();
 
                 replaceMap.put("{name}", name);
-                replaceMap.put("{editing}", ""+minionEntity.isEditing());
+                replaceMap.put("{editing}", "" + minionEntity.isEditing());
                 replaceMap.put("{targeting}", minionEntity.getTargeting());
 
-                if(current.equalsIgnoreCase(name)) {
+                if (current.equalsIgnoreCase(name)) {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.MinionList.selectedName"), replaceMap);
                 } else {
                     ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.MinionList.name"), replaceMap);

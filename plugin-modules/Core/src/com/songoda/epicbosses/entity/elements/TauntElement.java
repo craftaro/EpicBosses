@@ -26,20 +26,20 @@ public class TauntElement {
         return this.delay;
     }
 
-    public Integer getRadius() {
-        return this.radius;
-    }
-
-    public List<String> getTaunts() {
-        return this.taunts;
-    }
-
     public void setDelay(Integer delay) {
         this.delay = delay;
     }
 
+    public Integer getRadius() {
+        return this.radius;
+    }
+
     public void setRadius(Integer radius) {
         this.radius = radius;
+    }
+
+    public List<String> getTaunts() {
+        return this.taunts;
     }
 
     public void setTaunts(List<String> taunts) {
