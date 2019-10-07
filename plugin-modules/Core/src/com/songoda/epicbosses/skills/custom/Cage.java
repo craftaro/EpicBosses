@@ -1,5 +1,7 @@
 package com.songoda.epicbosses.skills.custom;
 
+import com.songoda.core.compatibility.CompatibleMaterial;
+import com.songoda.core.compatibility.ServerVersion;
 import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
@@ -83,8 +85,8 @@ public class Cage extends CustomSkillHandler {
     @Override
     public List<ICustomSettingAction> getOtherSkillDataActions(Skill skill, CustomSkillElement customSkillElement) {
         List<ICustomSettingAction> clickActions = new ArrayList<>();
-        ItemStack clickStack = new ItemStack(versionHandler.getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1) ? Material.STONE_PRESSURE_PLATE : Material.valueOf("STONE_PLATE"));
-        ItemStack duration = new ItemStack(versionHandler.getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1) ? Material.CLOCK : Material.valueOf("WATCH"));
+        ItemStack clickStack = CompatibleMaterial.STONE_PRESSURE_PLATE.getItem();
+        ItemStack duration = CompatibleMaterial.CLOCK.getItem();
         ClickAction flatAction = (event -> this.flatTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
         ClickAction wallAction = (event -> this.wallTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
         ClickAction insideAction = (event -> this.insideTypeEditor.openFor((Player) event.getWhoClicked(), skill, customSkillElement));
@@ -140,7 +142,7 @@ public class Cage extends CustomSkillHandler {
                 BlockState oldState = cageLocationData.getOldBlockState();
 
                 if(oldState != null) {
-                    if (versionHandler.getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1)) {
+                    if (ServerVersion.isServerVersionAtLeast(ServerVersion.V1_13)) {
                         location.getBlock().setBlockData(oldState.getBlockData());
                     } else {
                         if (setBlockDataMethod == null) {

@@ -1,6 +1,7 @@
 package com.songoda.epicbosses.panel.skills.custom;
 
 import com.google.gson.JsonObject;
+import com.songoda.core.compatibility.ServerVersion;
 import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -11,7 +12,6 @@ import com.songoda.epicbosses.skills.types.PotionSkillElement;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
-import com.songoda.epicbosses.utils.Versions;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
@@ -110,7 +110,7 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
                 ItemStack itemStack = new ItemStack(Material.POTION);
                 PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
 
-                if (new VersionHandler().getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1)) {
+                if (ServerVersion.isServerVersionAtLeast(ServerVersion.V1_13)) {
                     PotionType potionType = PotionType.getByEffect(PotionEffectType.BLINDNESS);
 
                     if (potionType == null) potionType = PotionType.WATER;

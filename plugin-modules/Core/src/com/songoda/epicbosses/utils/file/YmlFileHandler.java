@@ -1,14 +1,9 @@
 package com.songoda.epicbosses.utils.file;
 
-import com.songoda.epicbosses.utils.Versions;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
 
 /**
  * @author Charles Cullen
@@ -30,8 +25,8 @@ public class YmlFileHandler implements IFileHandler<FileConfiguration> {
 
     @Override
     public void createFile() {
-        if(!this.file.exists()) {
-            if(this.saveResource) {
+        if (!this.file.exists()) {
+            if (this.saveResource) {
                 String name = this.file.getName();
 
                 System.out.println(name);

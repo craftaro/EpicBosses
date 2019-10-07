@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.skills.custom;
 
+import com.songoda.core.compatibility.CompatibleMaterial;
 import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
@@ -12,9 +13,7 @@ import com.songoda.epicbosses.skills.interfaces.IOtherSkillDataElement;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.NumberUtils;
-import com.songoda.epicbosses.utils.Versions;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -30,8 +29,6 @@ import java.util.List;
  * @since 11-Nov-18
  */
 public class Minions extends CustomSkillHandler {
-
-    private static final VersionHandler versionHandler = new VersionHandler();
 
     private EpicBosses plugin;
 
@@ -54,7 +51,7 @@ public class Minions extends CustomSkillHandler {
         List<ICustomSettingAction> clickActions = new ArrayList<>();
 
         clickActions.add(BossSkillManager.createCustomSkillAction("Amount Editor", getAmountCurrent(customSkillElement), new ItemStack(Material.REDSTONE), getAmountAction(skill, customSkillElement)));
-        clickActions.add(BossSkillManager.createCustomSkillAction("Minion to Spawn Editor", getMinionToSpawnCurrent(customSkillElement), new ItemStack(versionHandler.getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1) ? Material.CREEPER_SPAWN_EGG : Material.valueOf("MONSTER_EGG")), getMinionToSpawnAction(skill, customSkillElement)));
+        clickActions.add(BossSkillManager.createCustomSkillAction("Minion to Spawn Editor", getMinionToSpawnCurrent(customSkillElement), CompatibleMaterial.CREEPER_SPAWN_EGG.getItem(), getMinionToSpawnAction(skill, customSkillElement)));
 
         return clickActions;
     }
@@ -77,7 +74,7 @@ public class Minions extends CustomSkillHandler {
     private String getAmountCurrent(CustomSkillElement customSkillElement) {
         CustomMinionSkillElement customMinionSkillElement = customSkillElement.getCustom().getCustomMinionSkillData();
 
-        return ""+customMinionSkillElement.getAmount();
+        return "" + customMinionSkillElement.getAmount();
     }
 
     private ClickAction getAmountAction(Skill skill, CustomSkillElement customSkillElement) {
@@ -86,7 +83,7 @@ public class Minions extends CustomSkillHandler {
             ClickType clickType = event.getClick();
             Integer amountToModifyBy;
 
-            if(clickType.name().contains("RIGHT")) {
+            if (clickType.name().contains("RIGHT")) {
                 amountToModifyBy = -1;
             } else {
                 amountToModifyBy = 1;
@@ -96,9 +93,9 @@ public class Minions extends CustomSkillHandler {
             String modifyValue;
             Integer newAmount;
 
-            if(currentAmount == null) currentAmount = 0;
+            if (currentAmount == null) currentAmount = 0;
 
-            if(amountToModifyBy > 0.0) {
+            if (amountToModifyBy > 0.0) {
                 modifyValue = "increased";
                 newAmount = currentAmount + amountToModifyBy;
             } else {
@@ -106,7 +103,7 @@ public class Minions extends CustomSkillHandler {
                 newAmount = currentAmount + amountToModifyBy;
             }
 
-            if(newAmount <= 0) {
+            if (newAmount <= 0) {
                 newAmount = 0;
             }
 
