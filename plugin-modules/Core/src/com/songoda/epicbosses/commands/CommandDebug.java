@@ -1,39 +1,30 @@
-package com.songoda.epicbosses.commands.boss;
+package com.songoda.epicbosses.commands;
 
+import com.songoda.core.commands.AbstractCommand;
 import com.songoda.epicbosses.managers.DebugManager;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.Permission;
-import com.songoda.epicbosses.utils.command.SubCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.List;
 
 /**
  * @author Charles Cullen
  * @version 1.0.0
  * @since 09-Oct-18
  */
-public class BossDebugCmd extends SubCommand {
+public class CommandDebug extends AbstractCommand {
 
     private DebugManager debugManager;
 
-    public BossDebugCmd(DebugManager debugManager) {
-        super("debug");
-
+    public CommandDebug(DebugManager debugManager) {
+        super(true, "debug");
         this.debugManager = debugManager;
     }
 
     @Override
-    public void execute(CommandSender sender, String[] args) {
-        if (!Permission.debug.hasPermission(sender)) {
-            Message.Boss_Debug_NoPermission.msg(sender);
-            return;
-        }
-
-        if (!(sender instanceof Player)) {
-            Message.General_MustBePlayer.msg(sender);
-            return;
-        }
-
+    protected ReturnType runCommand(CommandSender sender, String... args) {
         Player player = (Player) sender;
         String toggled;
 
@@ -46,5 +37,26 @@ public class BossDebugCmd extends SubCommand {
         }
 
         Message.Boss_Debug_Toggled.msg(player, toggled);
+        return ReturnType.SUCCESS;
+    }
+
+    @Override
+    protected List<String> onTab(CommandSender commandSender, String... args) {
+        return null;
+    }
+
+    @Override
+    public String getPermissionNode() {
+        return "boss.reload";
+    }
+
+    @Override
+    public String getSyntax() {
+        return "/boss reload";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Reloads EpicBosses and its configurations.";
     }
 }

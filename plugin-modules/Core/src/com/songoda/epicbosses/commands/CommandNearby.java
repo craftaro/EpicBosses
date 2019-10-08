@@ -1,13 +1,17 @@
-package com.songoda.epicbosses.commands.boss;
+package com.songoda.epicbosses.commands;
 
+import com.songoda.core.commands.AbstractCommand;
 import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
-import com.songoda.epicbosses.utils.*;
-import com.songoda.epicbosses.utils.command.SubCommand;
+import com.songoda.epicbosses.utils.MapUtils;
+import com.songoda.epicbosses.utils.Message;
+import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.StringUtils;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -17,42 +21,31 @@ import java.util.Map;
  * @version 1.0.0
  * @since 02-Oct-18
  */
-public class BossNearbyCmd extends SubCommand {
+public class CommandNearby extends AbstractCommand {
 
     private EpicBosses plugin;
 
-    public BossNearbyCmd(EpicBosses plugin) {
-        super("nearby");
-
+    public CommandNearby(EpicBosses plugin) {
+        super(true, "nearby");
         this.plugin = plugin;
     }
 
     @Override
-    public void execute(CommandSender sender, String[] args) {
-        if (!Permission.nearby.hasPermission(sender)) {
-            Message.Boss_Nearby_NoPermission.msg(sender);
-            return;
-        }
-
-        if (!(sender instanceof Player)) {
-            Message.General_MustBePlayer.msg(sender);
-            return;
-        }
-
+    protected AbstractCommand.ReturnType runCommand(CommandSender sender, String... args) {
         Player player = (Player) sender;
         Location location = player.getLocation();
         double radius = this.plugin.getConfig().getDouble("Settings.defaultNearbyRadius", 250.0);
         double maxRadius = this.plugin.getConfig().getDouble("Limits.maxNearbyRadius", 500.0);
         String nearbyFormat = this.plugin.getConfig().getString("Settings.nearbyFormat", "{name} ({distance}m)");
 
-        if (args.length == 2) {
-            Integer newNumber = NumberUtils.get().getInteger(args[1]);
+        if (args.length == 1) {
+            Integer newNumber = NumberUtils.get().getInteger(args[0]);
 
             if (newNumber != null) radius = newNumber;
 
             if (radius > maxRadius) {
                 Message.Boss_Nearby_MaxRadius.msg(player, maxRadius);
-                return;
+                return ReturnType.SUCCESS;
             }
         }
 
@@ -61,15 +54,38 @@ public class BossNearbyCmd extends SubCommand {
 
         if (sortedMap.isEmpty()) {
             Message.Boss_Nearby_NoneNearby.msg(player);
-            return;
+            return ReturnType.FAILURE;
         }
 
         List<String> input = new LinkedList<>();
 
-        sortedMap.forEach(((activeBossHolder, distance) -> {
-            input.add(nearbyFormat.replace("{name}", activeBossHolder.getName()).replace("{distance}", NumberUtils.get().formatDouble(distance)));
-        }));
+        sortedMap.forEach(((activeBossHolder, distance) ->
+                input.add(nearbyFormat.replace("{name}", activeBossHolder.getName()).replace("{distance}", NumberUtils.get().formatDouble(distance)))));
 
         Message.Boss_Nearby_Near.msg(player, StringUtils.get().appendList(input));
+        return ReturnType.SUCCESS;
+    }
+
+    @Override
+    protected List<String> onTab(CommandSender commandSender, String... args) {
+        if (args.length == 1) {
+            return Arrays.asList("1", "2", "3", "4", "5");
+        }
+        return null;
+    }
+
+    @Override
+    public String getPermissionNode() {
+        return "boss.nearby";
+    }
+
+    @Override
+    public String getSyntax() {
+        return "/boss nearby [radius]";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Displays all nearby bosses within the specified radius.";
     }
 }

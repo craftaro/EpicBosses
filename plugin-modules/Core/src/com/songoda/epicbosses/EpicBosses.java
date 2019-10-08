@@ -2,12 +2,13 @@ package com.songoda.epicbosses;
 
 import com.songoda.core.SongodaCore;
 import com.songoda.core.SongodaPlugin;
+import com.songoda.core.commands.CommandManager;
 import com.songoda.core.compatibility.CompatibleMaterial;
 import com.songoda.core.configuration.Config;
 import com.songoda.core.hooks.EconomyManager;
 import com.songoda.core.hooks.WorldGuardHook;
 import com.songoda.epicbosses.api.BossAPI;
-import com.songoda.epicbosses.commands.BossCmd;
+import com.songoda.epicbosses.commands.*;
 import com.songoda.epicbosses.container.BossEntityContainer;
 import com.songoda.epicbosses.container.MinionEntityContainer;
 import com.songoda.epicbosses.file.DisplayFileHandler;
@@ -51,7 +52,6 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
     private BossMechanicManager bossMechanicManager;
     private BossLocationManager bossLocationManager;
     private BossListenerManager bossListenerManager;
-    private BossCommandManager bossCommandManager;
     private BossEntityManager bossEntityManager;
     private BossTargetManager bossTargetManager;
     private BossPanelManager bossPanelManager;
@@ -64,6 +64,8 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
 
     private MinionMechanicManager minionMechanicManager;
     private MinionEntityContainer minionEntityContainer;
+
+    private CommandManager commandManager;
 
     private DebugManager debugManager = new DebugManager();
 
@@ -153,7 +155,33 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
         this.dropTableFileManager.reload();
         this.autoSpawnFileManager.reload();
 
-        this.bossCommandManager = new BossCommandManager(new BossCmd(), this);
+        // Register commands
+        this.commandManager = new CommandManager(this);
+        this.commandManager.addCommand(new CommandBoss())
+                .addSubCommands(
+                        new CommandCreate(bossEntityContainer),
+                        new CommandDebug(debugManager),
+                        new CommandDropTable(bossPanelManager),
+                        new CommandEdit(bossPanelManager, bossEntityContainer),
+                        new CommandGiveEgg(bossesFileManager, bossEntityManager),
+                        new CommandInfo(bossesFileManager, bossEntityManager),
+                        new CommandItems(bossPanelManager),
+                        new CommandKillAll(bossEntityManager),
+                        new CommandList(bossPanelManager),
+                        new CommandMenu(bossPanelManager),
+                        new CommandNearby(this),
+                        new CommandNewSkill(skillsFileManager, bossSkillManager),
+                        new CommandNewAutoSpawn(autoSpawnFileManager),
+                        new CommandNewCommand(bossCommandFileManager),
+                        new CommandNewMessage(bossCommandFileManager, bossMessagesFileManager),
+                        new CommandNewDropTable(dropTableFileManager, bossDropTableManager),
+                        new CommandReload(this, bossEntityManager),
+                        new CommandShop(this),
+                        new CommandSkills(bossPanelManager),
+                        new CommandSpawn(bossesFileManager),
+                        new CommandTime(this)
+                );
+
         this.bossListenerManager = new BossListenerManager(this);
 
         this.bossPanelManager.load();
@@ -167,7 +195,6 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
 
         saveMessagesToFile();
 
-        this.bossCommandManager.load();
         this.bossListenerManager.load();
 
         this.autoSpawnManager.startIntervalSystems();
@@ -295,10 +322,6 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
         return this.bossListenerManager;
     }
 
-    public BossCommandManager getBossCommandManager() {
-        return this.bossCommandManager;
-    }
-
     public BossEntityManager getBossEntityManager() {
         return this.bossEntityManager;
     }
@@ -337,6 +360,10 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
 
     public MinionEntityContainer getMinionEntityContainer() {
         return this.minionEntityContainer;
+    }
+
+    public CommandManager getCommandManager() {
+        return commandManager;
     }
 
     public DebugManager getDebugManager() {

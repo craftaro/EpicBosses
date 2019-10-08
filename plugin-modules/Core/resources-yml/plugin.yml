@@ -4,3 +4,8 @@ version: ${plugin.version}
 author: ${plugin.author}
 api-version: 1.13
 softdepend: [PlaceholderAPI] # TODO: Add other softdepends
+commands:
+  Boss:
+    description: Used to handle all CustomBosses related commands.
+    default: true
+    aliases: [bosses, eb, epicbosses]

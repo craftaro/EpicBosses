@@ -1,56 +1,47 @@
-package com.songoda.epicbosses.commands.boss;
+package com.songoda.epicbosses.commands;
 
+import com.songoda.core.commands.AbstractCommand;
 import com.songoda.epicbosses.container.BossEntityContainer;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.utils.Message;
-import com.songoda.epicbosses.utils.Permission;
-import com.songoda.epicbosses.utils.command.SubCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Charles Cullen
  * @version 1.0.0
  * @since 02-Oct-18
  */
-public class BossEditCmd extends SubCommand {
+public class CommandEdit extends AbstractCommand {
 
     private BossEntityContainer bossEntityContainer;
     private BossPanelManager bossPanelManager;
 
-    public BossEditCmd(BossPanelManager bossPanelManager, BossEntityContainer bossEntityContainer) {
-        super("edit");
-
+    public CommandEdit(BossPanelManager bossPanelManager, BossEntityContainer bossEntityContainer) {
+        super(true, "edit");
         this.bossPanelManager = bossPanelManager;
         this.bossEntityContainer = bossEntityContainer;
     }
 
     @Override
-    public void execute(CommandSender sender, String[] args) {
-        if (!Permission.admin.hasPermission(sender)) {
-            Message.Boss_Edit_NoPermission.msg(sender);
-            return;
-        }
-
-        if (!(sender instanceof Player)) {
-            Message.General_MustBePlayer.msg(sender);
-            return;
-        }
-
+    protected ReturnType runCommand(CommandSender sender, String... args) {
         Player player = (Player) sender;
 
         switch (args.length) {
             default:
-            case 1:
+            case 0:
                 this.bossPanelManager.getBosses().openFor(player);
                 break;
-            case 2:
-                String input = args[1];
+            case 1:
+                String input = args[0];
 
                 if (!this.bossEntityContainer.exists(input)) {
                     Message.Boss_Edit_DoesntExist.msg(sender);
-                    return;
+                    return ReturnType.FAILURE;
                 }
 
                 BossEntity bossEntity = this.bossEntityContainer.getData().get(input);
@@ -58,5 +49,29 @@ public class BossEditCmd extends SubCommand {
                 this.bossPanelManager.getMainBossEditMenu().openFor(player, bossEntity);
                 break;
         }
+        return ReturnType.SUCCESS;
+    }
+
+    @Override
+    protected List<String> onTab(CommandSender commandSender, String... args) {
+        if (args.length == 1) {
+            return Collections.singletonList("name");
+        }
+        return null;
+    }
+
+    @Override
+    public String getPermissionNode() {
+        return "boss.edit";
+    }
+
+    @Override
+    public String getSyntax() {
+        return "/boss edit <name>";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Edit a specified boss.";
     }
 }

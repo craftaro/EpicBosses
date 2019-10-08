@@ -11,10 +11,7 @@ import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Charles Cullen
@@ -66,6 +63,9 @@ public class AutoSpawnManager {
         });
 
         return intervalAutoSpawns;
+    }
+    public Map<String, ActiveAutoSpawnHolder> getAutoSpawns() {
+        return Collections.unmodifiableMap(this.activeAutoSpawnHolders);
     }
 
     public boolean exists(String name) {
