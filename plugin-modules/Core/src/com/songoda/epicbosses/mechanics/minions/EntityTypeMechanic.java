@@ -8,7 +8,9 @@ import com.songoda.epicbosses.holder.ActiveMinionHolder;
 import com.songoda.epicbosses.mechanics.IMinionMechanic;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.EntityFinder;
+import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Tameable;
 
 /**
  * @author Charles Cullen
@@ -44,6 +46,10 @@ public class EntityTypeMechanic implements IMinionMechanic {
                 if (lowerLivingEntity == null) {
                     Debug.FAILED_ATTEMPT_TO_STACK_BOSSES.debug(BossAPI.getMinionEntityName(minionEntity));
                     return false;
+                }
+
+                if (lowerLivingEntity instanceof Tameable) {
+                    ((Tameable) lowerLivingEntity).setTamed(true);
                 }
 
                 lowerLivingEntity.setPassenger(livingEntity);
