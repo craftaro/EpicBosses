@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.droptables.types.give.commands;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.droptable.elements.GiveTableElement;
@@ -32,7 +32,7 @@ public class GiveCommandRewardMainEditPanel extends SubSubVariablePanelHandler<D
 
     private DropTableFileManager dropTableFileManager;
 
-    public GiveCommandRewardMainEditPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public GiveCommandRewardMainEditPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.dropTableFileManager = plugin.getDropTableFileManager();
@@ -72,26 +72,26 @@ public class GiveCommandRewardMainEditPanel extends SubSubVariablePanelHandler<D
             ClickType clickType = event.getClick();
             double amountToModifyBy;
 
-            if(clickType == ClickType.SHIFT_LEFT) {
+            if (clickType == ClickType.SHIFT_LEFT) {
                 amountToModifyBy = 0.1;
-            } else if(clickType == ClickType.RIGHT) {
+            } else if (clickType == ClickType.RIGHT) {
                 amountToModifyBy = -1.0;
-            } else if(clickType == ClickType.SHIFT_RIGHT) {
+            } else if (clickType == ClickType.SHIFT_RIGHT) {
                 amountToModifyBy = -0.1;
             } else {
                 amountToModifyBy = 1.0;
             }
 
-            String modifyValue = amountToModifyBy > 0? "increased" : "decreased";
+            String modifyValue = amountToModifyBy > 0 ? "increased" : "decreased";
             Map<String, Double> rewards = giveRewardEditHandler.getGiveTableSubElement().getCommands();
             double currentValue = rewards.getOrDefault(name, 50.0);
             double newValue = currentValue + amountToModifyBy;
 
-            if(newValue < 0) {
+            if (newValue < 0) {
                 newValue = 0;
             }
 
-            if(newValue > 100) {
+            if (newValue > 100) {
                 newValue = 100;
             }
 

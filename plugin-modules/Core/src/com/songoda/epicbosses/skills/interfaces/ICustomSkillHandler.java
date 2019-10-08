@@ -4,7 +4,6 @@ import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Charles Cullen

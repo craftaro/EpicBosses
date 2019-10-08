@@ -1,7 +1,6 @@
 package com.songoda.epicbosses.utils.entity;
 
 import org.bukkit.Location;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 
 /**

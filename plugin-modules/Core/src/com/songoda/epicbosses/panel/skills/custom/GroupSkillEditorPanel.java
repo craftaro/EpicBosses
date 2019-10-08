@@ -1,7 +1,7 @@
 package com.songoda.epicbosses.panel.skills.custom;
 
 import com.google.gson.JsonObject;
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
@@ -32,9 +32,9 @@ public class GroupSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     private ItemStackConverter itemStackConverter;
     private ItemsFileManager itemsFileManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public GroupSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public GroupSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -50,7 +50,7 @@ public class GroupSkillEditorPanel extends VariablePanelHandler<Skill> {
         int maxPage = panel.getMaxPage(entryList);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, skill, groupSkillElement, skillMap, entryList);
             return true;
@@ -84,8 +84,9 @@ public class GroupSkillEditorPanel extends VariablePanelHandler<Skill> {
         List<String> currentSkills = groupSkillElement.getGroupedSkills();
 
         panel.loadPage(page, ((slot, realisticSlot) -> {
-            if(slot >= skillMap.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= skillMap.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = entryList.get(slot);
                 Skill innerSkill = skillMap.get(name);
@@ -98,11 +99,11 @@ public class GroupSkillEditorPanel extends VariablePanelHandler<Skill> {
                 ItemStack itemStack = this.itemStackConverter.from(this.itemsFileManager.getItemStackHolder("DefaultSkillMenuItem"));
                 boolean isCurrent = currentSkills.contains(name);
 
-                if(customMessage == null || customMessage.equals("")) customMessage = "N/A";
-                if(radius == null) radius = 100.0;
-                if(mode == null || mode.equals("")) mode = "N/A";
-                if(displayName == null || displayName.equals("")) displayName = "N/A";
-                if(type == null || type.equals("")) type = "N/A";
+                if (customMessage == null || customMessage.equals("")) customMessage = "N/A";
+                if (radius == null) radius = 100.0;
+                if (mode == null || mode.equals("")) mode = "N/A";
+                if (displayName == null || displayName.equals("")) displayName = "N/A";
+                if (type == null || type.equals("")) type = "N/A";
 
                 replaceMap.put("{name}", BossAPI.getSkillName(skill));
                 replaceMap.put("{customMessage}", customMessage);
@@ -111,16 +112,16 @@ public class GroupSkillEditorPanel extends VariablePanelHandler<Skill> {
                 replaceMap.put("{displayName}", displayName);
                 replaceMap.put("{type}", type);
 
-                if(isCurrent) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.Group.selectedName"), replaceMap);
+                if (isCurrent) {
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.Group.selectedName"), replaceMap);
                 } else {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.Group.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.Group.name"), replaceMap);
                 }
 
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Skills.Group.lore"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.Skills.Group.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, event -> {
-                    if(isCurrent) {
+                    if (isCurrent) {
                         currentSkills.remove(name);
                     } else {
                         currentSkills.add(name);

@@ -1,8 +1,7 @@
 package com.songoda.epicbosses.utils.entity.handlers;
 
-import com.songoda.epicbosses.utils.Versions;
+import com.songoda.core.compatibility.ServerVersion;
 import com.songoda.epicbosses.utils.entity.ICustomEntityHandler;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -15,11 +14,9 @@ import org.bukkit.entity.Skeleton;
  */
 public class WitherSkeletonHandler implements ICustomEntityHandler {
 
-    private VersionHandler versionHandler = new VersionHandler();
-
     @Override
     public LivingEntity getBaseEntity(String entityType, Location spawnLocation) {
-        if(this.versionHandler.getVersion().isHigherThanOrEqualTo(Versions.v1_11_R1)) {
+        if (ServerVersion.isServerVersionAtLeast(ServerVersion.V1_11)) {
             return (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.WITHER_SKELETON);
         }
 

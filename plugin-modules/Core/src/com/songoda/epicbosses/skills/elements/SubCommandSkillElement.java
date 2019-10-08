@@ -1,8 +1,6 @@
 package com.songoda.epicbosses.skills.elements;
 
 import com.google.gson.annotations.Expose;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -13,10 +11,13 @@ import java.util.List;
  */
 public class SubCommandSkillElement {
 
-    @Expose @Getter private final String name;
+    @Expose
+    private final String name;
 
-    @Expose @Getter @Setter private Double chance;
-    @Expose @Getter @Setter private List<String> commands;
+    @Expose
+    private Double chance;
+    @Expose
+    private List<String> commands;
 
     public SubCommandSkillElement(String name, Double chance, List<String> commands) {
         this.name = name;
@@ -24,4 +25,23 @@ public class SubCommandSkillElement {
         this.commands = commands;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public Double getChance() {
+        return this.chance;
+    }
+
+    public void setChance(Double chance) {
+        this.chance = chance;
+    }
+
+    public List<String> getCommands() {
+        return this.commands;
+    }
+
+    public void setCommands(List<String> commands) {
+        this.commands = commands;
+    }
 }

@@ -8,7 +8,10 @@ import com.songoda.epicbosses.holder.ActiveMinionHolder;
 import com.songoda.epicbosses.mechanics.IMinionMechanic;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.EntityFinder;
+import org.bukkit.entity.Ageable;
+import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Tameable;
 
 /**
  * @author Charles Cullen
@@ -19,7 +22,7 @@ public class EntityTypeMechanic implements IMinionMechanic {
 
     @Override
     public boolean applyMechanic(MinionEntity minionEntity, ActiveMinionHolder activeMinionHolder) {
-        for(EntityStatsElement entityStatsElement : minionEntity.getEntityStats()) {
+        for (EntityStatsElement entityStatsElement : minionEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
 
             String bossEntityType = mainStatsElement.getEntityType();
@@ -27,21 +30,21 @@ public class EntityTypeMechanic implements IMinionMechanic {
             EntityFinder entityFinder = EntityFinder.get(input);
             Integer position = mainStatsElement.getPosition();
 
-            if(position == null) position = 1;
-            if(entityFinder == null) return false;
+            if (position == null) position = 1;
+            if (entityFinder == null) return false;
 
             LivingEntity livingEntity = entityFinder.spawnNewLivingEntity(bossEntityType, activeMinionHolder.getLocation());
 
-            if(livingEntity == null) return false;
-            if(!activeMinionHolder.getLivingEntityMap().isEmpty()) activeMinionHolder.killAll();
+            if (livingEntity == null) return false;
+            if (!activeMinionHolder.getLivingEntityMap().isEmpty()) activeMinionHolder.killAll();
 
             activeMinionHolder.getLivingEntityMap().put(position, livingEntity.getUniqueId());
 
-            if(position > 1) {
+            if (position > 1) {
                 int lowerPosition = position - 1;
                 LivingEntity lowerLivingEntity = activeMinionHolder.getLivingEntity(lowerPosition);
 
-                if(lowerLivingEntity == null) {
+                if (lowerLivingEntity == null) {
                     Debug.FAILED_ATTEMPT_TO_STACK_BOSSES.debug(BossAPI.getMinionEntityName(minionEntity));
                     return false;
                 }

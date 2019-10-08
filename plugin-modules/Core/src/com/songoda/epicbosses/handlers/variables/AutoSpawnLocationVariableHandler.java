@@ -25,7 +25,7 @@ public class AutoSpawnLocationVariableHandler extends AutoSpawnVariableHandler {
     protected boolean confirmValue(String input, IntervalSpawnElement intervalSpawnElement) {
         Location location = StringUtils.get().fromStringToLocation(input);
 
-        if(location == null) {
+        if (location == null) {
             Message.Boss_AutoSpawn_InvalidLocation.msg(getPlayer(), input);
             return false;
         }

@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.bosses.commands;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -33,9 +33,9 @@ public class OnSpawnCommandEditor extends VariablePanelHandler<BossEntity> {
 
     private CommandsFileManager commandsFileManager;
     private ItemStackConverter itemStackConverter;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public OnSpawnCommandEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public OnSpawnCommandEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -50,7 +50,7 @@ public class OnSpawnCommandEditor extends VariablePanelHandler<BossEntity> {
         int maxPage = panel.getMaxPage(entryList);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, currentCommands, entryList, bossEntity);
             return true;
@@ -85,8 +85,9 @@ public class OnSpawnCommandEditor extends VariablePanelHandler<BossEntity> {
 
     private void loadPage(Panel panel, int page, Map<String, List<String>> currentCommands, List<String> entryList, BossEntity bossEntity) {
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= entryList.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= entryList.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = entryList.get(slot);
                 List<String> commands = currentCommands.get(name);
@@ -97,19 +98,19 @@ public class OnSpawnCommandEditor extends VariablePanelHandler<BossEntity> {
 
                 replaceMap.put("{name}", name);
 
-                if(bossEntity.getCommands().getOnSpawn() != null && bossEntity.getCommands().getOnSpawn().equalsIgnoreCase(name)) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Commands.selectedName"), replaceMap);
+                if (bossEntity.getCommands().getOnSpawn() != null && bossEntity.getCommands().getOnSpawn().equalsIgnoreCase(name)) {
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Commands.selectedName"), replaceMap);
                 } else {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Commands.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Commands.name"), replaceMap);
                 }
 
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                List<String> presetLore = this.plugin.getConfig().getStringList("Display.Boss.Commands.lore");
+                List<String> presetLore = this.plugin.getDisplay().getStringList("Display.Boss.Commands.lore");
                 List<String> newLore = new ArrayList<>();
 
-                for(String s : presetLore) {
-                    if(s.contains("{commands}")) {
-                        for(String command : commands) {
+                for (String s : presetLore) {
+                    if (s.contains("{commands}")) {
+                        for (String command : commands) {
                             newLore.add(StringUtils.get().translateColor("&7" + command));
                         }
                     } else {
@@ -121,7 +122,7 @@ public class OnSpawnCommandEditor extends VariablePanelHandler<BossEntity> {
                 itemStack.setItemMeta(itemMeta);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
-                    if(!bossEntity.isEditing()) {
+                    if (!bossEntity.isEditing()) {
                         Message.Boss_Edit_CannotBeModified.msg(e.getWhoClicked());
                         return;
                     }

@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.autospawns;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.autospawns.types.IntervalSpawnElement;
@@ -27,7 +27,7 @@ public class AutoSpawnTypeEditorPanel extends VariablePanelHandler<AutoSpawn> {
 
     private AutoSpawnFileManager autoSpawnFileManager;
 
-    public AutoSpawnTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public AutoSpawnTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.autoSpawnFileManager = plugin.getAutoSpawnFileManager();
@@ -67,7 +67,7 @@ public class AutoSpawnTypeEditorPanel extends VariablePanelHandler<AutoSpawn> {
 
     private ClickAction getIntervalSystem(AutoSpawn autoSpawn) {
         return event -> {
-            if(!autoSpawn.isEditing()) {
+            if (!autoSpawn.isEditing()) {
                 Message.Boss_AutoSpawn_MustToggleEditing.msg(event.getWhoClicked());
                 return;
             }

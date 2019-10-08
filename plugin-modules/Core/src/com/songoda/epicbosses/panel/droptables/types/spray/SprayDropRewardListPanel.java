@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.droptables.types.spray;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.droptable.elements.SprayTableElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class SprayDropRewardListPanel extends DropTableRewardsListEditorPanel<SprayTableElement> {
 
-    public SprayDropRewardListPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public SprayDropRewardListPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder, plugin);
     }
 

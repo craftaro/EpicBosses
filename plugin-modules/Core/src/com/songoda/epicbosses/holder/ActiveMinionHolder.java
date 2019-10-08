@@ -3,9 +3,6 @@ package com.songoda.epicbosses.holder;
 import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.targeting.TargetHandler;
 import com.songoda.epicbosses.utils.ServerUtils;
-import lombok.Getter;
-import lombok.Setter;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 
@@ -22,13 +19,12 @@ import org.bukkit.entity.Entity;
  */
 public class ActiveMinionHolder implements IActiveHolder {
 
-    @Getter @Setter private TargetHandler<ActiveMinionHolder> targetHandler = null;
-
-    @Getter private Map<Integer, UUID> livingEntityMap = new HashMap<>();
-    @Getter private ActiveBossHolder activeBossHolder;
-    @Getter private final MinionEntity minionEntity;
-    @Getter private final Location location;
-    @Getter private final String name;
+    private final MinionEntity minionEntity;
+    private final Location location;
+    private final String name;
+    private TargetHandler<ActiveMinionHolder> targetHandler = null;
+    private Map<Integer, UUID> livingEntityMap = new HashMap<>();
+    private ActiveBossHolder activeBossHolder;
 
     public ActiveMinionHolder(ActiveBossHolder activeBossHolder, MinionEntity minionEntity, Location spawnLocation, String name) {
         this.activeBossHolder = activeBossHolder;
@@ -44,7 +40,7 @@ public class ActiveMinionHolder implements IActiveHolder {
 
     @Override
     public void setLivingEntity(int position, LivingEntity livingEntity) {
-        if(this.livingEntityMap.containsKey(position)) {
+        if (this.livingEntityMap.containsKey(position)) {
             LivingEntity target = (LivingEntity) ServerUtils.get().getEntity(this.livingEntityMap.get(position));
             if (target != null)
                 target.remove();
@@ -93,11 +89,11 @@ public class ActiveMinionHolder implements IActiveHolder {
 
     @Override
     public boolean isDead() {
-        if(this.livingEntityMap.isEmpty()) return true;
+        if (this.livingEntityMap.isEmpty()) return true;
 
-        for(UUID uuid : this.livingEntityMap.values()) {
+        for (UUID uuid : this.livingEntityMap.values()) {
             LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(uuid);
-            if(livingEntity == null || livingEntity.isDead()) return true;
+            if (livingEntity == null || livingEntity.isDead()) return true;
         }
 
         return false;
@@ -108,4 +104,31 @@ public class ActiveMinionHolder implements IActiveHolder {
         return this.activeBossHolder.hasAttacked(uuid);
     }
 
+    public TargetHandler<ActiveMinionHolder> getTargetHandler() {
+        return this.targetHandler;
+    }
+
+    public void setTargetHandler(TargetHandler<ActiveMinionHolder> targetHandler) {
+        this.targetHandler = targetHandler;
+    }
+
+    public Map<Integer, UUID> getLivingEntityMap() {
+        return this.livingEntityMap;
+    }
+
+    public ActiveBossHolder getActiveBossHolder() {
+        return this.activeBossHolder;
+    }
+
+    public MinionEntity getMinionEntity() {
+        return this.minionEntity;
+    }
+
+    public Location getLocation() {
+        return this.location;
+    }
+
+    public String getName() {
+        return this.name;
+    }
 }

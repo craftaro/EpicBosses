@@ -1,8 +1,6 @@
 package com.songoda.epicbosses.entity.elements;
 
 import com.google.gson.annotations.Expose;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @author Charles Cullen
@@ -11,7 +9,8 @@ import lombok.Setter;
  */
 public class EquipmentElement {
 
-    @Expose @Getter @Setter private String helmet, chestplate, leggings, boots;
+    @Expose
+    private String helmet, chestplate, leggings, boots;
 
     public EquipmentElement(String helmet, String chestplate, String leggings, String boots) {
         this.helmet = helmet;
@@ -20,4 +19,35 @@ public class EquipmentElement {
         this.boots = boots;
     }
 
+    public String getHelmet() {
+        return this.helmet;
+    }
+
+    public void setHelmet(String helmet) {
+        this.helmet = helmet;
+    }
+
+    public String getChestplate() {
+        return this.chestplate;
+    }
+
+    public void setChestplate(String chestplate) {
+        this.chestplate = chestplate;
+    }
+
+    public String getLeggings() {
+        return this.leggings;
+    }
+
+    public void setLeggings(String leggings) {
+        this.leggings = leggings;
+    }
+
+    public String getBoots() {
+        return this.boots;
+    }
+
+    public void setBoots(String boots) {
+        this.boots = boots;
+    }
 }

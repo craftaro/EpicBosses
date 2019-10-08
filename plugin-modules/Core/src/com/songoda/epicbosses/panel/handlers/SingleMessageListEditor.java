@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.handlers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.MessagesFileManager;
@@ -32,9 +32,9 @@ public abstract class SingleMessageListEditor<T> extends VariablePanelHandler<T>
 
     private MessagesFileManager messagesFileManager;
     private ItemStackConverter itemStackConverter;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public SingleMessageListEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public SingleMessageListEditor(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -57,7 +57,7 @@ public abstract class SingleMessageListEditor<T> extends VariablePanelHandler<T>
         int maxPage = panel.getMaxPage(entryList);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, currentTexts, entryList, object);
             return true;
@@ -93,8 +93,9 @@ public abstract class SingleMessageListEditor<T> extends VariablePanelHandler<T>
         String current = getCurrent(object);
 
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= entryList.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= entryList.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = entryList.get(slot);
                 List<String> messages = currentMessages.get(name);
@@ -105,19 +106,19 @@ public abstract class SingleMessageListEditor<T> extends VariablePanelHandler<T>
 
                 replaceMap.put("{name}", name);
 
-                if(current != null && current.equalsIgnoreCase(name)) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Text.selectedName"), replaceMap);
+                if (current != null && current.equalsIgnoreCase(name)) {
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Text.selectedName"), replaceMap);
                 } else {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Text.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Text.name"), replaceMap);
                 }
 
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                List<String> presetLore = this.plugin.getConfig().getStringList("Display.Boss.Text.lore");
+                List<String> presetLore = this.plugin.getDisplay().getStringList("Display.Boss.Text.lore");
                 List<String> newLore = new ArrayList<>();
 
-                for(String s : presetLore) {
-                    if(s.contains("{message}")) {
-                        for(String message : messages) {
+                for (String s : presetLore) {
+                    if (s.contains("{message}")) {
+                        for (String message : messages) {
                             List<String> split = StringUtils.get().splitString(message, 45);
 
                             split.forEach(string -> newLore.add(StringUtils.get().translateColor("&7") + string));

@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.listeners.during;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.events.PreBossSkillEvent;
@@ -16,13 +16,14 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
-import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Charles Cullen
@@ -35,7 +36,7 @@ public class BossSkillListener implements Listener {
     private SkillsFileManager skillsFileManager;
     private BossSkillManager bossSkillManager;
 
-    public BossSkillListener(CustomBosses plugin) {
+    public BossSkillListener(EpicBosses plugin) {
         this.bossSkillManager = plugin.getBossSkillManager();
         this.bossEntityManager = plugin.getBossEntityManager();
         this.skillsFileManager = plugin.getSkillsFileManager();
@@ -46,7 +47,7 @@ public class BossSkillListener implements Listener {
         Entity entityBeingDamaged = event.getEntity();
         Entity entityDamaging = event.getDamager();
 
-        if(!(entityBeingDamaged instanceof LivingEntity)) return;
+        if (!(entityBeingDamaged instanceof LivingEntity)) return;
 
         if (entityDamaging instanceof Projectile) {
             Projectile projectile = (Projectile) entityDamaging;
@@ -57,18 +58,18 @@ public class BossSkillListener implements Listener {
             }
         }
 
-        if(!(entityDamaging instanceof LivingEntity)) return;
+        if (!(entityDamaging instanceof LivingEntity)) return;
 
         LivingEntity livingEntity = (LivingEntity) entityBeingDamaged;
         ActiveBossHolder activeBossHolder = this.bossEntityManager.getActiveBossHolder(livingEntity);
 
-        if(activeBossHolder == null) return;
+        if (activeBossHolder == null) return;
 
         BossEntity bossEntity = activeBossHolder.getBossEntity();
 
-        if(bossEntity.getSkills() == null || bossEntity.getSkills().getOverallChance() == null) return;
+        if (bossEntity.getSkills() == null || bossEntity.getSkills().getOverallChance() == null) return;
 
-        if(RandomUtils.get().canPreformAction(bossEntity.getSkills().getOverallChance())) {
+        if (RandomUtils.get().canPreformAction(bossEntity.getSkills().getOverallChance())) {
             PreBossSkillEvent preBossSkillEvent = new PreBossSkillEvent(activeBossHolder, livingEntity, (LivingEntity) entityDamaging);
 
             ServerUtils.get().callEvent(preBossSkillEvent);
@@ -83,7 +84,7 @@ public class BossSkillListener implements Listener {
         List<String> skills = bossEntity.getSkills().getSkills();
         List<String> masterMessage = BossAPI.getStoredMessages(bossEntity.getSkills().getMasterMessage());
 
-        if(skills.isEmpty()) {
+        if (skills.isEmpty()) {
             Debug.SKILL_EMPTY_SKILLS.debug(BossAPI.getBossEntityName(bossEntity));
             return;
         }
@@ -93,7 +94,7 @@ public class BossSkillListener implements Listener {
         String skillInput = skills.get(0);
         Skill skill = this.skillsFileManager.getSkill(skillInput);
 
-        if(skill == null) {
+        if (skill == null) {
             Debug.SKILL_NOT_FOUND.debug();
             return;
         }

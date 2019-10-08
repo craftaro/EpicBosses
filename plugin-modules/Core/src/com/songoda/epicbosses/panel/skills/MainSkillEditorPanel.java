@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.skills;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.handlers.SkillDisplayNameHandler;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -18,7 +18,8 @@ import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -29,7 +30,7 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     private SkillsFileManager skillsFileManager;
 
-    public MainSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public MainSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.skillsFileManager = plugin.getSkillsFileManager();
@@ -50,11 +51,11 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
         String type = skill.getType();
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        if(customMessage == null || customMessage.equals("")) customMessage = "N/A";
-        if(radius == null) radius = 100.0;
-        if(mode == null || mode.equals("")) mode = "N/A";
-        if(displayName == null || displayName.equals("")) displayName = "N/A";
-        if(type == null || type.equals("")) type = "N/A";
+        if (customMessage == null || customMessage.equals("")) customMessage = "N/A";
+        if (radius == null) radius = 100.0;
+        if (mode == null || mode.equals("")) mode = "N/A";
+        if (displayName == null || displayName.equals("")) displayName = "N/A";
+        if (type == null || type.equals("")) type = "N/A";
 
         replaceMap.put("{name}", BossAPI.getSkillName(skill));
         replaceMap.put("{customMessage}", customMessage);
@@ -92,13 +93,13 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
             String type = skill.getType();
             Player player = (Player) event.getWhoClicked();
 
-            if(type.equalsIgnoreCase("POTION")) {
+            if (type.equalsIgnoreCase("POTION")) {
                 this.bossPanelManager.getPotionSkillEditorPanel().openFor(player, skill);
-            } else if(type.equalsIgnoreCase("GROUP")) {
+            } else if (type.equalsIgnoreCase("GROUP")) {
                 this.bossPanelManager.getGroupSkillEditorPanel().openFor(player, skill);
-            } else if(type.equalsIgnoreCase("CUSTOM")) {
+            } else if (type.equalsIgnoreCase("CUSTOM")) {
                 this.bossPanelManager.getCustomSkillEditorPanel().openFor(player, skill);
-            } else if(type.equalsIgnoreCase("COMMAND")) {
+            } else if (type.equalsIgnoreCase("COMMAND")) {
                 this.bossPanelManager.getCommandSkillEditorPanel().openFor(player, skill);
             }
         };
@@ -120,7 +121,7 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
             ClickType clickType = event.getClick();
             Player player = (Player) event.getWhoClicked();
 
-            if(clickType.name().contains("RIGHT")) {
+            if (clickType.name().contains("RIGHT")) {
                 skill.setCustomMessage("");
                 saveSkill(skill, player);
             } else {
@@ -146,24 +147,24 @@ public class MainSkillEditorPanel extends VariablePanelHandler<Skill> {
             ClickType clickType = event.getClick();
             int radiusToModifyBy = 0;
 
-            if(clickType == ClickType.LEFT) {
+            if (clickType == ClickType.LEFT) {
                 radiusToModifyBy = 1;
-            } else if(clickType == ClickType.SHIFT_LEFT) {
+            } else if (clickType == ClickType.SHIFT_LEFT) {
                 radiusToModifyBy = 10;
-            } else if(clickType == ClickType.RIGHT) {
+            } else if (clickType == ClickType.RIGHT) {
                 radiusToModifyBy = -1;
-            } else if(clickType == ClickType.SHIFT_RIGHT) {
+            } else if (clickType == ClickType.SHIFT_RIGHT) {
                 radiusToModifyBy = -10;
             }
 
-            String modifyValue = radiusToModifyBy > 0? "increased" : "decreased";
+            String modifyValue = radiusToModifyBy > 0 ? "increased" : "decreased";
             Double currentRadius = skill.getRadius();
 
-            if(currentRadius == null) currentRadius = 0.0;
+            if (currentRadius == null) currentRadius = 0.0;
 
             double newRadius = currentRadius + radiusToModifyBy;
 
-            if(newRadius < 0) {
+            if (newRadius < 0) {
                 newRadius = 0;
             }
 

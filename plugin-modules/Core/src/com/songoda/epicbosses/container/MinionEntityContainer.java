@@ -23,8 +23,8 @@ public class MinionEntityContainer implements IContainer<Map<String, MinionEntit
     }
 
     public String getName(MinionEntity minionEntity) {
-        for(Map.Entry<String, MinionEntity> entry : getData().entrySet()) {
-            if(entry.getValue().equals(minionEntity)) return entry.getKey();
+        for (Map.Entry<String, MinionEntity> entry : getData().entrySet()) {
+            if (entry.getValue().equals(minionEntity)) return entry.getKey();
         }
 
         return null;
@@ -36,8 +36,8 @@ public class MinionEntityContainer implements IContainer<Map<String, MinionEntit
         int completed = 0;
         int failed = 0;
 
-        for(Map.Entry<String, MinionEntity> entry : stringMinionEntityMap.entrySet()) {
-            if(getData().containsKey(entry.getKey())) {
+        for (Map.Entry<String, MinionEntity> entry : stringMinionEntityMap.entrySet()) {
+            if (getData().containsKey(entry.getKey())) {
                 failed += 1;
                 stringBuilder.append(entry.getKey()).append("; ");
                 continue;
@@ -47,7 +47,7 @@ public class MinionEntityContainer implements IContainer<Map<String, MinionEntit
             completed++;
         }
 
-        if(failed > 0) {
+        if (failed > 0) {
             Debug.MINION_CONTAINER_SAVE.debug(completed, failed, stringBuilder.toString());
         }
 

@@ -22,15 +22,11 @@ public enum SkillMode {
         this.rank = rank;
     }
 
-    public SkillMode getNext() {
-        return get(this.rank+1);
-    }
-
     public static SkillMode getCurrent(String input) {
-        if(input == null || input.isEmpty()) return BLANK;
+        if (input == null || input.isEmpty()) return BLANK;
 
-        for(SkillMode skillMode : values()) {
-            if(skillMode.name().equalsIgnoreCase(input)) return skillMode;
+        for (SkillMode skillMode : values()) {
+            if (skillMode.name().equalsIgnoreCase(input)) return skillMode;
         }
 
         return BLANK;
@@ -39,21 +35,25 @@ public enum SkillMode {
     public static List<SkillMode> getSkillModes() {
         List<SkillMode> list = new ArrayList<>();
 
-        for(SkillMode skillMode : values()) {
-            if(skillMode.rank > 0) list.add(skillMode);
+        for (SkillMode skillMode : values()) {
+            if (skillMode.rank > 0) list.add(skillMode);
         }
 
         return list;
     }
 
     private static SkillMode get(int rank) {
-        for(SkillMode skillMode : values()) {
-            if(skillMode.rank == rank) {
+        for (SkillMode skillMode : values()) {
+            if (skillMode.rank == rank) {
                 return skillMode;
             }
         }
 
         return ALL;
+    }
+
+    public SkillMode getNext() {
+        return get(this.rank + 1);
     }
 
 }

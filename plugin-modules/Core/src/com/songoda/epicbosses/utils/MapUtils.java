@@ -14,6 +14,10 @@ public class MapUtils {
 
     private static MapUtils INSTANCE = new MapUtils();
 
+    public static MapUtils get() {
+        return INSTANCE;
+    }
+
     public <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
         List<Map.Entry<K, V>> list = new ArrayList<>(map.entrySet());
         Map<K, V> resultMap = new LinkedHashMap<>();
@@ -22,10 +26,6 @@ public class MapUtils {
         list.forEach(entry -> resultMap.put(entry.getKey(), entry.getValue()));
 
         return resultMap;
-    }
-
-    public static MapUtils get() {
-        return INSTANCE;
     }
 
 }

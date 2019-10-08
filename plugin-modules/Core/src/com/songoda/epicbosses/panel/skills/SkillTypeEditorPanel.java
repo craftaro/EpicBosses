@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.skills;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.SkillsFileManager;
@@ -26,7 +26,7 @@ public class SkillTypeEditorPanel extends VariablePanelHandler<Skill> {
 
     private SkillsFileManager skillsFileManager;
 
-    public SkillTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public SkillTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.skillsFileManager = plugin.getSkillsFileManager();

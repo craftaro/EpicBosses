@@ -1,11 +1,11 @@
 package com.songoda.epicbosses.mechanics.boss;
 
+import com.songoda.core.compatibility.ServerVersion;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.MainStatsElement;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.mechanics.IBossMechanic;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EntityEquipment;
 
@@ -16,21 +16,15 @@ import org.bukkit.inventory.EntityEquipment;
  */
 public class SettingsMechanic implements IBossMechanic {
 
-    private VersionHandler versionHandler;
-
-    public SettingsMechanic() {
-        this.versionHandler = new VersionHandler();
-    }
-
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        if(activeBossHolder.getLivingEntityMap().getOrDefault(1, null) == null) return false;
+        if (activeBossHolder.getLivingEntityMap().getOrDefault(1, null) == null) return false;
 
-        for(EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
+        for (EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
             LivingEntity livingEntity = activeBossHolder.getLivingEntity(mainStatsElement.getPosition());
 
-            if(livingEntity == null) return false;
+            if (livingEntity == null) return false;
 
             EntityEquipment entityEquipment = livingEntity.getEquipment();
 
@@ -41,7 +35,7 @@ public class SettingsMechanic implements IBossMechanic {
             entityEquipment.setLeggingsDropChance(0.0F);
             entityEquipment.setBootsDropChance(0.0F);
 
-            if(this.versionHandler.canUseOffHand()) {
+            if (ServerVersion.isServerVersionAtLeast(ServerVersion.V1_9)) {
                 entityEquipment.setItemInMainHandDropChance(0.0F);
                 entityEquipment.setItemInOffHandDropChance(0.0F);
             } else {

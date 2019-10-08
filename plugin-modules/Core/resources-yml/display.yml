@@ -1,0 +1,223 @@
+Display:
+  Boss:
+    Text:
+      menuName: '&b&l{name} Editor'
+      selectedName: '&bMessage: &f{name} &a&l** Selected **'
+      name: '&bMessage: &f{name}'
+      lore:
+        - '&fStrings within this section:'
+        - '{message}'
+    Commands:
+      menuName: '&b&l{name} Editor'
+      selectedName: '&bCommand: &f{name} &a&l** Selected **'
+      name: '&bCommand: &f{name}'
+      lore:
+        - '&fCommands within this section:'
+        - '{commands}'
+    Taunts:
+      menuName: '&b&l{name} Editor'
+    Drops:
+      name: '&bDropTable: &f{name}'
+      lore:
+        - '&3Type: &7{type}'
+        - '&7'
+        - '&7Click here to select this drop'
+        - '&7table as the current one.'
+    Equipment:
+      name: '{name} &a&l** Selected **'
+    EntityType:
+      menuName: '&b&l{name} Editor'
+      selectedName: '&f{name} Entity &a&l** Selected **'
+      name: '&f{name} Entity'
+    List:
+      name: '&3{position} Entity'
+      lore:
+        - '&3Left Click &8»'
+        - '&7Edit the {targetType} for this'
+        - '&7entity in the section.'
+        - '&7'
+        - '&3Right Click &8»'
+        - '&7Remove this section, can be done'
+        - '&7to anything above the first one.'
+    Skills:
+      menuName: '&b&l{name} Editor'
+      selectedName: '&b&l{name} Skill &a&l** Selected **'
+      name: '&b&l{name} Skill'
+      lore:
+        - '&3Type: &7{type}'
+        - '&3Display Name: &7{displayName}'
+        - '&3Custom Message: &7{customMessage}'
+        - '&3Radius: &7{radius}'
+        - '&7'
+        - '&7Click to add/remove the skill to'
+        - '&7or from the boss skill list.'
+  AutoSpawns:
+    Main:
+      menuName: '&b&lEpicBosses &3&lAutoSpawns'
+      name: '&bAuto Spawn: &f{name}'
+      lore:
+        - '&3Editing: &f{enabled}'
+        - '&7'
+        - '&3Spawn Type: &f{type}'
+        - '&3Entities: &f{entities}'
+        - '&7'
+        - '&3Max Alive: &f{maxAlive}'
+        - '&3Amount per Spawn: &f{amountPerSpawn}'
+        - '&3When Chunk Isnt Loaded: &f{chunkIsntLoaded}'
+        - '&3Override Spawn Messages: &f{overrideSpawnMessages}'
+        - '&3Shuffle Entities: &f{shuffleEntities}'
+        - '&3Custom Spawn Message: &f{customSpawnMessage}'
+    Entities:
+      selectedName: '&bBoss: &f{name} &a** Selected **'
+      name: '&bBoss: &f{name}'
+      lore:
+        - '&3Editing: &f{editing}'
+        - '&3Targeting: &f{targeting}'
+        - '&3Drop Table: &f{dropTable}'
+        - '&7'
+        - '&7Click to select or deselect this boss.'
+    CustomSettings:
+      name: '&bCustom Setting: &f{name}'
+      lore:
+        - '&3Currently: &f{currently}'
+        - '{extraInformation}'
+    SpawnMessage:
+      menuName: '&b&l{name} AutoSpawn'
+      selectedName: '&bMessage: &f{name} &a** Selected **'
+      name: '&bMessage: &f{name}'
+      lore:
+        - '&fStrings within this section:'
+        - '{message}'
+  Bosses:
+    menuName: '&b&lEpicBosses &3&lBosses'
+    name: '&b&l{name}'
+    lore:
+      - '&3Editing: &f{enabled}'
+      - '&7'
+      - '&3Left Click &8»'
+      - '&7Get spawn item for custom'
+      - '&7boss.'
+      - '&7'
+      - '&3Right Click &8»'
+      - '&7Edit the custom boss.'
+  DropTable:
+    Main:
+      menuName: '&b&lEpicBosses &3&lDropTables'
+      name: '&b&l{name} Drop Table'
+      lore:
+        - '&3Type: &7{type}'
+        - '&7'
+        - '&7Click to edit the drop table.'
+    RewardList:
+      name: '&bReward Section'
+      lore:
+        - '&3Selected Item: &f{itemName}'
+        - '&3Chance: &f{chance}%'
+        - '&7'
+        - '&7Click to modify this reward.'
+    CommandRewardList:
+      name: '&bReward Section'
+      lore:
+        - '&3Selected Command: &f{commandName}'
+        - '&3Chance: &f{chance}%'
+        - '&7'
+        - '&7Click to modify this reward.'
+    GivePositionList:
+      name: '&bReward Section'
+      lore:
+        - '&3Position: &f{position}'
+        - '&3Drops: &f{dropAmount}'
+        - '&7'
+        - '&7Shift Right-Click to remove.'
+        - '&7Left-Click to edit.'
+    GiveRewardsList:
+      name: '&bReward Section'
+      lore:
+        - '&3Position: &f{position}'
+        - '&3Required Percentage: &f{percentage}%'
+        - '&7'
+        - '&3Item Drops: &f{items}'
+        - '&3Max Drops: &f{maxDrops}'
+        - '&3Random Drops: &f{randomDrops}'
+        - '&7'
+        - '&3Command Drops: &f{commands}'
+        - '&3Max Commands: &f{maxCommands}'
+        - '&3Random Commands: &f{randomCommands}'
+        - '&7'
+        - '&7Shift Right-Click to remove.'
+        - '&7Left-Click to edit.'
+  Shop:
+    name: '&b&lBuy {name}''s Egg'
+    lore:
+      - '&3Cost: &a$&f{price}'
+  Skills:
+    Main:
+      menuName: '&b&lEpicBosses &3&lSkills'
+      name: '&b&l{name} Skill'
+      lore:
+        - '&3Type: &7{type}'
+        - '&3Display Name: &7{displayName}'
+        - '&3Custom Message: &7{customMessage}'
+        - '&3Radius: &7{radius}'
+        - '&7'
+        - '&7Click to edit the custom skill.'
+    MainEdit:
+      menuName: '&b&l{name} Skill Editor'
+    Potions:
+      name: '&b&l{effect} Potion Effect'
+      lore:
+        - '&3Duration: &7{duration}'
+        - '&3Level: &7{level}'
+        - '&7'
+        - '&7Click to remove potion effect.'
+    CreatePotion:
+      menuName: '&b&lSelect Potion Effect Type'
+      name: '&bEffect: &f{effect}'
+      selectedName: '&bEffect: &f{effect} &a&l** Selected **'
+    Commands:
+      name: '&b&lCommand Section'
+      lore:
+        - '&3Chance &8» &f{chance}%'
+        - '&7'
+        - '&3Commands &8»'
+        - '&f{commands}'
+        - '&7'
+        - '&7Click to edit command section.'
+    CommandList:
+      menuName: '&b&l{name} Skill Editor'
+      selectedName: '&bCommand: &f{name} &a&l** Selected **'
+      name: '&bCommand: &f{name}'
+      lore:
+        - '&fCommands within this section:'
+        - '{commands}'
+    Group:
+      menuName: '&b&l{name} Skill Editor'
+      selectedName: '&bSkill: &f{name} &a&l** Selected **'
+      name: '&bSkill: &f{name}'
+      lore:
+        - '&3Mode: &7{mode}'
+        - '&3Type: &7{type}'
+        - '&3Display Name: &7{displayName}'
+        - '&3Custom Message: &7{customMessage}'
+        - '&3Radius: &7{radius}'
+    CustomType:
+      selectedName: '&bCustom Skill: &f{name} &a** Selected **'
+      name: '&bCustom Skill: &f{name}'
+      lore:
+        - '&3Uses Multiplier: &7{multiplier}'
+        - '&3Has Custom Data: &7{customData}'
+    Material:
+      menuName: '&b&lSelect Material'
+      selectedName: '&bMaterial: &f{type} &a** Selected **'
+      name: '&bMaterial: &f{type}'
+    MinionList:
+      menuName: '&b&lSelect Minion For Skill'
+      selectedName: '&bMinion: &f{name} &a** Selected **'
+      name: '&bMinion: &f{name}'
+      lore:
+        - '&3Editing: &7{editing}'
+        - '&3Targeting: &7{targeting}'
+    CustomSetting:
+      name: '&bSetting: &f{setting}'
+      lore:
+        - '&3Currently: &7{currently}'

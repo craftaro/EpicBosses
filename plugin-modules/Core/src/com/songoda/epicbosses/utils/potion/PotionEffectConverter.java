@@ -25,7 +25,7 @@ public class PotionEffectConverter implements IConverter<PotionEffectHolder, Pot
         int duration = potionEffect.getDuration();
         int level = potionEffect.getAmplifier();
 
-        return new PotionEffectHolder(this.potionEffectTypeConverter.to(potionEffectType), level+1, duration/20);
+        return new PotionEffectHolder(this.potionEffectTypeConverter.to(potionEffectType), level + 1, duration / 20);
     }
 
     @Override
@@ -35,13 +35,13 @@ public class PotionEffectConverter implements IConverter<PotionEffectHolder, Pot
         Integer level = potionHolder.getLevel();
         PotionEffectType potionEffectTypeConverted = this.potionEffectTypeConverter.from(potionEffectType);
 
-        if(duration == null) duration = 5;
-        if(level == null) level = 1;
+        if (duration == null) duration = 5;
+        if (level == null) level = 1;
 
-        if(duration < 1) duration = (Integer.MAX_VALUE / 20);
+        if (duration < 1) duration = (Integer.MAX_VALUE / 20);
 
-        if(potionEffectTypeConverted == null) return null;
-        if(potionEffectType != null) return new PotionEffect(potionEffectTypeConverted, duration*20, level-1);
+        if (potionEffectTypeConverted == null) return null;
+        if (potionEffectType != null) return new PotionEffect(potionEffectTypeConverted, duration * 20, level - 1);
 
         return null;
     }

@@ -3,8 +3,6 @@ package com.songoda.epicbosses.skills.elements;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.songoda.epicbosses.utils.BossesGson;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @author Charles Cullen
@@ -13,9 +11,12 @@ import lombok.Setter;
  */
 public class SubCustomSkillElement {
 
-    @Expose @Getter @Setter private String type;
-    @Expose @Getter @Setter private Double multiplier;
-    @Expose @Setter private JsonObject otherSkillData;
+    @Expose
+    private String type;
+    @Expose
+    private Double multiplier;
+    @Expose
+    private JsonObject otherSkillData;
 
     public SubCustomSkillElement(String type, Double multiplier, JsonObject otherSkillData) {
         this.type = type;
@@ -24,7 +25,7 @@ public class SubCustomSkillElement {
     }
 
     public CustomCageSkillElement getCustomCageSkillData() {
-        if(getType().equalsIgnoreCase("CAGE")) {
+        if (getType().equalsIgnoreCase("CAGE")) {
             return BossesGson.get().fromJson(this.otherSkillData, CustomCageSkillElement.class);
         }
 
@@ -32,11 +33,30 @@ public class SubCustomSkillElement {
     }
 
     public CustomMinionSkillElement getCustomMinionSkillData() {
-        if(getType().equalsIgnoreCase("MINIONS")) {
+        if (getType().equalsIgnoreCase("MINIONS")) {
             return BossesGson.get().fromJson(this.otherSkillData, CustomMinionSkillElement.class);
         }
 
         return null;
     }
 
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Double getMultiplier() {
+        return this.multiplier;
+    }
+
+    public void setMultiplier(Double multiplier) {
+        this.multiplier = multiplier;
+    }
+
+    public void setOtherSkillData(JsonObject otherSkillData) {
+        this.otherSkillData = otherSkillData;
+    }
 }

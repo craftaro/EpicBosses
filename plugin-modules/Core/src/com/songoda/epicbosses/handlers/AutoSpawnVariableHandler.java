@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.handlers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.autospawns.types.IntervalSpawnElement;
@@ -8,8 +8,6 @@ import com.songoda.epicbosses.managers.files.AutoSpawnFileManager;
 import com.songoda.epicbosses.utils.IHandler;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,14 +23,14 @@ import java.util.UUID;
  */
 public abstract class AutoSpawnVariableHandler implements IHandler {
 
-    @Getter private final IVariablePanelHandler<AutoSpawn> panelHandler;
+    private final IVariablePanelHandler<AutoSpawn> panelHandler;
 
-    @Getter private final IntervalSpawnElement intervalSpawnElement;
-    @Getter private final AutoSpawnFileManager autoSpawnFileManager;
-    @Getter private final AutoSpawn autoSpawn;
-    @Getter private final Player player;
+    private final IntervalSpawnElement intervalSpawnElement;
+    private final AutoSpawnFileManager autoSpawnFileManager;
+    private final AutoSpawn autoSpawn;
+    private final Player player;
 
-    @Getter @Setter private boolean handled = false;
+    private boolean handled = false;
     private Listener listener;
 
     public AutoSpawnVariableHandler(Player player, AutoSpawn autoSpawn, IntervalSpawnElement intervalSpawnElement, AutoSpawnFileManager autoSpawnFileManager, IVariablePanelHandler<AutoSpawn> panelHandler) {
@@ -59,28 +57,28 @@ public abstract class AutoSpawnVariableHandler implements IHandler {
                 Player player = event.getPlayer();
                 UUID uuid = player.getUniqueId();
 
-                if(!uuid.equals(getPlayer().getUniqueId())) return;
-                if(isHandled()) return;
+                if (!uuid.equals(getPlayer().getUniqueId())) return;
+                if (isHandled()) return;
 
                 String input = event.getMessage();
 
-                if(input.equalsIgnoreCase("-")) {
+                if (input.equalsIgnoreCase("-")) {
                     input = null;
                 }
 
-                if(input == null) {
-                    Bukkit.getScheduler().scheduleSyncDelayedTask(CustomBosses.get(), AutoSpawnVariableHandler.this::finish);
+                if (input == null) {
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(EpicBosses.getInstance(), AutoSpawnVariableHandler.this::finish);
                     return;
                 }
 
-                if(!confirmValue(input, getIntervalSpawnElement())) return;
+                if (!confirmValue(input, getIntervalSpawnElement())) return;
 
                 getAutoSpawn().setCustomData(BossAPI.convertObjectToJsonObject(getIntervalSpawnElement()));
                 getAutoSpawnFileManager().save();
                 event.setCancelled(true);
                 setHandled(true);
 
-                Bukkit.getScheduler().scheduleSyncDelayedTask(CustomBosses.get(), AutoSpawnVariableHandler.this::finish);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(EpicBosses.getInstance(), AutoSpawnVariableHandler.this::finish);
             }
         };
     }
@@ -88,5 +86,33 @@ public abstract class AutoSpawnVariableHandler implements IHandler {
     private void finish() {
         AsyncPlayerChatEvent.getHandlerList().unregister(this.listener);
         getPanelHandler().openFor(getPlayer(), getAutoSpawn());
+    }
+
+    public IVariablePanelHandler<AutoSpawn> getPanelHandler() {
+        return this.panelHandler;
+    }
+
+    public IntervalSpawnElement getIntervalSpawnElement() {
+        return this.intervalSpawnElement;
+    }
+
+    public AutoSpawnFileManager getAutoSpawnFileManager() {
+        return this.autoSpawnFileManager;
+    }
+
+    public AutoSpawn getAutoSpawn() {
+        return this.autoSpawn;
+    }
+
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    public boolean isHandled() {
+        return this.handled;
+    }
+
+    public void setHandled(boolean handled) {
+        this.handled = handled;
     }
 }

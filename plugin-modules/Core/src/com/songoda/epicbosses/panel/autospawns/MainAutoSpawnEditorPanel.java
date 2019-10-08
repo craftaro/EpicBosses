@@ -1,11 +1,8 @@
 package com.songoda.epicbosses.panel.autospawns;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
-import com.songoda.epicbosses.autospawns.SpawnType;
-import com.songoda.epicbosses.holder.ActiveAutoSpawnHolder;
-import com.songoda.epicbosses.holder.autospawn.ActiveIntervalAutoSpawnHolder;
 import com.songoda.epicbosses.managers.AutoSpawnManager;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.AutoSpawnFileManager;
@@ -33,7 +30,7 @@ public class MainAutoSpawnEditorPanel extends VariablePanelHandler<AutoSpawn> {
     private AutoSpawnFileManager autoSpawnFileManager;
     private AutoSpawnManager autoSpawnManager;
 
-    public MainAutoSpawnEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public MainAutoSpawnEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.autoSpawnFileManager = plugin.getAutoSpawnFileManager();
@@ -49,7 +46,7 @@ public class MainAutoSpawnEditorPanel extends VariablePanelHandler<AutoSpawn> {
     public void openFor(Player player, AutoSpawn autoSpawn) {
         Map<String, String> replaceMap = new HashMap<>();
         String type = ObjectUtils.getValue(autoSpawn.getType(), "INTERVAL");
-        String editing = ""+ObjectUtils.getValue(autoSpawn.isEditing(), false);
+        String editing = "" + ObjectUtils.getValue(autoSpawn.isEditing(), false);
         String entities = StringUtils.get().appendList(autoSpawn.getEntities());
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
@@ -83,10 +80,10 @@ public class MainAutoSpawnEditorPanel extends VariablePanelHandler<AutoSpawn> {
             Player player = (Player) event.getWhoClicked();
             boolean editing = autoSpawn.isEditing();
 
-            if(!editing) {
+            if (!editing) {
                 autoSpawn.setEditing(true);
             } else {
-                if(!autoSpawn.isCompleteEnoughToSpawn()) {
+                if (!autoSpawn.isCompleteEnoughToSpawn()) {
                     Message.Boss_AutoSpawn_NotCompleteEnough.msg(player);
                     return;
                 }
@@ -98,7 +95,7 @@ public class MainAutoSpawnEditorPanel extends VariablePanelHandler<AutoSpawn> {
             this.autoSpawnFileManager.save();
             player.closeInventory();
 
-            if(autoSpawn.isEditing()) {
+            if (autoSpawn.isEditing()) {
                 this.autoSpawnManager.removeActiveAutoSpawnHolder(autoSpawn);
             } else {
                 this.autoSpawnManager.addAndCreateActiveAutoSpawnHolder(autoSpawn);

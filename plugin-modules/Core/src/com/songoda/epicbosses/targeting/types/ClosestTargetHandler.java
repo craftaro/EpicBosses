@@ -25,8 +25,8 @@ public class ClosestTargetHandler<T extends IActiveHolder> extends TargetHandler
         double closestDistance = (radius * radius);
         LivingEntity nearestTarget = null;
 
-        for(LivingEntity livingEntity : nearbyEntities) {
-            if(livingEntity.getLocation().distanceSquared(boss.getLocation()) > closestDistance) continue;
+        for (LivingEntity livingEntity : nearbyEntities) {
+            if (livingEntity.getLocation().distanceSquared(boss.getLocation()) > closestDistance) continue;
 
             closestDistance = livingEntity.getLocation().distanceSquared(boss.getLocation());
             nearestTarget = livingEntity;

@@ -1,13 +1,11 @@
 package com.songoda.epicbosses.handlers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.managers.files.SkillsFileManager;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.utils.IHandler;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,12 +21,12 @@ import java.util.UUID;
  */
 public class SkillDisplayNameHandler implements IHandler {
 
-    @Getter private final IVariablePanelHandler<Skill> panelHandler;
-    @Getter private final SkillsFileManager skillsFileManager;
-    @Getter private final Player player;
-    @Getter private final Skill skill;
+    private final IVariablePanelHandler<Skill> panelHandler;
+    private final SkillsFileManager skillsFileManager;
+    private final Player player;
+    private final Skill skill;
 
-    @Getter @Setter private boolean handled = false;
+    private boolean handled = false;
     private Listener listener;
 
     public SkillDisplayNameHandler(Player player, Skill skill, SkillsFileManager skillsFileManager, IVariablePanelHandler<Skill> panelHandler) {
@@ -52,12 +50,12 @@ public class SkillDisplayNameHandler implements IHandler {
                 Player player = event.getPlayer();
                 UUID uuid = player.getUniqueId();
 
-                if(!uuid.equals(getPlayer().getUniqueId())) return;
-                if(isHandled()) return;
+                if (!uuid.equals(getPlayer().getUniqueId())) return;
+                if (isHandled()) return;
 
                 String input = event.getMessage();
 
-                if(input.equalsIgnoreCase("-")) {
+                if (input.equalsIgnoreCase("-")) {
                     input = null;
                 }
 
@@ -66,7 +64,7 @@ public class SkillDisplayNameHandler implements IHandler {
                 event.setCancelled(true);
                 setHandled(true);
 
-                Bukkit.getScheduler().scheduleSyncDelayedTask(CustomBosses.get(), SkillDisplayNameHandler.this::finish);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(EpicBosses.getInstance(), SkillDisplayNameHandler.this::finish);
             }
         };
     }
@@ -74,5 +72,29 @@ public class SkillDisplayNameHandler implements IHandler {
     private void finish() {
         AsyncPlayerChatEvent.getHandlerList().unregister(this.listener);
         getPanelHandler().openFor(getPlayer(), getSkill());
+    }
+
+    public IVariablePanelHandler<Skill> getPanelHandler() {
+        return this.panelHandler;
+    }
+
+    public SkillsFileManager getSkillsFileManager() {
+        return this.skillsFileManager;
+    }
+
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    public Skill getSkill() {
+        return this.skill;
+    }
+
+    public boolean isHandled() {
+        return this.handled;
+    }
+
+    public void setHandled(boolean handled) {
+        this.handled = handled;
     }
 }

@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.droptables.rewards;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -28,9 +28,9 @@ import java.util.Map;
 public abstract class DropTableNewRewardEditorPanel<SubVariable> extends SubVariablePanelHandler<DropTable, SubVariable> implements IDropTableNewRewardEditor<SubVariable> {
 
     private ItemsFileManager itemsFileManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public DropTableNewRewardEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public DropTableNewRewardEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.itemsFileManager = plugin.getItemStackManager();
@@ -45,7 +45,7 @@ public abstract class DropTableNewRewardEditorPanel<SubVariable> extends SubVari
         int maxPage = panel.getMaxPage(filteredKeys);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, dropTable, subVariable, filteredKeys, itemStacks);
             return true;
@@ -70,8 +70,9 @@ public abstract class DropTableNewRewardEditorPanel<SubVariable> extends SubVari
 
     private void loadPage(Panel panel, int page, DropTable dropTable, SubVariable subVariable, List<String> filteredKeys, Map<String, ItemStackHolder> itemStacks) {
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= filteredKeys.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e->{});
+            if (slot >= filteredKeys.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = filteredKeys.get(slot);
                 ItemStackHolder itemStackHolder = itemStacks.get(name);
@@ -94,7 +95,7 @@ public abstract class DropTableNewRewardEditorPanel<SubVariable> extends SubVari
         List<String> filteredList = new ArrayList<>();
 
         itemStacks.keySet().forEach(string -> {
-            if(currentKeys.contains(string)) return;
+            if (currentKeys.contains(string)) return;
 
             filteredList.add(string);
         });

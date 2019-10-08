@@ -15,6 +15,10 @@ public class FileUtils {
 
     private static FileUtils INSTANCE = new FileUtils();
 
+    public static FileUtils get() {
+        return INSTANCE;
+    }
+
     public void saveFile(File file, FileConfiguration fileConfiguration) {
         try {
             fileConfiguration.save(file);
@@ -33,10 +37,6 @@ public class FileUtils {
 
     public FileConfiguration loadFile(File file) {
         return YamlConfiguration.loadConfiguration(file);
-    }
-
-    public static FileUtils get() {
-        return INSTANCE;
     }
 
 }

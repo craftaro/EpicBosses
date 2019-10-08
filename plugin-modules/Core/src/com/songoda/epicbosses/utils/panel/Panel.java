@@ -1,24 +1,21 @@
 package com.songoda.epicbosses.utils.panel;
 
-import com.songoda.epicbosses.utils.panel.base.*;
-import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
-import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
-import lombok.Getter;
 import com.songoda.epicbosses.utils.ICloneable;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackConverter;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
+import com.songoda.epicbosses.utils.panel.base.*;
+import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
+import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderSettings;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -39,8 +36,8 @@ public class Panel implements Listener, ICloneable<Panel> {
     //
     //--------------------------------------------------
 
-    @Getter private static final ItemStackConverter ITEM_STACK_CONVERTER = new ItemStackConverter();
-    @Getter private static final List<Panel> PANELS = new ArrayList<>();
+    private static final ItemStackConverter ITEM_STACK_CONVERTER = new ItemStackConverter();
+    private static final List<Panel> PANELS = new ArrayList<>();
 
     private static JavaPlugin PLUGIN;
 
@@ -57,16 +54,17 @@ public class Panel implements Listener, ICloneable<Panel> {
     private final Map<UUID, Integer> currentPageContainer = new HashMap<>();
     private final List<UUID> openedUsers = new ArrayList<>();
 
-    @Getter private boolean cancelClick = true, destroyWhenDone = true, cancelLowerClick = true;
-    @Getter private PanelBuilderSettings panelBuilderSettings;
-    @Getter private PanelBuilderCounter panelBuilderCounter;
-    @Getter private Sound clickSound = null;
-    @Getter private String title;
-    @Getter private Inventory inventory;
-    @Getter private int viewers = 0;
+    private boolean cancelClick = true, destroyWhenDone = true, cancelLowerClick = true;
+    private PanelBuilderSettings panelBuilderSettings;
+    private PanelBuilderCounter panelBuilderCounter;
+    private Sound clickSound = null;
+    private String title;
+    private Inventory inventory;
+    private int viewers = 0;
 
     private PageAction onPageChange = (player, currentPage, requestedPage) -> false;
-    private PanelCloseAction panelClose = (p) -> {};
+    private PanelCloseAction panelClose = (p) -> {
+    };
 
     //--------------------------------------------------
     //
@@ -78,12 +76,12 @@ public class Panel implements Listener, ICloneable<Panel> {
      * Creates a Panel with the specified arguments
      *
      * @param title - Panel title
-     * @param size - Panel size
+     * @param size  - Panel size
      */
     public Panel(String title, int size) {
         Bukkit.getPluginManager().registerEvents(this, PLUGIN);
 
-        if(size % 9 != 0 && size != 5) {
+        if (size % 9 != 0 && size != 5) {
             throw new UnsupportedOperationException("Inventory size must be a multiple of 9 or 5");
         }
 
@@ -97,7 +95,7 @@ public class Panel implements Listener, ICloneable<Panel> {
      * Creates a Panel with the specified arguments
      *
      * @param inventory - Panel inventory
-     * @param title - Panel title
+     * @param title     - Panel title
      */
     public Panel(Inventory inventory, String title) {
         this(inventory, title, null, null);
@@ -106,10 +104,10 @@ public class Panel implements Listener, ICloneable<Panel> {
     /**
      * Creates a Panel with the specified arguments
      *
-     * @param inventory - Panel inventory
-     * @param title - Panel title
+     * @param inventory            - Panel inventory
+     * @param title                - Panel title
      * @param panelBuilderSettings - Panel builder settings
-     * @param panelBuilderCounter - Panel builder counter
+     * @param panelBuilderCounter  - Panel builder counter
      */
     public Panel(Inventory inventory, String title, PanelBuilderSettings panelBuilderSettings, PanelBuilderCounter panelBuilderCounter) {
         Bukkit.getPluginManager().registerEvents(this, PLUGIN);
@@ -125,41 +123,39 @@ public class Panel implements Listener, ICloneable<Panel> {
         PANELS.add(this);
     }
 
+    public static ItemStackConverter getITEM_STACK_CONVERTER() {
+        return Panel.ITEM_STACK_CONVERTER;
+    }
+
+    public static List<Panel> getPANELS() {
+        return Panel.PANELS;
+    }
+
     //--------------------------------------------------
     //
     // P A N E L   L I S T E N E R S
     //
     //--------------------------------------------------
 
+    public static void setPlugin(JavaPlugin javaPlugin) {
+        PLUGIN = javaPlugin;
+    }
+
     @EventHandler
     protected void onClick(InventoryClickEvent event) {
-        if(event.getInventory() == null || event.getCursor() == null || getInventory() == null) return;
-        if(!getInventory().equals(event.getInventory())) return;
+        if (event.getInventory() == null || event.getCursor() == null || getInventory() == null) return;
+        if (!getInventory().equals(event.getInventory())) return;
 
         Player player = (Player) event.getWhoClicked();
 
-        if(isCancelLowerClick() && isLowerClick(event.getRawSlot())) {
+        if (isCancelLowerClick() && isLowerClick(event.getRawSlot())) {
             event.setCancelled(true);
             return;
         }
 
-        if(getClickSound() != null) player.playSound(player.getLocation(), getClickSound(), 3F, 1F);
-        if(isCancelClick()) event.setCancelled(true);
-        if(getInventory().equals(inventory)) executeAction(event.getSlot(), event);
-    }
-
-    @EventHandler
-    protected void onClose(InventoryCloseEvent event) {
-        if(event.getInventory() == null || getInventory() == null) return;
-        if(!getInventory().equals(event.getInventory())) return;
-
-        Player player = (Player) event.getPlayer();
-
-        this.panelClose.onClose(player);
-        this.openedUsers.remove(player.getUniqueId());
-        this.viewers--;
-
-        if(getViewers() <= 0 && isDestroyWhenDone()) destroy();
+        if (getClickSound() != null) player.playSound(player.getLocation(), getClickSound(), 3F, 1F);
+        if (isCancelClick()) event.setCancelled(true);
+        if (getInventory().equals(inventory)) executeAction(event.getSlot(), event);
     }
 
     //--------------------------------------------------
@@ -168,11 +164,25 @@ public class Panel implements Listener, ICloneable<Panel> {
     //
     //--------------------------------------------------
 
+    @EventHandler
+    protected void onClose(InventoryCloseEvent event) {
+        if (event.getInventory() == null || getInventory() == null) return;
+        if (!getInventory().equals(event.getInventory())) return;
+
+        Player player = (Player) event.getPlayer();
+
+        this.panelClose.onClose(player);
+        this.openedUsers.remove(player.getUniqueId());
+        this.viewers--;
+
+        if (getViewers() <= 0 && isDestroyWhenDone()) destroy();
+    }
+
     /**
      * Used to set an action for when a player clicks
      * the panel.
      *
-     * @param slot - the slot for the action to happen
+     * @param slot        - the slot for the action to happen
      * @param clickAction - the action to happen
      * @return an instance of the Panel.
      */
@@ -213,7 +223,7 @@ public class Panel implements Listener, ICloneable<Panel> {
      * @param item - the item to be set.
      * @return an instance of the Panel.
      */
-    public Panel setItem(int slot, ItemStack item){
+    public Panel setItem(int slot, ItemStack item) {
         this.inventory.setItem(slot, item);
         return this;
     }
@@ -223,8 +233,8 @@ public class Panel implements Listener, ICloneable<Panel> {
      * panel and for an action to also be set to that
      * specified slot.
      *
-     * @param slot - the slot for the action and item to be set to
-     * @param item - the item to be set
+     * @param slot   - the slot for the action and item to be set to
+     * @param item   - the item to be set
      * @param action - the action to be applied
      * @return an instance of the Panel.
      */
@@ -232,18 +242,6 @@ public class Panel implements Listener, ICloneable<Panel> {
         this.inventory.setItem(slot, item);
 
         return setOnClick(slot, action);
-    }
-
-    /**
-     * Used to set the click sound for when a player
-     * clicks the panel.
-     *
-     * @param clickSound - the sound to be played.
-     * @return an instance of the Panel.
-     */
-    public Panel setClickSound(Sound clickSound) {
-        this.clickSound = clickSound;
-        return this;
     }
 
     /**
@@ -283,41 +281,6 @@ public class Panel implements Listener, ICloneable<Panel> {
         return this;
     }
 
-    /**
-     * Used to set if clicks are cancelled in the panel.
-     *
-     * @param cancelClick - boolean if clicks are cancelled.
-     * @return an instance of the Panel.
-     */
-    public Panel setCancelClick(boolean cancelClick) {
-        this.cancelClick = cancelClick;
-        return this;
-    }
-
-    /**
-     * Used to specify if the panel is destroyed when the
-     * last person closes it.
-     *
-     * @param destroyWhenDone - the boolean to set if the panel destroys on close.
-     * @return an instance of the Panel.
-     */
-    public Panel setDestroyWhenDone(boolean destroyWhenDone) {
-        this.destroyWhenDone = destroyWhenDone;
-        return this;
-    }
-
-    /**
-     * Used to set if the click is cancelled on the bottom
-     * GUI.
-     *
-     * @param cancelClick - if the click is cancelled.
-     * @return an instance of the Panel.
-     */
-    public Panel setCancelLowerClick(boolean cancelClick) {
-        this.cancelLowerClick = cancelClick;
-        return this;
-    }
-
     public boolean isLowerClick(int rawSlot) {
         return rawSlot >= inventory.getSize();
     }
@@ -331,7 +294,7 @@ public class Panel implements Listener, ICloneable<Panel> {
      * @return the current Panel
      */
     public Panel setParentPanel(Panel parentPanel) {
-        if(!this.panelBuilderSettings.isBackButton()) return this;
+        if (!this.panelBuilderSettings.isBackButton()) return this;
 
         int slot = this.panelBuilderSettings.getBackButtonSlot() - 1;
 
@@ -344,14 +307,14 @@ public class Panel implements Listener, ICloneable<Panel> {
      * will be used if the Back Button is also set up for this
      * panel.
      *
-     * @param panelBuilder - the parent panelBuilder
-     * @param cancelClick - cancelClick on the parent panel
+     * @param panelBuilder     - the parent panelBuilder
+     * @param cancelClick      - cancelClick on the parent panel
      * @param cancelLowerClick - cancelLowerClick on the parent panel
-     * @param destroyWhenDone - destroy parent panel when done
+     * @param destroyWhenDone  - destroy parent panel when done
      * @return the current Panel
      */
     public Panel setParentPanel(PanelBuilder panelBuilder, boolean cancelClick, boolean destroyWhenDone, boolean cancelLowerClick) {
-        if(!this.panelBuilderSettings.isBackButton()) return this;
+        if (!this.panelBuilderSettings.isBackButton()) return this;
 
         int slot = this.panelBuilderSettings.getBackButtonSlot() - 1;
 
@@ -375,7 +338,7 @@ public class Panel implements Listener, ICloneable<Panel> {
      * @return the current Panel
      */
     public Panel setParentPanelHandler(IPanelHandler panelHandler) {
-        if(!this.panelBuilderSettings.isBackButton()) return this;
+        if (!this.panelBuilderSettings.isBackButton()) return this;
 
         int slot = this.panelBuilderSettings.getBackButtonSlot() - 1;
 
@@ -389,11 +352,11 @@ public class Panel implements Listener, ICloneable<Panel> {
      * panel.
      *
      * @param variablePanelHandler - the parent variable panel handler
-     * @param variable - the variable to handle when opening the parent panel
+     * @param variable             - the variable to handle when opening the parent panel
      * @return the current Panel
      */
     public <T> Panel setParentPanelHandler(IVariablePanelHandler<T> variablePanelHandler, T variable) {
-        if(!this.panelBuilderSettings.isBackButton()) return this;
+        if (!this.panelBuilderSettings.isBackButton()) return this;
 
         int slot = this.panelBuilderSettings.getBackButtonSlot() - 1;
 
@@ -407,12 +370,12 @@ public class Panel implements Listener, ICloneable<Panel> {
      * panel.
      *
      * @param variablePanelHandler - the parent variable panel handler
-     * @param variable - the main variable to handle when opening the parent panel
-     * @param subVariable - the sub variable to handle when opening the parent panel
+     * @param variable             - the main variable to handle when opening the parent panel
+     * @param subVariable          - the sub variable to handle when opening the parent panel
      * @return the current Panel
      */
     public <T, Y> Panel setParentPanelHandler(ISubVariablePanelHandler<T, Y> variablePanelHandler, T variable, Y subVariable) {
-        if(!this.panelBuilderSettings.isBackButton()) return this;
+        if (!this.panelBuilderSettings.isBackButton()) return this;
 
         int slot = this.panelBuilderSettings.getBackButtonSlot() - 1;
 
@@ -420,8 +383,8 @@ public class Panel implements Listener, ICloneable<Panel> {
         return this;
     }
 
-    public <T, Y, Z> Panel setParentPanelHandler(ISubSubVariablePanelHandler<T,Y,Z> panelHandler, T variable, Y subVariable, Z subSubVariable) {
-        if(!this.panelBuilderSettings.isBackButton()) return this;
+    public <T, Y, Z> Panel setParentPanelHandler(ISubSubVariablePanelHandler<T, Y, Z> panelHandler, T variable, Y subVariable, Z subSubVariable) {
+        if (!this.panelBuilderSettings.isBackButton()) return this;
 
         int slot = this.panelBuilderSettings.getBackButtonSlot() - 1;
 
@@ -436,7 +399,7 @@ public class Panel implements Listener, ICloneable<Panel> {
      * @return the current panel
      */
     public Panel setExitButton() {
-        if(!this.panelBuilderSettings.isExitButton()) return this;
+        if (!this.panelBuilderSettings.isExitButton()) return this;
 
         int slot = this.panelBuilderSettings.getExitButtonSlot();
 
@@ -444,17 +407,10 @@ public class Panel implements Listener, ICloneable<Panel> {
         return this;
     }
 
-
-    //--------------------------------------------------
-    //
-    // O T H E R   P A N E L   M E T H O D S
-    //
-    //--------------------------------------------------
-
     /**
      * Used to destroy a panel, no matter how many people
      * are in it or what's happening in it.
-     *
+     * <p>
      * ** ONLY USE THIS IF YOU KNOW WHAT YOU'RE DOING **
      */
     public void destroy() {
@@ -466,7 +422,7 @@ public class Panel implements Listener, ICloneable<Panel> {
         this.openedUsers.forEach(uuid -> {
             Player player = Bukkit.getPlayer(uuid);
 
-            if(player == null) return;
+            if (player == null) return;
 
             player.closeInventory();
         });
@@ -486,10 +442,10 @@ public class Panel implements Listener, ICloneable<Panel> {
     public Inventory cloneInventory() {
         Inventory newInventory = Bukkit.createInventory(this.inventory.getHolder(), this.inventory.getSize(), this.title);
 
-        for(int i = 0; i < this.inventory.getSize(); i++) {
+        for (int i = 0; i < this.inventory.getSize(); i++) {
             ItemStack itemStack = this.inventory.getItem(i);
 
-            if(itemStack == null) continue;
+            if (itemStack == null) continue;
 
             newInventory.setItem(i, itemStack);
         }
@@ -516,10 +472,10 @@ public class Panel implements Listener, ICloneable<Panel> {
         panel.onPageChange = this.onPageChange;
         panel.panelClose = this.panelClose;
 
-        for(int i = 0; i < this.inventory.getSize(); i++) {
+        for (int i = 0; i < this.inventory.getSize(); i++) {
             ItemStack itemStack = this.inventory.getItem(i);
 
-            if(itemStack != null) {
+            if (itemStack != null) {
                 panel.inventory.setItem(i, itemStack);
             }
         }
@@ -527,9 +483,10 @@ public class Panel implements Listener, ICloneable<Panel> {
         return panel;
     }
 
+
     //--------------------------------------------------
     //
-    // P A N E L   P A G E   M E T H O D S
+    // O T H E R   P A N E L   M E T H O D S
     //
     //--------------------------------------------------
 
@@ -537,15 +494,15 @@ public class Panel implements Listener, ICloneable<Panel> {
      * Load the specified page of the list panel
      * with the new page data.
      *
-     * @param page - page number to load
+     * @param page        - page number to load
      * @param pageHandler - page handler that is used when loading the page
      */
     public void loadPage(int page, IPageHandler pageHandler) {
         int fillTo = getPanelBuilderSettings().getFillTo();
         int startIndex = page * fillTo;
 
-        for(int i = startIndex; i < startIndex + fillTo; i++) {
-            pageHandler.handleSlot(i, i-startIndex);
+        for (int i = startIndex; i < startIndex + fillTo; i++) {
+            pageHandler.handleSlot(i, i - startIndex);
         }
     }
 
@@ -567,51 +524,45 @@ public class Panel implements Listener, ICloneable<Panel> {
      * @param map - the map to gain size from
      * @return integer amount of pages
      */
-    public int getMaxPage(Map<?,?> map) {
+    public int getMaxPage(Map<?, ?> map) {
         return (int) Math.ceil((double) map.size() / (double) getPanelBuilderSettings().getFillTo()) - 1;
     }
 
     //--------------------------------------------------
     //
-    // P A N E L   E X E C U T E   A C T I O N
+    // P A N E L   P A G E   M E T H O D S
     //
     //--------------------------------------------------
 
     private void executeAction(int slot, InventoryClickEvent e) {
         Player clicker = (Player) e.getWhoClicked();
 
-        if(getPanelBuilderCounter().getPageData().containsKey(slot)) {
+        if (getPanelBuilderCounter().getPageData().containsKey(slot)) {
             int currentPage = this.currentPageContainer.getOrDefault(clicker.getUniqueId(), 0);
 
-            if(getPanelBuilderCounter().getPageData().get(slot) > 0) {
-                if(this.onPageChange.onPageAction(clicker, currentPage, currentPage+1)) {
-                    this.currentPageContainer.put(clicker.getUniqueId(), currentPage+1);
+            if (getPanelBuilderCounter().getPageData().get(slot) > 0) {
+                if (this.onPageChange.onPageAction(clicker, currentPage, currentPage + 1)) {
+                    this.currentPageContainer.put(clicker.getUniqueId(), currentPage + 1);
                 }
             } else {
-                if(currentPage != 0) {
-                    if (this.onPageChange.onPageAction(clicker, currentPage, currentPage-1)) {
+                if (currentPage != 0) {
+                    if (this.onPageChange.onPageAction(clicker, currentPage, currentPage - 1)) {
                         this.currentPageContainer.put(clicker.getUniqueId(), currentPage - 1);
                     }
                 }
             }
         }
 
-        if(this.targettedSlotActions.containsKey(slot)) {
+        if (this.targettedSlotActions.containsKey(slot)) {
             this.targettedSlotActions.get(slot).onClick(e);
         }
 
-        if(!this.allSlotActions.isEmpty()) {
-            for(ClickAction clickAction : this.allSlotActions) {
+        if (!this.allSlotActions.isEmpty()) {
+            for (ClickAction clickAction : this.allSlotActions) {
                 clickAction.onClick(e);
             }
         }
     }
-
-    //--------------------------------------------------
-    //
-    // P A N E L   P R I V A T E   M E T H O D
-    //
-    //--------------------------------------------------
 
     /**
      * Used to fill the empty spaces in the panel with the specified
@@ -620,21 +571,52 @@ public class Panel implements Listener, ICloneable<Panel> {
     private void fillEmptySpace() {
         ItemStackHolder itemStackHolder = this.panelBuilderSettings.getEmptySpaceFillerItem();
 
-        if(itemStackHolder == null) return;
+        if (itemStackHolder == null) return;
 
         ItemStack itemStack = ITEM_STACK_CONVERTER.from(itemStackHolder);
 
-        if(itemStack == null) return;
+        if (itemStack == null) return;
 
-        for(int i = 0; i < getInventory().getSize(); i++) {
+        for (int i = 0; i < getInventory().getSize(); i++) {
             ItemStack itemAtSlot = getInventory().getItem(i);
 
-            if(getPanelBuilderCounter().isButtonAtSlot(i)) continue;
+            if (getPanelBuilderCounter().isButtonAtSlot(i)) continue;
 
-            if(itemAtSlot == null || itemAtSlot.getType() == Material.AIR) {
+            if (itemAtSlot == null || itemAtSlot.getType() == Material.AIR) {
                 getInventory().setItem(i, itemStack);
             }
         }
+    }
+
+    public boolean isCancelClick() {
+        return this.cancelClick;
+    }
+
+    //--------------------------------------------------
+    //
+    // P A N E L   E X E C U T E   A C T I O N
+    //
+    //--------------------------------------------------
+
+    /**
+     * Used to set if clicks are cancelled in the panel.
+     *
+     * @param cancelClick - boolean if clicks are cancelled.
+     * @return an instance of the Panel.
+     */
+    public Panel setCancelClick(boolean cancelClick) {
+        this.cancelClick = cancelClick;
+        return this;
+    }
+
+    //--------------------------------------------------
+    //
+    // P A N E L   P R I V A T E   M E T H O D
+    //
+    //--------------------------------------------------
+
+    public boolean isDestroyWhenDone() {
+        return this.destroyWhenDone;
     }
 
     //--------------------------------------------------
@@ -643,7 +625,67 @@ public class Panel implements Listener, ICloneable<Panel> {
     //
     //--------------------------------------------------
 
-    public static void setPlugin(JavaPlugin javaPlugin) {
-        PLUGIN = javaPlugin;
+    /**
+     * Used to specify if the panel is destroyed when the
+     * last person closes it.
+     *
+     * @param destroyWhenDone - the boolean to set if the panel destroys on close.
+     * @return an instance of the Panel.
+     */
+    public Panel setDestroyWhenDone(boolean destroyWhenDone) {
+        this.destroyWhenDone = destroyWhenDone;
+        return this;
+    }
+
+    public boolean isCancelLowerClick() {
+        return this.cancelLowerClick;
+    }
+
+    /**
+     * Used to set if the click is cancelled on the bottom
+     * GUI.
+     *
+     * @param cancelClick - if the click is cancelled.
+     * @return an instance of the Panel.
+     */
+    public Panel setCancelLowerClick(boolean cancelClick) {
+        this.cancelLowerClick = cancelClick;
+        return this;
+    }
+
+    public PanelBuilderSettings getPanelBuilderSettings() {
+        return this.panelBuilderSettings;
+    }
+
+    public PanelBuilderCounter getPanelBuilderCounter() {
+        return this.panelBuilderCounter;
+    }
+
+    public Sound getClickSound() {
+        return this.clickSound;
+    }
+
+    /**
+     * Used to set the click sound for when a player
+     * clicks the panel.
+     *
+     * @param clickSound - the sound to be played.
+     * @return an instance of the Panel.
+     */
+    public Panel setClickSound(Sound clickSound) {
+        this.clickSound = clickSound;
+        return this;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public Inventory getInventory() {
+        return this.inventory;
+    }
+
+    public int getViewers() {
+        return this.viewers;
     }
 }

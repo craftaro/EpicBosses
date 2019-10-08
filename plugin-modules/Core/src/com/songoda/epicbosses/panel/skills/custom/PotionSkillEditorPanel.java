@@ -1,7 +1,8 @@
 package com.songoda.epicbosses.panel.skills.custom;
 
 import com.google.gson.JsonObject;
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.core.compatibility.ServerVersion;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
@@ -11,7 +12,6 @@ import com.songoda.epicbosses.skills.types.PotionSkillElement;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
-import com.songoda.epicbosses.utils.Versions;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
@@ -19,7 +19,6 @@ import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import com.songoda.epicbosses.utils.potion.PotionEffectConverter;
 import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -43,9 +42,9 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
     private PotionEffectConverter potionEffectConverter;
     private SkillsFileManager skillsFileManager;
     private BossSkillManager bossSkillManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public PotionSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public PotionSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -61,7 +60,7 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
         int maxPage = panel.getMaxPage(potionEffectHolders);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, potionEffectHolders, potionSkillElement, skill);
             return true;
@@ -101,8 +100,9 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     private void loadPage(Panel panel, int page, List<PotionEffectHolder> potionEffectHolders, PotionSkillElement potionSkillElement, Skill skill) {
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= potionEffectHolders.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= potionEffectHolders.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 PotionEffectHolder potionEffectHolder = potionEffectHolders.get(slot);
                 PotionEffect potionEffect = this.potionEffectConverter.from(potionEffectHolder);
@@ -110,7 +110,7 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
                 ItemStack itemStack = new ItemStack(Material.POTION);
                 PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
 
-                if (new VersionHandler().getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1)) {
+                if (ServerVersion.isServerVersionAtLeast(ServerVersion.V1_13)) {
                     PotionType potionType = PotionType.getByEffect(PotionEffectType.BLINDNESS);
 
                     if (potionType == null) potionType = PotionType.WATER;
@@ -127,8 +127,8 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
                 replaceMap.put("{level}", NumberUtils.get().formatDouble(potionEffectHolder.getLevel()));
                 replaceMap.put("{duration}", NumberUtils.get().formatDouble(potionEffectHolder.getDuration()));
 
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Skills.Potions.lore"), replaceMap);
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.Potions.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.Skills.Potions.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.Potions.name"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
                     potionEffectHolders.remove(potionEffectHolder);

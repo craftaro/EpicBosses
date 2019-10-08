@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.bosses.list;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
  */
 public class BossListEquipmentEditorPanel extends BossListEditorPanel {
 
-    public BossListEquipmentEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public BossListEquipmentEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder, plugin, "Equipment");
     }
 

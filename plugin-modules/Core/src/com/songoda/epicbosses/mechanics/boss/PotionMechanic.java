@@ -28,16 +28,16 @@ public class PotionMechanic implements IBossMechanic {
 
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
-        if(activeBossHolder.getLivingEntityMap().getOrDefault(1, null) == null) return false;
+        if (activeBossHolder.getLivingEntityMap().getOrDefault(1, null) == null) return false;
 
-        for(EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
+        for (EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
             LivingEntity livingEntity = activeBossHolder.getLivingEntity(mainStatsElement.getPosition());
             List<PotionEffectHolder> potionElements = entityStatsElement.getPotions();
 
-            if(livingEntity == null) return false;
+            if (livingEntity == null) return false;
 
-            if(potionElements != null && !potionElements.isEmpty()) {
+            if (potionElements != null && !potionElements.isEmpty()) {
                 potionElements.forEach(potionElement -> {
                     PotionEffect potionEffect = this.potionEffectConverter.from(potionElement);
                     if (potionEffect == null) {

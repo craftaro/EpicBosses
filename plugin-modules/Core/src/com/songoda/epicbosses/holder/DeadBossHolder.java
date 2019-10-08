@@ -1,6 +1,5 @@
 package com.songoda.epicbosses.holder;
 
-import lombok.Getter;
 import com.songoda.epicbosses.entity.BossEntity;
 import org.bukkit.Location;
 
@@ -14,9 +13,9 @@ import java.util.UUID;
  */
 public class DeadBossHolder {
 
-    @Getter private final Map<UUID, Double> sortedDamageMap, percentageMap;
-    @Getter private final BossEntity bossEntity;
-    @Getter private final Location location;
+    private final Map<UUID, Double> sortedDamageMap, percentageMap;
+    private final BossEntity bossEntity;
+    private final Location location;
 
     public DeadBossHolder(BossEntity bossEntity, Location deathLocation, Map<UUID, Double> sortedDamageMap, Map<UUID, Double> percentageMap) {
         this.location = deathLocation;
@@ -25,4 +24,19 @@ public class DeadBossHolder {
         this.percentageMap = percentageMap;
     }
 
+    public Map<UUID, Double> getSortedDamageMap() {
+        return this.sortedDamageMap;
+    }
+
+    public Map<UUID, Double> getPercentageMap() {
+        return this.percentageMap;
+    }
+
+    public BossEntity getBossEntity() {
+        return this.bossEntity;
+    }
+
+    public Location getLocation() {
+        return this.location;
+    }
 }

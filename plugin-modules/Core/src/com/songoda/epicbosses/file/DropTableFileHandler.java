@@ -45,7 +45,7 @@ public class DropTableFileHandler extends FileHandler<Map<String, DropTable>> {
 
             fileReader.close();
 
-            if(jsonObject != null) {
+            if (jsonObject != null) {
                 jsonObject.entrySet().forEach(entry -> {
                     String id = entry.getKey();
                     DropTable dropTable = GSON.fromJson(entry.getValue(), DropTable.class);
@@ -64,7 +64,8 @@ public class DropTableFileHandler extends FileHandler<Map<String, DropTable>> {
     public void saveFile(Map<String, DropTable> stringDropTableMap) {
         try {
             FileWriter fileWriter = new FileWriter(getFile());
-            Type type = new TypeToken<Map<String, ItemStackHolder>>(){}.getType();
+            Type type = new TypeToken<Map<String, ItemStackHolder>>() {
+            }.getType();
 
             fileWriter.write(GSON.toJson(new HashMap<>(stringDropTableMap), type));
             fileWriter.flush();

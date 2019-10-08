@@ -1,10 +1,9 @@
 package com.songoda.epicbosses.managers.files;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.file.SkillsFileHandler;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.utils.ILoadable;
-import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.ISavable;
 
 import java.io.File;
@@ -16,12 +15,12 @@ import java.util.Map;
  * @version 1.0.0
  * @since 13-Nov-18
  */
-public class SkillsFileManager implements ILoadable, IReloadable, ISavable {
+public class SkillsFileManager implements ILoadable, ISavable {
 
     private Map<String, Skill> skillMap = new HashMap<>();
     private SkillsFileHandler skillsFileHandler;
 
-    public SkillsFileManager(CustomBosses plugin) {
+    public SkillsFileManager(EpicBosses plugin) {
         File file = new File(plugin.getDataFolder(), "skills.json");
 
         this.skillsFileHandler = new SkillsFileHandler(plugin, true, file);
@@ -32,7 +31,6 @@ public class SkillsFileManager implements ILoadable, IReloadable, ISavable {
         this.skillMap = this.skillsFileHandler.loadFile();
     }
 
-    @Override
     public void reload() {
         load();
     }
@@ -43,7 +41,7 @@ public class SkillsFileManager implements ILoadable, IReloadable, ISavable {
     }
 
     public void saveSkill(String name, Skill skill) {
-        if(this.skillMap.containsKey(name)) return;
+        if (this.skillMap.containsKey(name)) return;
 
         this.skillMap.put(name, skill);
         save();

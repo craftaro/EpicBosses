@@ -44,8 +44,9 @@ public class MessagesFileHandler extends FileHandler<Map<String, List<String>>> 
 
             fileReader.close();
 
-            if(jsonObject != null) {
-                Type listType = new TypeToken<List<String>>(){}.getType();
+            if (jsonObject != null) {
+                Type listType = new TypeToken<List<String>>() {
+                }.getType();
 
                 jsonObject.entrySet().forEach(entry -> {
                     String id = entry.getKey();
@@ -65,7 +66,8 @@ public class MessagesFileHandler extends FileHandler<Map<String, List<String>>> 
     public void saveFile(Map<String, List<String>> stringListMap) {
         try {
             FileWriter fileWriter = new FileWriter(getFile());
-            Type type = new TypeToken<Map<String, List<String>>>(){}.getType();
+            Type type = new TypeToken<Map<String, List<String>>>() {
+            }.getType();
 
             fileWriter.write(GSON.toJson(new HashMap<>(stringListMap), type));
             fileWriter.flush();

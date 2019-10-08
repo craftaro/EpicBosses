@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.autospawns;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.autospawns.settings.AutoSpawnSettings;
@@ -31,7 +31,7 @@ public class AutoSpawnSpecialSettingsEditorPanel extends VariablePanelHandler<Au
 
     private AutoSpawnFileManager autoSpawnFileManager;
 
-    public AutoSpawnSpecialSettingsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public AutoSpawnSpecialSettingsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.autoSpawnFileManager = plugin.getAutoSpawnFileManager();
@@ -47,11 +47,11 @@ public class AutoSpawnSpecialSettingsEditorPanel extends VariablePanelHandler<Au
         Map<String, String> replaceMap = new HashMap<>();
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
         AutoSpawnSettings autoSpawnSettings = autoSpawn.getAutoSpawnSettings();
-        String shuffleEntities = ObjectUtils.getValue(autoSpawnSettings.getShuffleEntitiesList(), false)+"";
+        String shuffleEntities = ObjectUtils.getValue(autoSpawnSettings.getShuffleEntitiesList(), false) + "";
         String maxAliveAtOnce = NumberUtils.get().formatDouble(ObjectUtils.getValue(autoSpawnSettings.getMaxAliveAtOnce(), 1));
         String amountPerSpawn = NumberUtils.get().formatDouble(ObjectUtils.getValue(autoSpawnSettings.getAmountPerSpawn(), 1));
-        String chunkIsntLoaded = ObjectUtils.getValue(autoSpawnSettings.getSpawnWhenChunkIsntLoaded(), false)+"";
-        String overrideSpawnMessage = ObjectUtils.getValue(autoSpawnSettings.getOverrideDefaultSpawnMessage(), false)+"";
+        String chunkIsntLoaded = ObjectUtils.getValue(autoSpawnSettings.getSpawnWhenChunkIsntLoaded(), false) + "";
+        String overrideSpawnMessage = ObjectUtils.getValue(autoSpawnSettings.getOverrideDefaultSpawnMessage(), false) + "";
         String spawnMessage = ObjectUtils.getValue(autoSpawnSettings.getSpawnMessage(), "");
 
         replaceMap.put("{name}", BossAPI.getAutoSpawnName(autoSpawn));
@@ -86,7 +86,7 @@ public class AutoSpawnSpecialSettingsEditorPanel extends VariablePanelHandler<Au
 
     private ClickAction getShuffleEntitiesButton(AutoSpawn autoSpawn) {
         return event -> {
-            if(isBlocked(autoSpawn, event)) return;
+            if (isBlocked(autoSpawn, event)) return;
 
             AutoSpawnSettings settings = autoSpawn.getAutoSpawnSettings();
 
@@ -97,13 +97,13 @@ public class AutoSpawnSpecialSettingsEditorPanel extends VariablePanelHandler<Au
 
     private ClickAction getMaxAliveEntitiesButton(AutoSpawn autoSpawn) {
         return event -> {
-            if(isBlocked(autoSpawn, event)) return;
+            if (isBlocked(autoSpawn, event)) return;
 
             AutoSpawnSettings settings = autoSpawn.getAutoSpawnSettings();
             ClickType clickType = event.getClick();
             int amountToModifyBy;
 
-            if(clickType.name().contains("RIGHT")) {
+            if (clickType.name().contains("RIGHT")) {
                 amountToModifyBy = -1;
             } else {
                 amountToModifyBy = +1;
@@ -112,7 +112,7 @@ public class AutoSpawnSpecialSettingsEditorPanel extends VariablePanelHandler<Au
             int currentAmount = ObjectUtils.getValue(settings.getMaxAliveAtOnce(), 1);
             int newAmount = currentAmount + amountToModifyBy;
 
-            if(newAmount <= 1) newAmount = 1;
+            if (newAmount <= 1) newAmount = 1;
 
             settings.setMaxAliveAtOnce(newAmount);
             save(autoSpawn, event);
@@ -121,13 +121,13 @@ public class AutoSpawnSpecialSettingsEditorPanel extends VariablePanelHandler<Au
 
     private ClickAction getAmountPerSpawnButton(AutoSpawn autoSpawn) {
         return event -> {
-            if(isBlocked(autoSpawn, event)) return;
+            if (isBlocked(autoSpawn, event)) return;
 
             AutoSpawnSettings settings = autoSpawn.getAutoSpawnSettings();
             ClickType clickType = event.getClick();
             int amountToModifyBy;
 
-            if(clickType.name().contains("RIGHT")) {
+            if (clickType.name().contains("RIGHT")) {
                 amountToModifyBy = -1;
             } else {
                 amountToModifyBy = +1;
@@ -136,7 +136,7 @@ public class AutoSpawnSpecialSettingsEditorPanel extends VariablePanelHandler<Au
             int currentAmount = ObjectUtils.getValue(settings.getAmountPerSpawn(), 1);
             int newAmount = currentAmount + amountToModifyBy;
 
-            if(newAmount <= 1) newAmount = 1;
+            if (newAmount <= 1) newAmount = 1;
 
             settings.setAmountPerSpawn(newAmount);
             save(autoSpawn, event);
@@ -145,7 +145,7 @@ public class AutoSpawnSpecialSettingsEditorPanel extends VariablePanelHandler<Au
 
     private ClickAction getChunkIsntLoadedButton(AutoSpawn autoSpawn) {
         return event -> {
-            if(isBlocked(autoSpawn, event)) return;
+            if (isBlocked(autoSpawn, event)) return;
 
             AutoSpawnSettings settings = autoSpawn.getAutoSpawnSettings();
 
@@ -156,7 +156,7 @@ public class AutoSpawnSpecialSettingsEditorPanel extends VariablePanelHandler<Au
 
     private ClickAction getOverrideSpawnMessageButton(AutoSpawn autoSpawn) {
         return event -> {
-            if(isBlocked(autoSpawn, event)) return;
+            if (isBlocked(autoSpawn, event)) return;
 
             AutoSpawnSettings settings = autoSpawn.getAutoSpawnSettings();
 
@@ -166,7 +166,7 @@ public class AutoSpawnSpecialSettingsEditorPanel extends VariablePanelHandler<Au
     }
 
     private boolean isBlocked(AutoSpawn autoSpawn, InventoryClickEvent event) {
-        if(!autoSpawn.isEditing()) {
+        if (!autoSpawn.isEditing()) {
             Message.Boss_AutoSpawn_MustToggleEditing.msg(event.getWhoClicked());
             return true;
         }

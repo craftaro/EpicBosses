@@ -1,7 +1,5 @@
 package com.songoda.epicbosses.utils;
 
-import org.bukkit.Material;
-
 import java.util.Random;
 
 /**
@@ -14,6 +12,10 @@ public class RandomUtils {
     private static RandomUtils INSTANCE = new RandomUtils();
 
     private Random random = new Random();
+
+    public static RandomUtils get() {
+        return INSTANCE;
+    }
 
     public boolean preformRandomAction() {
         int rand = getRandomNumber(2);
@@ -41,10 +43,6 @@ public class RandomUtils {
         double randomChance = getRandomDecimalNumber();
 
         return (randomChance <= chanceOfSuccess);
-    }
-
-    public static RandomUtils get() {
-        return INSTANCE;
     }
 
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -14,27 +14,18 @@
         <module>api-modules/FactionsOne</module>
         <module>api-modules/FactionsUUID</module>
         <module>api-modules/LegacyFactions</module>
-        <module>api-modules/WorldGuard</module>
-        <module>api-modules/WorldGuard-Legacy</module>
         <module>plugin-modules/Core</module>
         <module>plugin-modules/FactionHelper</module>
-        <module>plugin-modules/WorldGuardHelper</module>
     </modules>
 
     <properties>
         <plugin.version>maven-version-number</plugin.version>
         <plugin.name>EpicBosses</plugin.name>
-        <plugin.main>com.songoda.epicbosses.CustomBosses</plugin.main>
+        <plugin.main>com.songoda.epicbosses.EpicBosses</plugin.main>
         <plugin.author>AMinecraftDev</plugin.author>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>net.milkbowl</groupId>
-            <artifactId>vault</artifactId>
-            <version>1.7.1</version>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>com.wasteofplastic</groupId>
             <artifactId>askyblock</artifactId>
@@ -45,18 +36,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.22</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.bstats</groupId>
-            <artifactId>bstats-bukkit</artifactId>
-            <version>1.2</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.gmail.filoghost.holographicdisplays</groupId>
-            <artifactId>holographicdisplays-api</artifactId>
-            <version>2.3.2</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -71,10 +50,6 @@
         <repository>
             <id>private-repo</id>
             <url>http://repo.songoda.com/artifactory/private/</url>
-        </repository>
-        <repository>
-            <id>bstats-repo</id>
-            <url>http://repo.bstats.org/content/repositories/releases/</url>
         </repository>
     </repositories>
 
@@ -136,21 +111,6 @@
                         <artifactItem>
                             <groupId>${project.groupId}</groupId>
                             <artifactId>LegacyFactions</artifactId>
-                            <version>${project.version}</version>
-                        </artifactItem>
-                        <artifactItem>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>WorldGuardHelper</artifactId>
-                            <version>${project.version}</version>
-                        </artifactItem>
-                        <artifactItem>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>WorldGuard</artifactId>
-                            <version>${project.version}</version>
-                        </artifactItem>
-                        <artifactItem>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>WorldGuard-Legacy</artifactId>
                             <version>${project.version}</version>
                         </artifactItem>
                         <artifactItem>

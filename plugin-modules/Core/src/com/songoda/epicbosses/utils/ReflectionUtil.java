@@ -18,6 +18,10 @@ public class ReflectionUtil {
         this.nmsVersion = this.nmsVersion.substring(this.nmsVersion.lastIndexOf(".") + 1);
     }
 
+    public static ReflectionUtil get() {
+        return instance;
+    }
+
     public String getVersion() {
         return this.nmsVersion;
     }
@@ -25,7 +29,7 @@ public class ReflectionUtil {
     public Class<?> getNMSClass(String name) {
         try {
             return Class.forName("net.minecraft.server." + this.nmsVersion + "." + name);
-        } catch(ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
             return null;
         }
@@ -34,14 +38,10 @@ public class ReflectionUtil {
     public Class<?> getOBCClass(String name) {
         try {
             return Class.forName("org.bukkit.craftbukkit." + this.nmsVersion + "." + name);
-        } catch(ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
             return null;
         }
     }
-
-     public static ReflectionUtil get() {
-        return instance;
-     }
 
 }

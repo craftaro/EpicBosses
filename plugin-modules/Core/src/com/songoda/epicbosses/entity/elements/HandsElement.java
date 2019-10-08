@@ -1,8 +1,6 @@
 package com.songoda.epicbosses.entity.elements;
 
 import com.google.gson.annotations.Expose;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @author Charles Cullen
@@ -11,11 +9,27 @@ import lombok.Setter;
  */
 public class HandsElement {
 
-    @Expose @Getter @Setter private String mainHand, offHand;
+    @Expose
+    private String mainHand, offHand;
 
     public HandsElement(String mainHand, String offHand) {
         this.mainHand = mainHand;
         this.offHand = offHand;
     }
 
+    public String getMainHand() {
+        return this.mainHand;
+    }
+
+    public void setMainHand(String mainHand) {
+        this.mainHand = mainHand;
+    }
+
+    public String getOffHand() {
+        return this.offHand;
+    }
+
+    public void setOffHand(String offHand) {
+        this.offHand = offHand;
+    }
 }

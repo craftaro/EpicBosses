@@ -10,7 +10,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -38,11 +37,11 @@ public class Fireball extends CustomSkillHandler {
     public void castSkill(Skill skill, CustomSkillElement customSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
         LivingEntity boss = activeBossHolder.getLivingEntity();
 
-        if(boss == null) return;
+        if (boss == null) return;
 
         Double multiplier = customSkillElement.getCustom().getMultiplier();
 
-        if(multiplier == null) multiplier = 1.0;
+        if (multiplier == null) multiplier = 1.0;
 
         double finalMultiplier = multiplier;
 

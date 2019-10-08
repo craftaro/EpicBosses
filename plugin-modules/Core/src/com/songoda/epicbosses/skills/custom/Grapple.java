@@ -39,7 +39,7 @@ public class Grapple extends CustomSkillHandler {
         Location bossLocation = activeBossHolder.getLocation();
         Double multiplier = customSkillElement.getCustom().getMultiplier();
 
-        if(multiplier == null) multiplier = 1.0;
+        if (multiplier == null) multiplier = 1.0;
 
         double finalMultiplier = multiplier;
 

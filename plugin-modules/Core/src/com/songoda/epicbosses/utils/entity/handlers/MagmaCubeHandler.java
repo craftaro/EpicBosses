@@ -1,7 +1,6 @@
 package com.songoda.epicbosses.utils.entity.handlers;
 
 import com.songoda.epicbosses.utils.entity.ICustomEntityHandler;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -19,7 +18,7 @@ public class MagmaCubeHandler implements ICustomEntityHandler {
         int size = 4;
         if (entityType.contains(":")) {
             String[] split = entityType.split(":");
-            size = Integer.valueOf(split[1]);
+            size = Integer.parseInt(split[1]);
         }
 
         MagmaCube magmaCube = (MagmaCube) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.MAGMA_CUBE);

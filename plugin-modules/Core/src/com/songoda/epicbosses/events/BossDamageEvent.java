@@ -1,6 +1,5 @@
 package com.songoda.epicbosses.events;
 
-import lombok.Getter;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
@@ -16,10 +15,10 @@ public class BossDamageEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
 
-    @Getter private ActiveBossHolder activeBossHolder;
-    @Getter private LivingEntity livingEntity;
-    @Getter private Location damageLocation;
-    @Getter private double damage;
+    private ActiveBossHolder activeBossHolder;
+    private LivingEntity livingEntity;
+    private Location damageLocation;
+    private double damage;
 
     public BossDamageEvent(ActiveBossHolder activeBossHolder, LivingEntity livingEntity, Location damageLocation, double damageAmount) {
         this.activeBossHolder = activeBossHolder;
@@ -28,12 +27,28 @@ public class BossDamageEvent extends Event {
         this.damage = damageAmount;
     }
 
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
     @Override
     public HandlerList getHandlers() {
         return handlers;
     }
 
-    public static HandlerList getHandlerList() {
-        return handlers;
+    public ActiveBossHolder getActiveBossHolder() {
+        return this.activeBossHolder;
+    }
+
+    public LivingEntity getLivingEntity() {
+        return this.livingEntity;
+    }
+
+    public Location getDamageLocation() {
+        return this.damageLocation;
+    }
+
+    public double getDamage() {
+        return this.damage;
     }
 }

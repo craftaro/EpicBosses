@@ -4,7 +4,7 @@ package com.songoda.epicbosses.utils.time;
  * @author AMinecraftDev
  * @version 1.0.0
  * @since 23-May-17
- *
+ * <p>
  * Makes it easy to convert
  * time
  */
@@ -24,29 +24,6 @@ public enum TimeUnit {
 
     TimeUnit(double seconds) {
         this.seconds = seconds;
-    }
-
-    /**
-     * Returns a double, representing
-     * the amount of time in the requested
-     * TimeUnit
-     *
-     * @param timeUnit TimeUnit
-     * @param input double
-     * @return double
-     */
-    public double to(TimeUnit timeUnit, double input) {
-        return (input*seconds) / timeUnit.getSeconds();
-    }
-
-    /**
-     * Returns the amound of seconds
-     * that fit into this TimeUnit
-     *
-     * @return double
-     */
-    public double getSeconds() {
-        return seconds;
     }
 
     /**
@@ -98,6 +75,29 @@ public enum TimeUnit {
             default:
                 return null;
         }
+    }
+
+    /**
+     * Returns a double, representing
+     * the amount of time in the requested
+     * TimeUnit
+     *
+     * @param timeUnit TimeUnit
+     * @param input    double
+     * @return double
+     */
+    public double to(TimeUnit timeUnit, double input) {
+        return (input * seconds) / timeUnit.getSeconds();
+    }
+
+    /**
+     * Returns the amound of seconds
+     * that fit into this TimeUnit
+     *
+     * @return double
+     */
+    public double getSeconds() {
+        return seconds;
     }
 
 }

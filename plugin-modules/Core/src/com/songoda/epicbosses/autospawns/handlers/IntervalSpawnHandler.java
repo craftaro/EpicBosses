@@ -1,20 +1,24 @@
 package com.songoda.epicbosses.autospawns.handlers;
 
 import com.google.gson.JsonObject;
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.autospawns.types.IntervalSpawnElement;
 import com.songoda.epicbosses.handlers.AutoSpawnVariableHandler;
 import com.songoda.epicbosses.handlers.variables.AutoSpawnLocationVariableHandler;
 import com.songoda.epicbosses.handlers.variables.AutoSpawnPlaceholderVariableHandler;
-import com.songoda.epicbosses.utils.*;
+import com.songoda.epicbosses.utils.Message;
+import com.songoda.epicbosses.utils.NumberUtils;
+import com.songoda.epicbosses.utils.ObjectUtils;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Charles Cullen
@@ -29,7 +33,7 @@ public class IntervalSpawnHandler {
 
             intervalSpawnElement.setSpawnAfterLastBossIsKilled(!ObjectUtils.getValue(intervalSpawnElement.getSpawnAfterLastBossIsKilled(), false));
             autoSpawn.setCustomData(BossAPI.convertObjectToJsonObject(intervalSpawnElement));
-            CustomBosses.get().getAutoSpawnFileManager().save();
+            EpicBosses.getInstance().getAutoSpawnFileManager().save();
 
             panelHandler.openFor(player, autoSpawn);
         };
@@ -42,7 +46,7 @@ public class IntervalSpawnHandler {
     public ClickAction getLocationAction(IntervalSpawnElement intervalSpawnElement, AutoSpawn autoSpawn, VariablePanelHandler<AutoSpawn> variablePanelHandler) {
         return event -> {
             Player player = (Player) event.getWhoClicked();
-            AutoSpawnVariableHandler autoSpawnVariableHandler = new AutoSpawnLocationVariableHandler(player, autoSpawn, intervalSpawnElement, CustomBosses.get().getAutoSpawnFileManager(), variablePanelHandler);
+            AutoSpawnVariableHandler autoSpawnVariableHandler = new AutoSpawnLocationVariableHandler(player, autoSpawn, intervalSpawnElement, EpicBosses.getInstance().getAutoSpawnFileManager(), variablePanelHandler);
 
             Message.Boss_AutoSpawn_SetLocation.msg(player);
             autoSpawnVariableHandler.handle();
@@ -57,7 +61,7 @@ public class IntervalSpawnHandler {
     public ClickAction getPlaceholderAction(IntervalSpawnElement intervalSpawnElement, AutoSpawn autoSpawn, VariablePanelHandler<AutoSpawn> variablePanelHandler) {
         return event -> {
             Player player = (Player) event.getWhoClicked();
-            AutoSpawnVariableHandler autoSpawnVariableHandler = new AutoSpawnPlaceholderVariableHandler(player, autoSpawn, intervalSpawnElement, CustomBosses.get().getAutoSpawnFileManager(), variablePanelHandler);
+            AutoSpawnVariableHandler autoSpawnVariableHandler = new AutoSpawnPlaceholderVariableHandler(player, autoSpawn, intervalSpawnElement, EpicBosses.getInstance().getAutoSpawnFileManager(), variablePanelHandler);
 
             Message.Boss_AutoSpawn_SetPlaceholder.msg(player);
             autoSpawnVariableHandler.handle();
@@ -74,11 +78,11 @@ public class IntervalSpawnHandler {
             ClickType clickType = event.getClick();
             int amountToModifyBy;
 
-            if(clickType == ClickType.SHIFT_LEFT) {
+            if (clickType == ClickType.SHIFT_LEFT) {
                 amountToModifyBy = 10;
-            } else if(clickType == ClickType.RIGHT) {
+            } else if (clickType == ClickType.RIGHT) {
                 amountToModifyBy = -1;
-            } else if(clickType == ClickType.SHIFT_RIGHT) {
+            } else if (clickType == ClickType.SHIFT_RIGHT) {
                 amountToModifyBy = -10;
             } else {
                 amountToModifyBy = 1;
@@ -88,7 +92,7 @@ public class IntervalSpawnHandler {
             String modifyValue;
             int newAmount;
 
-            if(amountToModifyBy > 0) {
+            if (amountToModifyBy > 0) {
                 modifyValue = "increased";
                 newAmount = currentAmount + amountToModifyBy;
             } else {
@@ -96,7 +100,7 @@ public class IntervalSpawnHandler {
                 newAmount = currentAmount + amountToModifyBy;
             }
 
-            if(newAmount <= 0) {
+            if (newAmount <= 0) {
                 newAmount = 0;
             }
 
@@ -105,7 +109,7 @@ public class IntervalSpawnHandler {
             JsonObject jsonObject = BossAPI.convertObjectToJsonObject(intervalSpawnElement);
 
             autoSpawn.setCustomData(jsonObject);
-            CustomBosses.get().getAutoSpawnFileManager().save();
+            EpicBosses.getInstance().getAutoSpawnFileManager().save();
             Message.Boss_AutoSpawn_SpawnRate.msg(event.getWhoClicked(), modifyValue, NumberUtils.get().formatDouble(newAmount));
             panelHandler.openFor((Player) event.getWhoClicked(), autoSpawn);
         };

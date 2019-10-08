@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.listeners.pre;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.events.BossSpawnEvent;
@@ -10,14 +10,8 @@ import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.BossLocationManager;
 import com.songoda.epicbosses.managers.BossTauntManager;
-import com.songoda.epicbosses.utils.Message;
-import com.songoda.epicbosses.utils.MessageUtils;
-import com.songoda.epicbosses.utils.NumberUtils;
-import com.songoda.epicbosses.utils.ServerUtils;
-import com.songoda.epicbosses.utils.StringUtils;
+import com.songoda.epicbosses.utils.*;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
-import com.songoda.epicbosses.utils.version.VersionHandler;
-import java.util.ArrayList;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -30,6 +24,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,13 +38,11 @@ public class BossSpawnListener implements Listener {
     private BossLocationManager bossLocationManager;
     private BossEntityManager bossEntityManager;
     private BossTauntManager bossTauntManager;
-    private VersionHandler versionHandler;
 
-    public BossSpawnListener(CustomBosses customBosses) {
-        this.versionHandler = customBosses.getVersionHandler();
-        this.bossTauntManager = customBosses.getBossTauntManager();
-        this.bossEntityManager = customBosses.getBossEntityManager();
-        this.bossLocationManager = customBosses.getBossLocationManager();
+    public BossSpawnListener(EpicBosses epicBosses) {
+        this.bossTauntManager = epicBosses.getBossTauntManager();
+        this.bossEntityManager = epicBosses.getBossEntityManager();
+        this.bossLocationManager = epicBosses.getBossLocationManager();
     }
 
     @EventHandler
@@ -59,24 +52,24 @@ public class BossSpawnListener implements Listener {
         BlockFace blockFace = event.getBlockFace();
         Action action = event.getAction();
 
-        if(!event.hasItem()) return;
-        if(action != Action.RIGHT_CLICK_BLOCK) return;
-        if(block.getType() == Material.AIR) return;
+        if (!event.hasItem()) return;
+        if (action != Action.RIGHT_CLICK_BLOCK) return;
+        if (block.getType() == Material.AIR) return;
 
         Map<BossEntity, ItemStack> entitiesAndSpawnItems = this.bossEntityManager.getMapOfEntitiesAndSpawnItems();
-        ItemStack itemStack = this.versionHandler.getItemInHand(player);
+        ItemStack itemStack = player.getItemInHand();
         BossEntity bossEntity = null;
 
-        for(Map.Entry<BossEntity, ItemStack> entry : entitiesAndSpawnItems.entrySet()) {
-            if(ItemStackUtils.isItemStackSame(itemStack, entry.getValue())) {
+        for (Map.Entry<BossEntity, ItemStack> entry : entitiesAndSpawnItems.entrySet()) {
+            if (ItemStackUtils.isItemStackSame(itemStack, entry.getValue())) {
                 bossEntity = entry.getKey();
                 break;
             }
         }
 
-        if(bossEntity == null) return;
+        if (bossEntity == null) return;
 
-        if(bossEntity.isEditing()) {
+        if (bossEntity.isEditing()) {
             Message.Boss_Edit_CannotSpawn.msg(player);
             event.setCancelled(true);
             return;
@@ -84,11 +77,11 @@ public class BossSpawnListener implements Listener {
 
         Location location = block.getLocation().clone();
 
-        if(blockFace == BlockFace.UP) {
-            location.add(0,1,0);
+        if (blockFace == BlockFace.UP) {
+            location.add(0, 1, 0);
         }
 
-        if(!this.bossLocationManager.canSpawnBoss(player, location.clone())) {
+        if (!this.bossLocationManager.canSpawnBoss(player, location.clone())) {
             Message.General_CannotSpawn.msg(player);
             event.setCancelled(true);
             return;
@@ -98,7 +91,7 @@ public class BossSpawnListener implements Listener {
 
         ActiveBossHolder activeBossHolder = BossAPI.spawnNewBoss(bossEntity, location, player, itemStack, false);
 
-        if(activeBossHolder == null) {
+        if (activeBossHolder == null) {
             event.setCancelled(true);
         }
     }
@@ -123,7 +116,7 @@ public class BossSpawnListener implements Listener {
         int messageRadius = this.bossEntityManager.getOnSpawnMessageRadius(bossEntity);
         ServerUtils serverUtils = ServerUtils.get();
 
-        if(event instanceof PreBossSpawnItemEvent) {
+        if (event instanceof PreBossSpawnItemEvent) {
             PreBossSpawnItemEvent preBossSpawnItemEvent = (PreBossSpawnItemEvent) event;
             ItemStack itemStack = preBossSpawnItemEvent.getItemStackUsed().clone();
             Player player = preBossSpawnItemEvent.getPlayer();
@@ -147,8 +140,9 @@ public class BossSpawnListener implements Listener {
         if (!commands.isEmpty())
             commands.forEach(serverUtils::sendConsoleCommand);
 
-        if(!messages.isEmpty() && !activeBossHolder.isCustomSpawnMessage()) {
-            if(activeBossHolder.getName() != null) messages.replaceAll(s -> s.replace("{boss}", activeBossHolder.getName()));
+        if (!messages.isEmpty() && !activeBossHolder.isCustomSpawnMessage()) {
+            if (activeBossHolder.getName() != null)
+                messages.replaceAll(s -> s.replace("{boss}", activeBossHolder.getName()));
             final String locationString = StringUtils.get().translateLocation(location);
             messages.replaceAll(s -> s.replace("{location}", locationString));
 

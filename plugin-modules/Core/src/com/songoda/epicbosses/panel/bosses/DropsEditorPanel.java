@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.bosses;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.entity.BossEntity;
@@ -36,9 +36,9 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
     private DropTableFileManager dropTableFileManager;
     private ItemStackConverter itemStackConverter;
     private BossesFileManager bossesFileManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public DropsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public DropsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.dropTableFileManager = plugin.getDropTableFileManager();
@@ -59,7 +59,7 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
         int maxPage = panel.getMaxPage(entryList);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, dropTableMap, entryList, bossEntity);
             return true;
@@ -103,14 +103,15 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
         String dropTableName = bossEntity.getDrops().getDropTable();
 
         panel.loadPage(requestedPage, (slot, realisticSlot) -> {
-            if(slot >= dropTableMap.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= dropTableMap.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = entryList.get(slot);
                 DropTable dropTable = dropTableMap.get(name);
                 ItemStackHolder itemStackHolder;
 
-                if(dropTableName.equalsIgnoreCase(name)) {
+                if (dropTableName.equalsIgnoreCase(name)) {
                     itemStackHolder = BossAPI.getStoredItemStack("DefaultSelectedDropTableItem");
                 } else {
                     itemStackHolder = BossAPI.getStoredItemStack("DefaultDropTableMenuItem");
@@ -118,7 +119,7 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
 
                 ItemStack itemStack = this.itemStackConverter.from(itemStackHolder);
 
-                if(itemStack == null) {
+                if (itemStack == null) {
                     itemStack = new ItemStack(Material.BARRIER);
                 }
 
@@ -127,11 +128,11 @@ public class DropsEditorPanel extends VariablePanelHandler<BossEntity> {
                 replaceMap.put("{name}", name);
                 replaceMap.put("{type}", StringUtils.get().formatString(dropTable.getDropType()));
 
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Drops.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Boss.Drops.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Drops.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.Boss.Drops.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
-                    if(!bossEntity.isEditing()) {
+                    if (!bossEntity.isEditing()) {
                         Message.Boss_Edit_CannotBeModified.msg(e.getWhoClicked());
                         return;
                     }

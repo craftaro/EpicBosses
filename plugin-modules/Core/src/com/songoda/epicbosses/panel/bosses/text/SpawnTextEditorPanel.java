@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.bosses.text;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -28,7 +28,7 @@ public class SpawnTextEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private BossesFileManager bossesFileManager;
 
-    public SpawnTextEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public SpawnTextEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.bossesFileManager = plugin.getBossesFileManager();
@@ -46,8 +46,8 @@ public class SpawnTextEditorPanel extends VariablePanelHandler<BossEntity> {
         String message = bossEntity.getMessages().getOnSpawn().getMessage();
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        if(radius == null) radius = 0;
-        if(message == null) message = "N/A";
+        if (radius == null) radius = 0;
+        if (message == null) message = "N/A";
 
         replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
         replaceMap.put("{radius}", NumberUtils.get().formatDouble(radius));
@@ -77,7 +77,7 @@ public class SpawnTextEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ClickAction getRadiusAction(BossEntity bossEntity) {
         return event -> {
-            if(!bossEntity.isEditing()) {
+            if (!bossEntity.isEditing()) {
                 Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                 return;
             }
@@ -85,24 +85,24 @@ public class SpawnTextEditorPanel extends VariablePanelHandler<BossEntity> {
             ClickType clickType = event.getClick();
             int radiusToModifyBy = 0;
 
-            if(clickType == ClickType.LEFT) {
+            if (clickType == ClickType.LEFT) {
                 radiusToModifyBy = 1;
-            } else if(clickType == ClickType.SHIFT_LEFT) {
+            } else if (clickType == ClickType.SHIFT_LEFT) {
                 radiusToModifyBy = 10;
-            } else if(clickType == ClickType.RIGHT) {
+            } else if (clickType == ClickType.RIGHT) {
                 radiusToModifyBy = -1;
-            } else if(clickType == ClickType.SHIFT_RIGHT) {
+            } else if (clickType == ClickType.SHIFT_RIGHT) {
                 radiusToModifyBy = -10;
             }
 
-            String modifyValue = radiusToModifyBy > 0? "increased" : "decreased";
+            String modifyValue = radiusToModifyBy > 0 ? "increased" : "decreased";
             Integer currentRadius = bossEntity.getMessages().getOnSpawn().getRadius();
 
-            if(currentRadius == null) currentRadius = 0;
+            if (currentRadius == null) currentRadius = 0;
 
             int newRadius = currentRadius + radiusToModifyBy;
 
-            if(newRadius < -1) {
+            if (newRadius < -1) {
                 newRadius = -1;
             }
 

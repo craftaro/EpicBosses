@@ -14,9 +14,8 @@ import org.bukkit.configuration.ConfigurationSection;
 public abstract class BasePanelHandler implements IBasicPanelHandler {
 
     protected final BossPanelManager bossPanelManager;
-
-    private PanelBuilder panelBuilder;
     protected Panel panel = null;
+    private PanelBuilder panelBuilder;
 
     public BasePanelHandler(BossPanelManager bossPanelManager, ConfigurationSection configurationSection) {
         this(bossPanelManager, new PanelBuilder(configurationSection));

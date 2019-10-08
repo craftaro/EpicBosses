@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.bosses.weapons;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class OffHandEditorPanel extends ItemStackSubListPanelHandler {
 
-    public OffHandEditorPanel(BossPanelManager bossPanelManager, ConfigurationSection configurationSection, CustomBosses plugin) {
+    public OffHandEditorPanel(BossPanelManager bossPanelManager, ConfigurationSection configurationSection, EpicBosses plugin) {
         super(bossPanelManager, configurationSection, plugin);
     }
 

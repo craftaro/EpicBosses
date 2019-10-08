@@ -27,13 +27,14 @@ public class EquipmentMechanic implements IMinionMechanic {
 
     @Override
     public boolean applyMechanic(MinionEntity minionEntity, ActiveMinionHolder activeBossHolder) {
-        if(activeBossHolder.getLivingEntityMap() == null || activeBossHolder.getLivingEntityMap().isEmpty()) return false;
+        if (activeBossHolder.getLivingEntityMap() == null || activeBossHolder.getLivingEntityMap().isEmpty())
+            return false;
 
-        for(EntityStatsElement entityStatsElement : minionEntity.getEntityStats()) {
+        for (EntityStatsElement entityStatsElement : minionEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
             LivingEntity livingEntity = activeBossHolder.getLivingEntity(mainStatsElement.getPosition());
 
-            if(livingEntity == null) return false;
+            if (livingEntity == null) return false;
 
             EquipmentElement equipmentElement = entityStatsElement.getEquipment();
             EntityEquipment entityEquipment = livingEntity.getEquipment();
@@ -42,40 +43,40 @@ public class EquipmentMechanic implements IMinionMechanic {
             String leggings = equipmentElement.getLeggings();
             String boots = equipmentElement.getBoots();
 
-            if(helmet != null) {
+            if (helmet != null) {
                 ItemStackHolder itemStackHolder = this.itemStackManager.getItemStackHolder(helmet);
 
-                if(itemStackHolder != null) {
+                if (itemStackHolder != null) {
                     ItemStack itemStack = this.itemStackManager.getItemStackConverter().from(itemStackHolder);
 
                     entityEquipment.setHelmet(itemStack);
                 }
             }
 
-            if(chestplate != null) {
+            if (chestplate != null) {
                 ItemStackHolder itemStackHolder = this.itemStackManager.getItemStackHolder(chestplate);
 
-                if(itemStackHolder != null) {
+                if (itemStackHolder != null) {
                     ItemStack itemStack = this.itemStackManager.getItemStackConverter().from(itemStackHolder);
 
                     entityEquipment.setChestplate(itemStack);
                 }
             }
 
-            if(leggings != null) {
+            if (leggings != null) {
                 ItemStackHolder itemStackHolder = this.itemStackManager.getItemStackHolder(leggings);
 
-                if(itemStackHolder != null) {
+                if (itemStackHolder != null) {
                     ItemStack itemStack = this.itemStackManager.getItemStackConverter().from(itemStackHolder);
 
                     entityEquipment.setLeggings(itemStack);
                 }
             }
 
-            if(boots != null) {
+            if (boots != null) {
                 ItemStackHolder itemStackHolder = this.itemStackManager.getItemStackHolder(boots);
 
-                if(itemStackHolder != null) {
+                if (itemStackHolder != null) {
                     ItemStack itemStack = this.itemStackManager.getItemStackConverter().from(itemStackHolder);
 
                     entityEquipment.setBoots(itemStack);

@@ -44,7 +44,7 @@ public class SkillsFileHandler extends FileHandler<Map<String, Skill>> {
 
             fileReader.close();
 
-            if(jsonObject != null) {
+            if (jsonObject != null) {
                 jsonObject.entrySet().forEach(entry -> {
                     String id = entry.getKey();
                     Skill bossEntity = GSON.fromJson(entry.getValue(), Skill.class);
@@ -63,7 +63,8 @@ public class SkillsFileHandler extends FileHandler<Map<String, Skill>> {
     public void saveFile(Map<String, Skill> skillMap) {
         try {
             FileWriter fileWriter = new FileWriter(getFile());
-            Type type = new TypeToken<Map<String, Skill>>(){}.getType();
+            Type type = new TypeToken<Map<String, Skill>>() {
+            }.getType();
 
             fileWriter.write(GSON.toJson(new HashMap<>(skillMap), type));
             fileWriter.flush();

@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.panel.additems.interfaces.IParentPanelHandler;
@@ -30,7 +30,7 @@ public class AddItemsPanel extends PanelHandler {
     private IParentPanelHandler parentPanelHandler;
     private ItemsFileManager itemsFileManager;
 
-    public AddItemsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin, IParentPanelHandler parentPanelHandler) {
+    public AddItemsPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin, IParentPanelHandler parentPanelHandler) {
         super(bossPanelManager, panelBuilder);
 
         this.itemsFileManager = plugin.getItemStackManager();
@@ -67,8 +67,8 @@ public class AddItemsPanel extends PanelHandler {
                 int rawSlot = event.getRawSlot();
                 int slot = event.getSlot();
 
-                if(panel.isLowerClick(rawSlot)) {
-                    if(this.storedItemStacks.containsKey(uuid)) {
+                if (panel.isLowerClick(rawSlot)) {
+                    if (this.storedItemStacks.containsKey(uuid)) {
                         Message.Boss_Items_AlreadySet.msg(playerWhoClicked);
                         return;
                     }
@@ -93,12 +93,12 @@ public class AddItemsPanel extends PanelHandler {
         return event -> {
             int rawSlot = event.getRawSlot();
 
-            if(panel.isLowerClick(rawSlot)) return;
+            if (panel.isLowerClick(rawSlot)) return;
 
             Player player = (Player) event.getWhoClicked();
             UUID uuid = player.getUniqueId();
 
-            if(this.storedItemStacks.containsKey(uuid)) {
+            if (this.storedItemStacks.containsKey(uuid)) {
                 player.getInventory().addItem(this.storedItemStacks.get(uuid));
                 this.storedItemStacks.remove(uuid);
 
@@ -111,12 +111,12 @@ public class AddItemsPanel extends PanelHandler {
         return event -> {
             int rawSlot = event.getRawSlot();
 
-            if(panel.isLowerClick(rawSlot)) return;
+            if (panel.isLowerClick(rawSlot)) return;
 
             Player player = (Player) event.getWhoClicked();
             UUID uuid = player.getUniqueId();
 
-            if(this.storedItemStacks.containsKey(uuid)) {
+            if (this.storedItemStacks.containsKey(uuid)) {
                 this.itemsFileManager.addItemStack(UUID.randomUUID().toString(), this.storedItemStacks.get(uuid));
                 Message.Boss_Items_Added.msg(player);
                 this.storedItemStacks.remove(uuid);
@@ -130,12 +130,12 @@ public class AddItemsPanel extends PanelHandler {
         return event -> {
             int rawSlot = event.getRawSlot();
 
-            if(panel.isLowerClick(rawSlot)) return;
+            if (panel.isLowerClick(rawSlot)) return;
 
             Player player = (Player) event.getWhoClicked();
             UUID uuid = player.getUniqueId();
 
-            if(this.storedItemStacks.containsKey(uuid)) {
+            if (this.storedItemStacks.containsKey(uuid)) {
                 player.getInventory().addItem(this.storedItemStacks.get(uuid));
                 this.storedItemStacks.remove(uuid);
             }

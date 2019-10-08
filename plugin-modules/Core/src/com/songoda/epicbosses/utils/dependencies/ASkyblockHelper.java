@@ -1,8 +1,8 @@
 package com.songoda.epicbosses.utils.dependencies;
 
+import com.songoda.epicbosses.utils.IASkyblockHelper;
 import com.wasteofplastic.askyblock.ASkyBlock;
 import com.wasteofplastic.askyblock.Island;
-import com.songoda.epicbosses.utils.IASkyblockHelper;
 import org.bukkit.entity.Player;
 
 /**
@@ -16,7 +16,7 @@ public class ASkyblockHelper implements IASkyblockHelper {
     public boolean isOnOwnIsland(Player player) {
         Island island = ASkyBlock.getPlugin().getGrid().getProtectedIslandAt(player.getLocation());
 
-        if(island == null) return false;
+        if (island == null) return false;
 
         return island.getMembers().contains(player.getUniqueId());
     }

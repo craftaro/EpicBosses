@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.managers.files;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.file.CommandsFileHandler;
 import com.songoda.epicbosses.utils.ILoadable;
 import com.songoda.epicbosses.utils.IReloadable;
@@ -21,10 +21,10 @@ public class CommandsFileManager implements ILoadable, ISavable, IReloadable {
     private Map<String, List<String>> commandsMap = new HashMap<>();
     private CommandsFileHandler commandsFileHandler;
 
-    public CommandsFileManager(CustomBosses customBosses) {
-        File file = new File(customBosses.getDataFolder(), "commands.json");
+    public CommandsFileManager(EpicBosses epicBosses) {
+        File file = new File(epicBosses.getDataFolder(), "commands.json");
 
-        this.commandsFileHandler = new CommandsFileHandler(customBosses, true, file);
+        this.commandsFileHandler = new CommandsFileHandler(epicBosses, true, file);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class CommandsFileManager implements ILoadable, ISavable, IReloadable {
     }
 
     public boolean addNewCommand(String id, List<String> commands) {
-        if(this.commandsMap.containsKey(id)) return false;
+        if (this.commandsMap.containsKey(id)) return false;
 
         commandsMap.put(id, commands);
         return true;

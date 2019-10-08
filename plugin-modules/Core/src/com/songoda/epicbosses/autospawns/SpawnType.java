@@ -19,15 +19,11 @@ public enum SpawnType {
         this.rank = rank;
     }
 
-    public SpawnType getNext() {
-        return get(this.rank+1);
-    }
-
     public static SpawnType getCurrent(String input) {
-        if(input == null || input.isEmpty()) return BLANK;
+        if (input == null || input.isEmpty()) return BLANK;
 
-        for(SpawnType spawnTypes : values()) {
-            if(spawnTypes.name().equalsIgnoreCase(input)) return spawnTypes;
+        for (SpawnType spawnTypes : values()) {
+            if (spawnTypes.name().equalsIgnoreCase(input)) return spawnTypes;
         }
 
         return BLANK;
@@ -36,20 +32,24 @@ public enum SpawnType {
     public static List<SpawnType> getSpawnTypes() {
         List<SpawnType> list = new ArrayList<>();
 
-        for(SpawnType spawnTypes : values()) {
-            if(spawnTypes.rank > 0) list.add(spawnTypes);
+        for (SpawnType spawnTypes : values()) {
+            if (spawnTypes.rank > 0) list.add(spawnTypes);
         }
 
         return list;
     }
 
     private static SpawnType get(int rank) {
-        for(SpawnType spawnTypes : values()) {
-            if(spawnTypes.rank == rank) {
+        for (SpawnType spawnTypes : values()) {
+            if (spawnTypes.rank == rank) {
                 return spawnTypes;
             }
         }
 
         return INTERVAL;
+    }
+
+    public SpawnType getNext() {
+        return get(this.rank + 1);
     }
 }

@@ -1,9 +1,9 @@
 package com.songoda.epicbosses.targeting;
 
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.holder.IActiveHolder;
 import com.songoda.epicbosses.managers.BossTargetManager;
 import com.songoda.epicbosses.utils.ServerUtils;
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Creature;
@@ -22,8 +22,8 @@ import java.util.UUID;
  */
 public abstract class TargetHandler<Holder extends IActiveHolder> implements ITarget {
 
-    @Getter protected final BossTargetManager bossTargetManager;
-    @Getter protected final Holder holder;
+    protected final BossTargetManager bossTargetManager;
+    protected final Holder holder;
 
     public TargetHandler(Holder holder, BossTargetManager bossTargetManager) {
         this.holder = holder;
@@ -34,54 +34,60 @@ public abstract class TargetHandler<Holder extends IActiveHolder> implements ITa
         ServerUtils.get().runLaterAsync(10L, () -> {
             updateTarget();
 
-            if(!getHolder().isDead()) runTargetCycle();
+            if (!getHolder().isDead()) runTargetCycle();
         });
     }
 
     protected LivingEntity getBossEntity() {
-        for(UUID uuid : getHolder().getLivingEntityMap().values()) {
+        for (UUID uuid : getHolder().getLivingEntityMap().values()) {
             LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(uuid);
-            if(livingEntity != null && !livingEntity.isDead()) return livingEntity;
+            if (livingEntity != null && !livingEntity.isDead()) return livingEntity;
         }
 
         return null;
     }
 
     private void updateTarget() {
-        LivingEntity boss = getBossEntity();
-        double radius = this.bossTargetManager.getTargetRadius();
+        Bukkit.getScheduler().runTask(EpicBosses.getInstance(), () -> {
+            LivingEntity boss = getBossEntity();
+            double radius = this.bossTargetManager.getTargetRadius();
 
-        if(boss == null) return;
+            if (boss == null) return;
 
-        List<LivingEntity> nearbyEntities = new ArrayList<>();
-        List<Entity> nearbyBossEntities = boss.getNearbyEntities(radius, radius, radius);
+            List<LivingEntity> nearbyEntities = new ArrayList<>();
+            List<Entity> nearbyBossEntities = boss.getNearbyEntities(radius, radius, radius);
 
-        if(nearbyBossEntities == null) return;
 
-        for(Entity entity : nearbyBossEntities) {
-            if(!(entity instanceof Player)) continue;
+            for (Entity entity : nearbyBossEntities) {
+                if (!(entity instanceof Player)) continue;
 
-            LivingEntity livingEntity = (LivingEntity) entity;
+                LivingEntity livingEntity = (LivingEntity) entity;
 
-            if(livingEntity instanceof Player) {
                 Player player = (Player) livingEntity;
 
-                if(player.getGameMode() == GameMode.SPECTATOR || player.getGameMode() == GameMode.CREATIVE) continue;
+                if (player.getGameMode() == GameMode.SPECTATOR || player.getGameMode() == GameMode.CREATIVE) continue;
+
+                nearbyEntities.add(livingEntity);
             }
 
-            nearbyEntities.add(livingEntity);
-        }
-
-        updateBoss(selectTarget(nearbyEntities));
+            updateBoss(selectTarget(nearbyEntities));
+        });
     }
 
     private void updateBoss(LivingEntity newTarget) {
         getHolder().getLivingEntityMap().values().forEach(uuid -> {
             LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(uuid);
-            if(livingEntity != null && !livingEntity.isDead()) {
+            if (livingEntity != null && !livingEntity.isDead()) {
                 ((Creature) livingEntity).setTarget(newTarget);
             }
         });
     }
 
+    public BossTargetManager getBossTargetManager() {
+        return this.bossTargetManager;
+    }
+
+    public Holder getHolder() {
+        return this.holder;
+    }
 }

@@ -15,18 +15,18 @@ public class PotionEffectTypeConverter implements IConverter<String, PotionEffec
     public String to(PotionEffectType potionEffectType) {
         PotionEffectFinder potionEffectFinder = PotionEffectFinder.getByEffect(potionEffectType);
 
-        if(potionEffectFinder == null) return null;
+        if (potionEffectFinder == null) return null;
 
         return potionEffectFinder.getFancyName();
     }
 
     @Override
     public PotionEffectType from(String s) {
-        if(s == null) return null;
+        if (s == null) return null;
 
         PotionEffectFinder potionEffectFinder = PotionEffectFinder.getByName(s);
 
-        if(potionEffectFinder == null) return null;
+        if (potionEffectFinder == null) return null;
 
         return potionEffectFinder.getPotionEffectType();
     }
