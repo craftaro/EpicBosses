@@ -28,8 +28,6 @@ public class YmlFileHandler implements IFileHandler<FileConfiguration> {
         if (!this.file.exists()) {
             if (this.saveResource) {
                 String name = this.file.getName();
-
-                System.out.println(name);
                 javaPlugin.saveResource(name, false);
             }
 

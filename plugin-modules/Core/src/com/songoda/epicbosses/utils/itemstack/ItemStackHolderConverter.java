@@ -4,6 +4,7 @@ import com.songoda.core.compatibility.CompatibleMaterial;
 import com.songoda.epicbosses.utils.IConverter;
 import com.songoda.epicbosses.utils.exceptions.NotImplementedException;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.List;
@@ -21,8 +22,13 @@ public class ItemStackHolderConverter implements IConverter<ItemStackHolder, Con
         if (configurationSection == null) return null;
 
         Integer amount = (Integer) configurationSection.get("amount", null);
-        String type = CompatibleMaterial.getMaterial(configurationSection.getString("type", null)).getMaterial().name();
+        CompatibleMaterial material = CompatibleMaterial.getMaterial(configurationSection.getString("type", null));
+
+        String type = material.getMaterial().name();
+
         Short durability = (Short) configurationSection.get("durability", null);
+        if (material.getData() != -1) durability = (short) material.getData();
+
         String name = configurationSection.getString("name", null);
         List<String> lore = (List<String>) configurationSection.getList("lore", null);
         List<String> enchants = (List<String>) configurationSection.getList("enchants", null);

@@ -113,11 +113,16 @@ public class ItemStackUtils {
     }
 
     public static ItemStack createItemStack(ConfigurationSection configurationSection, int amount, Map<String, String> replacedMap) {
-        String type = configurationSection.getString("type");
+
+        CompatibleMaterial material = CompatibleMaterial.getMaterial(configurationSection.getString("type"));
+
+        String type = material.getMaterial().name();
         String name = configurationSection.getString("name");
         List<String> lore = configurationSection.getStringList("lore");
         List<String> enchants = configurationSection.getStringList("enchants");
-        short durability = (short) configurationSection.getInt("durability");
+        Short durability = (Short) configurationSection.get("durability");
+        if (material.getData() != -1) durability = (short) material.getData();
+
         String owner = configurationSection.getString("owner");
         Map<Enchantment, Integer> map = new HashMap<>();
         List<String> newLore = new ArrayList<>();
@@ -215,12 +220,8 @@ public class ItemStackUtils {
         if (!map.isEmpty()) {
             itemStack.addUnsafeEnchantments(map);
         }
-        if (configurationSection.contains("durability")) {
-            short dura = itemStack.getType().getMaxDurability();
-            dura -= (short) durability - 1;
-
-            itemStack.setDurability(dura);
-        }
+        if (durability != null)
+            itemStack.setDurability(durability);
 
         if (configurationSection.contains("owner") && itemStack.getType() == CompatibleMaterial.PLAYER_HEAD.getMaterial()) {
             SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
@@ -383,8 +384,12 @@ public class ItemStackUtils {
     @SuppressWarnings("unchecked")
     public static ItemStackHolder getItemStackHolder(ConfigurationSection configurationSection) {
         Integer amount = (Integer) configurationSection.get("amount", null);
-        String type = configurationSection.getString("type", null);
-        Short durability = (Short) configurationSection.get("durability", null);
+
+        CompatibleMaterial material = CompatibleMaterial.getMaterial(configurationSection.getString("type", null));
+
+        String type = material.getMaterial().name();
+        Short durability = (Short) configurationSection.get("durability");
+        if (material.getData() != -1) durability = (short) material.getData();
         String name = configurationSection.getString("name", null);
         List<String> lore = (List<String>) configurationSection.getList("lore", null);
         List<String> enchants = (List<String>) configurationSection.getList("enchants", null);
