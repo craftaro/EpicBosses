@@ -156,7 +156,7 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
 
         // Register commands
         this.commandManager = new CommandManager(this);
-        this.commandManager.addCommand(new CommandBoss())
+        this.commandManager.addMainCommand("boss")
                 .addSubCommands(
                         new CommandCreate(bossEntityContainer),
                         new CommandDebug(debugManager),
