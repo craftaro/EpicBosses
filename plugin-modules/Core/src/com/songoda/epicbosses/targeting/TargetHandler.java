@@ -1,8 +1,10 @@
 package com.songoda.epicbosses.targeting;
 
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.holder.IActiveHolder;
 import com.songoda.epicbosses.managers.BossTargetManager;
 import com.songoda.epicbosses.utils.ServerUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
@@ -46,31 +48,30 @@ public abstract class TargetHandler<Holder extends IActiveHolder> implements ITa
     }
 
     private void updateTarget() {
-        LivingEntity boss = getBossEntity();
-        double radius = this.bossTargetManager.getTargetRadius();
+        Bukkit.getScheduler().runTask(EpicBosses.getInstance(), () -> {
+            LivingEntity boss = getBossEntity();
+            double radius = this.bossTargetManager.getTargetRadius();
 
-        if (boss == null) return;
+            if (boss == null) return;
 
-        List<LivingEntity> nearbyEntities = new ArrayList<>();
-        List<Entity> nearbyBossEntities = boss.getNearbyEntities(radius, radius, radius);
+            List<LivingEntity> nearbyEntities = new ArrayList<>();
+            List<Entity> nearbyBossEntities = boss.getNearbyEntities(radius, radius, radius);
 
-        if (nearbyBossEntities == null) return;
 
-        for (Entity entity : nearbyBossEntities) {
-            if (!(entity instanceof Player)) continue;
+            for (Entity entity : nearbyBossEntities) {
+                if (!(entity instanceof Player)) continue;
 
-            LivingEntity livingEntity = (LivingEntity) entity;
+                LivingEntity livingEntity = (LivingEntity) entity;
 
-            if (livingEntity instanceof Player) {
                 Player player = (Player) livingEntity;
 
                 if (player.getGameMode() == GameMode.SPECTATOR || player.getGameMode() == GameMode.CREATIVE) continue;
+
+                nearbyEntities.add(livingEntity);
             }
 
-            nearbyEntities.add(livingEntity);
-        }
-
-        updateBoss(selectTarget(nearbyEntities));
+            updateBoss(selectTarget(nearbyEntities));
+        });
     }
 
     private void updateBoss(LivingEntity newTarget) {
