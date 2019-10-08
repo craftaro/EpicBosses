@@ -15,6 +15,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Charles Cullen
@@ -87,17 +88,39 @@ public class ActiveBossHolder implements IActiveHolder {
         this.activeMinionHolderMap.values().forEach(ActiveMinionHolder::killAll);
     }
 
+    public int count() {
+        return livingEntityMap.size() + activeMinionHolderMap.values().stream()
+                .map(e -> e.count())
+                .reduce((e1, e2) -> e1 + e2)
+                .orElse(0);
+    }
+
     public boolean killAllSubBosses(World world) {
         if (world != null && !this.location.getWorld().equals(world))
             return false;
 
-        this.livingEntityMap.values().forEach(e -> {
-            Entity entity = ServerUtils.get().getEntity(e);
-            if (entity != null)
-                entity.remove();
+//        this.livingEntityMap.values().forEach(e -> {
+//            Entity entity = ServerUtils.get().getEntity(e);
+//            if (entity != null)
+//                entity.remove();
+//        });
+//        this.livingEntityMap.clear();
+
+        // grab list of all valid entities by UUID that can be removed
+        Map<Integer, Entity> toRemove = this.livingEntityMap.entrySet().stream()
+                .collect(Collectors.toMap(e -> e.getKey(), e -> ServerUtils.get().getEntity(e.getValue())))
+                .entrySet().stream()
+                .filter(e -> e.getValue() != null && e.getValue().getWorld().isChunkLoaded(
+                                e.getValue().getLocation().getBlockX() >> 4,
+                                e.getValue().getLocation().getBlockZ() >> 4))
+                .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+
+        // remove everything we can
+        toRemove.entrySet().stream().forEach(e -> {
+            e.getValue().remove();
+            livingEntityMap.remove(e.getKey());
         });
 
-        this.livingEntityMap.clear();
         return true;
     }
 }

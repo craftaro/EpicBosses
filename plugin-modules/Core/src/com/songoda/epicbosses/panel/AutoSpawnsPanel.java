@@ -67,7 +67,7 @@ public class AutoSpawnsPanel extends MainListPanelHandler {
                 }
 
                 Map<String, String> replaceMap = new HashMap<>();
-                List<String> entities = ObjectUtils.getValue(autoSpawn.getEntities(), new ArrayList<>());
+                List<String> entities = (List<String>) ObjectUtils.getValue(autoSpawn.getEntities(), new ArrayList<>());
                 AutoSpawnSettings settings = autoSpawn.getAutoSpawnSettings();
                 String entitiesSize = entities.size()+"";
                 String maxAlive = ""+ObjectUtils.getValue(settings.getMaxAliveAtOnce(), 1);

@@ -17,14 +17,12 @@ import com.songoda.epicbosses.managers.files.DropTableFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.managers.files.MinionsFileManager;
 import com.songoda.epicbosses.skills.Skill;
-import com.songoda.epicbosses.skills.custom.Minions;
 import com.songoda.epicbosses.skills.elements.CustomMinionSkillElement;
 import com.songoda.epicbosses.utils.BossesGson;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.RandomUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Item;
@@ -110,10 +108,12 @@ public class BossEntityManager {
         for(ActiveBossHolder activeBossHolder : getActiveBossHolders()) {
             if(activeBossHolder.killAllSubBosses(world)) {
                 activeBossHolder.killAllMinions(world);
-                activeBossHolder.setDead(true);
                 amountOfBosses++;
 
-                ACTIVE_BOSS_HOLDERS.remove(activeBossHolder);
+                if(activeBossHolder.count() == 0) {
+                    activeBossHolder.setDead(true);
+                    ACTIVE_BOSS_HOLDERS.remove(activeBossHolder);
+                }
             }
         }
 
@@ -127,9 +127,11 @@ public class BossEntityManager {
             if(activeBossHolder.getBossEntity().equals(bossEntity)) {
                 activeBossHolder.killAll();
                 activeBossHolder.killAllMinions();
-                activeBossHolder.setDead(true);
 
-                ACTIVE_BOSS_HOLDERS.remove(activeBossHolder);
+                if(activeBossHolder.count() == 0) {
+                    activeBossHolder.setDead(true);
+                    ACTIVE_BOSS_HOLDERS.remove(activeBossHolder);
+                }
             }
         }
     }

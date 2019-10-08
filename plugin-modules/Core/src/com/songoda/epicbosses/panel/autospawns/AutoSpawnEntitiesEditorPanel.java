@@ -83,7 +83,7 @@ public class AutoSpawnEntitiesEditorPanel extends VariablePanelHandler<AutoSpawn
     }
 
     private void loadPage(Panel panel, int page, Map<String, BossEntity> currentEntities, List<String> entryList, AutoSpawn autoSpawn) {
-        List<String> current = ObjectUtils.getValue(autoSpawn.getEntities(), new ArrayList<>());
+        List<String> current = (List<String>) ObjectUtils.getValue(autoSpawn.getEntities(), new ArrayList<>());
 
         panel.loadPage(page, (slot, realisticSlot) -> {
             if(slot >= entryList.size()) {
