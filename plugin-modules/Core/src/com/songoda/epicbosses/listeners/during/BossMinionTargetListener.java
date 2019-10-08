@@ -28,7 +28,7 @@ public class BossMinionTargetListener implements Listener {
         Entity entityTargeting = event.getEntity();
         LivingEntity entityTargeted = event.getTarget();
 
-        if (entityTargeting == null || entityTargeted == null) return;
+        if (entityTargeted == null) return;
         if (!(entityTargeting instanceof LivingEntity)) return;
 
         LivingEntity livingEntity = (LivingEntity) entityTargeting;
@@ -38,14 +38,14 @@ public class BossMinionTargetListener implements Listener {
 
         if (targetingBossHolder != null) {
             for (ActiveMinionHolder minionHolder : targetingBossHolder.getActiveMinionHolderMap().values()) {
-                if (minionHolder.getLivingEntityMap().containsValue(entityTargeted)) {
+                if (minionHolder.getLivingEntityMap().containsValue(entityTargeted.getUniqueId())) {
                     event.setCancelled(true);
                     return;
                 }
             }
         } else if (targetedBossHolder != null) {
             for (ActiveMinionHolder minionHolder : targetedBossHolder.getActiveMinionHolderMap().values()) {
-                if (minionHolder.getLivingEntityMap().containsValue(entityTargeting)) {
+                if (minionHolder.getLivingEntityMap().containsValue(entityTargeting.getUniqueId())) {
                     event.setCancelled(true);
                     return;
                 }
