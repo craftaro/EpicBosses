@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.utils.itemstack;
 
+import com.songoda.core.compatibility.CompatibleMaterial;
 import com.songoda.epicbosses.utils.IReplaceableConverter;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.converters.EnchantConverter;
@@ -101,23 +102,20 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
         if (itemStackHolder == null) return itemStack;
         if (itemStackHolder.getType() == null) return itemStack;
 
-        String type = itemStackHolder.getType();
-        Material material = this.materialConverter.from(type);
+        CompatibleMaterial cMaterial = CompatibleMaterial.getMaterial(itemStackHolder.getType());
+        Material material = cMaterial.getMaterial();
 
         if (material == null) return itemStack;
 
         itemStack.setType(material);
 
         Integer amount = itemStackHolder.getAmount();
-        Short durability = itemStackHolder.getDurability(), spawnerId = itemStackHolder.getSpawnerId();
+        Short durability = (short) cMaterial.getData(), spawnerId = itemStackHolder.getSpawnerId();
+
         String name = itemStackHolder.getName(), skullOwner = itemStackHolder.getSkullOwner();
         List<String> lore = itemStackHolder.getLore(), enchants = itemStackHolder.getEnchants();
 
-        if (type.contains(":")) {
-            durability = Short.valueOf(type.split(":")[1]);
-        }
-
-        if (durability != null) itemStack.setDurability(durability);
+        if (durability != -1) itemStack.setDurability(durability);
         if (enchants != null) itemStack.addUnsafeEnchantments(this.enchantConverter.from(enchants));
 
         if (name != null || skullOwner != null || lore != null || spawnerId != null) {
