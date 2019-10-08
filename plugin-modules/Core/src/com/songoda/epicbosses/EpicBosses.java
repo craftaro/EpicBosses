@@ -90,7 +90,6 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
     @Override
     public void onPluginDisable() {
         this.autoSpawnManager.stopIntervalSystems();
-        this.bossEntityManager.killAllHolders((World) null);
     }
 
     @Override
