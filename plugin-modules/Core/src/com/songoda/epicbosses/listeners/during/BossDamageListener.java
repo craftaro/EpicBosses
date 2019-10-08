@@ -49,6 +49,13 @@ public class BossDamageListener implements Listener {
 
                 BossEntity bossEntity = bossesFileManager.getBossEntity(name);
                 bossEntityManager.createActiveBossHolder(bossEntity, livingEntity.getLocation(), name, null);
+
+                if (livingEntity.isInsideVehicle() && livingEntity.getVehicle() != null)
+                    livingEntity.getVehicle().remove();
+
+                if (livingEntity.getPassenger() != null)
+                    livingEntity.getPassenger().remove();
+
                 livingEntity.remove();
             }
             return;
