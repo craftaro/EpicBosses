@@ -3,8 +3,10 @@ package com.songoda.epicbosses.utils;
 import com.songoda.epicbosses.utils.entity.ICustomEntityHandler;
 import com.songoda.epicbosses.utils.entity.handlers.*;
 import org.bukkit.Location;
+import org.bukkit.entity.Ageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Tameable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -130,6 +132,14 @@ public enum EntityFinder {
             } catch (NullPointerException ex) {
                 Debug.FAILED_ATTEMPT_TO_SPAWN_BOSS.debug(ex.getMessage());
                 return null;
+            }
+
+            if (livingEntity instanceof Tameable) {
+                ((Tameable) livingEntity).setTamed(true);
+            }
+
+            if (livingEntity instanceof Ageable) {
+                ((Ageable) livingEntity).setAdult();
             }
 
             return livingEntity;

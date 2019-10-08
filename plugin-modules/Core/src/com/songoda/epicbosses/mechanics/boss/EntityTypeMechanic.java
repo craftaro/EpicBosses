@@ -8,6 +8,7 @@ import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.mechanics.IBossMechanic;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.EntityFinder;
+import org.bukkit.entity.Ageable;
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Tameable;
@@ -45,10 +46,6 @@ public class EntityTypeMechanic implements IBossMechanic {
                 if (lowerLivingEntity == null) {
                     Debug.FAILED_ATTEMPT_TO_STACK_BOSSES.debug(BossAPI.getBossEntityName(bossEntity));
                     return false;
-                }
-
-                if (lowerLivingEntity instanceof Tameable) {
-                    ((Tameable) lowerLivingEntity).setTamed(true);
                 }
 
                 lowerLivingEntity.setPassenger(livingEntity);
