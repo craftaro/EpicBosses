@@ -1,9 +1,12 @@
 package com.songoda.epicbosses.listeners.during;
 
+import com.songoda.core.utils.TextUtils;
 import com.songoda.epicbosses.EpicBosses;
+import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.events.BossDamageEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossEntityManager;
+import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.utils.ServerUtils;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -19,9 +22,11 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class BossDamageListener implements Listener {
 
     private BossEntityManager bossEntityManager;
+    private BossesFileManager bossesFileManager;
 
     public BossDamageListener(EpicBosses plugin) {
         this.bossEntityManager = plugin.getBossEntityManager();
+        this.bossesFileManager = plugin.getBossesFileManager();
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -36,7 +41,18 @@ public class BossDamageListener implements Listener {
         double damage = event.getDamage();
         Player player = null;
 
-        if (activeBossHolder == null) return;
+        if (activeBossHolder == null) {
+            // Check to see if this was a boss and respawn it if so.
+            String convert = TextUtils.convertFromInvisibleString(livingEntity.getCustomName());
+            if (convert.startsWith("BOSS:")) {
+                String name = convert.split(":")[1];
+
+                BossEntity bossEntity = bossesFileManager.getBossEntity(name);
+                bossEntityManager.createActiveBossHolder(bossEntity, livingEntity.getLocation(), name, null);
+                livingEntity.remove();
+            }
+            return;
+        }
 
         if (entityDamaging instanceof Player) {
             player = (Player) entityDamaging;

@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.mechanics.boss;
 
+import com.songoda.core.utils.TextUtils;
 import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
@@ -16,8 +17,6 @@ import org.bukkit.entity.LivingEntity;
  */
 public class NameMechanic implements IBossMechanic {
 
-    private EpicBosses plugin = EpicBosses.getInstance();
-
     @Override
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
         if (activeBossHolder.getLivingEntityMap().getOrDefault(1, null) == null) return false;
@@ -30,7 +29,7 @@ public class NameMechanic implements IBossMechanic {
             if (livingEntity == null || customName == null) continue;
             String formattedName = StringUtils.get().translateColor(customName);
 
-            livingEntity.setCustomName(formattedName);
+            livingEntity.setCustomName(TextUtils.convertToInvisibleString("BOSS:" + activeBossHolder.getName() + ":") + formattedName);
             livingEntity.setCustomNameVisible(true);
         }
 
