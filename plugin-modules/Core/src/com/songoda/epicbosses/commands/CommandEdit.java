@@ -1,6 +1,7 @@
 package com.songoda.epicbosses.commands;
 
 import com.songoda.core.commands.AbstractCommand;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.container.BossEntityContainer;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -8,8 +9,10 @@ import com.songoda.epicbosses.utils.Message;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Charles Cullen
@@ -44,7 +47,8 @@ public class CommandEdit extends AbstractCommand {
                     return ReturnType.FAILURE;
                 }
 
-                BossEntity bossEntity = this.bossEntityContainer.getData().get(input);
+                BossEntity bossEntity = bossEntityContainer.getData().entrySet().stream()
+                        .filter(e -> e.getKey().equalsIgnoreCase(input)).findFirst().get().getValue();
 
                 this.bossPanelManager.getMainBossEditMenu().openFor(player, bossEntity);
                 break;
@@ -55,7 +59,7 @@ public class CommandEdit extends AbstractCommand {
     @Override
     protected List<String> onTab(CommandSender commandSender, String... args) {
         if (args.length == 1) {
-            return Collections.singletonList("name");
+            return new ArrayList<>(EpicBosses.getInstance().getBossesFileManager().getBossEntitiesMap().keySet());
         }
         return null;
     }

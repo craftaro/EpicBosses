@@ -66,6 +66,6 @@ public class BossEntityContainer implements IContainer<Map<String, BossEntity>, 
 
     @Override
     public boolean exists(String string) {
-        return this.container.containsKey(string);
+        return this.container.keySet().stream().anyMatch(name -> name.equalsIgnoreCase(string));
     }
 }
