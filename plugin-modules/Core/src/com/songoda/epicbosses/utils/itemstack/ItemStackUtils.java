@@ -116,12 +116,12 @@ public class ItemStackUtils {
 
         CompatibleMaterial material = CompatibleMaterial.getMaterial(configurationSection.getString("type"));
 
-        String type = material.getMaterial().name();
+        String type = material == null ? configurationSection.getString("type") : material.getMaterial().name();
         String name = configurationSection.getString("name");
         List<String> lore = configurationSection.getStringList("lore");
         List<String> enchants = configurationSection.getStringList("enchants");
         Short durability = (Short) configurationSection.get("durability");
-        if (material.getData() != -1) durability = (short) material.getData();
+        if (material != null && material.getData() != -1) durability = (short) material.getData();
 
         String owner = configurationSection.getString("owner");
         Map<Enchantment, Integer> map = new HashMap<>();
