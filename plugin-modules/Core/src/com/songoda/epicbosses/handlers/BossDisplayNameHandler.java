@@ -1,14 +1,12 @@
 package com.songoda.epicbosses.handlers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.utils.IHandler;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,14 +22,14 @@ import java.util.UUID;
  */
 public class BossDisplayNameHandler implements IHandler {
 
-    @Getter private final ISubVariablePanelHandler<BossEntity, EntityStatsElement> panelHandler;
+    private final ISubVariablePanelHandler<BossEntity, EntityStatsElement> panelHandler;
 
-    @Getter private final EntityStatsElement entityStatsElement;
-    @Getter private final BossesFileManager bossesFileManager;
-    @Getter private final BossEntity bossEntity;
-    @Getter private final Player player;
+    private final EntityStatsElement entityStatsElement;
+    private final BossesFileManager bossesFileManager;
+    private final BossEntity bossEntity;
+    private final Player player;
 
-    @Getter @Setter private boolean handled = false;
+    private boolean handled = false;
     private Listener listener;
 
     public BossDisplayNameHandler(Player player, BossEntity bossEntity, EntityStatsElement entityStatsElement, BossesFileManager bossesFileManager, ISubVariablePanelHandler<BossEntity, EntityStatsElement> panelHandler) {
@@ -56,12 +54,12 @@ public class BossDisplayNameHandler implements IHandler {
                 Player player = event.getPlayer();
                 UUID uuid = player.getUniqueId();
 
-                if(!uuid.equals(getPlayer().getUniqueId())) return;
-                if(isHandled()) return;
+                if (!uuid.equals(getPlayer().getUniqueId())) return;
+                if (isHandled()) return;
 
                 String input = event.getMessage();
 
-                if(input.equalsIgnoreCase("-")) {
+                if (input.equalsIgnoreCase("-")) {
                     input = null;
                 }
 
@@ -70,7 +68,7 @@ public class BossDisplayNameHandler implements IHandler {
                 event.setCancelled(true);
                 setHandled(true);
 
-                Bukkit.getScheduler().scheduleSyncDelayedTask(CustomBosses.get(), BossDisplayNameHandler.this::finish);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(EpicBosses.getInstance(), BossDisplayNameHandler.this::finish);
             }
         };
     }
@@ -78,5 +76,33 @@ public class BossDisplayNameHandler implements IHandler {
     private void finish() {
         AsyncPlayerChatEvent.getHandlerList().unregister(this.listener);
         getPanelHandler().openFor(getPlayer(), getBossEntity(), getEntityStatsElement());
+    }
+
+    public ISubVariablePanelHandler<BossEntity, EntityStatsElement> getPanelHandler() {
+        return this.panelHandler;
+    }
+
+    public EntityStatsElement getEntityStatsElement() {
+        return this.entityStatsElement;
+    }
+
+    public BossesFileManager getBossesFileManager() {
+        return this.bossesFileManager;
+    }
+
+    public BossEntity getBossEntity() {
+        return this.bossEntity;
+    }
+
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    public boolean isHandled() {
+        return this.handled;
+    }
+
+    public void setHandled(boolean handled) {
+        this.handled = handled;
     }
 }

@@ -2,9 +2,6 @@ package com.songoda.epicbosses.panel.droptables;
 
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
-import com.songoda.epicbosses.droptable.elements.DropTableElement;
-import com.songoda.epicbosses.droptable.elements.GiveTableElement;
-import com.songoda.epicbosses.droptable.elements.SprayTableElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.ServerUtils;
@@ -66,11 +63,11 @@ public class MainDropTableEditorPanel extends VariablePanelHandler<DropTable> {
             String dropTableType = dropTable.getDropType();
             Player player = (Player) event.getWhoClicked();
 
-            if(dropTableType.equalsIgnoreCase("SPRAY")) {
+            if (dropTableType.equalsIgnoreCase("SPRAY")) {
                 this.bossPanelManager.getSprayDropTableMainEditMenu().openFor(player, dropTable, dropTable.getSprayTableData());
-            } else if(dropTableType.equalsIgnoreCase("GIVE")) {
+            } else if (dropTableType.equalsIgnoreCase("GIVE")) {
                 this.bossPanelManager.getGiveRewardPositionListMenu().openFor(player, dropTable, dropTable.getGiveTableData());
-            } else if(dropTableType.equalsIgnoreCase("DROP")) {
+            } else if (dropTableType.equalsIgnoreCase("DROP")) {
                 this.bossPanelManager.getDropDropTableMainEditMenu().openFor(player, dropTable, dropTable.getDropTableData());
             } else {
                 Debug.FAILED_TO_FIND_DROP_TABLE_TYPE.debug(dropTableType);

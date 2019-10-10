@@ -1,18 +1,20 @@
 package com.songoda.epicbosses.panel.bosses;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
-import com.songoda.epicbosses.utils.*;
+import com.songoda.epicbosses.utils.Message;
+import com.songoda.epicbosses.utils.ObjectUtils;
+import com.songoda.epicbosses.utils.ServerUtils;
+import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -29,7 +31,7 @@ public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
     private BossesFileManager bossesFileManager;
     private BossEntityManager bossEntityManager;
 
-    public MainBossEditPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public MainBossEditPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.bossesFileManager = plugin.getBossesFileManager();
@@ -86,12 +88,12 @@ public class MainBossEditPanel extends VariablePanelHandler<BossEntity> {
         return event -> {
             Player player = (Player) event.getWhoClicked();
 
-            if(bossEntity.isCompleteEnoughToSpawn()) {
+            if (bossEntity.isCompleteEnoughToSpawn()) {
                 bossEntity.setEditing(!bossEntity.isEditing());
                 this.bossesFileManager.save();
                 Message.Boss_Edit_Toggled.msg(player, BossAPI.getBossEntityName(bossEntity), bossEntity.getEditingValue());
 
-                if(bossEntity.isEditing()) {
+                if (bossEntity.isEditing()) {
                     this.bossEntityManager.killAllHolders(bossEntity);
                 }
 

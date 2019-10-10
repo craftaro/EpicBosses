@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.bosses;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
@@ -18,7 +18,6 @@ import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
-import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
@@ -38,10 +37,10 @@ public abstract class BossListEditorPanel extends VariablePanelHandler<BossEntit
     protected final BossesFileManager bossesFileManager;
 
     private ItemStackConverter itemStackConverter;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
     private String type;
 
-    public BossListEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin, String type) {
+    public BossListEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin, String type) {
         super(bossPanelManager, panelBuilder);
 
         this.itemStackConverter = new ItemStackConverter();
@@ -66,8 +65,8 @@ public abstract class BossListEditorPanel extends VariablePanelHandler<BossEntit
             replaceMap.put("{position}", "" + entityStatsElement.getMainStats().getPosition());
             replaceMap.put("{targetType}", this.type);
 
-            ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.List.name"), replaceMap);
-            ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Boss.List.lore"), replaceMap);
+            ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.List.name"), replaceMap);
+            ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.Boss.List.lore"), replaceMap);
 
             panel.setItem(slot, itemStack, event -> {
                 ClickType click = event.getClick();
@@ -76,7 +75,7 @@ public abstract class BossListEditorPanel extends VariablePanelHandler<BossEntit
                 if (click == ClickType.LEFT || click == ClickType.SHIFT_LEFT) {
                     getAction(bossEntity, entityStatsElement).onClick(event);
                 } else {
-                    if(!bossEntity.isEditing()) {
+                    if (!bossEntity.isEditing()) {
                         Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                         return;
                     }
@@ -114,7 +113,7 @@ public abstract class BossListEditorPanel extends VariablePanelHandler<BossEntit
             fillPanel(panel, bossEntity);
 
             panel.getPanelBuilderCounter().getSlotsWith("CreateEntity").forEach(slot -> panel.setOnClick(slot, event -> {
-                if(!bossEntity.isEditing()) {
+                if (!bossEntity.isEditing()) {
                     Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                     return;
                 }

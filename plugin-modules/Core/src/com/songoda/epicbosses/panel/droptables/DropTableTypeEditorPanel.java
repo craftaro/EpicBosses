@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.droptables;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -23,9 +23,9 @@ import java.util.Map;
  */
 public class DropTableTypeEditorPanel extends VariablePanelHandler<DropTable> {
 
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public DropTableTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public DropTableTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;

@@ -26,16 +26,16 @@ public class PotionMechanic implements IMinionMechanic {
 
     @Override
     public boolean applyMechanic(MinionEntity minionEntity, ActiveMinionHolder activeMinionHolder) {
-        if(activeMinionHolder.getLivingEntityMap().getOrDefault(1, null) == null) return false;
+        if (activeMinionHolder.getLivingEntityMap().getOrDefault(1, null) == null) return false;
 
-        for(EntityStatsElement entityStatsElement : minionEntity.getEntityStats()) {
+        for (EntityStatsElement entityStatsElement : minionEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
             LivingEntity livingEntity = activeMinionHolder.getLivingEntity(mainStatsElement.getPosition());
             List<PotionEffectHolder> potionElements = entityStatsElement.getPotions();
 
-            if(livingEntity == null) return false;
+            if (livingEntity == null) return false;
 
-            if(potionElements != null && !potionElements.isEmpty()) {
+            if (potionElements != null && !potionElements.isEmpty()) {
                 potionElements.forEach(potionElement -> livingEntity.addPotionEffect(this.potionEffectConverter.from(potionElement)));
             }
         }

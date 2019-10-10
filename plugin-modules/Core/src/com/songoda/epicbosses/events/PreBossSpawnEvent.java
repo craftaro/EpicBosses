@@ -1,7 +1,6 @@
 package com.songoda.epicbosses.events;
 
 import com.songoda.epicbosses.holder.ActiveBossHolder;
-import lombok.Getter;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
@@ -14,10 +13,14 @@ public class PreBossSpawnEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
 
-    @Getter private ActiveBossHolder activeBossHolder;
+    private ActiveBossHolder activeBossHolder;
 
     public PreBossSpawnEvent(ActiveBossHolder activeBossHolder) {
         this.activeBossHolder = activeBossHolder;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 
     @Override
@@ -25,7 +28,7 @@ public class PreBossSpawnEvent extends Event {
         return handlers;
     }
 
-    public static HandlerList getHandlerList() {
-        return handlers;
+    public ActiveBossHolder getActiveBossHolder() {
+        return this.activeBossHolder;
     }
 }

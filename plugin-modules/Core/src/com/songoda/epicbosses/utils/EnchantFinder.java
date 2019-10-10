@@ -1,6 +1,5 @@
 package com.songoda.epicbosses.utils;
 
-import lombok.Getter;
 import org.bukkit.enchantments.Enchantment;
 
 import java.util.ArrayList;
@@ -45,9 +44,9 @@ public enum EnchantFinder {
     mending("Mending", Enchantment.getByName("MENDING"), "mending"),
     curse_of_vanishing("Curse of Vanishing", Enchantment.getByName("VANISHING_CURSE"), "vanishing", "vanishing curse", "vanishing_curse", "curseofvanishing", "vanishingcurse", "curse of vanishing", "curse_of_vanishing");
 
-    @Getter private List<String> names = new ArrayList<>();
-    @Getter private Enchantment enchantment;
-    @Getter private String fancyName;
+    private List<String> names = new ArrayList<>();
+    private Enchantment enchantment;
+    private String fancyName;
 
     EnchantFinder(String fancyName, Enchantment enchantment, String... names) {
         this.fancyName = fancyName;
@@ -58,11 +57,11 @@ public enum EnchantFinder {
     }
 
     public static EnchantFinder getByName(String name) {
-        for(EnchantFinder enchantFinder : values()) {
+        for (EnchantFinder enchantFinder : values()) {
             List<String> names = enchantFinder.getNames();
 
-            for(String s : names) {
-                if(s.equalsIgnoreCase(name)) return enchantFinder;
+            for (String s : names) {
+                if (s.equalsIgnoreCase(name)) return enchantFinder;
             }
         }
 
@@ -70,16 +69,28 @@ public enum EnchantFinder {
     }
 
     public static EnchantFinder getByEnchant(Enchantment enchantment) {
-        if(enchantment == null) return null;
+        if (enchantment == null) return null;
 
-        for(EnchantFinder enchantFinder : values()) {
+        for (EnchantFinder enchantFinder : values()) {
             Enchantment enchantFinderEnchant = enchantFinder.getEnchantment();
 
-            if(enchantFinderEnchant == null) continue;
+            if (enchantFinderEnchant == null) continue;
 
-            if(enchantFinderEnchant.equals(enchantment)) return enchantFinder;
+            if (enchantFinderEnchant.equals(enchantment)) return enchantFinder;
         }
 
         return null;
+    }
+
+    public List<String> getNames() {
+        return this.names;
+    }
+
+    public Enchantment getEnchantment() {
+        return this.enchantment;
+    }
+
+    public String getFancyName() {
+        return this.fancyName;
     }
 }

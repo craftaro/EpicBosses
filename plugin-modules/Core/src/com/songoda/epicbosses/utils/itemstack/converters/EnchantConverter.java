@@ -20,12 +20,12 @@ public class EnchantConverter implements IConverter<List<String>, Map<Enchantmen
     public List<String> to(Map<Enchantment, Integer> enchantmentIntegerMap) {
         List<String> enchants = new ArrayList<>();
 
-        for(Map.Entry<Enchantment, Integer> entry : enchantmentIntegerMap.entrySet()) {
+        for (Map.Entry<Enchantment, Integer> entry : enchantmentIntegerMap.entrySet()) {
             int level = entry.getValue();
             Enchantment enchantment = entry.getKey();
             EnchantFinder enchantFinder = EnchantFinder.getByEnchant(enchantment);
 
-            if(enchantFinder == null) continue;
+            if (enchantFinder == null) continue;
 
             enchants.add(enchantFinder.getFancyName() + ":" + level);
         }
@@ -37,13 +37,13 @@ public class EnchantConverter implements IConverter<List<String>, Map<Enchantmen
     public Map<Enchantment, Integer> from(List<String> strings) {
         Map<Enchantment, Integer> enchantments = new HashMap<>();
 
-        for(String s : strings) {
+        for (String s : strings) {
             String[] split = s.split(":");
             String fancyName = split[0];
             Integer level = Integer.parseInt(split[1]);
             EnchantFinder enchantFinder = EnchantFinder.getByName(fancyName);
 
-            if(enchantFinder == null) continue;
+            if (enchantFinder == null) continue;
 
             enchantments.put(enchantFinder.getEnchantment(), level);
         }

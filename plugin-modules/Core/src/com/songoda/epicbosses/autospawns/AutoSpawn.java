@@ -5,8 +5,6 @@ import com.google.gson.annotations.Expose;
 import com.songoda.epicbosses.autospawns.settings.AutoSpawnSettings;
 import com.songoda.epicbosses.autospawns.types.IntervalSpawnElement;
 import com.songoda.epicbosses.utils.BossesGson;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -17,11 +15,16 @@ import java.util.List;
  */
 public class AutoSpawn {
 
-    @Expose @Getter @Setter private boolean editing;
-    @Expose @Getter @Setter private String type;
-    @Expose @Getter @Setter private List<String> entities;
-    @Expose @Getter @Setter private AutoSpawnSettings autoSpawnSettings;
-    @Expose @Getter @Setter private JsonObject customData;
+    @Expose
+    private boolean editing;
+    @Expose
+    private String type;
+    @Expose
+    private List<String> entities;
+    @Expose
+    private AutoSpawnSettings autoSpawnSettings;
+    @Expose
+    private JsonObject customData;
 
     public AutoSpawn(boolean editing, List<String> entities, AutoSpawnSettings autoSpawnSettings) {
         this.editing = editing;
@@ -30,7 +33,7 @@ public class AutoSpawn {
     }
 
     public IntervalSpawnElement getIntervalSpawnData() {
-        if(getType().equalsIgnoreCase("INTERVAL")) {
+        if (getType().equalsIgnoreCase("INTERVAL")) {
             return BossesGson.get().fromJson(this.customData, IntervalSpawnElement.class);
         }
 
@@ -38,13 +41,52 @@ public class AutoSpawn {
     }
 
     public boolean isCompleteEnoughToSpawn() {
-        if(this.type == null) return false;
+        if (this.type == null) return false;
 
         List<String> entities = getEntities();
 
-        if(entities == null || entities.isEmpty()) return false;
+        if (entities == null || entities.isEmpty()) return false;
 
         return true;
     }
 
+    public boolean isEditing() {
+        return this.editing;
+    }
+
+    public void setEditing(boolean editing) {
+        this.editing = editing;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public List<String> getEntities() {
+        return this.entities;
+    }
+
+    public void setEntities(List<String> entities) {
+        this.entities = entities;
+    }
+
+    public AutoSpawnSettings getAutoSpawnSettings() {
+        return this.autoSpawnSettings;
+    }
+
+    public void setAutoSpawnSettings(AutoSpawnSettings autoSpawnSettings) {
+        this.autoSpawnSettings = autoSpawnSettings;
+    }
+
+    public JsonObject getCustomData() {
+        return this.customData;
+    }
+
+    public void setCustomData(JsonObject customData) {
+        this.customData = customData;
+    }
 }

@@ -1,8 +1,6 @@
 package com.songoda.epicbosses.entity.elements;
 
 import com.google.gson.annotations.Expose;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @author Charles Cullen
@@ -11,11 +9,27 @@ import lombok.Setter;
  */
 public class CommandsElement {
 
-    @Expose @Getter @Setter private String onSpawn, onDeath;
+    @Expose
+    private String onSpawn, onDeath;
 
     public CommandsElement(String onSpawn, String onDeath) {
         this.onDeath = onDeath;
         this.onSpawn = onSpawn;
     }
 
+    public String getOnSpawn() {
+        return this.onSpawn;
+    }
+
+    public void setOnSpawn(String onSpawn) {
+        this.onSpawn = onSpawn;
+    }
+
+    public String getOnDeath() {
+        return this.onDeath;
+    }
+
+    public void setOnDeath(String onDeath) {
+        this.onDeath = onDeath;
+    }
 }

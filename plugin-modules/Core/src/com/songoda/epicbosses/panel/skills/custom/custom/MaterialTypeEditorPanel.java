@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.skills.custom.custom;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.skills.Skill;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
@@ -9,7 +9,6 @@ import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ISubVariablePanelHandler;
-import com.songoda.epicbosses.utils.panel.base.IVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import org.bukkit.Material;
@@ -25,9 +24,9 @@ import java.util.*;
  */
 public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Skill, CustomSkillElement> {
 
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public MaterialTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public MaterialTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -46,7 +45,7 @@ public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Sk
         int maxPage = panel.getMaxPage(filteredList);
 
         panel.setOnPageChange((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, filteredList, skill, customSkillElement);
             return true;
@@ -73,27 +72,28 @@ public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Sk
         String current = getCurrentSetting(customSkillElement);
 
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= filteredList.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e->{});
+            if (slot >= filteredList.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 Material material = filteredList.get(slot);
                 ItemStack itemStack;
 
-                if(material == Material.AIR) itemStack = new ItemStack(Material.GLASS);
+                if (material == Material.AIR) itemStack = new ItemStack(Material.GLASS);
                 else itemStack = new ItemStack(material);
 
                 Map<String, String> replaceMap = new HashMap<>();
 
-                if(itemStack.getType() == Material.AIR) return;
+                if (itemStack.getType() == Material.AIR) return;
 
                 String name = material.name();
 
                 replaceMap.put("{type}", StringUtils.get().formatString(name));
 
-                if(current.equalsIgnoreCase(name)) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.Material.selectedName"), replaceMap);
+                if (current.equalsIgnoreCase(name)) {
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.Material.selectedName"), replaceMap);
                 } else {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.Material.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.Material.name"), replaceMap);
                 }
 
                 panel.setItem(realisticSlot, itemStack, event -> {
@@ -108,7 +108,7 @@ public abstract class MaterialTypeEditorPanel extends SubVariablePanelHandler<Sk
         List<Material> materials = new ArrayList<>();
 
         masterList.forEach(material -> {
-            if((material.isBlock() && material.isSolid() && material.isItem()) || (material == Material.AIR)) {
+            if ((material.isBlock() && material.isSolid() && material.isItem()) || (material == Material.AIR)) {
                 materials.add(material);
             }
         });

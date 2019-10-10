@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.bosses;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -34,9 +34,9 @@ public class SkillListEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ItemStackConverter itemStackConverter;
     private SkillsFileManager skillsFileManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public SkillListEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public SkillListEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.itemStackConverter = new ItemStackConverter();
@@ -51,7 +51,7 @@ public class SkillListEditorPanel extends VariablePanelHandler<BossEntity> {
         int maxPage = panel.getMaxPage(entryList);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, currentSkills, entryList, bossEntity);
             return true;
@@ -86,8 +86,9 @@ public class SkillListEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private void loadPage(Panel panel, int requestedPage, Map<String, Skill> currentSkills, List<String> entryList, BossEntity bossEntity) {
         panel.loadPage(requestedPage, (slot, realisticSlot) -> {
-            if(slot >= currentSkills.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= currentSkills.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = entryList.get(slot);
                 Skill skill = currentSkills.get(name);
@@ -102,23 +103,23 @@ public class SkillListEditorPanel extends VariablePanelHandler<BossEntity> {
                 replaceMap.put("{customMessage}", StringUtils.get().formatString(skill.getCustomMessage()));
                 replaceMap.put("{radius}", NumberUtils.get().formatDouble(skill.getRadius()));
 
-                if(bossEntity.getSkills().getSkills().contains(name)) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Skills.selectedName"), replaceMap);
+                if (bossEntity.getSkills().getSkills().contains(name)) {
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Skills.selectedName"), replaceMap);
                 } else {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Skills.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Skills.name"), replaceMap);
                 }
 
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Boss.Skills.lore"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.Boss.Skills.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, e -> {
-                    if(!bossEntity.isEditing()) {
+                    if (!bossEntity.isEditing()) {
                         Message.Boss_Edit_CannotBeModified.msg(e.getWhoClicked());
                         return;
                     }
 
                     List<String> currentSkillList = bossEntity.getSkills().getSkills();
 
-                    if(currentSkillList.contains(name)) {
+                    if (currentSkillList.contains(name)) {
                         currentSkillList.remove(name);
                     } else {
                         currentSkillList.add(name);

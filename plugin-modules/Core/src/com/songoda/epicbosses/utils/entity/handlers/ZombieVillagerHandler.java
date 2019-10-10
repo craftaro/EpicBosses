@@ -1,8 +1,7 @@
 package com.songoda.epicbosses.utils.entity.handlers;
 
-import com.songoda.epicbosses.utils.Versions;
+import com.songoda.core.compatibility.ServerVersion;
 import com.songoda.epicbosses.utils.entity.ICustomEntityHandler;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.Location;
 import org.bukkit.entity.*;
 
@@ -13,15 +12,13 @@ import org.bukkit.entity.*;
  */
 public class ZombieVillagerHandler implements ICustomEntityHandler {
 
-    private VersionHandler versionHandler = new VersionHandler();
-
     @Override
     public LivingEntity getBaseEntity(String entityType, Location spawnLocation) {
-        if(this.versionHandler.getVersion().isHigherThanOrEqualTo(Versions.v1_11_R1)) {
+        if (ServerVersion.isServerVersionAtLeast(ServerVersion.V1_11)) {
             ZombieVillager zombieVillager = (ZombieVillager) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE_VILLAGER);
             String[] split = entityType.split(":");
 
-            if(split.length == 2) {
+            if (split.length == 2) {
                 String type = split[1];
                 Villager.Profession profession;
 

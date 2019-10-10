@@ -7,7 +7,6 @@ import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.PanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
@@ -53,9 +52,9 @@ public class MainMenuPanel extends PanelHandler {
         return event -> {
             Player player = (Player) event.getWhoClicked();
 
-            if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
+            if (event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
                 this.bossPanelManager.getBosses().openFor(player);
-            } else if(event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
+            } else if (event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
                 Message.Boss_Create_InvalidArgs.msg(player);
                 player.closeInventory();
             }
@@ -66,9 +65,9 @@ public class MainMenuPanel extends PanelHandler {
         return event -> {
             Player player = (Player) event.getWhoClicked();
 
-            if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
+            if (event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
                 this.bossPanelManager.getCustomItems().openFor(player);
-            } else if(event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
+            } else if (event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
                 this.bossPanelManager.getCustomItemAddItemsMenu().openFor(player);
             }
         };
@@ -78,9 +77,9 @@ public class MainMenuPanel extends PanelHandler {
         return event -> {
             Player player = (Player) event.getWhoClicked();
 
-            if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
+            if (event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
                 this.bossPanelManager.getAutoSpawns().openFor(player);
-            } else if(event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
+            } else if (event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
                 Message.Boss_New_CreateArgumentsAutoSpawn.msg(event.getWhoClicked());
                 player.closeInventory();
             }
@@ -91,9 +90,9 @@ public class MainMenuPanel extends PanelHandler {
         return event -> {
             Player player = (Player) event.getWhoClicked();
 
-            if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
+            if (event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
                 this.bossPanelManager.getDropTables().openFor(player);
-            } else if(event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
+            } else if (event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
                 Message.Boss_New_CreateArgumentsDropTable.msg(player);
                 player.closeInventory();
             }
@@ -104,9 +103,9 @@ public class MainMenuPanel extends PanelHandler {
         return event -> {
             Player player = (Player) event.getWhoClicked();
 
-            if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
+            if (event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT) {
                 this.bossPanelManager.getCustomSkills().openFor(player);
-            } else if(event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
+            } else if (event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
                 Message.Boss_New_CreateArgumentsSkill.msg(player);
                 player.closeInventory();
             }

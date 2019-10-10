@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.managers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.autospawns.SpawnType;
@@ -11,10 +11,7 @@ import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Charles Cullen
@@ -27,14 +24,18 @@ public class AutoSpawnManager {
 
     private AutoSpawnFileManager autoSpawnFileManager;
 
-    public AutoSpawnManager(CustomBosses plugin) {
+    public AutoSpawnManager(EpicBosses plugin) {
         this.autoSpawnFileManager = plugin.getAutoSpawnFileManager();
+    }
+
+    public static ICustomSettingAction createAutoSpawnAction(String name, String current, List<String> extraInformation, ItemStack displayStack, ClickAction clickAction) {
+        return new CustomAutoSpawnActionCreator(name, current, extraInformation, displayStack, clickAction);
     }
 
     public void startIntervalSystems() {
         Map<String, AutoSpawn> autoSpawnMap = this.autoSpawnFileManager.getAutoSpawnMap();
 
-        if(!this.activeAutoSpawnHolders.isEmpty()) {
+        if (!this.activeAutoSpawnHolders.isEmpty()) {
             stopIntervalSystems();
         }
 
@@ -56,19 +57,22 @@ public class AutoSpawnManager {
         List<String> intervalAutoSpawns = new ArrayList<>();
 
         autoSpawnHolderMap.forEach((name, autoSpawnHolder) -> {
-            if(autoSpawnHolder.getSpawnType() == SpawnType.INTERVAL) {
+            if (autoSpawnHolder.getSpawnType() == SpawnType.INTERVAL) {
                 intervalAutoSpawns.add(name);
             }
         });
 
         return intervalAutoSpawns;
     }
+    public Map<String, ActiveAutoSpawnHolder> getAutoSpawns() {
+        return Collections.unmodifiableMap(this.activeAutoSpawnHolders);
+    }
 
     public boolean exists(String name) {
         List<String> keyList = new ArrayList<>(this.activeAutoSpawnHolders.keySet());
 
         for (String s : keyList) {
-            if(s.equalsIgnoreCase(name)) return true;
+            if (s.equalsIgnoreCase(name)) return true;
         }
 
         return false;
@@ -93,7 +97,7 @@ public class AutoSpawnManager {
     private void removeActiveAutoSpawnHolder(String name) {
         ActiveAutoSpawnHolder autoSpawnHolder = this.activeAutoSpawnHolders.getOrDefault(name, null);
 
-        if(autoSpawnHolder != null) {
+        if (autoSpawnHolder != null) {
             stopInterval(autoSpawnHolder);
             this.activeAutoSpawnHolders.remove(name);
         }
@@ -113,18 +117,14 @@ public class AutoSpawnManager {
         String autoSpawnType = autoSpawn.getType();
         SpawnType spawnType = SpawnType.getCurrent(autoSpawnType);
 
-        if(spawnType == SpawnType.INTERVAL) {
+        if (spawnType == SpawnType.INTERVAL) {
             ActiveIntervalAutoSpawnHolder autoSpawnHolder = new ActiveIntervalAutoSpawnHolder(spawnType, autoSpawn);
 
-            if(autoSpawn.isEditing()) return;
+            if (autoSpawn.isEditing()) return;
 
             autoSpawnHolder.restartInterval();
             this.activeAutoSpawnHolders.put(name, autoSpawnHolder);
         }
-    }
-
-    public static ICustomSettingAction createAutoSpawnAction(String name, String current, List<String> extraInformation, ItemStack displayStack, ClickAction clickAction) {
-        return new CustomAutoSpawnActionCreator(name, current, extraInformation, displayStack, clickAction);
     }
 
     private static class CustomAutoSpawnActionCreator implements ICustomSettingAction {

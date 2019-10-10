@@ -22,13 +22,13 @@ public class LegacyFactions implements IFactionHelper {
         Faction bFac = FPlayerColl.get(b).getFaction();
         Relation relation = aFac.getRelationTo(bFac);
 
-        if(bFac.isWilderness()) return false;
-        if(aFac == bFac) return true;
-        if(relation.isEnemy()) return false;
-        if(relation.isNeutral()) return false;
-        if(relation.isTruce()) return true;
-        if(relation.isAlly()) return true;
-        if(relation.isMember()) return true;
+        if (bFac.isWilderness()) return false;
+        if (aFac == bFac) return true;
+        if (relation.isEnemy()) return false;
+        if (relation.isNeutral()) return false;
+        if (relation.isTruce()) return true;
+        if (relation.isAlly()) return true;
+        if (relation.isMember()) return true;
         return false;
     }
 
@@ -38,8 +38,8 @@ public class LegacyFactions implements IFactionHelper {
         Faction bFac = Board.get().getFactionAt(Locality.of(location));
         Relation relation = aFac.getRelationTo(bFac);
 
-        if(bFac.isWilderness() || relation.isEnemy() || relation.isNeutral()) return false;
-        if(relation.isTruce() || relation.isAlly() || relation.isMember()) return true;
+        if (bFac.isWilderness() || relation.isEnemy() || relation.isNeutral()) return false;
+        if (relation.isTruce() || relation.isAlly() || relation.isMember()) return true;
         return false;
     }
 

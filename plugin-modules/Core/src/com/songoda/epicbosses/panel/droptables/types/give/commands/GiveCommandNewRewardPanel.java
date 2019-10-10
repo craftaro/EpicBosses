@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.droptables.types.give.commands;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.droptable.elements.GiveTableElement;
@@ -38,9 +38,9 @@ public class GiveCommandNewRewardPanel extends SubVariablePanelHandler<DropTable
     private DropTableFileManager dropTableFileManager;
     private CommandsFileManager commandsFileManager;
     private ItemStackConverter itemStackConverter;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public GiveCommandNewRewardPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public GiveCommandNewRewardPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.commandsFileManager = plugin.getBossCommandFileManager();
@@ -57,7 +57,7 @@ public class GiveCommandNewRewardPanel extends SubVariablePanelHandler<DropTable
         int maxPage = panel.getMaxPage(filteredKeys);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, dropTable, giveRewardEditHandler, filteredKeys, commands);
             return true;
@@ -82,8 +82,9 @@ public class GiveCommandNewRewardPanel extends SubVariablePanelHandler<DropTable
 
     private void loadPage(Panel panel, int page, DropTable dropTable, GiveRewardEditHandler giveRewardEditHandler, List<String> filteredKeys, Map<String, List<String>> commands) {
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= filteredKeys.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e->{});
+            if (slot >= filteredKeys.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = filteredKeys.get(slot);
                 List<String> innerCommands = commands.get(name);
@@ -94,15 +95,15 @@ public class GiveCommandNewRewardPanel extends SubVariablePanelHandler<DropTable
 
                 replaceMap.put("{name}", name);
 
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Commands.name"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Commands.name"), replaceMap);
 
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                List<String> presetLore = this.plugin.getConfig().getStringList("Display.Boss.Commands.lore");
+                List<String> presetLore = this.plugin.getDisplay().getStringList("Display.Boss.Commands.lore");
                 List<String> newLore = new ArrayList<>();
 
-                for(String s : presetLore) {
-                    if(s.contains("{commands}")) {
-                        for(String command : innerCommands) {
+                for (String s : presetLore) {
+                    if (s.contains("{commands}")) {
+                        for (String command : innerCommands) {
                             newLore.add(StringUtils.get().translateColor("&7" + command));
                         }
                     } else {
@@ -127,7 +128,6 @@ public class GiveCommandNewRewardPanel extends SubVariablePanelHandler<DropTable
     }
 
 
-
     private List<String> getCurrentKeys(GiveRewardEditHandler giveRewardEditHandler) {
         return new ArrayList<>(giveRewardEditHandler.getGiveTableSubElement().getCommands().keySet());
     }
@@ -136,7 +136,7 @@ public class GiveCommandNewRewardPanel extends SubVariablePanelHandler<DropTable
         List<String> filteredList = new ArrayList<>();
 
         commands.keySet().forEach(string -> {
-            if(currentKeys.contains(string)) return;
+            if (currentKeys.contains(string)) return;
 
             filteredList.add(string);
         });

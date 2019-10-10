@@ -1,9 +1,12 @@
 package com.songoda.epicbosses.listeners.during;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.core.utils.TextUtils;
+import com.songoda.epicbosses.EpicBosses;
+import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.events.BossDamageEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossEntityManager;
+import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.utils.ServerUtils;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -19,9 +22,11 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class BossDamageListener implements Listener {
 
     private BossEntityManager bossEntityManager;
+    private BossesFileManager bossesFileManager;
 
-    public BossDamageListener(CustomBosses plugin) {
+    public BossDamageListener(EpicBosses plugin) {
         this.bossEntityManager = plugin.getBossEntityManager();
+        this.bossesFileManager = plugin.getBossesFileManager();
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -29,37 +34,55 @@ public class BossDamageListener implements Listener {
         Entity entityBeingDamaged = event.getEntity();
         Entity entityDamaging = event.getDamager();
 
-        if(!(entityBeingDamaged instanceof LivingEntity)) return;
+        if (!(entityBeingDamaged instanceof LivingEntity)) return;
 
         LivingEntity livingEntity = (LivingEntity) entityBeingDamaged;
         ActiveBossHolder activeBossHolder = this.bossEntityManager.getActiveBossHolder(livingEntity);
         double damage = event.getDamage();
         Player player = null;
 
-        if(activeBossHolder == null) return;
+        if (activeBossHolder == null) {
+            // Check to see if this was a boss and respawn it if so.
+            String convert = TextUtils.convertFromInvisibleString(livingEntity.getCustomName());
+            if (convert.startsWith("BOSS:")) {
+                String name = convert.split(":")[1];
 
-        if(entityDamaging instanceof Player) {
+                BossEntity bossEntity = bossesFileManager.getBossEntity(name);
+                bossEntityManager.createActiveBossHolder(bossEntity, livingEntity.getLocation(), name, null);
+
+                if (livingEntity.isInsideVehicle() && livingEntity.getVehicle() != null)
+                    livingEntity.getVehicle().remove();
+
+                if (livingEntity.getPassenger() != null)
+                    livingEntity.getPassenger().remove();
+
+                livingEntity.remove();
+            }
+            return;
+        }
+
+        if (entityDamaging instanceof Player) {
             player = (Player) entityDamaging;
-        } else if(entityDamaging instanceof Projectile) {
+        } else if (entityDamaging instanceof Projectile) {
             Projectile projectile = (Projectile) entityDamaging;
             LivingEntity shooter = (LivingEntity) projectile.getShooter();
 
-            if(projectile instanceof ThrownPotion) {
+            if (projectile instanceof ThrownPotion) {
                 event.setCancelled(true);
                 return;
             }
-            if(!(shooter instanceof Player)) return;
+            if (!(shooter instanceof Player)) return;
 
             player = (Player) shooter;
         }
 
-        if(player == null) return;
+        if (player == null) return;
 
         double currentDamage = activeBossHolder.getMapOfDamagingUsers().getOrDefault(player.getUniqueId(), 0.0);
         BossDamageEvent bossDamageEvent = new BossDamageEvent(activeBossHolder, livingEntity, livingEntity.getEyeLocation(), damage);
 
         ServerUtils.get().callEvent(bossDamageEvent);
-        activeBossHolder.getMapOfDamagingUsers().put(player.getUniqueId(), currentDamage+damage);
+        activeBossHolder.getMapOfDamagingUsers().put(player.getUniqueId(), currentDamage + damage);
     }
 
 }

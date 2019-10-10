@@ -36,7 +36,7 @@ public class Insidious extends CustomSkillHandler {
     public void castSkill(Skill skill, CustomSkillElement customSkillElement, ActiveBossHolder activeBossHolder, List<LivingEntity> nearbyEntities) {
         Double multiplier = customSkillElement.getCustom().getMultiplier();
 
-        if(multiplier == null) multiplier = 2.5;
+        if (multiplier == null) multiplier = 2.5;
 
         double finalMultiplier = multiplier;
 

@@ -1,7 +1,7 @@
 package com.songoda.epicbosses.panel.skills.custom;
 
 import com.google.gson.JsonObject;
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.skills.Skill;
@@ -29,9 +29,9 @@ import java.util.*;
  */
 public class CommandSkillEditorPanel extends VariablePanelHandler<Skill> {
 
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public CommandSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public CommandSkillEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -44,7 +44,7 @@ public class CommandSkillEditorPanel extends VariablePanelHandler<Skill> {
         int maxPage = panel.getMaxPage(subCommandSkillElements);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, subCommandSkillElements, skill);
             return true;
@@ -101,24 +101,25 @@ public class CommandSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     private void loadPage(Panel panel, int page, List<SubCommandSkillElement> subCommandSkillElements, Skill skill) {
         panel.loadPage(page, (slot, realisticSlot) -> {
-            if(slot >= subCommandSkillElements.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= subCommandSkillElements.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 SubCommandSkillElement subCommandSkillElement = subCommandSkillElements.get(slot);
                 Map<String, String> replaceMap = new HashMap<>();
                 Double chance = subCommandSkillElement.getChance();
                 List<String> commands = subCommandSkillElement.getCommands();
 
-                if(chance == null) chance = 100.0;
-                if(commands == null) commands = new ArrayList<>();
+                if (chance == null) chance = 100.0;
+                if (commands == null) commands = new ArrayList<>();
 
                 replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
                 replaceMap.put("{commands}", StringUtils.get().appendList(commands));
 
                 ItemStack itemStack = new ItemStack(Material.BOOK);
 
-                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getConfig().getStringList("Display.Skills.Commands.lore"), replaceMap);
-                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.Commands.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(itemStack, this.plugin.getDisplay().getStringList("Display.Skills.Commands.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.Commands.name"), replaceMap);
 
                 panel.setItem(realisticSlot, itemStack, event -> this.bossPanelManager.getModifyCommandEditMenu().openFor((Player) event.getWhoClicked(), skill, subCommandSkillElement));
             }

@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.autospawns;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -29,9 +29,9 @@ import java.util.Map;
  */
 public class AutoSpawnCustomSettingsEditorPanel extends VariablePanelHandler<AutoSpawn> {
 
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public AutoSpawnCustomSettingsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public AutoSpawnCustomSettingsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -41,12 +41,12 @@ public class AutoSpawnCustomSettingsEditorPanel extends VariablePanelHandler<Aut
     public void fillPanel(Panel panel, AutoSpawn autoSpawn) {
         List<ICustomSettingAction> customButtons = autoSpawn.getIntervalSpawnData().getCustomSettingActions(autoSpawn, this);
 
-        if(customButtons == null || customButtons.isEmpty()) return;
+        if (customButtons == null || customButtons.isEmpty()) return;
 
         int maxPage = panel.getMaxPage(customButtons);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, customButtons, autoSpawn);
             return true;
@@ -80,8 +80,9 @@ public class AutoSpawnCustomSettingsEditorPanel extends VariablePanelHandler<Aut
 
     private void loadPage(Panel panel, int page, List<ICustomSettingAction> clickActions, AutoSpawn autoSpawn) {
         panel.loadPage(page, ((slot, realisticSlot) -> {
-            if(slot >= clickActions.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= clickActions.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 ICustomSettingAction customSettingAction = clickActions.get(slot);
                 ClickAction clickAction = customSettingAction.getAction();
@@ -95,23 +96,23 @@ public class AutoSpawnCustomSettingsEditorPanel extends VariablePanelHandler<Aut
                 replaceMap.put("{name}", name);
                 replaceMap.put("{currently}", currently);
 
-                if(displayStack == null || displayStack.getType() == Material.AIR) return;
+                if (displayStack == null || displayStack.getType() == Material.AIR) return;
 
-                ItemStackUtils.applyDisplayName(displayStack, this.plugin.getConfig().getString("Display.AutoSpawns.CustomSettings.name"), replaceMap);
+                ItemStackUtils.applyDisplayName(displayStack, this.plugin.getDisplay().getString("Display.AutoSpawns.CustomSettings.name"), replaceMap);
 
                 ItemMeta itemMeta = displayStack.getItemMeta();
-                List<String> lore = this.plugin.getConfig().getStringList("Display.AutoSpawns.CustomSettings.lore");
+                List<String> lore = this.plugin.getDisplay().getStringList("Display.AutoSpawns.CustomSettings.lore");
                 List<String> newLore = new ArrayList<>();
 
-                for(String s : lore) {
-                    if(s.contains("{extraInformation}")) {
-                        if(extraInfo == null || extraInfo.isEmpty()) continue;
+                for (String s : lore) {
+                    if (s.contains("{extraInformation}")) {
+                        if (extraInfo == null || extraInfo.isEmpty()) continue;
 
                         newLore.add("&7");
                         newLore.addAll(extraInfo);
                     } else {
-                        for(String replaceKey : replaceMap.keySet()) {
-                            if(s.contains(replaceKey)) {
+                        for (String replaceKey : replaceMap.keySet()) {
+                            if (s.contains(replaceKey)) {
                                 s = s.replace(replaceKey, replaceMap.get(replaceKey));
                             }
                         }
@@ -125,7 +126,7 @@ public class AutoSpawnCustomSettingsEditorPanel extends VariablePanelHandler<Aut
                 displayStack.setItemMeta(itemMeta);
 
                 panel.setItem(realisticSlot, displayStack, event -> {
-                    if(!autoSpawn.isEditing()) {
+                    if (!autoSpawn.isEditing()) {
                         Message.Boss_AutoSpawn_MustToggleEditing.msg(event.getWhoClicked());
                     } else {
                         clickAction.onClick(event);

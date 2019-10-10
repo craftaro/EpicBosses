@@ -1,13 +1,12 @@
 package com.songoda.epicbosses.panel.bosses;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.utils.Message;
-import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
@@ -28,7 +27,7 @@ public class TargetingEditorPanel extends VariablePanelHandler<BossEntity> {
     private BossesFileManager bossesFileManager;
     private ItemsFileManager itemsFileManager;
 
-    public TargetingEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public TargetingEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.bossesFileManager = plugin.getBossesFileManager();
@@ -59,8 +58,8 @@ public class TargetingEditorPanel extends VariablePanelHandler<BossEntity> {
             ItemStack currentStack = panel.getInventory().getItem(slot);
             ItemStack newItemStack = getItemStack(current, (String) returnValue, currentStack);
 
-            panel.setItem(slot, newItemStack , event -> {
-                if(!bossEntity.isEditing()) {
+            panel.setItem(slot, newItemStack, event -> {
+                if (!bossEntity.isEditing()) {
                     Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                     return;
                 }
@@ -85,7 +84,7 @@ public class TargetingEditorPanel extends VariablePanelHandler<BossEntity> {
         ItemStack itemStack = this.itemsFileManager.getItemStackConverter().from(this.itemsFileManager.getItemStackHolder("DefaultSelectedTargetingItem"));
         ItemStack cloneStack = currentItemStack.clone();
 
-        if(thisType.equalsIgnoreCase(current)) {
+        if (thisType.equalsIgnoreCase(current)) {
             cloneStack.setType(itemStack.getType());
         }
 

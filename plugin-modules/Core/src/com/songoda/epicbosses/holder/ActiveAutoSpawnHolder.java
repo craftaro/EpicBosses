@@ -2,7 +2,6 @@ package com.songoda.epicbosses.holder;
 
 import com.songoda.epicbosses.autospawns.AutoSpawn;
 import com.songoda.epicbosses.autospawns.SpawnType;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +13,10 @@ import java.util.List;
  */
 public class ActiveAutoSpawnHolder {
 
-    @Getter private final SpawnType spawnType;
-    @Getter private final AutoSpawn autoSpawn;
+    private final SpawnType spawnType;
+    private final AutoSpawn autoSpawn;
 
-    @Getter private List<ActiveBossHolder> activeBossHolders = new ArrayList<>();
+    private List<ActiveBossHolder> activeBossHolders = new ArrayList<>();
 
     public ActiveAutoSpawnHolder(SpawnType spawnType, AutoSpawn autoSpawn) {
         this.autoSpawn = autoSpawn;
@@ -36,4 +35,15 @@ public class ActiveAutoSpawnHolder {
         this.activeBossHolders.clear();
     }
 
+    public SpawnType getSpawnType() {
+        return this.spawnType;
+    }
+
+    public AutoSpawn getAutoSpawn() {
+        return this.autoSpawn;
+    }
+
+    public List<ActiveBossHolder> getActiveBossHolders() {
+        return this.activeBossHolders;
+    }
 }

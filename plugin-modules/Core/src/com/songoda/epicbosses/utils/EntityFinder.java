@@ -1,11 +1,12 @@
 package com.songoda.epicbosses.utils;
 
-import lombok.Getter;
 import com.songoda.epicbosses.utils.entity.ICustomEntityHandler;
 import com.songoda.epicbosses.utils.entity.handlers.*;
 import org.bukkit.Location;
+import org.bukkit.entity.Ageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Tameable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,12 +69,24 @@ public enum EntityFinder {
     POLAR_BEAR("PolarBear", new PolarBearHandler(), "polarbear", "polar_bear", "polar bear", "snowbear", "snow_bear", "snow bear"),
     LLAMA("Llama", new LlamaHandler(), "llama"),
     PARROT("Parrot", new ParrotHandler(), "parrot"),
-    VILLAGER("Villager", new VillagerHandler(), "villager");
+    VILLAGER("Villager", new VillagerHandler(), "villager"),
+    DOLPHIN("Dolphin", new DolphinHandler(), "dolphin"),
+    DROWNED("Drowned", new DrownedHandler(), "drowned"),
+    FISH("Fish", new FishHandler(), "fish", "tropicalfish", "tropical fish", "tropical_fish", "clownfish", "cod", "salmon", "pufferfish"),
+    TURTLE("Turtle", new TurtleHandler(), "turtle"),
+    PHANTOM("Phantom", new PhantomHandler(), "phantom"),
+    CAT("Cat", new CatHandler(), "cat"),
+    FOX("Fox", new FoxHandler(), "fox"),
+    PANDA("Panda", new PandaHandler(), "panda"),
+    PILLAGER("Pillager", new PillagerHandler(), "pillager"),
+    RAVAGER("Ravager", new RavagerHandler(), "ravager"),
+    TRADER_LLAMA("TraderLlama", new TraderLlamaHandler(), "traderllama", "trader_llama", "trader llama", "llamatrader", "llama_trader", "llama trader"),
+    WANDERING_TRADER("WanderingTrader", new WanderingTraderHandler(), "wanderingtrader", "wandering_trader", "wandering trader", "tradervillager", "trader_villager", "trader villager");
 
-    @Getter private ICustomEntityHandler customEntityHandler;
-    @Getter private List<String> names = new ArrayList<>();
-    @Getter private EntityType entityType;
-    @Getter private String fancyName;
+    private ICustomEntityHandler customEntityHandler;
+    private List<String> names = new ArrayList<>();
+    private EntityType entityType;
+    private String fancyName;
 
     EntityFinder(String fancyName, ICustomEntityHandler customEntityHandler, String... names) {
         this.fancyName = fancyName;
@@ -95,13 +108,23 @@ public enum EntityFinder {
         this.customEntityHandler = null;
     }
 
+    public static EntityFinder get(String name) {
+        for (EntityFinder entityFinder : values()) {
+            for (String s : entityFinder.getNames()) {
+                if (name.equalsIgnoreCase(s)) return entityFinder;
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public String toString() {
         return this.fancyName;
     }
 
     public LivingEntity spawnNewLivingEntity(String input, Location location) {
-        if(this.customEntityHandler != null) {
+        if (this.customEntityHandler != null) {
             LivingEntity livingEntity;
 
             try {
@@ -111,20 +134,33 @@ public enum EntityFinder {
                 return null;
             }
 
+            if (livingEntity instanceof Tameable) {
+                ((Tameable) livingEntity).setTamed(true);
+            }
+
+            if (livingEntity instanceof Ageable) {
+                ((Ageable) livingEntity).setAdult();
+            }
+
             return livingEntity;
         } else {
             return (LivingEntity) location.getWorld().spawnEntity(location, getEntityType());
         }
     }
 
-    public static EntityFinder get(String name) {
-        for(EntityFinder entityFinder : values()) {
-            for (String s : entityFinder.getNames()) {
-                if(name.equalsIgnoreCase(s)) return entityFinder;
-            }
-        }
-
-        return null;
+    public ICustomEntityHandler getCustomEntityHandler() {
+        return this.customEntityHandler;
     }
 
+    public List<String> getNames() {
+        return this.names;
+    }
+
+    public EntityType getEntityType() {
+        return this.entityType;
+    }
+
+    public String getFancyName() {
+        return this.fancyName;
+    }
 }

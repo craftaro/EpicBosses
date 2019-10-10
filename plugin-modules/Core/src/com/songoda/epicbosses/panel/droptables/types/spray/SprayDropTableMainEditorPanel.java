@@ -1,7 +1,7 @@
 package com.songoda.epicbosses.panel.droptables.types.spray;
 
 import com.google.gson.JsonObject;
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.droptable.elements.SprayTableElement;
@@ -28,9 +28,9 @@ import java.util.Map;
  */
 public class SprayDropTableMainEditorPanel extends SubVariablePanelHandler<DropTable, SprayTableElement> {
 
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public SprayDropTableMainEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public SprayDropTableMainEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -49,12 +49,12 @@ public class SprayDropTableMainEditorPanel extends SubVariablePanelHandler<DropT
         Integer maxDrops = sprayTableElement.getSprayMaxDrops();
         Integer maxDistance = sprayTableElement.getSprayMaxDistance();
 
-        if(randomSprayDrops == null) randomSprayDrops = false;
-        if(maxDrops == null) maxDrops = -1;
-        if(maxDistance == null) maxDistance = 100;
+        if (randomSprayDrops == null) randomSprayDrops = false;
+        if (maxDrops == null) maxDrops = -1;
+        if (maxDistance == null) maxDistance = 100;
 
         replaceMap.put("{name}", BossAPI.getDropTableName(dropTable));
-        replaceMap.put("{randomDrops}", StringUtils.get().formatString(""+randomSprayDrops));
+        replaceMap.put("{randomDrops}", StringUtils.get().formatString("" + randomSprayDrops));
         replaceMap.put("{maxDrops}", NumberUtils.get().formatDouble(maxDrops));
         replaceMap.put("{maxDistance}", NumberUtils.get().formatDouble(maxDistance));
         panelBuilder.addReplaceData(replaceMap);
@@ -83,7 +83,7 @@ public class SprayDropTableMainEditorPanel extends SubVariablePanelHandler<DropT
         return event -> {
             Boolean currentValue = sprayTableElement.getRandomSprayDrops();
 
-            if(currentValue == null) currentValue = false;
+            if (currentValue == null) currentValue = false;
 
             boolean newValue = !currentValue;
 
@@ -99,24 +99,24 @@ public class SprayDropTableMainEditorPanel extends SubVariablePanelHandler<DropT
             ClickType clickType = event.getClick();
             int amountToModifyBy;
 
-            if(clickType == ClickType.SHIFT_LEFT) {
+            if (clickType == ClickType.SHIFT_LEFT) {
                 amountToModifyBy = 10;
-            } else if(clickType == ClickType.RIGHT) {
+            } else if (clickType == ClickType.RIGHT) {
                 amountToModifyBy = -1;
-            } else if(clickType == ClickType.SHIFT_RIGHT) {
+            } else if (clickType == ClickType.SHIFT_RIGHT) {
                 amountToModifyBy = -10;
             } else {
                 amountToModifyBy = 1;
             }
 
-            String modifyValue = amountToModifyBy > 0? "increased" : "decreased";
+            String modifyValue = amountToModifyBy > 0 ? "increased" : "decreased";
             Integer currentAmount = sprayTableElement.getSprayMaxDistance();
 
-            if(currentAmount == null) currentAmount = 100;
+            if (currentAmount == null) currentAmount = 100;
 
             int newAmount = currentAmount + amountToModifyBy;
 
-            if(newAmount < 0) {
+            if (newAmount < 0) {
                 newAmount = 0;
             }
 
@@ -132,24 +132,24 @@ public class SprayDropTableMainEditorPanel extends SubVariablePanelHandler<DropT
             ClickType clickType = event.getClick();
             int amountToModifyBy;
 
-            if(clickType == ClickType.SHIFT_LEFT) {
+            if (clickType == ClickType.SHIFT_LEFT) {
                 amountToModifyBy = 10;
-            } else if(clickType == ClickType.RIGHT) {
+            } else if (clickType == ClickType.RIGHT) {
                 amountToModifyBy = -1;
-            } else if(clickType == ClickType.SHIFT_RIGHT) {
+            } else if (clickType == ClickType.SHIFT_RIGHT) {
                 amountToModifyBy = -10;
             } else {
                 amountToModifyBy = 1;
             }
 
-            String modifyValue = amountToModifyBy > 0? "increased" : "decreased";
+            String modifyValue = amountToModifyBy > 0 ? "increased" : "decreased";
             Integer currentAmount = sprayTableElement.getSprayMaxDrops();
 
-            if(currentAmount == null) currentAmount = -1;
+            if (currentAmount == null) currentAmount = -1;
 
             int newAmount = currentAmount + amountToModifyBy;
 
-            if(newAmount < -1) {
+            if (newAmount < -1) {
                 newAmount = -1;
             }
 

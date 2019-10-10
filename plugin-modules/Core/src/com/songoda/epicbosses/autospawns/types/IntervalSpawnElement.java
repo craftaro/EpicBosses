@@ -16,8 +16,6 @@ import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.utils.*;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
 import com.songoda.epicbosses.utils.panel.base.handlers.VariablePanelHandler;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -31,9 +29,12 @@ import java.util.*;
  */
 public class IntervalSpawnElement implements IAutoSpawnCustomSettingsHandler {
 
-    @Expose @Getter @Setter private Boolean spawnAfterLastBossIsKilled;
-    @Expose @Getter @Setter private String location, placeholder;
-    @Expose @Getter @Setter private Integer spawnRate;
+    @Expose
+    private Boolean spawnAfterLastBossIsKilled;
+    @Expose
+    private String location, placeholder;
+    @Expose
+    private Integer spawnRate;
 
     public IntervalSpawnElement(String location, String placeholder, Integer spawnRate, boolean spawnAfterLastBossIsKilled) {
         this.location = location;
@@ -53,10 +54,10 @@ public class IntervalSpawnElement implements IAutoSpawnCustomSettingsHandler {
         ClickAction placeholderAction = intervalSpawnHandler.getPlaceholderAction(this, autoSpawn, variablePanelHandler);
         ClickAction spawnRateAction = intervalSpawnHandler.getSpawnRateAction(this, autoSpawn, variablePanelHandler);
 
-        clickActions.add(AutoSpawnManager.createAutoSpawnAction("Spawn After Last Boss Is Killed", getSpawnAfterLastBossIsKilled()+"", intervalSpawnHandler.getSpawnAfterLastBossIsKilledExtraInformation(), clickStack.clone(), lastBossKilledAction));
+        clickActions.add(AutoSpawnManager.createAutoSpawnAction("Spawn After Last Boss Is Killed", getSpawnAfterLastBossIsKilled() + "", intervalSpawnHandler.getSpawnAfterLastBossIsKilledExtraInformation(), clickStack.clone(), lastBossKilledAction));
         clickActions.add(AutoSpawnManager.createAutoSpawnAction("Location", getLocation(), intervalSpawnHandler.getLocationExtraInformation(), clickStack.clone(), locationAction));
         clickActions.add(AutoSpawnManager.createAutoSpawnAction("Placeholder", getPlaceholder(), intervalSpawnHandler.getPlaceholderExtraInformation(), clickStack.clone(), placeholderAction));
-        clickActions.add(AutoSpawnManager.createAutoSpawnAction("Spawn Rate", getSpawnRate()+"", intervalSpawnHandler.getSpawnRateExtraInformation(), clickStack.clone(), spawnRateAction));
+        clickActions.add(AutoSpawnManager.createAutoSpawnAction("Spawn Rate", getSpawnRate() + "", intervalSpawnHandler.getSpawnRateExtraInformation(), clickStack.clone(), spawnRateAction));
 
         return clickActions;
     }
@@ -72,22 +73,22 @@ public class IntervalSpawnElement implements IAutoSpawnCustomSettingsHandler {
         List<String> bosses = autoSpawn.getEntities();
         Location location = getSpawnLocation();
 
-        if(bosses == null || bosses.isEmpty()) {
+        if (bosses == null || bosses.isEmpty()) {
             ServerUtils.get().logDebug("BOSSES IS EMPTY!");
             return false;
         }
 
-        if(shuffleList) Collections.shuffle(bosses);
+        if (shuffleList) Collections.shuffle(bosses);
 
         Queue<String> queue = new LinkedList<>(bosses);
 
-        for(int i = 1; i <= amountToSpawn; i++) {
-            if(queue.isEmpty()) queue = new LinkedList<>(bosses);
+        for (int i = 1; i <= amountToSpawn; i++) {
+            if (queue.isEmpty()) queue = new LinkedList<>(bosses);
 
             BossEntity bossEntity = BossAPI.getBossEntity(queue.poll());
             ActiveBossHolder activeBossHolder = BossAPI.spawnNewBoss(bossEntity, location, null, null, customSpawnMessage);
 
-            if(activeBossHolder == null) continue;
+            if (activeBossHolder == null) continue;
 
             activeBossHolder.getPostBossDeathHandlers().add(bossDeathHandler);
             activeAutoSpawnHolder.getActiveBossHolders().add(activeBossHolder);
@@ -96,7 +97,7 @@ public class IntervalSpawnElement implements IAutoSpawnCustomSettingsHandler {
             ServerUtils.get().callEvent(bossSpawnEvent);
         }
 
-        if(customSpawnMessage && spawnMessage != null) {
+        if (customSpawnMessage && spawnMessage != null) {
             String x = NumberUtils.get().formatDouble(location.getBlockX());
             String y = NumberUtils.get().formatDouble(location.getBlockY());
             String z = NumberUtils.get().formatDouble(location.getBlockZ());
@@ -104,7 +105,7 @@ public class IntervalSpawnElement implements IAutoSpawnCustomSettingsHandler {
 
             List<String> spawnMessages = BossAPI.getStoredMessages(spawnMessage);
 
-            if(spawnMessages != null) {
+            if (spawnMessages != null) {
                 spawnMessages.replaceAll(s -> s.replace("{x}", x).replace("{y}", y).replace("{z}", z).replace("{world}", world));
 
                 MessageUtils.get().sendMessage(location, -1, spawnMessages);
@@ -116,5 +117,37 @@ public class IntervalSpawnElement implements IAutoSpawnCustomSettingsHandler {
 
     public Location getSpawnLocation() {
         return StringUtils.get().fromStringToLocation(this.location);
+    }
+
+    public Boolean getSpawnAfterLastBossIsKilled() {
+        return this.spawnAfterLastBossIsKilled;
+    }
+
+    public void setSpawnAfterLastBossIsKilled(Boolean spawnAfterLastBossIsKilled) {
+        this.spawnAfterLastBossIsKilled = spawnAfterLastBossIsKilled;
+    }
+
+    public String getLocation() {
+        return this.location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getPlaceholder() {
+        return this.placeholder;
+    }
+
+    public void setPlaceholder(String placeholder) {
+        this.placeholder = placeholder;
+    }
+
+    public Integer getSpawnRate() {
+        return this.spawnRate;
+    }
+
+    public void setSpawnRate(Integer spawnRate) {
+        this.spawnRate = spawnRate;
     }
 }

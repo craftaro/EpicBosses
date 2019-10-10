@@ -1,15 +1,9 @@
 package com.songoda.epicbosses.utils.file;
 
-import com.songoda.epicbosses.utils.Versions;
-import com.songoda.epicbosses.utils.version.VersionHandler;
-import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
 
 /**
  * @author Charles Cullen
@@ -21,7 +15,7 @@ public class YmlFileHandler implements IFileHandler<FileConfiguration> {
     private final JavaPlugin javaPlugin;
     private final boolean saveResource;
 
-    @Getter private final File file;
+    private final File file;
 
     public YmlFileHandler(JavaPlugin javaPlugin, boolean saveResource, File file) {
         this.javaPlugin = javaPlugin;
@@ -31,18 +25,10 @@ public class YmlFileHandler implements IFileHandler<FileConfiguration> {
 
     @Override
     public void createFile() {
-        if(!this.file.exists()) {
-            if(this.saveResource) {
+        if (!this.file.exists()) {
+            if (this.saveResource) {
                 String name = this.file.getName();
-                String folder = new VersionHandler().getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1) ? "/current/" : "/legacy/";
-                String path = folder + name;
-
-                try (InputStream resourceStream = this.getClass().getResourceAsStream(path)) {
-                    Files.copy(resourceStream, new File(this.javaPlugin.getDataFolder(), name).toPath());
-                    return;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                javaPlugin.saveResource(name, false);
             }
 
             FileUtils.get().createFile(this.file);
@@ -59,4 +45,7 @@ public class YmlFileHandler implements IFileHandler<FileConfiguration> {
         FileUtils.get().saveFile(this.file, config);
     }
 
+    public File getFile() {
+        return this.file;
+    }
 }

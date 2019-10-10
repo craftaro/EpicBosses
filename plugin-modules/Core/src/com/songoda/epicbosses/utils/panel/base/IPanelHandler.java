@@ -1,7 +1,6 @@
 package com.songoda.epicbosses.utils.panel.base;
 
 import com.songoda.epicbosses.utils.panel.Panel;
-import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import org.bukkit.entity.Player;
 
 /**

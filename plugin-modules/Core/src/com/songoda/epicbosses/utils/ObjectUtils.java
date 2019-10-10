@@ -8,7 +8,7 @@ package com.songoda.epicbosses.utils;
 public class ObjectUtils {
 
     public static <T> T getValue(T input, T defaultValue) {
-        if(input == null) return defaultValue;
+        if (input == null) return defaultValue;
 
         return input;
     }

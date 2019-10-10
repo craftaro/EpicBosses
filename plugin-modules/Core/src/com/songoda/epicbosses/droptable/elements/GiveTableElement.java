@@ -1,8 +1,6 @@
 package com.songoda.epicbosses.droptable.elements;
 
 import com.google.gson.annotations.Expose;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Map;
 
@@ -13,10 +11,18 @@ import java.util.Map;
  */
 public class GiveTableElement {
 
-    @Expose @Getter @Setter private Map<String, Map<String, GiveTableSubElement>> giveRewards;
+    @Expose
+    private Map<String, Map<String, GiveTableSubElement>> giveRewards;
 
     public GiveTableElement(Map<String, Map<String, GiveTableSubElement>> giveRewards) {
         this.giveRewards = giveRewards;
     }
 
+    public Map<String, Map<String, GiveTableSubElement>> getGiveRewards() {
+        return this.giveRewards;
+    }
+
+    public void setGiveRewards(Map<String, Map<String, GiveTableSubElement>> giveRewards) {
+        this.giveRewards = giveRewards;
+    }
 }

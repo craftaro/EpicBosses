@@ -1,8 +1,6 @@
 package com.songoda.epicbosses.entity.elements;
 
 import com.google.gson.annotations.Expose;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @author Charles Cullen
@@ -11,8 +9,10 @@ import lombok.Setter;
  */
 public class DropsElement {
 
-    @Expose @Getter @Setter private Boolean naturalDrops, dropExp;
-    @Expose @Getter @Setter private String dropTable;
+    @Expose
+    private Boolean naturalDrops, dropExp;
+    @Expose
+    private String dropTable;
 
     public DropsElement(Boolean naturalDrops, Boolean dropExp, String dropTable) {
         this.naturalDrops = naturalDrops;
@@ -20,4 +20,27 @@ public class DropsElement {
         this.dropTable = dropTable;
     }
 
+    public Boolean getNaturalDrops() {
+        return this.naturalDrops;
+    }
+
+    public void setNaturalDrops(Boolean naturalDrops) {
+        this.naturalDrops = naturalDrops;
+    }
+
+    public Boolean getDropExp() {
+        return this.dropExp;
+    }
+
+    public void setDropExp(Boolean dropExp) {
+        this.dropExp = dropExp;
+    }
+
+    public String getDropTable() {
+        return this.dropTable;
+    }
+
+    public void setDropTable(String dropTable) {
+        this.dropTable = dropTable;
+    }
 }

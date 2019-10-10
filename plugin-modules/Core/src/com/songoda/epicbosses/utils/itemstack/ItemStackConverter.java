@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.utils.itemstack;
 
+import com.songoda.core.compatibility.CompatibleMaterial;
 import com.songoda.epicbosses.utils.IReplaceableConverter;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.converters.EnchantConverter;
@@ -41,44 +42,44 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
         String type, name = null, skullOwner = null;
         List<String> lore = null, enchants = null;
 
-        if(durability == 0) {
+        if (durability == 0) {
             durability = null;
         }
 
         type = this.materialConverter.to(material);
 
-        if(itemStack.hasItemMeta()) {
+        if (itemStack.hasItemMeta()) {
             ItemMeta itemMeta = itemStack.getItemMeta();
 
-            if(itemMeta.hasDisplayName()) {
+            if (itemMeta.hasDisplayName()) {
                 name = itemMeta.getDisplayName().replace('§', '&');
             }
 
-            if(itemMeta.hasLore()) {
+            if (itemMeta.hasLore()) {
                 lore = new ArrayList<>();
 
-                for(String string : itemMeta.getLore()) {
+                for (String string : itemMeta.getLore()) {
                     lore.add(string.replace('§', '&'));
                 }
             }
 
-            if(itemMeta.hasEnchants()) {
+            if (itemMeta.hasEnchants()) {
                 enchants = this.enchantConverter.to(itemMeta.getEnchants());
             }
 
-            if(itemMeta instanceof SkullMeta) {
+            if (itemMeta instanceof SkullMeta) {
                 SkullMeta skullMeta = (SkullMeta) itemMeta;
 
-                if(skullMeta.hasOwner()) {
+                if (skullMeta.hasOwner()) {
                     skullOwner = skullMeta.getOwner();
                 }
             }
 
-            if(itemMeta instanceof BlockStateMeta) {
+            if (itemMeta instanceof BlockStateMeta) {
                 BlockStateMeta blockStateMeta = (BlockStateMeta) itemMeta;
                 BlockState blockState = blockStateMeta.getBlockState();
 
-                if(blockState instanceof CreatureSpawner) {
+                if (blockState instanceof CreatureSpawner) {
                     CreatureSpawner creatureSpawner = (CreatureSpawner) blockState;
 
                     spawnerId = creatureSpawner.getSpawnedType().getTypeId();
@@ -98,35 +99,32 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
     public ItemStack from(ItemStackHolder itemStackHolder, Map<String, String> replaceMap) {
         ItemStack itemStack = new ItemStack(Material.AIR);
 
-        if(itemStackHolder == null) return itemStack;
-        if(itemStackHolder.getType() == null) return itemStack;
+        if (itemStackHolder == null) return itemStack;
+        if (itemStackHolder.getType() == null) return itemStack;
 
-        String type = itemStackHolder.getType();
-        Material material = this.materialConverter.from(type);
+        CompatibleMaterial cMaterial = CompatibleMaterial.getMaterial(itemStackHolder.getType());
+        Material material = cMaterial.getMaterial();
 
-        if(material == null) return itemStack;
+        if (material == null) return itemStack;
 
         itemStack.setType(material);
 
         Integer amount = itemStackHolder.getAmount();
-        Short durability = itemStackHolder.getDurability(), spawnerId = itemStackHolder.getSpawnerId();
+        Short durability = (short) cMaterial.getData(), spawnerId = itemStackHolder.getSpawnerId();
+
         String name = itemStackHolder.getName(), skullOwner = itemStackHolder.getSkullOwner();
         List<String> lore = itemStackHolder.getLore(), enchants = itemStackHolder.getEnchants();
 
-        if(type.contains(":")) {
-            durability = Short.valueOf(type.split(":")[1]);
-        }
+        if (durability != -1) itemStack.setDurability(durability);
+        if (enchants != null) itemStack.addUnsafeEnchantments(this.enchantConverter.from(enchants));
 
-        if(durability != null) itemStack.setDurability(durability);
-        if(enchants != null) itemStack.addUnsafeEnchantments(this.enchantConverter.from(enchants));
-
-        if(name != null || skullOwner != null || lore != null || spawnerId != null) {
+        if (name != null || skullOwner != null || lore != null || spawnerId != null) {
             ItemMeta itemMeta = itemStack.getItemMeta();
 
             //-----------
             // SET NAME
             //-----------
-            if(name != null) {
+            if (name != null) {
                 name = StringUtils.get().translateColor(name);
 
                 itemMeta.setDisplayName(replaceString(name, replaceMap));
@@ -135,7 +133,7 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
             //-----------
             // SET LORE
             //-----------
-            if(lore != null) {
+            if (lore != null) {
                 List<String> replacedLore = new ArrayList<>(lore);
 
                 replacedLore.replaceAll(s -> s.replace('&', '§'));
@@ -147,12 +145,12 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
             //----------------------------------------------
             // SET OWNER, SPAWNER ID, OR UPDATE ITEM META
             //----------------------------------------------
-            if(skullOwner != null) {
+            if (skullOwner != null) {
                 SkullMeta skullMeta = (SkullMeta) itemMeta;
 
                 skullMeta.setOwner(skullOwner);
                 itemStack.setItemMeta(skullMeta);
-            } else if(spawnerId != null) {
+            } else if (spawnerId != null) {
                 BlockStateMeta blockStateMeta = (BlockStateMeta) itemMeta;
                 BlockState blockState = blockStateMeta.getBlockState();
                 CreatureSpawner creatureSpawner = (CreatureSpawner) blockState;
@@ -165,7 +163,7 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
             }
         }
 
-        if(amount != null && amount > 1) {
+        if (amount != null && amount > 1) {
             itemStack.setAmount(amount);
         }
 
@@ -173,10 +171,10 @@ public class ItemStackConverter implements IReplaceableConverter<ItemStackHolder
     }
 
     private String replaceString(String input, Map<String, String> replaceMap) {
-        if(replaceMap == null) return input;
+        if (replaceMap == null) return input;
 
-        for(String replaceKey : replaceMap.keySet()) {
-            if(input.contains(replaceKey)) {
+        for (String replaceKey : replaceMap.keySet()) {
+            if (input.contains(replaceKey)) {
                 input = input.replace(replaceKey, replaceMap.get(replaceKey));
             }
         }

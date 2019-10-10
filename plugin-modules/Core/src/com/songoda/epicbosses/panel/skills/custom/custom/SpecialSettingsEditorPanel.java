@@ -1,12 +1,12 @@
 package com.songoda.epicbosses.panel.skills.custom.custom;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.BossSkillManager;
 import com.songoda.epicbosses.skills.CustomSkillHandler;
-import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.skills.Skill;
+import com.songoda.epicbosses.skills.interfaces.ICustomSettingAction;
 import com.songoda.epicbosses.skills.types.CustomSkillElement;
 import com.songoda.epicbosses.utils.Debug;
 import com.songoda.epicbosses.utils.ServerUtils;
@@ -31,9 +31,9 @@ import java.util.Map;
 public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, CustomSkillElement> {
 
     private BossSkillManager bossSkillManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public SpecialSettingsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public SpecialSettingsEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -62,19 +62,19 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
         String currentSkillName = customSkillElement.getCustom().getType();
         CustomSkillHandler customSkillHandler = this.bossSkillManager.getSkills().stream().filter(cSH -> cSH.getSkillName().equalsIgnoreCase(currentSkillName)).findFirst().orElse(null);
 
-        if(customSkillHandler == null) {
+        if (customSkillHandler == null) {
             Debug.FAILED_TO_FIND_ASSIGNED_CUSTOMSKILLHANDLER.debug(currentSkillName);
             return;
         }
 
         List<ICustomSettingAction> customButtons = customSkillHandler.getOtherSkillDataActions(skill, customSkillElement);
 
-        if(customButtons == null || customButtons.isEmpty()) return;
+        if (customButtons == null || customButtons.isEmpty()) return;
 
         int maxPage = panel.getMaxPage(customButtons);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, customButtons);
             return true;
@@ -91,8 +91,9 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
 
     private void loadPage(Panel panel, int page, List<ICustomSettingAction> clickActions) {
         panel.loadPage(page, ((slot, realisticSlot) -> {
-            if(slot >= clickActions.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= clickActions.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 ICustomSettingAction customSkillAction = clickActions.get(slot);
                 ClickAction clickAction = customSkillAction.getAction();
@@ -105,10 +106,10 @@ public class SpecialSettingsEditorPanel extends SubVariablePanelHandler<Skill, C
                 replaceMap.put("{setting}", name);
                 replaceMap.put("{currently}", currently);
 
-                if(displayStack == null || displayStack.getType() == Material.AIR) return;
+                if (displayStack == null || displayStack.getType() == Material.AIR) return;
 
-                ItemStackUtils.applyDisplayName(displayStack, this.plugin.getConfig().getString("Display.Skills.CustomSetting.name"), replaceMap);
-                ItemStackUtils.applyDisplayLore(displayStack, this.plugin.getConfig().getStringList("Display.Skills.CustomSetting.lore"), replaceMap);
+                ItemStackUtils.applyDisplayName(displayStack, this.plugin.getDisplay().getString("Display.Skills.CustomSetting.name"), replaceMap);
+                ItemStackUtils.applyDisplayLore(displayStack, this.plugin.getDisplay().getStringList("Display.Skills.CustomSetting.lore"), replaceMap);
 
                 panel.setItem(realisticSlot, displayStack, clickAction);
             }

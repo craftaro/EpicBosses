@@ -1,16 +1,18 @@
 package com.songoda.epicbosses.panel.skills.custom.potions;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.core.compatibility.ServerVersion;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.skills.Skill;
-import com.songoda.epicbosses.utils.*;
+import com.songoda.epicbosses.utils.PotionEffectFinder;
+import com.songoda.epicbosses.utils.ServerUtils;
+import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.ItemStackUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.potion.PotionEffectConverter;
 import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -33,9 +35,9 @@ import java.util.stream.Collectors;
 public class PotionEffectTypeEditorPanel extends SubVariablePanelHandler<Skill, PotionEffectHolder> {
 
     private PotionEffectConverter potionEffectConverter = new PotionEffectConverter();
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public PotionEffectTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public PotionEffectTypeEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.plugin = plugin;
@@ -47,7 +49,7 @@ public class PotionEffectTypeEditorPanel extends SubVariablePanelHandler<Skill, 
         int maxPage = panel.getMaxPage(list);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, list, skill, potionEffectHolder);
             return true;
@@ -74,14 +76,15 @@ public class PotionEffectTypeEditorPanel extends SubVariablePanelHandler<Skill, 
         String type = potionEffectHolder.getType();
 
         ServerUtils.get().runTaskAsync(() -> panel.loadPage(requestedPage, ((slot, realisticSlot) -> {
-            if(slot >= potionEffectTypes.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= potionEffectTypes.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 PotionEffectType potionEffectType = potionEffectTypes.get(slot);
                 ItemStack itemStack = new ItemStack(Material.POTION);
                 PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
 
-                if (new VersionHandler().getVersion().isHigherThanOrEqualTo(Versions.v1_13_R1)) {
+                if (ServerVersion.isServerVersionAtLeast(ServerVersion.V1_13)) {
                     PotionType potionType = PotionType.getByEffect(potionEffectType);
 
                     if (potionType == null) potionType = PotionType.WATER;
@@ -98,23 +101,23 @@ public class PotionEffectTypeEditorPanel extends SubVariablePanelHandler<Skill, 
 
                 replaceMap.put("{effect}", StringUtils.get().formatString(potionEffectType.getName()));
 
-                if(type != null && !type.isEmpty()) {
+                if (type != null && !type.isEmpty()) {
                     PotionEffectFinder potionEffectFinder = PotionEffectFinder.getByName(type);
 
                     if (potionEffectFinder != null) {
-                        ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.CreatePotion.selectedName"), replaceMap);
+                        ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.CreatePotion.selectedName"), replaceMap);
                         found = true;
                     }
                 }
 
-                if(!found) {
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Skills.CreatePotion.name"), replaceMap);
+                if (!found) {
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.CreatePotion.name"), replaceMap);
                 }
 
                 panel.setItem(realisticSlot, itemStack, e -> {
                     PotionEffectFinder potionEffectFinder = PotionEffectFinder.getByEffect(potionEffectType);
 
-                    if(potionEffectFinder != null) {
+                    if (potionEffectFinder != null) {
                         potionEffectHolder.setType(potionEffectFinder.getFancyName());
 
                         this.bossPanelManager.getCreatePotionEffectMenu().openFor((Player) e.getWhoClicked(), skill, potionEffectHolder);

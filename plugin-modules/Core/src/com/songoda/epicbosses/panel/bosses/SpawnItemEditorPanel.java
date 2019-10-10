@@ -1,14 +1,14 @@
 package com.songoda.epicbosses.panel.bosses;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.panel.AddItemsPanel;
-import com.songoda.epicbosses.panel.additems.interfaces.IParentPanelHandler;
 import com.songoda.epicbosses.panel.additems.SpawnItemAddItemsParentPanelHandler;
+import com.songoda.epicbosses.panel.additems.interfaces.IParentPanelHandler;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.ObjectUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
@@ -36,9 +36,9 @@ public class SpawnItemEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private BossesFileManager bossesFileManager;
     private ItemsFileManager itemsFileManager;
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public SpawnItemEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public SpawnItemEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.bossesFileManager = plugin.getBossesFileManager();
@@ -53,7 +53,7 @@ public class SpawnItemEditorPanel extends VariablePanelHandler<BossEntity> {
         int maxPage = panel.getMaxPage(entryList);
 
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
-            if(requestedPage < 0 || requestedPage > maxPage) return false;
+            if (requestedPage < 0 || requestedPage > maxPage) return false;
 
             loadPage(panel, requestedPage, itemStackHolderMap, entryList, bossEntity);
             return true;
@@ -77,7 +77,7 @@ public class SpawnItemEditorPanel extends VariablePanelHandler<BossEntity> {
         ServerUtils.get().runTaskAsync(() -> {
             panelBuilderCounter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, event -> openAddItemsPanel(player, bossEntity)));
             panelBuilderCounter.getSlotsWith("Remove").forEach(slot -> panel.setOnClick(slot, event -> {
-                if(!bossEntity.isEditing()) {
+                if (!bossEntity.isEditing()) {
                     Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                     return;
                 }
@@ -110,27 +110,28 @@ public class SpawnItemEditorPanel extends VariablePanelHandler<BossEntity> {
         String current = ObjectUtils.getValue(bossEntity.getSpawnItem(), "");
 
         panel.loadPage(requestedPage, (slot, realisticSlot) -> {
-            if(slot >= filteredMap.size()) {
-                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {});
+            if (slot >= filteredMap.size()) {
+                panel.setItem(realisticSlot, new ItemStack(Material.AIR), e -> {
+                });
             } else {
                 String name = entryList.get(slot);
                 ItemStackHolder itemStackHolder = filteredMap.get(name);
                 ItemStack itemStack = this.itemsFileManager.getItemStackConverter().from(itemStackHolder);
 
-                if(itemStack == null) {
+                if (itemStack == null) {
                     itemStack = new ItemStack(Material.BARRIER);
                 }
 
-                if(name.equalsIgnoreCase(current)) {
+                if (name.equalsIgnoreCase(current)) {
                     Map<String, String> replaceMap = new HashMap<>();
 
                     replaceMap.put("{name}", ItemStackUtils.getName(itemStack));
 
-                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getConfig().getString("Display.Boss.Equipment.name"), replaceMap);
+                    ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Boss.Equipment.name"), replaceMap);
                 }
 
                 panel.setItem(realisticSlot, itemStack, e -> {
-                    if(!bossEntity.isEditing()) {
+                    if (!bossEntity.isEditing()) {
                         Message.Boss_Edit_CannotBeModified.msg(e.getWhoClicked());
                         return;
                     }

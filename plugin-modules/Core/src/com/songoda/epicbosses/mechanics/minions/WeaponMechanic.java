@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.mechanics.minions;
 
+import com.songoda.core.compatibility.ServerVersion;
 import com.songoda.epicbosses.entity.MinionEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.entity.elements.HandsElement;
@@ -8,7 +9,6 @@ import com.songoda.epicbosses.holder.ActiveMinionHolder;
 import com.songoda.epicbosses.managers.files.ItemsFileManager;
 import com.songoda.epicbosses.mechanics.IMinionMechanic;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
@@ -21,35 +21,34 @@ import org.bukkit.inventory.ItemStack;
 public class WeaponMechanic implements IMinionMechanic {
 
     private ItemsFileManager itemStackManager;
-    private VersionHandler versionHandler;
 
     public WeaponMechanic(ItemsFileManager itemStackManager) {
         this.itemStackManager = itemStackManager;
-        this.versionHandler = new VersionHandler();
     }
 
     @Override
     public boolean applyMechanic(MinionEntity minionEntity, ActiveMinionHolder activeMinionHolder) {
-        if(activeMinionHolder.getLivingEntityMap() == null || activeMinionHolder.getLivingEntityMap().isEmpty()) return false;
+        if (activeMinionHolder.getLivingEntityMap() == null || activeMinionHolder.getLivingEntityMap().isEmpty())
+            return false;
 
-        for(EntityStatsElement entityStatsElement : minionEntity.getEntityStats()) {
+        for (EntityStatsElement entityStatsElement : minionEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
             LivingEntity livingEntity = activeMinionHolder.getLivingEntity(mainStatsElement.getPosition());
 
-            if(livingEntity == null) return false;
+            if (livingEntity == null) return false;
 
             EntityEquipment entityEquipment = livingEntity.getEquipment();
             HandsElement handsElement = entityStatsElement.getHands();
             String mainHand = handsElement.getMainHand();
             String offHand = handsElement.getOffHand();
 
-            if(mainHand != null) {
+            if (mainHand != null) {
                 ItemStackHolder itemStackHolder = this.itemStackManager.getItemStackHolder(mainHand);
 
-                if(itemStackHolder != null) {
+                if (itemStackHolder != null) {
                     ItemStack itemStack = this.itemStackManager.getItemStackConverter().from(itemStackHolder);
 
-                    if(this.versionHandler.canUseOffHand()) {
+                    if (ServerVersion.isServerVersionAtLeast(ServerVersion.V1_9)) {
                         entityEquipment.setItemInMainHand(itemStack);
                     } else {
                         entityEquipment.setItemInHand(itemStack);
@@ -57,10 +56,10 @@ public class WeaponMechanic implements IMinionMechanic {
                 }
             }
 
-            if(offHand != null && this.versionHandler.canUseOffHand()) {
+            if (offHand != null && ServerVersion.isServerVersionAtLeast(ServerVersion.V1_9)) {
                 ItemStackHolder itemStackHolder = this.itemStackManager.getItemStackHolder(offHand);
 
-                if(itemStackHolder != null) {
+                if (itemStackHolder != null) {
                     ItemStack itemStack = this.itemStackManager.getItemStackConverter().from(itemStackHolder);
 
                     entityEquipment.setItemInOffHand(itemStack);

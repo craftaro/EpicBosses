@@ -14,6 +14,10 @@ public class NumberUtils {
 
     private static NumberUtils INSTANCE = new NumberUtils();
 
+    public static NumberUtils get() {
+        return INSTANCE;
+    }
+
     public boolean isInt(String string) {
         try {
             Integer.valueOf(string);
@@ -25,13 +29,13 @@ public class NumberUtils {
     }
 
     public Integer getInteger(String input) {
-        if(!isInt(input)) return null;
+        if (!isInt(input)) return null;
 
         return Integer.valueOf(input);
     }
 
     public int getSquared(int original) {
-        if(original == -1) return -1;
+        if (original == -1) return -1;
 
         return original * original;
     }
@@ -47,7 +51,7 @@ public class NumberUtils {
     }
 
     public Double getDouble(String input) {
-        if(!isDouble(input)) return null;
+        if (!isDouble(input)) return null;
 
         return Double.valueOf(input);
     }
@@ -73,10 +77,6 @@ public class NumberUtils {
         }
 
         return currentIds.size() + 1;
-    }
-
-    public static NumberUtils get() {
-        return INSTANCE;
     }
 
 }

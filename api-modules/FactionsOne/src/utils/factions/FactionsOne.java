@@ -23,16 +23,16 @@ public class FactionsOne implements IFactionHelper {
         Faction zFac = FPlayers.i.get(b).getFaction();
         Rel r = pFac.getRelationTo(zFac);
 
-        if(ChatColor.stripColor(zFac.getId()).equalsIgnoreCase("Wilderness")) return false;
-        if(a == b) return true;
-        if(r.equals(Rel.ALLY)) return true;
-        if(r.equals(Rel.TRUCE)) return true;
-        if(r.equals(Rel.LEADER)) return true;
-        if(r.equals(Rel.MEMBER)) return true;
-        if(r.equals(Rel.OFFICER)) return true;
-        if(r.equals(Rel.RECRUIT)) return true;
-        if(r.equals(Rel.ENEMY)) return false;
-        if(r.equals(Rel.NEUTRAL)) return false;
+        if (ChatColor.stripColor(zFac.getId()).equalsIgnoreCase("Wilderness")) return false;
+        if (a == b) return true;
+        if (r.equals(Rel.ALLY)) return true;
+        if (r.equals(Rel.TRUCE)) return true;
+        if (r.equals(Rel.LEADER)) return true;
+        if (r.equals(Rel.MEMBER)) return true;
+        if (r.equals(Rel.OFFICER)) return true;
+        if (r.equals(Rel.RECRUIT)) return true;
+        if (r.equals(Rel.ENEMY)) return false;
+        if (r.equals(Rel.NEUTRAL)) return false;
         return false;
     }
 
@@ -43,15 +43,15 @@ public class FactionsOne implements IFactionHelper {
         Faction locFac = Board.getFactionAt(fLoc);
         Rel r = pFac.getRelationTo(locFac);
 
-        if(ChatColor.stripColor(locFac.getComparisonTag()).equalsIgnoreCase("Wilderness")) return false;
-        if(r.equals(Rel.ALLY)) return true;
-        if(r.equals(Rel.TRUCE)) return true;
-        if(r.equals(Rel.LEADER)) return true;
-        if(r.equals(Rel.MEMBER)) return true;
-        if(r.equals(Rel.OFFICER)) return true;
-        if(r.equals(Rel.RECRUIT)) return true;
-        if(r.equals(Rel.ENEMY)) return false;
-        if(r.equals(Rel.NEUTRAL)) return false;
+        if (ChatColor.stripColor(locFac.getComparisonTag()).equalsIgnoreCase("Wilderness")) return false;
+        if (r.equals(Rel.ALLY)) return true;
+        if (r.equals(Rel.TRUCE)) return true;
+        if (r.equals(Rel.LEADER)) return true;
+        if (r.equals(Rel.MEMBER)) return true;
+        if (r.equals(Rel.OFFICER)) return true;
+        if (r.equals(Rel.RECRUIT)) return true;
+        if (r.equals(Rel.ENEMY)) return false;
+        if (r.equals(Rel.NEUTRAL)) return false;
         return false;
     }
 
@@ -60,7 +60,7 @@ public class FactionsOne implements IFactionHelper {
         FLocation fLoc = new FLocation(location);
         Faction locFac = Board.getFactionAt(fLoc);
 
-        if(ChatColor.stripColor(locFac.getComparisonTag()).equalsIgnoreCase("WarZone")) return true;
+        if (ChatColor.stripColor(locFac.getComparisonTag()).equalsIgnoreCase("WarZone")) return true;
         return false;
     }
 
@@ -70,9 +70,9 @@ public class FactionsOne implements IFactionHelper {
         Faction locFac = Board.getFactionAt(fLoc);
         String string = ChatColor.stripColor(locFac.getComparisonTag());
 
-        if(string.equalsIgnoreCase("WarZone")) return false;
-        if(string.equalsIgnoreCase("SafeZone")) return false;
-        if(string.equalsIgnoreCase("Wilderness")) return false;
+        if (string.equalsIgnoreCase("WarZone")) return false;
+        if (string.equalsIgnoreCase("SafeZone")) return false;
+        if (string.equalsIgnoreCase("Wilderness")) return false;
         return true;
     }
 }

@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.bosses;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -28,7 +28,7 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private BossesFileManager bossesFileManager;
 
-    public SkillMainEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public SkillMainEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.bossesFileManager = plugin.getBossesFileManager();
@@ -45,7 +45,7 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
         Double chance = bossEntity.getSkills().getOverallChance();
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        if(chance == null) chance = 0.0;
+        if (chance == null) chance = 0.0;
 
         replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
         replaceMap.put("{chance}", NumberUtils.get().formatDouble(chance));
@@ -74,7 +74,7 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ClickAction getOverallChanceAction(BossEntity bossEntity) {
         return event -> {
-            if(!bossEntity.isEditing()) {
+            if (!bossEntity.isEditing()) {
                 Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                 return;
             }
@@ -82,28 +82,28 @@ public class SkillMainEditorPanel extends VariablePanelHandler<BossEntity> {
             ClickType clickType = event.getClick();
             double chanceToModifyBy = 0.0;
 
-            if(clickType == ClickType.LEFT) {
+            if (clickType == ClickType.LEFT) {
                 chanceToModifyBy = 1.0;
-            } else if(clickType == ClickType.SHIFT_LEFT) {
+            } else if (clickType == ClickType.SHIFT_LEFT) {
                 chanceToModifyBy = 0.1;
-            } else if(clickType == ClickType.RIGHT) {
+            } else if (clickType == ClickType.RIGHT) {
                 chanceToModifyBy = -1.0;
-            } else if(clickType == ClickType.SHIFT_RIGHT) {
+            } else if (clickType == ClickType.SHIFT_RIGHT) {
                 chanceToModifyBy = -0.1;
             }
 
-            String modifyValue = chanceToModifyBy > 0.0? "increased" : "decreased";
+            String modifyValue = chanceToModifyBy > 0.0 ? "increased" : "decreased";
             Double currentChance = bossEntity.getSkills().getOverallChance();
 
-            if(currentChance == null) currentChance = 0.0;
+            if (currentChance == null) currentChance = 0.0;
 
             double newChance = currentChance + chanceToModifyBy;
 
-            if(newChance < 0.0) {
+            if (newChance < 0.0) {
                 newChance = 0.0;
             }
 
-            if(newChance > 100.0) {
+            if (newChance > 100.0) {
                 newChance = 100.0;
             }
 

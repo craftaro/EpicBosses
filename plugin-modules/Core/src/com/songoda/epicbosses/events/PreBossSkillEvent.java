@@ -1,7 +1,6 @@
 package com.songoda.epicbosses.events;
 
 import com.songoda.epicbosses.holder.ActiveBossHolder;
-import lombok.Getter;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -15,8 +14,8 @@ public class PreBossSkillEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
 
-    @Getter private LivingEntity livingEntityDamaged, damagingEntity;
-    @Getter private ActiveBossHolder activeBossHolder;
+    private LivingEntity livingEntityDamaged, damagingEntity;
+    private ActiveBossHolder activeBossHolder;
 
     public PreBossSkillEvent(ActiveBossHolder activeBossHolder, LivingEntity livingEntity, LivingEntity damagingEntity) {
         this.activeBossHolder = activeBossHolder;
@@ -24,12 +23,24 @@ public class PreBossSkillEvent extends Event {
         this.damagingEntity = damagingEntity;
     }
 
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
     @Override
     public HandlerList getHandlers() {
         return handlers;
     }
 
-    public static HandlerList getHandlerList() {
-        return handlers;
+    public LivingEntity getLivingEntityDamaged() {
+        return this.livingEntityDamaged;
+    }
+
+    public LivingEntity getDamagingEntity() {
+        return this.damagingEntity;
+    }
+
+    public ActiveBossHolder getActiveBossHolder() {
+        return this.activeBossHolder;
     }
 }

@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.bosses.text;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -15,7 +15,7 @@ import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
  */
 public class SkillMasterMessageTextEditorPanel extends SingleMessageListEditor<BossEntity> {
 
-    public SkillMasterMessageTextEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public SkillMasterMessageTextEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder, plugin);
     }
 

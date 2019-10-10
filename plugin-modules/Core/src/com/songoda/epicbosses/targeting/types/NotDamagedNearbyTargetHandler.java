@@ -21,13 +21,13 @@ public class NotDamagedNearbyTargetHandler<T extends IActiveHolder> extends Targ
 
     @Override
     public LivingEntity selectTarget(List<LivingEntity> nearbyEntities) {
-        for(LivingEntity livingEntity : nearbyEntities) {
-            if(getHolder().hasAttacked(livingEntity.getUniqueId())) continue;
+        for (LivingEntity livingEntity : nearbyEntities) {
+            if (getHolder().hasAttacked(livingEntity.getUniqueId())) continue;
 
             return livingEntity;
         }
 
-        if(!nearbyEntities.isEmpty()) {
+        if (!nearbyEntities.isEmpty()) {
             Collections.shuffle(nearbyEntities);
 
             return nearbyEntities.stream().findFirst().orElse(null);

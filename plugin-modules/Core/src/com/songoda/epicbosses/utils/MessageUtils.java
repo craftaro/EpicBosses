@@ -3,7 +3,6 @@ package com.songoda.epicbosses.utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,12 +16,16 @@ public class MessageUtils {
 
     private static MessageUtils INSTANCE = new MessageUtils();
 
+    public static MessageUtils get() {
+        return INSTANCE;
+    }
+
     public void sendMessage(LivingEntity player, String... messages) {
         sendMessage(player, Arrays.asList(messages));
     }
 
     public void sendMessage(LivingEntity player, List<String> messages) {
-        for(String s : messages) {
+        for (String s : messages) {
             player.sendMessage(StringUtils.get().translateColor(s));
         }
     }
@@ -34,19 +37,15 @@ public class MessageUtils {
     public void sendMessage(Location center, int radius, List<String> messages) {
         messages.replaceAll(s -> s.replace('&', '§'));
 
-        if(radius == -1) {
+        if (radius == -1) {
             Bukkit.getOnlinePlayers().forEach(player -> messages.forEach(string -> player.sendMessage(string)));
         } else {
             Bukkit.getOnlinePlayers().forEach(player -> {
-                if((player.getWorld().equals(center.getWorld())) && (player.getLocation().distanceSquared(center) <= radius)) {
+                if ((player.getWorld().equals(center.getWorld())) && (player.getLocation().distanceSquared(center) <= radius)) {
                     messages.forEach(string -> player.sendMessage(string));
                 }
             });
         }
-    }
-
-    public static MessageUtils get() {
-        return INSTANCE;
     }
 
 }

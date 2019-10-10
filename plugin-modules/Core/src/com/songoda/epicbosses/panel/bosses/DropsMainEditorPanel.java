@@ -1,12 +1,11 @@
 package com.songoda.epicbosses.panel.bosses;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.managers.BossPanelManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
 import com.songoda.epicbosses.utils.Message;
-import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.panel.Panel;
 import com.songoda.epicbosses.utils.panel.base.ClickAction;
@@ -27,7 +26,7 @@ public class DropsMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private BossesFileManager bossesFileManager;
 
-    public DropsMainEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, CustomBosses plugin) {
+    public DropsMainEditorPanel(BossPanelManager bossPanelManager, PanelBuilder panelBuilder, EpicBosses plugin) {
         super(bossPanelManager, panelBuilder);
 
         this.bossesFileManager = plugin.getBossesFileManager();
@@ -46,13 +45,13 @@ public class DropsMainEditorPanel extends VariablePanelHandler<BossEntity> {
         String dropTable = bossEntity.getDrops().getDropTable();
         PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
 
-        if(naturalDrops == null) naturalDrops = true;
-        if(naturalExp == null) naturalExp = true;
-        if(dropTable == null) dropTable = "N/A";
+        if (naturalDrops == null) naturalDrops = true;
+        if (naturalExp == null) naturalExp = true;
+        if (dropTable == null) dropTable = "N/A";
 
         replaceMap.put("{name}", BossAPI.getBossEntityName(bossEntity));
-        replaceMap.put("{naturalDrops}", ""+naturalDrops);
-        replaceMap.put("{naturalExp}", ""+naturalExp);
+        replaceMap.put("{naturalDrops}", "" + naturalDrops);
+        replaceMap.put("{naturalExp}", "" + naturalExp);
         replaceMap.put("{dropTable}", dropTable);
         panelBuilder.addReplaceData(replaceMap);
 
@@ -82,7 +81,7 @@ public class DropsMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ClickAction getNaturalDropsAction(BossEntity bossEntity, Boolean current) {
         return event -> {
-            if(!bossEntity.isEditing()) {
+            if (!bossEntity.isEditing()) {
                 Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                 return;
             }
@@ -96,7 +95,7 @@ public class DropsMainEditorPanel extends VariablePanelHandler<BossEntity> {
 
     private ClickAction getNaturalExpAction(BossEntity bossEntity, Boolean current) {
         return event -> {
-            if(!bossEntity.isEditing()) {
+            if (!bossEntity.isEditing()) {
                 Message.Boss_Edit_CannotBeModified.msg(event.getWhoClicked());
                 return;
             }

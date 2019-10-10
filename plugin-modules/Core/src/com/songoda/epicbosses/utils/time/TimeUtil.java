@@ -6,7 +6,7 @@ public class TimeUtil {
      * Returns the amount of time in the
      * requested TimeUnit from a formatted string
      *
-     * @param string String
+     * @param string   String
      * @param timeUnit TimeUnit
      * @return double
      * @throws IllegalArgumentException when the string is formatted wrongly
@@ -16,41 +16,41 @@ public class TimeUtil {
 
         String timeString = string.trim().toLowerCase();
 
-        if(timeString.contains(" ")) {
+        if (timeString.contains(" ")) {
             String[] split = timeString.split(" ");
 
-            for(String line : split) {
+            for (String line : split) {
                 int index = 0;
-                while(isInteger(String.valueOf(line.charAt(index)))) {
+                while (isInteger(String.valueOf(line.charAt(index)))) {
                     index++;
                 }
 
                 int time = Integer.parseInt(line.substring(0, index));
 
-                String unit = line.substring(index+1, line.length());
+                String unit = line.substring(index + 1, line.length());
                 TimeUnit tempUnit = TimeUnit.fromString(unit);
-                if(tempUnit == null) throw new IllegalArgumentException("Invalid time format: " + unit);
+                if (tempUnit == null) throw new IllegalArgumentException("Invalid time format: " + unit);
 
                 seconds += tempUnit.to(TimeUnit.SECONDS, time);
             }
         } else {
             int index = 0;
             int prevIndex = 0;
-            while(index < timeString.length()-1) {
+            while (index < timeString.length() - 1) {
                 double time;
-                while(isInteger(String.valueOf(timeString.charAt(index)))) {
+                while (isInteger(String.valueOf(timeString.charAt(index)))) {
                     index++;
                 }
                 time = Integer.parseInt(timeString.substring(prevIndex, index));
                 prevIndex = index;
 
-                while(!isInteger(String.valueOf(timeString.charAt(index)))) {
+                while (!isInteger(String.valueOf(timeString.charAt(index)))) {
                     index++;
-                    if(index >= timeString.length()) break;
+                    if (index >= timeString.length()) break;
                 }
                 String unit = timeString.substring(prevIndex, index);
                 TimeUnit tempUnit = TimeUnit.fromString(unit);
-                if(tempUnit == null) throw new IllegalArgumentException("Invalid time format: " + unit);
+                if (tempUnit == null) throw new IllegalArgumentException("Invalid time format: " + unit);
 
                 seconds += tempUnit.to(TimeUnit.SECONDS, time);
 
@@ -66,7 +66,7 @@ public class TimeUtil {
      * belonging to this amount of time
      *
      * @param unit TimeUnit
-     * @param a int amount of time
+     * @param a    int amount of time
      * @return String
      */
     public static String getFormattedTime(TimeUnit unit, int a) {
@@ -77,8 +77,8 @@ public class TimeUtil {
      * Returns the formatted time string
      * belonging to this amount of time
      *
-     * @param unit TimeUnit
-     * @param a int amount of time
+     * @param unit     TimeUnit
+     * @param a        int amount of time
      * @param splitter String
      * @return String
      */
@@ -100,7 +100,7 @@ public class TimeUtil {
 
         StringBuilder sb = new StringBuilder();
 
-        if(splitter == null) {
+        if (splitter == null) {
             if (years > 0) {
                 sb.append(years).append(" year").append(years != 1 ? "s" : "").append(", ");
             }
@@ -123,25 +123,25 @@ public class TimeUtil {
                 sb.append(minutes > 0 ? "and " : "").append(seconds).append(" second").append(seconds != 1 ? "s" : "");
             }
         } else {
-            if(years > 0) {
+            if (years > 0) {
                 sb.append(years).append(splitter);
             }
-            if(months > 0 || sb.length() > 0) {
+            if (months > 0 || sb.length() > 0) {
                 sb.append(months).append(splitter);
             }
-            if(weeks > 0 || sb.length() > 0) {
+            if (weeks > 0 || sb.length() > 0) {
                 sb.append(weeks).append(splitter);
             }
-            if(days > 0 || sb.length() > 0) {
+            if (days > 0 || sb.length() > 0) {
                 sb.append(days).append(splitter);
             }
-            if(hours > 0 || sb.length() > 0) {
+            if (hours > 0 || sb.length() > 0) {
                 sb.append(hours).append(splitter);
             }
-            if(minutes > 0 || sb.length() > 0) {
+            if (minutes > 0 || sb.length() > 0) {
                 sb.append(minutes).append(splitter);
             }
-            if(seconds > 0 || sb.length() > 0) {
+            if (seconds > 0 || sb.length() > 0) {
                 sb.append(seconds);
             }
         }

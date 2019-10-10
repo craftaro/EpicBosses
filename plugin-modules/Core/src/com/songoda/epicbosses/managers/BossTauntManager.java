@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.managers;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.api.BossAPI;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.TauntElement;
@@ -20,28 +20,28 @@ import java.util.Queue;
  */
 public class BossTauntManager {
 
-    private CustomBosses plugin;
+    private EpicBosses plugin;
 
-    public BossTauntManager(CustomBosses plugin) {
+    public BossTauntManager(EpicBosses plugin) {
         this.plugin = plugin;
     }
 
     public void handleTauntSystem(ActiveBossHolder activeBossHolder) {
         BossEntity bossEntity = activeBossHolder.getBossEntity();
 
-        if(bossEntity.getMessages() == null) return;
-        if(bossEntity.getMessages().getTaunts() == null) return;
+        if (bossEntity.getMessages() == null) return;
+        if (bossEntity.getMessages().getTaunts() == null) return;
 
         TauntElement tauntElement = bossEntity.getMessages().getTaunts();
         Integer delay = tauntElement.getDelay();
         Integer radius = tauntElement.getRadius();
         List<String> taunts = tauntElement.getTaunts();
 
-        if(delay == null) delay = 60;
-        if(radius == null) radius = 100;
+        if (delay == null) delay = 60;
+        if (radius == null) radius = 100;
 
-        if(taunts != null) {
-            if(taunts.isEmpty()) return;
+        if (taunts != null) {
+            if (taunts.isEmpty()) return;
 
             createRunnable(taunts, activeBossHolder, NumberUtils.get().getSquared(radius), delay);
         }
@@ -53,12 +53,12 @@ public class BossTauntManager {
 
             @Override
             public void run() {
-                if(activeBossHolder.isDead() || BossTauntManager.this.plugin.getBossEntityManager().isAllEntitiesDead(activeBossHolder)) {
+                if (activeBossHolder.isDead() || BossTauntManager.this.plugin.getBossEntityManager().isAllEntitiesDead(activeBossHolder)) {
                     cancel();
                     return;
                 }
 
-                if(this.queue.isEmpty()) this.queue = new LinkedList<>(taunts);
+                if (this.queue.isEmpty()) this.queue = new LinkedList<>(taunts);
 
                 List<String> messages = BossAPI.getStoredMessages(this.queue.poll());
 
@@ -66,6 +66,6 @@ public class BossTauntManager {
                     MessageUtils.get().sendMessage(activeBossHolder.getLocation(), radius, messages);
                 }
             }
-        }.runTaskTimer(this.plugin, delay*20, delay*20);
+        }.runTaskTimer(this.plugin, delay * 20, delay * 20);
     }
 }

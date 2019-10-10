@@ -1,6 +1,6 @@
 package com.songoda.epicbosses.panel.bosses.equipment;
 
-import com.songoda.epicbosses.CustomBosses;
+import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.entity.elements.EntityStatsElement;
 import com.songoda.epicbosses.managers.BossPanelManager;
@@ -20,7 +20,7 @@ import java.util.Map;
  */
 public class LeggingsEditorPanel extends ItemStackSubListPanelHandler {
 
-    public LeggingsEditorPanel(BossPanelManager bossPanelManager, ConfigurationSection configurationSection, CustomBosses plugin) {
+    public LeggingsEditorPanel(BossPanelManager bossPanelManager, ConfigurationSection configurationSection, EpicBosses plugin) {
         super(bossPanelManager, configurationSection, plugin);
     }
 
@@ -31,7 +31,7 @@ public class LeggingsEditorPanel extends ItemStackSubListPanelHandler {
         originalMap.forEach((string, holder) -> {
             ItemStack itemStack = this.itemStackConverter.from(holder);
 
-            if(itemStack.getType().name().contains("LEGGINGS")) {
+            if (itemStack.getType().name().contains("LEGGINGS")) {
                 newMap.put(string, holder);
             }
         });

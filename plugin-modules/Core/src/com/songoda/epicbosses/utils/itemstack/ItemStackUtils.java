@@ -1,12 +1,12 @@
 package com.songoda.epicbosses.utils.itemstack;
 
+import com.songoda.core.compatibility.CompatibleMaterial;
+import com.songoda.core.compatibility.ServerVersion;
 import com.songoda.epicbosses.utils.NumberUtils;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
-import com.songoda.epicbosses.utils.Versions;
 import com.songoda.epicbosses.utils.itemstack.enchants.GlowEnchant;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
-import com.songoda.epicbosses.utils.version.VersionHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -25,7 +25,6 @@ import java.util.*;
  */
 public class ItemStackUtils {
 
-    private static final VersionHandler versionHandler = new VersionHandler();
     private static final Map<EntityType, Material> spawnableEntityMaterials;
     private static final Map<EntityType, Short> spawnableEntityIds;
 
@@ -33,7 +32,7 @@ public class ItemStackUtils {
         spawnableEntityMaterials = new HashMap<>();
         spawnableEntityIds = new HashMap<>();
 
-        boolean isLegacy = versionHandler.getVersion().isLessThanOrEqualTo(Versions.v1_12_R1);
+        boolean isLegacy = ServerVersion.isServerVersionAtOrBelow(ServerVersion.V1_12);
 
         Arrays.stream(EntityType.values()).filter(EntityType::isSpawnable).forEach(entityType -> {
             if (isLegacy) {
@@ -48,7 +47,7 @@ public class ItemStackUtils {
     }
 
     public static List<EntityType> getSpawnableEntityTypes() {
-        if (versionHandler.getVersion().isLessThanOrEqualTo(Versions.v1_12_R1)) {
+        if (ServerVersion.isServerVersionAtOrBelow(ServerVersion.V1_12)) {
             return new ArrayList<>(spawnableEntityIds.keySet());
         } else {
             return new ArrayList<>(spawnableEntityMaterials.keySet());
@@ -59,18 +58,18 @@ public class ItemStackUtils {
         if (!entityType.isSpawnable())
             return new ItemStack(Material.AIR);
 
-        if (versionHandler.getVersion().isLessThanOrEqualTo(Versions.v1_12_R1)) {
-            return new ItemStack(Material.valueOf("MONSTER_EGG"), spawnableEntityIds.get(entityType));
+        if (ServerVersion.isServerVersionAtOrBelow(ServerVersion.V1_12)) {
+            return new ItemStack(Material.valueOf("MONSTER_EGG"), 1, spawnableEntityIds.get(entityType));
         } else {
             return new ItemStack(spawnableEntityMaterials.get(entityType));
         }
     }
 
-    public static ItemStack createItemStack(ItemStack itemStack, Map<String,String> replaceMap) {
+    public static ItemStack createItemStack(ItemStack itemStack, Map<String, String> replaceMap) {
         return createItemStack(itemStack, replaceMap, null);
     }
 
-    public static ItemStack createItemStack(ItemStack itemStack, Map<String,String> replaceMap, Map<String,Object> compoundData) {
+    public static ItemStack createItemStack(ItemStack itemStack, Map<String, String> replaceMap, Map<String, Object> compoundData) {
         ItemStack cloneStack = itemStack.clone();
         ItemMeta itemMeta = cloneStack.getItemMeta();
         boolean hasName = cloneStack.getItemMeta().hasDisplayName();
@@ -78,21 +77,21 @@ public class ItemStackUtils {
         String name = "";
         List<String> newLore = new ArrayList<>();
 
-        if(hasName) name = cloneStack.getItemMeta().getDisplayName();
+        if (hasName) name = cloneStack.getItemMeta().getDisplayName();
 
-        if(replaceMap != null && !replaceMap.isEmpty()) {
-            if(hasName) {
-                for(String s : replaceMap.keySet()) {
+        if (replaceMap != null && !replaceMap.isEmpty()) {
+            if (hasName) {
+                for (String s : replaceMap.keySet()) {
                     name = name.replace(s, replaceMap.get(s));
                 }
 
                 itemMeta.setDisplayName(name);
             }
 
-            if(hasLore) {
-                for(String s : itemMeta.getLore()) {
-                    for(String z : replaceMap.keySet()) {
-                        if(s.contains(z)) s = s.replace(z, replaceMap.get(z));
+            if (hasLore) {
+                for (String s : itemMeta.getLore()) {
+                    for (String z : replaceMap.keySet()) {
+                        if (s.contains(z)) s = s.replace(z, replaceMap.get(z));
                     }
 
                     newLore.add(s);
@@ -104,7 +103,7 @@ public class ItemStackUtils {
 
         cloneStack.setItemMeta(itemMeta);
 
-        if(compoundData == null || compoundData.isEmpty()) return cloneStack;
+        if (compoundData == null || compoundData.isEmpty()) return cloneStack;
 
         return cloneStack;
     }
@@ -114,11 +113,16 @@ public class ItemStackUtils {
     }
 
     public static ItemStack createItemStack(ConfigurationSection configurationSection, int amount, Map<String, String> replacedMap) {
-        String type = configurationSection.getString("type");
+
+        CompatibleMaterial material = CompatibleMaterial.getMaterial(configurationSection.getString("type"));
+
+        String type = material == null ? configurationSection.getString("type") : material.getMaterial().name();
         String name = configurationSection.getString("name");
         List<String> lore = configurationSection.getStringList("lore");
         List<String> enchants = configurationSection.getStringList("enchants");
-        short durability = (short) configurationSection.getInt("durability");
+        Short durability = (Short) configurationSection.get("durability");
+        if (material != null && material.getData() != -1) durability = (short) material.getData();
+
         String owner = configurationSection.getString("owner");
         Map<Enchantment, Integer> map = new HashMap<>();
         List<String> newLore = new ArrayList<>();
@@ -126,14 +130,14 @@ public class ItemStackUtils {
         short meta = 0;
         Material mat;
 
-        if(NumberUtils.get().isInt(type)) {
+        if (NumberUtils.get().isInt(type)) {
             mat = MaterialUtils.fromId(NumberUtils.get().getInteger(type));
         } else {
-            if(type.contains(":")) {
+            if (type.contains(":")) {
                 String[] split = type.split(":");
                 String typeSplit = split[0];
 
-                if(NumberUtils.get().isInt(typeSplit)) {
+                if (NumberUtils.get().isInt(typeSplit)) {
                     mat = MaterialUtils.fromId(NumberUtils.get().getInteger(typeSplit));
                 } else {
                     mat = Material.getMaterial(typeSplit);
@@ -145,23 +149,23 @@ public class ItemStackUtils {
             }
         }
 
-        if((replacedMap != null) && (name != null)) {
-            for(String z : replacedMap.keySet()) {
-                if(!name.contains(z)) continue;
+        if ((replacedMap != null) && (name != null)) {
+            for (String z : replacedMap.keySet()) {
+                if (!name.contains(z)) continue;
 
                 name = name.replace(z, replacedMap.get(z));
             }
         }
 
-        if(lore != null) {
-            for(String z : lore) {
+        if (lore != null && !lore.isEmpty()) {
+            for (String z : lore) {
                 String y = z;
 
-                if(replacedMap != null) {
-                    for(String x : replacedMap.keySet()) {
-                        if(!y.contains(x)) continue;
+                if (replacedMap != null) {
+                    for (String x : replacedMap.keySet()) {
+                        if (x == null || !y.contains(x)) continue;
 
-                        if (!replacedMap.containsKey(x)) {
+                        if (replacedMap.get(x) == null) {
                             ServerUtils.get().logDebug("Failed to apply replaced lore: [y=" + y + "x=" + x + "]");
                             continue;
                         }
@@ -170,10 +174,10 @@ public class ItemStackUtils {
                     }
                 }
 
-                if(y.contains("\n")) {
+                if (y.contains("\n")) {
                     String[] split = y.split("\n");
 
-                    for(String s2 : split) {
+                    for (String s2 : split) {
                         newLore.add(ChatColor.translateAlternateColorCodes('&', s2));
                     }
                 } else {
@@ -182,12 +186,12 @@ public class ItemStackUtils {
             }
         }
 
-        if(enchants != null) {
-            for(String s : enchants) {
+        if (enchants != null) {
+            for (String s : enchants) {
                 String[] spl = s.split(":");
                 String ench = spl[0];
 
-                if(ench.equalsIgnoreCase("GLOW")) {
+                if (ench.equalsIgnoreCase("GLOW")) {
                     addGlow = true;
                 } else {
                     int level = Integer.parseInt(spl[1]);
@@ -197,33 +201,29 @@ public class ItemStackUtils {
             }
         }
 
-        if(mat == null) return null;
+        if (mat == null) return null;
 
         ItemStack itemStack = new ItemStack(mat, amount, meta);
         ItemMeta itemMeta = itemStack.getItemMeta();
 
-        if(!newLore.isEmpty()) {
+        if (!newLore.isEmpty()) {
             itemMeta.setLore(newLore);
         }
-        if(name != null) {
-            if(!name.equals("")) {
+        if (name != null) {
+            if (!name.equals("")) {
                 itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
             }
         }
 
         itemStack.setItemMeta(itemMeta);
 
-        if(!map.isEmpty()) {
+        if (!map.isEmpty()) {
             itemStack.addUnsafeEnchantments(map);
         }
-        if(configurationSection.contains("durability")) {
-            short dura = itemStack.getType().getMaxDurability();
-            dura -= (short) durability - 1;
+        if (durability != null)
+            itemStack.setDurability(durability);
 
-            itemStack.setDurability(dura);
-        }
-
-        if(configurationSection.contains("owner") && itemStack.getType() == MaterialUtils.getSkullMaterial()) {
+        if (configurationSection.contains("owner") && itemStack.getType() == CompatibleMaterial.PLAYER_HEAD.getMaterial()) {
             SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
 
             skullMeta.setOwner(owner);
@@ -231,7 +231,7 @@ public class ItemStackUtils {
             itemStack.setItemMeta(skullMeta);
         }
 
-        return addGlow? addGlow(itemStack) : itemStack;
+        return addGlow ? addGlow(itemStack) : itemStack;
     }
 
     public static void applyDisplayName(ItemStack itemStack, String name) {
@@ -241,13 +241,13 @@ public class ItemStackUtils {
     public static void applyDisplayName(ItemStack itemStack, String name, Map<String, String> replaceMap) {
         ItemMeta itemMeta = itemStack.getItemMeta();
 
-        if(replaceMap != null) {
-            for(String s : replaceMap.keySet()) {
-                if(name.contains(s)) name = name.replace(s, replaceMap.get(s));
+        if (replaceMap != null) {
+            for (String s : replaceMap.keySet()) {
+                if (name.contains(s)) name = name.replace(s, replaceMap.get(s));
             }
         }
 
-        if(itemMeta == null) return;
+        if (itemMeta == null) return;
 
         itemMeta.setDisplayName(StringUtils.get().translateColor(name));
         itemStack.setItemMeta(itemMeta);
@@ -258,10 +258,17 @@ public class ItemStackUtils {
     }
 
     public static void applyDisplayLore(ItemStack itemStack, List<String> lore, Map<String, String> replaceMap) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
+        ItemMeta itemMeta;
+        if (itemStack == null || (itemMeta = itemStack.getItemMeta()) == null)
+            return;
+        if (lore == null || lore.isEmpty()) {
+            itemMeta.setLore(Collections.EMPTY_LIST);
+            itemStack.setItemMeta(itemMeta);
+            return;
+        }
 
-        if(replaceMap != null) {
-            for(String s : replaceMap.keySet()) {
+        if (replaceMap != null) {
+            for (String s : replaceMap.keySet()) {
                 lore.replaceAll(loreLine -> loreLine
                         .replace(s, replaceMap.get(s))
                         .replace('&', '§')
@@ -274,7 +281,7 @@ public class ItemStackUtils {
     }
 
     public static String getName(ItemStack itemStack) {
-        if(!itemStack.hasItemMeta() || !itemStack.getItemMeta().hasDisplayName()) {
+        if (!itemStack.hasItemMeta() || !itemStack.getItemMeta().hasDisplayName()) {
             return StringUtils.get().formatString(itemStack.getType().name());
         }
 
@@ -286,15 +293,15 @@ public class ItemStackUtils {
     public static Material getType(String string) {
         Material material = Material.getMaterial(string);
 
-        if(material == null) {
-            if(NumberUtils.get().isInt(string)) {
+        if (material == null) {
+            if (NumberUtils.get().isInt(string)) {
                 return null;
             } else {
                 String[] split = string.split(":");
 
                 material = Material.getMaterial(split[0]);
 
-                if(material != null) return material;
+                if (material != null) return material;
 
                 return null;
             }
@@ -314,16 +321,16 @@ public class ItemStackUtils {
     public static void giveItems(Player player, List<ItemStack> items) {
         PlayerInventory inventory = player.getInventory();
 
-        for(ItemStack itemStack : items) {
+        for (ItemStack itemStack : items) {
             int amount = itemStack.getAmount();
 
-            while(amount > 0) {
-                int toGive = amount > 64? 64 : amount;
+            while (amount > 0) {
+                int toGive = amount > 64 ? 64 : amount;
 
                 ItemStack stack = itemStack.clone();
                 stack.setAmount(toGive);
 
-                if(inventory.firstEmpty() != -1) {
+                if (inventory.firstEmpty() != -1) {
                     inventory.addItem(stack);
                 } else {
                     player.getWorld().dropItemNaturally(player.getLocation(), stack);
@@ -337,18 +344,18 @@ public class ItemStackUtils {
     public static void takeItems(Player player, Map<ItemStack, Integer> items) {
         PlayerInventory inventory = player.getInventory();
 
-        for(ItemStack itemStack : items.keySet()) {
+        for (ItemStack itemStack : items.keySet()) {
             int toTake = items.get(itemStack);
             int i = 0;
 
-            while(toTake > 0 && i < inventory.getSize()) {
+            while (toTake > 0 && i < inventory.getSize()) {
                 if (inventory.getItem(i) != null && inventory.getItem(i).getType() == itemStack.getType() && (inventory.getItem(i).getData().getData() == itemStack.getData().getData() || itemStack.getData().getData() == -1)) {
                     ItemStack target = inventory.getItem(i);
-                    if(target.getAmount() > toTake) {
-                        target.setAmount(target.getAmount()-toTake);
+                    if (target.getAmount() > toTake) {
+                        target.setAmount(target.getAmount() - toTake);
                         inventory.setItem(i, target);
                         break;
-                    } else if(target.getAmount() == toTake) {
+                    } else if (target.getAmount() == toTake) {
                         inventory.setItem(i, new ItemStack(Material.AIR));
                         break;
                     } else {
@@ -365,7 +372,7 @@ public class ItemStackUtils {
         PlayerInventory playerInventory = player.getInventory();
         int amountInInventory = 0;
 
-        for(int i = 0; i < playerInventory.getSize(); i++) {
+        for (int i = 0; i < playerInventory.getSize(); i++) {
             if (playerInventory.getItem(i) != null && playerInventory.getItem(i).getType() == itemStack.getType() && (playerInventory.getItem(i).getData().getData() == itemStack.getData().getData() || itemStack.getData().getData() == -1)) {
                 amountInInventory += playerInventory.getItem(i).getAmount();
             }
@@ -377,8 +384,12 @@ public class ItemStackUtils {
     @SuppressWarnings("unchecked")
     public static ItemStackHolder getItemStackHolder(ConfigurationSection configurationSection) {
         Integer amount = (Integer) configurationSection.get("amount", null);
-        String type = configurationSection.getString("type", null);
-        Short durability = (Short) configurationSection.get("durability", null);
+
+        CompatibleMaterial material = CompatibleMaterial.getMaterial(configurationSection.getString("type", null));
+
+        String type = material.getMaterial().name();
+        Short durability = (Short) configurationSection.get("durability");
+        if (material.getData() != -1) durability = (short) material.getData();
         String name = configurationSection.getString("name", null);
         List<String> lore = (List<String>) configurationSection.getList("lore", null);
         List<String> enchants = (List<String>) configurationSection.getList("enchants", null);
@@ -390,27 +401,26 @@ public class ItemStackUtils {
     }
 
     public static boolean isItemStackSame(ItemStack itemStack1, ItemStack itemStack2) {
-        if(itemStack1 == null || itemStack2 == null) return false;
-        if(itemStack1.getType() != itemStack2.getType()) return false;
-        if(itemStack1.getDurability() != itemStack2.getDurability()) return false;
+        if (itemStack1 == null || itemStack2 == null) return false;
+        if (itemStack1.getType() != itemStack2.getType()) return false;
+        // Durability checks are too tempermental to be reliable for all versions
+        //if(itemStack1.getDurability() != itemStack2.getDurability()) return false;
 
         ItemMeta itemMeta1 = itemStack1.getItemMeta();
         ItemMeta itemMeta2 = itemStack2.getItemMeta();
 
-        if(itemMeta1 == null || itemMeta2 == null) return false;
+        if (itemMeta1 == null || itemMeta2 == null) return false;
 
-        if(itemMeta1.hasDisplayName() == itemMeta2.hasDisplayName()) {
-            if(itemMeta1.hasDisplayName()) {
-                if(!itemMeta1.getDisplayName().equals(itemMeta2.getDisplayName())) return false;
-            }
+        if (itemMeta1.hasDisplayName() == itemMeta2.hasDisplayName()) {
+            if (itemMeta1.hasDisplayName() && !itemMeta1.getDisplayName().equals(itemMeta2.getDisplayName()))
+                return false;
         } else {
             return false;
         }
 
-        if(itemMeta1.hasLore() == itemMeta2.hasLore()) {
-            if(itemMeta1.hasLore()) {
-                if(!itemMeta1.getLore().equals(itemMeta2.getLore())) return false;
-            }
+        if (itemMeta1.hasLore() == itemMeta2.hasLore()) {
+            if (itemMeta1.hasLore() && !itemMeta1.getLore().equals(itemMeta2.getLore()))
+                return false;
         } else {
             return false;
         }

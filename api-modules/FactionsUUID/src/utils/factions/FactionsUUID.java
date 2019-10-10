@@ -23,13 +23,13 @@ public class FactionsUUID implements IFactionHelper {
         Faction zFac = FPlayers.getInstance().getByPlayer(b).getFaction();
         Relation r = pFac.getRelationTo(zFac);
 
-        if(ChatColor.stripColor(zFac.getId()).equalsIgnoreCase("Wilderness")) return false;
-        if(a == b) return true;
-        if(r.isEnemy()) return false;
-        if(r.isNeutral()) return false;
-        if(r.isTruce()) return true;
-        if(r.isAlly()) return true;
-        if(r.isMember()) return true;
+        if (ChatColor.stripColor(zFac.getId()).equalsIgnoreCase("Wilderness")) return false;
+        if (a == b) return true;
+        if (r.isEnemy()) return false;
+        if (r.isNeutral()) return false;
+        if (r.isTruce()) return true;
+        if (r.isAlly()) return true;
+        if (r.isMember()) return true;
         return false;
     }
 
@@ -40,12 +40,12 @@ public class FactionsUUID implements IFactionHelper {
         Faction locFac = Board.getInstance().getFactionAt(fLoc);
         Relation r = pFac.getRelationTo(locFac);
 
-        if(ChatColor.stripColor(locFac.getComparisonTag()).equalsIgnoreCase("Wilderness")) return false;
-        if(r.isEnemy()) return false;
-        if(r.isNeutral()) return false;
-        if(r.isTruce()) return true;
-        if(r.isAlly()) return true;
-        if(r.isMember()) return true;
+        if (ChatColor.stripColor(locFac.getComparisonTag()).equalsIgnoreCase("Wilderness")) return false;
+        if (r.isEnemy()) return false;
+        if (r.isNeutral()) return false;
+        if (r.isTruce()) return true;
+        if (r.isAlly()) return true;
+        if (r.isMember()) return true;
         return false;
     }
 
@@ -54,7 +54,7 @@ public class FactionsUUID implements IFactionHelper {
         FLocation fLoc = new FLocation(location);
         Faction locFac = Board.getInstance().getFactionAt(fLoc);
 
-        if(ChatColor.stripColor(locFac.getComparisonTag()).equalsIgnoreCase("WarZone")) return true;
+        if (ChatColor.stripColor(locFac.getComparisonTag()).equalsIgnoreCase("WarZone")) return true;
         return false;
     }
 
@@ -64,9 +64,9 @@ public class FactionsUUID implements IFactionHelper {
         Faction locFac = Board.getInstance().getFactionAt(fLoc);
         String string = ChatColor.stripColor(locFac.getComparisonTag());
 
-        if(string.equalsIgnoreCase("WarZone")) return false;
-        if(string.equalsIgnoreCase("SafeZone")) return false;
-        if(string.equalsIgnoreCase("Wilderness")) return false;
+        if (string.equalsIgnoreCase("WarZone")) return false;
+        if (string.equalsIgnoreCase("SafeZone")) return false;
+        if (string.equalsIgnoreCase("Wilderness")) return false;
         return true;
     }
 }

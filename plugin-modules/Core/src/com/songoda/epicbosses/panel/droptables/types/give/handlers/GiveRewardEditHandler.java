@@ -3,7 +3,6 @@ package com.songoda.epicbosses.panel.droptables.types.give.handlers;
 import com.songoda.epicbosses.droptable.DropTable;
 import com.songoda.epicbosses.droptable.elements.GiveTableElement;
 import com.songoda.epicbosses.droptable.elements.GiveTableSubElement;
-import lombok.Getter;
 
 /**
  * @author Charles Cullen
@@ -12,10 +11,10 @@ import lombok.Getter;
  */
 public class GiveRewardEditHandler {
 
-    @Getter private final GiveTableSubElement giveTableSubElement;
-    @Getter private final String damagePosition, dropSection;
-    @Getter private final GiveTableElement giveTableElement;
-    @Getter private final DropTable dropTable;
+    private final GiveTableSubElement giveTableSubElement;
+    private final String damagePosition, dropSection;
+    private final GiveTableElement giveTableElement;
+    private final DropTable dropTable;
 
     public GiveRewardEditHandler(String damagePosition, String dropSection, DropTable dropTable, GiveTableElement giveTableElement, GiveTableSubElement giveTableSubElement) {
         this.damagePosition = damagePosition;
@@ -25,4 +24,23 @@ public class GiveRewardEditHandler {
         this.giveTableSubElement = giveTableSubElement;
     }
 
+    public GiveTableSubElement getGiveTableSubElement() {
+        return this.giveTableSubElement;
+    }
+
+    public String getDamagePosition() {
+        return this.damagePosition;
+    }
+
+    public String getDropSection() {
+        return this.dropSection;
+    }
+
+    public GiveTableElement getGiveTableElement() {
+        return this.giveTableElement;
+    }
+
+    public DropTable getDropTable() {
+        return this.dropTable;
+    }
 }

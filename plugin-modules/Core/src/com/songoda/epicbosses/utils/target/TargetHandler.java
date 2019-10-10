@@ -32,12 +32,11 @@ public abstract class TargetHandler implements ITargetHandler {
         ServerUtils.get().runLaterAsync(100L, () -> {
             updateTarget();
 
-            if(this.currentTarget == null || this.currentTarget.isDead()) return;
+            if (this.currentTarget == null || this.currentTarget.isDead()) return;
 
             createAutoTarget();
         });
     }
-
 
 
 }

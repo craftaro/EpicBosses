@@ -1,7 +1,6 @@
 package com.songoda.epicbosses.managers.interfaces;
 
 import com.songoda.epicbosses.utils.ILoadable;
-import com.songoda.epicbosses.utils.IMechanic;
 
 /**
  * @author Charles Cullen

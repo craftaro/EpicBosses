@@ -1,9 +1,8 @@
 package com.songoda.epicbosses.events;
 
 import com.songoda.epicbosses.holder.ActiveBossHolder;
-import com.songoda.epicbosses.skills.interfaces.ISkillHandler;
 import com.songoda.epicbosses.skills.Skill;
-import lombok.Getter;
+import com.songoda.epicbosses.skills.interfaces.ISkillHandler;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
@@ -16,9 +15,9 @@ public class BossSkillEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
 
-    @Getter private ActiveBossHolder activeBossHolder;
-    @Getter private ISkillHandler skillHandler;
-    @Getter private Skill skill;
+    private ActiveBossHolder activeBossHolder;
+    private ISkillHandler skillHandler;
+    private Skill skill;
 
     public BossSkillEvent(ActiveBossHolder activeBossHolder, ISkillHandler skillHandler, Skill skill) {
         this.activeBossHolder = activeBossHolder;
@@ -26,12 +25,24 @@ public class BossSkillEvent extends Event {
         this.skill = skill;
     }
 
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
     @Override
     public HandlerList getHandlers() {
         return handlers;
     }
 
-    public static HandlerList getHandlerList() {
-        return handlers;
+    public ActiveBossHolder getActiveBossHolder() {
+        return this.activeBossHolder;
+    }
+
+    public ISkillHandler getSkillHandler() {
+        return this.skillHandler;
+    }
+
+    public Skill getSkill() {
+        return this.skill;
     }
 }
