@@ -60,7 +60,7 @@ public class CommandNewAutoSpawn extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss new autospawn <name>";
+        return "new autospawn <name>";
     }
 
     @Override

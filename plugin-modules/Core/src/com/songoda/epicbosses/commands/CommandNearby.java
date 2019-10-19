@@ -81,7 +81,7 @@ public class CommandNearby extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss nearby [radius]";
+        return "nearby [radius]";
     }
 
     @Override

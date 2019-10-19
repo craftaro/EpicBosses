@@ -52,7 +52,7 @@ public class CommandDebug extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss reload";
+        return "reload";
     }
 
     @Override

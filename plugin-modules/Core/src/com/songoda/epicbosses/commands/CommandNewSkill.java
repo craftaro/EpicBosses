@@ -94,7 +94,7 @@ public class CommandNewSkill extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss new skill <name> <type> <mods>";
+        return "new skill <name> <type> <mods>";
     }
 
     @Override

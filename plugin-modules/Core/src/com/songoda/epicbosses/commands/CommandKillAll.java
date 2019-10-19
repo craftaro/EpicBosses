@@ -61,7 +61,7 @@ public class CommandKillAll extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss killall [world]";
+        return "killall [world]";
     }
 
     @Override

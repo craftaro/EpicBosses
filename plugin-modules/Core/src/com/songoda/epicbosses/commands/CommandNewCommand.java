@@ -54,7 +54,7 @@ public class CommandNewCommand extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss new command <name> <commands...>";
+        return "new command <name> <commands...>";
     }
 
     @Override

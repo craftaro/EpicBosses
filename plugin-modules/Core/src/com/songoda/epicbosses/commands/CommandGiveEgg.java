@@ -105,7 +105,7 @@ public class CommandGiveEgg extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss giveegg <name> <player> [amount]";
+        return "giveegg <name> <player> [amount]";
     }
 
     @Override

@@ -84,7 +84,7 @@ public class CommandSpawn extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss spawn <name> [location]";
+        return "spawn <name> [location]";
     }
 
     @Override
