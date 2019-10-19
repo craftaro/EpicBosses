@@ -7,12 +7,16 @@ import com.songoda.epicbosses.events.BossDamageEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossEntityManager;
 import com.songoda.epicbosses.managers.files.BossesFileManager;
+import com.songoda.epicbosses.settings.Settings;
 import com.songoda.epicbosses.utils.ServerUtils;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 
 /**
  * @author Charles Cullen
@@ -85,4 +89,13 @@ public class BossDamageListener implements Listener {
         activeBossHolder.getMapOfDamagingUsers().put(player.getUniqueId(), currentDamage + damage);
     }
 
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onBossExplode(ExplosionPrimeEvent event) {
+        if (!(event.getEntity() instanceof LivingEntity)) return;
+        LivingEntity livingEntity = (LivingEntity) event.getEntity();
+        ActiveBossHolder activeBossHolder = this.bossEntityManager.getActiveBossHolder(livingEntity);
+
+        if (activeBossHolder != null && !Settings.BOSS_EXPLOSIONS.getBoolean())
+            event.setCancelled(true);
+    }
 }

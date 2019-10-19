@@ -28,6 +28,9 @@ public class Settings {
             "Which economy plugin should be used?",
             "Supported plugins you have installed: \"" + EconomyManager.getManager().getRegisteredPlugins().stream().collect(Collectors.joining("\", \"")) + "\".");
 
+    public static final ConfigSetting BOSS_EXPLOSIONS = new ConfigSetting(config, "Toggles.bossExplosions", false,
+            "Should bosses such as Creepers be allowed to explode?");
+
     public static final ConfigSetting BOSS_SHOP = new ConfigSetting(config, "Toggles.bossShop", true);
 
     public static final ConfigSetting ENDERMAN_TELEPORTING = new ConfigSetting(config, "Toggles.endermanTeleporting", true);
