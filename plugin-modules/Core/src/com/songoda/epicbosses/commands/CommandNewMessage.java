@@ -58,7 +58,7 @@ public class CommandNewMessage extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss new message <name> <message...>";
+        return "new message <name> <message...>";
     }
 
     @Override

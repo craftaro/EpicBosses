@@ -64,7 +64,7 @@ public class CommandInfo extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss info <name>";
+        return "info <name>";
     }
 
     @Override

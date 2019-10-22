@@ -80,7 +80,7 @@ public class CommandNewDropTable extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss new droptable <name> <type>";
+        return "new droptable <name> <type>";
     }
 
     @Override

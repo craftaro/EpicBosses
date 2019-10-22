@@ -39,7 +39,7 @@ public class CommandList extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss list";
+        return "list";
     }
 
     @Override

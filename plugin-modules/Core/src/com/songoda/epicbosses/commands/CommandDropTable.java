@@ -40,7 +40,7 @@ public class CommandDropTable extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss droptable";
+        return "droptable";
     }
 
     @Override

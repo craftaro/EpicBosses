@@ -3,7 +3,7 @@ main: ${plugin.main}
 version: ${plugin.version}
 author: ${plugin.author}
 api-version: 1.13
-softdepend: [PlaceholderAPI] # TODO: Add other softdepends
+softdepend: [PlaceholderAPI, PlayerPoints, Vault] # TODO: Add other softdepends
 commands:
   Boss:
     description: Used to handle all CustomBosses related commands.

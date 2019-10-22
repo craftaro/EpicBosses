@@ -71,7 +71,7 @@ public class CommandEdit extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss edit <name>";
+        return "edit <name>";
     }
 
     @Override

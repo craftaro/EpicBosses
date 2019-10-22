@@ -53,8 +53,6 @@ public class BossSpawnListener implements Listener {
         Action action = event.getAction();
 
         if (!event.hasItem()) return;
-        if (action != Action.RIGHT_CLICK_BLOCK) return;
-        if (block.getType() == Material.AIR) return;
 
         Map<BossEntity, ItemStack> entitiesAndSpawnItems = this.bossEntityManager.getMapOfEntitiesAndSpawnItems();
         ItemStack itemStack = player.getItemInHand();
@@ -67,7 +65,15 @@ public class BossSpawnListener implements Listener {
             }
         }
 
-        if (bossEntity == null) return;
+        if (bossEntity == null)
+            return;
+        else {
+            if (action != Action.RIGHT_CLICK_BLOCK
+                    || block.getType() == Material.AIR) {
+                event.setCancelled(true);
+                return;
+            }
+        }
 
         if (bossEntity.isEditing()) {
             Message.Boss_Edit_CannotSpawn.msg(player);

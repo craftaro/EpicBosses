@@ -62,8 +62,11 @@ public class CommandSpawn extends AbstractCommand {
             return ReturnType.FAILURE;
         }
 
-        BossAPI.spawnNewBoss(bossEntity, spawnLocation, null, null, false);
-        Message.Boss_Spawn_Spawned.msg(sender, bossInput, StringUtils.get().translateLocation(spawnLocation));
+        if (BossAPI.spawnNewBoss(bossEntity, spawnLocation, null, null, false) != null)
+            Message.Boss_Spawn_Spawned.msg(sender, bossInput, StringUtils.get().translateLocation(spawnLocation));
+        else
+            Message.Boss_Spawn_Editing.msg(sender);
+
         return ReturnType.SUCCESS;
     }
 
@@ -84,7 +87,7 @@ public class CommandSpawn extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss spawn <name> [location]";
+        return "spawn <name> [location]";
     }
 
     @Override

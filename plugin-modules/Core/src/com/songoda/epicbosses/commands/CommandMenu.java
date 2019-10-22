@@ -34,7 +34,7 @@ public class CommandMenu extends AbstractCommand {
 
     @Override
     public String getPermissionNode() {
-        return "/boss menu";
+        return "menu";
     }
 
     @Override

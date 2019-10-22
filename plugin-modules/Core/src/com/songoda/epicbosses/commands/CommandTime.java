@@ -82,7 +82,7 @@ public class CommandTime extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss time <section>";
+        return "time <section>";
     }
 
     @Override

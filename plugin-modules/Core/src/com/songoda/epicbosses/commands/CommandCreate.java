@@ -88,7 +88,7 @@ public class CommandCreate extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "/boss create <[>name> <entity>";
+        return "create <[>name> <entity>";
     }
 
     @Override
