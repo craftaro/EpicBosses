@@ -134,6 +134,7 @@ public enum Message {
     Boss_Spawn_MustBePlayer("&c&l(!) &cTo use this command without an input of location you must be a player."),
     Boss_Spawn_InvalidBoss("&c&l(!) &cThe specified boss is not a valid type."),
     Boss_Spawn_Spawned("&c&l(!) &cYou have spawned a {0} boss at {1}."),
+    Boss_Spawn_Editing("&c&l(!) &cYou must disable editing for this boss before spawning it."),
 
     Boss_Statistics_SetChance("&b&lEpicBosses &8» &7You have {0} the health of the entity to &f{1}&7."),
     Boss_Statistics_SetDisplayName("&b&lEpicBosses &8» &7Your next input in to chat will be the display name for the entity. If you enter &f-&7 it will remove/clear the display name of the entity. For color codes use the &f& &7sign."),
