@@ -24,7 +24,7 @@ public class ItemStackHolderConverter implements IConverter<ItemStackHolder, Con
         Integer amount = (Integer) configurationSection.get("amount", null);
         CompatibleMaterial material = CompatibleMaterial.getMaterial(configurationSection.getString("type", null));
 
-        String type = material.getMaterial().name();
+        String type = material.getMaterial() == null ? "STONE" : material.getMaterial().name();
 
         Short durability = (Short) configurationSection.get("durability", null);
         if (material.getData() != -1) durability = (short) material.getData();
