@@ -19,7 +19,7 @@ public class CommandNewAutoSpawn extends AbstractCommand {
     private AutoSpawnFileManager autoSpawnFileManager;
 
     public CommandNewAutoSpawn(AutoSpawnFileManager autoSpawnFileManager) {
-        super(false, " ");
+        super(false, "new autospawn");
         this.autoSpawnFileManager = autoSpawnFileManager;
     }
 

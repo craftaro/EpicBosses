@@ -100,12 +100,13 @@ public class ShopPanel extends PanelHandler {
                     }
 
 
-                    if (EconomyManager.hasBalance(player, price)) {
+                    if (!player.isOp() && !EconomyManager.hasBalance(player, price)) {
                         Message.Boss_Shop_NotEnoughBalance.msg(player, NumberUtils.get().formatDouble(price));
                         return;
                     }
 
-                    EconomyManager.withdrawBalance(player, price);
+                    if (!player.isOp())
+                        EconomyManager.withdrawBalance(player, price);
                     player.getInventory().addItem(spawnItem);
                     Message.Boss_Shop_Purchased.msg(player, spawnItem.getItemMeta().getDisplayName());
                 });
