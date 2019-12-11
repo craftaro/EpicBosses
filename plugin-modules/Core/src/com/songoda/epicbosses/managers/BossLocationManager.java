@@ -58,11 +58,11 @@ public class BossLocationManager implements IReloadable {
             }
         }
 
-        if (WorldGuardHook.isEnabled()) {
-            if (WorldGuardHook.getBooleanFlag(location, "boss-blocked-region")) {
-                ServerUtils.get().logDebug("Unable to spawn boss due to worldguard region having the 'boss-blocked-region' flag");
-                return false;
-            }
+
+        Boolean flag;
+        if ((flag = WorldGuardHook.getBooleanFlag(location, "boss-blocked-region")) != null && flag) {
+            ServerUtils.get().logDebug("Unable to spawn boss due to worldguard region having the 'boss-blocked-region' flag");
+            return false;
         }
 
         if (this.bossHookManager.isFactionsEnabled() && this.bossHookManager.getFactionHelper() != null) {
