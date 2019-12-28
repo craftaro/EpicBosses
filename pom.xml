@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.songoda.epicbosses</groupId>
     <artifactId>EpicBosses</artifactId>
     <packaging>pom</packaging>
-    <version>maven-version-number</version>
+    <version>1.2.5</version>
 
     <modules>
         <module>api-modules/FactionsM</module>
@@ -19,10 +16,10 @@
     </modules>
 
     <properties>
-        <plugin.version>maven-version-number</plugin.version>
+        <plugin.version>1.2.5</plugin.version>
         <plugin.name>EpicBosses</plugin.name>
         <plugin.main>com.songoda.epicbosses.EpicBosses</plugin.main>
-        <plugin.author>AMinecraftDev</plugin.author>
+        <plugin.author>Songoda</plugin.author>
     </properties>
 
     <dependencies>
@@ -48,12 +45,13 @@
 
     <repositories>
         <repository>
-            <id>private-repo</id>
+            <id>private</id>
             <url>http://repo.songoda.com/artifactory/private/</url>
         </repository>
     </repositories>
 
     <build>
+        <defaultGoal>clean install</defaultGoal>
         <sourceDirectory>src</sourceDirectory>
         <testSourceDirectory>test</testSourceDirectory>
         <plugins>
