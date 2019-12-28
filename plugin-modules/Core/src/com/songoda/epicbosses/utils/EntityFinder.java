@@ -76,6 +76,7 @@ public enum EntityFinder {
     TURTLE("Turtle", new TurtleHandler(), "turtle"),
     PHANTOM("Phantom", new PhantomHandler(), "phantom"),
     CAT("Cat", new CatHandler(), "cat"),
+    BEE("Bee", new BeeHandler(), "bee"),
     FOX("Fox", new FoxHandler(), "fox"),
     PANDA("Panda", new PandaHandler(), "panda"),
     PILLAGER("Pillager", new PillagerHandler(), "pillager"),
