@@ -20,9 +20,8 @@ public class HealthMechanic implements IBossMechanic {
     public boolean applyMechanic(BossEntity bossEntity, ActiveBossHolder activeBossHolder) {
         if (activeBossHolder.getLivingEntityMap().getOrDefault(1, null) == null) return false;
 
-        Object o = SpigotYmlReader.get().getObject("settings.attribute.maxHealth.max");
-
-        double maxHealthSetting = o instanceof Double ? (double) o : (double) (int) o;
+        double maxHealthSetting = Double.valueOf( SpigotYmlReader
+                .get().getObject("settings.attribute.maxHealth.max").toString());
 
         for (EntityStatsElement entityStatsElement : bossEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
