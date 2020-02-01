@@ -21,7 +21,8 @@ public class HealthMechanic implements IMinionMechanic {
         if (activeMinionHolder.getLivingEntityMap() == null || activeMinionHolder.getLivingEntityMap().isEmpty())
             return false;
 
-        double maxHealthSetting = (double) SpigotYmlReader.get().getObject("settings.attribute.maxHealth.max");
+        double maxHealthSetting = Double.valueOf( SpigotYmlReader
+                .get().getObject("settings.attribute.maxHealth.max").toString());
 
         for (EntityStatsElement entityStatsElement : minionEntity.getEntityStats()) {
             MainStatsElement mainStatsElement = entityStatsElement.getMainStats();

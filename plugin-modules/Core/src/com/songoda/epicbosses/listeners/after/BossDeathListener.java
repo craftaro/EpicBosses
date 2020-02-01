@@ -45,7 +45,7 @@ public class BossDeathListener implements Listener {
         ActiveBossHolder activeBossHolder = this.bossEntityManager.getActiveBossHolder(livingEntity);
         Location location = livingEntity.getLocation();
 
-        if (activeBossHolder == null) return;
+        if (activeBossHolder == null || entityDamageEvent == null) return;
 
         EntityDamageEvent.DamageCause damageCause = entityDamageEvent.getCause();
         Boolean naturalDrops = activeBossHolder.getBossEntity().getDrops().getNaturalDrops();

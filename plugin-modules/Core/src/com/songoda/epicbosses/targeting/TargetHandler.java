@@ -6,10 +6,7 @@ import com.songoda.epicbosses.managers.BossTargetManager;
 import com.songoda.epicbosses.utils.ServerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.entity.Creature;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +75,10 @@ public abstract class TargetHandler<Holder extends IActiveHolder> implements ITa
         getHolder().getLivingEntityMap().values().forEach(uuid -> {
             LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(uuid);
             if (livingEntity != null && !livingEntity.isDead()) {
-                ((Creature) livingEntity).setTarget(newTarget);
+                if (livingEntity instanceof Mob)
+                    ((Mob) livingEntity).setTarget(newTarget);
+                else
+                    ((Creature) livingEntity).setTarget(newTarget);
             }
         });
     }
