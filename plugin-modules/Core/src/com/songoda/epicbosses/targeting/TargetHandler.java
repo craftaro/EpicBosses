@@ -1,5 +1,6 @@
 package com.songoda.epicbosses.targeting;
 
+import com.songoda.core.compatibility.ServerVersion;
 import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.holder.IActiveHolder;
 import com.songoda.epicbosses.managers.BossTargetManager;
@@ -75,9 +76,9 @@ public abstract class TargetHandler<Holder extends IActiveHolder> implements ITa
         getHolder().getLivingEntityMap().values().forEach(uuid -> {
             LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(uuid);
             if (livingEntity != null && !livingEntity.isDead()) {
-                if (livingEntity instanceof Mob)
+                if (ServerVersion.isServerVersionAtLeast(ServerVersion.V1_12) && livingEntity instanceof Mob)
                     ((Mob) livingEntity).setTarget(newTarget);
-                else
+                else if (livingEntity instanceof Creature)
                     ((Creature) livingEntity).setTarget(newTarget);
             }
         });
