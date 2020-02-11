@@ -90,7 +90,10 @@ public class BossDeathListener implements Listener {
         if (commands != null) {
             if (activeBossHolder.getSpawningPlayerName() != null)
                 commands.replaceAll(s -> s.replace("{spawner}", activeBossHolder.getSpawningPlayerName()));
-            if (event.getKiller() != null) commands.replaceAll(s -> s.replace("{killer}", event.getKiller().getName()));
+            if (event.getKiller() != null) {
+                commands.replaceAll(s -> s.replace("{killer}", event.getKiller().getName()));
+                commands.replaceAll(s -> s.replace("%player%", event.getKiller().getName()));
+            }
             commands.forEach(serverUtils::sendConsoleCommand);
         }
 
