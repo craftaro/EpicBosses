@@ -76,7 +76,7 @@ public abstract class TargetHandler<Holder extends IActiveHolder> implements ITa
         getHolder().getLivingEntityMap().values().forEach(uuid -> {
             LivingEntity livingEntity = (LivingEntity) ServerUtils.get().getEntity(uuid);
             if (livingEntity != null && !livingEntity.isDead()) {
-                if (ServerVersion.isServerVersionAtLeast(ServerVersion.V1_12) && livingEntity instanceof Mob)
+                if (ServerVersion.isServerVersionAtLeast(ServerVersion.V1_13) && livingEntity instanceof Mob)
                     ((Mob) livingEntity).setTarget(newTarget);
                 else if (livingEntity instanceof Creature)
                     ((Creature) livingEntity).setTarget(newTarget);

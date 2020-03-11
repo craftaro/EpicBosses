@@ -4,7 +4,7 @@
     <groupId>com.songoda.epicbosses</groupId>
     <artifactId>EpicBosses</artifactId>
     <packaging>pom</packaging>
-    <version>1.2.8</version>
+    <version>1.2.9</version>
 
     <modules>
         <module>api-modules/FactionsM</module>
@@ -16,7 +16,7 @@
     </modules>
 
     <properties>
-        <plugin.version>1.2.8</plugin.version>
+        <plugin.version>1.2.9</plugin.version>
         <plugin.name>EpicBosses</plugin.name>
         <plugin.main>com.songoda.epicbosses.EpicBosses</plugin.main>
         <plugin.author>Songoda</plugin.author>
