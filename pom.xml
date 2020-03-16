@@ -48,6 +48,10 @@
             <id>private</id>
             <url>http://repo.songoda.com/artifactory/private/</url>
         </repository>
+        <repository>
+            <id>public</id>
+            <url>http://repo.songoda.com/artifactory/public/</url>
+        </repository>
     </repositories>
 
     <build>
