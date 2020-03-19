@@ -3,10 +3,13 @@ package com.songoda.epicbosses.managers.files;
 import com.songoda.epicbosses.EpicBosses;
 import com.songoda.epicbosses.container.BossEntityContainer;
 import com.songoda.epicbosses.entity.BossEntity;
+import com.songoda.epicbosses.entity.elements.EntityStatsElement;
+import com.songoda.epicbosses.entity.elements.MainStatsElement;
 import com.songoda.epicbosses.file.BossesFileHandler;
 import com.songoda.epicbosses.utils.ILoadable;
 import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.ISavable;
+import com.songoda.epicbosses.utils.StringUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -54,6 +57,15 @@ public class BossesFileManager implements ILoadable, ISavable, IReloadable {
     }
 
     public BossEntity getBossEntity(String name) {
+        for (Map.Entry<String, BossEntity> entry : this.bossEntityContainer.getData().entrySet()) {
+            for (EntityStatsElement entityStatsElement : entry.getValue().getEntityStats()) {
+                MainStatsElement mainStatsElement = entityStatsElement.getMainStats();
+                String customName = mainStatsElement.getDisplayName();
+                System.out.println(name + " : " + StringUtils.get().translateColor(customName));
+                if (StringUtils.get().translateColor(customName).equals(name))
+                    return entry.getValue();
+            }
+        }
         return this.bossEntityContainer.getData().getOrDefault(name, null);
     }
 

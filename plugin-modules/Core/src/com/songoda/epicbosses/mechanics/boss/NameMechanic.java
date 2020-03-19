@@ -10,6 +10,8 @@ import com.songoda.epicbosses.mechanics.IBossMechanic;
 import com.songoda.epicbosses.utils.StringUtils;
 import org.bukkit.entity.LivingEntity;
 
+import java.util.Arrays;
+
 /**
  * @author Charles Cullen
  * @version 1.0.0
@@ -29,7 +31,7 @@ public class NameMechanic implements IBossMechanic {
             if (livingEntity == null || customName == null) continue;
             String formattedName = StringUtils.get().translateColor(customName);
 
-            livingEntity.setCustomName(TextUtils.convertToInvisibleString("BOSS:" + activeBossHolder.getName() + ":") + formattedName);
+            livingEntity.setCustomName(TextUtils.convertToInvisibleString("BOSS:") + formattedName);
             livingEntity.setCustomNameVisible(true);
         }
 

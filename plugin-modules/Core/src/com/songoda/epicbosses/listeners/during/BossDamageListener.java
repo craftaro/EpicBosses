@@ -45,22 +45,25 @@ public class BossDamageListener implements Listener {
         double damage = event.getDamage();
         Player player = null;
 
-        if (activeBossHolder == null) {
+        if (activeBossHolder == null && livingEntity.getCustomName() != null) {
             // Check to see if this was a boss and respawn it if so.
-            String convert = TextUtils.convertFromInvisibleString(livingEntity.getCustomName());
-            if (convert.startsWith("BOSS:")) {
+            String convert = livingEntity.getCustomName();
+
+            if (convert.toUpperCase().startsWith(TextUtils.convertToInvisibleString("BOSS:"))) {
                 String name = convert.split(":")[1];
 
                 BossEntity bossEntity = bossesFileManager.getBossEntity(name);
-                bossEntityManager.createActiveBossHolder(bossEntity, livingEntity.getLocation(), name, null);
+                if (bossEntity != null) {
+                    bossEntityManager.createActiveBossHolder(bossEntity, livingEntity.getLocation(), name, null);
 
-                if (livingEntity.isInsideVehicle() && livingEntity.getVehicle() != null)
-                    livingEntity.getVehicle().remove();
+                    if (livingEntity.isInsideVehicle() && livingEntity.getVehicle() != null)
+                        livingEntity.getVehicle().remove();
 
-                if (livingEntity.getPassenger() != null)
-                    livingEntity.getPassenger().remove();
+                    if (livingEntity.getPassenger() != null)
+                        livingEntity.getPassenger().remove();
 
-                livingEntity.remove();
+                    livingEntity.remove();
+                }
             }
             return;
         }

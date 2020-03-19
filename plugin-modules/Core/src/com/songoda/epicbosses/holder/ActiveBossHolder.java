@@ -111,12 +111,12 @@ public class ActiveBossHolder implements IActiveHolder {
                 .filter(e -> e.getValue() != null && e.getValue().getWorld().isChunkLoaded(
                                 e.getValue().getLocation().getBlockX() >> 4,
                                 e.getValue().getLocation().getBlockZ() >> 4))
-                .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         // remove everything we can
-        toRemove.entrySet().stream().forEach(e -> {
-            e.getValue().remove();
-            livingEntityMap.remove(e.getKey());
+        toRemove.forEach((key, value) -> {
+            value.remove();
+            livingEntityMap.remove(key);
         });
 
         return true;
