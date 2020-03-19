@@ -34,12 +34,12 @@ public class CommandMenu extends AbstractCommand {
 
     @Override
     public String getPermissionNode() {
-        return "menu";
+        return "boss.menu";
     }
 
     @Override
     public String getSyntax() {
-        return null;
+        return "menu";
     }
 
     @Override

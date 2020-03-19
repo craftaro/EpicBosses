@@ -6,7 +6,6 @@ import com.songoda.epicbosses.container.BossEntityContainer;
 import com.songoda.epicbosses.entity.BossEntity;
 import com.songoda.epicbosses.utils.EntityFinder;
 import com.songoda.epicbosses.utils.Message;
-import com.songoda.epicbosses.utils.Permission;
 import com.songoda.epicbosses.utils.StringUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
@@ -88,7 +87,7 @@ public class CommandCreate extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "create <[>name> <entity>";
+        return "create <name> <entity>";
     }
 
     @Override

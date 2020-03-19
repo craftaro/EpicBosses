@@ -46,7 +46,7 @@ public class CommandShop extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "shop";
+        return "shop/buy/store";
     }
 
     @Override
