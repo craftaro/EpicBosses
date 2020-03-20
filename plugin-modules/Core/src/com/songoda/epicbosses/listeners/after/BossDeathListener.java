@@ -160,6 +160,7 @@ public class BossDeathListener implements Listener {
         DeadBossHolder deadBossHolder = new DeadBossHolder(bossEntity, location, mapOfDamage, mapOfPercent);
         BossDeathEvent bossDeathEvent = new BossDeathEvent(activeBossHolder, autoSpawn);
         DropTable dropTable = this.bossEntityManager.getDropTable(bossEntity);
+        this.bossEntityManager.removeActiveBossHolder(activeBossHolder);
 
         if (dropTable == null) {
             Debug.FAILED_TO_FIND_DROP_TABLE.debug(activeBossHolder.getName(), bossEntity.getDrops().getDropTable());

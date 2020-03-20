@@ -35,6 +35,16 @@ public class StringUtils {
         return messages;
     }
 
+    public String toNum(String s) {
+        StringBuilder t = new StringBuilder();
+        for (int i = 0; i < s.length(); ++i) {
+            char ch = s.charAt(i);
+            int n = (int)ch - (int)'a' + 1;
+            t.append(n);
+        }
+        return t.toString();
+    }
+
     public String stripColor(String string) {
         return ChatColor.stripColor(string);
     }

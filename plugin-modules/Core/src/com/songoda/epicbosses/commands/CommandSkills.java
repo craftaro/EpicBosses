@@ -39,7 +39,7 @@ public class CommandSkills extends AbstractCommand {
 
     @Override
     public String getSyntax() {
-        return "skills";
+        return "skills/skill";
     }
 
     @Override

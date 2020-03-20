@@ -3,7 +3,6 @@ package com.songoda.epicbosses.commands;
 import com.songoda.core.commands.AbstractCommand;
 import com.songoda.epicbosses.managers.DebugManager;
 import com.songoda.epicbosses.utils.Message;
-import com.songoda.epicbosses.utils.Permission;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -47,16 +46,16 @@ public class CommandDebug extends AbstractCommand {
 
     @Override
     public String getPermissionNode() {
-        return "boss.reload";
+        return "boss.debug";
     }
 
     @Override
     public String getSyntax() {
-        return "reload";
+        return "debug";
     }
 
     @Override
     public String getDescription() {
-        return "Reloads EpicBosses and its configurations.";
+        return "Toggles on and off the debug mode.";
     }
 }
