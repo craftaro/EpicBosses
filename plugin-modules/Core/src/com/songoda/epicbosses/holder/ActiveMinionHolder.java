@@ -8,6 +8,7 @@ import org.bukkit.entity.LivingEntity;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.bukkit.entity.Entity;
@@ -72,16 +73,16 @@ public class ActiveMinionHolder implements IActiveHolder {
 //        this.livingEntityMap.clear();
 
         // grab list of all valid entities by UUID that can be removed
-        Map<Integer, Entity> toRemove = this.livingEntityMap.entrySet().stream()
-                .collect(Collectors.toMap(e -> e.getKey(), e -> ServerUtils.get().getEntity(e.getValue())))
+        Map<Integer, Entity> toRemove = this.livingEntityMap.entrySet().stream().filter(Objects::nonNull)
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> ServerUtils.get().getEntity(e.getValue())))
                 .entrySet().stream()
                 .filter(e -> e.getValue() != null && e.getValue().getWorld().isChunkLoaded(
                                 e.getValue().getLocation().getBlockX() >> 4,
                                 e.getValue().getLocation().getBlockZ() >> 4))
-                .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         // remove everything we can
-        toRemove.entrySet().stream().forEach(e -> {
+        toRemove.entrySet().forEach(e -> {
             e.getValue().remove();
             livingEntityMap.remove(e.getKey());
         });

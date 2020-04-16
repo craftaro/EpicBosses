@@ -4,7 +4,6 @@ import com.songoda.core.compatibility.CompatibleMaterial;
 import com.songoda.epicbosses.utils.IConverter;
 import com.songoda.epicbosses.utils.exceptions.NotImplementedException;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
-import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.List;
@@ -24,7 +23,11 @@ public class ItemStackHolderConverter implements IConverter<ItemStackHolder, Con
         Integer amount = (Integer) configurationSection.get("amount", null);
         CompatibleMaterial material = CompatibleMaterial.getMaterial(configurationSection.getString("type", null));
 
-        String type = material.getMaterial() == null ? "STONE" : material.getMaterial().name();
+        String type;
+        if (material == null)
+            type = "STONE";
+        else
+            type = material.getMaterial() == null ? "STONE" : material.getMaterial().name();
 
         Short durability = (Short) configurationSection.get("durability", null);
         if (material.getData() != -1) durability = (short) material.getData();

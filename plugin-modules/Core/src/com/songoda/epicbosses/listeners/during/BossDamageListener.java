@@ -81,7 +81,7 @@ public class BossDamageListener implements Listener {
             player = (Player) shooter;
         }
 
-        if (player == null) return;
+        if (player == null || activeBossHolder == null) return;
 
         double currentDamage = activeBossHolder.getMapOfDamagingUsers().getOrDefault(player.getUniqueId(), 0.0);
         BossDamageEvent bossDamageEvent = new BossDamageEvent(activeBossHolder, livingEntity, livingEntity.getEyeLocation(), damage);
