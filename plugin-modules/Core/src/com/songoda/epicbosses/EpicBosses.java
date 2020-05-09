@@ -60,7 +60,6 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
     private BossHookManager bossHookManager;
 
     private AutoSpawnManager autoSpawnManager;
-    private PlaceholderManager placeholderManager;
 
     private MinionMechanicManager minionMechanicManager;
     private MinionEntityContainer minionEntityContainer;
@@ -135,10 +134,8 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
 
         this.autoSpawnManager = new AutoSpawnManager(this);
 
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            this.placeholderManager = new PlaceholderManager(this);
-            this.placeholderManager.register();
-        }
+        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI"))
+            new PlaceholderManager(this).register();
 
         createFiles();
         reloadFiles();
@@ -197,6 +194,11 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
         this.bossListenerManager.load();
 
         this.autoSpawnManager.startIntervalSystems();
+
+        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            System.out.println("hiiiit");
+            new PlaceholderManager(this).register();
+        }
 
         ServerUtils.get().logDebug("Loaded all fields and managers, saved messages and plugin is initialized and ready to go. (took " + (System.currentTimeMillis() - beginMs) + "ms).");
     }
@@ -347,10 +349,6 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
 
     public AutoSpawnManager getAutoSpawnManager() {
         return this.autoSpawnManager;
-    }
-
-    public PlaceholderManager getPlaceholderManager() {
-        return this.placeholderManager;
     }
 
     public MinionMechanicManager getMinionMechanicManager() {

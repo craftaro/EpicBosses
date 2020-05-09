@@ -8,7 +8,7 @@ import org.bukkit.OfflinePlayer;
 
 public class PlaceholderManager extends PlaceholderExpansion {
 
-    private AutoSpawnManager autoSpawnManager;
+    private final AutoSpawnManager autoSpawnManager;
 
     public PlaceholderManager(EpicBosses plugin) {
         this.autoSpawnManager = plugin.getAutoSpawnManager();
@@ -24,10 +24,14 @@ public class PlaceholderManager extends PlaceholderExpansion {
             ActiveIntervalAutoSpawnHolder intervalAutoSpawnHolder = (ActiveIntervalAutoSpawnHolder) autoSpawnHolder;
             long duration = (long) (intervalAutoSpawnHolder.getRemainingMs() / 1000D);
 
-            String formattedIdentifier = intervalAutoSpawnHolder.getIntervalSpawnElement().getPlaceholder() + "_formatted";
+            String placeHolder = intervalAutoSpawnHolder.getIntervalSpawnElement().getPlaceholder()
+                    .replace("{", "")
+                    .replace("}", "");
+
+            String formattedIdentifier = placeHolder + "_formatted";
             if (identifier.equalsIgnoreCase(formattedIdentifier)) {
                 return this.getTimeFormatted(duration);
-            } else if (identifier.equals(intervalAutoSpawnHolder.getIntervalSpawnElement().getPlaceholder())) {
+            } else if (identifier.equals(placeHolder)) {
                 return String.valueOf((int) (intervalAutoSpawnHolder.getRemainingMs() / 1000D));
             }
         }
