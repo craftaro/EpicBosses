@@ -73,7 +73,8 @@ public class ActiveMinionHolder implements IActiveHolder {
 //        this.livingEntityMap.clear();
 
         // grab list of all valid entities by UUID that can be removed
-        Map<Integer, Entity> toRemove = this.livingEntityMap.entrySet().stream().filter(Objects::nonNull)
+        Map<Integer, Entity> toRemove = this.livingEntityMap.entrySet().stream()
+                .filter(e -> e != null && e.getValue() != null && ServerUtils.get().getEntity(e.getValue()) != null)
                 .collect(Collectors.toMap(Map.Entry::getKey, e -> ServerUtils.get().getEntity(e.getValue())))
                 .entrySet().stream()
                 .filter(e -> e.getValue() != null && e.getValue().getWorld().isChunkLoaded(
