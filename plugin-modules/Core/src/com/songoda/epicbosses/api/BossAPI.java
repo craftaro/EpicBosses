@@ -379,8 +379,9 @@ public class BossAPI {
         DropsElement dropsElement = new DropsElement(true, true, "");
         MessagesElement messagesElement = new MessagesElement(new OnSpawnMessageElement("", -1), new OnDeathMessageElement("", "", -1, 5), new TauntElement(60, 100, new ArrayList<>()));
         CommandsElement commandsElement = new CommandsElement("", "");
+        HealthBarElement healthBarElement = new HealthBarElement("%bossName% %currentHealth%/%maxHealth%", 50);
 
-        BossEntity bossEntity = new BossEntity(true, null, "RandomNearby", false, 100.0, entityStatsElements, skillsElement, dropsElement, messagesElement, commandsElement);
+        BossEntity bossEntity = new BossEntity(true, null, "RandomNearby", false, 100.0, entityStatsElements, skillsElement, dropsElement, messagesElement, commandsElement, healthBarElement);
         boolean result = PLUGIN.getBossEntityContainer().saveData(name, bossEntity);
 
         if (!result) {
