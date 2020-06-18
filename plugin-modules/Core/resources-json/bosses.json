@@ -5,6 +5,10 @@
     "editing": true,
     "buyable": true,
     "price": 500000.0,
+    "healthBar": {
+      "radius": 50,
+      "text": "&6&lSkeleton King &8&m  &r &a%currentHealth%&7/&2%maxHealth%"
+    },
     "entityStats": [
       {
         "mainStats": {

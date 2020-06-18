@@ -58,6 +58,7 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
     private BossSkillManager bossSkillManager;
     private BossTauntManager bossTauntManager;
     private BossHookManager bossHookManager;
+    private BossHealthBarManager bossHealthBarManager;
 
     private AutoSpawnManager autoSpawnManager;
 
@@ -119,6 +120,7 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
         this.bossSkillManager = new BossSkillManager(this);
         this.bossHookManager = new BossHookManager(this);
         this.bossTauntManager = new BossTauntManager(this);
+        this.bossHealthBarManager = new BossHealthBarManager(this);
         this.bossTargetManager = new BossTargetManager(this);
         this.bossEntityContainer = new BossEntityContainer();
         this.minionEntityContainer = new MinionEntityContainer();
@@ -315,6 +317,10 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
 
     public BossEntityContainer getBossEntityContainer() {
         return this.bossEntityContainer;
+    }
+
+    public BossHealthBarManager getBossHealthBarManager() {
+        return bossHealthBarManager;
     }
 
     public BossMechanicManager getBossMechanicManager() {

@@ -24,19 +24,22 @@ public class BossEntity {
     @Expose
     private final DropsElement drops;
     @Expose
+    private final HealthBarElement healthBar;
+    @Expose
     private String spawnItem, targeting;
     @Expose
     private boolean editing, buyable;
     @Expose
     private Double price;
 
-    public BossEntity(boolean editing, String spawnItem, String targeting, boolean buyable, Double price, List<EntityStatsElement> entityStats, SkillsElement skills, DropsElement drops, MessagesElement messages, CommandsElement commands) {
+    public BossEntity(boolean editing, String spawnItem, String targeting, boolean buyable, Double price, List<EntityStatsElement> entityStats, SkillsElement skills, DropsElement drops, MessagesElement messages, CommandsElement commands, HealthBarElement healthBar) {
         this.editing = editing;
         this.entityStats = entityStats;
         this.targeting = targeting;
         this.spawnItem = spawnItem;
         this.skills = skills;
         this.drops = drops;
+        this.healthBar = healthBar;
         this.messages = messages;
         this.commands = commands;
         this.buyable = buyable;
@@ -163,5 +166,9 @@ public class BossEntity {
 
     public DropsElement getDrops() {
         return this.drops;
+    }
+
+    public HealthBarElement getHealthBar() {
+        return healthBar;
     }
 }

@@ -8,6 +8,7 @@ import com.songoda.epicbosses.events.PreBossSpawnEvent;
 import com.songoda.epicbosses.events.PreBossSpawnItemEvent;
 import com.songoda.epicbosses.holder.ActiveBossHolder;
 import com.songoda.epicbosses.managers.BossEntityManager;
+import com.songoda.epicbosses.managers.BossHealthBarManager;
 import com.songoda.epicbosses.managers.BossLocationManager;
 import com.songoda.epicbosses.managers.BossTauntManager;
 import com.songoda.epicbosses.utils.*;
@@ -38,11 +39,13 @@ public class BossSpawnListener implements Listener {
     private BossLocationManager bossLocationManager;
     private BossEntityManager bossEntityManager;
     private BossTauntManager bossTauntManager;
+    private BossHealthBarManager bossHealthBarManager;
 
     public BossSpawnListener(EpicBosses epicBosses) {
         this.bossTauntManager = epicBosses.getBossTauntManager();
         this.bossEntityManager = epicBosses.getBossEntityManager();
         this.bossLocationManager = epicBosses.getBossLocationManager();
+        this.bossHealthBarManager = epicBosses.getBossHealthBarManager();
     }
 
     @EventHandler
@@ -120,6 +123,7 @@ public class BossSpawnListener implements Listener {
         List<String> commands = new ArrayList(this.bossEntityManager.getOnSpawnCommands(bossEntity));
         List<String> messages = new ArrayList(this.bossEntityManager.getOnSpawnMessage(bossEntity));
         int messageRadius = this.bossEntityManager.getOnSpawnMessageRadius(bossEntity);
+
         ServerUtils serverUtils = ServerUtils.get();
 
         if (event instanceof PreBossSpawnItemEvent) {
@@ -155,6 +159,9 @@ public class BossSpawnListener implements Listener {
             MessageUtils.get().sendMessage(location, NumberUtils.get().getSquared(messageRadius), messages);
         }
 
+        // Health bar in action bar ;)
+        this.bossHealthBarManager.handleHealthBar(activeBossHolder);
+
         activeBossHolder.getTargetHandler().runTargetCycle();
         this.bossTauntManager.handleTauntSystem(activeBossHolder);
 
@@ -162,5 +169,4 @@ public class BossSpawnListener implements Listener {
 
         ServerUtils.get().callEvent(bossSpawnEvent);
     }
-
 }
