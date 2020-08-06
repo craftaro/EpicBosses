@@ -28,6 +28,7 @@ public class ActiveBossHolder implements IActiveHolder {
     private Map<Integer, ActiveMinionHolder> activeMinionHolderMap = new HashMap<>();
     private Map<Integer, UUID> livingEntityMap = new HashMap<>();
     private List<IBossDeathHandler> postBossDeathHandlers = new ArrayList<>();
+    private List<IBossDeathHandler> postBossDeathRemoveHandlers = new ArrayList<>();
     private Map<UUID, Double> mapOfDamagingUsers = new HashMap<>();
     private String spawningPlayerName;
 
@@ -144,6 +145,10 @@ public class ActiveBossHolder implements IActiveHolder {
 
     public List<IBossDeathHandler> getPostBossDeathHandlers() {
         return this.postBossDeathHandlers;
+    }
+    
+    public List<IBossDeathHandler> getPostBossDeathRemoveHandlers() {
+        return this.postBossDeathRemoveHandlers;
     }
 
     public Map<UUID, Double> getMapOfDamagingUsers() {

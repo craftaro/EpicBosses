@@ -60,6 +60,7 @@ public class BossDeathListener implements Listener {
         if (damageCause == EntityDamageEvent.DamageCause.VOID || damageCause == EntityDamageEvent.DamageCause.LAVA
                 || activeBossHolder.getMapOfDamagingUsers().isEmpty()) {
             this.bossEntityManager.removeActiveBossHolder(activeBossHolder);
+            activeBossHolder.getPostBossDeathRemoveHandlers().forEach(handler -> handler.onPreDeath(new PreBossDeathEvent(activeBossHolder, location, null)));
             return;
         }
 

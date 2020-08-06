@@ -91,6 +91,7 @@ public class IntervalSpawnElement implements IAutoSpawnCustomSettingsHandler {
             if (activeBossHolder == null) continue;
 
             activeBossHolder.getPostBossDeathHandlers().add(bossDeathHandler);
+            activeBossHolder.getPostBossDeathRemoveHandlers().add(bossDeathHandler);
             activeAutoSpawnHolder.getActiveBossHolders().add(activeBossHolder);
 
             BossSpawnEvent bossSpawnEvent = new BossSpawnEvent(activeBossHolder, true);
