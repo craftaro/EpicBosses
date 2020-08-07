@@ -45,14 +45,17 @@ public class GroupSkillEditorPanel extends VariablePanelHandler<Skill> {
     @Override
     public void fillPanel(Panel panel, Skill skill) {
         GroupSkillElement groupSkillElement = this.plugin.getBossSkillManager().getGroupSkillElement(skill);
+        if (groupSkillElement == null)
+            groupSkillElement = new GroupSkillElement(new ArrayList<>());
         Map<String, Skill> skillMap = this.plugin.getSkillsFileManager().getSkillMap();
         List<String> entryList = new ArrayList<>(skillMap.keySet());
         int maxPage = panel.getMaxPage(entryList);
 
+        GroupSkillElement finalGroupSkillElement = groupSkillElement;
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
             if (requestedPage < 0 || requestedPage > maxPage) return false;
 
-            loadPage(panel, requestedPage, skill, groupSkillElement, skillMap, entryList);
+            loadPage(panel, requestedPage, skill, finalGroupSkillElement, skillMap, entryList);
             return true;
         }));
 

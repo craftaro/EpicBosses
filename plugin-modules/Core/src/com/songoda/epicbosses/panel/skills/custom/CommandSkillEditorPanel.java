@@ -40,6 +40,8 @@ public class CommandSkillEditorPanel extends VariablePanelHandler<Skill> {
     @Override
     public void fillPanel(Panel panel, Skill skill) {
         CommandSkillElement commandSkillElement = this.plugin.getBossSkillManager().getCommandSkillElement(skill);
+        if (commandSkillElement == null)
+            commandSkillElement = new CommandSkillElement(new ArrayList<>());
         List<SubCommandSkillElement> subCommandSkillElements = commandSkillElement.getCommands();
         int maxPage = panel.getMaxPage(subCommandSkillElements);
 
@@ -55,24 +57,22 @@ public class CommandSkillEditorPanel extends VariablePanelHandler<Skill> {
 
     @Override
     public void openFor(Player player, Skill skill) {
+        Map<String, String> replaceMap = new HashMap<>();
+        PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
+
+        replaceMap.put("{name}", BossAPI.getSkillName(skill));
+        panelBuilder.addReplaceData(replaceMap);
+
+        PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
+        Panel panel = panelBuilder.getPanel()
+                .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
+
         ServerUtils.get().runTaskAsync(() -> {
-            Map<String, String> replaceMap = new HashMap<>();
-            PanelBuilder panelBuilder = getPanelBuilder().cloneBuilder();
-
-            replaceMap.put("{name}", BossAPI.getSkillName(skill));
-            panelBuilder.addReplaceData(replaceMap);
-
-            PanelBuilderCounter counter = panelBuilder.getPanelBuilderCounter();
-            Panel panel = panelBuilder.getPanel()
-                    .setParentPanelHandler(this.bossPanelManager.getMainSkillEditMenu(), skill);
-
-            ServerUtils.get().runTaskAsync(() -> {
-                counter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, getAddNewAction(skill)));
-                fillPanel(panel, skill);
-            });
-
-            panel.openFor(player);
+            counter.getSlotsWith("AddNew").forEach(slot -> panel.setOnClick(slot, getAddNewAction(skill)));
+            fillPanel(panel, skill);
         });
+
+        panel.openFor(player);
     }
 
     @Override
@@ -84,7 +84,9 @@ public class CommandSkillEditorPanel extends VariablePanelHandler<Skill> {
         return event -> {
             SubCommandSkillElement subCommandSkillElement = new SubCommandSkillElement(UUID.randomUUID().toString(), 100.0, new ArrayList<>());
             CommandSkillElement commandSkillElement = this.plugin.getBossSkillManager().getCommandSkillElement(skill);
-
+            if (commandSkillElement == null)
+                commandSkillElement = new CommandSkillElement(new ArrayList<>());
+            
             List<SubCommandSkillElement> subElements = commandSkillElement.getCommands();
 
             subElements.add(subCommandSkillElement);

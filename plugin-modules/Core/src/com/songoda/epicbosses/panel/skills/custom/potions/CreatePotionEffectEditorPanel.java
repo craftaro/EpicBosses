@@ -18,6 +18,7 @@ import com.songoda.epicbosses.utils.panel.base.handlers.SubVariablePanelHandler;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
+import java.util.ArrayList;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
@@ -146,6 +147,8 @@ public class CreatePotionEffectEditorPanel extends SubVariablePanelHandler<Skill
 
             if (duration != null && level != null && type != null && !type.isEmpty()) {
                 PotionSkillElement potionSkillElement = this.bossSkillManager.getPotionSkillElement(skill);
+                if (potionSkillElement == null)
+                    potionSkillElement = new PotionSkillElement(new ArrayList<>());
                 PotionEffectFinder potionEffectFinder = PotionEffectFinder.getByName(type);
 
                 if (potionEffectFinder != null) {

@@ -19,6 +19,7 @@ import com.songoda.epicbosses.utils.panel.builder.PanelBuilder;
 import com.songoda.epicbosses.utils.panel.builder.PanelBuilderCounter;
 import com.songoda.epicbosses.utils.potion.PotionEffectConverter;
 import com.songoda.epicbosses.utils.potion.holder.PotionEffectHolder;
+import java.util.ArrayList;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -56,13 +57,16 @@ public class PotionSkillEditorPanel extends VariablePanelHandler<Skill> {
     @Override
     public void fillPanel(Panel panel, Skill skill) {
         PotionSkillElement potionSkillElement = this.bossSkillManager.getPotionSkillElement(skill);
+        if (potionSkillElement == null)
+            potionSkillElement = new PotionSkillElement(new ArrayList<>());
         List<PotionEffectHolder> potionEffectHolders = potionSkillElement.getPotions();
         int maxPage = panel.getMaxPage(potionEffectHolders);
 
+        PotionSkillElement finalPotionSkillElement = potionSkillElement;
         panel.setOnPageChange(((player, currentPage, requestedPage) -> {
             if (requestedPage < 0 || requestedPage > maxPage) return false;
 
-            loadPage(panel, requestedPage, potionEffectHolders, potionSkillElement, skill);
+            loadPage(panel, requestedPage, potionEffectHolders, finalPotionSkillElement, skill);
             return true;
         }));
 
