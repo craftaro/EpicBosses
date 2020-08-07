@@ -7,6 +7,8 @@ import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.StringUtils;
 import com.songoda.epicbosses.utils.itemstack.enchants.GlowEnchant;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
+import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolderJson;
+import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolderLegacy;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -383,6 +385,10 @@ public class ItemStackUtils {
 
     @SuppressWarnings("unchecked")
     public static ItemStackHolder getItemStackHolder(ConfigurationSection configurationSection) {
+        if (configurationSection == null) return null;
+        if (configurationSection.getKeys(false).contains("json"))
+            return new ItemStackHolderJson(configurationSection.getString("json", null));
+        
         Integer amount = (Integer) configurationSection.get("amount", null);
 
         CompatibleMaterial material = CompatibleMaterial.getMaterial(configurationSection.getString("type", null));
@@ -394,10 +400,10 @@ public class ItemStackUtils {
         List<String> lore = (List<String>) configurationSection.getList("lore", null);
         List<String> enchants = (List<String>) configurationSection.getList("enchants", null);
         String skullOwner = configurationSection.getString("skullOwner", null);
-        Short spawnerId = (Short) configurationSection.get("spawnerId", null);
+        EntityType spawnerId = Arrays.stream(EntityType.values()).filter(e -> e.name().equalsIgnoreCase(configurationSection.getString("spawnerId", null))).findFirst().orElse(null);
         //Boolean isGlowing = (Boolean) configurationSection.get("isGlowing", null);
 
-        return new ItemStackHolder(amount, type, durability, name, lore, enchants, skullOwner, spawnerId);
+        return new ItemStackHolderLegacy(amount, type, durability, name, lore, enchants, skullOwner, spawnerId);
     }
 
     public static boolean isItemStackSame(ItemStack itemStack1, ItemStack itemStack2) {

@@ -22,8 +22,8 @@ import com.songoda.epicbosses.utils.IReloadable;
 import com.songoda.epicbosses.utils.Message;
 import com.songoda.epicbosses.utils.ServerUtils;
 import com.songoda.epicbosses.utils.file.YmlFileHandler;
+import com.songoda.epicbosses.utils.itemstack.ItemSerializer;
 import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
@@ -70,6 +70,7 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
 
     private YmlFileHandler langFileHandler, editorFileHandler, displayFileHandler;
     private FileConfiguration lang, editor, display;
+    private ItemSerializer itemSerializer;
 
     private boolean debug = true;
 
@@ -133,6 +134,11 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
         this.bossEntityManager = new BossEntityManager(this);
 
         this.autoSpawnManager = new AutoSpawnManager(this);
+        try {
+            this.itemSerializer = new ItemSerializer();
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
 
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI"))
             new PlaceholderManager(this).register();
@@ -389,6 +395,10 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
 
     public FileConfiguration getDisplay() {
         return this.display;
+    }
+
+    public ItemSerializer getItemSerializer() {
+        return itemSerializer;
     }
 
     public boolean isDebug() {

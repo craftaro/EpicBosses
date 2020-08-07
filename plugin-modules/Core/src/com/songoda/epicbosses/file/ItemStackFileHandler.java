@@ -6,6 +6,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.songoda.epicbosses.utils.file.FileHandler;
 import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolder;
+import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolderJson;
+import com.songoda.epicbosses.utils.itemstack.holder.ItemStackHolderLegacy;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -47,7 +49,9 @@ public class ItemStackFileHandler extends FileHandler<Map<String, ItemStackHolde
             if (jsonObject != null) {
                 jsonObject.entrySet().forEach(entry -> {
                     String id = entry.getKey();
-                    ItemStackHolder itemStackHolder = GSON.fromJson(entry.getValue(), ItemStackHolder.class);
+                    ItemStackHolder itemStackHolder = entry.getValue().getAsJsonObject().has("json")
+                            ? GSON.fromJson(entry.getValue(), ItemStackHolderJson.class)
+                            : GSON.fromJson(entry.getValue(), ItemStackHolderLegacy.class);
 
                     itemStackHolderMap.put(id, itemStackHolder);
                 });
