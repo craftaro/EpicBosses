@@ -91,7 +91,9 @@ public class PotionEffectTypeEditorPanel extends SubVariablePanelHandler<Skill, 
 
                     potionMeta.setBasePotionData(new PotionData(potionType));
                 } else {
-                    potionMeta.addCustomEffect(this.potionEffectConverter.from(potionEffectHolder), true);
+                    PotionEffectHolder holder = new PotionEffectHolder(potionEffectType.getName(), null, null);
+                    potionMeta.addCustomEffect(this.potionEffectConverter.from(holder), true);
+//                    potionMeta.setMainEffect(potionEffectType);
                 }
 
                 itemStack.setItemMeta(potionMeta);
@@ -104,7 +106,7 @@ public class PotionEffectTypeEditorPanel extends SubVariablePanelHandler<Skill, 
                 if (type != null && !type.isEmpty()) {
                     PotionEffectFinder potionEffectFinder = PotionEffectFinder.getByName(type);
 
-                    if (potionEffectFinder != null) {
+                    if (potionEffectFinder != null && potionEffectFinder.getPotionEffectType().equals(potionEffectType)) {
                         ItemStackUtils.applyDisplayName(itemStack, this.plugin.getDisplay().getString("Display.Skills.CreatePotion.selectedName"), replaceMap);
                         found = true;
                     }
