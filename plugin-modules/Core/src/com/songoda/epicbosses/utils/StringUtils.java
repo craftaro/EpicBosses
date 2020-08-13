@@ -113,6 +113,7 @@ public class StringUtils {
 
     public String formatString(String string) {
         if (string == null) return "null";
+        if (string.isEmpty()) return string;
 
         string = string.toLowerCase();
 
