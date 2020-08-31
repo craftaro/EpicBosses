@@ -40,7 +40,9 @@ public class BossDamageListener implements Listener {
 
         LivingEntity livingEntity = (LivingEntity) entityBeingDamaged;
         ActiveBossHolder activeBossHolder = this.bossEntityManager.getActiveBossHolder(livingEntity);
-        double damage = event.getDamage();
+        double damage = event.getFinalDamage();
+        if (entityBeingDamaged instanceof LivingEntity && damage > ((LivingEntity) entityBeingDamaged).getHealth())
+            damage = ((LivingEntity) entityBeingDamaged).getHealth();
         Player player = null;
 
         if (activeBossHolder == null && livingEntity.getCustomName() != null) {
