@@ -212,6 +212,10 @@ public class EpicBosses extends SongodaPlugin implements IReloadable {
     }
 
     @Override
+    public void onDataLoad() {
+    }
+
+    @Override
     public List<Config> getExtraConfig() {
         return new ArrayList<>();
     }
