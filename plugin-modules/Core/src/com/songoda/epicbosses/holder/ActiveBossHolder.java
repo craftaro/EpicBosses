@@ -106,7 +106,7 @@ public class ActiveBossHolder implements IActiveHolder {
 
         // grab list of all valid entities by UUID that can be removed
         Map<Integer, Entity> toRemove = this.livingEntityMap.entrySet().stream()
-                .filter(Objects::nonNull) // This may fix ticket #4522
+                .filter(e -> e != null && e.getValue() != null && ServerUtils.get().getEntity(e.getValue()) != null) // This may fix ticket #4522
                 .collect(Collectors.toMap(Map.Entry::getKey, e -> ServerUtils.get().getEntity(e.getValue())))
                 .entrySet().stream()
                 .filter(e -> e.getValue() != null && e.getValue().getWorld().isChunkLoaded(
